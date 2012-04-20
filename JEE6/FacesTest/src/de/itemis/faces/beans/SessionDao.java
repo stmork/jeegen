@@ -1,5 +1,9 @@
 package de.itemis.faces.beans;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.ejb.PostActivate;
+import javax.ejb.PrePassivate;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,6 +20,30 @@ public class SessionDao
 	@PersistenceContext(unitName="jbossDS")
 	EntityManager em;
 
+	@PostConstruct
+	public void construct()
+	{
+		log.debug("=construct() " + this);
+	}
+	
+	@PostActivate
+	public void activate()
+	{
+		log.debug("=activate()" + this);
+	}
+	
+	@PrePassivate
+	public void passivate()
+	{
+		log.debug("=passivate()" + this);
+	}
+
+	@PreDestroy
+	public void destroy()
+	{
+		log.debug("=destroy()" + this);
+	}
+	
 	public UserInfo getUserInfo(String login)
 	{
 		log.debug("  >getUserInfo(" + login + ")");
