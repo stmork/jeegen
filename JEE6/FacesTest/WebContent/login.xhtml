@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<title>#{msg['login.title']}</title>
+</h:head>
+<h:body>
+	<h1>#{msg['login.title']}</h1>
+	<form method="post" action="j_security_check" name="loginForm">
+		<h:panelGrid columns="2">
+			<h:outputLabel id="userNameLabel" for="j_username"
+				value="#{msg['login.user']}:" />
+			<h:inputText id="j_username" autocomplete="off" />
+			<h:outputLabel id="passwordLabel" for="j_password"
+				value="#{msg['login.password']}:" />
+			<h:inputSecret id="j_password" autocomplete="off" />
+			<div />
+			<h:panelGroup>
+				<h:commandButton type="submit" value="#{msg['login.login']}" />
+				<h:commandButton type="reset" value="#{msg['login.clear']}" />
+			</h:panelGroup>
+		</h:panelGrid>
+	</form>
+</h:body>
+</html>
