@@ -13,13 +13,17 @@ abstract public class ManagerBase implements Serializable
 	 */
 	private static final long serialVersionUID = 1L;
 
-	protected ExternalContext getExternalContext()
+	protected final ExternalContext getExternalContext()
 	{
-		return FacesContext.getCurrentInstance().getExternalContext();
+		final FacesContext context = FacesContext.getCurrentInstance();
+
+		return context != null ? context.getExternalContext() : null;
 	}
 
-	protected HttpSession getSession()
+	protected final HttpSession getSession()
 	{
-		return (HttpSession) getExternalContext().getSession(false);
+		ExternalContext context = getExternalContext();
+		
+		return context != null ? (HttpSession) context.getSession(false) : null;
 	}
 }

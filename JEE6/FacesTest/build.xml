@@ -10,6 +10,10 @@
 	<path id="compile.path">
 		<fileset dir="${jboss.lib}">
 			<include name="**/*.jar"/>
+			<exclude name="**/*jsf*1.2*.jar"/>
+		</fileset>
+		<fileset dir="${web-path}">
+			<include name="**/*.jar"/>
 		</fileset>
 	</path>
 

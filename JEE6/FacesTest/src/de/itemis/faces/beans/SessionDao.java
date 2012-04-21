@@ -8,14 +8,15 @@ import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.jboss.logging.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import de.itemis.faces.entities.UserInfo;
 
 @Stateful
 public class SessionDao
 {
-	private final static Logger log = Logger.getLogger(SessionDao.class);
+	private final static Log log = LogFactory.getLog(SessionDao.class);
 
 	@PersistenceContext(unitName="jbossDS")
 	EntityManager em;

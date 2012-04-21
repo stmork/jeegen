@@ -9,7 +9,8 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import org.jboss.logging.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import de.itemis.faces.entities.UserInfo;
 
@@ -22,7 +23,7 @@ public class SessionInfo extends ManagerBase implements Serializable
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private final static Logger log = Logger.getLogger(SessionInfo.class);
+	private final static Log log = LogFactory.getLog(SessionInfo.class);
 
 	@EJB
 	private SessionDao dao;
