@@ -1,22 +1,27 @@
 package de.itemis.faces.beans;
 
+import java.util.Date;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.ejb.PostActivate;
 import javax.ejb.PrePassivate;
-import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import de.itemis.faces.DateTimeUtil;
 import de.itemis.faces.entities.UserInfo;
 
-@Stateful
-public class SessionDao
+@Stateless
+public class SessionDaoBean
 {
-	private final static Log log = LogFactory.getLog(SessionDao.class);
+	private final static Log log = LogFactory.getLog(SessionDaoBean.class);
 
 	@PersistenceContext(unitName="jbossDS")
 	EntityManager em;
@@ -63,5 +68,18 @@ public class SessionDao
 	public UserInfo updateUserInfo(UserInfo user)
 	{
 		return em.merge(user);
+	}
+	
+	public List<UserInfo> query(final int year)
+	{
+		final Date border = DateTimeUtil.getStartOfYear(year).getTime();
+
+		log.debug("  >query(" + year + ")   - " + border);
+		TypedQuery<UserInfo> query = em.createQuery(
+				"SELECT ui FROM UserInfo ui WHERE ui.birth >= :year",
+				UserInfo.class);
+		query.setParameter("year", border);
+		log.debug("  <query(" + year + ") = ...");
+		return query.getResultList();
 	}
 }

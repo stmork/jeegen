@@ -12,8 +12,29 @@
 	<h:body>
 		<h1>#{msg['change.title']}</h1>
 		<h:form>
-		#{msg['change.name']} <h:inputText value="#{sessionInfo.name}" />
-			<h:commandButton value="#{msg['change.change']}" action="#{sessionInfo.action()}" />
+		<table>
+			<tr>
+				<td>#{msg['change.name']}</td>
+				<td><h:inputText value="#{sessionInfo.user.name}" /></td>
+			</tr>
+
+			<tr>
+				<td>#{msg['change.birth']}</td>
+				<td>
+					<h:inputText value="#{sessionInfo.user.birth}">
+						<f:convertDateTime pattern="dd.MM.yyyy"/>
+					</h:inputText>
+				</td>
+			</tr>
+			<tr>
+				<td>#{msg['change.changed']}</td>
+				<td>#{sessionInfo.user.changed}</td>
+			</tr>
+			<tr>		
+				<td></td>
+				<td><h:commandButton value="#{msg['change.change']}" action="#{sessionInfo.action()}" /></td>
+			</tr>
+		</table>
 		</h:form>
 	</h:body>
 </html>

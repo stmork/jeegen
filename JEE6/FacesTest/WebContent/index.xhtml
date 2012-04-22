@@ -11,7 +11,7 @@
 	
 	<h:body>
 		<h1>#{msg['start.title']}</h1>
-		#{msg['start.name']} #{sessionInfo.name}
+		#{msg['start.name']} #{controller.name}
 		<ul>
 			<li><h:link value="#{msg['start.change']}" outcome="/admin/change.xhtml" /></li>
 			<li><h:link value="#{msg['start.logout']}" outcome="/logout.xhtml" /></li>

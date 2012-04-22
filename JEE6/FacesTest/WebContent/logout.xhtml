@@ -12,7 +12,7 @@
 		<h1>#{msg['logout.title']}</h1>
 		<h:form>
 			#{msg['logout.message']}
-			<h:commandButton value="#{msg['logout.logout']}" action="#{controller.logout()}" />
+			<h:commandButton value="#{msg['logout.logout']}" action="#{controller.logout(request)}" />
 			<h:commandButton value="#{msg['logout.back']}" action="/index.xhtml" />
 		</h:form>
 	</h:body>

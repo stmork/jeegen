@@ -16,6 +16,7 @@ import de.itemis.faces.entities.UserInfo;
 
 @ManagedBean
 @SessionScoped
+@RolesAllowed(value="admin")
 public class SessionInfo extends ManagerBase implements Serializable
 {
 	/**
@@ -26,7 +27,7 @@ public class SessionInfo extends ManagerBase implements Serializable
 	private final static Log log = LogFactory.getLog(SessionInfo.class);
 
 	@EJB
-	private SessionDao dao;
+	private SessionDaoBean dao;
 	private UserInfo user;
 
 	@PostConstruct
@@ -56,16 +57,10 @@ public class SessionInfo extends ManagerBase implements Serializable
 		log.debug("<close()");
 	}
 
-	public String getName()
-	{
-		init();
-		return user != null ? user.getName() : "<???>";
-	}
-
 	@RolesAllowed(value="admin")
-	public void setName(String name)
+	public UserInfo getUser()
 	{
-		user.setName(name);
+		return user;
 	}
 	
 	public String action()
