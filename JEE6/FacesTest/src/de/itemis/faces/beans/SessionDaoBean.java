@@ -16,6 +16,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import de.itemis.faces.DateTimeUtil;
+import de.itemis.faces.entities.Address;
 import de.itemis.faces.entities.UserInfo;
 
 @Stateless
@@ -69,7 +70,18 @@ public class SessionDaoBean
 	{
 		return em.merge(user);
 	}
-	
+
+	public UserInfo addAddress(UserInfo user)
+	{
+		Address address = new Address();
+		address.setPosition(user.getAddresses().size() + 1);
+		address.setUser(user);
+		em.persist(address);
+		user.getAddresses().add(address);
+
+		return user;
+	}
+
 	public List<UserInfo> query(final int year)
 	{
 		final Date border = DateTimeUtil.getStartOfYear(year).getTime();

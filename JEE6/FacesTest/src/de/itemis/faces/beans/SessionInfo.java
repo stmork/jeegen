@@ -63,6 +63,14 @@ public class SessionInfo extends ManagerBase implements Serializable
 		return user;
 	}
 	
+	public String add()
+	{
+		log.debug(">add");
+		user = dao.addAddress(user);
+		log.debug("<add");
+		return ".";
+	}
+
 	public String action()
 	{
 		log.debug(">action");

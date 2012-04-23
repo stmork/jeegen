@@ -53,5 +53,6 @@
 	
 	<target name="undeploy">
 		<delete file="${jboss.deploy}/${war}" />
+		<delete file="${glassfish.deploy}/${war}" />
 	</target>
 </project>
