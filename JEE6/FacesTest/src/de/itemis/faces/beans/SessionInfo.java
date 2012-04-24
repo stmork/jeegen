@@ -45,7 +45,7 @@ public class SessionInfo extends ManagerBase implements Serializable
 			
 			if (login != null)
 			{
-				user = dao.getUserInfo(login);
+				user = dao.ensureUserInfo(login);
 				log.debug(" " + login);
 			}
 			log.debug("<init()");

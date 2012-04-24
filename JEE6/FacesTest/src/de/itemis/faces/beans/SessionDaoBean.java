@@ -54,7 +54,7 @@ public class SessionDaoBean
 		log.debug("=destroy()" + this);
 	}
 	
-	public UserInfo getUserInfo(String login)
+	public UserInfo ensureUserInfo(String login)
 	{
 		log.debug("  >getUserInfo(" + login + ")");
 		UserInfo user = em.find(UserInfo.class, login);
@@ -82,13 +82,17 @@ public class SessionDaoBean
 	public Address addAddress(UserInfo user)
 	{
 		log.debug("  >addAddress(" + user + ")");
+
+		// Create new address
 		Address address = new Address();
 		address.setPosition(user.getAddresses().size() + 1);
 		address.setUser(user);
-		em.persist(address);
 		user.getAddresses().add(address);
-		log.debug("  <addAddress(" + user + ") = " + address);
+		
+		// Update into database
+		em.persist(address);
 
+		log.debug("  <addAddress(" + user + ") = " + address);
 		return address;
 	}
 
@@ -108,7 +112,7 @@ public class SessionDaoBean
 		em.remove(address);
 		user = em.merge(user);
 
-		log.debug("  <removeAddress(" + address + ")");
+		log.debug("  <removeAddress(" + address + ") = " + user);
 		return user;
 	}
 
@@ -123,5 +127,10 @@ public class SessionDaoBean
 		query.setParameter("year", border);
 		log.debug("  <query(" + year + ") = ...");
 		return query.getResultList();
+	}
+
+	public UserInfo getUser(UserInfo user)
+	{
+		return em.getReference(UserInfo.class, user.getLogin());
 	}
 }
