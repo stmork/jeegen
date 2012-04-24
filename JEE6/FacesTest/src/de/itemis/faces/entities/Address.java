@@ -82,4 +82,10 @@ public class Address implements Serializable
 	public void setUser(UserInfo user) {
 		this.user = user;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return getStreet() + ", " + (getPlz() + " " + getLocation()).trim();
+	}
 }

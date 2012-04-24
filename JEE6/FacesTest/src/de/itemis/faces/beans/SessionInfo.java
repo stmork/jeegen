@@ -7,6 +7,7 @@ import javax.annotation.PreDestroy;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import org.apache.commons.logging.Log;
@@ -19,17 +20,17 @@ import de.itemis.faces.entities.UserInfo;
 @RolesAllowed(value="admin")
 public class SessionInfo extends ManagerBase implements Serializable
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-
 	private final static Log log = LogFactory.getLog(SessionInfo.class);
 
 	@EJB
 	private SessionDaoBean dao;
+	
+	@ManagedProperty(value="#{addressInfo}")
+	private AddressHandler addressInfo;
+	
 	private UserInfo user;
-
+	
 	@PostConstruct
 	public void init()
 	{
@@ -62,20 +63,17 @@ public class SessionInfo extends ManagerBase implements Serializable
 	{
 		return user;
 	}
-	
-	public String add()
+
+	public void setUserInfo(UserInfo user)
 	{
-		log.debug(">add");
-		user = dao.addAddress(user);
-		log.debug("<add");
-		return ".";
+		this.user = user;
 	}
 
-	public String action()
-	{
-		log.debug(">action");
-		user = dao.updateUserInfo(user);
-		log.debug("<action");
-		return "/index.xhtml";
+	public AddressHandler getAddressInfo() {
+		return addressInfo;
+	}
+
+	public void setAddressInfo(AddressHandler addressInfo) {
+		this.addressInfo = addressInfo;
 	}
 }

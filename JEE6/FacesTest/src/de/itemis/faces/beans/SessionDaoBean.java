@@ -70,15 +70,42 @@ public class SessionDaoBean
 	{
 		return em.merge(user);
 	}
-
-	public UserInfo addAddress(UserInfo user)
+	
+	public Address updateAddress(Address address)
 	{
+		return em.merge(address);
+	}
+
+	public Address addAddress(UserInfo user)
+	{
+		log.debug("  >addAddress(" + user + ")");
 		Address address = new Address();
 		address.setPosition(user.getAddresses().size() + 1);
 		address.setUser(user);
 		em.persist(address);
 		user.getAddresses().add(address);
+		log.debug("  <addAddress(" + user + ") = " + address);
 
+		return address;
+	}
+
+	public UserInfo removeAddress(Address address)
+	{
+		log.debug("  >removeAddress(" + address + ")");
+		
+		// get correct references
+		address = em.getReference(Address.class, address.getId());
+		UserInfo user = address.getUser();
+		
+		// unlink
+		user.getAddresses().remove(address);
+		address.setUser(null);
+
+		// finally do database operations
+		em.remove(address);
+		user = em.merge(user);
+
+		log.debug("  <removeAddress(" + address + ")");
 		return user;
 	}
 

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:head>
+		<title>#{msg['address.title']}</title>
+	</h:head>
+	
+	<h:body>
+		<h1>#{msg['address.title']}</h1>
+		<h:form>
+			<table>
+				<tr>
+					<td>#{msg['change.address.street']}</td>
+					<td><h:inputText value="#{addressHandler.address.street}" /></td>
+				</tr>
+	
+				<tr>
+					<td>#{msg['change.address.plz']}</td>
+					<td><h:inputText value="#{addressHandler.address.plz}" /></td>
+				</tr>
+				<tr>
+					<td>#{msg['change.address.location']}</td>
+					<td><h:inputText value="#{addressHandler.address.location}" /></td>
+				</tr>
+				<tr>		
+					<td></td>
+					<td><h:commandButton value="#{msg['change.change']}" action="#{addressHandler.change()}" /></td>
+				</tr>
+			</table>
+		</h:form>
+	</h:body>
+</html>
