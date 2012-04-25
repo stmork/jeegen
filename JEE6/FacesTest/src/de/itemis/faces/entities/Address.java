@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
@@ -23,6 +24,7 @@ public class Address implements Serializable
 	private String plz;
 	private String location;
 	private UserInfo user;
+	private AddressOption addressOption;
 
 	@Id
 	@TableGenerator(
@@ -82,7 +84,16 @@ public class Address implements Serializable
 	public void setUser(UserInfo user) {
 		this.user = user;
 	}
-	
+
+	@OneToOne
+	public AddressOption getAddressOption() {
+		return addressOption;
+	}
+
+	public void setAddressOption(AddressOption addressOption) {
+		this.addressOption = addressOption;
+	}
+
 	@Override
 	public String toString()
 	{

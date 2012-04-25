@@ -11,6 +11,7 @@
 	
 	<h:body>
 		<h1>#{msg['address.title']}</h1>
+		<h:messages />
 		<h:form>
 			<table>
 				<tr>
@@ -25,6 +26,15 @@
 				<tr>
 					<td>#{msg['change.address.location']}</td>
 					<td><h:inputText value="#{addressHandler.address.location}" /></td>
+				</tr>
+				<tr>
+					<td>#{msg['change.address.option']}</td>
+					<td>
+						<h:selectOneMenu value="#{addressHandler.address.addressOption}">
+							<f:selectItems value="#{applicationController.addressOptionList}"
+								itemValue="#{option.type}" itemLabel="#{option.description}" var="option" />
+						</h:selectOneMenu>
+					</td>
 				</tr>
 				<tr>		
 					<td></td>
