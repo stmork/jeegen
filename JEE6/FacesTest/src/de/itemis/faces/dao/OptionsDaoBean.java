@@ -25,6 +25,13 @@ public class OptionsDaoBean
 
 	public AddressOption ensure(final AddressOptionType type, final String description)
 	{
-		return em.merge(new AddressOption(type, description));
+		AddressOption option = em.find(AddressOption.class, type.ordinal());
+		
+		if (option == null)
+		{
+			option = new AddressOption(type, description);
+			em.persist(option);
+		}
+		return option;
 	}
 }
