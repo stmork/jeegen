@@ -16,7 +16,10 @@ import javax.faces.bean.SessionScoped;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import de.itemis.faces.dao.SessionDaoBean;
 import de.itemis.faces.entities.UserInfo;
+import de.itemis.faces.handler.AddressHandler;
+import de.itemis.faces.handler.ManagerBase;
 
 @ManagedBean
 @SessionScoped

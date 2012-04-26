@@ -1,7 +1,7 @@
 /*
  * $Id$
  */
-package de.itemis.faces.beans;
+package de.itemis.faces.handler;
 
 import java.io.Serializable;
 
@@ -16,6 +16,7 @@ import javax.faces.validator.ValidatorException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import de.itemis.faces.dao.SessionDaoBean;
 import de.itemis.faces.entities.Address;
 
 @ManagedBean

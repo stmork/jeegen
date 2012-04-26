@@ -21,11 +21,11 @@
 			<tr>
 				<td>#{msg['change.birth']}</td>
 				<td><h:inputText value="#{sessionInfo.user.birth}">
-						<f:convertDateTime pattern="dd.MM.yyyy" />
+						<f:convertDateTime pattern="dd.MM.yyyy" locale="#{applicationController.locale}" timeZone="#{applicationController.timezone}"/>
 					</h:inputText></td>
 			</tr>
 			<tr>
-				<td>#{msg['change.changed']}</td>
+				<td>#{<u>msg</u>['change.changed']}</td>
 				<td>#{sessionInfo.user.changed}</td>
 			</tr>
 			<tr>

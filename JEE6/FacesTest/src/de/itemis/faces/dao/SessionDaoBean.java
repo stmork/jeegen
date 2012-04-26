@@ -1,7 +1,7 @@
 /*
  * $Id$
  */
-package de.itemis.faces.beans;
+package de.itemis.faces.dao;
 
 import java.util.Date;
 import java.util.List;

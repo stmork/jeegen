@@ -1,7 +1,7 @@
 /*
  * $Id$
  */
-package de.itemis.faces.beans;
+package de.itemis.faces.handler;
 
 import java.io.Serializable;
 
@@ -14,6 +14,8 @@ import javax.faces.bean.SessionScoped;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import de.itemis.faces.beans.SessionInfo;
+import de.itemis.faces.dao.SessionDaoBean;
 import de.itemis.faces.entities.Address;
 import de.itemis.faces.entities.UserInfo;
 

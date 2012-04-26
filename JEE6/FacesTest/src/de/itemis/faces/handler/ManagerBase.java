@@ -1,7 +1,7 @@
 /*
  * $Id$
  */
-package de.itemis.faces.beans;
+package de.itemis.faces.handler;
 
 import java.io.Serializable;
 
