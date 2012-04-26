@@ -9,6 +9,9 @@ import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -33,6 +36,11 @@ public class AddressHandler implements Serializable
 
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+
+	public void validate(FacesContext arg0, UIComponent arg1, Object arg2)
+			throws ValidatorException {
+		log.debug(">>>>>>>>>" + arg2);
 	}
 	
 	public String change()

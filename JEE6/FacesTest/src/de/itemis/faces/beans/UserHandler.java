@@ -30,11 +30,11 @@ public class UserHandler implements Serializable
 
 	@ManagedProperty(value="#{sessionInfo}")
 	private SessionInfo sessionInfo;
-	
+
 	@ManagedProperty(value="#{addressHandler}")
 	private AddressHandler addressHandler;
-	
-	
+
+
 	public SessionInfo getSessionInfo() {
 		return sessionInfo;
 	}

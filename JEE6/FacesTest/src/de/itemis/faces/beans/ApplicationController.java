@@ -1,7 +1,9 @@
 package de.itemis.faces.beans;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -12,6 +14,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import de.itemis.faces.entities.AddressOption;
+import de.itemis.faces.entities.AddressOption.AddressOptionType;
 
 @ManagedBean(eager=true)
 @ApplicationScoped
@@ -27,12 +30,34 @@ public class ApplicationController implements Serializable
 	public void init()
 	{
 		log.debug(">init()");
-		dao.initOptions();
+		initOptions();
 		log.debug("<init()");
 	}
-	
-	public List<AddressOption> getAddressOptionList()
+
+	private void initOptions()
 	{
-		return dao.getAddressOptionList();
+		log.debug("  >initOptions()");
+		add(AddressOptionType.HOME, "Wohnadresse");
+		add(AddressOptionType.WORK, "Arbeitsstätte");
+		log.debug("  <initOptions()");
+	}
+
+	private final static Map<String, AddressOption> addressOptions = new LinkedHashMap<String, AddressOption>();
+
+	private void add(final AddressOptionType type, final String description)
+	{
+		final AddressOption option = dao.ensure(type, description);
+
+		addressOptions.put(Integer.toString(type.ordinal()), option);
+		
+	}
+	public Collection<AddressOption> getAddressOptionList()
+	{
+		return addressOptions.values();
+	}
+	
+	public static AddressOption getAddressOption(final String type)
+	{
+		return addressOptions.get(type);
 	}
 }

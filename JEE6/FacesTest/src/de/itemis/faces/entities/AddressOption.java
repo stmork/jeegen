@@ -15,19 +15,8 @@ public class AddressOption implements Serializable
 
 	public static enum AddressOptionType
 	{
-		HOME(1),
-		WORK(2);
-		
-		private final int type;
-		private AddressOptionType(final int type)
-		{
-			this.type = type;
-		}
-		
-		public int getType()
-		{
-			return this.type;
-		}
+		HOME,
+		WORK;
 	}
 	
 	private int type;
@@ -39,7 +28,7 @@ public class AddressOption implements Serializable
 
 	public AddressOption(final AddressOptionType type, final String description)
 	{
-		setType(type.getType());
+		setType(type.ordinal());
 		setDescription(description);
 	}
 
@@ -57,5 +46,18 @@ public class AddressOption implements Serializable
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return getDescription() + "/" + getType();
+	}
+	
+	@Override
+	public boolean equals(Object object)
+	{
+		AddressOption option = (AddressOption)object;
+		return getType() == option.getType();
 	}
 }

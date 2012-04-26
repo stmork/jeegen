@@ -40,13 +40,16 @@
 		<h:dataTable value="#{sessionInfo.user.addresses}" var="address">
 			<h:column>
 				<f:facet name="header">#{msg['change.address.street']}</f:facet>#{address.street}
-				</h:column>
+			</h:column>
 			<h:column>
 				<f:facet name="header">#{msg['change.address.plz']}</f:facet>#{address.plz}
-				</h:column>
+			</h:column>
 			<h:column>
 				<f:facet name="header">#{msg['change.address.location']}</f:facet>#{address.location}
-				</h:column>
+			</h:column>
+			<h:column>
+				<f:facet name="header">#{msg['change.address.option']}</f:facet>#{address.addressOption.description}
+			</h:column>
 			<h:column>
 				<f:facet name="header" />
 				<h:commandLink value="#{msg['change.change']}"
