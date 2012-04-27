@@ -12,6 +12,9 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -73,6 +76,12 @@ public class SessionInfo extends ManagerBase implements Serializable
 	public void setUserInfo(UserInfo user)
 	{
 		this.user = user;
+	}
+
+	public void validateMail(FacesContext context, UIComponent component, Object input)
+			throws ValidatorException
+	{
+		log.debug(" validateMail() " + getUser());
 	}
 
 	public AddressHandler getAddressInfo() {

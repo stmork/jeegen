@@ -11,6 +11,7 @@
 
 <h:body>
 	<h1>#{msg['change.title']}</h1>
+	<h:messages />
 	<h:form>
 		<table>
 			<tr>
@@ -19,10 +20,20 @@
 			</tr>
 
 			<tr>
+				<td>#{msg['change.mail']}</td>
+				<td>
+					<h:inputText value="#{sessionInfo.user.mail}" validator="#{sessionInfo.validateMail}">
+						<f:validator validatorId="mailValidator"/>
+					</h:inputText>
+				</td>
+			</tr>
+
+			<tr>
 				<td>#{msg['change.birth']}</td>
 				<td><h:inputText value="#{sessionInfo.user.birth}">
 						<f:convertDateTime pattern="dd.MM.yyyy" locale="#{applicationController.locale}" timeZone="#{applicationController.timezone}"/>
-					</h:inputText></td>
+					</h:inputText>
+				</td>
 			</tr>
 			<tr>
 				<td>#{msg['change.changed']}</td>

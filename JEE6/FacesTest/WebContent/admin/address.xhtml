@@ -30,8 +30,8 @@
 				<tr>
 					<td>#{msg['change.address.option']}</td>
 					<td>
-						<h:selectOneMenu value="#{addressHandler.address.addressOption}">
-							<f:selectItems value="#{applicationController.addressOptionList}"
+						<h:selectOneMenu value="#{addressHandler.address.addressOption}" converter="#{addressHandler.testConverter}">
+							<f:selectItems value="#{addressHandler.addressOptionList}"
 								itemValue="#{option}" itemLabel="#{option.description}" var="option" />
 						</h:selectOneMenu>
 					</td>

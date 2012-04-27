@@ -24,9 +24,10 @@ public class UserInfo implements Serializable
 
 	private String login;
 	private String name;
+	private String mail;
+	private List<Address> addresses;
 	private Date birth;
 	private Date changed;
-	private List<Address> addresses;
 
 	@Id
 	public String getLogin() {
@@ -60,6 +61,14 @@ public class UserInfo implements Serializable
 	}
 	public void setChanged(Date changed) {
 		this.changed = changed;
+	}
+
+	@Column
+	public String getMail() {
+		return mail;
+	}
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 
 	@OneToMany(mappedBy="user",cascade=CascadeType.ALL,fetch=FetchType.EAGER)

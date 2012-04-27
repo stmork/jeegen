@@ -25,7 +25,7 @@ public class OptionsDaoBean
 
 	public AddressOption ensure(final AddressOptionType type, final String description)
 	{
-		AddressOption option = em.find(AddressOption.class, type.ordinal());
+		AddressOption option = find(type.ordinal());
 		
 		if (option == null)
 		{
@@ -33,5 +33,10 @@ public class OptionsDaoBean
 			em.persist(option);
 		}
 		return option;
+	}
+
+	public AddressOption find(int id)
+	{
+		return em.find(AddressOption.class, id);
 	}
 }
