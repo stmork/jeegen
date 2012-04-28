@@ -5,6 +5,16 @@
  <display-name>FacesTest</display-name>
  <distributable/>
  <context-param>
+  <description>Damit nicht immer UTF-8 genommen wird ;-)</description>
+  <param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
+  <param-value>true</param-value>
+ </context-param>
+ <context-param>
+  <description>Wir sind am Entwickeln am dran sein.</description>
+  <param-name>javax.faces.PROJECT_STAGE</param-name>
+  <param-value>Development</param-value>
+ </context-param>
+ <context-param>
   <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
   <param-value>server</param-value>
  </context-param>
