@@ -15,10 +15,12 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
+import javax.interceptor.Interceptors;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import de.itemis.faces.Profiler;
 import de.itemis.faces.dao.SessionDaoBean;
 import de.itemis.faces.entities.UserInfo;
 import de.itemis.faces.handler.AddressHandler;
@@ -27,6 +29,7 @@ import de.itemis.faces.handler.ManagerBase;
 @ManagedBean
 @SessionScoped
 @RolesAllowed(value="admin")
+@Interceptors(Profiler.class)
 public class SessionInfo extends ManagerBase implements Serializable
 {
 	private static final long serialVersionUID = 1L;

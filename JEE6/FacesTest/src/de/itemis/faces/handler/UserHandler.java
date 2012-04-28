@@ -56,7 +56,7 @@ public class UserHandler implements Serializable
 	{
 		log.debug(">action");
 		UserInfo user = getSessionInfo().getUser();
-		dao.updateUserInfo(user);
+		user = dao.updateUserInfo(user);
 		getSessionInfo().setUserInfo(user);
 		log.debug("<action");
 		return "/index.xhtml";
@@ -86,6 +86,6 @@ public class UserHandler implements Serializable
 		UserInfo user = dao.removeAddress(address);
 		getSessionInfo().setUserInfo(user);
 		log.debug("<removeAddress");
-		return ".";
+		return "change.xhtml";
 	}
 }

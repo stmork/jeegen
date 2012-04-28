@@ -7,17 +7,20 @@ import java.io.Serializable;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.interceptor.Interceptors;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import de.itemis.faces.Profiler;
 import de.itemis.faces.dao.SessionDaoBean;
 import de.itemis.faces.entities.UserInfo;
 import de.itemis.faces.handler.ManagerBase;
 
 @ManagedBean
+@Interceptors(Profiler.class)
 public class Controller extends ManagerBase implements Serializable {
 	/**
 	 * 

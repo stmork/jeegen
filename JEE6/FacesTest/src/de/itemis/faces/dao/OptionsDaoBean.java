@@ -3,14 +3,17 @@ package de.itemis.faces.dao;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import de.itemis.faces.Profiler;
 import de.itemis.faces.entities.AddressOption;
 import de.itemis.faces.entities.AddressOption.AddressOptionType;
 
 @Stateless
+@Interceptors(Profiler.class)
 public class OptionsDaoBean
 {
 	@PersistenceContext(unitName="jbossDS")

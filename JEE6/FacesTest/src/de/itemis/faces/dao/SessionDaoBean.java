@@ -11,6 +11,7 @@ import javax.annotation.PreDestroy;
 import javax.ejb.PostActivate;
 import javax.ejb.PrePassivate;
 import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -19,10 +20,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import de.itemis.faces.DateTimeUtil;
+import de.itemis.faces.Profiler;
 import de.itemis.faces.entities.Address;
 import de.itemis.faces.entities.UserInfo;
 
 @Stateless
+@Interceptors(Profiler.class)
 public class SessionDaoBean
 {
 	private final static Log log = LogFactory.getLog(SessionDaoBean.class);

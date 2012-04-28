@@ -6,15 +6,18 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.interceptor.Interceptors;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import de.itemis.faces.Profiler;
 import de.itemis.faces.dao.OptionsDaoBean;
 import de.itemis.faces.entities.AddressOption.AddressOptionType;
 
 @ManagedBean(eager=true)
 @ApplicationScoped
+@Interceptors(Profiler.class)
 public class ApplicationController implements Serializable
 {
 	private static final long serialVersionUID = 1L;
