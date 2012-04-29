@@ -41,11 +41,15 @@
 			</tr>
 			<tr>
 				<td></td>
-				<td><h:commandButton value="#{msg['change.change']}"
-						action="#{userHandler.change()}" /></td>
+				<td>
+					<h:commandButton value="#{msg.change}" action="#{userHandler.change()}" />
+					<h:commandButton value="#{msg.back}" action="/index.xhtml" />
+				</td>
 			</tr>
 		</table>
 	</h:form>
+
+	<hr/>
 
 	<h:form>
 		<h:dataTable value="#{sessionInfo.user.addresses}" var="address">
@@ -59,16 +63,21 @@
 				<f:facet name="header">#{msg['change.address.location']}</f:facet>#{address.location}
 			</h:column>
 			<h:column>
+				<f:facet name="header">#{msg['change.address.active']}</f:facet>
+				<h:outputText value="#{msg.yes}" rendered="#{address.active}" />
+				<h:outputText value="#{msg.no}" rendered="#{!address.active}" />
+			</h:column>
+			<h:column>
 				<f:facet name="header">#{msg['change.address.option']}</f:facet>#{address.addressOption.description}
 			</h:column>
 			<h:column>
 				<f:facet name="header" />
-				<h:commandLink value="#{msg['change.change']}"
+				<h:commandLink value="#{msg.change}"
 					action="#{userHandler.editAddress(address)}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header" />
-				<h:commandLink value="#{msg['change.remove']}"
+				<h:commandLink value="#{msg.remove}"
 					action="#{userHandler.removeAddress(address)}" />
 			</h:column>
 		</h:dataTable>

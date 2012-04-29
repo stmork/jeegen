@@ -23,6 +23,7 @@ public class Address implements Serializable
 	private String street;
 	private String plz;
 	private String location;
+	private boolean active;
 	private UserInfo user;
 	private AddressOption addressOption;
 
@@ -74,6 +75,15 @@ public class Address implements Serializable
 
 	public void setLocation(String location) {
 		this.location = location;
+	}
+
+	@Column
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 	@ManyToOne

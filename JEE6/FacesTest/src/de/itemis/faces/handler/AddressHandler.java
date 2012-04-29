@@ -54,7 +54,7 @@ public class AddressHandler implements Serializable
 	private SessionDaoBean dao;
 
 	private Address address;
-	private final AddressOptionConverter testConverter = new AddressOptionConverter();
+	private final AddressOptionConverter addressOptionConverter = new AddressOptionConverter();
 	private List<AddressOption> addressOptionList;
 
 	@PostConstruct
@@ -76,8 +76,8 @@ public class AddressHandler implements Serializable
 		return addressOptionList;
 	}
 	
-	public AddressOptionConverter getTestConverter() {
-		return testConverter;
+	public AddressOptionConverter getAddressOptionConverter() {
+		return addressOptionConverter;
 	}
 	
 	public String change()

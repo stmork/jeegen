@@ -10,10 +10,12 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.interceptor.Interceptors;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import de.itemis.faces.Profiler;
 import de.itemis.faces.beans.SessionInfo;
 import de.itemis.faces.dao.SessionDaoBean;
 import de.itemis.faces.entities.Address;
@@ -22,6 +24,7 @@ import de.itemis.faces.entities.UserInfo;
 @ManagedBean
 @SessionScoped
 @RolesAllowed(value="admin")
+@Interceptors(Profiler.class)
 public class UserHandler implements Serializable
 {
 	private static final long serialVersionUID = 1L;

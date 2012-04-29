@@ -28,9 +28,13 @@
 					<td><h:inputText value="#{addressHandler.address.location}" /></td>
 				</tr>
 				<tr>
+					<td>#{msg['change.address.active']}</td>
+					<td><h:selectBooleanCheckbox value="#{addressHandler.address.active}" /></td>
+				</tr>
+				<tr>
 					<td>#{msg['change.address.option']}</td>
 					<td>
-						<h:selectOneMenu value="#{addressHandler.address.addressOption}" converter="#{addressHandler.testConverter}">
+						<h:selectOneMenu value="#{addressHandler.address.addressOption}" converter="#{addressHandler.addressOptionConverter}">
 							<f:selectItems value="#{addressHandler.addressOptionList}"
 								itemValue="#{option}" itemLabel="#{option.description}" var="option" />
 						</h:selectOneMenu>
@@ -38,7 +42,10 @@
 				</tr>
 				<tr>		
 					<td></td>
-					<td><h:commandButton value="#{msg['change.change']}" action="#{addressHandler.change()}" /></td>
+					<td>
+						<h:commandButton value="#{msg.change}" action="#{addressHandler.change()}" />
+						<h:commandButton value="#{msg.back}" action="change.xhtml" />
+					</td>
 				</tr>
 			</table>
 		</h:form>
