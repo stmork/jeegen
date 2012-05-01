@@ -20,7 +20,8 @@ public class Profiler
 			final  String method = invocation.getMethod().getName();
 			Object        result = null;
 	
-			log.debug(LogUtil.printf(">%s(%s)", method, listParams(invocation.getParameters())));
+			log.debug(LogUtil.printf("  >%s(%s)", method, listParams(invocation.getParameters())));
+
 			final long start  = System.currentTimeMillis();
 			try
 			{
@@ -29,15 +30,16 @@ public class Profiler
 			}
 			catch(Exception e)
 			{
-				log.error(LogUtil.printf("!%s() - %s", method, e.getMessage()));
+				log.error(LogUtil.printf("!  %s() - %s", method, e.getMessage()));
 				throw e;
 			}
 			finally
 			{
 				final long end = System.currentTimeMillis();
 
-				StringBuffer buffer = new StringBuffer("<" + method + "(...)");
+				StringBuffer buffer = new StringBuffer();
 
+				buffer.append("  <").append(method).append("(...)");
 				if (result != null)
 				{
 					String resultText = result.toString();

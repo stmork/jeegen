@@ -38,6 +38,9 @@ public class SessionInfo extends ManagerBase implements Serializable
 	@EJB
 	private SessionDaoBean dao;
 	
+	@EJB
+	private StatefulBean bean;
+
 	@ManagedProperty(value="#{addressInfo}")
 	private AddressHandler addressInfo;
 	
@@ -66,6 +69,7 @@ public class SessionInfo extends ManagerBase implements Serializable
 	{
 		log.debug(">close()");
 		log.debug(" " + getSession());
+		bean.ping();
 		user = null;
 		log.debug("<close()");
 	}
