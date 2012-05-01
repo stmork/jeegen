@@ -4,6 +4,7 @@
 package de.itemis.faces.handler;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
@@ -63,6 +64,11 @@ public class UserHandler implements Serializable
 		getSessionInfo().setUserInfo(user);
 		log.debug("<action");
 		return "/index.xhtml";
+	}
+	
+	public List<Address> getAddressList()
+	{
+		return dao.getAddressList(getSessionInfo().getUser());
 	}
 	
 	public String addAddress()

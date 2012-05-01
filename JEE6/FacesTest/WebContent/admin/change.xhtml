@@ -52,7 +52,7 @@
 	<hr/>
 
 	<h:form>
-		<h:dataTable value="#{sessionInfo.user.addresses}" var="address">
+		<h:dataTable value="#{userHandler.addressList}" var="address">
 			<h:column>
 				<f:facet name="header">#{msg['change.address.street']}</f:facet>#{address.street}
 			</h:column>

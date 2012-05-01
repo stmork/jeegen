@@ -82,6 +82,9 @@ public class SessionDaoBean
 
 	public Address addAddress(UserInfo user)
 	{
+		// get correct references
+		user = em.getReference(UserInfo.class, user.getLogin());
+
 		// Create new address
 		final Address address = new Address();
 		address.setPosition(user.getAddresses().size() + 1);
@@ -109,16 +112,26 @@ public class SessionDaoBean
 		return em.merge(user);
 	}
 
+	public List<Address> getAddressList(final UserInfo user)
+	{
+		final TypedQuery<UserInfo> query = em.createQuery(
+				"SELECT ui FROM UserInfo ui LEFT JOIN FETCH ui.addresses WHERE ui.login = :login",
+				UserInfo.class);
+		query.setParameter("login", user.getLogin());
+		final UserInfo result = query.getSingleResult();
+
+		return result.getAddresses();
+	}
+
 	public List<UserInfo> query(final int year)
 	{
 		final Date border = DateTimeUtil.getStartOfYear(year).getTime();
 
-		log.debug("  >query(" + year + ")   - " + border);
 		TypedQuery<UserInfo> query = em.createQuery(
 				"SELECT ui FROM UserInfo ui WHERE ui.birth >= :year",
 				UserInfo.class);
 		query.setParameter("year", border);
-		log.debug("  <query(" + year + ") = ...");
+
 		return query.getResultList();
 	}
 
