@@ -1,26 +1,34 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html">
-<h:head>
-	<title>#{msg['login.title']}</title>
-</h:head>
-<h:body>
-	<h1>#{msg['login.title']}</h1>
-	<form method="post" action="j_security_check" name="loginForm">
-		<h:panelGrid columns="2">
-			<h:outputLabel id="userNameLabel" for="j_username"
-				value="#{msg['login.user']}:" />
-			<h:inputText id="j_username" autocomplete="off" />
-			<h:outputLabel id="passwordLabel" for="j_password"
-				value="#{msg['login.password']}:" />
-			<h:inputSecret id="j_password" autocomplete="off" />
-			<div />
-			<h:panelGroup>
-				<h:commandButton type="submit" value="#{msg['login.login']}" />
-				<h:commandButton type="reset" value="#{msg.clear}" />
-			</h:panelGroup>
-			<h:link value="#{msg.back}" outcome="/index.xhtml"/>
-		</h:panelGrid>
-	</form>
-</h:body>
+		xmlns:ui="http://java.sun.com/jsf/facelets"      
+		xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/layout.xhtml">
+	<ui:define name="title">#{msg['login.title']}</ui:define>
+	<ui:define name="content">
+		<form method="post" action="j_security_check" name="loginForm">
+			<table>
+				<tr>
+					<td></td>
+					<td class="remark">#{msg['login.do_login']}</td>
+				</tr>
+				<tr>
+					<td class="mid">#{msg['login.user']}:</td>
+					<td><h:inputText autofocus="autofocus" id="j_username" autocomplete="off" /></td>
+				</tr>
+				<tr>
+					<td class="mid">#{msg['login.password']}:</td>
+					<td><h:inputSecret id="j_password" autocomplete="off" /></td>
+				</tr>
+				<tr>
+					<td/>
+					<td>
+						<h:commandButton type="submit" value="#{msg['login.login']}" />
+						<h:commandButton type="reset" value="#{msg.clear}" />
+					</td>
+				</tr>
+			</table>
+		</form>
+	</ui:define>
+</ui:composition>
 </html>

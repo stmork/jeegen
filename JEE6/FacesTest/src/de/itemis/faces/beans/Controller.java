@@ -52,9 +52,9 @@ public class Controller extends ManagerBase implements Serializable {
 		}
 		return login != null ? dao.ensureUserInfo(login).getName() : "<???>";
 	}
-	
+
 	public boolean isLoggedIn()
 	{
-		return dao.ensureUserInfo(getExternalContext().getRemoteUser()) != null;
+		return getExternalContext().getRemoteUser() != null;
 	}
 }
