@@ -24,13 +24,13 @@ import de.itemis.faces.Profiler;
 import de.itemis.faces.dao.SessionDaoBean;
 import de.itemis.faces.entities.UserInfo;
 import de.itemis.faces.handler.AddressHandler;
-import de.itemis.faces.handler.ManagerBase;
+import de.itemis.faces.handler.AbstractHandler;
 
 @ManagedBean
 @SessionScoped
 @RolesAllowed(value="admin")
 @Interceptors(Profiler.class)
-public class SessionInfo extends ManagerBase implements Serializable
+public class SessionInfo extends AbstractHandler implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	private final static Log log = LogFactory.getLog(SessionInfo.class);

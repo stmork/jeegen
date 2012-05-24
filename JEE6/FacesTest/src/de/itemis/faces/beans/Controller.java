@@ -17,11 +17,11 @@ import org.apache.commons.logging.LogFactory;
 import de.itemis.faces.Profiler;
 import de.itemis.faces.dao.SessionDaoBean;
 import de.itemis.faces.entities.UserInfo;
-import de.itemis.faces.handler.ManagerBase;
+import de.itemis.faces.handler.AbstractHandler;
 
 @ManagedBean
 @Interceptors(Profiler.class)
-public class Controller extends ManagerBase implements Serializable {
+public class Controller extends AbstractHandler implements Serializable {
 	/**
 	 * 
 	 */

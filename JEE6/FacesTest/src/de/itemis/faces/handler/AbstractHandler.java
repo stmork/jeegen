@@ -9,7 +9,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
-abstract public class ManagerBase implements Serializable
+abstract public class AbstractHandler implements Serializable
 {
 	/**
 	 * 

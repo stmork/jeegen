@@ -9,12 +9,12 @@ import org.apache.commons.logging.LogFactory;
 
 @Singleton
 @Startup
-public class TimerBean
+public class TimerSingleton
 {
-	private final static Log log = LogFactory.getLog(TimerBean.class);
+	private final static Log log = LogFactory.getLog(TimerSingleton.class);
 	
 	@Schedule(minute="*/15",hour="*",persistent=false)
-	public void time()
+	public void timer()
 	{
 		log.debug("  =time()");
 	}
