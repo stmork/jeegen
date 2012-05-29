@@ -123,6 +123,15 @@ public class SessionDaoBean
 		return result.getAddresses();
 	}
 
+	public UserInfo getUserInfo(final String login)
+	{
+		final TypedQuery<UserInfo> query = em.createQuery(
+				"SELECT ui FROM UserInfo ui LEFT JOIN FETCH ui.addresses WHERE ui.login = :login",
+				UserInfo.class);
+		query.setParameter("login", login);
+		return query.getSingleResult();
+	}
+
 	public List<UserInfo> query(final int year)
 	{
 		final Date border = DateTimeUtil.getStartOfYear(year).getTime();
@@ -138,5 +147,14 @@ public class SessionDaoBean
 	public UserInfo getUser(UserInfo user)
 	{
 		return em.getReference(UserInfo.class, user.getLogin());
+	}
+
+	public List<UserInfo> getAllUsers()
+	{
+		final TypedQuery<UserInfo> query = em.createQuery(
+				"SELECT DISTINCT ui FROM UserInfo ui LEFT JOIN FETCH ui.addresses",
+				UserInfo.class);
+		
+		return query.getResultList();
 	}
 }
