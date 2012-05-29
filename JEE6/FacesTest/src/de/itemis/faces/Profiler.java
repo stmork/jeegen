@@ -1,4 +1,9 @@
+/*
+ * $Id$
+ */
 package de.itemis.faces;
+
+import java.util.Collection;
 
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
@@ -20,7 +25,7 @@ public class Profiler
 			final  String method = invocation.getMethod().getName();
 			Object        result = null;
 	
-			log.debug(LogUtil.printf("  >%s(%s)", method, listParams(invocation.getParameters())));
+			LogUtil.debug(log, "  >%s(%s)", method, listParams(invocation.getParameters()));
 
 			final long start  = System.currentTimeMillis();
 			try
@@ -30,7 +35,7 @@ public class Profiler
 			}
 			catch(Exception e)
 			{
-				log.error(LogUtil.printf("!  %s() - %s", method, e.getMessage()));
+				LogUtil.error(log, "!  %s() - %s", method, e.getMessage());
 				throw e;
 			}
 			finally
@@ -47,6 +52,13 @@ public class Profiler
 					buffer.
 						append(" = ").
 						append(resultText.length() > MAX_LENGTH ? "..." : resultText);
+					if (result instanceof Collection)
+					{
+						@SuppressWarnings("rawtypes")
+						Collection collection = (Collection)result;
+						
+						buffer.append(LogUtil.printf(" (%d entries)", collection.size()));
+					}
 				}
 				buffer.append(" took ").append(time(start,end)).append("s");
 				log.debug(buffer);
@@ -70,7 +82,9 @@ public class Profiler
 		}
 		else if(params.length == 1)
 		{
-			return paramToString(params[0]);
+			final String param = paramToString(params[0]);
+			
+			return param.length() > MAX_LENGTH ? "..." : param;
 		}
 		else
 		{
