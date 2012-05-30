@@ -8,8 +8,6 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.ejb.PostActivate;
-import javax.ejb.PrePassivate;
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
@@ -38,25 +36,18 @@ public class SessionDaoBean
 	{
 		log.debug("=construct() " + this);
 	}
-	
-	@PostActivate
-	public void activate()
-	{
-		log.debug("=activate()" + this);
-	}
-	
-	@PrePassivate
-	public void passivate()
-	{
-		log.debug("=passivate()" + this);
-	}
 
 	@PreDestroy
 	public void destroy()
 	{
 		log.debug("=destroy()" + this);
 	}
-	
+
+	public void ping()
+	{
+		log.debug("=ping()" + this);
+	}
+
 	public UserInfo ensureUserInfo(String login)
 	{
 		UserInfo user = em.find(UserInfo.class, login);

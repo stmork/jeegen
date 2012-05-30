@@ -40,7 +40,6 @@ public class UserHandler implements Serializable
 	@ManagedProperty(value="#{addressHandler}")
 	private AddressHandler addressHandler;
 
-
 	public SessionInfo getSessionInfo() {
 		return sessionInfo;
 	}

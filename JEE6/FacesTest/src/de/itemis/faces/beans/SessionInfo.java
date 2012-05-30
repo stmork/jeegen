@@ -4,9 +4,12 @@
 package de.itemis.faces.beans;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.util.Date;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.annotation.Resource;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -16,6 +19,13 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.interceptor.Interceptors;
+import javax.mail.Address;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -23,8 +33,8 @@ import org.apache.commons.logging.LogFactory;
 import de.itemis.faces.Profiler;
 import de.itemis.faces.dao.SessionDaoBean;
 import de.itemis.faces.entities.UserInfo;
-import de.itemis.faces.handler.AddressHandler;
 import de.itemis.faces.handler.AbstractHandler;
+import de.itemis.faces.handler.AddressHandler;
 
 @ManagedBean
 @SessionScoped
@@ -40,6 +50,9 @@ public class SessionInfo extends AbstractHandler implements Serializable
 	
 	@EJB
 	private StatefulBean bean;
+
+	@Resource(name="mail/Default")
+	private Session mailSession;
 
 	@ManagedProperty(value="#{addressInfo}")
 	private AddressHandler addressInfo;
@@ -98,5 +111,35 @@ public class SessionInfo extends AbstractHandler implements Serializable
 
 	public void setAddressInfo(AddressHandler addressInfo) {
 		this.addressInfo = addressInfo;
+	}
+	
+	public String testMail()
+	{
+		log.debug(">testMail()");
+		try
+		{
+			final MimeMessage msg = new MimeMessage(mailSession);
+            final InternetAddress from = new InternetAddress(user.getMail());
+            final Address[] to = new InternetAddress[] {new InternetAddress(user.getMail()) };
+
+            from.setPersonal(user.getName(), "utf-8");
+            msg.setFrom(from);
+            msg.setRecipients(Message.RecipientType.TO, to);
+            msg.setSubject("Test");
+            msg.setSentDate(new Date());
+            msg.setText("Test\n-- \nTest\n", "utf-8");
+
+            Transport.send(msg);
+        }
+        catch (MessagingException me)
+        {
+            log.error(me.getMessage(), me);
+		}
+		catch (UnsupportedEncodingException uee)
+		{
+            log.error(uee.getMessage(), uee);
+		}
+		log.debug("<testMail()");
+		return "change.xhtml";
 	}
 }

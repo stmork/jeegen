@@ -24,6 +24,7 @@
 							<h:inputText id="mail" value="#{sessionInfo.user.mail}" validator="#{sessionInfo.validateMail}">
 								<f:validator validatorId="mailValidator"/>
 							</h:inputText>
+							<h:commandButton value="#{msg.testmail}" action="#{sessionInfo.testMail()}" />
 						</td>
 					</tr>
 		

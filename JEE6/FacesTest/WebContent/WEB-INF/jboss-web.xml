@@ -2,4 +2,9 @@
 <jboss-web>
 	<security-domain>java:/jaas/itemis</security-domain>
 	<context-root>/faces</context-root>
+	<resource-ref>
+		<res-ref-name>mail/Default</res-ref-name>
+		<res-type>javax.mail.Session</res-type>
+		<jndi-name>java:/jboss/mail/Default</jndi-name>
+	</resource-ref>
 </jboss-web>
