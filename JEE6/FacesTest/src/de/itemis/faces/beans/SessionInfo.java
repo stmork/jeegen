@@ -70,6 +70,7 @@ public class SessionInfo extends AbstractHandler implements Serializable
 		log.debug(">close()");
 		log.debug(" " + getSession());
 		bean.ping();
+		bean.logout();
 		user = null;
 		log.debug("<close()");
 	}

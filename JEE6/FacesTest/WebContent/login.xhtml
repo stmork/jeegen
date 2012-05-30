@@ -6,7 +6,7 @@
 <ui:composition template="/layout.xhtml">
 	<ui:define name="title">#{msg['login.title']}</ui:define>
 	<ui:define name="content">
-		<form method="post" action="j_security_check" name="loginForm">
+		<form id="login" name="login" method="post" action="j_security_check">
 			<table>
 				<tr>
 					<td></td>
@@ -28,6 +28,19 @@
 					</td>
 				</tr>
 			</table>
+			<h:outputScript>
+				function setFocusOnLoginForm()
+				{
+					try
+					{
+						document.login.j_username.focus();
+					}
+					catch (err)
+					{
+					}
+				}
+				setFocusOnLoginForm();
+			</h:outputScript>
 		</form>
 	</ui:define>
 </ui:composition>

@@ -11,17 +11,17 @@
 	<ui:define name="content">
 		<h:messages layout="table" styleClass="error" />
 		<div class="box">
-			<h:form>
+			<h:form id="user">
 				<table>
 					<tr>
 						<td>#{msg['change.name']}</td>
-						<td><h:inputText value="#{sessionInfo.user.name}" /></td>
+						<td><h:inputText id="name" value="#{sessionInfo.user.name}" /></td>
 					</tr>
 		
 					<tr>
 						<td>#{msg['change.mail']}</td>
 						<td>
-							<h:inputText value="#{sessionInfo.user.mail}" validator="#{sessionInfo.validateMail}">
+							<h:inputText id="mail" value="#{sessionInfo.user.mail}" validator="#{sessionInfo.validateMail}">
 								<f:validator validatorId="mailValidator"/>
 							</h:inputText>
 						</td>
@@ -29,7 +29,7 @@
 		
 					<tr>
 						<td>#{msg['change.birth']}</td>
-						<td><h:inputText value="#{sessionInfo.user.birth}">
+						<td><h:inputText id="birth" value="#{sessionInfo.user.birth}">
 								<f:convertDateTime pattern="dd.MM.yyyy"/>
 							</h:inputText>
 						</td>
@@ -46,6 +46,19 @@
 						</td>
 					</tr>
 				</table>
+				<h:outputScript>
+					function setFocusOnLoginForm()
+					{
+						try
+						{
+							document.getElementById('user:name').focus();
+						}
+						catch (err)
+						{
+						}
+					}
+					setFocusOnLoginForm();
+				</h:outputScript>
 			</h:form>
 		</div>
 	

@@ -11,29 +11,29 @@
 	<ui:define name="content">
 		<h:messages layout="table" styleClass="error" />
 		<div class="box">
-			<h:form>
+			<h:form id="address">
 				<table>
 					<tr>
 						<td>#{msg['change.address.street']}</td>
-						<td><h:inputText value="#{addressHandler.address.street}" /></td>
+						<td><h:inputText id="street" value="#{addressHandler.address.street}" /></td>
 					</tr>
 		
 					<tr>
 						<td>#{msg['change.address.plz']}</td>
-						<td><h:inputText value="#{addressHandler.address.plz}" /></td>
+						<td><h:inputText id="plz" value="#{addressHandler.address.plz}" /></td>
 					</tr>
 					<tr>
 						<td>#{msg['change.address.location']}</td>
-						<td><h:inputText value="#{addressHandler.address.location}" /></td>
+						<td><h:inputText id="location" value="#{addressHandler.address.location}" /></td>
 					</tr>
 					<tr>
 						<td>#{msg['change.address.active']}</td>
-						<td><h:selectBooleanCheckbox value="#{addressHandler.address.active}" /></td>
+						<td><h:selectBooleanCheckbox id="active" value="#{addressHandler.address.active}" /></td>
 					</tr>
 					<tr>
 						<td>#{msg['change.address.option']}</td>
 						<td>
-							<h:selectOneMenu value="#{addressHandler.address.addressOption}" converter="#{addressHandler.addressOptionConverter}">
+							<h:selectOneMenu id="type" value="#{addressHandler.address.addressOption}" converter="#{addressHandler.addressOptionConverter}">
 								<f:selectItems value="#{addressHandler.addressOptionList}"
 									itemValue="#{option}" itemLabel="#{option.description}" var="option" />
 							</h:selectOneMenu>
@@ -47,6 +47,19 @@
 						</td>
 					</tr>
 				</table>
+				<h:outputScript>
+					function setFocusOnLoginForm()
+					{
+						try
+						{
+							document.getElementById('address:street').focus();
+						}
+						catch (err)
+						{
+						}
+					}
+					setFocusOnLoginForm();
+				</h:outputScript>
 			</h:form>
 		</div>
 	</ui:define>
