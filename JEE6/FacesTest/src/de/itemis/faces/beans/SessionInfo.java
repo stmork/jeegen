@@ -3,13 +3,8 @@
  */
 package de.itemis.faces.beans;
 
-import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-import java.util.Date;
-
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.annotation.Resource;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -19,13 +14,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.interceptor.Interceptors;
-import javax.mail.Address;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -40,19 +28,16 @@ import de.itemis.faces.handler.AddressHandler;
 @SessionScoped
 @RolesAllowed(value="admin")
 @Interceptors(Profiler.class)
-public class SessionInfo extends AbstractHandler implements Serializable
+public class SessionInfo extends AbstractHandler
 {
 	private static final long serialVersionUID = 1L;
-	private final static Log log = LogFactory.getLog(SessionInfo.class);
+	private static final Log log = LogFactory.getLog(SessionInfo.class);
 
 	@EJB
 	private SessionDaoBean dao;
 	
 	@EJB
 	private StatefulBean bean;
-
-	@Resource(name="mail/Default")
-	private Session mailSession;
 
 	@ManagedProperty(value="#{addressInfo}")
 	private AddressHandler addressInfo;
@@ -83,7 +68,7 @@ public class SessionInfo extends AbstractHandler implements Serializable
 		log.debug(">close()");
 		log.debug(" " + getSession());
 		bean.ping();
-		bean.logout();
+//		bean.logout();
 		user = null;
 		log.debug("<close()");
 	}
@@ -116,29 +101,7 @@ public class SessionInfo extends AbstractHandler implements Serializable
 	public String testMail()
 	{
 		log.debug(">testMail()");
-		try
-		{
-			final MimeMessage msg = new MimeMessage(mailSession);
-            final InternetAddress from = new InternetAddress(user.getMail());
-            final Address[] to = new InternetAddress[] {new InternetAddress(user.getMail()) };
-
-            from.setPersonal(user.getName(), "utf-8");
-            msg.setFrom(from);
-            msg.setRecipients(Message.RecipientType.TO, to);
-            msg.setSubject("Test");
-            msg.setSentDate(new Date());
-            msg.setText("Test\n-- \nTest\n", "utf-8");
-
-            Transport.send(msg);
-        }
-        catch (MessagingException me)
-        {
-            log.error(me.getMessage(), me);
-		}
-		catch (UnsupportedEncodingException uee)
-		{
-            log.error(uee.getMessage(), uee);
-		}
+		dao.sendMail(user);
 		log.debug("<testMail()");
 		return "change.xhtml";
 	}

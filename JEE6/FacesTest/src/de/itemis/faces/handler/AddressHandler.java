@@ -29,10 +29,12 @@ import de.itemis.faces.entities.AddressOption;
 public class AddressHandler implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	private final static Log log = LogFactory.getLog(AddressHandler.class);
+	private static final Log log = LogFactory.getLog(AddressHandler.class);
 
-	private class AddressOptionConverter implements Converter
+	private class AddressOptionConverter implements Converter, Serializable
 	{
+		private static final long serialVersionUID = 1L;
+
 		@Override
 		public Object getAsObject(final FacesContext context, final UIComponent component, final String input)
 		{

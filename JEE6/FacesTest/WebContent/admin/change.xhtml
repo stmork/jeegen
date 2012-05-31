@@ -37,7 +37,11 @@
 					</tr>
 					<tr>
 						<td>#{msg['change.changed']}</td>
-						<td>#{sessionInfo.user.changed}</td>
+						<td>
+							<h:outputText value="#{sessionInfo.user.changed}">
+								<f:convertDateTime type="both"/>
+							</h:outputText>
+						</td>
 					</tr>
 					<tr>
 						<td></td>
