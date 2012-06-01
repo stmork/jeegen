@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: de.itemis.jee6
-Bundle-Vendor: My Company
+Bundle-Vendor: itemis AG
 Bundle-Version: 1.0.0
 Bundle-SymbolicName: de.itemis.jee6; singleton:=true
 Bundle-ActivationPolicy: lazy
@@ -11,8 +11,8 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.1.0";visibility:=reexport,
  org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional;visibility:=reexport,
  org.eclipse.xtext.generator;resolution:=optional,
  org.eclipse.emf.codegen.ecore;resolution:=optional,
- org.eclipse.emf.mwe.utils;resolution:=optional,
- org.eclipse.emf.mwe2.launch;resolution:=optional,
+ org.eclipse.emf.mwe.utils;resolution:=optional;visibility:=reexport,
+ org.eclipse.emf.mwe2.launch;resolution:=optional;visibility:=reexport,
  org.eclipse.xtext.util,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
@@ -25,13 +25,13 @@ Import-Package: org.apache.log4j,
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: de.itemis.jee6,
  de.itemis.jee6.services,
- de.itemis.jee6.dsl,
- de.itemis.jee6.dsl.impl,
- de.itemis.jee6.dsl.util,
  de.itemis.jee6.parseTreeConstruction,
  de.itemis.jee6.parser.antlr,
  de.itemis.jee6.parser.antlr.internal,
  de.itemis.jee6.validation,
  de.itemis.jee6.scoping,
  de.itemis.jee6.generator,
- de.itemis.jee6.formatting
+ de.itemis.jee6.formatting,
+ de.itemis.jee6.jee6,
+ de.itemis.jee6.jee6.impl,
+ de.itemis.jee6.jee6.util

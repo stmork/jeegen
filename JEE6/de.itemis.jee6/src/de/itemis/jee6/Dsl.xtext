@@ -1,6 +1,6 @@
 grammar de.itemis.jee6.Dsl with org.eclipse.xtext.common.Terminals
 
-generate dsl "http://www.itemis.de/jee6/Dsl"
+generate jee6 "http://www.itemis.de/jee6/Dsl"
 
 Model:
 	(options  += Option)*

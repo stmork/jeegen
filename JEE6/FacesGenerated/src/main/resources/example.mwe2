@@ -1,0 +1,8 @@
+module de.itemis.jee6.example
+
+@de.itemis.jee6.generator.DslGeneratorMWE
+{
+	modelPath="model/Example.jee6"
+	srcdir="src/generated/java"
+	resdir="src/generated/resources"
+}

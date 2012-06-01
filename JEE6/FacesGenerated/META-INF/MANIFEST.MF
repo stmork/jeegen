@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: de.itemis.jee6.example
+Bundle-Vendor: itemis AG
+Bundle-Version: 1.0.0
+Bundle-SymbolicName: de.itemis.jee6.example; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: de.itemis.jee6;bundle-version="1.0.0"

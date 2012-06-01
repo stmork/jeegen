@@ -1,0 +1,28 @@
+«IMPORT jee6»
+
+«DEFINE Main FOR Model»
+«ERROR "Start"»
+
+«EXPAND Main FOREACH options»
+«EXPAND Main FOREACH entities»
+«ENDDEFINE»
+
+«DEFINE Main FOR Option»
+«ERROR "Abstract"»
+«ENDDEFINE»
+
+«DEFINE Main FOR Application»
+«ERROR name»
+«ERROR context»
+«ENDDEFINE»
+
+«DEFINE Main FOR Entity»
+«ENDDEFINE»
+
+«DEFINE Main FOR Table»
+«ERROR name»
+«ENDDEFINE»
+
+«DEFINE Main FOR Options»
+«ERROR name»
+«ENDDEFINE»
