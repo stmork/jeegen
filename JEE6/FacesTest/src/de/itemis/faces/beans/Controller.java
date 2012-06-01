@@ -3,8 +3,6 @@
  */
 package de.itemis.faces.beans;
 
-import java.io.Serializable;
-
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.interceptor.Interceptors;
@@ -21,7 +19,8 @@ import de.itemis.faces.handler.AbstractHandler;
 
 @ManagedBean
 @Interceptors(Profiler.class)
-public class Controller extends AbstractHandler implements Serializable {
+public class Controller extends AbstractHandler
+{
 	/**
 	 * 
 	 */

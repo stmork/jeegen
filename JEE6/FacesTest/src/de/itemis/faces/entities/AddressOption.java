@@ -53,10 +53,20 @@ public class AddressOption implements Serializable
 	{
 		return getDescription() + "/" + getType();
 	}
-	
+
+	@Override
+	public int hashCode()
+	{
+		return super.hashCode();
+	}
+
 	@Override
 	public boolean equals(Object object)
 	{
+		if ((object == null) || !(object instanceof AddressOption))
+		{
+			return false;
+		}
 		AddressOption option = (AddressOption)object;
 		return getType() == option.getType();
 	}

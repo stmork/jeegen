@@ -3,6 +3,8 @@
  */
 package de.itemis.faces.beans;
 
+import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.security.RolesAllowed;
