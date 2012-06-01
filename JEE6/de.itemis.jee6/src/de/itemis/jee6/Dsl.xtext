@@ -1,0 +1,35 @@
+grammar de.itemis.jee6.Dsl with org.eclipse.xtext.common.Terminals
+
+generate dsl "http://www.itemis.de/jee6/Dsl"
+
+Model:
+	(options  += Option)*
+	(entities += Entity)*;
+	
+Option:			(Application|Persistence|Security) ';';
+
+Application:	'application' name=STRING 'context' context=STRING;
+Security:		{Security}('security' 'domain' jaas=STRING)?;
+Persistence:	'persistence' 'unit' persistence=STRING 'jndi' jndi=STRING;
+
+/* Types */
+Type:		(Simple|History|OptionRef|EntityRef) ';';
+Simple:		(Date|Timestamp|Integer|Number|Text|Blob|Clob) name=ID;
+
+Date:		{Date}'Date';
+Timestamp:	{Timestamp}'Timestamp';
+Integer:	{Integer}'Int';
+Number:		{Number}'Number';
+Text:		{Text}'Text';
+Blob:		{Blob}'Blob';
+Clob:		{Clob}'Clob';
+
+History:	'History' name=[Entity|ID];
+EntityRef:	'Entity'  name=[Entity|ID] (many?='[]')?;
+OptionRef:	'Option'  name=[Options|ID];
+
+/* Entities */
+Entity:		(Table|Options) ';';
+
+Table:		'entity'  name=ID '{' (types += Type)+ '}';
+Options:	'options' name=ID '{' keys+=STRING ( ',' keys += STRING)* '}';

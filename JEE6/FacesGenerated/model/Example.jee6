@@ -1,0 +1,64 @@
+application "Test" context "/test";
+persistence unit "jbossDS" jndi "jdbc/jbossDS";
+security domain "itemis";
+
+options AddressType
+{
+	"address.work",
+	"address.home"
+};
+
+entity Address
+{
+	Text street;
+	Text plz;
+	Text location;
+	Option AddressType;
+};
+
+entity User
+{
+	Text login;
+	Entity Address [];
+};
+
+entity Vendor
+{
+	Text name;
+};
+
+entity InventoryType
+{
+	Text   name;
+	Entity Vendor;
+};
+
+entity OrderPosition
+{
+	Int amount;
+};
+
+entity Purchase
+{
+	Text article;
+	Entity OrderPosition [];
+};
+
+options InventoryState
+{
+	"ordered",
+	"received"
+};
+
+entity InventoryHistoryEntry
+{
+	Timestamp created;
+	Option InventoryState;
+	Clob comment;
+	Entity User;
+};
+
+entity Inventory
+{
+	History InventoryHistoryEntry; 
+};
