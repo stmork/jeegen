@@ -152,37 +152,6 @@
 
 
 
-   <extension
-         point="org.eclipse.xtext.builder.participant">
-      <participant
-            class="de.itemis.jee6.ui.DslExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
-      </participant>
-   </extension>
-   <extension
-            point="org.eclipse.ui.preferencePages">
-        <page
-            category="de.itemis.jee6.Dsl"
-            class="de.itemis.jee6.ui.DslExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
-            id="de.itemis.jee6.Dsl.compiler.preferencePage"
-            name="Compiler">
-            <keywordReference id="de.itemis.jee6.ui.keyword_Dsl"/>
-        </page>
-    </extension>
-    <extension
-            point="org.eclipse.ui.propertyPages">
-        <page
-            category="de.itemis.jee6.Dsl"
-            class="de.itemis.jee6.ui.DslExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
-            id="de.itemis.jee6.Dsl.compiler.propertyPage"
-            name="Compiler">
-            <keywordReference id="de.itemis.jee6.ui.keyword_Dsl"/>
-            <enabledWhen>
-	            <adapt type="org.eclipse.core.resources.IProject"/>
-			</enabledWhen>
-	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
-        </page>
-    </extension>
-
 	<!-- Quick Outline -->
 	<extension
 		point="org.eclipse.ui.handlers">

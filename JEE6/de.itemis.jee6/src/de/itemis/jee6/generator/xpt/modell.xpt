@@ -1,5 +1,10 @@
 «IMPORT jee6»
 
+«DEFINE Main FOR Object»
+«ERROR "?:" + this.toString()»
+«ERROR "?:" + this.metaType.toString()»
+«ENDDEFINE»
+
 «DEFINE Main FOR Model»
 «ERROR "Start"»
 
@@ -11,18 +16,19 @@
 «ERROR "Abstract"»
 «ENDDEFINE»
 
-«DEFINE Main FOR Application»
-«ERROR name»
-«ERROR context»
+«DEFINE Main FOR Persistence»
+«ERROR "P:" + persistence»
+«ERROR "P:" + jndi»
 «ENDDEFINE»
 
 «DEFINE Main FOR Entity»
+«ERROR "  E:" + name» 
 «ENDDEFINE»
 
 «DEFINE Main FOR Table»
-«ERROR name»
+«ERROR "  T:" + name» 
 «ENDDEFINE»
 
 «DEFINE Main FOR Options»
-«ERROR name»
+«ERROR "  O:" + name» 
 «ENDDEFINE»

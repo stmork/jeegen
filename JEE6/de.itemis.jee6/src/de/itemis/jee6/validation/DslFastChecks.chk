@@ -1,0 +1,4 @@
+import jee6;
+
+context Model ERROR "Context must start with '/'" :
+	this.path.startsWith("/");

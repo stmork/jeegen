@@ -1,8 +1,11 @@
 module de.itemis.jee6.example
 
-@de.itemis.jee6.generator.DslGeneratorMWE
+Workflow
 {
-	modelPath="model/Example.jee6"
-	srcdir="src/generated/java"
-	resdir="src/generated/resources"
+	component = @de.itemis.jee6.generator.DslGeneratorMWE
+	{
+		modelpath="model"
+		srcdir="src/generated/java"
+		resdir="src/generated/resources"
+	}
 }

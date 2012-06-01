@@ -2,13 +2,13 @@ grammar de.itemis.jee6.Dsl with org.eclipse.xtext.common.Terminals
 
 generate jee6 "http://www.itemis.de/jee6/Dsl"
 
-Model:
+import 'http://www.eclipse.org/emf/2002/Ecore' as ecore
+
+Model:	'application' name=STRING 'context' path=STRING
 	(options  += Option)*
 	(entities += Entity)*;
 	
-Option:			(Application|Persistence|Security) ';';
-
-Application:	'application' name=STRING 'context' context=STRING;
+Option:			(Persistence|Security) ';';
 Security:		{Security}('security' 'domain' jaas=STRING)?;
 Persistence:	'persistence' 'unit' persistence=STRING 'jndi' jndi=STRING;
 
