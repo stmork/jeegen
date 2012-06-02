@@ -55,6 +55,10 @@ Workflow
 		{
 			name = "RES"
 			path = resdir
+			postprocessor = org.eclipse.xtend.typesystem.xsd.XMLBeautifier
+			{
+				formatComments=false
+			}
 		}
 	}
 }

@@ -1,24 +1,185 @@
 «IMPORT jee6»
 
+«EXTENSION de::itemis::jee6::generator::ext::model»
+
 «DEFINE Main FOR Model»
-«EXPAND Persistence FOREACH options.typeSelect(Persistence)»
+«EXPAND Persistence»
+«EXPAND Web»
+«EXPAND JBoss»
+«EXPAND Glassfish»
+«EXPAND Faces»
 «ENDDEFINE»
 
-«DEFINE Persistence FOR Persistence»
+«DEFINE Persistence FOR Model»
 «FILE "META-INF/persistence.xml"»
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.0"
 		xmlns="http://java.sun.com/xml/ns/persistence"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-	<persistence-unit name="«persistence»" transaction-type="JTA">
-		<jta-data-source>«jndi»</jta-data-source>
+«FOREACH getPersistenceUnits() AS pu»
+	<persistence-unit name="«pu.persistence»" transaction-type="JTA">
+		<jta-data-source>«pu.jndi»</jta-data-source>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.show_sql"     value="false" />
 		</properties>
 	</persistence-unit>
+«ENDFOREACH»
 </persistence>
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE Web FOR Model»
+«FILE "WEB-INF/web.xml" RES»
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+		xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+		metadata-complete="false" version="3.0">
+	<display-name>«this.name»</display-name>
+	<distributable />
+
+	<context-param>
+		<description>Damit nicht immer UTF-8 genommen wird ;-)</description>
+		<param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<description>Wir sind am Entwickeln am dran sein.</description>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Development</param-value>
+	</context-param>
+	<context-param>
+		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+		<param-value>server</param-value>
+	</context-param>
+
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
+	<session-config>
+		<session-timeout>60</session-timeout>
+	</session-config>
+
+	<welcome-file-list>
+		<welcome-file>index.xhtml</welcome-file>
+	</welcome-file-list>
+
+«LET getSecurityDomains().first() AS sd»
+«IF sd != null»
+	<!-- ==================== -->
+	<!-- Security definitions -->
+	<!-- ==================== -->
+«FOREACH processes AS process»
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>SecurePages</web-resource-name>
+			<description>Security constraint «uriOf(process)»</description>
+			<url-pattern>«uriOf(process)»/*</url-pattern>
+			<http-method>POST</http-method>
+			<http-method>GET</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+«FOREACH process.roles AS role»
+			<role-name>«role»</role-name>
+«ENDFOREACH»
+		</auth-constraint>
+	</security-constraint>
+«ENDFOREACH»
+
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<realm-name>«sd.jaas»</realm-name>
+		<form-login-config>
+			<form-login-page>/login.xhtml</form-login-page>
+			<form-error-page>/index.xhtml</form-error-page>
+		</form-login-config>
+	</login-config>
+«FOREACH getAllRoles() AS role»
+	<security-role>
+		<role-name>«role»</role-name>
+	</security-role>
+«ENDFOREACH»
+«ENDIF»
+«ENDLET»
+</web-app>
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE JBoss FOR Model»
+«FILE "WEB-INF/jboss-web.xml" RES»
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-web>
+«FOREACH getSecurityDomains() AS sd»
+	<security-domain>java:/jaas/«sd.jaas»</security-domain>
+«ENDFOREACH»
+	<context-root>«path»</context-root>
+«FOREACH getMails() AS mail»
+	<resource-ref>
+		<res-ref-name>«mail.jndi»</res-ref-name>
+		<res-type>javax.mail.Session</res-type>
+		<jndi-name>java:/jboss/«mail.jndi»</jndi-name>
+	</resource-ref>
+«ENDFOREACH»
+</jboss-web>
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE Glassfish FOR Model»
+«FILE "WEB-INF/sun-web.xml" RES»
+<!DOCTYPE sun-web-app PUBLIC "-//Sun Microsystems, Inc.//DTD 
+GlassFish Application Server 3.0 Servlet 3.0//EN" 
+"http://www.sun.com/software/appserver/dtds/sun-web-app_3_0-0.dtd">
+<sun-web-app>
+	<context-root>«path»</context-root>
+«FOREACH getAllRoles() AS role»
+	<security-role-mapping>
+		<role-name>«role»</role-name>
+		<group-name>«role»</group-name>
+	</security-role-mapping>
+«ENDFOREACH»
+</sun-web-app>
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE Faces FOR Model»
+«FILE "WEB-INF/faces-config.xml" RES»
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee"
+		xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+	<application>
+		<resource-bundle>
+			<base-name>«package».messages</base-name>
+			<var>msg</var>
+		</resource-bundle>
+		<resource-bundle>
+			<base-name>«package».errors</base-name>
+			<var>err</var>
+		</resource-bundle>
+		<resource-bundle>
+			<base-name>«package».version</base-name>
+			<var>ver</var>
+		</resource-bundle>
+		<locale-config>
+«FOREACH getLocales() AS locale»
+«IF locale.home»
+			<default-locale>«locale.language»</default-locale>
+«ELSE»
+			<supported-locale>«locale.language»</supported-locale>
+«ENDIF»
+«ENDFOREACH»
+		</locale-config>
+	</application>
+</faces-config>
 «ENDFILE»
 «ENDDEFINE»

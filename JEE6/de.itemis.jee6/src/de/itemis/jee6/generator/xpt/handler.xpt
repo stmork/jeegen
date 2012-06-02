@@ -1,0 +1,140 @@
+«IMPORT jee6»
+
+«EXTENSION de::itemis::jee6::generator::ext::model»
+«EXTENSION de::itemis::jee6::generator::ext::types»
+«EXTENSION de::itemis::jee6::generator::ext::naming»
+«EXTENSION de::itemis::jee6::generator::ext::converter»
+«EXTENSION de::itemis::jee6::generator::ext::dao»
+
+«DEFINE Main FOR Process»
+«EXPAND Handler»
+«EXPAND Dao»
+«ENDDEFINE»
+
+«DEFINE Handler FOR Process»
+«FILE handlerFilename(this)»
+«LET getConverterList(this) AS converterList»
+package «handlerPackageOf(this)»;
+
+import java.io.Serializable;
+import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import «fqDaoOf()»;
+
+«IF converterList.size > 0»
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.convert.Converter;
+import java.util.List;
+«FOREACH converterList AS option»
+import «fqTypeOf(option)»;
+«ENDFOREACH»
+«ENDIF»
+
+@ManagedBean
+@SessionScoped
+abstract public class «handlerOf(this)» implements Serializable
+{
+	private static final long serialVersionUID = 1L;
+	
+	@EJB
+	protected «daoOf()» dao;
+
+«IF converterList.size > 0»
+	private static final String NULL = "[NULL]";
+	private static boolean isNull(final Object input)
+	{
+		return (input == null) || NULL.equals(input);
+	}
+«ENDIF»
+
+«FOREACH converterList AS option»
+	/*
+	 * «typeOf(option)» converter *
+	 */
+	private final «converterOf(option)» «nameOf(option)» = new «converterOf(option)»();
+
+	private class «converterOf(option)» implements Converter
+	{
+		@Override
+		public Object getAsObject(final FacesContext context, final UIComponent component, final String input)
+		{
+			return isNull(input) ? null : dao.«finderOf(option)»(Integer.parseInt(input));
+		}
+
+		@Override
+		public String getAsString(FacesContext context, UIComponent component, Object input)
+		{
+			final String result;
+			
+			if (isNull(input))
+			{
+				result = NULL;
+			}
+			else
+			{
+				final «typeOf(option)» option = («typeOf(option)»)input;
+				result = Integer.toString(option.getId());
+			}
+			return result;
+		}
+	}
+	
+	public List<«typeOf(option)»> «listOf(option)»()
+	{
+		return dao.«listOf(option)»();
+	}
+	
+	public «converterOf(option)» «converterGetter(option)»()
+	{
+		return «nameOf(option)»;
+	}
+«ENDFOREACH»
+}
+«ENDLET»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE Dao FOR Process»
+«FILE daoFilename(this)»
+«LET getConverterList(this) AS converterList»
+package «daoPackageOf(this)»;
+
+import javax.ejb.Stateless;
+import javax.persistence.*;
+
+«IF converterList.size > 0»
+import java.util.List;
+«FOREACH converterList AS option»
+import «fqTypeOf(option)»;
+«ENDFOREACH»
+«ENDIF»
+
+@Stateless
+abstract public class «daoOf(this)»
+{
+«FOREACH getPersistenceUnits(getModel(this)) AS pu»
+	@PersistenceContext(unitName="«pu.persistence»")
+	protected EntityManager em;
+«ENDFOREACH»
+
+«FOREACH converterList AS option»
+	public «typeOf(option)» «finderOf(option)»(final int id)
+	{
+		return em.find(«typeOf(option)».class, id);
+	} 
+
+	public List<«typeOf(option)»> «listOf(option)»()
+	{
+		TypedQuery<«typeOf(option)»> query = em.createQuery(
+				"SELECT o FROM «typeOf(option)» o WHERE o.active = TRUE ORDER BY o.active DESC, o.name",
+				«typeOf(option)».class);
+		
+		return query.getResultList();
+	}
+«ENDFOREACH»
+}
+«ENDLET»
+«ENDFILE»
+«ENDDEFINE»

@@ -1,6 +1,9 @@
 application "Test" context "/test" package de.itemis.faces.test;
 persistence unit "jbossDS" jndi "jdbc/jbossDS";
 security domain "itemis";
+smtp "mail/Default";
+locale "de" default;
+locale "en";
 
 options AddressType
 {
@@ -10,57 +13,125 @@ options AddressType
 
 entity Address
 {
-	Text street;
-	Text plz;
-	Text location;
+	Text               street;
+	Text               plz;
+	Text               location;
 	Option AddressType type;
 };
 
-entity User
+entity UserInfo
 {
-	Text login;
+	Text              login;
 	Entity Address [] addresses;
+	Text              mail;
+	Timestamp         changed;
+	Text              forename;
+	Text              surename;
+	Boolean           active;
+	Boolean           authorizer;
 };
 
-entity Vendor
+entity Mail
+{
+	Timestamp created;
+	Timestamp sent;
+	Text      subject;
+	Text      sender;
+	Text      receiver;
+	Text      cc;
+	Clob      message;
+};
+
+options Vendor editable
 {
 	Text name;
+	Boolean active;
 };
 
-entity InventoryType
+options Distributor editable
 {
-	Text   name;
-	Entity Vendor vendor;
+	Text name;
+	Boolean active;
+	Text contact;
+	Text phone;
+	Text mail;
+};
+
+options InventoryType editable
+{
+	Text    type;
+	Text    label;
+	Entity  Vendor vendor;
+	Boolean active;
 };
 
 entity OrderPosition
 {
-	Int amount;
+	Entity UserInfo      owner;
+	Entity UserInfo      authorizer;
+	Int                  amount;
+	Text                 model;
+	Option InventoryType inventoryType;
+	Timestamp            received;
+	Text                 comment;
+	Boolean              canceled;
 };
 
 entity Purchase
 {
-	Text article;
-	Entity OrderPosition [] orders;
+	Text      article;
+	Entity    OrderPosition [] positions;
+	Option    Distributor distributor;
+	Timestamp created;
+	Entity    UserInfo buyer;
 };
 
 options InventoryState
 {
-	"ordered",
-	"received"
+	"UNKNOWN",
+	"ORDERED",
+	"RECEIVED",
+	"IN_USE",
+	"REPAIR",
+	"NOT_IN_USE",
+	"MARKED_FOR_SELL",
+	"SOLD",
+	"GIVE_AWAY",
+	"DEFECT",
+	"THEFT"
 };
 
 entity InventoryHistoryEntry
 {
-	Timestamp created;
+	Timestamp             created;
+//	private Inventory      inventory;
 	Option InventoryState state;
-	Clob comment;
-	Entity User owner;
-	Entity User commentator;
-	Number price;
+	Entity UserInfo       owner;
+	Entity UserInfo       commentator;
+	Text                  utilization;
+	Text                  comment;
+	Number                sell;
 };
 
 entity Inventory
 {
 	History InventoryHistoryEntry history; 
+	Text                          serialNumber;
+	Option InventoryType          inventoryType;
+	Boolean                       infrastructure;
+};
+
+process Inventory roles "controlling","it_support","vorstand"
+{
+	Inventory, InventoryHistoryEntry
+};
+
+process Purchasing roles "controlling","it_support","vorstand"
+{
+	Purchase, OrderPosition
+};
+
+process Admin roles "admin"
+{
+	Vendor, Distributor, InventoryType
 };

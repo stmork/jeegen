@@ -45,6 +45,18 @@ String annotationOf(Timestamp ts) :
 	"@Temporal(TemporalType.TIMESTAMP)";
 
 /*
+ * Boolean
+ */
+String typeOf(jee6::Boolean i) :
+	"boolean";
+
+String packageOf(jee6::Boolean i) :
+	"";
+
+String fqTypeOf(jee6::Boolean i) :
+	typeOf(i);
+
+/*
  * Integer
  */
 String typeOf(jee6::Integer i) :
@@ -143,6 +155,9 @@ String packageOf(OptionRef ref) :
 String annotationOf(OptionRef ref) :
 	"@OneToOne";
 
+String converterOf(OptionRef option) :
+	typeOf(option) + "Converter";
+
 /*
  * Entity
  */
@@ -154,6 +169,27 @@ String packageOf(Entity e) :
 
 String fqTypeOf(Entity e) :
 	packageOf(e) + "." + typeOf(e);
+
+/*
+ * Process
+ */
+String handlerOf(Process p) :
+	"Abstract" + p.name + "Handler";
+
+String handlerPackageOf(Process p) :
+	getModel(p).package + ".handler";
+
+String fqHandlerOf(Process p) :
+	handlerPackageOf(p) + "." + handlerOf(p);
+
+String daoOf(Process p) :
+	p.name + "DaoBean";
+
+String daoPackageOf(Process p) :
+	getModel(p).package + ".dao";
+
+String fqDaoOf(Process p) :
+	daoPackageOf(p) + "." + daoOf(p);
 
 /*
  * List handling

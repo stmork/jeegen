@@ -2,13 +2,13 @@
 
 «IMPORT de::itemis::jee6::generator::xpt::entity»
 «IMPORT de::itemis::jee6::generator::xpt::descriptor»
+«IMPORT de::itemis::jee6::generator::xpt::handler»
 
 «EXTENSION de::itemis::jee6::generator::ext::types»
 «EXTENSION de::itemis::jee6::generator::ext::naming»
 
 «DEFINE Main FOR Model»
-«ERROR "Start"»
-
 «EXPAND descriptor::Main»
 «EXPAND entity::Main FOREACH entities»
+«EXPAND handler::Main FOREACH processes»
 «ENDDEFINE»

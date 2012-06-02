@@ -5,3 +5,24 @@ Model getModel(Entity t) :
 
 Model getModel(EntityRef t) :
 	(Model)t.eRootContainer;
+
+Model getModel(Process p) :
+	(Model)p.eRootContainer;
+
+List[Persistence] getPersistenceUnits(Model m) :
+	m.options.typeSelect(Persistence);
+
+List[Persistence] getMails(Model m) :
+	m.options.typeSelect(Mail);
+
+List[Locale] getLocales(Model m) :
+	m.options.typeSelect(Locale);
+
+List[Security] getSecurityDomains(Model m) :
+	m.options.typeSelect(Security);
+
+List[String] getAllRoles(Model m) :
+	m.processes.roles.toSet();
+
+String uriOf(Process p) :
+	"/" + p.name.toLowerCase();

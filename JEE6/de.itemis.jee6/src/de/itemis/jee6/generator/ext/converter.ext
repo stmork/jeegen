@@ -1,0 +1,9 @@
+import jee6;
+
+extension de::itemis::jee6::generator::ext::types;
+
+List[OptionRef] getConverterList(Process p) :
+	p.entities.types.typeSelect(OptionRef).toSet();
+
+String converterGetter(OptionRef option) :
+	"get" + typeOf(option);

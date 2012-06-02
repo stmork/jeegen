@@ -5,19 +5,23 @@ generate jee6 "http://www.itemis.de/jee6/Dsl"
 import 'http://www.eclipse.org/emf/2002/Ecore' as ecore
 
 Model:	'application' name=STRING 'context' path=STRING 'package' package=PACKAGED_ID ';'
-	(options  += Option)*
-	(entities += Entity)*;
+	(options   += Option)*
+	(entities  += Entity)*
+	(processes += Process)*;
 	
-Option:			(Persistence|Security) ';';
+Option:			(Persistence|Security|Mail|Locale) ';';
 Security:		{Security}('security' 'domain' jaas=STRING)?;
 Persistence:	'persistence' 'unit' persistence=STRING 'jndi' jndi=STRING;
+Mail:			'smtp' jndi=STRING;
+Locale:			'locale' language=STRING (country=STRING)? (home?='default')?;
 
 /* Types */
 Type:		(Simple|Reference) ';';
 
-Simple:		(Date|Timestamp|Integer|Number|Text|Blob|Clob) name=ID;
+Simple:		(Date|Timestamp|Boolean|Integer|Number|Text|Blob|Clob) name=ID;
 Date:		{Date}'Date';
 Timestamp:	{Timestamp}'Timestamp';
+Boolean:	{Boolean}'Boolean';
 Integer:	{Integer}'Int';
 Number:		{Number}'Number';
 Text:		{Text}'Text';
@@ -33,6 +37,9 @@ OptionRef:	'Option'  type=[Options|ID] name=ID;
 Entity:		(Table|Options) ';';
 
 Table:		'entity'  name=ID '{' (types += Type)+ '}';
-Options:	'options' name=ID '{' keys+=STRING ( ',' keys += STRING)* '}';
+Options:	'options' name=ID
+	('editable' '{' (types += Type)+ '}'| '{' keys+=STRING ( ',' keys += STRING)*  '}');
+
+Process:	'process' name=ID ('roles' roles+=STRING (',' roles+=STRING)* )? '{' entities += [Entity|ID] (',' entities += [Entity|ID])* '}' ';';
 
 PACKAGED_ID : ID ('.' ID)* ;
