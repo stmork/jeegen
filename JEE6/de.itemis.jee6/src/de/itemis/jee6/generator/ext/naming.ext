@@ -1,0 +1,21 @@
+import jee6;
+
+extension de::itemis::jee6::generator::ext::types;
+
+String nameOf(Type t) :
+	t.name;
+
+String nameOf(Entity t) :
+	t.name;
+
+String filename(Type t) :
+	fqTypeOf(t).replaceAll(".", "/") + ".java";
+
+String filename(Entity t) :
+	fqTypeOf(t).replaceAll("\\.", "/") + ".java";
+
+String getterOf(Type t) :
+	"get" + nameOf(t).toFirstUpper();
+
+String setterOf(Type t) :
+	"set" + nameOf(t).toFirstUpper();

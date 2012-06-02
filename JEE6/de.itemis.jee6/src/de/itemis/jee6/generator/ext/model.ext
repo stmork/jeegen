@@ -1,0 +1,7 @@
+import jee6;
+
+Model getModel(Entity t) :
+	(Model)t.eRootContainer;
+
+Model getModel(EntityRef t) :
+	(Model)t.eRootContainer;

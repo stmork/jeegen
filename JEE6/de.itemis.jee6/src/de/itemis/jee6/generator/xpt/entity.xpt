@@ -1,0 +1,132 @@
+«IMPORT jee6»
+
+«EXTENSION de::itemis::jee6::generator::ext::types»
+«EXTENSION de::itemis::jee6::generator::ext::naming»
+
+«DEFINE Main FOR Entity»
+«FILE filename(this)»
+package «packageOf(this)»;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+«IF hasList(this)»
+import java.util.List;
+«ENDIF»
+
+«FOREACH packages() AS pkg»
+import «pkg»;
+«ENDFOREACH»
+
+@Entity
+public class «nameOf(this)» implements Serializable
+{
+	private static final long serialVersionUID = 1L;
+
+«EXPAND Attributes»
+«EXPAND Id»
+«EXPAND GetterSetter»
+«EXPAND Sorting»
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE Id FOR Entity»
+«ENDDEFINE»
+
+«DEFINE Attributes FOR Entity»
+«ENDDEFINE»
+
+«DEFINE GetterSetter FOR Entity»
+«ENDDEFINE»
+
+«DEFINE Sorting FOR Entity»
+«ENDDEFINE»
+
+«DEFINE Id FOR Options»
+	public static enum Type
+	{
+«FOREACH keys AS key SEPARATOR ","»
+	«key.toUpperCase().replaceAll("\\.", "_")»
+«ENDFOREACH»
+	}
+
+	private int    id;
+	private String key;
+
+	@Id
+	public int getId() {
+		return this.id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	@Column
+	public String getKey() {
+		return this.key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
+	}
+«ENDDEFINE»
+
+«DEFINE Id FOR Table»
+	private int id;
+
+	@Id
+	@TableGenerator(
+			name="id«nameOf(this)»", table = "IDs",
+			pkColumnName = "id", valueColumnName = "value", pkColumnValue = "«nameOf(this)»",
+			initialValue = 1, allocationSize = 10)
+	@GeneratedValue(strategy=GenerationType.TABLE, generator="id«nameOf(this)»")
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+«ENDDEFINE»
+
+«DEFINE Attributes FOR Table»
+«FOREACH types AS type»
+	private «relationOfType(type)» «nameOf(type)»;
+«ENDFOREACH»
+«ENDDEFINE»
+
+«DEFINE GetterSetter FOR Table»
+«FOREACH types AS type»
+	«annotationOf(type)»
+	public «relationOfType(type)» «getterOf(type)»()
+	{
+		return this.«nameOf(type)»;
+	}
+
+	public void «setterOf(type)»(«relationOfType(type)» «nameOf(type)»)
+	{
+		this.«nameOf(type)» = «nameOf(type)»;
+	}
+«ENDFOREACH»
+«ENDDEFINE»
+
+«DEFINE Sorting FOR Options»
+	@Override
+	public int hashCode()
+	{
+		return super.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object object)
+	{
+		if ((object == null) || !(object instanceof «typeOf(this)»))
+		{
+			return false;
+		}
+		«typeOf(this)» option = («typeOf(this)»)object;
+		return getId() == option.getId();
+	}
+«ENDDEFINE»

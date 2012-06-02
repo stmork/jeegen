@@ -1,34 +1,14 @@
 «IMPORT jee6»
 
-«DEFINE Main FOR Object»
-«ERROR "?:" + this.toString()»
-«ERROR "?:" + this.metaType.toString()»
-«ENDDEFINE»
+«IMPORT de::itemis::jee6::generator::xpt::entity»
+«IMPORT de::itemis::jee6::generator::xpt::descriptor»
+
+«EXTENSION de::itemis::jee6::generator::ext::types»
+«EXTENSION de::itemis::jee6::generator::ext::naming»
 
 «DEFINE Main FOR Model»
 «ERROR "Start"»
 
-«EXPAND Main FOREACH options»
-«EXPAND Main FOREACH entities»
-«ENDDEFINE»
-
-«DEFINE Main FOR Option»
-«ERROR "Abstract"»
-«ENDDEFINE»
-
-«DEFINE Main FOR Persistence»
-«ERROR "P:" + persistence»
-«ERROR "P:" + jndi»
-«ENDDEFINE»
-
-«DEFINE Main FOR Entity»
-«ERROR "  E:" + name» 
-«ENDDEFINE»
-
-«DEFINE Main FOR Table»
-«ERROR "  T:" + name» 
-«ENDDEFINE»
-
-«DEFINE Main FOR Options»
-«ERROR "  O:" + name» 
+«EXPAND descriptor::Main»
+«EXPAND entity::Main FOREACH entities»
 «ENDDEFINE»

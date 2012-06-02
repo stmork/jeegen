@@ -1,4 +1,4 @@
-application "Test" context "/test";
+application "Test" context "/test" package de.itemis.faces.test;
 persistence unit "jbossDS" jndi "jdbc/jbossDS";
 security domain "itemis";
 
@@ -13,13 +13,13 @@ entity Address
 	Text street;
 	Text plz;
 	Text location;
-	Option AddressType;
+	Option AddressType type;
 };
 
 entity User
 {
 	Text login;
-	Entity Address [];
+	Entity Address [] addresses;
 };
 
 entity Vendor
@@ -30,7 +30,7 @@ entity Vendor
 entity InventoryType
 {
 	Text   name;
-	Entity Vendor;
+	Entity Vendor vendor;
 };
 
 entity OrderPosition
@@ -41,7 +41,7 @@ entity OrderPosition
 entity Purchase
 {
 	Text article;
-	Entity OrderPosition [];
+	Entity OrderPosition [] orders;
 };
 
 options InventoryState
@@ -53,12 +53,14 @@ options InventoryState
 entity InventoryHistoryEntry
 {
 	Timestamp created;
-	Option InventoryState;
+	Option InventoryState state;
 	Clob comment;
-	Entity User;
+	Entity User owner;
+	Entity User commentator;
+	Number price;
 };
 
 entity Inventory
 {
-	History InventoryHistoryEntry; 
+	History InventoryHistoryEntry history; 
 };

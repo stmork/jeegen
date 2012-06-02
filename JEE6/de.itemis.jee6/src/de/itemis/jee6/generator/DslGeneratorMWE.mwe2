@@ -48,7 +48,7 @@ Workflow
 		expand = "de::itemis::jee6::generator::xpt::modell::Main FOREACH ${slotname}"
 		outlet =
 		{
-			path = resdir
+			path = srcdir
 			postprocessor = org.eclipse.xpand2.output.JavaBeautifier {}
 		}
 		outlet =
