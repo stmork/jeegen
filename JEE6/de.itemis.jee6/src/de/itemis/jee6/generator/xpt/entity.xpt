@@ -6,13 +6,18 @@
 
 «DEFINE Main FOR Entity»
 «FILE filename(this)»
+«LET getId() AS id»
 package «packageOf(this)»;
 
 import java.io.Serializable;
+import java.text.MessageFormat;
 import javax.persistence.*;
 
 «IF hasList(this)»
 import java.util.List;
+«ENDIF»
+«IF filterable»
+import java.util.Locale;
 «ENDIF»
 
 «FOREACH packages() AS pkg»
@@ -21,17 +26,89 @@ import «pkg»;
 
 @Entity
 @Table(name="«typeOf(this)»")
-«IF types.exists(e|isTransient(e))»
+«IF isAbstract()»
 abstract
 «ENDIF»
 public class «typeOf(this)» implements Serializable
+«IF cloneable»
+, Cloneable
+«ENDIF»
 {
 	private static final long serialVersionUID = 1L;
 
 «EXPAND Id»
 «EXPAND GetterSetter»
+
+«LET types.typeSelect(Timestamp).select(e|e.auto) AS auto»
+«IF auto.size > 0»
+	@PrePersist
+	public void prePersist()
+	{
+«FOREACH auto AS date»
+		if («getterOf(date)»() == null)
+		{
+			«setterOf(date)»(new Date());
+		}
+«ENDFOREACH»
+	}
+«ENDIF»
+«ENDLET»
+
+«LET types.typeSelect(Timestamp).select(e|e.update) AS update»
+«IF update.size > 0»
+	@PreUpdate
+	public void preUpdate()
+	{
+«FOREACH update AS date»
+		«setterOf(date)»(new Date());
+«ENDFOREACH»
+	}
+«ENDIF»
+«ENDLET»
+
 «EXPAND Sorting»
+
+«IF cloneable»
+	@Override
+	public «typeOf(this)» clone()
+	{
+		try
+		{
+			«typeOf(this)» «nameOf(this)» = («typeOf(this)»)super.clone();
+«IF id == null»
+			«nameOf(this)».setId(0);
+«ELSE»
+			«nameOf(this)».«setterOf(id)»(null);
+«ENDIF»
+			return «nameOf(this)»;
+		}
+		catch (CloneNotSupportedException cnse)
+		{
+			return null;
+		}
+	}
+«ENDIF»
+
+	@Override
+	public String toString()
+	{
+		StringBuffer buffer = new StringBuffer();
+«FOREACH types.typeSelect(Simple).reject(s|isId(s)) AS a»
+		buffer.append(" «nameOf(a)»=").append(«getterOf(a)»());
+«ENDFOREACH»
+		return MessageFormat.format("[«typeOf()»:{0}]{1}",
+«IF id == null»
+			getId(),
+«ELSE»
+			«getterOf(id)»(),
+«ENDIF»
+			buffer);
+	}
+«IF filterable»
+	abstract public boolean filter(final String pattern, final Locale locale);
+«ENDIF»
 }
+«ENDLET»
 «ENDFILE»
 «ENDDEFINE»
 
@@ -126,10 +203,10 @@ public class «typeOf(this)» implements Serializable
 
 	@Id
 	@TableGenerator(
-			name="id«nameOf(this)»", table = "IDs",
-			pkColumnName = "id", valueColumnName = "value", pkColumnValue = "«nameOf(this)»",
+			name="«typeOf(this)»IDs", table = "IDs",
+			pkColumnName = "id", valueColumnName = "value", pkColumnValue = "«typeOf(this)»",
 			initialValue = 1, allocationSize = 10)
-	@GeneratedValue(strategy=GenerationType.TABLE, generator="id«nameOf(this)»")
+	@GeneratedValue(strategy=GenerationType.TABLE, generator="«typeOf(this)»IDs")
 	public int getId() {
 		return id;
 	}

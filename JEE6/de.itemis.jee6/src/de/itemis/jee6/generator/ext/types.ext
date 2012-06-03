@@ -162,8 +162,18 @@ String converterOf(OptionRef option) :
 /*
  * Entity
  */
+
+Boolean isTransient(Attribute a) :
+	false;
+
+Boolean isTransient(Simple s) :
+	s.transient;
+
+Boolean isAbstract(Entity e) :
+	e.filterable || e.types.exists(t|isTransient(t));
+
 String typeOf(Entity e) :
-	e.name;
+	(isAbstract(e) ? "Abstract" : "") + e.name.toFirstUpper();
 
 String packageOf(Entity e) :
 	getModel(e).package + ".entity";

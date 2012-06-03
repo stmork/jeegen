@@ -24,7 +24,7 @@ options UserInfo editable
 	Text id           login;
 	Entity Address [] addresses;
 	Text              mail;
-	Timestamp         changed;
+	Timestamp update  changed;
 	Text              forename;
 	Text              surename;
 	Boolean           active;
@@ -66,26 +66,26 @@ options InventoryType editable
 	Boolean active;
 };
 
-entity OrderPosition
+entity OrderPosition filterable cloneable
 {
-	Entity UserInfo      owner;
-	Entity UserInfo      authorizer;
+	Option InventoryType inventoryType;
 	Int                  amount;
 	Text                 model;
-	Option InventoryType inventoryType;
-	Timestamp            received;
 	Text                 comment;
+	Timestamp            received;
 	Boolean              canceled;
+	Entity UserInfo      owner;
+	Entity UserInfo      authorizer;
 	Text                 positition transient;
 };
 
 entity Purchase
 {
-	Text      article;
-	Entity    OrderPosition [] positions;
-	Option    Distributor distributor;
-	Timestamp created;
-	Entity    UserInfo buyer;
+	Timestamp auto          created;
+	Text                    article;
+	Entity OrderPosition [] positions;
+	Option Distributor      distributor;
+	Entity UserInfo         buyer;
 };
 
 options InventoryState
@@ -103,7 +103,7 @@ options InventoryState
 	"THEFT"
 };
 
-entity InventoryHistoryEntry
+entity InventoryHistoryEntry cloneable
 {
 	Timestamp             created;
 //	private Inventory      inventory;
@@ -115,7 +115,7 @@ entity InventoryHistoryEntry
 	Number                sell;
 };
 
-entity Inventory
+entity Inventory filterable
 {
 	History InventoryHistoryEntry history; 
 	Text                          serialNumber;
