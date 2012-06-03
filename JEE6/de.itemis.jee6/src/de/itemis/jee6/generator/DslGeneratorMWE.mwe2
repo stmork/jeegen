@@ -4,6 +4,7 @@ import org.eclipse.emf.mwe.utils.*
  
 var slotname='model'
 var modelpath
+var impldir
 var srcdir
 var resdir
 
@@ -49,6 +50,13 @@ Workflow
 		outlet =
 		{
 			path = srcdir
+			postprocessor = org.eclipse.xpand2.output.JavaBeautifier {}
+		}
+		outlet =
+		{
+			name = "IMPL"
+			path = impldir
+			overwrite = false
 			postprocessor = org.eclipse.xpand2.output.JavaBeautifier {}
 		}
 		outlet =

@@ -172,14 +172,20 @@ Boolean isTransient(Simple s) :
 Boolean isAbstract(Entity e) :
 	e.filterable || e.types.exists(t|isTransient(t));
 
+String abstractOf(Entity e) :
+	(isAbstract(e) ? "Abstract" : "") + typeOf(e);
+
 String typeOf(Entity e) :
-	(isAbstract(e) ? "Abstract" : "") + e.name.toFirstUpper();
+	e.name.toFirstUpper();
 
 String packageOf(Entity e) :
 	getModel(e).package + ".entity";
 
 String fqTypeOf(Entity e) :
 	packageOf(e) + "." + typeOf(e);
+
+String fqAbstractTypeOf(Entity e) :
+	packageOf(e) + "." + abstractOf(e);
 
 /*
  * Process

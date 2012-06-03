@@ -5,6 +5,7 @@ Workflow
 	component = @de.itemis.jee6.generator.DslGeneratorMWE
 	{
 		modelpath="model"
+		impldir="src/main/java"
 		srcdir="src/generated/java"
 		resdir="src/generated/resources"
 	}

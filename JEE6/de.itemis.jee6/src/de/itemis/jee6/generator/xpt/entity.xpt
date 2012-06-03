@@ -5,7 +5,12 @@
 «EXTENSION de::itemis::jee6::generator::ext::entity»
 
 «DEFINE Main FOR Entity»
-«FILE filename(this)»
+«EXPAND Base»
+«EXPAND Implementation»
+«ENDDEFINE»
+
+«DEFINE Base FOR Entity»
+«FILE abstractFilename(this)»
 «LET getId() AS id»
 package «packageOf(this)»;
 
@@ -19,19 +24,23 @@ import java.util.List;
 «IF filterable»
 import java.util.Locale;
 «ENDIF»
-
 «FOREACH packages() AS pkg»
 import «pkg»;
 «ENDFOREACH»
 
+«IF isAbstract()»
+@MappedSuperclass
+abstract
+«ELSE»
 @Entity
 @Table(name="«typeOf(this)»")
-«IF isAbstract()»
-abstract
 «ENDIF»
-public class «typeOf(this)» implements Serializable
+public class «abstractOf(this)» implements Serializable
 «IF cloneable»
 , Cloneable
+«ENDIF»
+«IF filterable»
+, de.itemis.jee6.util.Filterable
 «ENDIF»
 {
 	private static final long serialVersionUID = 1L;
@@ -104,9 +113,6 @@ public class «typeOf(this)» implements Serializable
 «ENDIF»
 			buffer);
 	}
-«IF filterable»
-	abstract public boolean filter(final String pattern, final Locale locale);
-«ENDIF»
 }
 «ENDLET»
 «ENDFILE»
@@ -132,7 +138,7 @@ public class «typeOf(this)» implements Serializable
 		return this.«nameOf()»;
 	}
 
-	public void «setterOf()»(«relationOfType()» «nameOf()»)
+	public void «setterOf()»(final «relationOfType()» «nameOf()»)
 	{
 		this.«nameOf()» = «nameOf()»;
 	}
@@ -148,7 +154,7 @@ public class «typeOf(this)» implements Serializable
 		return this.«nameOf()»;
 	}
 
-	public void «setterOf()»(«typeOf()» «nameOf()»)
+	public void «setterOf()»(final «typeOf()» «nameOf()»)
 	{
 		this.«nameOf()» = «nameOf()»;
 	}
@@ -178,7 +184,7 @@ public class «typeOf(this)» implements Serializable
 		return this.key;
 	}
 
-	public void setKey(String key) {
+	public void setKey(final String key) {
 		this.key = key;
 	}
 «ENDIF»
@@ -191,7 +197,7 @@ public class «typeOf(this)» implements Serializable
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(final int id) {
 		this.id = id;
 	}
 «ENDIF»
@@ -211,7 +217,7 @@ public class «typeOf(this)» implements Serializable
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(final int id) {
 		this.id = id;
 	}
 «ENDIF»
@@ -225,7 +231,7 @@ public class «typeOf(this)» implements Serializable
 	}
 
 	@Override
-	public boolean equals(Object object)
+	public boolean equals(final Object object)
 	{
 		if ((object == null) || !(object instanceof «typeOf(this)»))
 		{
@@ -240,4 +246,42 @@ public class «typeOf(this)» implements Serializable
 «ENDIF»
 «ENDLET»
 	}
+«ENDDEFINE»
+
+«DEFINE Implementation FOR Entity»
+«IF isAbstract()»
+«FILE filename(this) IMPL»
+package «packageOf(this)»;
+
+import javax.persistence.*;
+«IF filterable»
+import java.util.Locale;
+«ENDIF»
+
+@Entity
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@Table(name="«typeOf(this)»")
+public class «typeOf()» extends «abstractOf()»
+{
+	private static final long serialVersionUID = 1L;
+
+«FOREACH types.select(e|isTransient(e)) AS property»
+	@Transient
+	@Override
+	public «typeOf(property)» «getterOf(property)»()
+	{
+		// TODO: Implement!
+		throw new IllegalStateException("«fqTypeOf()».«getterOf(property)»() not implemented!");
+	}
+«ENDFOREACH»
+«IF filterable»
+	@Override
+	public boolean filter(final String pattern, final Locale locale) {
+		// TODO: Auto-generated method stub
+		return false;
+	}
+«ENDIF»
+}
+«ENDFILE»
+«ENDIF»
 «ENDDEFINE»

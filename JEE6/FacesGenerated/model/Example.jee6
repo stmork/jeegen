@@ -76,7 +76,7 @@ entity OrderPosition filterable cloneable
 	Boolean              canceled;
 	Entity UserInfo      owner;
 	Entity UserInfo      authorizer;
-	Text                 positition transient;
+	Text                 position transient;
 };
 
 entity Purchase

@@ -11,6 +11,9 @@ String nameOf(Entity t) :
 String filename(Entity e) :
 	fqTypeOf(e).replaceAll("\\.", "/") + ".java";
 
+String abstractFilename(Entity e) :
+	fqAbstractTypeOf(e).replaceAll("\\.", "/") + ".java";
+
 String handlerFilename(Process p) :
 	fqHandlerOf(p).replaceAll("\\.", "/") + ".java";
 
