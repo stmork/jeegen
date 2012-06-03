@@ -1,9 +1,5 @@
 «IMPORT jee6»
 
-«IMPORT de::itemis::jee6::generator::xpt::entity»
-«IMPORT de::itemis::jee6::generator::xpt::descriptor»
-«IMPORT de::itemis::jee6::generator::xpt::handler»
-
 «EXTENSION de::itemis::jee6::generator::ext::types»
 «EXTENSION de::itemis::jee6::generator::ext::naming»
 

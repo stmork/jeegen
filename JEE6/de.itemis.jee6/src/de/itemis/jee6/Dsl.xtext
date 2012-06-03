@@ -16,15 +16,15 @@ Mail:			'smtp' jndi=STRING;
 Locale:			'locale' language=STRING (country=STRING)? (home?='default')?;
 
 /* Types */
-Type:		(Simple|Reference) ';';
+Attribute:	(Simple|Reference) ';';
 
-Simple:		(Date|Timestamp|Boolean|Integer|Number|Text|Blob|Clob) name=ID;
+Simple:		(Date|Timestamp|Boolean|Integer|Number|Text|Blob|Clob) name=ID (transient?='transient')?;
 Date:		{Date}'Date';
 Timestamp:	{Timestamp}'Timestamp';
 Boolean:	{Boolean}'Boolean';
 Integer:	{Integer}'Int';
 Number:		{Number}'Number';
-Text:		{Text}'Text';
+Text:		{Text}'Text' (id?='id')?;
 Blob:		{Blob}'Blob';
 Clob:		{Clob}'Clob';
 
@@ -36,9 +36,9 @@ OptionRef:	'Option'  type=[Options|ID] name=ID;
 /* Entities */
 Entity:		(Table|Options) ';';
 
-Table:		'entity'  name=ID '{' (types += Type)+ '}';
+Table:		'entity'  name=ID '{' (types += Attribute)+ '}';
 Options:	'options' name=ID
-	('editable' '{' (types += Type)+ '}'| '{' keys+=STRING ( ',' keys += STRING)*  '}');
+	('editable' '{' (types += Attribute)+ '}'| '{' keys+=STRING ( ',' keys += STRING)*  '}');
 
 Process:	'process' name=ID ('roles' roles+=STRING (',' roles+=STRING)* )? '{' entities += [Entity|ID] (',' entities += [Entity|ID])* '}' ';';
 

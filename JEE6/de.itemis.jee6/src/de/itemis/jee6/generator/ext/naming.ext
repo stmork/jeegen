@@ -2,11 +2,11 @@ import jee6;
 
 extension de::itemis::jee6::generator::ext::types;
 
-String nameOf(Type t) :
-	t.name;
+String nameOf(Attribute t) :
+	t.name.toFirstLower();
 
 String nameOf(Entity t) :
-	t.name;
+	t.name.toFirstLower();
 
 String filename(Entity e) :
 	fqTypeOf(e).replaceAll("\\.", "/") + ".java";
@@ -17,8 +17,18 @@ String handlerFilename(Process p) :
 String daoFilename(Process p) :
 	fqDaoOf(p).replaceAll("\\.", "/") + ".java";
 
-String getterOf(Type t) :
+String getterOf(jee6::Boolean t) :
+	"is" + nameOf(t).toFirstUpper();
+
+String getterOf(Attribute t) :
 	"get" + nameOf(t).toFirstUpper();
 
-String setterOf(Type t) :
+String setterOf(Attribute t) :
 	"set" + nameOf(t).toFirstUpper();
+
+String getterOf(Entity t) :
+	"get" + nameOf(t).toFirstUpper();
+
+String setterOf(Entity t) :
+	"set" + nameOf(t).toFirstUpper();
+	

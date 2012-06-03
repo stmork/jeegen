@@ -26,3 +26,6 @@ List[String] getAllRoles(Model m) :
 
 String uriOf(Process p) :
 	"/" + p.name.toLowerCase();
+
+List[Entity] getAllEntities(Model m) :
+	m.entities;

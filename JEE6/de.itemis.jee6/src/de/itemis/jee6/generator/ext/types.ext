@@ -1,24 +1,25 @@
 import jee6;
 
 extension de::itemis::jee6::generator::ext::model;
+extension de::itemis::jee6::generator::ext::naming;
 
 /*
  * Type
  */
 
-Boolean isMany(Type t) :
+Boolean isMany(Attribute t) :
 	false;
 
-String typeOf(Type t) :
+String typeOf(Attribute t) :
 	"Object";
 
-String packageOf(Type t) :
+String packageOf(Attribute t) :
 	"java.lang";
 
-String fqTypeOf(Type t) :
+String fqTypeOf(Attribute t) :
 	packageOf(t) + "." + typeOf(t);
 
-String annotationOf(Type t) :
+String annotationOf(Attribute t) :
 	"@Column";
 
 /*
@@ -31,7 +32,7 @@ String packageOf(Date d) :
 	"java.util";
 
 String annotationOf(Date d) :
-	"@Column @Temporal(TemporalType.Date)";
+	"@Column @Temporal(TemporalType.DATE)";
 /*
  * Timestamp
  */
@@ -42,7 +43,7 @@ String packageOf(Timestamp ts) :
 	"java.util";
 
 String annotationOf(Timestamp ts) :
-	"@Temporal(TemporalType.TIMESTAMP)";
+	"@Column @Temporal(TemporalType.TIMESTAMP)";
 
 /*
  * Boolean
@@ -126,7 +127,7 @@ String packageOf(History ref) :
 	packageOf(ref.type);
 
 String annotationOf(History ref) :
-	"@OneToMany";
+	"@OneToMany(mappedBy=\"" + nameOf((Entity)ref.eContainer) + "\")";
 
 /*
  * Entity reference
@@ -141,7 +142,7 @@ String packageOf(EntityRef ref) :
 	packageOf(ref.type);
 
 String annotationOf(EntityRef ref) :
-	ref.many ? "@OneToMany" : "@OneToOne";
+	ref.many ? ("@OneToMany(mappedBy=\"" + nameOf((Entity)ref.eContainer) + "\")") : "@OneToOne";
 
 /*
  * Options reference
@@ -194,7 +195,7 @@ String fqDaoOf(Process p) :
 /*
  * List handling
  */
-String relationOfType(Type t) :
+String relationOfType(Attribute t) :
 	isMany(t) ? "List<" + typeOf(t) + ">" : typeOf(t);
 
 Boolean hasList(Entity t) :
@@ -203,11 +204,18 @@ Boolean hasList(Entity t) :
 Boolean hasList(Table t) :
 	t.types.exists(e|isMany(e));
 
+Boolean hasList(Options o) :
+	o.types.exists(e|isMany(e));
+
 List[String] packages(Entity t) :
 	null;
 
-private Boolean isNative(Type t) :
+private Boolean isNative(Attribute t) :
 	(packageOf(t).length == 0) || packageOf(t).startsWith("java.lang");
+
+List[String] packages(Options o) :
+	o.types.reject(t|isNative(t)).fqTypeOf().toSet();
 
 List[String] packages(Table t) :
 	t.types.reject(t|isNative(t)).fqTypeOf().toSet();
+	

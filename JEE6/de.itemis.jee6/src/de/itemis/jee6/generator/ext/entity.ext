@@ -1,0 +1,28 @@
+import jee6;
+
+extension de::itemis::jee6::generator::ext::model;
+
+History getHistory(Entity e) :
+	e.types.typeSelect(History).first();
+
+Boolean hasBackReference(Entity test, Entity entity) :
+	test.types.typeSelect(EntityRef).exists(ref|ref.many && (ref.type == entity)) ||
+	test.types.typeSelect(History).exists(ref|ref.type == entity);
+
+List[Entity] getEntityReferences(Entity entity) :
+	getAllEntities(getModel(entity)).select(e|hasBackReference(e, entity)).toSet();
+
+Attribute getId(Entity e) :
+	e.types.select(e|isId(e)).first();
+
+Boolean isTransient(Attribute a) :
+	false;
+
+Boolean isTransient(Simple s) :
+	s.transient;
+
+Boolean isId(Attribute a) :
+	false;
+
+Boolean isId(Text t) :
+	t.id;

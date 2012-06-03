@@ -19,9 +19,9 @@ entity Address
 	Option AddressType type;
 };
 
-entity UserInfo
+options UserInfo editable
 {
-	Text              login;
+	Text id           login;
 	Entity Address [] addresses;
 	Text              mail;
 	Timestamp         changed;
@@ -29,6 +29,7 @@ entity UserInfo
 	Text              surename;
 	Boolean           active;
 	Boolean           authorizer;
+	Text              name transient;
 };
 
 entity Mail
@@ -44,22 +45,22 @@ entity Mail
 
 options Vendor editable
 {
-	Text name;
+	Text    name;
 	Boolean active;
 };
 
 options Distributor editable
 {
-	Text name;
+	Text    name;
 	Boolean active;
-	Text contact;
-	Text phone;
-	Text mail;
+	Text    contact;
+	Text    phone;
+	Text    mail;
 };
 
 options InventoryType editable
 {
-	Text    type;
+	Text id type;
 	Text    label;
 	Entity  Vendor vendor;
 	Boolean active;
@@ -75,6 +76,7 @@ entity OrderPosition
 	Timestamp            received;
 	Text                 comment;
 	Boolean              canceled;
+	Text                 positition transient;
 };
 
 entity Purchase
@@ -134,4 +136,9 @@ process Purchasing roles "controlling","it_support","vorstand"
 process Admin roles "admin"
 {
 	Vendor, Distributor, InventoryType
+};
+
+process User roles "itemis"
+{
+	UserInfo
 };

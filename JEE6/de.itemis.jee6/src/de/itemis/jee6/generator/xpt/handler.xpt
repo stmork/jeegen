@@ -1,5 +1,6 @@
 «IMPORT jee6»
 
+«EXTENSION de::itemis::jee6::generator::ext::entity»
 «EXTENSION de::itemis::jee6::generator::ext::model»
 «EXTENSION de::itemis::jee6::generator::ext::types»
 «EXTENSION de::itemis::jee6::generator::ext::naming»
@@ -57,10 +58,15 @@ abstract public class «handlerOf(this)» implements Serializable
 
 	private class «converterOf(option)» implements Converter
 	{
+«LET getId(option.type) AS id»
 		@Override
 		public Object getAsObject(final FacesContext context, final UIComponent component, final String input)
 		{
+«IF id == null»
 			return isNull(input) ? null : dao.«finderOf(option)»(Integer.parseInt(input));
+«ELSE»
+			return isNull(input) ? null : dao.«finderOf(option)»(input);
+«ENDIF»
 		}
 
 		@Override
@@ -75,10 +81,15 @@ abstract public class «handlerOf(this)» implements Serializable
 			else
 			{
 				final «typeOf(option)» option = («typeOf(option)»)input;
+«IF id == null»
 				result = Integer.toString(option.getId());
+«ELSE»
+				result = option.«getterOf(id)»();
+«ENDIF»
 			}
 			return result;
 		}
+«ENDLET»
 	}
 	
 	public List<«typeOf(option)»> «listOf(option)»()
@@ -120,7 +131,12 @@ abstract public class «daoOf(this)»
 «ENDFOREACH»
 
 «FOREACH converterList AS option»
+«LET getId(option.type) AS id»
+«IF id == null»
 	public «typeOf(option)» «finderOf(option)»(final int id)
+«ELSE»
+	public «typeOf(option)» «finderOf(option)»(final «typeOf(id)» id)
+«ENDIF»
 	{
 		return em.find(«typeOf(option)».class, id);
 	} 
@@ -133,6 +149,7 @@ abstract public class «daoOf(this)»
 		
 		return query.getResultList();
 	}
+«ENDLET»
 «ENDFOREACH»
 }
 «ENDLET»

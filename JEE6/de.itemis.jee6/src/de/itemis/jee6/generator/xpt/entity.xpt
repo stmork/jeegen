@@ -2,6 +2,7 @@
 
 «EXTENSION de::itemis::jee6::generator::ext::types»
 «EXTENSION de::itemis::jee6::generator::ext::naming»
+«EXTENSION de::itemis::jee6::generator::ext::entity»
 
 «DEFINE Main FOR Entity»
 «FILE filename(this)»
@@ -20,11 +21,13 @@ import «pkg»;
 
 @Entity
 @Table(name="«typeOf(this)»")
+«IF types.exists(e|isTransient(e))»
+abstract
+«ENDIF»
 public class «typeOf(this)» implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
-«EXPAND Attributes»
 «EXPAND Id»
 «EXPAND GetterSetter»
 «EXPAND Sorting»
@@ -35,25 +38,48 @@ public class «typeOf(this)» implements Serializable
 «DEFINE Id FOR Entity»
 «ENDDEFINE»
 
-«DEFINE Attributes FOR Entity»
-«FOREACH types AS type»
-	private «relationOfType(type)» «nameOf(type)»;
-«ENDFOREACH»
+«DEFINE Property FOR Attribute»
+«IF isTransient()»
+	@Transient
+	public abstract «relationOfType()» «getterOf()»();
+«ELSE»
+	private «relationOfType()» «nameOf()»;
+
+«IF isId()»
+	@Id
+«ELSE»
+	«annotationOf()»
+«ENDIF»
+	public «relationOfType()» «getterOf()»()
+	{
+		return this.«nameOf()»;
+	}
+
+	public void «setterOf()»(«relationOfType()» «nameOf()»)
+	{
+		this.«nameOf()» = «nameOf()»;
+	}
+«ENDIF»
+«ENDDEFINE»
+
+«DEFINE Property FOR Entity»
+	private «typeOf()» «nameOf()»;
+
+	@ManyToOne
+	public «typeOf()» «getterOf()»()
+	{
+		return this.«nameOf()»;
+	}
+
+	public void «setterOf()»(«typeOf()» «nameOf()»)
+	{
+		this.«nameOf()» = «nameOf()»;
+	}
 «ENDDEFINE»
 
 «DEFINE GetterSetter FOR Entity»
-«FOREACH types AS type»
-	«annotationOf(type)»
-	public «relationOfType(type)» «getterOf(type)»()
-	{
-		return this.«nameOf(type)»;
-	}
-
-	public void «setterOf(type)»(«relationOfType(type)» «nameOf(type)»)
-	{
-		this.«nameOf(type)» = «nameOf(type)»;
-	}
-«ENDFOREACH»
+«EXPAND Property FOREACH types»
+«EXPAND Property FOREACH getEntityReferences()»
 «ENDDEFINE»
 
 «DEFINE Sorting FOR Entity»
@@ -80,6 +106,7 @@ public class «typeOf(this)» implements Serializable
 	}
 «ENDIF»
 
+«IF !types.exists(e|isId(e))»
 	private int    id;
 
 	@Id
@@ -90,9 +117,11 @@ public class «typeOf(this)» implements Serializable
 	public void setId(int id) {
 		this.id = id;
 	}
+«ENDIF»
 «ENDDEFINE»
 
 «DEFINE Id FOR Table»
+«IF !types.exists(e|isId(e))»
 	private int id;
 
 	@Id
@@ -108,6 +137,7 @@ public class «typeOf(this)» implements Serializable
 	public void setId(int id) {
 		this.id = id;
 	}
+«ENDIF»
 «ENDDEFINE»
 
 «DEFINE Sorting FOR Options»
@@ -125,6 +155,12 @@ public class «typeOf(this)» implements Serializable
 			return false;
 		}
 		«typeOf(this)» option = («typeOf(this)»)object;
+«LET getId() AS id»
+«IF id == null»
 		return getId() == option.getId();
+«ELSE»
+		return «getterOf(id)»().equals(option.«getterOf(id)»());
+«ENDIF»
+«ENDLET»
 	}
 «ENDDEFINE»
