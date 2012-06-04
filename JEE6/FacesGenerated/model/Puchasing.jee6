@@ -107,12 +107,12 @@ entity Inventory filterable
 	Boolean                       infrastructure;
 };
 
-process Inventory roles "controlling","it_support","vorstand"
+process Inventory roles "controlling","it-support","vorstand"
 {
 	Inventory, InventoryHistoryEntry
 };
 
-process Purchasing roles "controlling","it_support","vorstand"
+process Ordering roles "controlling","it-support","vorstand"
 {
 	Purchase, OrderPosition
 };
@@ -122,7 +122,7 @@ process Admin roles "admin"
 	Vendor, Distributor, InventoryType
 };
 
-process User roles "itemis"
+process User roles "itemis", "extern"
 {
 	UserInfo
 };

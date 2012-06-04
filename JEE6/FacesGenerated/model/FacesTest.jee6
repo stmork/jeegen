@@ -30,3 +30,7 @@ options UserInfo editable
 	Timestamp update  changed;
 };
 
+process Admin roles "admin"
+{
+	UserInfo, Address
+};
