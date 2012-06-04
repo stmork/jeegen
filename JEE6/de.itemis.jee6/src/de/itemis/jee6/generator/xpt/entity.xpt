@@ -42,7 +42,7 @@ public class «abstractOf(this)» implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
-«EXPAND Id»
+«EXPAND Id(id)»
 «EXPAND GetterSetter»
 «EXPAND Automatic»
 «EXPAND Cloneable(id)»
@@ -105,10 +105,10 @@ public class «typeOf()» extends «abstractOf()»
 «ENDIF»
 «ENDDEFINE»
 
-«DEFINE Id FOR Entity»
+«DEFINE Id(Attribute id) FOR Entity»
 «ENDDEFINE»
 
-«DEFINE Id FOR Options»
+«DEFINE Id(Attribute id) FOR Options»
 «IF keys.size > 0»
 	public static enum Type
 	{
@@ -117,19 +117,43 @@ public class «typeOf()» extends «abstractOf()»
 «ENDFOREACH»
 	}
 
-	private String key;
-
-	@Column
-	public String getKey() {
-		return this.key;
+	public «abstractOf()»()
+	{
 	}
 
-	public void setKey(final String key) {
-		this.key = key;
+«IF id == null»
+	public «abstractOf()»(final Type type, final String bundleKey)
+	{
+		setId(type.ordinal());
+		setBundleKey(bundleKey);
+	}
+
+	public «abstractOf()»(final int id, final String bundleKey)
+	{
+		setId(id);
+		setBundleKey(bundleKey);
+	}
+«ELSE»
+	public «abstractOf()»(final «typeOf(id)» «nameOf(id)», final String bundleKey)
+	{
+		setId(«nameOf(id)»);
+		setKey(bundleKey);
 	}
 «ENDIF»
 
-«IF !types.exists(e|isId(e))»
+	private String bundleKey;
+
+	@Column
+	public String getBundleKey() {
+		return this.bundleKey;
+	}
+
+	public void setBundleKey(final String bundleKey) {
+		this.bundleKey = bundleKey;
+	}
+«ENDIF»
+
+«IF id == null»
 	private int    id;
 
 	@Id
@@ -142,7 +166,8 @@ public class «typeOf()» extends «abstractOf()»
 	}
 «ENDIF»
 «ENDDEFINE»
-«DEFINE Id FOR Table»
+
+«DEFINE Id(Attribute id) FOR Table»
 «IF !types.exists(e|isId(e))»
 	private int id;
 

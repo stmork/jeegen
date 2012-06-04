@@ -7,4 +7,5 @@
 «EXPAND descriptor::Main»
 «EXPAND entity::Main FOREACH entities»
 «EXPAND handler::Main FOREACH processes»
+«EXPAND dao::Main FOREACH processes»
 «ENDDEFINE»

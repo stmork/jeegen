@@ -90,7 +90,7 @@ public class SessionDaoBean
 		// Create new address
 		final Address address = new Address();
 		address.setPosition(user.getAddresses().size() + 1);
-		address.setUser(user);
+		address.setUserInfo(user);
 		user.getAddresses().add(address);
 		
 		// Update into database
@@ -103,11 +103,11 @@ public class SessionDaoBean
 	{
 		// get correct references
 		address = em.getReference(Address.class, address.getId());
-		final UserInfo user = address.getUser();
+		final UserInfo user = address.getUserInfo();
 		
 		// unlink
 		user.getAddresses().remove(address);
-		address.setUser(null);
+		address.setUserInfo(null);
 
 		// finally do database operations
 		em.remove(address);

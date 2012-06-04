@@ -10,7 +10,6 @@ import javax.persistence.TypedQuery;
 
 import de.itemis.faces.Profiler;
 import de.itemis.faces.entities.AddressOption;
-import de.itemis.faces.entities.AddressOption.AddressOptionType;
 
 @Stateless
 @Interceptors(Profiler.class)
@@ -26,7 +25,7 @@ public class OptionsDaoBean
 		return query.getResultList();
 	}
 
-	public AddressOption ensure(final AddressOptionType type, final String description)
+	public AddressOption ensure(final AddressOption.Type type, final String description)
 	{
 		AddressOption option = find(type.ordinal());
 		
@@ -38,7 +37,7 @@ public class OptionsDaoBean
 		return option;
 	}
 
-	public AddressOption find(int id)
+	public AddressOption find(final int id)
 	{
 		return em.find(AddressOption.class, id);
 	}

@@ -45,7 +45,7 @@ public class AddressHandler implements Serializable
 		public String getAsString(FacesContext context, UIComponent component, Object input)
 		{
 			final AddressOption option = (AddressOption)input;
-			return Integer.toString(option.getType());
+			return Integer.toString(option.getId());
 		}
 	}
 

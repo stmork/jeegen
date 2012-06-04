@@ -1,73 +1,81 @@
 package de.itemis.faces.entities;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.text.MessageFormat;
+import javax.persistence.*;
 
 @Entity
-@Table(name="AddressOption")
+@Table(name = "AddressOption")
 public class AddressOption implements Serializable
+
 {
 	private static final long serialVersionUID = 1L;
 
-	public static enum AddressOptionType
-	{
-		HOME,
-		WORK;
-	}
-	
-	private int type;
-	private String description;
+	public static enum Type {
 
-	public AddressOption()
-	{
+		ADDRESS_WORK, ADDRESS_HOME
+
 	}
 
-	public AddressOption(final AddressOptionType type, final String description)
-	{
-		setType(type.ordinal());
-		setDescription(description);
+	public AddressOption() {
 	}
 
-	@Id
-	public int getType() {
-		return type;
+	public AddressOption(final Type type, final String bundleKey) {
+		setId(type.ordinal());
+		setBundleKey(bundleKey);
 	}
-	public void setType(int type) {
-		this.type = type;
+
+	public AddressOption(final int id, final String bundleKey) {
+		setId(id);
+		setBundleKey(bundleKey);
 	}
+
+	private String bundleKey;
 
 	@Column
-	public String getDescription() {
-		return description;
+	public String getBundleKey() {
+		return this.bundleKey;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+
+	public void setBundleKey(final String bundleKey) {
+		this.bundleKey = bundleKey;
 	}
-	
-	@Override
-	public String toString()
-	{
-		return getDescription() + "/" + getType();
+
+	private int id;
+
+	@Id
+	public int getId() {
+		return this.id;
+	}
+
+	public void setId(final int id) {
+		this.id = id;
 	}
 
 	@Override
-	public int hashCode()
-	{
+	public int hashCode() {
 		return super.hashCode();
 	}
 
 	@Override
-	public boolean equals(Object object)
-	{
-		if ((object == null) || !(object instanceof AddressOption))
-		{
+	public boolean equals(final Object object) {
+		if ((object == null) || !(object instanceof AddressOption)) {
 			return false;
 		}
-		AddressOption option = (AddressOption)object;
-		return getType() == option.getType();
+		AddressOption option = (AddressOption) object;
+
+		return getId() == option.getId();
+
+	}
+
+	@Override
+	public String toString() {
+		StringBuffer buffer = new StringBuffer();
+
+		return MessageFormat.format("[AddressOption:{0}]{1}",
+
+		getId(),
+
+		buffer);
 	}
 }

@@ -1,0 +1,57 @@
+«IMPORT jee6»
+
+«EXTENSION de::itemis::jee6::generator::ext::entity»
+«EXTENSION de::itemis::jee6::generator::ext::model»
+«EXTENSION de::itemis::jee6::generator::ext::types»
+«EXTENSION de::itemis::jee6::generator::ext::naming»
+«EXTENSION de::itemis::jee6::generator::ext::converter»
+«EXTENSION de::itemis::jee6::generator::ext::dao»
+
+«DEFINE Main FOR Process»
+«FILE daoFilename(this)»
+«LET getConverterList(this) AS converterList»
+package «daoPackageOf(this)»;
+
+import javax.ejb.Stateless;
+import javax.persistence.*;
+
+«IF converterList.size > 0»
+import java.util.List;
+«FOREACH converterList AS option»
+import «fqTypeOf(option)»;
+«ENDFOREACH»
+«ENDIF»
+
+@Stateless
+abstract public class «daoOf(this)»
+{
+«FOREACH getPersistenceUnits(getModel(this)) AS pu»
+	@PersistenceContext(unitName="«pu.persistence»")
+	protected EntityManager em;
+«ENDFOREACH»
+
+«FOREACH converterList AS option»
+«LET getId(option.type) AS id»
+«IF id == null»
+	public «typeOf(option)» «finderOf(option)»(final int id)
+«ELSE»
+	public «typeOf(option)» «finderOf(option)»(final «typeOf(id)» id)
+«ENDIF»
+	{
+		return em.find(«typeOf(option)».class, id);
+	} 
+
+	public List<«typeOf(option)»> «listOf(option)»()
+	{
+		TypedQuery<«typeOf(option)»> query = em.createQuery(
+				"SELECT o FROM «typeOf(option)» o WHERE o.active = TRUE ORDER BY o.active DESC, o.name",
+				«typeOf(option)».class);
+		
+		return query.getResultList();
+	}
+«ENDLET»
+«ENDFOREACH»
+}
+«ENDLET»
+«ENDFILE»
+«ENDDEFINE»

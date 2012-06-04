@@ -40,7 +40,7 @@ public class FacesWebService {
 		final UserInfo user = session.getUserInfo(login);
 		for (Address address : user.getAddresses())
 		{
-			address.setUser(null);
+			address.setUserInfo(null);
 		}
 		LogUtil.debug(log, "<getUser(%s) = %s", login, user);
 		return user;
@@ -57,7 +57,7 @@ public class FacesWebService {
 			log.debug(" " + user);
 			for(Address address : user.getAddresses())
 			{
-				address.setUser(null);
+				address.setUserInfo(null);
 			}
 		}
 		log.debug("<getUsers() = ...");

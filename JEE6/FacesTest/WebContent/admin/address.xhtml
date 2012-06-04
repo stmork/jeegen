@@ -35,7 +35,7 @@
 						<td>
 							<h:selectOneMenu id="type" value="#{addressHandler.address.addressOption}" converter="#{addressHandler.addressOptionConverter}">
 								<f:selectItems value="#{addressHandler.addressOptionList}"
-									itemValue="#{option}" itemLabel="#{option.description}" var="option" />
+									itemValue="#{option}" itemLabel="#{msg[option.bundleKey]}" var="option" />
 							</h:selectOneMenu>
 						</td>
 					</tr>

@@ -3,7 +3,6 @@ persistence unit "jbossDS" jndi "jdbc/jbossDS";
 security domain "itemis";
 smtp "mail/Default";
 locale "de" default;
-locale "en";
 
 options AddressOption
 {
@@ -13,10 +12,12 @@ options AddressOption
 
 entity Address
 {
+	Int                  position;
 	Text                 street;
 	Text                 plz;
 	Text                 location;
-	Option AddressOption type;
+	Boolean              active;
+	Option AddressOption addressOption;
 };
 
 options UserInfo editable

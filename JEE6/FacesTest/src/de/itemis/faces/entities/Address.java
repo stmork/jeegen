@@ -1,112 +1,126 @@
 package de.itemis.faces.entities;
 
 import java.io.Serializable;
+import java.text.MessageFormat;
+import javax.persistence.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.TableGenerator;
+import de.itemis.faces.entities.AddressOption;
 
 @Entity
-@Table(name="Address")
+@Table(name = "Address")
 public class Address implements Serializable
+
 {
 	private static final long serialVersionUID = 1L;
 
 	private int id;
-	private int position;
-	private String street;
-	private String plz;
-	private String location;
-	private boolean active;
-	private UserInfo user;
-	private AddressOption addressOption;
 
 	@Id
-	@TableGenerator(
-			name="idGenerator", table = "IDs",
-			pkColumnName = "id", valueColumnName = "value", pkColumnValue = "Address",
-			initialValue = 1, allocationSize = 10)
-	@GeneratedValue(strategy=GenerationType.TABLE, generator="idGenerator")
+	@TableGenerator(name = "AddressIDs", table = "IDs", pkColumnName = "id", valueColumnName = "value", pkColumnValue = "Address", initialValue = 1, allocationSize = 10)
+	@GeneratedValue(strategy = GenerationType.TABLE, generator = "AddressIDs")
 	public int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(final int id) {
 		this.id = id;
 	}
 
-	@Column(nullable=false)
+	private int position;
+
+	@Column
 	public int getPosition() {
-		return position;
+		return this.position;
 	}
 
-	public void setPosition(int position) {
+	public void setPosition(final int position) {
 		this.position = position;
 	}
 
+	private String street;
+
 	@Column
 	public String getStreet() {
-		return street;
+		return this.street;
 	}
 
-	public void setStreet(String street) {
+	public void setStreet(final String street) {
 		this.street = street;
 	}
 
+	private String plz;
+
 	@Column
 	public String getPlz() {
-		return plz;
+		return this.plz;
 	}
 
-	public void setPlz(String plz) {
+	public void setPlz(final String plz) {
 		this.plz = plz;
 	}
 
+	private String location;
+
 	@Column
 	public String getLocation() {
-		return location;
+		return this.location;
 	}
 
-	public void setLocation(String location) {
+	public void setLocation(final String location) {
 		this.location = location;
 	}
 
+	private boolean active;
+
 	@Column
 	public boolean isActive() {
-		return active;
+		return this.active;
 	}
 
-	public void setActive(boolean active) {
+	public void setActive(final boolean active) {
 		this.active = active;
 	}
 
-	@ManyToOne
-	public UserInfo getUser() {
-		return user;
-	}
-
-	public void setUser(UserInfo user) {
-		this.user = user;
-	}
+	private AddressOption addressOption;
 
 	@OneToOne
 	public AddressOption getAddressOption() {
-		return addressOption;
+		return this.addressOption;
 	}
 
-	public void setAddressOption(AddressOption addressOption) {
+	public void setAddressOption(final AddressOption addressOption) {
 		this.addressOption = addressOption;
 	}
 
+	private UserInfo userInfo;
+
+	@ManyToOne
+	public UserInfo getUserInfo() {
+		return this.userInfo;
+	}
+
+	public void setUserInfo(final UserInfo userInfo) {
+		this.userInfo = userInfo;
+	}
+
 	@Override
-	public String toString()
-	{
-		return getStreet() + ", " + (getPlz() + " " + getLocation()).trim();
+	public String toString() {
+		StringBuffer buffer = new StringBuffer();
+
+		buffer.append(" position=").append(getPosition());
+
+		buffer.append(" street=").append(getStreet());
+
+		buffer.append(" plz=").append(getPlz());
+
+		buffer.append(" location=").append(getLocation());
+
+		buffer.append(" active=").append(isActive());
+
+		return MessageFormat.format("[Address:{0}]{1}",
+
+		getId(),
+
+		buffer);
 	}
 }
