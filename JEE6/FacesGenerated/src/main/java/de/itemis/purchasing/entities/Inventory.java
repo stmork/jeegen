@@ -1,6 +1,9 @@
-package de.itemis.purchasing.entity;
+package de.itemis.purchasing.entities;
 
 import javax.persistence.*;
+
+import de.itemis.purchasing.entities.AbstractInventory;
+import de.itemis.purchasing.entities.InventoryHistoryEntry;
 
 import java.util.Locale;
 

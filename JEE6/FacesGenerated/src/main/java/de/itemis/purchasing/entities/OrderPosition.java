@@ -1,8 +1,12 @@
-package de.itemis.purchasing.entity;
-
-import javax.persistence.*;
+package de.itemis.purchasing.entities;
 
 import java.util.Locale;
+
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)

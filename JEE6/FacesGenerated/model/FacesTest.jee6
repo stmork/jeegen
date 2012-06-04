@@ -5,7 +5,7 @@ smtp "mail/Default";
 locale "de" default;
 locale "en";
 
-options AddressType
+options AddressOption
 {
 	"address.work",
 	"address.home"
@@ -13,10 +13,10 @@ options AddressType
 
 entity Address
 {
-	Text               street;
-	Text               plz;
-	Text               location;
-	Option AddressType type;
+	Text                 street;
+	Text                 plz;
+	Text                 location;
+	Option AddressOption type;
 };
 
 options UserInfo editable

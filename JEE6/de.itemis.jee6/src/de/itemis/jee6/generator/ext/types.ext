@@ -179,7 +179,7 @@ String typeOf(Entity e) :
 	e.name.toFirstUpper();
 
 String packageOf(Entity e) :
-	getModel(e).package + ".entity";
+	getModel(e).package + ".entities";
 
 String fqTypeOf(Entity e) :
 	packageOf(e) + "." + typeOf(e);
