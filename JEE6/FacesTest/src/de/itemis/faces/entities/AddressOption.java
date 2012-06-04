@@ -11,7 +11,7 @@ public class AddressOption implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
-	public static enum Type {
+	public static enum AddressOptionEnum {
 
 		ADDRESS_WORK, ADDRESS_HOME
 
@@ -20,7 +20,7 @@ public class AddressOption implements Serializable
 	public AddressOption() {
 	}
 
-	public AddressOption(final Type type, final String bundleKey) {
+	public AddressOption(final AddressOptionEnum type, final String bundleKey) {
 		setId(type.ordinal());
 		setBundleKey(bundleKey);
 	}
@@ -33,12 +33,18 @@ public class AddressOption implements Serializable
 	private String bundleKey;
 
 	@Column
+	@javax.validation.constraints.NotNull
 	public String getBundleKey() {
 		return this.bundleKey;
 	}
 
 	public void setBundleKey(final String bundleKey) {
 		this.bundleKey = bundleKey;
+	}
+
+	@Transient
+	public AddressOptionEnum getAddressOptionEnum() {
+		return AddressOptionEnum.values()[getId()];
 	}
 
 	private int id;

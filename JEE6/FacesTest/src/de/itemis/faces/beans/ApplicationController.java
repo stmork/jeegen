@@ -13,7 +13,7 @@ import org.apache.commons.logging.LogFactory;
 
 import de.itemis.faces.Profiler;
 import de.itemis.faces.dao.OptionsDaoBean;
-import de.itemis.faces.entities.AddressOption.Type;
+import de.itemis.faces.entities.AddressOption.AddressOptionEnum;
 
 @ManagedBean(eager=true)
 @ApplicationScoped
@@ -37,8 +37,8 @@ public class ApplicationController implements Serializable
 	private void initOptions()
 	{
 		log.debug("  >initOptions()");
-		dao.ensure(Type.ADDRESS_HOME, "address.home");
-		dao.ensure(Type.ADDRESS_WORK, "address.work");
+		dao.ensure(AddressOptionEnum.ADDRESS_HOME, "address.home");
+		dao.ensure(AddressOptionEnum.ADDRESS_WORK, "address.work");
 		log.debug("  <initOptions()");
 	}
 }

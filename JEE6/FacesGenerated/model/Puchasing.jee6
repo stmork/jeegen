@@ -1,9 +1,14 @@
-application "Test" context "/purchasing" package de.itemis.purchasing;
+application "Test" context "/purchasing" package de.itemis.purchasing timeout 120;
 persistence unit "purchasingDS" jndi "jdbc/purchasingDS";
 security domain "itemis";
 smtp "mail/Default";
+
 locale "de" default;
 locale "en";
+
+param de.itemis.purchasing.CONTROLLING_EMAIL = "controlling@itemis.de"           description "Ziel aller Inventarisierungs-EMails";
+param de.itemis.purchasing.ITEMIKER          = "itemis"                          description "LDAP-Gruppe aller itemiker";
+param de.itemis.purchasing.AUTHORIZER        = "vorstand,teamleiter,controlling" description "LDAP-Gruppen (Komma-separiert) aller genehmigungsfaehigker itemiker";
 
 options UserInfo editable
 {
@@ -75,17 +80,17 @@ entity Purchase
 
 options InventoryState
 {
-	"UNKNOWN",
-	"ORDERED",
-	"RECEIVED",
-	"IN_USE",
-	"REPAIR",
-	"NOT_IN_USE",
-	"MARKED_FOR_SELL",
-	"SOLD",
-	"GIVE_AWAY",
-	"DEFECT",
-	"THEFT"
+	"inventory.state.enum.UNKNOWN",
+	"inventory.state.enum.ORDERED",
+	"inventory.state.enum.RECEIVED",
+	"inventory.state.enum.IN_USE",
+	"inventory.state.enum.REPAIR",
+	"inventory.state.enum.NOT_IN_USE",
+	"inventory.state.enum.MARKED_FOR_SELL",
+	"inventory.state.enum.SOLD",
+	"inventory.state.enum.GIVE_AWAY",
+	"inventory.state.enum.DEFECT",
+	"inventory.state.enum.THEFT"
 };
 
 entity InventoryHistoryEntry cloneable

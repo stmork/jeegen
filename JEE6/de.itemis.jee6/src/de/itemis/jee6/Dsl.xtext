@@ -9,11 +9,12 @@ Model:	'application' name=STRING 'context' path=STRING 'package' package=PACKAGE
 	(entities  += Entity)*
 	(processes += Process)*;
 	
-Option:			(Persistence|Security|Mail|Locale) ';';
+Option:			(Persistence|Security|Mail|Locale|Param) ';';
 Security:		{Security}('security' 'domain' jaas=STRING)?;
 Persistence:	'persistence' 'unit' persistence=STRING 'jndi' jndi=STRING;
 Mail:			'smtp' jndi=STRING;
 Locale:			'locale' language=STRING (country=STRING)? (home?='default')?;
+Param:			'param' name=PACKAGED_ID '=' value=STRING ('description' description=STRING)?;
 
 /* Types */
 Attribute:	(Simple|Reference) ';';

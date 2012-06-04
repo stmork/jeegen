@@ -20,3 +20,6 @@ Boolean isId(Attribute a) :
 
 Boolean isId(Text t) :
 	t.id;
+
+String enumOf(Options o) :
+	o.name.toFirstUpper() + "Enum";

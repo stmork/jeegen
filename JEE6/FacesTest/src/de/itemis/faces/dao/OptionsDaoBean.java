@@ -25,7 +25,7 @@ public class OptionsDaoBean
 		return query.getResultList();
 	}
 
-	public AddressOption ensure(final AddressOption.Type type, final String description)
+	public AddressOption ensure(final AddressOption.AddressOptionEnum type, final String description)
 	{
 		AddressOption option = find(type.ordinal());
 		

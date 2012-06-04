@@ -41,6 +41,16 @@
 	<display-name>«this.name»</display-name>
 	<distributable />
 
+«FOREACH options.typeSelect(Param) AS param»
+	<context-param>
+«IF param.description.length > 0»
+		<description>«param.description»</description>
+«ENDIF»
+		<param-name>«param.name»</param-name>
+		<param-value>«param.value»</param-value>
+	</context-param>
+«ENDFOREACH»
+
 	<context-param>
 		<description>Damit nicht immer UTC genommen wird ;-)</description>
 		<param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
@@ -66,9 +76,12 @@
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
+
+«IF timeout > 0»
 	<session-config>
-		<session-timeout>60</session-timeout>
+		<session-timeout>«timeout»</session-timeout>
 	</session-config>
+«ENDIF»
 
 	<welcome-file-list>
 		<welcome-file>index.xhtml</welcome-file>

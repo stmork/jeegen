@@ -110,7 +110,7 @@ public class «typeOf()» extends «abstractOf()»
 
 «DEFINE Id(Attribute id) FOR Options»
 «IF keys.size > 0»
-	public static enum Type
+	public static enum «enumOf(this)»
 	{
 «FOREACH keys AS key SEPARATOR ","»
 	«key.toUpperCase().replaceAll("\\.", "_")»
@@ -122,7 +122,7 @@ public class «typeOf()» extends «abstractOf()»
 	}
 
 «IF id == null»
-	public «abstractOf()»(final Type type, final String bundleKey)
+	public «abstractOf()»(final «enumOf(this)» type, final String bundleKey)
 	{
 		setId(type.ordinal());
 		setBundleKey(bundleKey);
@@ -144,6 +144,7 @@ public class «typeOf()» extends «abstractOf()»
 	private String bundleKey;
 
 	@Column
+	@javax.validation.constraints.NotNull
 	public String getBundleKey() {
 		return this.bundleKey;
 	}
@@ -151,6 +152,14 @@ public class «typeOf()» extends «abstractOf()»
 	public void setBundleKey(final String bundleKey) {
 		this.bundleKey = bundleKey;
 	}
+
+«IF id == null»
+	@Transient
+	public «enumOf(this)» get«enumOf(this)»()
+	{
+		return «enumOf(this)».values()[getId()];
+	}
+«ENDIF»
 «ENDIF»
 
 «IF id == null»
