@@ -133,6 +133,22 @@ public class «typeOf()» extends «abstractOf()»
 		setId(id);
 		setBundleKey(bundleKey);
 	}
+	private int    id;
+
+	@Id
+	public int getId() {
+		return this.id;
+	}
+
+	public void setId(final int id) {
+		this.id = id;
+	}
+
+	@Transient
+	public «enumOf(this)» get«enumOf(this)»()
+	{
+		return «enumOf(this)».values()[getId()];
+	}
 «ELSE»
 	public «abstractOf()»(final «typeOf(id)» «nameOf(id)», final String bundleKey)
 	{
@@ -152,32 +168,29 @@ public class «typeOf()» extends «abstractOf()»
 	public void setBundleKey(final String bundleKey) {
 		this.bundleKey = bundleKey;
 	}
-
+«ELSE»
 «IF id == null»
-	@Transient
-	public «enumOf(this)» get«enumOf(this)»()
-	{
-		return «enumOf(this)».values()[getId()];
-	}
-«ENDIF»
-«ENDIF»
-
-«IF id == null»
-	private int    id;
+	private int id;
 
 	@Id
+	@TableGenerator(
+			name="«typeOf(this)»IDs", table = "IDs",
+			pkColumnName = "id", valueColumnName = "value", pkColumnValue = "«typeOf(this)»",
+			initialValue = 1, allocationSize = 10)
+	@GeneratedValue(strategy=GenerationType.TABLE, generator="«typeOf(this)»IDs")
 	public int getId() {
-		return this.id;
+		return id;
 	}
 
 	public void setId(final int id) {
 		this.id = id;
 	}
 «ENDIF»
+«ENDIF»
 «ENDDEFINE»
 
 «DEFINE Id(Attribute id) FOR Table»
-«IF !types.exists(e|isId(e))»
+«IF id == null»
 	private int id;
 
 	@Id
