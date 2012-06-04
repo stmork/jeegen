@@ -1,4 +1,12 @@
 import jee6;
 
-context Model ERROR "Context must start with '/'" :
+extension de::itemis::jee6::generator::ext::entity;
+
+context Model ERROR "Context muss mit '/' beginnen!" :
 	this.path.startsWith("/");
+
+context Entity ERROR "Es darf nur max. ein ID-Attribut vorhanden sein!" :
+	this.types.select(a|isId(a)).size <= 1;
+
+context Entity ERROR "Es darf nur max. eine Historie vorhanden sein!" :
+	this.types.typeSelect(History).size <= 1;

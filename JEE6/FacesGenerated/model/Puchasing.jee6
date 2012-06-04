@@ -1,28 +1,13 @@
-application "Test" context "/test" package de.itemis.faces.test;
-persistence unit "jbossDS" jndi "jdbc/jbossDS";
+application "Test" context "/purchasing" package de.itemis.purchasing;
+persistence unit "purchasingDS" jndi "jdbc/purchasingDS";
 security domain "itemis";
 smtp "mail/Default";
 locale "de" default;
 locale "en";
 
-options AddressType
-{
-	"address.work",
-	"address.home"
-};
-
-entity Address
-{
-	Text               street;
-	Text               plz;
-	Text               location;
-	Option AddressType type;
-};
-
 options UserInfo editable
 {
 	Text id           login;
-	Entity Address [] addresses;
 	Text              mail;
 	Timestamp update  changed;
 	Text              forename;
@@ -106,7 +91,6 @@ options InventoryState
 entity InventoryHistoryEntry cloneable
 {
 	Timestamp             created;
-//	private Inventory      inventory;
 	Option InventoryState state;
 	Entity UserInfo       owner;
 	Entity UserInfo       commentator;

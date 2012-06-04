@@ -21,9 +21,6 @@ import javax.persistence.*;
 «IF hasList(this)»
 import java.util.List;
 «ENDIF»
-«IF filterable»
-import java.util.Locale;
-«ENDIF»
 «FOREACH packages() AS pkg»
 import «pkg»;
 «ENDFOREACH»
@@ -47,56 +44,9 @@ public class «abstractOf(this)» implements Serializable
 
 «EXPAND Id»
 «EXPAND GetterSetter»
-
-«LET types.typeSelect(Timestamp).select(e|e.auto) AS auto»
-«IF auto.size > 0»
-	@PrePersist
-	public void prePersist()
-	{
-«FOREACH auto AS date»
-		if («getterOf(date)»() == null)
-		{
-			«setterOf(date)»(new Date());
-		}
-«ENDFOREACH»
-	}
-«ENDIF»
-«ENDLET»
-
-«LET types.typeSelect(Timestamp).select(e|e.update) AS update»
-«IF update.size > 0»
-	@PreUpdate
-	public void preUpdate()
-	{
-«FOREACH update AS date»
-		«setterOf(date)»(new Date());
-«ENDFOREACH»
-	}
-«ENDIF»
-«ENDLET»
-
-«EXPAND Sorting»
-
-«IF cloneable»
-	@Override
-	public «typeOf(this)» clone()
-	{
-		try
-		{
-			«typeOf(this)» «nameOf(this)» = («typeOf(this)»)super.clone();
-«IF id == null»
-			«nameOf(this)».setId(0);
-«ELSE»
-			«nameOf(this)».«setterOf(id)»(null);
-«ENDIF»
-			return «nameOf(this)»;
-		}
-		catch (CloneNotSupportedException cnse)
-		{
-			return null;
-		}
-	}
-«ENDIF»
+«EXPAND Automatic»
+«EXPAND Cloneable(id)»
+«EXPAND Sorting(id)»
 
 	@Override
 	public String toString()
@@ -117,8 +67,99 @@ public class «abstractOf(this)» implements Serializable
 «ENDLET»
 «ENDFILE»
 «ENDDEFINE»
+«DEFINE Implementation FOR Entity»
+«IF isAbstract()»
+«FILE filename(this) IMPL»
+package «packageOf(this)»;
+
+import javax.persistence.*;
+«IF filterable»
+import java.util.Locale;
+«ENDIF»
+
+@Entity
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@Table(name="«typeOf(this)»")
+public class «typeOf()» extends «abstractOf()»
+{
+	private static final long serialVersionUID = 1L;
+
+«FOREACH types.select(e|isTransient(e)) AS property»
+	@Transient
+	@Override
+	public «typeOf(property)» «getterOf(property)»()
+	{
+		// TODO: Implement!
+		throw new IllegalStateException("«fqTypeOf()».«getterOf(property)»() not implemented!");
+	}
+«ENDFOREACH»
+«IF filterable»
+	@Override
+	public boolean filter(final String pattern, final Locale locale) {
+		// TODO: Auto-generated method stub
+		return false;
+	}
+«ENDIF»
+}
+«ENDFILE»
+«ENDIF»
+«ENDDEFINE»
 
 «DEFINE Id FOR Entity»
+«ENDDEFINE»
+
+«DEFINE Id FOR Options»
+«IF keys.size > 0»
+	public static enum Type
+	{
+«FOREACH keys AS key SEPARATOR ","»
+	«key.toUpperCase().replaceAll("\\.", "_")»
+«ENDFOREACH»
+	}
+
+	private String key;
+
+	@Column
+	public String getKey() {
+		return this.key;
+	}
+
+	public void setKey(final String key) {
+		this.key = key;
+	}
+«ENDIF»
+
+«IF !types.exists(e|isId(e))»
+	private int    id;
+
+	@Id
+	public int getId() {
+		return this.id;
+	}
+
+	public void setId(final int id) {
+		this.id = id;
+	}
+«ENDIF»
+«ENDDEFINE»
+«DEFINE Id FOR Table»
+«IF !types.exists(e|isId(e))»
+	private int id;
+
+	@Id
+	@TableGenerator(
+			name="«typeOf(this)»IDs", table = "IDs",
+			pkColumnName = "id", valueColumnName = "value", pkColumnValue = "«typeOf(this)»",
+			initialValue = 1, allocationSize = 10)
+	@GeneratedValue(strategy=GenerationType.TABLE, generator="«typeOf(this)»IDs")
+	public int getId() {
+		return id;
+	}
+
+	public void setId(final int id) {
+		this.id = id;
+	}
+«ENDIF»
 «ENDDEFINE»
 
 «DEFINE Property FOR Attribute»
@@ -163,67 +204,57 @@ public class «abstractOf(this)» implements Serializable
 «DEFINE GetterSetter FOR Entity»
 «EXPAND Property FOREACH types»
 «EXPAND Property FOREACH getEntityReferences()»
-«ENDDEFINE»
-
-«DEFINE Sorting FOR Entity»
-«ENDDEFINE»
-
-«DEFINE Id FOR Options»
-«IF keys.size > 0»
-	public static enum Type
+«LET types.typeSelect(History).first() AS history»
+«IF history != null»
+	private «typeOf(history)» last;
+	
+	@OneToOne
+	public «typeOf(history)» getLast()
 	{
-«FOREACH keys AS key SEPARATOR ","»
-	«key.toUpperCase().replaceAll("\\.", "_")»
+		return this.last;
+	}
+
+	public void setLast(final «typeOf(history)» last)
+	{
+		this.last = last;
+	}
+«ENDIF»
+«ENDLET»
+«ENDDEFINE»
+
+«DEFINE Sorting(Attribute id) FOR Entity»
+«ENDDEFINE»
+
+«DEFINE Automatic FOR Entity»
+«LET types.typeSelect(Timestamp).select(e|e.auto) AS auto»
+«IF auto.size > 0»
+	@PrePersist
+	public void prePersist()
+	{
+«FOREACH auto AS date»
+		if («getterOf(date)»() == null)
+		{
+			«setterOf(date)»(new Date());
+		}
 «ENDFOREACH»
 	}
+«ENDIF»
+«ENDLET»
 
-	private String key;
-
-	@Column
-	public String getKey() {
-		return this.key;
-	}
-
-	public void setKey(final String key) {
-		this.key = key;
+«LET types.typeSelect(Timestamp).select(e|e.update) AS update»
+«IF update.size > 0»
+	@PreUpdate
+	public void preUpdate()
+	{
+«FOREACH update AS date»
+		«setterOf(date)»(new Date());
+«ENDFOREACH»
 	}
 «ENDIF»
-
-«IF !types.exists(e|isId(e))»
-	private int    id;
-
-	@Id
-	public int getId() {
-		return this.id;
-	}
-
-	public void setId(final int id) {
-		this.id = id;
-	}
-«ENDIF»
+«ENDLET»
 «ENDDEFINE»
 
-«DEFINE Id FOR Table»
-«IF !types.exists(e|isId(e))»
-	private int id;
-
-	@Id
-	@TableGenerator(
-			name="«typeOf(this)»IDs", table = "IDs",
-			pkColumnName = "id", valueColumnName = "value", pkColumnValue = "«typeOf(this)»",
-			initialValue = 1, allocationSize = 10)
-	@GeneratedValue(strategy=GenerationType.TABLE, generator="«typeOf(this)»IDs")
-	public int getId() {
-		return id;
-	}
-
-	public void setId(final int id) {
-		this.id = id;
-	}
-«ENDIF»
-«ENDDEFINE»
-
-«DEFINE Sorting FOR Options»
+«DEFINE Sorting(Attribute id) FOR Options»
 	@Override
 	public int hashCode()
 	{
@@ -238,50 +269,34 @@ public class «abstractOf(this)» implements Serializable
 			return false;
 		}
 		«typeOf(this)» option = («typeOf(this)»)object;
-«LET getId() AS id»
 «IF id == null»
 		return getId() == option.getId();
 «ELSE»
 		return «getterOf(id)»().equals(option.«getterOf(id)»());
 «ENDIF»
-«ENDLET»
 	}
 «ENDDEFINE»
 
-«DEFINE Implementation FOR Entity»
-«IF isAbstract()»
-«FILE filename(this) IMPL»
-package «packageOf(this)»;
-
-import javax.persistence.*;
-«IF filterable»
-import java.util.Locale;
-«ENDIF»
-
-@Entity
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@Table(name="«typeOf(this)»")
-public class «typeOf()» extends «abstractOf()»
-{
-	private static final long serialVersionUID = 1L;
-
-«FOREACH types.select(e|isTransient(e)) AS property»
-	@Transient
+«DEFINE Cloneable(Attribute id) FOR Entity»
+«IF cloneable»
 	@Override
-	public «typeOf(property)» «getterOf(property)»()
+	public «typeOf(this)» clone()
 	{
-		// TODO: Implement!
-		throw new IllegalStateException("«fqTypeOf()».«getterOf(property)»() not implemented!");
-	}
-«ENDFOREACH»
-«IF filterable»
-	@Override
-	public boolean filter(final String pattern, final Locale locale) {
-		// TODO: Auto-generated method stub
-		return false;
-	}
+		try
+		{
+			«typeOf(this)» «nameOf(this)» = («typeOf(this)»)super.clone();
+«IF id == null»
+			«nameOf(this)».setId(0);
+«ELSE»
+			«nameOf(this)».«setterOf(id)»(null);
 «ENDIF»
-}
-«ENDFILE»
+			return «nameOf(this)»;
+		}
+		catch (CloneNotSupportedException cnse)
+		{
+			return null;
+		}
+	}
 «ENDIF»
 «ENDDEFINE»
+
