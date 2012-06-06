@@ -1,10 +1,7 @@
 package de.itemis.faces.dao;
 
-import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
-import javax.persistence.TypedQuery;
 
 import de.itemis.faces.Profiler;
 import de.itemis.faces.entities.AddressOption;
@@ -13,13 +10,6 @@ import de.itemis.faces.entities.AddressOption;
 @Interceptors(Profiler.class)
 public class AdminDaoBean extends AbstractAdminDaoBean
 {
-	public List<AddressOption>  getAddressOptionList()
-	{
-		TypedQuery<AddressOption> query = em.createQuery("SELECT ao FROM AddressOption ao", AddressOption.class);
-		
-		return query.getResultList();
-	}
-
 	public AddressOption ensure(final AddressOption.AddressOptionEnum type, final String description)
 	{
 		AddressOption option = findAddressOption(type.ordinal());
