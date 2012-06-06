@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Faces Test
+Bundle-SymbolicName: de.itemis.faces
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: FacesTest.jar,
+ WebContent/WEB-INF/lib/commons-logging.jar
+Require-Bundle: de.itemis.jee6;bundle-version="1.0.0",
+ org.eclipse.emf.mwe2.launch;bundle-version="2.2.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Vendor: itemis AG

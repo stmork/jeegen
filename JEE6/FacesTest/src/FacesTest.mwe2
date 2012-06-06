@@ -1,0 +1,12 @@
+module de.itemis.faces.FacesTest
+
+Workflow
+{
+	component = @de.itemis.jee6.generator.DslGeneratorMWE
+	{
+		modelpath="model"
+		impldir="src"
+		srcdir="src-gen"
+		resdir="res-gen"
+	}
+}

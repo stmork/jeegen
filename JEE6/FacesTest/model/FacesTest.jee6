@@ -1,0 +1,36 @@
+application "JEE6 Test Application" context "/faces" package de.itemis.faces timeout 2;
+persistence unit "jbossDS" jndi "jdbc/jbossDS";
+security domain "itemis";
+smtp "mail/Default";
+locale "de" default;
+
+options AddressOption
+{
+	"address.work",
+	"address.home"
+};
+
+entity Address
+{
+	Int                  position;
+	Text                 street;
+	Text                 plz;
+	Text                 location;
+	Boolean              active;
+	Option AddressOption addressOption;
+};
+
+options UserInfo editable
+{
+	Text id           login;
+	Entity Address [] addresses;
+	Text              name;
+	Text              mail;
+	Date              birth;
+	Timestamp update  changed;
+};
+
+process Admin roles "admin"
+{
+	UserInfo, Address
+};

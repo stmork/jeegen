@@ -12,7 +12,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import de.itemis.faces.Profiler;
-import de.itemis.faces.dao.OptionsDaoBean;
+import de.itemis.faces.dao.AdminDaoBean;
 import de.itemis.faces.entities.AddressOption.AddressOptionEnum;
 
 @ManagedBean(eager=true)
@@ -24,7 +24,7 @@ public class ApplicationController implements Serializable
 	private final static Log log = LogFactory.getLog(ApplicationController.class);
 
 	@EJB
-	private OptionsDaoBean dao;
+	private AdminDaoBean dao;
 
 	@PostConstruct
 	public void init()

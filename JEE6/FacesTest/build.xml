@@ -2,6 +2,8 @@
 	<property name="war"          value="facestest.war"/>
 	<property name="bin-path"     value="./bin"/>
 	<property name="src-path"     value="./src"/>
+	<property name="src-gen-path" value="./src-gen"/>
+	<property name="res-gen-path" value="./res-gen"/>
 	<property name="web-path"     value="./WebContent"/>
 
 	<property name="findbugs.home"     value="./findbugs"/>
@@ -52,7 +54,7 @@
 
 	<target name="compile">
 		<mkdir dir="${bin-path}"/>
-		<javac srcdir="${src-path}" destdir="${bin-path}" debug="true" includeantruntime="false">
+		<javac srcdir="${src-path}:${src-gen-path}" destdir="${bin-path}" debug="true" includeantruntime="false">
 			<classpath refid="compile.path"/>
 		</javac>
 	</target>
@@ -67,6 +69,7 @@
 				<include name="**/*.properties"/>
 			</zipfileset>
 			<zipfileset dir="${web-path}"/>
+			<zipfileset dir="${res-gen-path}"/>
 		</jar>
 	</target>
 	
