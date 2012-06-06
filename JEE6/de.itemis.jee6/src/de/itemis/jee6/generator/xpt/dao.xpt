@@ -8,11 +8,28 @@
 «EXTENSION de::itemis::jee6::generator::ext::dao»
 
 «DEFINE Main FOR Process»
-«FILE daoFilename(this)»
-«LET getConverterList(this) AS converterList»
+«EXPAND AbstractDao»
+«EXPAND Dao»
+«ENDDEFINE»
+
+«DEFINE Dao FOR Process»
+«FILE daoFilename(this) IMPL»
 package «daoPackageOf(this)»;
 
 import javax.ejb.Stateless;
+
+@Stateless
+public class «daoOf(this)» extends «abstractDaoOf(this)»
+{
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE AbstractDao FOR Process»
+«FILE abstractDaoFilename(this)»
+«LET getConverterList(this) AS converterList»
+package «daoPackageOf(this)»;
+
 import javax.persistence.*;
 
 «IF converterList.size > 0»
@@ -22,8 +39,7 @@ import «fqTypeOf(option)»;
 «ENDFOREACH»
 «ENDIF»
 
-@Stateless
-abstract public class «daoOf(this)»
+abstract public class «abstractDaoOf(this)»
 {
 «FOREACH getPersistenceUnits(getModel(this)) AS pu»
 	@PersistenceContext(unitName="«pu.persistence»")
@@ -44,11 +60,22 @@ abstract public class «daoOf(this)»
 	public List<«typeOf(option)»> «listOf(option)»()
 	{
 		TypedQuery<«typeOf(option)»> query = em.createQuery(
-				"SELECT o FROM «typeOf(option)» o WHERE o.active = TRUE ORDER BY o.active DESC, o.name",
+				"SELECT o FROM «typeOf(option)» o",
 				«typeOf(option)».class);
 		
 		return query.getResultList();
 	}
+«IF hasActivationBoolean(option.type)»
+
+	public List<«typeOf(option)»> «listActiveOf(option)»()
+	{
+		TypedQuery<«typeOf(option)»> query = em.createQuery(
+				"SELECT o FROM «typeOf(option)» o WHERE o.active = TRUE",
+				«typeOf(option)».class);
+		
+		return query.getResultList();
+	}
+«ENDIF»
 «ENDLET»
 «ENDFOREACH»
 }

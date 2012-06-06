@@ -14,8 +14,6 @@ package «handlerPackageOf(this)»;
 
 import java.io.Serializable;
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import «fqDaoOf()»;
 
 «IF converterList.size > 0»
@@ -28,8 +26,6 @@ import «fqTypeOf(option)»;
 «ENDFOREACH»
 «ENDIF»
 
-@ManagedBean
-@SessionScoped
 abstract public class «handlerOf(this)» implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -91,6 +87,13 @@ abstract public class «handlerOf(this)» implements Serializable
 	{
 		return dao.«listOf(option)»();
 	}
+	
+«IF hasActivationBoolean(option.type)»
+	public List<«typeOf(option)»> «listActiveOf(option)»()
+	{
+		return dao.«listActiveOf(option)»();
+	}
+«ENDIF»
 	
 	public «converterOf(option)» «converterGetter(option)»()
 	{

@@ -20,6 +20,9 @@ String handlerFilename(Process p) :
 String daoFilename(Process p) :
 	fqDaoOf(p).replaceAll("\\.", "/") + ".java";
 
+String abstractDaoFilename(Process p) :
+	fqAbstractDaoOf(p).replaceAll("\\.", "/") + ".java";
+
 String getterOf(jee6::Boolean t) :
 	"is" + nameOf(t).toFirstUpper();
 

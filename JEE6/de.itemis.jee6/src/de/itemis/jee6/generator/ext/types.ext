@@ -202,11 +202,17 @@ String fqHandlerOf(Process p) :
 String daoOf(Process p) :
 	p.name + "DaoBean";
 
+String abstractDaoOf(Process p) :
+	"Abstract" + p.name + "DaoBean";
+
 String daoPackageOf(Process p) :
 	getModel(p).package + ".dao";
 
 String fqDaoOf(Process p) :
 	daoPackageOf(p) + "." + daoOf(p);
+
+String fqAbstractDaoOf(Process p) :
+	daoPackageOf(p) + "." + abstractDaoOf(p);
 
 /*
  * List handling

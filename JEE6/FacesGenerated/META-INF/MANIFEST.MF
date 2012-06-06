@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: de.itemis.jee6.example
-Bundle-SymbolicName: FacesGenerated;singleton:=true
+Bundle-Name: JEE6 Generator Example
+Bundle-SymbolicName: de.itemis.jee6.example;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: itemis AG
 Require-Bundle: de.itemis.jee6;bundle-version="1.0.0",
- org.eclipse.emf.mwe2.launch;resolution:=optional
+ org.eclipse.emf.mwe2.launch;bundle-version="2.2.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

@@ -6,4 +6,4 @@ List[OptionRef] getConverterList(Process p) :
 	p.entities.types.typeSelect(OptionRef).toSet();
 
 String converterGetter(OptionRef option) :
-	"get" + typeOf(option);
+	"get" + typeOf(option) + "Converter";

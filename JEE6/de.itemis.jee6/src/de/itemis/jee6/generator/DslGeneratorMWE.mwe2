@@ -51,6 +51,10 @@ Workflow
 		{
 			path = srcdir
 			postprocessor = org.eclipse.xpand2.output.JavaBeautifier {}
+			postprocessor = org.eclipse.xtend.typesystem.xsd.XMLBeautifier
+			{
+				formatComments=false
+			}
 		}
 		outlet =
 		{

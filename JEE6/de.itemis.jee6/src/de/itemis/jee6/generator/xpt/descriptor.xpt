@@ -11,7 +11,7 @@
 «ENDDEFINE»
 
 «DEFINE Persistence FOR Model»
-«FILE "META-INF/persistence.xml"»
+«FILE "WEB-INF/classes/META-INF/persistence.xml" RES»
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.0"
 		xmlns="http://java.sun.com/xml/ns/persistence"
