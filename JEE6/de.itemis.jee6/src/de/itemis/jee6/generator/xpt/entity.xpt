@@ -124,8 +124,7 @@ public class «typeOf()» extends «abstractOf()»
 «IF id == null»
 	public «abstractOf()»(final «enumOf(this)» type, final String bundleKey)
 	{
-		setId(type.ordinal());
-		setBundleKey(bundleKey);
+		this(type.ordinal(), bundleKey);
 	}
 
 	public «abstractOf()»(final int id, final String bundleKey)

@@ -1,15 +1,12 @@
-<project name="Faces Test" default="package">
+<project name="Faces Generator Test" default="generate">
 	<property file="build.properties"/>
 	<property file="environment.properties"/>
 	<property name="war"          value="facestest.war"/>
 	<property name="bin-path"     value="./bin"/>
-	<property name="src-path"     value="./src"/>
-	<property name="src-gen-path" value="./src-gen"/>
-	<property name="res-gen-path" value="./res-gen"/>
-	<property name="web-path"     value="./WebContent"/>
-
-	<property name="findbugs.home"     value="./findbugs"/>
-	<property name="findbugs.results"  value="./findbugs-results.xml"/>
+	<property name="src-path"     value="./src/main/java"/>
+	<property name="res-path"     value="./src/main/resources"/>
+	<property name="src-gen-path" value="./src/generated/java"/>
+	<property name="res-gen-path" value="./src/generated/resource"/>
 
 	<property name="eclipse.home"         value="/opt/eclipse"/>
 	<property name="eclipse.home.plugins" value="${eclipse.home}/plugins"/>
@@ -25,24 +22,11 @@
 	<!--              Setting up classpaths                   -->
 	<!-- ==================================================== -->
 
-	<path id="logger.path">
-		<fileset dir="${web-path}">
-			<include name="**/*.jar"/>
-		</fileset>
-	</path>
-
 	<path id="compile.path">
 		<fileset dir="${jboss.lib}">
 			<include name="**/*.jar"/>
 			<exclude name="**/*jsf*1.2*.jar"/>
 		</fileset>
-		<path refid="logger.path"/>
-	</path>
-
-	<path id="findbugs.lib">
-		<fileset dir="${findbugs.home}">
-			<include name="**/*.jar"/>
-		</fileset>  
 	</path>
 
 	<path id="generate.classpath">
@@ -69,15 +53,9 @@
 			<exclude name="**/*src*.jar"/>
 			<exclude name="**/*editor*.jar"/>
 		</fileset>
-		<pathelement path="${src-path}" />
+		<pathelement path="${res-path}" />
 	</path>
 	
-	<!-- ==================================================== -->
-	<!--            Setting up target definitions             -->
-	<!-- ==================================================== -->
-
-	<taskdef name="findbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask" classpathref="findbugs.lib"/>
-
 	<!-- ==================================================== -->
 	<!--              Setting up build targets                -->
 	<!-- ==================================================== -->
@@ -91,7 +69,7 @@
 	<target name="generate">
 		<echo message="${eclipse.home}"/>
 		<java classname="org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher" classpathref="generate.classpath" fork="true">
-			<arg value="${src-path}/FacesTest.mwe2"/>
+			<arg value="${res-path}/example.mwe2"/>
 		</java>
 	</target>
 
@@ -100,49 +78,5 @@
 		<javac srcdir="${src-path}:${src-gen-path}" destdir="${bin-path}" debug="true" includeantruntime="false">
 			<classpath refid="compile.path"/>
 		</javac>
-	</target>
-
-	<target name="package" depends="compile">
-		<jar destfile="${war}">
-			<zipfileset dir="${bin-path}" prefix="WEB-INF/classes">
-				<include name="**/*.class"/>
-			</zipfileset>
-			<zipfileset dir="${src-path}" prefix="WEB-INF/classes">
-				<include name="**/*.xml"/>
-				<include name="**/*.properties"/>
-			</zipfileset>
-			<zipfileset dir="${web-path}"/>
-			<zipfileset dir="${res-gen-path}"/>
-		</jar>
-	</target>
-	
-	<target name="deploy" depends="package">
-		<copy file="${war}" todir="${jboss.deploy}" />
-		<copy file="${war}" todir="${glassfish.deploy}" />
-	</target>
-	
-	<target name="undeploy">
-		<delete file="${jboss.deploy}/${war}" />
-		<delete file="${glassfish.deploy}/${war}" />
-	</target>
-
-	<!-- ==================================================== -->
-	<!--              Setting up runtime targets              -->
-	<!-- ==================================================== -->
-
-	<target name="findbugs" depends="compile">
-		<echo message="Checking ${ant.project.name}..."/>
-		<findbugs jvmargs="-Xmx512m" home="${findbugs.home}"
-				output="xml:withMessages"
-				outputFile="${findbugs.results}"
-				classpathref="compile.path"
-				effort="max"
-				excludeFilter="findbugs-exclude.xml"
-				reportlevel="low"
-				failonerror="true">
-			<sourcePath path="${main-project}/${src-path}"/>
-			<class location="${bin-path}"/> 
-			<auxclasspath refid="compile.path"/>
-		</findbugs>
 	</target>
 </project>

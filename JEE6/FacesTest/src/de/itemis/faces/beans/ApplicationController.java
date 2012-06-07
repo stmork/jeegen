@@ -30,15 +30,8 @@ public class ApplicationController implements Serializable
 	public void init()
 	{
 		log.debug(">init()");
-		initOptions();
-		log.debug("<init()");
-	}
-
-	private void initOptions()
-	{
-		log.debug("  >initOptions()");
 		dao.ensure(AddressOptionEnum.ADDRESS_HOME, "address.home");
 		dao.ensure(AddressOptionEnum.ADDRESS_WORK, "address.work");
-		log.debug("  <initOptions()");
+		log.debug("<init()");
 	}
 }

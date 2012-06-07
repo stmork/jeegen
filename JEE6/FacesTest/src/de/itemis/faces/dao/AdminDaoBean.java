@@ -12,7 +12,7 @@ public class AdminDaoBean extends AbstractAdminDaoBean
 {
 	public AddressOption ensure(final AddressOption.AddressOptionEnum type, final String description)
 	{
-		AddressOption option = findAddressOption(type.ordinal());
+		AddressOption option = em.find(AddressOption.class, type.ordinal());
 		
 		if (option == null)
 		{
