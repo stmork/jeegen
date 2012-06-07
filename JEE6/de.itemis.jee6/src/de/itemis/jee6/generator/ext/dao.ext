@@ -1,9 +1,13 @@
 import jee6;
 
 extension de::itemis::jee6::generator::ext::types;
+extension de::itemis::jee6::generator::ext::entity;
 
 String finderOf(OptionRef reference) :
 	"find" + typeOf(reference).toFirstUpper();
+
+String ensureOf(OptionRef reference) :
+	"ensure" + typeOf(reference).toFirstUpper();
 
 String listOf(OptionRef reference) :
 	"get" + typeOf(reference).toFirstUpper() + "List";
@@ -13,3 +17,6 @@ String listActiveOf(OptionRef reference) :
 
 Boolean hasActivationBoolean(Entity o) :
 	o.types.typeSelect(jee6::Boolean).exists(b|b.name == "active");
+
+Boolean isEnumeration(Options option) :
+	(option.keys.size > 0) && (getId(option) == null);

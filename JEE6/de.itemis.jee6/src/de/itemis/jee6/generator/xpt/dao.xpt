@@ -36,6 +36,9 @@ import javax.persistence.*;
 import java.util.List;
 «FOREACH converterList AS option»
 import «fqTypeOf(option)»;
+«IF isEnumeration(option.type)»
+import «fqTypeOf(option)».«enumOf(option.type)»;
+«ENDIF»
 «ENDFOREACH»
 «ENDIF»
 
@@ -47,14 +50,36 @@ abstract public class «abstractDaoOf(this)»
 «ENDFOREACH»
 
 «FOREACH converterList AS option»
+	/**********************************
+	 * «typeOf(option)»
+	 **********************************/
 «LET getId(option.type) AS id»
 «IF id == null»
+«IF option.type.keys.size > 0»
+	public «typeOf(option)» ensure(final «enumOf(option.type)» type, final String key)
+	{
+		«typeOf(option)» option = em.find(«typeOf(option)».class, type.ordinal());
+		
+		if (option == null)
+		{
+			option = new «typeOf(option)»(type, key);
+			em.persist(option);
+		}
+		return option;
+	}
+
+	public «typeOf(option)» «finderOf(option)»(final «enumOf(option.type)» type)
+	{
+		return «finderOf(option)»(type.ordinal());
+	}
+«ENDIF»
+
 	public «typeOf(option)» «finderOf(option)»(final int id)
 «ELSE»
 	public «typeOf(option)» «finderOf(option)»(final «typeOf(id)» id)
 «ENDIF»
 	{
-		return em.find(«typeOf(option)».class, id);
+		return em.getReference(«typeOf(option)».class, id);
 	} 
 
 	public List<«typeOf(option)»> «listOf(option)»()

@@ -42,9 +42,9 @@ abstract public class «handlerOf(this)» implements Serializable
 «ENDIF»
 
 «FOREACH converterList AS option»
-	/*
-	 * «typeOf(option)» converter *
-	 */
+	/**********************************
+	 * «typeOf(option)» converter
+	 **********************************/
 	private final «converterOf(option)» «nameOf(option)» = new «converterOf(option)»();
 
 	private class «converterOf(option)» implements Converter
