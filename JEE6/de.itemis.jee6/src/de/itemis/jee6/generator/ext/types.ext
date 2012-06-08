@@ -187,6 +187,9 @@ String fqTypeOf(Entity e) :
 String fqAbstractTypeOf(Entity e) :
 	packageOf(e) + "." + abstractOf(e);
 
+String converterOf(Options option) :
+	typeOf(option) + "Converter";
+
 /*
  * Process
  */
@@ -198,6 +201,9 @@ String handlerPackageOf(Process p) :
 
 String fqHandlerOf(Process p) :
 	handlerPackageOf(p) + "." + handlerOf(p);
+
+String fqBaseHandlerOf(Process p) :
+	handlerPackageOf(p) + ".AbstractHandler";
 
 String daoOf(Process p) :
 	p.name + "DaoBean";

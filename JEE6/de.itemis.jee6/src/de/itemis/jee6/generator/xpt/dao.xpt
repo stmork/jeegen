@@ -27,7 +27,7 @@ public class «daoOf(this)» extends «abstractDaoOf(this)»
 
 «DEFINE AbstractDao FOR Process»
 «FILE abstractDaoFilename(this)»
-«LET getConverterList(this) AS converterList»
+«LET getOptionsList(this) AS converterList»
 package «daoPackageOf(this)»;
 
 import javax.persistence.*;
@@ -36,8 +36,8 @@ import javax.persistence.*;
 import java.util.List;
 «FOREACH converterList AS option»
 import «fqTypeOf(option)»;
-«IF isEnumeration(option.type)»
-import «fqTypeOf(option)».«enumOf(option.type)»;
+«IF isEnumeration(option)»
+import «fqTypeOf(option)».«enumOf(option)»;
 «ENDIF»
 «ENDFOREACH»
 «ENDIF»
@@ -53,10 +53,10 @@ abstract public class «abstractDaoOf(this)»
 	/**********************************
 	 * «typeOf(option)»
 	 **********************************/
-«LET getId(option.type) AS id»
+«LET getId(option) AS id»
 «IF id == null»
-«IF option.type.keys.size > 0»
-	public «typeOf(option)» ensure(final «enumOf(option.type)» type, final String key)
+«IF option.keys.size > 0»
+	public «typeOf(option)» ensure(final «enumOf(option)» type, final String key)
 	{
 		«typeOf(option)» option = em.find(«typeOf(option)».class, type.ordinal());
 		
@@ -68,7 +68,7 @@ abstract public class «abstractDaoOf(this)»
 		return option;
 	}
 
-	public «typeOf(option)» «finderOf(option)»(final «enumOf(option.type)» type)
+	public «typeOf(option)» «finderOf(option)»(final «enumOf(option)» type)
 	{
 		return «finderOf(option)»(type.ordinal());
 	}
@@ -90,7 +90,7 @@ abstract public class «abstractDaoOf(this)»
 		
 		return query.getResultList();
 	}
-«IF hasActivationBoolean(option.type)»
+«IF hasActivationBoolean(option)»
 
 	public List<«typeOf(option)»> «listActiveOf(option)»()
 	{

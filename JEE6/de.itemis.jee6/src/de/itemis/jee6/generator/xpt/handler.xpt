@@ -8,11 +8,15 @@
 «EXTENSION de::itemis::jee6::generator::ext::dao»
 
 «DEFINE Main FOR Process»
+«EXPAND Handler»
+«EXPAND BaseHandler»
+«ENDDEFINE»
+
+«DEFINE Handler FOR Process»
 «FILE handlerFilename(this)»
-«LET getConverterList(this) AS converterList»
+«LET getConverterReferencesList(this) AS converterList»
 package «handlerPackageOf(this)»;
 
-import java.io.Serializable;
 import javax.ejb.EJB;
 import «fqDaoOf()»;
 
@@ -26,7 +30,7 @@ import «fqTypeOf(option)»;
 «ENDFOREACH»
 «ENDIF»
 
-abstract public class «handlerOf(this)» implements Serializable
+abstract public class «handlerOf(this)» extends AbstractHandler
 {
 	private static final long serialVersionUID = 1L;
 	
@@ -49,7 +53,7 @@ abstract public class «handlerOf(this)» implements Serializable
 
 	private class «converterOf(option)» implements Converter
 	{
-«LET getId(option.type) AS id»
+«LET getId(option) AS id»
 		@Override
 		public Object getAsObject(final FacesContext context, final UIComponent component, final String input)
 		{
@@ -88,7 +92,7 @@ abstract public class «handlerOf(this)» implements Serializable
 		return dao.«listOf(option)»();
 	}
 	
-«IF hasActivationBoolean(option.type)»
+«IF hasActivationBoolean(option)»
 	public List<«typeOf(option)»> «listActiveOf(option)»()
 	{
 		return dao.«listActiveOf(option)»();
@@ -102,5 +106,36 @@ abstract public class «handlerOf(this)» implements Serializable
 «ENDFOREACH»
 }
 «ENDLET»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE BaseHandler FOR Process»
+«FILE baseHandlerFilename(this)»
+package «handlerPackageOf(this)»;
+
+import java.io.Serializable;
+
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
+
+abstract public class AbstractHandler implements Serializable
+{
+	private static final long serialVersionUID = 1L;
+
+	protected final ExternalContext getExternalContext()
+	{
+		final FacesContext context = FacesContext.getCurrentInstance();
+
+		return context != null ? context.getExternalContext() : null;
+	}
+
+	protected final HttpSession getSession()
+	{
+		ExternalContext context = getExternalContext();
+		
+		return context != null ? (HttpSession) context.getSession(false) : null;
+	}
+}
 «ENDFILE»
 «ENDDEFINE»

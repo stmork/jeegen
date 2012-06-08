@@ -3,17 +3,17 @@ import jee6;
 extension de::itemis::jee6::generator::ext::types;
 extension de::itemis::jee6::generator::ext::entity;
 
-String finderOf(OptionRef reference) :
-	"find" + typeOf(reference).toFirstUpper();
+String finderOf(Options options) :
+	"find" + typeOf(options).toFirstUpper();
 
-String ensureOf(OptionRef reference) :
-	"ensure" + typeOf(reference).toFirstUpper();
+String ensureOf(Options options) :
+	"ensure" + typeOf(options).toFirstUpper();
 
-String listOf(OptionRef reference) :
-	"get" + typeOf(reference).toFirstUpper() + "List";
+String listOf(Options options) :
+	"get" + typeOf(options).toFirstUpper() + "List";
 
-String listActiveOf(OptionRef reference) :
-	"getActive" + typeOf(reference).toFirstUpper() + "List";
+String listActiveOf(Options options) :
+	"getActive" + typeOf(options).toFirstUpper() + "List";
 
 Boolean hasActivationBoolean(Entity o) :
 	o.types.typeSelect(jee6::Boolean).exists(b|b.name == "active");

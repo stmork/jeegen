@@ -17,6 +17,9 @@ String abstractFilename(Entity e) :
 String handlerFilename(Process p) :
 	fqHandlerOf(p).replaceAll("\\.", "/") + ".java";
 
+String baseHandlerFilename(Process p) :
+	fqBaseHandlerOf(p).replaceAll("\\.", "/") + ".java";
+
 String daoFilename(Process p) :
 	fqDaoOf(p).replaceAll("\\.", "/") + ".java";
 

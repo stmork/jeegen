@@ -52,7 +52,7 @@ options InventoryType editable
 {
 	Text id type;
 	Text    label;
-	Entity  Vendor vendor;
+	Option  Vendor vendor;
 	Boolean active;
 };
 
