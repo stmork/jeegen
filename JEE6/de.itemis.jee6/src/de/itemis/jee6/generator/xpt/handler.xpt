@@ -236,6 +236,11 @@ abstract public class AbstractHandler implements Serializable, ResourceBundleDef
 		}		
 	}
 	
+	public String back()
+	{
+		return NAV_INDEX;
+	}
+
 	public int getActYear()
 	{
 		return Calendar.getInstance().get(Calendar.YEAR);

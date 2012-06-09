@@ -64,8 +64,8 @@ options OrderPosition filterable cloneable editable
 	Text                 comment;
 	Timestamp            received;
 	Boolean              canceled;
-	Entity UserInfo      owner;
-	Entity UserInfo      authorizer;
+	Option UserInfo      owner;
+	Option UserInfo      authorizer;
 	Text                 position transient;
 };
 
@@ -75,7 +75,7 @@ entity Purchase
 	Text                    article;
 	Entity OrderPosition [] positions;
 	Option Distributor      distributor;
-	Entity UserInfo         buyer;
+	Option UserInfo         buyer;
 };
 
 options InventoryState
@@ -97,8 +97,8 @@ entity InventoryHistoryEntry cloneable
 {
 	Timestamp             created;
 	Option InventoryState state;
-	Entity UserInfo       owner;
-	Entity UserInfo       commentator;
+	Option UserInfo       owner;
+	Option UserInfo       commentator;
 	Text                  utilization;
 	Text                  comment;
 	Number                sell;
