@@ -11,9 +11,9 @@ import javax.interceptor.Interceptors;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import de.itemis.faces.Profiler;
 import de.itemis.faces.dao.AdminDaoBean;
 import de.itemis.faces.entities.AddressOption.AddressOptionEnum;
+import de.itemis.jee6.util.Profiler;
 
 @ManagedBean(eager=true)
 @ApplicationScoped

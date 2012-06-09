@@ -71,6 +71,10 @@ Workflow
 			{
 				formatComments=false
 			}
+			postprocessor = de.morknet.oaw.tools.postprocessor.unix.UnixBeautifier
+			{
+				
+			}
 		}
 	}
 }

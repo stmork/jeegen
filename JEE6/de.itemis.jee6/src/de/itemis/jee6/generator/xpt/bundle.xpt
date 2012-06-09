@@ -1,0 +1,37 @@
+«IMPORT jee6»
+
+«EXTENSION de::itemis::jee6::generator::ext::bundle»
+
+«DEFINE Main FOR Model»
+«FOREACH this.options.typeSelect(jee6::Locale) AS locale»
+«EXPAND Messages(locale)»
+«EXPAND Errors(locale)»
+«ENDFOREACH»
+«EXPAND Version»
+«ENDDEFINE»
+
+«DEFINE Messages(Locale locale) FOR Model»
+«FILE messageFilename(this, locale) IMPL»
+«FOREACH entities.typeSelect(Options) AS entity»
+«FOREACH entity.keys AS key»
+«key»=
+«ENDFOREACH»
+«ENDFOREACH»
+yes=yes
+no=no
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE Errors(Locale locale) FOR Model»
+«FILE errorFilename(this, locale) IMPL»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE Version FOR Model»
+«FILE versionFilename(this) IMPL»
+vendor=
+version.major=0
+version.minor=0
+version.patch=1
+«ENDFILE»
+«ENDDEFINE»

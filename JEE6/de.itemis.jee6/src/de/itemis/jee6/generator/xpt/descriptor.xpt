@@ -1,6 +1,7 @@
 «IMPORT jee6»
 
 «EXTENSION de::itemis::jee6::generator::ext::model»
+«EXTENSION de::itemis::jee6::generator::ext::bundle»
 
 «DEFINE Main FOR Model»
 «EXPAND Persistence»

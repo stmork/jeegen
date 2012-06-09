@@ -6,6 +6,6 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: FacesTest.jar,
  WebContent/WEB-INF/lib/commons-logging.jar
 Require-Bundle: de.itemis.jee6;bundle-version="1.0.0",
- org.eclipse.emf.mwe2.launch;bundle-version="2.2.0"
+ de.morknet.oaw.dependencies;bundle-version="5.2.4"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Vendor: itemis AG

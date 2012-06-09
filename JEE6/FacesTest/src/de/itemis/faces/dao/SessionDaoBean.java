@@ -25,10 +25,10 @@ import javax.persistence.TypedQuery;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import de.itemis.faces.DateTimeUtil;
-import de.itemis.faces.Profiler;
 import de.itemis.faces.entities.Address;
 import de.itemis.faces.entities.UserInfo;
+import de.itemis.jee6.util.DateTimeUtil;
+import de.itemis.jee6.util.Profiler;
 
 @Stateless
 @Interceptors(Profiler.class)

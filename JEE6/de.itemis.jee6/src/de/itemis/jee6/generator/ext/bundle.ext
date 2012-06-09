@@ -1,0 +1,19 @@
+import jee6;
+
+String messageBundle(Model m, Locale l) :
+	m.package + ".messages" + (l.home ? "" : "_" + l.language);
+
+String messageFilename(Model m, Locale l) :
+	messageBundle(m, l).replaceAll("\\.", "/") + ".properties";
+
+String errorBundle(Model m, Locale l) :
+	m.package + ".messages" + (l.home ? "" : "_" + l.language);
+
+String errorFilename(Model m, Locale l) :
+	errorBundle(m, l).replaceAll("\\.", "/") + ".properties";
+
+String versionBundle(Model m) :
+	m.package + ".version";
+
+String versionFilename(Model m) :
+	versionBundle(m).replaceAll("\\.", "/") + ".properties";

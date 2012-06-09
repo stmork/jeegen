@@ -114,14 +114,68 @@ abstract public class «handlerOf(this)» extends AbstractHandler
 package «handlerPackageOf(this)»;
 
 import java.io.Serializable;
+import java.text.MessageFormat;
+import java.text.NumberFormat;
+import java.util.Calendar;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
+import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.application.ProjectStage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 import javax.servlet.http.HttpSession;
 
-abstract public class AbstractHandler implements Serializable
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import de.itemis.jee6.util.ErrorInfo;
+import de.itemis.jee6.util.ResourceBundleDefinitions;
+
+abstract public class AbstractHandler implements Serializable, ResourceBundleDefinitions
 {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID    = 1L;
+	private static final Log  log                 = LogFactory.getLog(AbstractHandler.class);
+
+	protected static final NumberFormat money     = NumberFormat.getCurrencyInstance();
+	protected static final String       NAV_INDEX = "index.xhtml";
+
+	private ResourceBundle messages;
+	private ResourceBundle errors;
+	protected boolean production;
+
+	@PostConstruct
+	public void getBundles()
+	{
+		log.debug("<getBundles()");
+		FacesContext context = FacesContext.getCurrentInstance();
+		messages   = context.getApplication().getResourceBundle(context, BUNDLE_MESSAGES);
+		errors     = context.getApplication().getResourceBundle(context, BUNDLE_ERRORS);
+		production = context.getApplication().getProjectStage() == ProjectStage.Production;
+
+		if (log.isDebugEnabled())
+		{
+			ExternalContext external = context.getExternalContext();
+			log.debug(" default: " + Locale.getDefault());
+			log.debug(" req.:    " + external.getRequestLocale());
+			Iterator<Locale> locales = external.getRequestLocales();
+			if (locales != null)
+			{
+				while(locales.hasNext())
+				{
+					Locale locale = locales.next();
+					log.debug(" o " + locale);
+				}
+			}
+			log.debug(" msg: " + messages.getLocale());
+			log.debug(" err: " + errors.getLocale());
+		}
+		log.debug(">getBundles()");
+	}
 
 	protected final ExternalContext getExternalContext()
 	{
@@ -130,11 +184,73 @@ abstract public class AbstractHandler implements Serializable
 		return context != null ? context.getExternalContext() : null;
 	}
 
+	protected final String getInitParameter(final String key)
+	{
+		return getExternalContext().getInitParameter(key);
+	}
+
 	protected final HttpSession getSession()
 	{
 		ExternalContext context = getExternalContext();
 		
 		return context != null ? (HttpSession) context.getSession(false) : null;
+	}
+	
+	protected String getMessage(final String key, final Object ... params)
+	{
+		return MessageFormat.format(messages.getString(key), params);
+	}
+	
+	protected String getError(final String key, final Object ... params)
+	{
+		final String message = MessageFormat.format(errors.getString(key), params); 
+		log.debug(message);
+		return message;
+	}
+	
+	public String getYesNo(final boolean flag)
+	{
+		return messages.getString(flag ? "yes" : "no");
+	}
+
+	protected String error(final String id, final String key, final Object ... params)
+	{
+		final FacesContext context = FacesContext.getCurrentInstance();
+		final String text = getError(key, params);
+		final FacesMessage msg = new FacesMessage(text);
+		msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+		context.addMessage(id, msg);
+		return text;
+	}
+
+	protected void addErrors(List<ErrorInfo> errors)
+	{
+		final FacesContext context = FacesContext.getCurrentInstance();
+		
+		for (ErrorInfo info : errors)
+		{
+			final String text = getError(info.getMessageKey());
+			final FacesMessage msg = new FacesMessage(text);
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			context.addMessage(info.getGuiItemId(), msg);
+		}		
+	}
+	
+	public int getActYear()
+	{
+		return Calendar.getInstance().get(Calendar.YEAR);
+	}
+
+	protected int getMessageCount()
+	{
+		return FacesContext.getCurrentInstance().getMessageList().size();
+	}
+
+	protected void validationError(final String key, final Object ... params)
+	{
+		FacesMessage msg = new FacesMessage(getError(key, params));
+		msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+		throw new ValidatorException(msg);
 	}
 }
 «ENDFILE»

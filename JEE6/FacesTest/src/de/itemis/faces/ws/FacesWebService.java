@@ -9,10 +9,10 @@ import javax.jws.WebService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import de.itemis.faces.LogUtil;
 import de.itemis.faces.dao.SessionDaoBean;
 import de.itemis.faces.entities.Address;
 import de.itemis.faces.entities.UserInfo;
+import de.itemis.jee6.util.LogUtil;
 
 @WebService(serviceName="FacesWS")
 public class FacesWebService {

@@ -2,10 +2,10 @@ import jee6;
 
 extension de::itemis::jee6::generator::ext::types;
 
-List[Option] getConverterReferencesList(Process p) :
+List[Options] getConverterReferencesList(Process p) :
 	p.entities.types.typeSelect(OptionRef).type.toSet();
 
-List[Option] getOptionsList(Process p) :
+List[Options] getOptionsList(Process p) :
 	p.entities.types.typeSelect(OptionRef).type.union(p.entities.typeSelect(Options)).toSet();
 
 String converterGetter(Options option) :

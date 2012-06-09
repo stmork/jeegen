@@ -18,11 +18,11 @@ import javax.interceptor.Interceptors;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import de.itemis.faces.Profiler;
 import de.itemis.faces.dao.SessionDaoBean;
 import de.itemis.faces.entities.UserInfo;
 import de.itemis.faces.handler.AbstractHandler;
 import de.itemis.faces.handler.AddressHandler;
+import de.itemis.jee6.util.Profiler;
 
 @ManagedBean
 @SessionScoped

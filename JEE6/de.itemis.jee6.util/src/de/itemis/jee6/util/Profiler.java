@@ -1,7 +1,7 @@
 /*
  * $Id$
  */
-package de.itemis.faces;
+package de.itemis.jee6.util;
 
 import java.util.Collection;
 
@@ -10,6 +10,7 @@ import javax.interceptor.InvocationContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 
 public class Profiler
 {
