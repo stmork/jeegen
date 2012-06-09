@@ -43,6 +43,10 @@
 				<include name="**/*.class"/>
 				<exclude name="**/*Test.class"/>
 			</zipfileset>
+			<zipfileset dir="${src-path}">
+				<include name="**/*.java"/>
+				<exclude name="**/*Test.java"/>
+			</zipfileset>
 		</jar>
 	</target>
 </project>
