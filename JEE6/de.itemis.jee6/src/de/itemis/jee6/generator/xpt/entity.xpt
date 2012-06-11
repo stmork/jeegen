@@ -31,6 +31,9 @@ abstract
 «ELSE»
 @Entity
 @Table(name="«typeOf(this)»")
+«IF Options.isInstance(this)»
+@Cacheable
+«ENDIF»
 «ENDIF»
 public class «abstractOf(this)» implements Serializable
 «IF cloneable»
@@ -80,6 +83,9 @@ import java.util.Locale;
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @Table(name="«typeOf(this)»")
+«IF Options.isInstance(this)»
+@Cacheable
+«ENDIF»
 public class «typeOf()» extends «abstractOf()»
 {
 	private static final long serialVersionUID = 1L;

@@ -21,10 +21,17 @@
 «FOREACH getPersistenceUnits() AS pu»
 	<persistence-unit name="«pu.persistence»" transaction-type="JTA">
 		<jta-data-source>«pu.jndi»</jta-data-source>
+		<shared-cache-mode>ALL</shared-cache-mode>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
-			<property name="hibernate.hbm2ddl.auto" value="update" />
-			<property name="hibernate.show_sql"     value="false" />
+			<property name="hibernate.hbm2ddl.auto"                 value="update" />
+			<property name="hibernate.cache.use_second_level_cache" value="true"/>
+			<property name="hibernate.cache.use_query_cache"        value="true" />
+«IF state == ProjectState::Development»
+			<property name="hibernate.show_sql"                     value="true" />
+«ELSE»
+			<property name="hibernate.show_sql"                     value="false" />
+«ENDIF»
 		</properties>
 	</persistence-unit>
 «ENDFOREACH»

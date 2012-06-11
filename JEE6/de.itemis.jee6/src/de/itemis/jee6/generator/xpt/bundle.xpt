@@ -17,13 +17,23 @@
 «key»=
 «ENDFOREACH»
 «ENDFOREACH»
+back=back
 yes=yes
 no=no
+change=Change
+remove=Remove
+clear=Clear
+save=Save
+logout=Logout
+main=Main menu
+footer=JSF 2.0 / EJB 3.1 / JEE 6 - test application
+menue=Menu
 «ENDFILE»
 «ENDDEFINE»
 
 «DEFINE Errors(Locale locale) FOR Model»
 «FILE errorFilename(this, locale) IMPL»
+not-found.title=Resource not found\!
 «ENDFILE»
 «ENDDEFINE»
 

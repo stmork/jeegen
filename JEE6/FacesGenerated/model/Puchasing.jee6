@@ -1,4 +1,4 @@
-application "Test" context "/purchasing" package de.itemis.purchasing timeout 120;
+application "Test" context "/purchasing" package de.itemis.purchasing timeout 120 integration;
 persistence unit "purchasingDS" jndi "jdbc/purchasingDS";
 security domain "itemis";
 smtp "mail/Default";

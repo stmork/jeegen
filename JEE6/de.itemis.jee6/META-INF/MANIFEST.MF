@@ -5,8 +5,13 @@ Bundle-Vendor: itemis AG
 Bundle-Version: 1.0.0
 Bundle-SymbolicName: de.itemis.jee6; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: de.morknet.oaw.dependencies;bundle-version="5.2.4",
- de.morknet.oaw.tools5;bundle-version="5.2.2"
+Require-Bundle: de.morknet.oaw.dependencies;bundle-version="5.2.4";visibility:=reexport,
+ de.morknet.oaw.tools5;bundle-version="5.2.2";visibility:=reexport,
+ org.eclipse.xtext,
+ org.eclipse.xtext.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.common,
+ org.antlr.runtime
 Import-Package: org.apache.log4j,
  org.apache.commons.logging,
  org.eclipse.xtext.xbase.lib,
@@ -24,3 +29,4 @@ Export-Package: de.itemis.jee6;uses:="org.eclipse.xtext,org.eclipse.xtext.servic
  de.itemis.jee6.scoping;uses:="org.eclipse.xtext.scoping.impl",
  de.itemis.jee6.services;uses:="org.eclipse.xtext,org.eclipse.xtext.common.services,org.eclipse.xtext.service",
  de.itemis.jee6.validation
+
