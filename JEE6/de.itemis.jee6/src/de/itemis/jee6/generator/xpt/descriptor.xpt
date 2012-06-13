@@ -65,14 +65,26 @@
 		<param-value>true</param-value>
 	</context-param>
 	<context-param>
-		<description>Wir sind am Entwickeln am dran sein.</description>
-		<param-name>javax.faces.PROJECT_STAGE</param-name>
-		<param-value>Development</param-value>
-	</context-param>
-	<context-param>
 		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
 		<param-value>server</param-value>
 	</context-param>
+«IF state != null»
+	<context-param>
+«IF state == ProjectState::Productive»
+		<description>Alles ist am geschmiert laufen...</description>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Productive</param-value>
+«ELSEIF state == ProjectState::Integration»
+		<description>Mal schauen, ob alles zusammenspielen tut.</description>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>SystemTest</param-value>
+«ELSE»
+		<description>Wir sind am Entwickeln am dran sein, am tun, am machen.</description>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Development</param-value>
+«ENDIF»
+	</context-param>
+«ENDIF»
 
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
