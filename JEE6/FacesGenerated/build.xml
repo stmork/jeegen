@@ -1,6 +1,8 @@
 <project name="Faces Generator Test" default="generate">
-	<property file="build.properties"/>
-	<property file="environment.properties"/>
+	<property file="${user.home}/.jee6.properties" />
+	<property file="${basedir}/build.properties"/>
+	<property file="${basedir}/environment.properties"/>
+
 	<property name="war"          value="facestest.war"/>
 	<property name="bin-path"     value="./bin"/>
 	<property name="src-path"     value="./src/main/java"/>
