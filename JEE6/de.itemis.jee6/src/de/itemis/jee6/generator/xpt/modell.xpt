@@ -6,7 +6,8 @@
 «DEFINE Main FOR Model»
 «EXPAND descriptor::Main»
 «EXPAND bundle::Main»
-«EXPAND entity::Main FOREACH entities»
+«EXPAND handler::Main»
 «EXPAND handler::Main FOREACH processes»
-«EXPAND dao::Main FOREACH processes»
+«EXPAND dao::Main     FOREACH processes»
+«EXPAND entity::Main  FOREACH entities»
 «ENDDEFINE»

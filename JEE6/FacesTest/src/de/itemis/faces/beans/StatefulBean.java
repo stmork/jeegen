@@ -8,11 +8,15 @@ import javax.ejb.PostActivate;
 import javax.ejb.PrePassivate;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
+import javax.interceptor.Interceptors;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import de.itemis.jee6.util.Profiler;
+
 @Stateful
+@Interceptors(Profiler.class)
 public class StatefulBean implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -21,7 +25,7 @@ public class StatefulBean implements Serializable
 	@PostConstruct
 	public void init()
 	{
-		log.debug("  =init() # " + this);
+		log.debug("  =construct() # " + this);
 	}
 
 	@PreDestroy

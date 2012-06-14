@@ -35,3 +35,8 @@ process Admin roles "admin"
 {
 	UserInfo, Address
 };
+
+process Info
+{
+	UserInfo
+};

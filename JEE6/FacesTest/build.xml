@@ -114,6 +114,10 @@
 				<include name="**/*.xml"/>
 				<include name="**/*.properties"/>
 			</zipfileset>
+			<zipfileset dir="${src-gen-path}" prefix="WEB-INF/classes">
+				<include name="**/*.xml"/>
+				<include name="**/*.properties"/>
+			</zipfileset>
 			<zipfileset dir="${web-path}"/>
 			<zipfileset dir="${res-gen-path}"/>
 		</jar>

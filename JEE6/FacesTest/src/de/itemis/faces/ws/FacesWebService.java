@@ -9,6 +9,7 @@ import javax.jws.WebService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import de.itemis.faces.beans.StatefulBean;
 import de.itemis.faces.dao.SessionDaoBean;
 import de.itemis.faces.entities.Address;
 import de.itemis.faces.entities.UserInfo;
@@ -21,10 +22,16 @@ public class FacesWebService {
 	@EJB
 	private SessionDaoBean session;
 
+	@EJB
+	private StatefulBean stateful;
+
 	@WebMethod
 	public void ping()
 	{
-		log.info("=ping()");
+		log.info(">ping()");
+		session.ping();
+		stateful.ping();
+		log.info("<ping()");
 	}
 	
 	@WebMethod

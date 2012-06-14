@@ -9,6 +9,20 @@
 «EXPAND JBoss»
 «EXPAND Glassfish»
 «EXPAND Faces»
+«EXPAND Log4J»
+«ENDDEFINE»
+
+«DEFINE Log4J FOR Model»
+«FILE "log4j.properties"»
+«IF state == ProjectState::Productive»
+log4j.rootLogger=info, R
+«ELSE»
+log4j.rootLogger=debug, R
+«ENDIF»
+log4j.appender.R=org.apache.log4j.ConsoleAppender
+log4j.appender.R.layout=org.apache.log4j.PatternLayout
+log4j.appender.R.layout.ConversionPattern=%-5p %-30.30c{1} %x - %m%n
+«ENDFILE»
 «ENDDEFINE»
 
 «DEFINE Persistence FOR Model»
@@ -21,12 +35,16 @@
 «FOREACH getPersistenceUnits() AS pu»
 	<persistence-unit name="«pu.persistence»" transaction-type="JTA">
 		<jta-data-source>«pu.jndi»</jta-data-source>
+«REM»
 		<shared-cache-mode>ALL</shared-cache-mode>
+«ENDREM»
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
 			<property name="hibernate.hbm2ddl.auto"                 value="update" />
 			<property name="hibernate.cache.use_second_level_cache" value="true"/>
+«REM»
 			<property name="hibernate.cache.use_query_cache"        value="true" />
+«ENDREM»
 «IF state == ProjectState::Development»
 			<property name="hibernate.show_sql"                     value="true" />
 «ELSE»

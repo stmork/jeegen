@@ -45,18 +45,18 @@ public class SessionDaoBean
 	@PostConstruct
 	public void construct()
 	{
-		log.debug("=construct() " + this);
+		log.debug("  =construct() # " + this);
 	}
 
 	@PreDestroy
 	public void destroy()
 	{
-		log.debug("=destroy()" + this);
+		log.debug("  =destroy() # " + this);
 	}
 
 	public void ping()
 	{
-		log.debug("=ping()" + this);
+		log.debug("  =ping() # " + this);
 	}
 
 	public UserInfo ensureUserInfo(String login)
