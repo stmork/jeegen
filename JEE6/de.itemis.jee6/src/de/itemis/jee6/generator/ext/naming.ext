@@ -2,6 +2,9 @@ import jee6;
 
 extension de::itemis::jee6::generator::ext::types;
 
+String asType(String s) :
+	JAVA de.itemis.jee6.generator.ext.ExtensionHelper.asType(java.lang.String);
+
 String nameOf(Attribute t) :
 	t.name.toFirstLower();
 
@@ -42,5 +45,11 @@ String setterOf(Entity t) :
 	"set" + nameOf(t).toFirstUpper();
 
 String nameOf(Property prop) :
-	prop.jndi.replaceAll("/", "");
+	asType(prop.jndi);
+
+String getterOf(jee6::Property p) :
+	"get" + nameOf(p).toFirstUpper();
+
+String getterOf(jee6::BooleanProp p) :
+	"is" + nameOf(p).toFirstUpper();
 	

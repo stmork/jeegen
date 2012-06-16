@@ -33,10 +33,17 @@ options UserInfo editable
 
 process Admin roles "admin"
 {
+	Text default "ldaps://master.itemis.de:636/" "ldap/url" ref "java:global/ldap/url";
+	Text "ldap/baseDN" ref "java:global/ldap/baseDN";
+
 	UserInfo, Address
 };
 
 process Info
 {
+ 	Type javax.naming.directory.DirContext "ldap/itemis" ref "java:global/ldap/itemis"; 
+	Text "ldap/baseDN" ref "java:global/ldap/baseDN";
+	Boolean default false "productive" ref "java:global/productive";
+
 	UserInfo
 };

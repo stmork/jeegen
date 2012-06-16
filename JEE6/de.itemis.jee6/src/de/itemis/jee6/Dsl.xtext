@@ -49,8 +49,9 @@ Process:	'process' name=ID ('roles' roles+=STRING (',' roles+=STRING)* )?
 		entities += [Entity|ID] (',' entities += [Entity|ID])*
 	 '}' ';';
 
-Property: (TextProp|IntegerProp|BooleanProp) jndi=STRING ('ref' original=STRING)? ';';
+Property: (TypeProp|TextProp|IntegerProp|BooleanProp) jndi=STRING ('ref' original=STRING)? ';';
 
+TypeProp:		{TypeProp} 'Type' type=PACKAGED_ID;
 TextProp:		{TextProp}'Text' ('default' value=STRING)?;
 IntegerProp:	{IntegerProp}'Integer' ('default' value=INT)?;
 BooleanProp:	{BooleanProp}'Boolean' ('default' value=('true'|'false'))?;

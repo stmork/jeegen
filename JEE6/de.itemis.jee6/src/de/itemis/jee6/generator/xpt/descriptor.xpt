@@ -198,6 +198,14 @@ log4j.appender.R.layout.ConversionPattern=%-5p %-30.30c{1} %x - %m%n
 	</resource-ref>
 «ENDDEFINE»
 
+«DEFINE reference FOR TypeProp»
+	<resource-ref>
+		<res-ref-name>«jndi»</res-ref-name>
+		<res-type>«type»</res-type>
+		<jndi-name>«original»</jndi-name>
+	</resource-ref>
+«ENDDEFINE»
+
 «DEFINE reference FOR IntegerProp»
 	<resource-ref>
 		<res-ref-name>«jndi»</res-ref-name>

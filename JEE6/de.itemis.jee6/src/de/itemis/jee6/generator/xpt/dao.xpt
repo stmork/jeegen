@@ -57,8 +57,13 @@ abstract public class «abstractDaoOf(this)»
 «ENDFOREACH»
 
 «FOREACH properties AS property»
-	@Resource
-	protected «typeOf(property)» «nameOf(property)»«EXPAND Default FOR property»;
+	@Resource(mappedName="«property.jndi»")
+	private «typeOf(property)» «nameOf(property)-»«EXPAND Default FOR property-»;
+	
+	public «typeOf(property)» «getterOf(property)»()
+	{
+		return this.«nameOf(property)»;
+	}
 «ENDFOREACH»
 
 «FOREACH converterList AS option»
@@ -121,7 +126,9 @@ abstract public class «abstractDaoOf(this)»
 «ENDDEFINE»
 
 «DEFINE Default FOR jee6::Property»
-«ERROR "Abstract Property"»
+«REM»
+// No default for other JNDI Properties
+«ENDREM»
 «ENDDEFINE»
 
 «DEFINE Default FOR TextProp»

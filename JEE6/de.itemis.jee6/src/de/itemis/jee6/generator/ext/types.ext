@@ -233,6 +233,9 @@ String fqAbstractDaoOf(Process p) :
 String typeOf(jee6::Property prop) :
 	"???";
 
+String typeOf(TypeProp prop) :
+	prop.type;
+
 String typeOf(TextProp prop) :
 	"String";
 

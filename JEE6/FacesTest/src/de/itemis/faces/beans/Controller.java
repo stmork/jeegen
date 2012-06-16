@@ -3,7 +3,6 @@
  */
 package de.itemis.faces.beans;
 
-import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.naming.NamingException;
@@ -16,6 +15,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import de.itemis.faces.LdapClient;
+import de.itemis.faces.dao.InfoDaoBean;
 import de.itemis.faces.dao.SessionDaoBean;
 import de.itemis.faces.entities.UserInfo;
 import de.itemis.faces.handler.AbstractHandler;
@@ -30,14 +30,11 @@ public class Controller extends AbstractHandler
 	private static final long serialVersionUID = 1L;
 	private static final Log  log = LogFactory.getLog(Controller.class);
 
-	@Resource(mappedName="ldap/baseDN")
-	private String baseDN;
-
-	@Resource(mappedName="ldap/itemis")
-	private DirContext ldap;
-
 	@EJB
 	private SessionDaoBean dao;
+
+	@EJB
+	private InfoDaoBean info;
 
 	public String logout(final HttpServletRequest request) throws ServletException
 	{
@@ -56,11 +53,12 @@ public class Controller extends AbstractHandler
 		final String login = getExternalContext().getRemoteUser();
 		if (login != null)
 		{
+			final DirContext ldap = info.getLdapItemis();
 			final String namespace = ldap.getNameInNamespace();
-			final LdapClient client = new LdapClient(ldap, baseDN);
+			final LdapClient client = new LdapClient(ldap, info.getLdapBaseDN());
 			final Attributes attributes = client.getUser(login);
 
-			LogUtil.debug(log, " baseDn=%s", baseDN);
+			LogUtil.debug(log, " baseDn=%s", info.getLdapBaseDN());
 			LogUtil.debug(log, " ns=%s",     namespace);
 			LogUtil.debug(log, " gecos=%s",  LdapClient.getValue(attributes, "gecos"));
 		}
