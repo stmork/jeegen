@@ -40,4 +40,7 @@ String getterOf(Entity t) :
 
 String setterOf(Entity t) :
 	"set" + nameOf(t).toFirstUpper();
+
+String nameOf(Property prop) :
+	prop.jndi.replaceAll("/", "");
 	

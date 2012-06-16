@@ -227,6 +227,22 @@ String fqAbstractDaoOf(Process p) :
 	daoPackageOf(p) + "." + abstractDaoOf(p);
 
 /*
+ * Properties
+ */
+
+String typeOf(jee6::Property prop) :
+	"???";
+
+String typeOf(TextProp prop) :
+	"String";
+
+String typeOf(IntegerProp prop) :
+	"int";
+
+String typeOf(BooleanProp prop) :
+	"boolean";
+
+/*
  * List handling
  */
 String relationOfType(Attribute t) :
@@ -252,4 +268,3 @@ List[String] packages(Options o) :
 
 List[String] packages(Table t) :
 	t.types.reject(t|isNative(t)).fqTypeOf().toSet();
-	

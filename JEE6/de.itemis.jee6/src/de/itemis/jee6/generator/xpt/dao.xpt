@@ -35,6 +35,10 @@ package «daoPackageOf(this)»;
 
 import javax.persistence.*;
 
+«IF properties.size > 0»
+import javax.annotation.Resource;
+«ENDIF»
+
 «IF converterList.size > 0»
 import java.util.List;
 «FOREACH converterList AS option»
@@ -50,6 +54,11 @@ abstract public class «abstractDaoOf(this)»
 «FOREACH getPersistenceUnits(getModel(this)) AS pu»
 	@PersistenceContext(unitName="«pu.persistence»")
 	protected EntityManager em;
+«ENDFOREACH»
+
+«FOREACH properties AS property»
+	@Resource
+	protected «typeOf(property)» «nameOf(property)»«EXPAND Default FOR property»;
 «ENDFOREACH»
 
 «FOREACH converterList AS option»
@@ -109,4 +118,26 @@ abstract public class «abstractDaoOf(this)»
 }
 «ENDLET»
 «ENDFILE»
+«ENDDEFINE»
+
+«DEFINE Default FOR jee6::Property»
+«ERROR "Abstract Property"»
+«ENDDEFINE»
+
+«DEFINE Default FOR TextProp»
+«IF value != null»
+= "«value»"
+«ENDIF»
+«ENDDEFINE»
+
+«DEFINE Default FOR IntegerProp»
+«IF value != null»
+= «value»
+«ENDIF»
+«ENDDEFINE»
+
+«DEFINE Default FOR BooleanProp»
+«IF value != null»
+= «value»
+«ENDIF»
 «ENDDEFINE»

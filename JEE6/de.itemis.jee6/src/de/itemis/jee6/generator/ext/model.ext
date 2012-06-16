@@ -29,3 +29,6 @@ String uriOf(Process p) :
 
 List[Entity] getAllEntities(Model m) :
 	m.entities;
+
+List[Property] getProperties(Model m) :
+	m.processes.properties.reject(e|e.original == null).toSet();

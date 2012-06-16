@@ -129,5 +129,10 @@ process Admin roles "admin"
 
 process User roles "itemis", "extern"
 {
+	Text default "ldaps://master.itemis.de:636/" "ldap/url" ref "java:global/ldap/url";
+	Text "ldap/baseDN";
+	Integer "build";
+	Integer default 1 "productive";
+
 	UserInfo
 };

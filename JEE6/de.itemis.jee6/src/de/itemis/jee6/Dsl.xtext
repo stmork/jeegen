@@ -43,6 +43,16 @@ Table:		'entity'  name=ID (filterable?='filterable')? (cloneable?='cloneable')? 
 Options:	'options' name=ID (filterable?='filterable')? (cloneable?='cloneable')?
 	('editable' '{' (types += Attribute)+ '}'| '{' keys+=STRING ( ',' keys += STRING)*  '}');
 
-Process:	'process' name=ID ('roles' roles+=STRING (',' roles+=STRING)* )? '{' entities += [Entity|ID] (',' entities += [Entity|ID])* '}' ';';
+Process:	'process' name=ID ('roles' roles+=STRING (',' roles+=STRING)* )?
+	'{'
+		(properties += Property)*
+		entities += [Entity|ID] (',' entities += [Entity|ID])*
+	 '}' ';';
+
+Property: (TextProp|IntegerProp|BooleanProp) jndi=STRING ('ref' original=STRING)? ';';
+
+TextProp:		{TextProp}'Text' ('default' value=STRING)?;
+IntegerProp:	{IntegerProp}'Integer' ('default' value=INT)?;
+BooleanProp:	{BooleanProp}'Boolean' ('default' value=('true'|'false'))?;
 
 PACKAGED_ID : ID ('.' ID)* ;

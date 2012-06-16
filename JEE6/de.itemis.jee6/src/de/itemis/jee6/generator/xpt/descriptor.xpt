@@ -181,8 +181,37 @@ log4j.appender.R.layout.ConversionPattern=%-5p %-30.30c{1} %x - %m%n
 		<jndi-name>java:/jboss/«mail.jndi»</jndi-name>
 	</resource-ref>
 «ENDFOREACH»
+«EXPAND reference FOREACH getProperties()»
 </jboss-web>
 «ENDFILE»
+«ENDDEFINE»
+
+«DEFINE reference FOR jee6::Property»
+«ERROR "Abstract Property"»
+«ENDDEFINE»
+
+«DEFINE reference FOR TextProp»
+	<resource-ref>
+		<res-ref-name>«jndi»</res-ref-name>
+		<res-type>java.lang.String</res-type>
+		<jndi-name>«original»</jndi-name>
+	</resource-ref>
+«ENDDEFINE»
+
+«DEFINE reference FOR IntegerProp»
+	<resource-ref>
+		<res-ref-name>«jndi»</res-ref-name>
+		<res-type>java.lang.Integer</res-type>
+		<jndi-name>«original»</jndi-name>
+	</resource-ref>
+«ENDDEFINE»
+
+«DEFINE reference FOR BooleanProp»
+	<resource-ref>
+		<res-ref-name>«jndi»</res-ref-name>
+		<res-type>java.lang.Boolean</res-type>
+		<jndi-name>«original»</jndi-name>
+	</resource-ref>
 «ENDDEFINE»
 
 «DEFINE Glassfish FOR Model»

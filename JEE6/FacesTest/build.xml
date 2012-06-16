@@ -113,8 +113,6 @@
 		<jar destfile="${war}">
 			<zipfileset dir="${bin-path}" prefix="WEB-INF/classes">
 				<include name="**/*.class"/>
-				<include name="**/*.ext"/>
-				<include name="**/*.xpt"/>
 			</zipfileset>
 			<zipfileset dir="${src-path}" prefix="WEB-INF/classes">
 				<include name="**/*.xml"/>
