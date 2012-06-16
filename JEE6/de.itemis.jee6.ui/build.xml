@@ -49,6 +49,14 @@
 
 	<target name="compile">
 		<mkdir dir="${bin-path}"/>
+		<copy todir="${bin-path}">
+			<fileset dir="${src-path}">
+				<exclude name="**/*.java"/>
+			</fileset>
+			<fileset dir="${src-gen-path}">
+				<exclude name="**/*.java"/>
+			</fileset>
+		</copy>
 		<javac srcdir="${src-path}:${src-gen-path}" destdir="${bin-path}" debug="true" includeantruntime="false">
 			<classpath refid="generate.classpath"/>
 		</javac>
@@ -56,14 +64,7 @@
 	
 	<target name="package" depends="compile">
 		<jar destfile="${plugin}">
-			<zipfileset dir="${bin-path}">
-				<include name="**/*.class"/>
-			</zipfileset>
-			<zipfileset dir="${src-path}">
-				<include name="**/*.ext"/>
-				<include name="**/*.xpt"/>
-				<include name="**/*.mwe2"/>
-			</zipfileset>
+			<zipfileset dir="${bin-path}"/>
 			<filename name="plugin.xml"/>
 		</jar>
 	</target>

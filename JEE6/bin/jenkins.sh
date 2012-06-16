@@ -15,12 +15,12 @@ cd ../de.itemis.jee6.ui
 ant clean
 ant deploy
 
+cd ../FacesGenerated
+ant clean
+ant generate
+
 cd ../FacesTest
 ant clean
 ant generate
 ant package
 ant findbugs
-
-cd ../FacesGenerated
-ant clean
-ant generate
