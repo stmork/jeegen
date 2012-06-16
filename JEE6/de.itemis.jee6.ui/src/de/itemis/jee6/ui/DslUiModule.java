@@ -12,4 +12,10 @@ public class DslUiModule extends de.itemis.jee6.ui.AbstractDslUiModule {
 	public DslUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
 	}
+
+	// contributed by org.eclipse.xtext.ui.generator.projectWizard.SimpleProjectWizardFragment
+	@Override
+	public Class<? extends org.eclipse.xtext.ui.wizard.IProjectCreator> bindIProjectCreator() {
+		return de.itemis.jee6.ui.wizard.Jee6ProjectCreator.class;
+	}
 }

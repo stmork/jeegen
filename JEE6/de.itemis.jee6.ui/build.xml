@@ -1,4 +1,4 @@
-<project name="JEE6 Generator DSL" default="deploy">
+<project name="JEE6 Generator UI" default="deploy">
 	<property file="${user.home}/.jee6.properties" />
 	<property file="${basedir}/build.properties"/>
 	<property file="${basedir}/environment.properties"/>
@@ -10,7 +10,7 @@
 	<property name="eclipse.home"         value="/opt/eclipse"/>
 	<property name="eclipse.home.plugins" value="${eclipse.home}/plugins"/>
 
-	<property name="plugin" value="de.itemis.jee6_1.0.0.jar"/>
+	<property name="plugin" value="de.itemis.jee6.ui_1.0.0.jar"/>
 
 	<!-- ==================================================== -->
 	<!--              Setting up classpaths                   -->
@@ -27,19 +27,13 @@
 			<include name="org.apache.commons.cli*.jar"/>
 			<include name="org.apache.commons.logging*.jar"/>
 			<include name="org.apache.log4j*.jar"/>
-			<include name="org.eclipse.emf.*.jar"/>
-			<include name="org.eclipse.xpand*.jar"/>
-			<include name="org.eclipse.xtend*.jar"/>
-			<include name="org.eclipse.xtext*.jar"/>
-			<include name="org.eclipse.text*.jar"/>
-			<include name="org.eclipse.jdt*.jar"/>
-			<include name="org.eclipse.equi*.jar"/>
+			<include name="org.eclipse*.jar"/>
+			<include name="org.osgi*.jar"/>
 			<include name="javax.inject*.jar"/>
 			<include name="stringtemplate*.jar"/>
 
-			<exclude name="**/*source*.jar"/>
-			<exclude name="**/*src*.jar"/>
-			<exclude name="**/*editor*.jar"/>
+			<exclude name="**/*source_*.jar"/>
+			<exclude name="**/*src_*.jar"/>
 		</fileset>
 		<pathelement path="${src-path}" />
 	</path>
@@ -53,13 +47,6 @@
 		<delete dir="${bin-path}" />
 	</target>
 
-	<target name="generate">
-		<echo message="${eclipse.home}"/>
-		<java classname="org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher" classpathref="generate.classpath" fork="true">
-			<arg value="${src-path}/de/itemis/jee6/GenerateDsl.mwe2"/>
-		</java>
-	</target>
-	
 	<target name="compile">
 		<mkdir dir="${bin-path}"/>
 		<javac srcdir="${src-path}:${src-gen-path}" destdir="${bin-path}" debug="true" includeantruntime="false">
@@ -76,13 +63,6 @@
 				<include name="**/*.ext"/>
 				<include name="**/*.xpt"/>
 				<include name="**/*.mwe2"/>
-			</zipfileset>
-			<zipfileset dir="${src-gen-path}">
-				<include name="**/*.g"/>
-				<include name="**/*.tokens"/>
-				<include name="**/*.ecore"/>
-				<include name="**/*.genmodel"/>
-				<include name="**/*.xmi"/>
 			</zipfileset>
 			<filename name="plugin.xml"/>
 		</jar>

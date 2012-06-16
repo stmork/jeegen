@@ -1,20 +1,64 @@
-<project name="Faces Test" default="package">
+«IMPORT de::itemis::jee6::ui::wizard»
+
+«EXTENSION de::itemis::jee6::ui::wizard::paths»
+
+«DEFINE main FOR DslProjectInfo»
+«EXPAND model FOR this»
+«EXPAND workflow FOR this»
+«EXPAND build FOR this»
+«ENDDEFINE»
+
+«DEFINE model FOR DslProjectInfo»
+«FILE getModelPath() + "/" + projectName + ".jee6"-»
+// Edit model here...
+application "«projectName»"  context "/«applicationName»" package «basePackage».«applicationName.toFirstUpper()» development;
+persistence unit"«applicationName»DS" jndi "jndi/«applicationName»DS";
+locale "de" default;
+
+entity UserInfo
+{
+	Text name;
+	Date birth;
+};
+
+process User roles "users"
+{
+	UserInfo
+};
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE workflow FOR DslProjectInfo»
+«FILE getSrcPath() + "/" + getWorkflow()-»
+module Generator
+
+Workflow
+{
+	component = @de.itemis.jee6.generator.DslGeneratorMWE
+	{
+		modelpath="«getModelPath()»"
+		impldir="«getSrcPath()»"
+		srcdir="«getSrcGenPath()»"
+		resdir="«getResGenPath()»"
+	}
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE build FOR DslProjectInfo»
+«FILE "build.xml"»
+<project name="«this.projectName»" default="package">
 	<property file="${user.home}/.jee6.properties" />
 	<property file="${basedir}/build.properties"/>
 	<property file="${basedir}/environment.properties"/>
 
 	<property name="bin-path"     value="./bin"/>
-	<property name="src-path"     value="./src"/>
-	<property name="src-gen-path" value="./src-gen"/>
-	<property name="res-gen-path" value="./res-gen"/>
-	<property name="web-path"     value="./WebContent"/>
+	<property name="src-path"     value="./«getSrcPath()»"/>
+	<property name="src-gen-path" value="./«getSrcGenPath()»"/>
+	<property name="res-gen-path" value="./«getResGenPath()»"/>
+	<property name="web-path"     value="./«getResPath()»"/>
 
-	<property name="war"          value="facestest.war"/>
-	<property name="module.jar"   value="ldapcontext.jar"/>
-	<property name="module.xml"   value="module.xml"/>
-	
-	<property name="findbugs.home"     value="./findbugs"/>
-	<property name="findbugs.results"  value="./findbugs-results.xml"/>
+	<property name="war"          value="«applicationName».war"/>
 
 	<property name="eclipse.home"         value="/opt/eclipse"/>
 	<property name="eclipse.home.plugins" value="${eclipse.home}/plugins"/>
@@ -43,12 +87,6 @@
 			<exclude name="**/*jsf*1.2*.jar"/>
 		</fileset>
 		<path refid="logger.path"/>
-	</path>
-
-	<path id="findbugs.lib">
-		<fileset dir="${findbugs.home}">
-			<include name="**/*.jar"/>
-		</fileset>  
 	</path>
 
 	<path id="generate.classpath">
@@ -80,17 +118,10 @@
 	</path>
 	
 	<!-- ==================================================== -->
-	<!--            Setting up target definitions             -->
-	<!-- ==================================================== -->
-
-	<taskdef name="findbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask" classpathref="findbugs.lib"/>
-
-	<!-- ==================================================== -->
 	<!--              Setting up build targets                -->
 	<!-- ==================================================== -->
 
 	<target name="clean">
-		<delete file="${findbugs.results}"/>
 		<delete file="${war}" />
 		<delete dir="${bin-path}" />
 	</target>
@@ -98,7 +129,7 @@
 	<target name="generate">
 		<echo message="${eclipse.home}"/>
 		<java classname="org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher" classpathref="generate.classpath" fork="true">
-			<arg value="${src-path}/FacesTest.mwe2"/>
+			<arg value="${src-path}/«getWorkflow()»"/>
 		</java>
 	</target>
 
@@ -113,8 +144,6 @@
 		<jar destfile="${war}">
 			<zipfileset dir="${bin-path}" prefix="WEB-INF/classes">
 				<include name="**/*.class"/>
-				<include name="**/*.ext"/>
-				<include name="**/*.xpt"/>
 			</zipfileset>
 			<zipfileset dir="${src-path}" prefix="WEB-INF/classes">
 				<include name="**/*.xml"/>
@@ -127,16 +156,9 @@
 			<zipfileset dir="${web-path}"/>
 			<zipfileset dir="${res-gen-path}"/>
 		</jar>
-		<jar destfile="${module.jar}">
-			<zipfileset dir="${bin-path}">
-				<include name="**/LdapFactory.class"/>
-			</zipfileset>
-		</jar>
 	</target>
 	
 	<target name="deploy" depends="package">
-		<copy file="${module.jar}" todir="${jboss.module}"/>
-		<copy file="${module.xml}" todir="${jboss.module}"/>
 		<copy file="${war}" todir="${jboss.deploy}" />
 		<copy file="${war}" todir="${glassfish.deploy}" />
 	</target>
@@ -145,24 +167,6 @@
 		<delete file="${jboss.deploy}/${war}" />
 		<delete file="${glassfish.deploy}/${war}" />
 	</target>
-
-	<!-- ==================================================== -->
-	<!--              Setting up runtime targets              -->
-	<!-- ==================================================== -->
-
-	<target name="findbugs" depends="compile">
-		<echo message="Checking ${ant.project.name}..."/>
-		<findbugs jvmargs="-Xmx512m" home="${findbugs.home}"
-				output="xml:withMessages"
-				outputFile="${findbugs.results}"
-				classpathref="compile.path"
-				effort="max"
-				excludeFilter="findbugs-exclude.xml"
-				reportlevel="low"
-				failonerror="true">
-			<sourcePath path="${main-project}/${src-path}"/>
-			<class location="${bin-path}"/> 
-			<auxclasspath refid="compile.path"/>
-		</findbugs>
-	</target>
 </project>
+«ENDFILE»
+«ENDDEFINE»

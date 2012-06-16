@@ -193,4 +193,15 @@
       </markerResolutionGenerator>
    </extension>
 
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            category="org.eclipse.xtext.projectwiz"
+            class="de.itemis.jee6.ui.DslExecutableExtensionFactory:de.itemis.jee6.ui.wizard.DslNewProjectWizard"
+            id="de.itemis.jee6.ui.wizard.DslNewProjectWizard"
+            name="Dsl Project"
+            project="true">
+      </wizard>
+   </extension>
+
 </plugin>
