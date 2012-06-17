@@ -62,8 +62,15 @@
 	<!-- ==================================================== -->
 
 	<target name="clean">
-		<delete file="${jar}" />
 		<delete dir="${bin-path}" />
+		<delete dir="${instr-path}" />
+		<delete dir="${coverage-path}" />
+		<delete>
+			<fileset dir="." includes="TEST-*.xml"/>
+			<fileset dir="." includes="TEST-*.txt"/>
+			<fileset dir="." includes="coverage.*"/>
+			<fileset dir="." includes="*.emma"/>
+		</delete>
 	</target>
 
 	<target name="compile">
