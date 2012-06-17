@@ -177,7 +177,7 @@ Workflow
 Für das Kompilieren müssen
 1. Die JEE6-Tools in das Verzeichnis «getResPath()»/WEB-INF/lib kopiert
    werden. Die Tools lassen sich über
-   https://projects.itemis.de/subversion/ejb3/trunk/JEE6/de.itemis.jee6.util/jee6-util.jar
+   https://projects.itemis.de/subversion/ejb3/trunk/JEE6/de.itemis.jee6.util/jee6-utils.jar
    runterladen. Das JAR muss in den Build Path eingebunden werden.
 2. Eine Runtime-Umgebung eingerichtet werden. Unter "Window -> Preferences -> Server ->
    Runtime Environment" kann eine eigerichtet werden. Im erzeugten Projekt muss das unter
