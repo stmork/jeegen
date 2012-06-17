@@ -7,7 +7,6 @@ public class ErrorInfo
 	
 	public ErrorInfo(final String item, final String key)
 	{
-		System.err.println(item + "/" + key);
 		this.item = item;
 		this.key  = key;
 	}

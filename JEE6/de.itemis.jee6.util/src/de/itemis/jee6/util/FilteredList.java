@@ -11,6 +11,14 @@ import java.util.Locale;
 public class FilteredList<T extends Filterable> extends ArrayList<T>
 {
 	private static final long serialVersionUID = 1L;
+	
+	public void add(final T element, final String filter, final Locale locale)
+	{
+		if (element.filter(filter, locale))
+		{
+			add(element);
+		}
+	}
 
 	public void addAll(final Collection<T> collection, final String filter, final Locale locale)
 	{
@@ -26,10 +34,7 @@ public class FilteredList<T extends Filterable> extends ArrayList<T>
 		{
 			for (T element : collection)
 			{
-				if (element.filter(filter, locale))
-				{
-					add(element);
-				}
+				add(element, filter, locale);
 			}
 		}
 	}
