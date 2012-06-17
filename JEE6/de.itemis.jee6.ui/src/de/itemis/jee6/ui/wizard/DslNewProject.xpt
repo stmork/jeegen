@@ -6,6 +6,7 @@
 «EXPAND model FOR this»
 «EXPAND workflow FOR this»
 «EXPAND build FOR this»
+«EXPAND readme FOR this»
 «ENDDEFINE»
 
 «DEFINE model FOR DslProjectInfo»
@@ -168,5 +169,18 @@ Workflow
 		<delete file="${glassfish.deploy}/${war}" />
 	</target>
 </project>
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE readme FOR DslProjectInfo»
+«FILE "README.txt"»
+Für das Kompilieren müssen
+1. Die JEE6-Tools in das Verzeichnis «getResPath()»/WEB-INF/lib kopiert
+   werden. Die Tools lassen sich über
+   https://projects.itemis.de/subversion/ejb3/trunk/JEE6/de.itemis.jee6.util/jee6-util.jar
+   runterladen. Das JAR muss in den Build Path eingebunden werden.
+2. Eine Runtime-Umgebung eingerichtet werden. Unter "Window -> Preferences -> Server ->
+   Runtime Environment" kann eine eigerichtet werden. Im erzeugten Projekt muss das unter
+   "Project -> Properties -> Java Build Path -> Library -> Add Library" hinzugefügt werden.
 «ENDFILE»
 «ENDDEFINE»
