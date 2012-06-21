@@ -6,6 +6,7 @@
 	<property name="bin-path"     value="./bin"/>
 	<property name="src-path"     value="./src"/>
 	<property name="src-gen-path" value="./src-gen"/>
+	<property name="manifest"     value="META-INF/MANIFEST.MF"/>
 
 	<property name="eclipse.home"         value="/opt/eclipse"/>
 	<property name="eclipse.home.plugins" value="${eclipse.home}/plugins"/>
@@ -63,9 +64,11 @@
 	</target>
 	
 	<target name="package" depends="compile">
-		<jar destfile="${plugin}">
+		<jar destfile="${plugin}" manifest="${manifest}">
+			<zipfileset dir=".">
+				<include name="plugin.xml"/>
+			</zipfileset>
 			<zipfileset dir="${bin-path}"/>
-			<filename name="plugin.xml"/>
 		</jar>
 	</target>
 	
