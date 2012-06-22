@@ -29,6 +29,12 @@ String daoFilename(Process p) :
 String abstractDaoFilename(Process p) :
 	fqAbstractDaoOf(p).replaceAll("\\.", "/") + ".java";
 
+String daoFilename(Model m) :
+	fqDaoOf(m).replaceAll("\\.", "/") + ".java";
+
+String abstractDaoFilename(Model m) :
+	fqAbstractDaoOf(m).replaceAll("\\.", "/") + ".java";
+
 String getterOf(jee6::Boolean t) :
 	"is" + nameOf(t).toFirstUpper();
 

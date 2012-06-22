@@ -23,6 +23,14 @@ public class LogUtil
 		return result;
 	}
 	
+	public final static void trace(final Log log, final String format, final Object ... arguments)
+	{
+		if (log.isTraceEnabled())
+		{
+			log.trace(printf(format, arguments));
+		}
+	}
+	
 	public final static void debug(final Log log, final String format, final Object ... arguments)
 	{
 		if (log.isDebugEnabled())

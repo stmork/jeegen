@@ -202,15 +202,6 @@ String handlerPackageOf(Process p) :
 String fqHandlerOf(Process p) :
 	handlerPackageOf(p) + "." + handlerOf(p);
 
-String handlerOf(Model m) :
-	"AbstractHandler";
-
-String handlerPackageOf(Model m) :
-	m.package + ".handler";
-
-String fqHandlerOf(Model m) :
-	handlerPackageOf(m) + "." + handlerOf(m);
-
 String daoOf(Process p) :
 	p.name + "DaoBean";
 
@@ -224,6 +215,34 @@ String fqDaoOf(Process p) :
 	daoPackageOf(p) + "." + daoOf(p);
 
 String fqAbstractDaoOf(Process p) :
+	daoPackageOf(p) + "." + abstractDaoOf(p);
+
+/*
+ * Model
+ */
+
+String handlerOf(Model m) :
+	"AbstractHandler";
+
+String handlerPackageOf(Model m) :
+	m.package + ".handler";
+
+String fqHandlerOf(Model m) :
+	handlerPackageOf(m) + "." + handlerOf(m);
+
+String daoOf(Model m) :
+	"OptionsDaoBean";
+
+String daoPackageOf(Model m) :
+	m.package + ".dao";
+
+String fqDaoOf(Model m) :
+	daoPackageOf(m) + "." + daoOf(m);
+
+String abstractDaoOf(Model m) :
+	"AbstractDaoBean";
+
+String fqAbstractDaoOf(Model p) :
 	daoPackageOf(p) + "." + abstractDaoOf(p);
 
 /*

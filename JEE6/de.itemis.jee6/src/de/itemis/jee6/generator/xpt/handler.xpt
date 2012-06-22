@@ -9,7 +9,6 @@
 
 «DEFINE Main FOR Process»
 «FILE handlerFilename(this)»
-«LET getConverterReferencesList(this) AS converterList»
 package «handlerPackageOf(this)»;
 
 import javax.ejb.EJB;
@@ -18,20 +17,11 @@ import «fqDaoOf()»;
 «IF roles.size > 0»
 import javax.faces.context.ExternalContext;
 «ENDIF»
-«IF converterList.size > 0»
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
-import javax.faces.convert.Converter;
-import java.util.List;
-«FOREACH converterList AS option»
-import «fqTypeOf(option)»;
-«ENDFOREACH»
-«ENDIF»
 
 abstract public class «handlerOf(this)» extends «handlerOf(getModel(this))»
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	@EJB
 	protected «daoOf()» dao;
 
@@ -48,73 +38,13 @@ abstract public class «handlerOf(this)» extends «handlerOf(getModel(this))»
 		return true;
 «ENDIF»
 	}
-
-«FOREACH converterList AS option»
-	/**********************************
-	 * «typeOf(option)» converter
-	 **********************************/
-	private final «converterOf(option)» «nameOf(option)» = new «converterOf(option)»();
-
-	private class «converterOf(option)» implements Converter
-	{
-«LET getId(option) AS id»
-		@Override
-		public Object getAsObject(final FacesContext context, final UIComponent component, final String input)
-		{
-«IF id == null»
-			return isNull(input) ? null : dao.«finderOf(option)»(Integer.parseInt(input));
-«ELSE»
-			return isNull(input) ? null : dao.«finderOf(option)»(input);
-«ENDIF»
-		}
-
-		@Override
-		public String getAsString(FacesContext context, UIComponent component, Object input)
-		{
-			final String result;
-			
-			if (isNull(input))
-			{
-				result = NULL;
-			}
-			else
-			{
-				final «typeOf(option)» option = («typeOf(option)»)input;
-«IF id == null»
-				result = Integer.toString(option.getId());
-«ELSE»
-				result = option.«getterOf(id)»();
-«ENDIF»
-			}
-			return result;
-		}
-«ENDLET»
-	}
-	
-	public List<«typeOf(option)»> «listOf(option)»()
-	{
-		return dao.«listOf(option)»();
-	}
-	
-«IF hasActivationBoolean(option)»
-	public List<«typeOf(option)»> «listActiveOf(option)»()
-	{
-		return dao.«listActiveOf(option)»();
-	}
-«ENDIF»
-	
-	public «converterOf(option)» «converterGetter(option)»()
-	{
-		return «nameOf(option)»;
-	}
-«ENDFOREACH»
 }
-«ENDLET»
 «ENDFILE»
 «ENDDEFINE»
 
 «DEFINE Main FOR Model»
 «FILE handlerFilename(this)»
+«LET entities.typeSelect(Options) AS converterList»
 package «handlerPackageOf(this)»;
 
 import java.io.Serializable;
@@ -140,6 +70,16 @@ import org.apache.commons.logging.LogFactory;
 import de.itemis.jee6.util.ErrorInfo;
 import de.itemis.jee6.util.ResourceBundleDefinitions;
 
+«IF converterList.size > 0»
+import javax.faces.component.UIComponent;
+import javax.faces.convert.Converter;
+import javax.ejb.EJB;
+import «fqDaoOf()»;
+«FOREACH converterList AS option»
+import «fqTypeOf(option)»;
+«ENDFOREACH»
+«ENDIF»
+
 abstract public class «handlerOf(this)» implements Serializable, ResourceBundleDefinitions
 {
 	private static final long serialVersionUID    = 1L;
@@ -152,6 +92,11 @@ abstract public class «handlerOf(this)» implements Serializable, ResourceBundleD
 	private ResourceBundle messages;
 	private ResourceBundle errors;
 	protected boolean production;
+
+«IF converterList.size > 0»
+	@EJB
+	protected «daoOf()» options;
+«ENDIF»
 
 	@PostConstruct
 	public void getBundles()
@@ -181,6 +126,71 @@ abstract public class «handlerOf(this)» implements Serializable, ResourceBundleD
 		}
 		log.debug(">getBundles()");
 	}
+
+
+«FOREACH converterList AS option»
+	/**********************************
+	 * «typeOf(option)» converter
+	 **********************************/
+	private final «converterOf(option)» «nameOf(option)» = new «converterOf(option)»();
+
+	private class «converterOf(option)» implements Converter
+	{
+«LET getId(option) AS id»
+		@Override
+		public Object getAsObject(final FacesContext context, final UIComponent component, final String input)
+		{
+«IF id == null»
+			return isNull(input) ? null : options.«finderOf(option)»(Integer.parseInt(input));
+«ELSE»
+			return isNull(input) ? null : options.«finderOf(option)»(input);
+«ENDIF»
+		}
+
+		@Override
+		public String getAsString(FacesContext context, UIComponent component, Object input)
+		{
+			final String result;
+			
+			if (isNull(input))
+			{
+				result = NULL;
+			}
+			else
+			{
+				final «typeOf(option)» option = («typeOf(option)»)input;
+«IF id == null»
+				result = Integer.toString(option.getId());
+«ELSE»
+				result = option.«getterOf(id)»();
+«ENDIF»
+			}
+			return result;
+		}
+«ENDLET»
+	}
+	
+	public List<«typeOf(option)»> «listOf(option)»()
+	{
+		return options.«listOf(option)»();
+	}
+	
+«IF hasActivationBoolean(option)»
+	public List<«typeOf(option)»> «listActiveOf(option)»()
+	{
+		return options.«listActiveOf(option)»();
+	}
+«ENDIF»
+	
+	public «converterOf(option)» «converterGetter(option)»()
+	{
+		return «nameOf(option)»;
+	}
+«ENDFOREACH»
+
+	/***********************
+	 *      utilities      *
+	 ***********************/
 
 	protected static boolean isNull(final Object input)
 	{
@@ -273,5 +283,6 @@ abstract public class «handlerOf(this)» implements Serializable, ResourceBundleD
 		throw new ValidatorException(msg);
 	}
 }
+«ENDLET»
 «ENDFILE»
 «ENDDEFINE»

@@ -22,6 +22,12 @@ public class UtilTest
 	private static final Log        log  = LogFactory.getLog(UtilTest.class);
 
 	@Test
+	public void trace()
+	{
+		LogUtil.trace(log, "[%d %% %s]", 1, "s");
+	}
+
+	@Test
 	public void debug()
 	{
 		LogUtil.debug(log, "[%d %% %s]", 1, "s");

@@ -7,9 +7,11 @@
 «EXTENSION de::itemis::jee6::generator::ext::converter»
 «EXTENSION de::itemis::jee6::generator::ext::dao»
 
-«DEFINE Main FOR Process»
-«EXPAND AbstractDao»
-«EXPAND Dao»
+«DEFINE Main FOR Model»
+«EXPAND AbstractDao FOREACH processes»
+«EXPAND Dao FOREACH  processes»
+«EXPAND ModelDao»
+«EXPAND AbstractModelDao»
 «ENDDEFINE»
 
 «DEFINE Dao FOR Process»
@@ -30,7 +32,6 @@ public class «daoOf(this)» extends «abstractDaoOf(this)»
 
 «DEFINE AbstractDao FOR Process»
 «FILE abstractDaoFilename(this)»
-«LET getOptionsList(this) AS converterList»
 package «daoPackageOf(this)»;
 
 import javax.persistence.*;
@@ -39,17 +40,7 @@ import javax.persistence.*;
 import javax.annotation.Resource;
 «ENDIF»
 
-«IF converterList.size > 0»
-import java.util.List;
-«FOREACH converterList AS option»
-import «fqTypeOf(option)»;
-«IF isEnumeration(option)»
-import «fqTypeOf(option)».«enumOf(option)»;
-«ENDIF»
-«ENDFOREACH»
-«ENDIF»
-
-abstract public class «abstractDaoOf(this)»
+abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 {
 «FOREACH getPersistenceUnits(getModel(this)) AS pu»
 	@PersistenceContext(unitName="«pu.persistence»")
@@ -64,6 +55,50 @@ abstract public class «abstractDaoOf(this)»
 	{
 		return this.«nameOf(property)»;
 	}
+«ENDFOREACH»
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE ModelDao FOR Model»
+«FILE daoFilename(this)»
+package «daoPackageOf(this)»;
+
+import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
+import de.itemis.jee6.util.Profiler;
+
+@Stateless
+@Interceptors(Profiler.class)
+public class «daoOf(this)» extends «abstractDaoOf(this)»
+{
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE AbstractModelDao FOR Model»
+«FILE abstractDaoFilename(this)»
+«LET entities.typeSelect(Options) AS converterList»
+package «daoPackageOf(this)»;
+
+import javax.persistence.*;
+
+
+«IF converterList.size > 0»
+import java.util.List;
+«FOREACH converterList AS option»
+import «fqTypeOf(option)»;
+«IF isEnumeration(option)»
+import «fqTypeOf(option)».«enumOf(option)»;
+«ENDIF»
+«ENDFOREACH»
+«ENDIF»
+
+abstract public class «abstractDaoOf(this)»
+{
+«FOREACH getPersistenceUnits() AS pu»
+	@PersistenceContext(unitName="«pu.persistence»")
+	protected EntityManager em;
 «ENDFOREACH»
 
 «FOREACH converterList AS option»
