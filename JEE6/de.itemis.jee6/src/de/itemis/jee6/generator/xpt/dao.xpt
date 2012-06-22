@@ -24,29 +24,26 @@ import de.itemis.jee6.util.Profiler;
 
 @Stateless
 @Interceptors(Profiler.class)
-public class «daoOf(this)» extends «abstractDaoOf(this)»
+public class «daoOf(this)» extends
+«IF properties.size > 0»
+«abstractDaoOf(this)»
+«ELSE»
+«abstractDaoOf(getModel())»
+«ENDIF»
 {
 }
 «ENDFILE»
 «ENDDEFINE»
 
 «DEFINE AbstractDao FOR Process»
+«IF properties.size > 0»
 «FILE abstractDaoFilename(this)»
 package «daoPackageOf(this)»;
 
-import javax.persistence.*;
-
-«IF properties.size > 0»
 import javax.annotation.Resource;
-«ENDIF»
 
 abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 {
-«FOREACH getPersistenceUnits(getModel(this)) AS pu»
-	@PersistenceContext(unitName="«pu.persistence»")
-	protected EntityManager em;
-«ENDFOREACH»
-
 «FOREACH properties AS property»
 	@Resource(mappedName="«property.jndi»")
 	private «typeOf(property)» «nameOf(property)-»«EXPAND Default FOR property-»;
@@ -58,6 +55,7 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 «ENDFOREACH»
 }
 «ENDFILE»
+«ENDIF»
 «ENDDEFINE»
 
 «DEFINE ModelDao FOR Model»
