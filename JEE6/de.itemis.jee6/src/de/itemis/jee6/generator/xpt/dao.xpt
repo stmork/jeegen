@@ -25,7 +25,7 @@ import de.itemis.jee6.util.Profiler;
 @Stateless
 @Interceptors(Profiler.class)
 public class «daoOf(this)» extends
-«IF properties.size > 0»
+«IF hasAbstractDao()»
 «abstractDaoOf(this)»
 «ELSE»
 «abstractDaoOf(getModel())»
@@ -36,11 +36,21 @@ public class «daoOf(this)» extends
 «ENDDEFINE»
 
 «DEFINE AbstractDao FOR Process»
-«IF properties.size > 0»
+«IF hasAbstractDao()»
 «FILE abstractDaoFilename(this)»
 package «daoPackageOf(this)»;
 
+«IF properties.size > 0»
 import javax.annotation.Resource;
+«ENDIF»
+
+«IF entities.size > 0»
+import «packageOf(entities.first())».*;
+«IF entities.types.exists(e|isMany(e))»
+import java.util.List;
+import javax.persistence.TypedQuery;
+«ENDIF»
+«ENDIF»
 
 abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 {
@@ -53,9 +63,106 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 		return this.«nameOf(property)»;
 	}
 «ENDFOREACH»
+
+«FOREACH entities AS entity»
+	/*********************************************
+	 * «typeOf(entity)» «nameOf(entity)»
+	 *********************************************/
+	public void «adder(entity)»(final «typeOf(entity)» «parameterOf(entity)»)
+	{
+		em.persist(«parameterOf(entity)»);
+	}
+
+	public «typeOf(entity)» «updater(entity)»(final «typeOf(entity)» «parameterOf(entity)»)
+	{
+		return em.merge(«parameterOf(entity)»);
+	}
+
+	public void «remover(entity)»(final «typeOf(entity)» «parameterOf(entity)»)
+	{
+		em.remove(«parameterOf(entity)»);
+	}
+
+«FOREACH entity.types.select(e|isMany(e)) AS type»
+	public «typeOf(type)» «adder(entity)»(«typeOf(entity)» «parameterOf(entity)», final «typeOf(type)» «parameterOf(type)»)
+	{
+«EXPAND GetReference(entity)»
+
+		// Link new «nameOf(type)»
+		«parameterOf(type)».«setterOf(entity)»(«parameterOf(entity)»);
+		«parameterOf(entity)».«getterOf(type)»().add(«parameterOf(type)»);
+«IF History.isInstance(type)»
+		«parameterOf(entity)».setLast(«parameterOf(type)»);
+«ENDIF»		
+		// Update into database
+		em.persist(«parameterOf(type)»);
+
+		return «parameterOf(type)»;
+	}
+
+«IF !History.isInstance(type)»
+	public «typeOf(entity)» «remover(entity)»(«typeOf(type)» «parameterOf(type)»)
+	{
+«EXPAND GetReference((EntityRef)type)»
+		final «typeOf(entity)» «parameterOf(entity)» = «parameterOf(type)».«getterOf(entity)»();
+		
+		// Unlink
+		«parameterOf(entity)».«getterOf(type)»().remove(«parameterOf(type)»);
+		«parameterOf(type)».«setterOf(entity)»(null);
+
+		// finally do database operations
+		em.remove(«parameterOf(type)»);
+		return «parameterOf(entity)»;
+	}
+«ENDIF»
+
+	public List<«typeOf(type)»> «lister(type)»(final «typeOf(entity)» «parameterOf(entity)»)
+	{
+«LET getId(entity) AS id»
+«IF id == null»
+		final TypedQuery<«typeOf(entity)»> query = em.createQuery(
+				"SELECT e FROM «typeOf(entity)» e LEFT JOIN FETCH e.«nameOf(type)» WHERE e.id = :id",
+				«typeOf(entity)».class);
+		query.setParameter("id", «parameterOf(entity)».getId());
+«ELSE»
+		final TypedQuery<«typeOf(entity)»> query = em.createQuery(
+				"SELECT e FROM «typeOf(entity)» e LEFT JOIN FETCH e.«nameOf(type)» WHERE e.«nameOf(id)» = :«nameOf(id)»",
+				«typeOf(entity)».class);
+		query.setParameter("«nameOf(id)»", «parameterOf(entity)».«getterOf(id)»());
+«ENDIF»
+«ENDLET»
+		final «typeOf(entity)» result = query.getSingleResult();
+
+		return result.«getterOf(type)»();
+	}
+
+«ENDFOREACH»
+«ENDFOREACH»
 }
 «ENDFILE»
 «ENDIF»
+«ENDDEFINE»
+
+«DEFINE GetReference(Entity entity) FOR Process»
+«LET getId(entity) AS id»
+		// get correct references
+«IF id == null»
+		«parameterOf(entity)» = em.getReference(«typeOf(entity)».class, «parameterOf(entity)».getId());
+«ELSE»
+		«parameterOf(entity)» = em.getReference(«typeOf(entity)».class, «parameterOf(entity)».«getterOf(id)»());
+«ENDIF»
+«ENDLET»
+«ENDDEFINE»
+
+«DEFINE GetReference(EntityRef type) FOR Process»
+«LET getId(type.type) AS id»
+		// get correct references
+«IF id == null»
+		«parameterOf(type)» = em.getReference(«typeOf(type)».class, «parameterOf(type)».getId());
+«ELSE»
+		«parameterOf(type)» = em.getReference(«typeOf(type)».class, «parameterOf(type)».«getterOf(id)»());
+«ENDIF»
+«ENDLET»
 «ENDDEFINE»
 
 «DEFINE ModelDao FOR Model»

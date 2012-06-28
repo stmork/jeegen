@@ -256,7 +256,7 @@ public class «typeOf()» extends «abstractOf()»
 «DEFINE GetterSetter FOR Entity»
 «EXPAND Property FOREACH types»
 «EXPAND Property FOREACH getEntityReferences()»
-«LET types.typeSelect(History).first() AS history»
+«LET getHistory() AS history»
 «IF history != null»
 	private «typeOf(history)» last;
 	

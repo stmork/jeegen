@@ -13,7 +13,7 @@
 «FILE getModelPath() + "/" + projectName + ".jee6"-»
 // Edit model here...
 application "«projectName»"  context "/«applicationName»" package «basePackage».«applicationName.toFirstUpper()» development;
-persistence unit"«applicationName»DS" jndi "jndi/«applicationName»DS";
+persistence unit"«applicationName»DS" jndi "jdbc/«applicationName»DS";
 locale "de" default;
 
 entity UserInfo
@@ -174,12 +174,12 @@ Workflow
 
 «DEFINE readme FOR DslProjectInfo»
 «FILE "README.txt"»
-Für das Kompilieren müssen
-1. Die JEE6-Tools in das Verzeichnis «getResPath()»/WEB-INF/lib kopiert
+Für das Kompilieren müssen folgende Bedingungen erfüllt sein:
+1. Die JEE6-Tools müssen in das Verzeichnis «getResPath()»/WEB-INF/lib kopiert
    werden. Die Tools lassen sich über
    https://projects.itemis.de/subversion/ejb3/trunk/JEE6/de.itemis.jee6.util/jee6-utils.jar
    runterladen. Das JAR muss in den Build Path eingebunden werden.
-2. Eine Runtime-Umgebung eingerichtet werden. Unter "Window -> Preferences -> Server ->
+2. Eine Runtime-Umgebung muss eingerichtet werden. Unter "Window -> Preferences -> Server ->
    Runtime Environment" kann eine eigerichtet werden. Im erzeugten Projekt muss das unter
    "Project -> Properties -> Java Build Path -> Library -> Add Library" hinzugefügt werden.
 «ENDFILE»

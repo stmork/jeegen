@@ -194,7 +194,7 @@ String converterOf(Options option) :
  * Process
  */
 String handlerOf(Process p) :
-	"Abstract" + p.name + "Handler";
+	"Abstract" + p.name.toFirstUpper() + "Handler";
 
 String handlerPackageOf(Process p) :
 	getModel(p).package + ".handler";
@@ -203,10 +203,10 @@ String fqHandlerOf(Process p) :
 	handlerPackageOf(p) + "." + handlerOf(p);
 
 String daoOf(Process p) :
-	p.name + "DaoBean";
+	p.name.toFirstUpper() + "DaoBean";
 
 String abstractDaoOf(Process p) :
-	"Abstract" + p.name + "DaoBean";
+	"Abstract" + p.name.toFirstUpper() + "DaoBean";
 
 String daoPackageOf(Process p) :
 	getModel(p).package + ".dao";

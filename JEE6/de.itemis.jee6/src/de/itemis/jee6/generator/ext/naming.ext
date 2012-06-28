@@ -8,8 +8,14 @@ String asType(String s) :
 String nameOf(Attribute t) :
 	t.name.toFirstLower();
 
+String parameterOf(Attribute t) :
+	typeOf(t).toFirstLower();
+
 String nameOf(Entity t) :
 	t.name.toFirstLower();
+
+String parameterOf(Entity t) :
+	typeOf(t).toFirstLower();
 
 String filename(Entity e) :
 	fqTypeOf(e).replaceAll("\\.", "/") + ".java";
