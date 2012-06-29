@@ -24,6 +24,7 @@ public class FacesClient
 	{
 		FacesClient client = new FacesClient();
 		client.execute();
+		client.test();
 	}
 	
 	private void execute()
@@ -42,5 +43,11 @@ public class FacesClient
 				System.out.println("  " + address.getStreet());
 			}
 		}
+	}
+
+	private void test()
+	{
+		service.ping();
+		service.test();
 	}
 }

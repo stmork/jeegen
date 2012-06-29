@@ -31,15 +31,23 @@ options UserInfo editable
 	Timestamp update  changed;
 };
 
-entity Entry
+entity HistoryEntry
 {
-	Text           comment;
 	Timestamp auto creation;
+	Text           comment;
+};
+
+entity EntityEntry
+{
+	Timestamp auto creation;
+	Text           comment;
+	Option AddressOption addressOption;
 };
 
 entity Startup
 {
-	History Entry startups;
+	History HistoryEntry   history;
+	Entity  EntityEntry [] entities; 
 };
 
 process Admin roles "admin"
@@ -56,5 +64,5 @@ process Info
 	Text "ldap/baseDN" ref "java:global/ldap/baseDN";
 	Boolean default false "productive" ref "java:global/productive";
 
-	UserInfo
+	UserInfo, Startup, EntityEntry
 };

@@ -16,7 +16,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import de.itemis.faces.beans.SessionInfo;
-import de.itemis.faces.dao.SessionDaoBean;
+import de.itemis.faces.dao.AdminDaoBean;
 import de.itemis.faces.entities.Address;
 import de.itemis.faces.entities.UserInfo;
 
@@ -29,7 +29,7 @@ public class UserHandler implements Serializable
 	private final static Log log = LogFactory.getLog(UserHandler.class);
 
 	@EJB
-	private SessionDaoBean dao;
+	private AdminDaoBean dao;
 
 	@ManagedProperty(value="#{sessionInfo}")
 	private SessionInfo sessionInfo;
@@ -71,7 +71,7 @@ public class UserHandler implements Serializable
 	{
 		log.debug(">add");
 		UserInfo user = getSessionInfo().getUser();
-		Address address = dao.addAddress(user);
+		Address address = dao.addToUserInfo(user, new Address());
 		getAddressHandler().setAddress(address);
 		log.debug("<add");
 		return "address.xhtml";
@@ -88,7 +88,7 @@ public class UserHandler implements Serializable
 	public String removeAddress(final Address address)
 	{
 		log.debug(">removeAddress");
-		UserInfo user = dao.removeAddress(address);
+		UserInfo user = dao.deleteFromUserInfo(address);
 		getSessionInfo().setUserInfo(user);
 		log.debug("<removeAddress");
 		return "change.xhtml";

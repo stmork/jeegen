@@ -10,8 +10,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import de.itemis.faces.beans.StatefulBean;
+import de.itemis.faces.dao.InfoDaoBean;
 import de.itemis.faces.dao.SessionDaoBean;
 import de.itemis.faces.entities.Address;
+import de.itemis.faces.entities.AddressOption.AddressOptionEnum;
+import de.itemis.faces.entities.EntityEntry;
+import de.itemis.faces.entities.Startup;
 import de.itemis.faces.entities.UserInfo;
 import de.itemis.jee6.util.LogUtil;
 
@@ -24,6 +28,9 @@ public class FacesWebService {
 
 	@EJB
 	private StatefulBean stateful;
+
+	@EJB
+	private InfoDaoBean info;
 
 	@WebMethod
 	public void ping()
@@ -70,5 +77,34 @@ public class FacesWebService {
 		log.debug("<getUsers() = ...");
 		
 		return users;
+	}
+	
+	@WebMethod
+	public void test()
+	{
+		log.debug(">test()");
+		Startup startup = new Startup();
+		
+		info.addStartup(startup);
+		startup = info.updateStartup(startup);
+		log.debug(" " + startup);
+
+		for (int i = 0; i < 10; i++)
+		{
+			EntityEntry entry = new EntityEntry();
+			entry.setComment("Persist automatically - " + i);
+			entry.setAddressOption(info.findAddressOption(AddressOptionEnum.ADDRESS_HOME));
+			entry = info.addToStartup(startup, entry);
+			log.debug(" ====== " + entry);
+		}
+
+		for (EntityEntry entry : info.getEntityEntryList(startup))
+		{
+			log.debug(" ====== " + entry);
+			info.deleteFromStartup(entry);
+		}
+
+		info.deleteStartup(startup);
+		log.debug("<test()");
 	}
 }

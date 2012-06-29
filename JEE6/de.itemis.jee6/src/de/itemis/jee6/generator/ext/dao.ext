@@ -27,11 +27,17 @@ Boolean hasAbstractDao(Process p) :
 String adder(Entity e) :
 	"add" + typeOf(e);
 
+String adderTo(Entity e) :
+	"addTo" + typeOf(e);
+
 String updater(Entity e) :
 	"update" + typeOf(e);
 
 String remover(Entity e) :
 	"delete" + typeOf(e);
+
+String removerFrom(Entity e) :
+	"deleteFrom" + typeOf(e);
 
 String lister(Attribute a) :
 	"get" + typeOf(a) + "List";

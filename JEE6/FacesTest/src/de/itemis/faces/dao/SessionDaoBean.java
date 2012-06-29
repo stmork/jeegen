@@ -25,7 +25,6 @@ import javax.persistence.TypedQuery;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import de.itemis.faces.entities.Address;
 import de.itemis.faces.entities.UserInfo;
 import de.itemis.jee6.util.DateTimeUtil;
 import de.itemis.jee6.util.Profiler;
@@ -72,59 +71,6 @@ public class SessionDaoBean
 		return user;
 	}
 	
-	public UserInfo updateUserInfo(UserInfo user)
-	{
-		return em.merge(user);
-	}
-	
-	public Address updateAddress(Address address)
-	{
-		return em.merge(address);
-	}
-
-	public Address addAddress(UserInfo user)
-	{
-		// get correct references
-		user = em.getReference(UserInfo.class, user.getLogin());
-
-		// Create new address
-		final Address address = new Address();
-		address.setPosition(user.getAddresses().size() + 1);
-		address.setUserInfo(user);
-		user.getAddresses().add(address);
-		
-		// Update into database
-		em.persist(address);
-
-		return address;
-	}
-
-	public UserInfo removeAddress(Address address)
-	{
-		// get correct references
-		address = em.getReference(Address.class, address.getId());
-		final UserInfo user = address.getUserInfo();
-		
-		// unlink
-		user.getAddresses().remove(address);
-		address.setUserInfo(null);
-
-		// finally do database operations
-		em.remove(address);
-		return em.merge(user);
-	}
-
-	public List<Address> getAddressList(final UserInfo user)
-	{
-		final TypedQuery<UserInfo> query = em.createQuery(
-				"SELECT ui FROM UserInfo ui LEFT JOIN FETCH ui.addresses WHERE ui.login = :login",
-				UserInfo.class);
-		query.setParameter("login", user.getLogin());
-		final UserInfo result = query.getSingleResult();
-
-		return result.getAddresses();
-	}
-
 	public UserInfo getUserInfo(final String login)
 	{
 		final TypedQuery<UserInfo> query = em.createQuery(

@@ -78,13 +78,14 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 		return em.merge(«parameterOf(entity)»);
 	}
 
-	public void «remover(entity)»(final «typeOf(entity)» «parameterOf(entity)»)
+	public void «remover(entity)»(«typeOf(entity)» «parameterOf(entity)»)
 	{
+«EXPAND GetReference(entity)»
 		em.remove(«parameterOf(entity)»);
 	}
 
 «FOREACH entity.types.select(e|isMany(e)) AS type»
-	public «typeOf(type)» «adder(entity)»(«typeOf(entity)» «parameterOf(entity)», final «typeOf(type)» «parameterOf(type)»)
+	public «typeOf(type)» «adderTo(entity)»(«typeOf(entity)» «parameterOf(entity)», final «typeOf(type)» «parameterOf(type)»)
 	{
 «EXPAND GetReference(entity)»
 
@@ -101,7 +102,7 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 	}
 
 «IF !History.isInstance(type)»
-	public «typeOf(entity)» «remover(entity)»(«typeOf(type)» «parameterOf(type)»)
+	public «typeOf(entity)» «removerFrom(entity)»(«typeOf(type)» «parameterOf(type)»)
 	{
 «EXPAND GetReference((EntityRef)type)»
 		final «typeOf(entity)» «parameterOf(entity)» = «parameterOf(type)».«getterOf(entity)»();

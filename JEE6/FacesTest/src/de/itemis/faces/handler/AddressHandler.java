@@ -11,7 +11,7 @@ import javax.faces.bean.SessionScoped;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import de.itemis.faces.dao.SessionDaoBean;
+import de.itemis.faces.dao.AdminDaoBean;
 import de.itemis.faces.entities.Address;
 
 @ManagedBean
@@ -23,7 +23,7 @@ public class AddressHandler extends AbstractAdminHandler
 	private static final Log log = LogFactory.getLog(AddressHandler.class);
 
 	@EJB
-	private SessionDaoBean session;
+	private AdminDaoBean dao;
 
 	private Address address;
 
@@ -38,7 +38,7 @@ public class AddressHandler extends AbstractAdminHandler
 	public String change()
 	{
 		log.debug(">change");
-		address = session.updateAddress(getAddress());
+		address = dao.updateAddress(getAddress());
 		log.debug("<change");
 		return "change.xhtml";
 	}
