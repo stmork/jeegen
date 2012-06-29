@@ -243,12 +243,24 @@ abstract public class «abstractDaoOf(this)»
 	public List<«typeOf(option)»> «listOf(option)»()
 	{
 		TypedQuery<«typeOf(option)»> query = em.createQuery(
-				"SELECT o FROM «typeOf(option)» o",
+				"SELECT entity FROM «typeOf(option)» entity",
 				«typeOf(option)».class);
 		
 		return query.getResultList();
 	}
 «IF hasActivationBoolean(option)»
+
+	public «typeOf(option)» activate(«typeOf(option)» «nameOf(option)», final boolean activation)
+	{
+«IF id == null»
+		«nameOf(option)» = em.getReference(«typeOf(option)».class, «nameOf(option)».getId());
+«ELSE»
+		«nameOf(option)» = em.getReference(«typeOf(option)».class, «nameOf(option)».«getterOf(id)»());
+«ENDIF»
+		«nameOf(option)».setActive(activation);
+		
+		return «nameOf(option)»;
+	}
 
 	public List<«typeOf(option)»> «listActiveOf(option)»()
 	{
