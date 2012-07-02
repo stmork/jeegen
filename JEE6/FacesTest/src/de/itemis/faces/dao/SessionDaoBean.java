@@ -94,7 +94,7 @@ public class SessionDaoBean
 
 	public UserInfo getUser(UserInfo user)
 	{
-		return em.getReference(UserInfo.class, user.getLogin());
+		return em.find(UserInfo.class, user.getLogin());
 	}
 
 	public List<UserInfo> getAllUsers()

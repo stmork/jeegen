@@ -237,7 +237,7 @@ abstract public class «abstractDaoOf(this)»
 	public «typeOf(option)» «finderOf(option)»(final «typeOf(id)» id)
 «ENDIF»
 	{
-		return em.getReference(«typeOf(option)».class, id);
+		return em.find(«typeOf(option)».class, id);
 	} 
 
 	public List<«typeOf(option)»> «listOf(option)»()
