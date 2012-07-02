@@ -310,7 +310,11 @@ public class «typeOf()» extends «abstractOf()»
 	@Override
 	public int hashCode()
 	{
-		return super.hashCode();
+«IF id == null»
+		return getId();
+«ELSE»
+		return «getterOf(id)»().hashCode();
+«ENDIF»
 	}
 
 	@Override

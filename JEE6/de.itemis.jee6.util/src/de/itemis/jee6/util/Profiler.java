@@ -83,9 +83,7 @@ public class Profiler
 		}
 		else if(params.length == 1)
 		{
-			final String param = paramToString(params[0]);
-			
-			return param.length() > MAX_LENGTH ? "..." : param;
+			return paramToString(params[0]);
 		}
 		else
 		{
@@ -110,7 +108,21 @@ public class Profiler
 
 	private static String paramToString(Object param)
 	{
-		return param != null ? param.toString() : "<null>";
+		String result;
+		
+		if (param != null)
+		{
+			result = param.toString();
+			if (result.length() > MAX_LENGTH)
+			{
+				result = "...";
+			}
+		}
+		else
+		{
+			result = "<null>";
+		}
+		return result;
 	}
 
 	private static String time(final long start, final long end)
