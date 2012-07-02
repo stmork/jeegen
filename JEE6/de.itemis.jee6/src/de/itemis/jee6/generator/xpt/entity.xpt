@@ -313,7 +313,8 @@ public class «typeOf()» extends «abstractOf()»
 «IF id == null»
 		return getId();
 «ELSE»
-		return «getterOf(id)»().hashCode();
+		final String object = «getterOf(id)»(); 
+		return object != null ? object.hashCode() : 0;
 «ENDIF»
 	}
 
