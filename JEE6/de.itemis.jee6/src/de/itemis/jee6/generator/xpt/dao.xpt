@@ -16,6 +16,7 @@
 
 «DEFINE Dao FOR Process»
 «FILE daoFilename(this) IMPL»
+«EXPAND util::Header»
 package «daoPackageOf(this)»;
 
 import javax.ejb.Stateless;
@@ -38,6 +39,7 @@ public class «daoOf(this)» extends
 «DEFINE AbstractDao FOR Process»
 «IF hasAbstractDao()»
 «FILE abstractDaoFilename(this)»
+«EXPAND util::Header»
 package «daoPackageOf(this)»;
 
 «IF properties.size > 0»
@@ -168,6 +170,7 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 
 «DEFINE ModelDao FOR Model»
 «FILE daoFilename(this)»
+«EXPAND util::Header»
 package «daoPackageOf(this)»;
 
 import javax.ejb.Stateless;
@@ -185,6 +188,7 @@ public class «daoOf(this)» extends «abstractDaoOf(this)»
 «DEFINE AbstractModelDao FOR Model»
 «FILE abstractDaoFilename(this)»
 «LET entities.typeSelect(Options) AS converterList»
+«EXPAND util::Header»
 package «daoPackageOf(this)»;
 
 import javax.persistence.*;

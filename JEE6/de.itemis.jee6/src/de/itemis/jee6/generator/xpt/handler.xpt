@@ -9,6 +9,7 @@
 
 «DEFINE Main FOR Process»
 «FILE handlerFilename(this)»
+«EXPAND util::Header»
 package «handlerPackageOf(this)»;
 
 import javax.ejb.EJB;
@@ -45,6 +46,7 @@ abstract public class «handlerOf(this)» extends «handlerOf(getModel(this))»
 «DEFINE Main FOR Model»
 «FILE handlerFilename(this)»
 «LET entities.typeSelect(Options) AS converterList»
+«EXPAND util::Header»
 package «handlerPackageOf(this)»;
 
 import java.io.Serializable;

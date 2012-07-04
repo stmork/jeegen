@@ -12,6 +12,7 @@
 «DEFINE Base FOR Entity»
 «FILE abstractFilename(this)»
 «LET getId() AS id»
+«EXPAND util::Header»
 package «packageOf(this)»;
 
 import java.io.Serializable;
