@@ -25,4 +25,4 @@ ant clean
 ant generate
 ant package
 ant findbugs
-ant emma
+ant test

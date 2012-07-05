@@ -135,7 +135,7 @@ public class «typeOf()» extends «abstractOf()»
 «IF id == null»
 	public «abstractOf()»(final «enumOf(this)» type)
 	{
-		this(type.ordinal(), type.name().replaceAll("_", ".").toLowerCase(Locale.ROOT));
+		this(type, type.name().replaceAll("_", ".").toLowerCase(Locale.ROOT));
 	}
 
 	public «abstractOf()»(final «enumOf(this)» type, final String bundleKey)
