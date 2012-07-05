@@ -19,6 +19,10 @@ import java.io.Serializable;
 import java.text.MessageFormat;
 import javax.persistence.*;
 
+«IF id == null»
+import java.util.Locale;
+«ENDIF»
+
 «IF hasList(this)»
 import java.util.List;
 «ENDIF»
@@ -131,7 +135,7 @@ public class «typeOf()» extends «abstractOf()»
 «IF id == null»
 	public «abstractOf()»(final «enumOf(this)» type)
 	{
-		this(type.ordinal(), type.name().replaceAll("_", ".").toLowerCase());
+		this(type.ordinal(), type.name().replaceAll("_", ".").toLowerCase(Locale.ROOT));
 	}
 
 	public «abstractOf()»(final «enumOf(this)» type, final String bundleKey)
