@@ -10,6 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -21,17 +22,16 @@ import de.itemis.jee6.util.LogUtil;
 public class AutoLoginFilter implements Filter
 {
 	private static final Log  log    = LogFactory.getLog(AutoLoginFilter.class);
+	private static final BASE64Decoder decoder = new BASE64Decoder();
 
 	@Override
-	public void init(FilterConfig arg0) throws ServletException {
-		// TODO Auto-generated method stub
-		
+	public void init(FilterConfig arg0) throws ServletException
+	{
 	}
 
 	@Override
-	public void destroy() {
-		// TODO Auto-generated method stub
-		
+	public void destroy()
+	{
 	}
 
 	@Override
@@ -44,20 +44,26 @@ public class AutoLoginFilter implements Filter
 		HttpServletRequest r = (HttpServletRequest)request;
 		
         String basic = r.getHeader("authorization"); 
+        LogUtil.debug(log, " URI: %s", r.getRequestURI());
+        LogUtil.debug(log, " URL: %s", r.getRequestURL());
         if ((basic != null) && basic.startsWith("Basic "))
         {
-            String principal = r.getRemoteUser();
+        	String principal = r.getRemoteUser();
             if (principal == null)
             {
-            	final BASE64Decoder decoder = new BASE64Decoder();
                 String [] userdata = new String (decoder.decodeBuffer(basic.substring(6))).split(":");
                 final String user = userdata[0];
 
                 LogUtil.info(log, " Automatically logging in user %s.", user);
             	r.login(userdata[0], userdata[1]);
+            	HttpServletResponse resp = (HttpServletResponse)response;
+//            	resp.sendRedirect(r.getRequestURL().toString());
             }
-        }		
-		filter.doFilter(request, response);
+        }
+//		else
+        {
+        	filter.doFilter(request, response);
+        }
 		log.trace("<doFilter()");
 	}
 }

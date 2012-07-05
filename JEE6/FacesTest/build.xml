@@ -8,6 +8,8 @@
 	<property name="src-gen-path" value="./src-gen"/>
 	<property name="res-gen-path" value="./res-gen"/>
 	<property name="web-path"     value="./WebContent"/>
+	<property name="tst-path"     value="./test"/>
+	<property name="lib-path"     value="../de.itemis.jee6.util/lib"/>
 
 	<property name="war"          value="facestest.war"/>
 	<property name="module.jar"   value="ldapcontext.jar"/>
@@ -27,6 +29,10 @@
 	<property name="glassfish.home"   value="/opt/glassfish3"/>
 	<property name="glassfish.deploy" value="${glassfish.home}/glassfish/domains/domain1/autodeploy/"/>
 
+	<property name="coverage-path" value="./coverage"/>	
+	<property name="instr-path"    value="./instr"/>	
+	<property name="emma.enabled"  value="true"/>
+
 	<!-- ==================================================== -->
 	<!--              Setting up classpaths                   -->
 	<!-- ==================================================== -->
@@ -42,13 +48,34 @@
 			<include name="**/*.jar"/>
 			<exclude name="**/*jsf*1.2*.jar"/>
 		</fileset>
+		<fileset dir="${lib-path}"/>
 		<path refid="logger.path"/>
+	</path>
+
+	<path id="runtime.path">
+		<path refid="compile.path"/>
 	</path>
 
 	<path id="findbugs.lib">
 		<fileset dir="${findbugs.home}">
 			<include name="**/*.jar"/>
 		</fileset>  
+	</path>
+
+	<path id="emma.lib">
+		<fileset dir="${lib-path}">
+			<include name="**/emma*.jar"/>
+		</fileset>
+	</path>
+
+	<path id="instr.classpath">
+		<pathelement path="${bin-path}" />
+	</path>
+
+	<path id="emma.classpath">
+		<pathelement location="${instr-path}" />  
+		<pathelement location="${bin-path}" />  
+		<path refid="runtime.path"/>
 	</path>
 
 	<path id="generate.classpath">
@@ -84,6 +111,8 @@
 	<!-- ==================================================== -->
 
 	<taskdef name="findbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask" classpathref="findbugs.lib"/>
+	<taskdef name="junit" classname="org.apache.tools.ant.taskdefs.optional.junit.JUnitTask" classpathref="runtime.path"/>
+	<taskdef resource="emma_ant.properties" classpathref="runtime.path" />
 
 	<!-- ==================================================== -->
 	<!--              Setting up build targets                -->
@@ -93,6 +122,14 @@
 		<delete file="${findbugs.results}"/>
 		<delete file="${war}" />
 		<delete dir="${bin-path}" />
+		<delete dir="${instr-path}" />
+		<delete dir="${coverage-path}" />
+		<delete>
+			<fileset dir="." includes="TEST-*.xml"/>
+			<fileset dir="." includes="TEST-*.txt"/>
+			<fileset dir="." includes="coverage.*"/>
+			<fileset dir="." includes="*.emma"/>
+		</delete>
 	</target>
 
 	<target name="generate">
@@ -104,7 +141,7 @@
 
 	<target name="compile">
 		<mkdir dir="${bin-path}"/>
-		<javac srcdir="${src-path}:${src-gen-path}" destdir="${bin-path}" debug="true" includeantruntime="false">
+		<javac srcdir="${src-path}:${src-gen-path}:${tst-path}" destdir="${bin-path}" debug="true" includeantruntime="false">
 			<classpath refid="compile.path"/>
 		</javac>
 	</target>
@@ -113,6 +150,7 @@
 		<jar destfile="${war}">
 			<zipfileset dir="${bin-path}" prefix="WEB-INF/classes">
 				<include name="**/*.class"/>
+				<exclude name="**/*Test.class"/>
 			</zipfileset>
 			<zipfileset dir="${src-path}" prefix="WEB-INF/classes">
 				<include name="**/*.xml"/>
@@ -147,6 +185,41 @@
 	<!-- ==================================================== -->
 	<!--              Setting up runtime targets              -->
 	<!-- ==================================================== -->
+
+	<target name="instr" depends="compile" if="emma.enabled">
+		<mkdir dir="${instr-path}"/>
+		<emma>
+			<instr instrpathref="instr.classpath" destdir="${instr-path}" metadatafile="metadata.emma" merge="true">
+				<filter excludes="org.*,com.*,edu.*,junit.*,gnu.io.*,java*"/>
+				<filter excludes="de.itemis.jee6.util.Profiler*"/>
+			</instr>
+		</emma>
+	</target>
+
+	<target name="test" depends="compile">
+		<taskdef resource="emma_ant.properties" classpathref="emma.lib" />
+		<junit printsummary="on" fork="on" haltonerror="yes" haltonfailure="yes">
+			<classpath refid="emma.classpath" />
+			<formatter type="xml"/>
+			<jvmarg value="-Demma.coverage.out.file=coverage.emma" />
+			<jvmarg value="-Demma.coverage.out.merge=true" />
+			<test name="de.itemis.faces.test.EntityTest"/>
+		</junit>
+	</target>
+
+	<target name="emma" depends="instr,test">
+		<taskdef resource="emma_ant.properties" classpathref="emma.lib" />
+		<emma>
+			<report sourcepath="${src-path}:${tst-path}:${main-project}/${src-path}:${main-project}/${src-gen-path}">
+				<fileset dir=".">
+					<include name="*.emma"/>
+				</fileset>  
+				<txt  outfile="coverage.txt" />
+				<xml  outfile="coverage.xml" />
+				<html outfile="coverage.html" />
+			</report>  
+		</emma>
+	</target>  
 
 	<target name="findbugs" depends="compile">
 		<echo message="Checking ${ant.project.name}..."/>

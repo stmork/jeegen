@@ -26,8 +26,7 @@
 			<include name="**/*.jar"/>
 			<exclude name="**/*jsf*1.2*.jar"/>
 		</fileset>
-		<fileset dir="${lib-path}">
-		</fileset>
+		<fileset dir="${lib-path}"/>
 	</path>
 
 	<path id="runtime.path">
@@ -36,7 +35,7 @@
 
 	<path id="emma.lib">
 		<fileset dir="${lib-path}">
-		<include name="**/emma*.jar"/>
+			<include name="**/emma*.jar"/>
 		</fileset>
 	</path>
 
