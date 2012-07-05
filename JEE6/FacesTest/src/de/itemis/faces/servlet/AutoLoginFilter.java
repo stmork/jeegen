@@ -10,7 +10,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -41,24 +40,27 @@ public class AutoLoginFilter implements Filter
 			FilterChain filter) throws IOException, ServletException {
 		log.trace(">doFilter()");
 
-		HttpServletRequest r = (HttpServletRequest)request;
-		
-        String basic = r.getHeader("authorization"); 
-        LogUtil.debug(log, " URI: %s", r.getRequestURI());
-        LogUtil.debug(log, " URL: %s", r.getRequestURL());
-        if ((basic != null) && basic.startsWith("Basic "))
-        {
-        	String principal = r.getRemoteUser();
-            if (principal == null)
-            {
-                String [] userdata = new String (decoder.decodeBuffer(basic.substring(6))).split(":");
-                final String user = userdata[0];
-
-                LogUtil.info(log, " Automatically logging in user %s.", user);
-            	r.login(userdata[0], userdata[1]);
-            	HttpServletResponse resp = (HttpServletResponse)response;
-//            	resp.sendRedirect(r.getRequestURL().toString());
-            }
+		if (request instanceof HttpServletRequest)
+		{
+			HttpServletRequest r = (HttpServletRequest)request;
+			
+	        String basic = r.getHeader("authorization"); 
+	        LogUtil.debug(log, " URI: %s", r.getRequestURI());
+	        LogUtil.debug(log, " URL: %s", r.getRequestURL());
+	        if ((basic != null) && basic.startsWith("Basic "))
+	        {
+	        	String principal = r.getRemoteUser();
+	            if (principal == null)
+	            {
+	                String [] userdata = new String (decoder.decodeBuffer(basic.substring(6))).split(":");
+	                final String user = userdata[0];
+	
+	                LogUtil.info(log, " Automatically logging in user %s.", user);
+	            	r.login(userdata[0], userdata[1]);
+	//            	HttpServletResponse resp = (HttpServletResponse)response;
+	//            	resp.sendRedirect(r.getRequestURL().toString());
+	            }
+	        }
         }
 //		else
         {
