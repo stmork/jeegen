@@ -78,6 +78,7 @@ public class «abstractOf(this)» implements Serializable
 «DEFINE Implementation FOR Entity»
 «IF isAbstract()»
 «FILE filename(this) IMPL»
+«EXPAND utility::Header»
 package «packageOf(this)»;
 
 import javax.persistence.*;
