@@ -9,6 +9,8 @@
 «EXPAND Implementation»
 «ENDDEFINE»
 
+
+
 «DEFINE Base FOR Entity»
 «FILE abstractFilename(this)»
 «LET getId() AS id»
@@ -19,8 +21,12 @@ import java.io.Serializable;
 import java.text.MessageFormat;
 import javax.persistence.*;
 
-«IF id == null»
+«IF (id == null) && (Options.isInstance(this))»
+«LET (Options)this AS options»
+«IF options.keys.size > 0»
 import java.util.Locale;
+«ENDIF»
+«ENDLET»
 «ENDIF»
 
 «IF hasList(this)»
@@ -75,6 +81,9 @@ public class «abstractOf(this)» implements Serializable
 «ENDLET»
 «ENDFILE»
 «ENDDEFINE»
+
+
+
 «DEFINE Implementation FOR Entity»
 «IF isAbstract()»
 «FILE filename(this) IMPL»
@@ -117,8 +126,12 @@ public class «typeOf()» extends «abstractOf()»
 «ENDIF»
 «ENDDEFINE»
 
+
+
 «DEFINE Id(Attribute id) FOR Entity»
 «ENDDEFINE»
+
+
 
 «DEFINE Id(Attribute id) FOR Options»
 «IF keys.size > 0»
@@ -205,6 +218,8 @@ public class «typeOf()» extends «abstractOf()»
 «ENDIF»
 «ENDDEFINE»
 
+
+
 «DEFINE Id(Attribute id) FOR Table»
 «IF id == null»
 	private int id;
@@ -249,6 +264,8 @@ public class «typeOf()» extends «abstractOf()»
 «ENDIF»
 «ENDDEFINE»
 
+
+
 «DEFINE Property FOR Entity»
 	private «typeOf()» «nameOf()»;
 
@@ -263,6 +280,8 @@ public class «typeOf()» extends «abstractOf()»
 		this.«nameOf()» = «nameOf()»;
 	}
 «ENDDEFINE»
+
+
 
 «DEFINE GetterSetter FOR Entity»
 «EXPAND Property FOREACH types»
@@ -285,8 +304,12 @@ public class «typeOf()» extends «abstractOf()»
 «ENDLET»
 «ENDDEFINE»
 
+
+
 «DEFINE Sorting(Attribute id) FOR Entity»
 «ENDDEFINE»
+
+
 
 «DEFINE Automatic FOR Entity»
 «LET types.typeSelect(Timestamp).select(e|e.auto) AS auto»
@@ -317,12 +340,20 @@ public class «typeOf()» extends «abstractOf()»
 «ENDLET»
 «ENDDEFINE»
 
+
+
 «DEFINE Sorting(Attribute id) FOR Options»
 	@Override
 	public int hashCode()
 	{
 «IF id == null»
+«IF keys.size == 0»
+		final int hash = getId();
+		
+		return hash == 0 ? super.hashCode() : hash;
+«ELSE»
 		return getId();
+«ENDIF»
 «ELSE»
 		final String object = «getterOf(id)»(); 
 		return object != null ? object.hashCode() : 0;
@@ -338,7 +369,7 @@ public class «typeOf()» extends «abstractOf()»
 		}
 		«typeOf(this)» option = («typeOf(this)»)object;
 «IF id == null»
-		return getId() == option.getId();
+		return hashCode() == option.hashCode();
 «ELSE»
 		return «getterOf(id)»().equals(option.«getterOf(id)»());
 «ENDIF»

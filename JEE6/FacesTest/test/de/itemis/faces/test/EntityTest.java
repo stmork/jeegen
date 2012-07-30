@@ -1,7 +1,9 @@
 package de.itemis.faces.test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -11,6 +13,7 @@ import org.junit.Test;
 
 import de.itemis.faces.entities.AddressOption;
 import de.itemis.faces.entities.AddressOption.AddressOptionEnum;
+import de.itemis.faces.entities.Preferences;
 import de.itemis.faces.entities.UserInfo;
 
 public class EntityTest {
@@ -146,5 +149,38 @@ public class EntityTest {
 			map.remove(login);
 		}
 		Assert.assertEquals(0, map.size());
+	}
+	
+	@Test
+	public void listTest()
+	{
+		final Preferences [] prefs = new Preferences[20];
+		final List<Preferences> list = new ArrayList<Preferences>(prefs.length);
+
+		for (int i = 0; i < prefs.length;i++)
+		{
+			final Preferences pref = new Preferences();
+
+			pref.setEntry("test" + i);
+			prefs[i] = pref;
+			list.add(pref);
+		}
+
+		final Preferences r1 = prefs[prefs.length / 2];
+		final Preferences r2 = prefs[prefs.length / 3];
+		final Preferences r3 = prefs[prefs.length / 4];
+		Assert.assertTrue(list.remove (r1));
+		System.out.println(r1);
+		Assert.assertEquals(prefs.length - 1, list.size());
+		Assert.assertFalse(list.remove (r1));
+		Assert.assertEquals(prefs.length - 1, list.size());
+
+		Assert.assertTrue(list.remove (r2));
+		Assert.assertEquals(prefs.length - 2, list.size());
+		Assert.assertTrue(list.remove (r3));
+		Assert.assertEquals(prefs.length - 3, list.size());
+
+		list.clear();
+		Assert.assertEquals(0, list.size());
 	}
 }

@@ -50,6 +50,11 @@ entity Startup
 	Entity  EntityEntry [] entities; 
 };
 
+options Preferences editable
+{
+	Text entry;
+};
+
 process Admin roles "admin"
 {
 	Text default "ldaps://master.itemis.de:636/" "ldap/url" ref "java:global/ldap/url";
