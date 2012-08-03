@@ -46,8 +46,22 @@
 	<!-- ==================================================== -->
 	<!--              Setting up build targets                -->
 	<!-- ==================================================== -->
+	
+	<target name="-version">
+	    <loadproperties srcfile="META-INF/MANIFEST.MF">
+	        <filterchain>
+	            <linecontains>
+	                <contains value="Bundle-Version" />
+	            </linecontains>
+	            <tokenfilter>
+	                <replaceregex pattern="^Bundle-Version: d*.d*.d*s*$" replace="" />
+	            </tokenfilter>
+	        </filterchain>
+	    </loadproperties>
+		<property name="plugin" value="de.itemis.jee6_${Bundle-Version}.jar"/>
+	</target>
 
-	<target name="clean">
+	<target name="clean" depends="-version">
 		<delete file="${plugin}" />
 		<delete dir="${bin-path}" />
 	</target>
@@ -74,21 +88,7 @@
 		</javac>
 	</target>
 	
-	<target name="version">
-	    <loadproperties srcfile="META-INF/MANIFEST.MF">
-	        <filterchain>
-	            <linecontains>
-	                <contains value="Bundle-Version" />
-	            </linecontains>
-	            <tokenfilter>
-	                <replaceregex pattern="^Bundle-Version: d*.d*.d*s*$" replace="" />
-	            </tokenfilter>
-	        </filterchain>
-	    </loadproperties>
-		<property name="plugin" value="de.itemis.jee6_${Bundle-Version}.jar"/>
-	</target>
-	
-	<target name="package" depends="compile,version">
+	<target name="package" depends="compile,-version">
 		<jar destfile="${plugin}" manifest="${manifest}">
 			<zipfileset dir=".">
 				<include name="plugin.xml"/>
