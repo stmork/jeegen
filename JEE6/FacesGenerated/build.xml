@@ -60,6 +60,7 @@
 			<exclude name="**/*editor*.jar"/>
 		</fileset>
 		<pathelement path="${res-path}" />
+		<pathelement path="${src-path}" />
 	</path>
 	
 	<!-- ==================================================== -->
