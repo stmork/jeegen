@@ -6,6 +6,7 @@ package de.itemis.jee6.util;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.text.MessageFormat;
+import java.util.ResourceBundle;
 
 import org.apache.commons.logging.Log;
 
@@ -71,5 +72,22 @@ public class LogUtil
 	public final static boolean isEmpty(final String input)
 	{
 		return (input == null) || input.trim().isEmpty();
+	}
+	
+	public static String banner(final String key, final String product)
+	{
+		ResourceBundle bundle = ResourceBundle.getBundle(key);
+		final String version = LogUtil.format("= {4} (C) {0} {1}.{2}.{3} =",
+				bundle.getString("vendor"),
+				bundle.getString("version.major"),
+				bundle.getString("version.minor"),
+				bundle.getString("version.patch"),
+				product);
+		StringBuffer buffer = new StringBuffer(version.length());
+		for (int i = 0;i < version.length();i++)
+		{
+			buffer.append("=");
+		}
+		return buffer + "\n" + version + "\n" + buffer;
 	}
 }

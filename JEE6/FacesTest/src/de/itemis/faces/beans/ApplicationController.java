@@ -42,6 +42,7 @@ public class ApplicationController implements Serializable
 		final DirContext ldap = info.getLdapItemis();
 		final String     ns   = ldap.getNameInNamespace();
 
+		log.info("\n" + LogUtil.banner("de.itemis.faces.version", "Faces Test Application"));
 		log.debug(">init()");
 		log.debug(ldap);
 		LogUtil.debug(log, " url        = %s", dao.getLdapUrl());

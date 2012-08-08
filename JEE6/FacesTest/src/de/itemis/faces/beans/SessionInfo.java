@@ -21,7 +21,7 @@ import org.apache.commons.logging.LogFactory;
 import de.itemis.faces.dao.SessionDaoBean;
 import de.itemis.faces.entities.UserInfo;
 import de.itemis.faces.handler.AbstractHandler;
-import de.itemis.faces.handler.AddressHandler;
+import de.itemis.faces.handler.AdminHandler;
 import de.itemis.jee6.util.Profiler;
 
 @ManagedBean
@@ -40,7 +40,7 @@ public class SessionInfo extends AbstractHandler
 	private StatefulBean bean;
 
 	@ManagedProperty(value="#{addressInfo}")
-	private AddressHandler addressInfo;
+	private AdminHandler addressInfo;
 	
 	private UserInfo user;
 	
@@ -90,11 +90,11 @@ public class SessionInfo extends AbstractHandler
 		log.debug(" validateMail() " + getUser());
 	}
 
-	public AddressHandler getAddressInfo() {
+	public AdminHandler getAddressInfo() {
 		return addressInfo;
 	}
 
-	public void setAddressInfo(AddressHandler addressInfo) {
+	public void setAddressInfo(AdminHandler addressInfo) {
 		this.addressInfo = addressInfo;
 	}
 	

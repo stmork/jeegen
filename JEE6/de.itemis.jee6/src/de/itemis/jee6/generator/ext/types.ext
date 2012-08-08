@@ -194,13 +194,22 @@ String converterOf(Options option) :
  * Process
  */
 String handlerOf(Process p) :
-	"Abstract" + p.name.toFirstUpper() + "Handler";
+	p.name.toFirstUpper() + "Handler";
+
+String abstractHandlerOf(Process p) :
+	"Abstract" + handlerOf(p);
+
+String handlerUri(Process p) :
+	p.name.toFirstLower() + "Handler";
 
 String handlerPackageOf(Process p) :
 	getModel(p).package + ".handler";
 
 String fqHandlerOf(Process p) :
 	handlerPackageOf(p) + "." + handlerOf(p);
+
+String fqAbstractHandlerOf(Process p) :
+	handlerPackageOf(p) + "." + abstractHandlerOf(p);
 
 String daoOf(Process p) :
 	p.name.toFirstUpper() + "DaoBean";
@@ -221,14 +230,14 @@ String fqAbstractDaoOf(Process p) :
  * Model
  */
 
-String handlerOf(Model m) :
+String abstractHandlerOf(Model m) :
 	"AbstractHandler";
 
 String handlerPackageOf(Model m) :
 	m.package + ".handler";
 
-String fqHandlerOf(Model m) :
-	handlerPackageOf(m) + "." + handlerOf(m);
+String fqAbstractHandlerOf(Model m) :
+	handlerPackageOf(m) + "." + abstractHandlerOf(m);
 
 String daoOf(Model m) :
 	"OptionsDaoBean";
@@ -244,6 +253,21 @@ String abstractDaoOf(Model m) :
 
 String fqAbstractDaoOf(Model p) :
 	daoPackageOf(p) + "." + abstractDaoOf(p);
+
+String applicationController(Model m) :
+	"ApplicationController";
+
+String sessionController(Model m) :
+	"SessionController";
+
+String controllerPackageOf(Model m) :
+	m.package + ".beans";
+
+String fqApplicationController(Model m) :
+	controllerPackageOf(m)  + "." + applicationController(m);
+
+String fqSessionController(Model m) :
+	controllerPackageOf(m)  + "." + sessionController(m);
 
 /*
  * Properties

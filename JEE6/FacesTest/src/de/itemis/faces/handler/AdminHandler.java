@@ -17,10 +17,10 @@ import de.itemis.faces.entities.Address;
 @ManagedBean
 @SessionScoped
 @RolesAllowed(value="admin")
-public class AddressHandler extends AbstractAdminHandler
+public class AdminHandler extends AbstractAdminHandler
 {
 	private static final long serialVersionUID = 1L;
-	private static final Log log = LogFactory.getLog(AddressHandler.class);
+	private static final Log log = LogFactory.getLog(AdminHandler.class);
 
 	@EJB
 	private AdminDaoBean dao;
@@ -40,6 +40,6 @@ public class AddressHandler extends AbstractAdminHandler
 		log.debug(">change");
 		address = dao.updateAddress(getAddress());
 		log.debug("<change");
-		return "change.xhtml";
+		return "index.xhtml";
 	}
 }

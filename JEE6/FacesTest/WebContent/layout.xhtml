@@ -18,7 +18,7 @@
 					<td class="space"/>
 					<td class="welcome">
 						<h1><ui:insert name="title"/></h1>
-						#{msg['start.name']} #{controller.name}
+						#{msg['start.name']} #{sessionController.name}
 					</td>
 				</tr>
 			</table>
@@ -27,14 +27,7 @@
 		<div id="mid">
 			<div class="left">
 				<div class="box">
-				<h2>#{msg.menue}</h2>
-					<ul>
-						<li><h:link value="#{msg.main}"   outcome="/index.xhtml" /></li>
-						<ui:fragment rendered="#{controller.loggedIn}">
-							<li><h:link value="#{msg.change}" outcome="/admin/change.xhtml" /></li>
-							<li><h:link value="#{msg.logout}" outcome="/logout.xhtml"/></li>
-						</ui:fragment>
-					</ul>
+					<ui:include src="menu.xhtml"/>
 				</div>
 			</div>
 			<div class="content">

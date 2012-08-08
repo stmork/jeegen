@@ -1,34 +1,40 @@
 import jee6;
 
-Model getModel(Entity t) :
+cached Model getModel(Entity t) :
 	(Model)t.eRootContainer;
 
-Model getModel(EntityRef t) :
+cached Model getModel(EntityRef t) :
 	(Model)t.eRootContainer;
 
-Model getModel(Process p) :
+cached Model getModel(Process p) :
 	(Model)p.eRootContainer;
 
-List[Persistence] getPersistenceUnits(Model m) :
+cached List[Persistence] getPersistenceUnits(Model m) :
 	m.options.typeSelect(Persistence);
 
-List[Persistence] getMails(Model m) :
+cached List[Persistence] getMails(Model m) :
 	m.options.typeSelect(Mail);
 
-List[Locale] getLocales(Model m) :
+cached List[Locale] getLocales(Model m) :
 	m.options.typeSelect(Locale);
 
-List[Security] getSecurityDomains(Model m) :
+cached List[Security] getSecurityDomains(Model m) :
 	m.options.typeSelect(Security);
 
-List[String] getAllRoles(Model m) :
+cached List[String] getAllRoles(Model m) :
 	m.processes.roles.toSet();
 
-String uriOf(Process p) :
-	"/" + p.name.toLowerCase();
+cached String prefixOf(Process p) :
+	p.name.toLowerCase();
 
-List[Entity] getAllEntities(Model m) :
+cached String uriOf(Process p) :
+	"/" + prefixOf(p); 
+
+cached List[Entity] getAllEntities(Model m) :
 	m.entities;
 
-List[Property] getProperties(Model m) :
+cached List[Property] getProperties(Model m) :
 	m.processes.properties.reject(e|e.original == null).toSet();
+
+cached Boolean hasSecurityDomain(Model m) :
+	getSecurityDomains(m).first() != null;

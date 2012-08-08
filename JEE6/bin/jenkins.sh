@@ -17,8 +17,9 @@ ant clean
 ant deploy
 
 cd ../FacesGenerated
-ant clean
+ant clobber
 ant generate
+ant package
 
 cd ../FacesTest
 ant clean

@@ -6,9 +6,10 @@
 «EXTENSION de::itemis::jee6::generator::ext::naming»
 «EXTENSION de::itemis::jee6::generator::ext::converter»
 «EXTENSION de::itemis::jee6::generator::ext::dao»
+«EXTENSION de::itemis::jee6::generator::ext::ui»
 
-«DEFINE Main FOR Process»
-«FILE handlerFilename(this)»
+«DEFINE AbstractHandler FOR Process»
+«FILE abstractHandlerFilename(this)»
 «EXPAND utility::Header»
 package «handlerPackageOf(this)»;
 
@@ -19,7 +20,7 @@ import «fqDaoOf()»;
 import javax.faces.context.ExternalContext;
 «ENDIF»
 
-abstract public class «handlerOf(this)» extends «handlerOf(getModel(this))»
+abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(getModel(this))»
 {
 	private static final long serialVersionUID = 1L;
 
@@ -43,8 +44,25 @@ abstract public class «handlerOf(this)» extends «handlerOf(getModel(this))»
 «ENDFILE»
 «ENDDEFINE»
 
+«DEFINE ImplHandler FOR Process»
+«FILE handlerFilename(this) IMPL»
+«EXPAND utility::Header»
+package «handlerPackageOf(this)»;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
+@ManagedBean
+@SessionScoped
+public class «handlerOf(this)» extends «abstractHandlerOf(this)»
+{
+	private static final long serialVersionUID = 1L;
+}
+«ENDFILE»
+«ENDDEFINE»
+
 «DEFINE Main FOR Model»
-«FILE handlerFilename(this)»
+«FILE abstractHandlerFilename(this)»
 «LET entities.typeSelect(Options) AS converterList»
 «EXPAND utility::Header»
 package «handlerPackageOf(this)»;
@@ -82,13 +100,13 @@ import «fqTypeOf(option)»;
 «ENDFOREACH»
 «ENDIF»
 
-abstract public class «handlerOf(this)» implements Serializable, ResourceBundleDefinitions
+abstract public class «abstractHandlerOf(this)» implements Serializable, ResourceBundleDefinitions
 {
 	private static final long serialVersionUID    = 1L;
 	private static final Log  log                 = LogFactory.getLog(AbstractHandler.class);
 
 	protected static final NumberFormat money     = NumberFormat.getCurrencyInstance();
-	protected static final String       NAV_INDEX = "index.xhtml";
+	protected static final String       NAV_INDEX = "«index()»";
 	protected static final String       NULL      = "[NULL]";
 
 	private ResourceBundle messages;

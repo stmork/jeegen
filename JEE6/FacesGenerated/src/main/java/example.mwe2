@@ -8,5 +8,6 @@ Workflow
 		impldir="src/main/java"
 		srcdir="src/generated/java"
 		resdir="src/generated/resources"
+		xhtmldir="src/main/resources"
 	}
 }

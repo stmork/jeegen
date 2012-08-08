@@ -22,13 +22,13 @@ import de.itemis.faces.handler.AbstractHandler;
 import de.itemis.jee6.util.LogUtil;
 
 @ManagedBean
-public class Controller extends AbstractHandler
+public class SessionController extends AbstractHandler
 {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static final Log  log = LogFactory.getLog(Controller.class);
+	private static final Log  log = LogFactory.getLog(SessionController.class);
 
 	@EJB
 	private SessionDaoBean dao;
@@ -68,10 +68,5 @@ public class Controller extends AbstractHandler
 			log.debug(info);
 		}
 		return login != null ? dao.ensureUserInfo(login).getName() : "<???>";
-	}
-
-	public boolean isLoggedIn()
-	{
-		return getExternalContext().getRemoteUser() != null;
 	}
 }

@@ -1,0 +1,28 @@
+import jee6;
+
+extension de::itemis::jee6::generator::ext::model;
+extension de::itemis::jee6::generator::ext::types;
+
+String index(Model m) :
+	"index.xhtml";
+
+String layout(Model m) :
+	"layout.xhtml";
+
+String login(Model m) :
+	"login.xhtml";
+
+String logout(Model m) :
+	"logout.xhtml";
+
+String menu(Model m) :
+	"menu.xhtml";
+
+String css(Model m) :
+	"resources/css/display.css";
+
+String index(Process p) :
+	prefixOf(p) + "/index.xhtml";
+
+String sessionUri(Model m) :
+	sessionController(m).toFirstLower();

@@ -26,8 +26,11 @@ String abstractFilename(Entity e) :
 String handlerFilename(Process p) :
 	fqHandlerOf(p).replaceAll("\\.", "/") + ".java";
 
-String handlerFilename(Model m) :
-	fqHandlerOf(m).replaceAll("\\.", "/") + ".java";
+String abstractHandlerFilename(Process p) :
+	fqAbstractHandlerOf(p).replaceAll("\\.", "/") + ".java";
+
+String abstractHandlerFilename(Model m) :
+	fqAbstractHandlerOf(m).replaceAll("\\.", "/") + ".java";
 
 String daoFilename(Process p) :
 	fqDaoOf(p).replaceAll("\\.", "/") + ".java";
@@ -41,6 +44,12 @@ String daoFilename(Model m) :
 String abstractDaoFilename(Model m) :
 	fqAbstractDaoOf(m).replaceAll("\\.", "/") + ".java";
 
+String applicationControllerFilename(Model m) :
+	fqApplicationController(m).replaceAll("\\.", "/") + ".java";
+
+String sessionControllerFilename(Model m) :
+	fqSessionController(m).replaceAll("\\.", "/") + ".java";
+	
 String getterOf(jee6::Boolean t) :
 	"is" + nameOf(t).toFirstUpper();
 

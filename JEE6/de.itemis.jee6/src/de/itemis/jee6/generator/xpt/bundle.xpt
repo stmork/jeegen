@@ -1,6 +1,7 @@
 «IMPORT jee6»
 
 «EXTENSION de::itemis::jee6::generator::ext::bundle»
+«EXTENSION de::itemis::jee6::generator::ext::model»
 
 «DEFINE Main FOR Model»
 «FOREACH this.options.typeSelect(jee6::Locale) AS locale»
@@ -12,10 +13,24 @@
 
 «DEFINE Messages(Locale locale) FOR Model»
 «FILE messageFilename(this, locale) IMPL»
+start.title=Welcome to «name»!
+start.name=Full name
+«IF hasSecurityDomain()»
+login.title=Login dialog
+login.do_login=Please enter your login and password!
+login.user=Login
+login.password=Password
+logout.title=Logout dialog
+logout.message=Confirm loggin out!
+«ENDIF»
 «FOREACH entities.typeSelect(Options) AS entity»
 «FOREACH entity.keys AS key»
-«key»=
+«key»=«key»
 «ENDFOREACH»
+«ENDFOREACH»
+«FOREACH processes AS process»
+«prefixOf(process)»=«process.name»
+«prefixOf(process)».title=«process.name»
 «ENDFOREACH»
 back=back
 yes=yes
@@ -24,9 +39,10 @@ change=Change
 remove=Remove
 clear=Clear
 save=Save
+login=Login
 logout=Logout
 main=Main menu
-footer=JSF 2.0 / EJB 3.1 / JEE 6 - test application
+footer=«name»
 menue=Menu
 «ENDFILE»
 «ENDDEFINE»
@@ -39,7 +55,7 @@ not-found.title=Resource not found\!
 
 «DEFINE Version FOR Model»
 «FILE versionFilename(this) IMPL»
-vendor=
+vendor=itemis AG
 version.major=0
 version.minor=0
 version.patch=1

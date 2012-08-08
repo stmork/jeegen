@@ -34,8 +34,8 @@ public class UserHandler implements Serializable
 	@ManagedProperty(value="#{sessionInfo}")
 	private SessionInfo sessionInfo;
 
-	@ManagedProperty(value="#{addressHandler}")
-	private AddressHandler addressHandler;
+	@ManagedProperty(value="#{adminHandler}")
+	private AdminHandler adminHandler;
 
 	public SessionInfo getSessionInfo() {
 		return sessionInfo;
@@ -45,11 +45,11 @@ public class UserHandler implements Serializable
 	}
 
 	
-	public AddressHandler getAddressHandler() {
-		return addressHandler;
+	public AdminHandler getAddressHandler() {
+		return adminHandler;
 	}
-	public void setAddressHandler(AddressHandler addressHandler) {
-		this.addressHandler = addressHandler;
+	public void setAddressHandler(AdminHandler addressHandler) {
+		this.adminHandler = addressHandler;
 	}
 
 	public String change()
@@ -91,6 +91,6 @@ public class UserHandler implements Serializable
 		UserInfo user = dao.deleteFromUserInfo(address);
 		getSessionInfo().setUserInfo(user);
 		log.debug("<removeAddress");
-		return "change.xhtml";
+		return "index.xhtml";
 	}
 }

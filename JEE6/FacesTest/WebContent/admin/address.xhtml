@@ -15,26 +15,26 @@
 				<table>
 					<tr>
 						<td>#{msg['change.address.street']}</td>
-						<td><h:inputText id="street" value="#{addressHandler.address.street}" /></td>
+						<td><h:inputText id="street" value="#{adminHandler.address.street}" /></td>
 					</tr>
 		
 					<tr>
 						<td>#{msg['change.address.plz']}</td>
-						<td><h:inputText id="plz" value="#{addressHandler.address.plz}" /></td>
+						<td><h:inputText id="plz" value="#{adminHandler.address.plz}" /></td>
 					</tr>
 					<tr>
 						<td>#{msg['change.address.location']}</td>
-						<td><h:inputText id="location" value="#{addressHandler.address.location}" /></td>
+						<td><h:inputText id="location" value="#{adminHandler.address.location}" /></td>
 					</tr>
 					<tr>
 						<td>#{msg['change.address.active']}</td>
-						<td><h:selectBooleanCheckbox id="active" value="#{addressHandler.address.active}" /></td>
+						<td><h:selectBooleanCheckbox id="active" value="#{adminHandler.address.active}" /></td>
 					</tr>
 					<tr>
 						<td>#{msg['change.address.option']}</td>
 						<td>
-							<h:selectOneMenu id="type" value="#{addressHandler.address.addressOption}" converter="#{addressHandler.addressOptionConverter}">
-								<f:selectItems value="#{addressHandler.addressOptionList}"
+							<h:selectOneMenu id="type" value="#{adminHandler.address.addressOption}" converter="#{adminHandler.addressOptionConverter}">
+								<f:selectItems value="#{adminHandler.addressOptionList}"
 									itemValue="#{option}" itemLabel="#{msg[option.bundleKey]}" var="option" />
 							</h:selectOneMenu>
 						</td>
@@ -42,8 +42,8 @@
 					<tr>		
 						<td></td>
 						<td>
-							<h:commandButton value="#{msg.change}" action="#{addressHandler.change()}" />
-							<h:commandButton value="#{msg.back}" action="change.xhtml" />
+							<h:commandButton value="#{msg.change}" action="#{adminHandler.change()}" />
+							<h:commandButton value="#{msg.back}" action="index.xhtml" />
 						</td>
 					</tr>
 				</table>

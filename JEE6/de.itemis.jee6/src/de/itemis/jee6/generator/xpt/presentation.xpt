@@ -1,0 +1,411 @@
+«IMPORT jee6»
+
+«EXTENSION de::itemis::jee6::generator::ext::model»
+«EXTENSION de::itemis::jee6::generator::ext::types»
+«EXTENSION de::itemis::jee6::generator::ext::ui»
+
+«DEFINE Main FOR Model»
+«EXPAND css»
+«EXPAND index»
+«EXPAND layout»
+«IF hasSecurityDomain()»
+«EXPAND login»
+«EXPAND logout»
+«ENDIF»
+«EXPAND menu»
+«EXPAND index FOREACH processes»
+«ENDDEFINE»
+
+«DEFINE index FOR Model»
+«FILE index(this) XHTML»
+«EXPAND utility::XhtmlStart»
+
+<ui:composition template="/«layout()»">
+	<ui:define name="title">#{msg['start.title']}</ui:define>
+	<ui:define name="content">
+		<ui:include src="«menu()»"/>
+	</ui:define>
+</ui:composition>
+«EXPAND utility::XhtmlEnd»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE layout FOR Model»
+«FILE layout(this) XHTML»
+«EXPAND utility::XhtmlStart»
+	<f:view>
+		<h:head>
+			<title><ui:insert name="title"/></title>
+			<h:outputStylesheet library="css" name="display.css"  />
+			<link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/img/favicon.ico"/>
+		</h:head>
+		<div class="header">
+			<table>
+				<tr>
+					<td class="logo"><h:graphicImage value="/img/logo.png" /></td>
+					<td class="space"/>
+					<td class="welcome">
+						<h1><ui:insert name="title"/></h1>
+						#{msg['start.name']} #{sessionController.name}
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div id="line"/>
+		<div id="mid">
+			<div class="left">
+				<div class="box">
+					<ui:include src="«menu()»"/>
+				</div>
+			</div>
+			<div class="content">
+				<ui:insert name="content"/>
+			</div>
+		</div>
+		<div id="line"/>
+		<div class="footer">#{msg.footer}</div>
+	</f:view>
+«EXPAND utility::XhtmlEnd»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE login FOR Model»
+«FILE login(this) XHTML»
+«EXPAND utility::XhtmlStart»
+<ui:composition template="/«layout()»">
+	<ui:define name="title">#{msg['login.title']}</ui:define>
+	<ui:define name="content">
+		<form id="login" name="login" method="post" action="j_security_check">
+			<table>
+				<tr>
+					<td></td>
+					<td class="remark">#{msg['login.do_login']}</td>
+				</tr>
+				<tr>
+					<td class="mid">#{msg['login.user']}:</td>
+					<td><h:inputText autofocus="autofocus" id="j_username" autocomplete="off" /></td>
+				</tr>
+				<tr>
+					<td class="mid">#{msg['login.password']}:</td>
+					<td><h:inputSecret id="j_password" autocomplete="off" /></td>
+				</tr>
+				<tr>
+					<td/>
+					<td>
+						<h:commandButton type="submit" value="#{msg.login}" />
+						<h:commandButton type="reset" value="#{msg.clear}" />
+					</td>
+				</tr>
+			</table>
+			<h:outputScript>
+				function setFocusOnLoginForm()
+				{
+					try
+					{
+						document.login.j_username.focus();
+					}
+					catch (err)
+					{
+					}
+				}
+				setFocusOnLoginForm();
+			</h:outputScript>
+		</form>
+	</ui:define>
+</ui:composition>
+«EXPAND utility::XhtmlEnd»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE logout FOR Model»
+«FILE logout(this) XHTML»
+«EXPAND utility::XhtmlStart»
+<ui:composition template="/«layout()»">
+	<ui:define name="title">#{msg['logout.title']}</ui:define>
+	<ui:define name="content">
+		<h1>#{msg['logout.title']}</h1>
+		<h:form>
+			#{msg['logout.message']}
+			<h:commandButton value="#{msg.logout}" action="#{sessionController.logout(request)}" />
+			<h:commandButton value="#{msg.back}" action="/«index()»" />
+		</h:form>
+	</ui:define>
+</ui:composition>
+«EXPAND utility::XhtmlEnd»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE menu FOR Model»
+«FILE menu(this) XHTML»
+«EXPAND utility::XhtmlStart»
+					<h2>#{msg.menue}</h2>
+					<ul>
+						<li><h:link value="#{msg.main}" outcome="/«index()»" /></li>
+«FOREACH processes AS process»
+						<ui:fragment rendered="#{«handlerUri(process)».allowed}" >
+							<li><h:link value="#{msg.«prefixOf(process)»}" outcome="/«index(process)»" /></li>
+						</ui:fragment>
+«ENDFOREACH»
+«IF hasSecurityDomain()»
+						<ui:fragment rendered="#{«sessionUri()».loggedIn}">
+							<li><h:link value="#{msg.logout}" outcome="/logout.xhtml"/></li>
+						</ui:fragment>
+«ENDIF»
+					</ul>
+«EXPAND utility::XhtmlEnd»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE index FOR Process»
+«FILE index(this) XHTML»
+«EXPAND utility::XhtmlStart»
+<ui:composition template="/«layout(getModel())»">
+	<ui:define name="title">#{msg['«prefixOf()».title']}</ui:define>
+	<ui:define name="content">
+		<h:messages layout="table" styleClass="error" />
+	</ui:define>
+</ui:composition>
+«EXPAND utility::XhtmlEnd»
+«ENDFILE»
+«ENDDEFINE»
+
+
+«DEFINE css FOR Model»
+«FILE css(this) XHTML»
+body {
+	padding: 0px;
+	margin: 0px;
+	font-family: sans-serif;
+	font-style: normal;
+	background-color: #fff;
+	color: #004c84;
+}
+
+a:LINK {
+	color: #004c84;
+}
+
+a:VISITED {
+	color: #004c84;
+}
+
+textarea {
+	
+}
+
+h1, h2, h3 {
+	margin-top: 6px;
+	margin-bottom: 2px;
+}
+
+table, tr, td, th {
+	text-align: left;
+	mrgin: 0px;
+	padding: 3px;
+	vertical-align: top;
+}
+
+div.space {
+	margin-top: 6px;
+	padding: opx;
+}
+
+tr.odd {
+	background-color: #fff;
+}
+
+tr.even {
+	background-color: #ffd;
+}
+
+td.nowrap {
+	text-align: left;
+	white-space: nowrap;
+}
+
+td.left {
+	text-align: left;
+}
+
+td.center {
+	text-align: center;
+}
+
+td.right {
+	text-align: right;
+	white-space: nowrap;
+}
+
+td.top {
+	vertical-align: text-top;
+}
+
+td.mid {
+	vertical-align: middle;
+}
+
+input, select, textarea {
+	border-radius: 3px
+}
+
+div.box {
+	margin: 0px;
+	padding: 8px;
+	color: #004c84;
+	background-color: #f8f8f8;
+	border-style: solid;
+	border-color: #004c84;
+	border-width: 1px;
+	border-radius: 5px;
+}
+
+div.box ul {
+	list-style: none;
+	margin-left: 0px;
+	margin-bottom: 0px;
+	padding-left: 0px;
+}
+
+div.box h2 {
+	margin-top: 0px;
+}
+
+td.logo {
+	width: 48px;
+	text-align: center;
+	background-color: #004c84;
+	vertical-align: middle;
+}
+
+div.header td.space {
+	border-width: 0px;
+	padding: 0px;
+	width: 8px;
+}
+
+td.welcome {
+	margin-left: 6px;
+	background-color: #f8f8f8;
+	vertical-align: middle;
+}
+
+div.header {
+	margin: 0px;
+	padding: 0px;
+	background-color: #fff;
+	border-width: 0px;
+}
+
+div.header table {
+	margin: 0px;
+	padding: 10px;
+	border-spacing: 0px;
+}
+
+div.header td {
+	padding: 8px;
+	border-style: solid;
+	border-color: #004c84;
+	border-width: 1px;
+	border-radius: 5px;
+}
+
+table.grid {
+	margin: 0px;
+	padding: 0px;
+	border-spacing: 0px;
+}
+
+table.grid td {
+	margin: 0px;
+	padding: 0px;
+}
+
+table.grid td.box {
+	margin: 0px;
+	padding: 8px;
+}
+
+td.box {
+	padding: 8px;
+	background-color: #f8f8f8;
+	border-style: solid;
+	border-color: #004c84;
+	border-width: 1px;
+	border-radius: 5px;
+}
+
+table.list {
+	margin-top: 6px;
+	padding: 5px;
+	background-color: #f8f8f8;
+	border-style: solid;
+	border-color: #004c84;
+	border-width: 1px;
+	border-radius: 4px
+}
+
+#mid {
+	margin: 0px;
+	padding: 0px;
+	position: relative;
+	width: 100%;
+}
+
+div.left {
+	padding: 10px;
+	position: static;
+	float: left;
+	max-width: 15%;
+}
+
+div {
+	position: static;
+}
+
+div.left-of {
+	float: left;
+	position: relative;
+}
+
+div.content {
+	padding: 10px;
+/*	background-color: #fee; */
+	position: relative;
+	float: left;
+	left: 0px;
+	max-width: 85%;
+	overflow: auto;
+}
+
+div.footer {
+	margin: 0px;
+	padding: 10px;
+	clear: both;
+	background-color: #fff;
+}
+
+#line {
+	height: 2px;
+	clear: both;
+	margin: 0px;
+	padding: 0px;
+	background-color: #004c84;
+}
+
+table.error {
+	margin: 0px 0px 6px 0px;
+	padding: 8px;
+	color: #004c84;
+	background-color: #ffe7e7;
+	border-style: solid;
+	border-color: #df9898;
+	border-width: 1px;
+	border-radius: 5px;
+}
+
+table.error tbody tr td {
+	background-color: #ffe7e7;
+}
+«ENDFILE»
+«ENDDEFINE»
