@@ -1,0 +1,76 @@
+«REM»
+«###»	Copyright (C) 2012 itemis AG
+«###»	$Id$
+«ENDREM»
+
+«IMPORT jee6»
+
+«EXTENSION de::itemis::jee6::generator::ext::dao»
+«EXTENSION de::itemis::jee6::generator::ext::entity»
+«EXTENSION de::itemis::jee6::generator::ext::model»
+«EXTENSION de::itemis::jee6::generator::ext::naming»
+«EXTENSION de::itemis::jee6::generator::ext::types»
+«EXTENSION de::itemis::jee6::generator::ext::ui»
+«EXTENSION de::itemis::jee6::generator::ext::converter»
+
+«DEFINE Multiple(Process p) FOR Entity»
+«LET getMultipleAttributes() AS attributes»
+«FOREACH attributes AS attr»
+	<!-- «attr.name» -->
+«ENDFOREACH»
+«ENDLET»
+«ENDDEFINE»
+
+«DEFINE Main(Process p) FOR Entity»
+«LET getSingleAttributes() AS attributes»
+«IF attributes.size > 0»
+			<h:form id="«prefixOf(this)»_list">
+				<h:dataTable
+						value="#{«handlerUri(p)».«uiList()»}" var="«nameOf(this)»"
+						styleClass="list" rowClasses="odd,even" columnClasses="«FOREACH attributes AS attr SEPARATOR ","»«getClass(attr)»«ENDFOREACH»,command,command,command">
+«FOREACH attributes AS attr»
+					<h:column>
+						<f:facet name="header">#{msg['«prefixOf(p)».«prefixOf(this)».«prefixOf(attr)»']}</f:facet>
+«EXPAND element(p, this) FOR attr»
+					</h:column>
+«ENDFOREACH»
+					<h:column>
+						<f:facet name="header" />
+						<h:commandLink
+							value="#{msg.change}"
+							action="#{«handlerUri(p)».«editEntity()»(«nameOf(this)»)}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header" />
+						<h:commandLink
+							value="#{msg.remove}"
+							action="#{«handlerUri(p)».«removeEntity()»(«nameOf(this)»)}" />
+					</h:column>
+«IF hasActivationBoolean()»
+					<h:column>
+						<f:facet name="header" />
+						<h:commandLink
+							value="#{«nameOf(this)».active ? msg['options.deactivate'] : msg['options.activate']}"
+							action="#{«handlerUri(p)».«reactivateEntity()»(«nameOf(this)»)}" />
+					</h:column>
+«ENDIF»
+				</h:dataTable>
+			</h:form>
+«ENDIF»
+«ENDLET»
+«ENDDEFINE»
+
+«DEFINE element(Process p, Entity e) FOR Attribute»
+		#{«nameOf(e)».«nameOf()»}
+«ENDDEFINE»
+
+«DEFINE element(Process p, Entity e) FOR jee6::Boolean»
+		<h:outputText value="#{msg.yes}" rendered="#{«nameOf(e)».«nameOf()»}" />
+		<h:outputText value="#{msg.no}" rendered="#{!«nameOf(e)».«nameOf()»}" />
+«ENDDEFINE»
+
+«DEFINE element(Process p, Entity e) FOR Date»
+		<h:outputText value="#{«nameOf(e)».«nameOf()»}">
+			<f:convertDateTime type="date" dateStyle="medium"/>
+		</h:outputText>
+«ENDDEFINE»

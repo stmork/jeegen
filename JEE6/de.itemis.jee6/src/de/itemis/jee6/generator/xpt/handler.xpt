@@ -1,5 +1,11 @@
+«REM»
+«###»	Copyright (C) 2012 itemis AG
+«###»	$Id$
+«ENDREM»
+
 «IMPORT jee6»
 
+«EXTENSION de::itemis::jee6::generator::ext::bundle»
 «EXTENSION de::itemis::jee6::generator::ext::entity»
 «EXTENSION de::itemis::jee6::generator::ext::model»
 «EXTENSION de::itemis::jee6::generator::ext::types»
@@ -8,13 +14,28 @@
 «EXTENSION de::itemis::jee6::generator::ext::dao»
 «EXTENSION de::itemis::jee6::generator::ext::ui»
 
-«DEFINE AbstractHandler FOR Process»
+«DEFINE Main FOR Model»
+«EXPAND AbstractModelHandler»
+«EXPAND AbstractProcessHandler FOREACH processes»
+«EXPAND ProcessHandler FOREACH processes»
+«EXPAND ApplicationController»
+«EXPAND SessionController»
+«ENDDEFINE»
+
+«DEFINE AbstractProcessHandler FOR Process»
 «FILE abstractHandlerFilename(this)»
 «EXPAND utility::Header»
+«LET getUiEntities() AS entities»
 package «handlerPackageOf(this)»;
 
 import javax.ejb.EJB;
 import «fqDaoOf()»;
+«IF entities.size > 0»
+import java.util.List;
+«ENDIF»
+«FOREACH entities AS entity»
+import «fqTypeOf(entity)»;
+«ENDFOREACH»
 
 «IF roles.size > 0»
 import javax.faces.context.ExternalContext;
@@ -40,28 +61,124 @@ abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(getMo
 		return true;
 «ENDIF»
 	}
+
+«FOREACH entities AS entity»
+	/*********************************************
+	 * «typeOf(entity)» «nameOf(entity)»
+	 *********************************************/
+
+	private «typeOf(entity)» «nameOf(entity)» = new «typeOf(entity)»();
+
+	public «typeOf(entity)» «getterOf(entity)»()
+	{
+		return «nameOf(entity)»;
+	}	
+
+	public void «setterOf(entity)»(final «typeOf(entity)» «nameOf(entity)»)
+	{
+		this.«nameOf(entity)» = «nameOf(entity)»;
+	}
+
+«IF isAbstract()»
+	abstract public List<«typeOf(entity)»> «listOf(entity)»();
+	abstract String «createEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
+	abstract String «editEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
+	abstract String «saveEntity(entity)»();
+	abstract String «removeEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
+«IF hasActivationBoolean(entity)»
+	abstract String «reactivateEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
+«ENDIF»
+«ENDIF»
+«ENDFOREACH»
 }
+«ENDLET»
 «ENDFILE»
 «ENDDEFINE»
 
-«DEFINE ImplHandler FOR Process»
+«DEFINE ProcessHandler FOR Process»
 «FILE handlerFilename(this) IMPL»
+«LET getUiEntities() AS entities»
 «EXPAND utility::Header»
 package «handlerPackageOf(this)»;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+«IF entities.size > 0»
+import java.util.List;
+«ENDIF»
+«FOREACH entities AS entity»
+import «fqTypeOf(entity)»;
+«ENDFOREACH»
 
 @ManagedBean
 @SessionScoped
 public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 {
 	private static final long serialVersionUID = 1L;
+
+«FOREACH entities AS entity»
+	/*********************************************
+	 * «typeOf(entity)» «nameOf(entity)»
+	 *********************************************/
+
+«IF isAbstract()»
+	@Override
+«ENDIF»
+	public List<«typeOf(entity)»> «listOf(entity)»()
+	{
+		return dao.«listOf(entity)»();
+	} 
+
+«IF isAbstract()»
+	@Override
+«ENDIF»
+	public String «createEntity(entity)»(final «typeOf(entity)» «nameOf(entity)») {
+		dao.«adder(entity)»(«nameOf(entity)»);
+		«setterOf(entity)»(new «typeOf(entity)»());
+		return "«index(entity)»";
+	}
+
+«IF isAbstract()»
+	@Override
+«ENDIF»
+	public String «editEntity(entity)»(final «typeOf(entity)» «nameOf(entity)») {
+		«setterOf(entity)»(«nameOf(entity)»);
+		return "«index(entity)»";
+	}
+
+«IF isAbstract()»
+	@Override
+«ENDIF»
+	public String «saveEntity(entity)»() {
+		dao.«updater(entity)»(«getterOf(entity)»());
+		«setterOf(entity)»(new «typeOf(entity)»());
+		return "«index(entity)»";
+	}
+
+«IF isAbstract()»
+	@Override
+«ENDIF»
+	public String «removeEntity(entity)»(final «typeOf(entity)» «nameOf(entity)») {
+		dao.«remover(entity)»(«nameOf(entity)»);
+		return "«index(entity)»";
+	}
+
+«IF hasActivationBoolean(entity)»
+«IF isAbstract()»
+	@Override
+«ENDIF»
+	public String «reactivateEntity(entity)»(final «typeOf(entity)» «nameOf(entity)») {
+		dao.activate(«nameOf(entity)», !«nameOf(entity)».isActive());
+		return "«index(entity)»";
+	}
+«ENDIF»
+«ENDFOREACH»
 }
+«ENDLET»
 «ENDFILE»
 «ENDDEFINE»
 
-«DEFINE Main FOR Model»
+«DEFINE AbstractModelHandler FOR Model»
 «FILE abstractHandlerFilename(this)»
 «LET entities.typeSelect(Options) AS converterList»
 «EXPAND utility::Header»
@@ -304,5 +421,76 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resourc
 	}
 }
 «ENDLET»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE ApplicationController FOR Model»
+«FILE applicationControllerFilename() IMPL»
+«EXPAND utility::Header»
+package «controllerPackageOf()»;
+
+import java.io.Serializable;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
+
+import de.itemis.jee6.util.LogUtil;
+
+@ManagedBean(eager=true)
+@ApplicationScoped
+public class «applicationController()» implements Serializable
+{
+	private static final long serialVersionUID = 1L;
+	private final static Log log = LogFactory.getLog(«applicationController()».class);
+
+	@PostConstruct
+	public void init()
+	{
+		log.info("\n" + LogUtil.banner("«versionBundle()»", "«name»"));
+		log.debug(">init()");
+		log.debug("<init()");
+	}
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE SessionController FOR Model»
+«FILE sessionControllerFilename() IMPL»
+«EXPAND utility::Header»
+package «controllerPackageOf()»;
+
+import javax.faces.bean.ManagedBean;
+import «fqAbstractHandlerOf()»;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+
+@ManagedBean
+public class «sessionController()» extends «abstractHandlerOf()»
+{
+	private static final long serialVersionUID = 1L;
+
+	public String logout(final HttpServletRequest request) throws ServletException
+	{
+		request.logout();
+		getExternalContext().invalidateSession();
+
+		return "/«index()»";
+	}
+
+	public boolean isLoggedIn()
+	{
+		return getExternalContext().getRemoteUser() != null;
+	}
+	
+	public String getName()
+	{
+		final String login = getExternalContext().getRemoteUser();
+
+		return login != null ? login : "<???>";
+	}
+}
 «ENDFILE»
 «ENDDEFINE»

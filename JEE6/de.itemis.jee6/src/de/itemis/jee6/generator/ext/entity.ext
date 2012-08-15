@@ -23,3 +23,19 @@ Boolean isId(Text t) :
 
 String enumOf(Options o) :
 	o.name.toFirstUpper() + "Enum";
+
+String createEntity(Entity e) :
+	"create" + e.name.toFirstUpper();
+
+String editEntity(Entity e) :
+	"edit" + e.name.toFirstUpper();
+	
+String saveEntity(Entity e) :
+	"save" + e.name.toFirstUpper();
+	
+String removeEntity(Entity e) :
+	"delete" + e.name.toFirstUpper();
+	
+String reactivateEntity(Entity e) :
+	"reactivate" + e.name.toFirstUpper();
+	

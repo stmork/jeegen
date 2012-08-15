@@ -45,11 +45,11 @@ public class UserHandler implements Serializable
 	}
 
 	
-	public AdminHandler getAddressHandler() {
+	public AdminHandler getAdminHandler() {
 		return adminHandler;
 	}
-	public void setAddressHandler(AdminHandler addressHandler) {
-		this.adminHandler = addressHandler;
+	public void setAdminHandler(AdminHandler adminHandler) {
+		this.adminHandler = adminHandler;
 	}
 
 	public String change()
@@ -72,7 +72,7 @@ public class UserHandler implements Serializable
 		log.debug(">add");
 		UserInfo user = getSessionInfo().getUser();
 		Address address = dao.addToUserInfo(user, new Address());
-		getAddressHandler().setAddress(address);
+		getAdminHandler().setAddress(address);
 		log.debug("<add");
 		return "address.xhtml";
 	}
@@ -80,7 +80,7 @@ public class UserHandler implements Serializable
 	public String editAddress(final Address address)
 	{
 		log.debug(">editAddress");
-		getAddressHandler().setAddress(address);
+		getAdminHandler().setAddress(address);
 		log.debug("<editAddress");
 		return "address.xhtml";
 	}

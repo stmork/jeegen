@@ -1,0 +1,87 @@
+«REM»
+«###»	Copyright (C) 2012 itemis AG
+«###»	$Id$
+«ENDREM»
+
+«IMPORT jee6»
+
+«EXTENSION de::itemis::jee6::generator::ext::entity»
+«EXTENSION de::itemis::jee6::generator::ext::model»
+«EXTENSION de::itemis::jee6::generator::ext::converter»
+«EXTENSION de::itemis::jee6::generator::ext::naming»
+«EXTENSION de::itemis::jee6::generator::ext::types»
+«EXTENSION de::itemis::jee6::generator::ext::ui»
+
+«DEFINE Main(Process p) FOR Entity»
+«LET getSingleAttributes() AS attributes»
+«IF attributes.size > 0»
+		<div class="box">
+			<h:form id="«prefixOf()»">
+				<table>
+«FOREACH attributes AS attr»
+					<tr>
+						<td>#{msg['«prefixOf(p)».«prefixOf()».«prefixOf(attr)»']}</td>
+						<td>
+«EXPAND element(p, this) FOR attr»
+						</td>
+					</tr>
+«ENDFOREACH»
+					<tr>
+						<td/>
+						<td><h:commandButton
+							action="#{«handlerUri(p)».«saveEntity()»}"
+«LET getId() AS id»
+«IF id == null»
+							value="#{«handlerUri(p)».«nameOf()».id == 0 ? msg.create : msg.save}" /></td>
+«ELSE»
+							value="#{«handlerUri(p)».«nameOf()».«nameOf(id)» == null ? msg.create : msg.save}" /></td>
+«ENDIF»
+«ENDLET»
+					</tr>
+				</table>
+			</h:form>
+		</div>
+«ENDIF»
+«ENDLET»
+«ENDDEFINE»
+
+«DEFINE element(Process p, Entity e) FOR jee6::Text»
+						<h:inputText id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" />
+«ENDDEFINE»
+
+«DEFINE element(Process p, Entity e) FOR jee6::Integer»
+						<h:inputText id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" size="10"/>
+«ENDDEFINE»
+
+«DEFINE element(Process p, Entity e) FOR jee6::Boolean»
+						<h:selectBooleanCheckbox id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" />
+«ENDDEFINE»
+
+«DEFINE element(Process p, Entity e) FOR jee6::Date»
+						<h:inputText id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}">
+							<f:convertDateTime pattern="dd.MM.yyyy"/>
+						</h:inputText>
+«ENDDEFINE»
+
+«DEFINE element(Process p, Entity e) FOR jee6::Number»
+						<h:inputText id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" maxlength="10" />
+«ENDDEFINE»
+
+«DEFINE element(Process p, Entity e) FOR OptionRef»
+							<h:selectOneMenu id="«nameOf()»"
+									value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}"
+									converter="#{«handlerUri(p)».«uiConverter(type)»}">
+								<f:selectItem itemValue="[NULL]" itemLabel="#{msg.no_selection}"/>
+								<f:selectItems
+										value="#{«handlerUri(p)».«uiList(type)»}"
+										itemValue="#{«nameOf(e)»}"
+										itemLabel="#{«nameOf(e)».name}"
+										var="vendor" />
+							</h:selectOneMenu>
+«ENDDEFINE»
+
+«DEFINE element(Process p, Entity e) FOR jee6::Attribute»
+«REM»
+Template intentionally left blank.
+«ENDREM»
+«ENDDEFINE»

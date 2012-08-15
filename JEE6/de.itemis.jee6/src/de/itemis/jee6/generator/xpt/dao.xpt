@@ -1,3 +1,8 @@
+«REM»
+«###»	Copyright (C) 2012 itemis AG
+«###»	$Id$
+«ENDREM»
+
 «IMPORT jee6»
 
 «EXTENSION de::itemis::jee6::generator::ext::entity»
@@ -6,15 +11,16 @@
 «EXTENSION de::itemis::jee6::generator::ext::naming»
 «EXTENSION de::itemis::jee6::generator::ext::converter»
 «EXTENSION de::itemis::jee6::generator::ext::dao»
+«EXTENSION de::itemis::jee6::generator::ext::ui»
 
 «DEFINE Main FOR Model»
-«EXPAND AbstractDao FOREACH processes»
-«EXPAND Dao FOREACH  processes»
+«EXPAND AbstractProcessDao FOREACH processes»
+«EXPAND ProcessDao FOREACH  processes»
 «EXPAND ModelDao»
 «EXPAND AbstractModelDao»
 «ENDDEFINE»
 
-«DEFINE Dao FOR Process»
+«DEFINE ProcessDao FOR Process»
 «FILE daoFilename(this) IMPL»
 «EXPAND utility::Header»
 package «daoPackageOf(this)»;
@@ -36,7 +42,7 @@ public class «daoOf(this)» extends
 «ENDFILE»
 «ENDDEFINE»
 
-«DEFINE AbstractDao FOR Process»
+«DEFINE AbstractProcessDao FOR Process»
 «IF hasAbstractDao()»
 «FILE abstractDaoFilename(this)»
 «EXPAND utility::Header»
@@ -85,6 +91,33 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 «EXPAND GetReference(entity)»
 		em.remove(«parameterOf(entity)»);
 	}
+
+«IF hasActivationBoolean(entity)»
+«LET getId(entity) AS id»
+	public «typeOf(entity)» activate(«typeOf(entity)» «nameOf(entity)», final boolean activation)
+	{
+«IF id == null»
+		«nameOf(entity)» = em.getReference(«typeOf(entity)».class, «nameOf(entity)».getId());
+«ELSE»
+		«nameOf(entity)» = em.getReference(«typeOf(entity)».class, «nameOf(entity)».«getterOf(id)»());
+«ENDIF»
+		«nameOf(entity)».setActive(activation);
+		
+		return «nameOf(entity)»;
+	}
+«ENDLET»
+«ENDIF»
+
+«IF isUi(entity) && (!Options.isInstance(entity))»
+	public List<«typeOf(entity)»> «listOf(entity)»()
+	{
+		TypedQuery<«typeOf(entity)»> query = em.createQuery(
+				"SELECT entity FROM «typeOf(entity)» entity",
+				«typeOf(entity)».class);
+		
+		return query.getResultList();
+	}
+«ENDIF»
 
 «FOREACH entity.types.select(e|isMany(e)) AS type»
 	public «typeOf(type)» «adderTo(entity)»(«typeOf(entity)» «parameterOf(entity)», final «typeOf(type)» «parameterOf(type)»)
@@ -138,7 +171,6 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 
 		return result.«getterOf(type)»();
 	}
-
 «ENDFOREACH»
 «ENDFOREACH»
 }
@@ -252,20 +284,8 @@ abstract public class «abstractDaoOf(this)»
 		
 		return query.getResultList();
 	}
+
 «IF hasActivationBoolean(option)»
-
-	public «typeOf(option)» activate(«typeOf(option)» «nameOf(option)», final boolean activation)
-	{
-«IF id == null»
-		«nameOf(option)» = em.getReference(«typeOf(option)».class, «nameOf(option)».getId());
-«ELSE»
-		«nameOf(option)» = em.getReference(«typeOf(option)».class, «nameOf(option)».«getterOf(id)»());
-«ENDIF»
-		«nameOf(option)».setActive(activation);
-		
-		return «nameOf(option)»;
-	}
-
 	public List<«typeOf(option)»> «listActiveOf(option)»()
 	{
 		TypedQuery<«typeOf(option)»> query = em.createQuery(

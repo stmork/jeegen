@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"      
+		xmlns:f="http://java.sun.com/jsf/core"      
+		xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/layout.xhtml">
+	<ui:define name="title">#{msg['admin.userinfo.title']}</ui:define>
+	<ui:define name="content">
+		<h:messages layout="table" styleClass="error" />
+
+
+
+		<div class="box">
+			<h:form id="userinfo">
+				<table>
+
+					<tr>
+						<td>#{msg['admin.userinfo.name']}</td>
+						<td>
+
+						<h:inputText id="name" value="#{adminHandler.userInfo.name}" />
+
+						</td>
+					</tr>
+
+					<tr>
+						<td>#{msg['admin.userinfo.mail']}</td>
+						<td>
+
+						<h:inputText id="mail" value="#{adminHandler.userInfo.mail}" />
+
+						</td>
+					</tr>
+
+					<tr>
+						<td>#{msg['admin.userinfo.birth']}</td>
+						<td>
+
+						<h:inputText id="birth" value="#{adminHandler.userInfo.birth}">
+							<f:convertDateTime pattern="dd.MM.yyyy"/>
+						</h:inputText>
+
+						</td>
+					</tr>
+
+					<tr>
+						<td>#{msg['admin.userinfo.changed']}</td>
+						<td>
+
+
+
+						</td>
+					</tr>
+
+					<tr>
+						<td/>
+						<td><h:commandButton
+							action="#{adminHandler.saveUserInfo}"
+
+
+							value="#{adminHandler.userInfo.login == null ? msg.create : msg.save}" /></td>
+
+
+					</tr>
+				</table>
+			</h:form>
+		</div>
+
+
+
+
+
+
+			<h:form id="userinfo_list">
+				<h:dataTable
+						value="#{adminHandler.userInfoList}" var="userInfo"
+						styleClass="list" rowClasses="odd,even" columnClasses="left,left,center,center,command,command,command">
+
+					<h:column>
+						<f:facet name="header">#{msg['admin.userinfo.name']}</f:facet>
+
+		#{userInfo.name}
+
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">#{msg['admin.userinfo.mail']}</f:facet>
+
+		#{userInfo.mail}
+
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">#{msg['admin.userinfo.birth']}</f:facet>
+
+		<h:outputText value="#{userInfo.birth}">
+			<f:convertDateTime type="date" dateStyle="medium"/>
+		</h:outputText>
+
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">#{msg['admin.userinfo.changed']}</f:facet>
+
+		#{userInfo.changed}
+
+					</h:column>
+
+					<h:column>
+						<f:facet name="header" />
+						<h:commandLink
+							value="#{msg.change}"
+							action="#{adminHandler.editUserInfo(userInfo)}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header" />
+						<h:commandLink
+							value="#{msg.remove}"
+							action="#{adminHandler.deleteUserInfo(userInfo)}" />
+					</h:column>
+
+				</h:dataTable>
+			</h:form>
+
+
+
+	</ui:define>
+</ui:composition>
+
+</html>

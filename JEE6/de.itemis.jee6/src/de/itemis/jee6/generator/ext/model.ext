@@ -27,6 +27,12 @@ cached List[String] getAllRoles(Model m) :
 cached String prefixOf(Process p) :
 	p.name.toLowerCase();
 
+cached String prefixOf(Entity e) :
+	e.name.toLowerCase();
+
+cached String prefixOf(Attribute a) :
+	a.name.toLowerCase();
+
 cached String uriOf(Process p) :
 	"/" + prefixOf(p); 
 
@@ -38,3 +44,6 @@ cached List[Property] getProperties(Model m) :
 
 cached Boolean hasSecurityDomain(Model m) :
 	getSecurityDomains(m).first() != null;
+
+Boolean isAbstract() :
+	false;

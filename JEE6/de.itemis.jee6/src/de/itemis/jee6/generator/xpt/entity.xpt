@@ -1,17 +1,20 @@
+«REM»
+«###»	Copyright (C) 2012 itemis AG
+«###»	$Id$
+«ENDREM»
+
 «IMPORT jee6»
 
 «EXTENSION de::itemis::jee6::generator::ext::types»
 «EXTENSION de::itemis::jee6::generator::ext::naming»
 «EXTENSION de::itemis::jee6::generator::ext::entity»
 
-«DEFINE Main FOR Entity»
-«EXPAND Base»
-«EXPAND Implementation»
+«DEFINE Main FOR Model»
+«EXPAND AbstractEntity FOREACH entities»
+«EXPAND Implementation FOREACH entities»
 «ENDDEFINE»
 
-
-
-«DEFINE Base FOR Entity»
+«DEFINE AbstractEntity FOR Entity»
 «FILE abstractFilename(this)»
 «LET getId() AS id»
 «EXPAND utility::Header»

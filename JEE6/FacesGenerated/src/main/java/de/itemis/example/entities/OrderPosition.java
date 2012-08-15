@@ -1,4 +1,4 @@
-package de.itemis.purchasing.entities;
+package de.itemis.example.entities;
 
 import java.util.Locale;
 

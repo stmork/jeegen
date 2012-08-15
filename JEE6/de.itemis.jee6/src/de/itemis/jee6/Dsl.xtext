@@ -32,7 +32,7 @@ Blob:		{Blob}'Blob';
 Clob:		{Clob}'Clob';
 
 Reference:	(History|EntityRef|OptionRef);
-History:	'History' type=[Entity|ID] name=ID;
+History:	'History' type=[Table|ID] name=ID;
 EntityRef:	'Entity'  type=[Entity|ID] (many?='[]')? name=ID;
 OptionRef:	'Option'  type=[Options|ID] name=ID;
 

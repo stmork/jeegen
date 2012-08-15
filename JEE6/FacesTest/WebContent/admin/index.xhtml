@@ -7,19 +7,19 @@
 		xmlns:h="http://java.sun.com/jsf/html">
 
 <ui:composition template="/layout.xhtml">
-	<ui:define name="title">#{msg['change.title']}</ui:define>
+	<ui:define name="title">#{msg['admin.userinfo.title']}</ui:define>
 	<ui:define name="content">
 		<h:messages layout="table" styleClass="error" />
 		<div class="box">
 			<h:form id="user">
 				<table>
 					<tr>
-						<td>#{msg['change.name']}</td>
+						<td>#{msg['admin.userinfo.name']}</td>
 						<td><h:inputText id="name" value="#{sessionInfo.user.name}" /></td>
 					</tr>
 		
 					<tr>
-						<td>#{msg['change.mail']}</td>
+						<td>#{msg['admin.userinfo.mail']}</td>
 						<td>
 							<h:inputText id="mail" value="#{sessionInfo.user.mail}" validator="#{sessionInfo.validateMail}">
 								<f:validator validatorId="mailValidator"/>
@@ -29,14 +29,14 @@
 					</tr>
 		
 					<tr>
-						<td>#{msg['change.birth']}</td>
+						<td>#{msg['admin.userinfo.birth']}</td>
 						<td><h:inputText id="birth" value="#{sessionInfo.user.birth}">
 								<f:convertDateTime pattern="dd.MM.yyyy"/>
 							</h:inputText>
 						</td>
 					</tr>
 					<tr>
-						<td>#{msg['change.changed']}</td>
+						<td>#{msg['admin.userinfo.changed']}</td>
 						<td>
 							<h:outputText value="#{sessionInfo.user.changed}">
 								<f:convertDateTime type="both"/>
@@ -72,21 +72,21 @@
 					value="#{userHandler.addressList}" var="address"
 					styleClass="list" rowClasses="odd,even" columnClasses="left,right,left,center,left">
 				<h:column>
-					<f:facet name="header">#{msg['change.address.street']}</f:facet>#{address.street}
+					<f:facet name="header">#{msg['admin.address.street']}</f:facet>#{address.street}
 				</h:column>
 				<h:column>
-					<f:facet name="header">#{msg['change.address.plz']}</f:facet>#{address.plz}
+					<f:facet name="header">#{msg['admin.address.plz']}</f:facet>#{address.plz}
 				</h:column>
 				<h:column>
-					<f:facet name="header">#{msg['change.address.location']}</f:facet>#{address.location}
+					<f:facet name="header">#{msg['admin.address.location']}</f:facet>#{address.location}
 				</h:column>
 				<h:column>
-					<f:facet name="header">#{msg['change.address.active']}</f:facet>
+					<f:facet name="header">#{msg['admin.address.active']}</f:facet>
 					<h:outputText value="#{msg.yes}" rendered="#{address.active}" />
 					<h:outputText value="#{msg.no}" rendered="#{!address.active}" />
 				</h:column>
 				<h:column>
-					<f:facet name="header">#{msg['change.address.option']}</f:facet>#{msg[address.addressOption.bundleKey]}
+					<f:facet name="header">#{msg['admin.address.option']}</f:facet>#{msg[address.addressOption.bundleKey]}
 				</h:column>
 				<h:column>
 					<f:facet name="header" />
@@ -100,7 +100,7 @@
 				</h:column>
 			</h:dataTable>
 			<div class="space"/>
-			<h:commandButton value="#{msg['change.add']}"
+			<h:commandButton value="#{msg['admin.address.add']}"
 				action="#{userHandler.addAddress()}" />
 		</h:form>
 	</ui:define>

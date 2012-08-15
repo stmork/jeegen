@@ -8,8 +8,75 @@ package de.itemis.faces.handler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import java.util.List;
+
+import de.itemis.faces.entities.Startup;
+
+import de.itemis.faces.entities.EntityEntry;
+
 @ManagedBean
 @SessionScoped
 public class InfoHandler extends AbstractInfoHandler {
 	private static final long serialVersionUID = 1L;
+
+	/*********************************************
+	 * Startup startup
+	 *********************************************/
+
+	public List<Startup> getStartupList() {
+		return dao.getStartupList();
+	}
+
+	public String createStartup(final Startup startup) {
+		dao.addStartup(startup);
+		setStartup(new Startup());
+		return "startup.xhtml";
+	}
+
+	public String editStartup(final Startup startup) {
+		setStartup(startup);
+		return "startup.xhtml";
+	}
+
+	public String saveStartup() {
+		dao.updateStartup(getStartup());
+		setStartup(new Startup());
+		return "startup.xhtml";
+	}
+
+	public String deleteStartup(final Startup startup) {
+		dao.deleteStartup(startup);
+		return "startup.xhtml";
+	}
+
+	/*********************************************
+	 * EntityEntry entityEntry
+	 *********************************************/
+
+	public List<EntityEntry> getEntityEntryList() {
+		return dao.getEntityEntryList();
+	}
+
+	public String createEntityEntry(final EntityEntry entityEntry) {
+		dao.addEntityEntry(entityEntry);
+		setEntityEntry(new EntityEntry());
+		return "entityentry.xhtml";
+	}
+
+	public String editEntityEntry(final EntityEntry entityEntry) {
+		setEntityEntry(entityEntry);
+		return "entityentry.xhtml";
+	}
+
+	public String saveEntityEntry() {
+		dao.updateEntityEntry(getEntityEntry());
+		setEntityEntry(new EntityEntry());
+		return "entityentry.xhtml";
+	}
+
+	public String deleteEntityEntry(final EntityEntry entityEntry) {
+		dao.deleteEntityEntry(entityEntry);
+		return "entityentry.xhtml";
+	}
+
 }

@@ -9,8 +9,8 @@ String finderOf(Options options) :
 String ensureOf(Options options) :
 	"ensure" + typeOf(options).toFirstUpper();
 
-String listOf(Options options) :
-	"get" + typeOf(options).toFirstUpper() + "List";
+String listOf(Entity entity) :
+	"get" + typeOf(entity).toFirstUpper() + "List";
 
 String listActiveOf(Options options) :
 	"getActive" + typeOf(options).toFirstUpper() + "List";

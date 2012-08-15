@@ -1,7 +1,13 @@
+«REM»
+«###»	Copyright (C) 2012 itemis AG
+«###»	$Id$
+«ENDREM»
+
 «IMPORT jee6»
 
 «EXTENSION de::itemis::jee6::generator::ext::bundle»
 «EXTENSION de::itemis::jee6::generator::ext::model»
+«EXTENSION de::itemis::jee6::generator::ext::ui»
 
 «DEFINE Main FOR Model»
 «FOREACH this.options.typeSelect(jee6::Locale) AS locale»
@@ -15,6 +21,8 @@
 «FILE messageFilename(this, locale) IMPL»
 start.title=Welcome to «name»!
 start.name=Full name
+options.activate=Activate
+options.deactivate=Deactivate
 «IF hasSecurityDomain()»
 login.title=Login dialog
 login.do_login=Please enter your login and password!
@@ -30,11 +38,19 @@ logout.message=Confirm loggin out!
 «ENDFOREACH»
 «FOREACH processes AS process»
 «prefixOf(process)»=«process.name»
-«prefixOf(process)».title=«process.name»
+«prefixOf(process)».title=Edit «process.name»
+«FOREACH getUiEntities(process) AS entity»
+«prefixOf(process)».«prefixOf(entity)».title=Edit «entity.name»
+«FOREACH entity.types AS attr»
+«prefixOf(process)».«prefixOf(entity)».«prefixOf(attr)»=«attr.name»
+«ENDFOREACH»
+«ENDFOREACH»
 «ENDFOREACH»
 back=back
 yes=yes
 no=no
+edit=Edit
+create=Create
 change=Change
 remove=Remove
 clear=Clear
@@ -44,6 +60,7 @@ logout=Logout
 main=Main menu
 footer=«name»
 menue=Menu
+no_selection=-- empty --
 «ENDFILE»
 «ENDDEFINE»
 

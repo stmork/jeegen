@@ -7,35 +7,35 @@
 		xmlns:h="http://java.sun.com/jsf/html">
 
 <ui:composition template="/layout.xhtml">
-	<ui:define name="title">#{msg['address.title']}</ui:define>
+	<ui:define name="title">#{msg['admin.address.title']}</ui:define>
 	<ui:define name="content">
 		<h:messages layout="table" styleClass="error" />
 		<div class="box">
 			<h:form id="address">
 				<table>
 					<tr>
-						<td>#{msg['change.address.street']}</td>
+						<td>#{msg['admin.address.street']}</td>
 						<td><h:inputText id="street" value="#{adminHandler.address.street}" /></td>
 					</tr>
 		
 					<tr>
-						<td>#{msg['change.address.plz']}</td>
+						<td>#{msg['admin.address.plz']}</td>
 						<td><h:inputText id="plz" value="#{adminHandler.address.plz}" /></td>
 					</tr>
 					<tr>
-						<td>#{msg['change.address.location']}</td>
+						<td>#{msg['admin.address.location']}</td>
 						<td><h:inputText id="location" value="#{adminHandler.address.location}" /></td>
 					</tr>
 					<tr>
-						<td>#{msg['change.address.active']}</td>
+						<td>#{msg['admin.address.active']}</td>
 						<td><h:selectBooleanCheckbox id="active" value="#{adminHandler.address.active}" /></td>
 					</tr>
 					<tr>
-						<td>#{msg['change.address.option']}</td>
+						<td>#{msg['admin.address.option']}</td>
 						<td>
 							<h:selectOneMenu id="type" value="#{adminHandler.address.addressOption}" converter="#{adminHandler.addressOptionConverter}">
 								<f:selectItems value="#{adminHandler.addressOptionList}"
-									itemValue="#{option}" itemLabel="#{msg[option.bundleKey]}" var="option" />
+									itemValue="#{option}" var="option" itemLabel="#{msg[option.bundleKey]}" />
 							</h:selectOneMenu>
 						</td>
 					</tr>

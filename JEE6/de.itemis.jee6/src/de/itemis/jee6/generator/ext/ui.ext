@@ -24,5 +24,69 @@ String css(Model m) :
 String index(Process p) :
 	prefixOf(p) + "/index.xhtml";
 
+String index(Entity e) :
+	prefixOf(e) + ".xhtml";
+
+String index(Process p, Entity e) :
+	prefixOf(p) + "/" + index(e); 
+
 String sessionUri(Model m) :
 	sessionController(m).toFirstLower();
+
+Set[Entity] getHistoryEntities(Model m) :
+	m.eAllContents.typeSelect(History).type;
+
+Boolean isUi(Options o) :
+	o.keys.size == 0;
+
+Boolean isUi(Table t) :
+	!getHistoryEntities(getModel(t)).contains(t);
+
+Boolean isUi(Entity e) :
+	true;
+
+List[Entity] getUiEntities(Process p) :
+	p.entities.select(e|isUi(e));
+
+private Boolean isSingle(Text t) :
+	!t.id;
+
+private Boolean isSingle(Blob r) :
+	false;
+
+private Boolean isSingle(Clob r) :
+	false;
+
+private Boolean isSingle(OptionRef r) :
+	true;
+
+private Boolean isSingle(Reference r) :
+	false;
+
+private Boolean isSingle(Attribute a) :
+	true;
+
+List[Attribute] getSingleAttributes(Entity e) :
+	e.types.select(e|isSingle(e));
+
+List[Attribute] getMultipleAttributes(Entity e) :
+	e.types.select(e|isMany(e));
+
+String getClass(Text t) :
+	"left";
+
+String getClass(Reference r) :
+	"left";
+
+String getClass(jee6::Integer i) :
+	"right";
+
+String getClass(Number n) :
+	"right";
+
+String getClass(Boolean b) :
+	"center";
+
+String getClass(Attribute a) :
+	"center";
+	

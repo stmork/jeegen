@@ -1,90 +1,15 @@
-«IMPORT jee6»
+«REM»
+«###»	Copyright (C) 2012 itemis AG
+«###»	$Id$
+«ENDREM»
 
-«EXTENSION de::itemis::jee6::generator::ext::bundle»
-«EXTENSION de::itemis::jee6::generator::ext::types»
-«EXTENSION de::itemis::jee6::generator::ext::naming»
-«EXTENSION de::itemis::jee6::generator::ext::ui»
+«IMPORT jee6»
 
 «DEFINE Main FOR Model»
 «EXPAND descriptor::Main»
-«EXPAND dao::Main»
 «EXPAND presentation::Main»
-«EXPAND ApplicationController»
-«EXPAND SessionController»
 «EXPAND bundle::Main»
 «EXPAND handler::Main»
-«EXPAND handler::AbstractHandler FOREACH processes»
-«EXPAND handler::ImplHandler FOREACH processes»
-«EXPAND entity::Main  FOREACH entities»
-«ENDDEFINE»
-
-«DEFINE ApplicationController FOR Model»
-«FILE applicationControllerFilename() IMPL»
-«EXPAND utility::Header»
-package «controllerPackageOf()»;
-
-import java.io.Serializable;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import javax.annotation.PostConstruct;
-import javax.faces.bean.ApplicationScoped;
-import javax.faces.bean.ManagedBean;
-
-import de.itemis.jee6.util.LogUtil;
-
-@ManagedBean(eager=true)
-@ApplicationScoped
-public class «applicationController()» implements Serializable
-{
-	private static final long serialVersionUID = 1L;
-	private final static Log log = LogFactory.getLog(«applicationController()».class);
-
-	@PostConstruct
-	public void init()
-	{
-		log.info("\n" + LogUtil.banner("«versionBundle()»", "«name»"));
-		log.debug(">init()");
-		log.debug("<init()");
-	}
-}
-«ENDFILE»
-«ENDDEFINE»
-
-«DEFINE SessionController FOR Model»
-«FILE sessionControllerFilename() IMPL»
-«EXPAND utility::Header»
-package «controllerPackageOf()»;
-
-import javax.faces.bean.ManagedBean;
-import «fqAbstractHandlerOf()»;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-
-@ManagedBean
-public class «sessionController()» extends «abstractHandlerOf()»
-{
-	private static final long serialVersionUID = 1L;
-
-	public String logout(final HttpServletRequest request) throws ServletException
-	{
-		request.logout();
-		getExternalContext().invalidateSession();
-
-		return "/«index()»";
-	}
-
-	public boolean isLoggedIn()
-	{
-		return getExternalContext().getRemoteUser() != null;
-	}
-	
-	public String getName()
-	{
-		final String login = getExternalContext().getRemoteUser();
-
-		return login != null ? login : "<???>";
-	}
-}
-«ENDFILE»
+«EXPAND dao::Main»
+«EXPAND entity::Main»
 «ENDDEFINE»

@@ -1,3 +1,8 @@
+«REM»
+«###»	Copyright (C) 2012 itemis AG
+«###»	$Id$
+«ENDREM»
+
 «IMPORT jee6»
 
 «EXTENSION de::itemis::jee6::generator::ext::model»
@@ -131,6 +136,7 @@ log4j.appender.R.layout.ConversionPattern=%-5p %-30.30c{1} %x - %m%n
 	<!-- Security definitions -->
 	<!-- ==================== -->
 «FOREACH processes AS process»
+«IF process.roles.size > 0»
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>SecurePages</web-resource-name>
@@ -145,6 +151,7 @@ log4j.appender.R.layout.ConversionPattern=%-5p %-30.30c{1} %x - %m%n
 «ENDFOREACH»
 		</auth-constraint>
 	</security-constraint>
+«ENDIF»
 «ENDFOREACH»
 
 	<login-config>

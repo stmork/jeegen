@@ -1,5 +1,5 @@
-application "Test" context "/example" package de.itemis.purchasing timeout 120 integration;
-persistence unit "purchasingDS" jndi "jdbc/purchasingDS";
+application "Test" context "/example" package de.itemis.example timeout 120 integration;
+persistence unit "exampleDS" jndi "jdbc/purchasingDS";
 security domain "itemis";
 smtp "mail/Default";
 
@@ -112,6 +112,31 @@ entity Inventory filterable
 	Boolean                       infrastructure;
 };
 
+options AddressOption
+{
+	"address.work",
+	"address.home"
+};
+
+entity HistoryEntry
+{
+	Timestamp auto creation;
+	Text           comment;
+};
+
+entity EntityEntry
+{
+	Timestamp auto creation;
+	Text           comment;
+	Option AddressOption addressOption;
+};
+
+entity Startup
+{
+	History HistoryEntry   history;
+	Entity  EntityEntry [] entities; 
+};
+
 process Inventory roles "controlling","it-support","vorstand"
 {
 	Inventory, InventoryHistoryEntry
@@ -135,4 +160,13 @@ process User roles "itemis", "extern"
 	Boolean default false "productive" ref "java:global/productive";
 
 	UserInfo
+};
+
+process Info
+{
+ 	Type javax.naming.directory.DirContext "ldap/itemis" ref "java:global/ldap/itemis"; 
+	Text "ldap/baseDN" ref "java:global/ldap/baseDN";
+	Boolean default false "productive" ref "java:global/productive";
+
+	UserInfo, Startup, EntityEntry
 };
