@@ -54,7 +54,7 @@ import javax.annotation.Resource;
 
 «IF entities.size > 0»
 import «packageOf(entities.first())».*;
-«IF entities.types.exists(e|isMany(e))»
+«IF entities.types.exists(e|isMany(e)) || entities.exists(e|isUi(e) && (!Options.isInstance(e)))»
 import java.util.List;
 import javax.persistence.TypedQuery;
 «ENDIF»
