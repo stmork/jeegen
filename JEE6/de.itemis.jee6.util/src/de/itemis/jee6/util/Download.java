@@ -1,10 +1,14 @@
 package de.itemis.jee6.util;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+
+import javax.imageio.ImageIO;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -18,10 +22,19 @@ public class Download {
 		this.url = new URL(url);
 	}
 
-	public byte[] download() throws IOException
+	public BufferedImage downloadImage() throws IOException
+	{
+		return ImageIO.read(url);
+	}
+
+	public byte[] downloadArray() throws IOException
     {
-		URLConnection connection = url.openConnection();
 		InputStream is = null;
+		byte [] array = null;
+
+		LogUtil.debug(log, "<download(%s)", url);
+		final URLConnection connection = url.openConnection();
+		connection.setReadTimeout(1000);
 
 		try
 		{
@@ -30,7 +43,7 @@ public class Download {
 
 			if (len > 0)
 			{
-				byte [] array = new byte[len];
+				array = new byte[len];
 				int already = 0;
 	
 				while (already < len)
@@ -56,7 +69,14 @@ public class Download {
 			{
 				is.close();
 			}
+			LogUtil.debug(log, "<download(..) = %s", array != null);
 		}
-		return null;
+		return array;
     }
+	
+	public static BufferedImage read(final byte [] buffer) throws IOException
+	{
+		ByteArrayInputStream stream = new ByteArrayInputStream(buffer);
+		return ImageIO.read(stream); 
+	}
 }
