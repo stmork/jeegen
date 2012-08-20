@@ -1,3 +1,6 @@
+/*
+ * $Id$
+ */
 package de.itemis.jee6.util;
 
 public class ErrorInfo
