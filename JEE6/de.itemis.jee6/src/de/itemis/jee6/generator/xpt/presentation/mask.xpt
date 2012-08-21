@@ -76,7 +76,6 @@
 						<h:inputText id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" maxlength="10">
 							<f:convertDateTime pattern="dd.MM.yyyy"/>
 						</h:inputText>
-						askdjfhakdfhn
 «ENDDEFINE»
 
 «DEFINE element(Process p, Entity e) FOR jee6::Timestamp»
