@@ -74,3 +74,9 @@
 			<f:convertDateTime type="date" dateStyle="medium"/>
 		</h:outputText>
 «ENDDEFINE»
+
+«DEFINE element(Process p, Entity e) FOR Timestamp»
+		<h:outputText value="#{«nameOf(e)».«nameOf()»}">
+			<f:convertDateTime type="date" dateStyle="medium"/>
+		</h:outputText>
+«ENDDEFINE»

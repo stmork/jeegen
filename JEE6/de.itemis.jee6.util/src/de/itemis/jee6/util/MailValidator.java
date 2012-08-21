@@ -1,4 +1,4 @@
-package de.itemis.faces;
+package de.itemis.jee6.util;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -103,6 +103,6 @@ public class SessionInfo extends AbstractHandler
 		log.debug(">testMail()");
 		dao.sendMail(user);
 		log.debug("<testMail()");
-		return "change.xhtml";
+		return NAV_INDEX;
 	}
 }
