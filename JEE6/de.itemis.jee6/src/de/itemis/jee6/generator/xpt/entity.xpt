@@ -39,6 +39,11 @@ import java.util.List;
 import «pkg»;
 «ENDFOREACH»
 
+/**
+ * This class implements the «typeOf()» entity bean,
+ *
+ * @author smork
+ */
 «IF isAbstract()»
 @MappedSuperclass
 abstract
@@ -98,6 +103,11 @@ import javax.persistence.*;
 import java.util.Locale;
 «ENDIF»
 
+/**
+ * This class implements the «typeOf()» entity bean,
+ *
+ * @author smork
+ */
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @Table(name="«typeOf(this)»")

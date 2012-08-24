@@ -48,6 +48,12 @@ abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(getMo
 	@EJB
 	protected «daoOf()» dao;
 
+	/**
+	 * This method checks wether the logged in user is allowed to use this handler. If no role
+	 * is specified this method alwasy returns true.
+	 *  
+	 * @return A flag which signs the permission to use this handler.
+	 */
 	public boolean isAllowed()
 	{
 «IF roles.size > 0»
@@ -235,10 +241,13 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resourc
 	protected «daoOf()» options;
 «ENDIF»
 
+	/**
+	 * This method initializes the resource bundles.
+	 */
 	@PostConstruct
 	public void getBundles()
 	{
-		log.debug("<getBundles()");
+		log.debug(">getBundles()");
 		FacesContext context = FacesContext.getCurrentInstance();
 		messages   = context.getApplication().getResourceBundle(context, BUNDLE_MESSAGES);
 		errors     = context.getApplication().getResourceBundle(context, BUNDLE_ERRORS);
@@ -261,7 +270,7 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resourc
 			log.trace(" msg: " + messages.getLocale());
 			log.trace(" err: " + errors.getLocale());
 		}
-		log.debug(">getBundles()");
+		log.debug("<getBundles()");
 	}
 
 
@@ -271,9 +280,19 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resourc
 	 **********************************/
 	private final «converterOf(option)» «nameOf(option)» = new «converterOf(option)»();
 
+	/**
+	 * This class implements a converter for converting HTML selection box IDs to option entity beans.
+	 */
 	private class «converterOf(option)» implements Converter
 	{
 «LET getId(option) AS id»
+		/**
+		 * This method converts an ID into its appropriate {@link «typeOf(option)»} option bean.
+		 *
+		 * @param context The {@link FacesContext}
+		 * @param compoent The {@link UIComponent} belonging to the selection box.
+		 * @param input The HTML input ID to be converted into the {@link «typeOf(option)»} option bean.
+		 */
 		@Override
 		public Object getAsObject(final FacesContext context, final UIComponent component, final String input)
 		{
@@ -284,6 +303,13 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resourc
 «ENDIF»
 		}
 
+		/**
+		 * This method converts the given {@link «typeOf(option)»} option bean into an HTML ID.
+		 *
+		 * @param context The {@link FacesContext}
+		 * @param compoent The {@link UIComponent} belonging to the selection box.
+		 * @param input The {@link «typeOf(option)»} option bean.
+		 */
 		@Override
 		public String getAsString(FacesContext context, UIComponent component, Object input)
 		{
@@ -307,18 +333,33 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resourc
 «ENDLET»
 	}
 	
+	/**
+	 * This method returns a {@link List} of all {@link «typeOf(option)»} option beans.
+	 *
+	 * @return {@link List} of all {@link «typeOf(option)»} option beans.
+	 */
 	public List<«typeOf(option)»> «listOf(option)»()
 	{
 		return options.«listOf(option)»();
 	}
 	
 «IF hasActivationBoolean(option)»
+	/**
+	 * This method returns a {@link List} of all active {@link «typeOf(option)»} option beans.
+	 *
+	 * @return {@link List} of all {@link «typeOf(option)»} option beans.
+	 */
 	public List<«typeOf(option)»> «listActiveOf(option)»()
 	{
 		return options.«listActiveOf(option)»();
 	}
 «ENDIF»
 	
+	/**
+	 * This method returns the converter for this «typeOf(option)» option bean.
+	 *
+	 * @return The {@link «typeOf(option)»} option bean converter.
+	 */
 	public «converterOf(option)» «converterGetter(option)»()
 	{
 		return «nameOf(option)»;
@@ -329,11 +370,19 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resourc
 	 *      utilities      *
 	 ***********************/
 
+	/**
+	 * This method checks whether an object is null.
+	 */
 	protected static boolean isNull(final Object input)
 	{
 		return (input == null) || NULL.equals(input);
 	}
 
+	/**
+	 * This method returns {@link ExternalContext}.
+	 *
+	 * @return The {@link ExternalContext}
+	 */
 	protected final ExternalContext getExternalContext()
 	{
 		final FacesContext context = FacesContext.getCurrentInstance();
@@ -341,11 +390,22 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resourc
 		return context != null ? context.getExternalContext() : null;
 	}
 
+	/**
+	 * This method returns a servlet context init parameter.
+	 *
+	 * @param key The key of the servlet init parameter.
+	 * @return The resulting servlet init parameter.
+	 */
 	protected final String getInitParameter(final String key)
 	{
 		return getExternalContext().getInitParameter(key);
 	}
 
+	/**
+	 * This method returns the {@link HttpSession} object.
+	 *
+	 * @return The {@link HttpSession} object.
+	 */
 	protected final HttpSession getSession()
 	{
 		ExternalContext context = getExternalContext();
@@ -353,23 +413,51 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resourc
 		return context != null ? (HttpSession) context.getSession(false) : null;
 	}
 
+	/**
+	 * This method returns true if a valid user is logged in.
+	 *
+	 * @return A flag signing if somebody is logged in.
+	 */ 
 	public boolean isLoggedIn()
 	{
 		return getExternalContext().getRemoteUser() != null;
 	}
 	
+	/**
+	 * This method gets a formatted messge from the resource bundle and formats it
+	 * using {link MessageFormat#format(final String, final Object...)}.
+	 *
+	 * @param key The key of the resource bundle.
+	 * @param params The array of optional format objects.
+	 * @return The formatted {@link String}.
+	 */
 	protected String getMessage(final String key, final Object ... params)
 	{
 		return MessageFormat.format(messages.getString(key), params);
 	}
 	
+	/**
+	 * This method gets a formatted error messge from the error resource bundle and formats it
+	 * using {link MessageFormat#format(final String, final Object...)}.
+	 *
+	 * @param key The key of the resource bundle.
+	 * @param params The array of optional format objects.
+	 * @return The formatted error {@link String}.
+	 */
 	protected String getError(final String key, final Object ... params)
 	{
 		final String message = MessageFormat.format(errors.getString(key), params); 
-		log.debug(message);
+		log.error(message);
 		return message;
 	}
 	
+	/**
+	 * This method returns the localized version of "yes" or "no" depending of the selected language
+	 * and the given flag.
+	 *
+	 * @param flag A flag signing "yes" or "no".
+	 * @return The returning localized {@link String}.
+	 */
 	public String getYesNo(final boolean flag)
 	{
 		return messages.getString(flag ? "yes" : "no");
@@ -385,6 +473,12 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resourc
 		return text;
 	}
 
+	/**
+	 * This method initializes the Faces error list from the given
+	 * {@link List} of {@link ErrorInfo} pairs.
+	 *
+	 * @param errors The {@link List} of {@link ErrorInfo} pairs.
+	 */
 	protected void addErrors(List<ErrorInfo> errors)
 	{
 		final FacesContext context = FacesContext.getCurrentInstance();
@@ -398,11 +492,21 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resourc
 		}		
 	}
 	
+	/**
+	 * This method returns the outcome of the default view.
+	 *
+	 * @return The default outcome.
+	 */
 	public String back()
 	{
 		return NAV_INDEX;
 	}
 
+	/**
+	 * This method returns the actual year as int.
+	 *
+	 * @return The actual year.
+	 */
 	public int getActYear()
 	{
 		return Calendar.getInstance().get(Calendar.YEAR);
