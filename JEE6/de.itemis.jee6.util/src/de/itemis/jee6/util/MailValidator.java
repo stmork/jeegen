@@ -11,6 +11,11 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
+/**
+ * This class implements a JSF {@link Validator}.
+ * @author sm
+ *
+ */
 @ManagedBean
 @FacesValidator("mailValidator")
 public class MailValidator implements Validator

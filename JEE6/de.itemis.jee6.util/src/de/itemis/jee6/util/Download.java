@@ -16,20 +16,43 @@ import javax.imageio.ImageIO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * This class helps downloading binary file via the HTTP protocol.
+ * 
+ * @author sm
+ *
+ */
 public class Download {
 	private final static Log log = LogFactory.getLog(Download.class);
 	private final URL url;
 
+	/**
+	 * The constructor specifies the URL.
+	 * @param url The URL for downloading.
+	 * @throws MalformedURLException Thrown if the URL is malformed.
+	 */
 	public Download(final String url) throws MalformedURLException
 	{
 		this.url = new URL(url);
 	}
 
+	/**
+	 * This method returns a {@link BufferedImage}.
+	 * 
+	 * @return The downloaded image.
+	 * @throws IOException Thrown if womething went wrong.
+	 */
 	public BufferedImage downloadImage() throws IOException
 	{
 		return ImageIO.read(url);
 	}
 
+	/**
+	 * This method downloads a HTTP resource and returns it as an byte array.
+	 * 
+	 * @return The downloaded byte array.
+	 * @throws IOException Thrown if womething went wrong.
+	 */
 	public byte[] downloadArray() throws IOException
     {
 		InputStream is = null;
@@ -77,6 +100,13 @@ public class Download {
 		return array;
     }
 	
+	/**
+	 * This method converts an image as byte array into a {@link BufferedImage}.
+	 * 
+	 * @param buffer The image as byte array.
+	 * @return The resulting {@link BufferedImage}.
+	 * @throws IOException Thrown if something went wrong.
+	 */
 	public static BufferedImage read(final byte [] buffer) throws IOException
 	{
 		ByteArrayInputStream stream = new ByteArrayInputStream(buffer);

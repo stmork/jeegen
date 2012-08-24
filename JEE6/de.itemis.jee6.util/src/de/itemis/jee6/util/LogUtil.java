@@ -4,26 +4,39 @@
 package de.itemis.jee6.util;
 
 import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
 import org.apache.commons.logging.Log;
 
+/**
+ * This class helps logging in a performant manner.
+ * @author sm
+ *
+ */
 public class LogUtil
 {
+	/**
+	 * This method formats a {@link String} using the {@link PrintWriter#printf(String, Object...)} method.
+	 * 
+	 * @param format The format {@link String}.
+	 * @param arguments The arguments to be formatted.
+	 * @return The completely formatted String.
+	 */
 	public final static String printf(final String format, final Object ... arguments)
 	{
-		final StringWriter sw = new StringWriter();
-		final PrintWriter  pw = new PrintWriter(sw);
-		
-		pw.printf(format, arguments);
-		final String result = sw.toString();
-		
-		pw.close();
-		return result;
+		return String.format(format, arguments);
 	}
 	
+	/**
+	 * This method prints a trace message into a given log with given message objects. The message
+	 * is formatted using {@link LogUtil#printf(String, Object...)} with given objects. The
+	 * formatting needs only be done if trace logging is enabled.
+	 * 
+	 * @param log The {@link Log} instance.
+	 * @param format The formattable messaage.
+	 * @param arguments The message objects formatted into the massage.
+	 */
 	public final static void trace(final Log log, final String format, final Object ... arguments)
 	{
 		if (log.isTraceEnabled())
@@ -32,6 +45,15 @@ public class LogUtil
 		}
 	}
 	
+	/**
+	 * This method prints a debug message into a given log with given message objects. The message
+	 * is formatted using {@link LogUtil#printf(String, Object...)} with given objects. The
+	 * formatting needs only be done if debug logging is enabled.
+	 * 
+	 * @param log The {@link Log} instance.
+	 * @param format The formattable messaage.
+	 * @param arguments The message objects formatted into the massage.
+	 */
 	public final static void debug(final Log log, final String format, final Object ... arguments)
 	{
 		if (log.isDebugEnabled())
@@ -40,6 +62,15 @@ public class LogUtil
 		}
 	}
 
+	/**
+	 * This method prints an info message into a given log with given message objects. The message
+	 * is formatted using {@link LogUtil#printf(String, Object...)} with given objects. The
+	 * formatting needs only be done if info logging is enabled.
+	 * 
+	 * @param log The {@link Log} instance.
+	 * @param format The formattable messaage.
+	 * @param arguments The message objects formatted into the massage.
+	 */
 	public final static void info(final Log log, final String format, final Object ... arguments)
 	{
 		if (log.isInfoEnabled())
@@ -48,6 +79,15 @@ public class LogUtil
 		}
 	}
 	
+	/**
+	 * This method prints a warn message into a given log with given message objects. The message
+	 * is formatted using {@link LogUtil#printf(String, Object...)} with given objects. The
+	 * formatting needs only be done if warn logging is enabled.
+	 * 
+	 * @param log The {@link Log} instance.
+	 * @param format The formattable messaage.
+	 * @param arguments The message objects formatted into the massage.
+	 */
 	public final static void warn(final Log log, final String format, final Object ... arguments)
 	{
 		if (log.isWarnEnabled())
@@ -56,6 +96,15 @@ public class LogUtil
 		}
 	}
 
+	/**
+	 * This method prints an error message into a given log with given message objects. The message
+	 * is formatted using {@link LogUtil#printf(String, Object...)} with given objects. The
+	 * formatting needs only be done if error logging is enabled.
+	 * 
+	 * @param log The {@link Log} instance.
+	 * @param format The formattable messaage.
+	 * @param arguments The message objects formatted into the massage.
+	 */
 	public final static void error(final Log log, final String format, final Object ... arguments)
 	{
 		if (log.isErrorEnabled())
@@ -64,11 +113,24 @@ public class LogUtil
 		}
 	}
 
+	/**
+	 * This method formats a {@link String} using the {@link MessageFormat#format(String, Object...)} method.
+	 * 
+	 * @param format The format {@link String}.
+	 * @param arguments The arguments to be formatted.
+	 * @return The completely formatted String.
+	 */
 	public final static String format(final String format, final Object ... arguments)
 	{
 		return MessageFormat.format(format, arguments);
 	}
-	
+
+	/**
+	 * This method tests a given {@link String} if it is null or has zero length.
+	 * 
+	 * @param input The {@link String} object to test.
+	 * @return true if given text is null or has zero length.
+	 */
 	public final static boolean isEmpty(final String input)
 	{
 		return (input == null) || input.trim().isEmpty();

@@ -10,9 +10,19 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 
-
+/**
+ * This class is an abstract class for validators.
+ * @author sm
+ *
+ */
 abstract public class BaseValidator implements ResourceBundleDefinitions
 {
+	/**
+	 * This method throws a validation exception. 
+	 * @param context The {@link FacesContext}.
+	 * @param key The key of the error resource bundle.
+	 * @param params Optional parameters needed to parametrize the error message.
+	 */
 	protected void validationError(final FacesContext context, final String key, final Object ... params)
 	{
 		final ResourceBundle errors = context.getApplication().getResourceBundle(context, BUNDLE_ERRORS);

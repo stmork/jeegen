@@ -8,6 +8,7 @@
 	<property name="src-path"      value="./src"/>
 	<property name="tst-path"      value="./test"/>
 	<property name="lib-path"      value="./lib"/>
+	<property name="doc-path"      value="../api"/>
 
 	<property name="jboss.home"    value="/opt/jboss"/>
 	<property name="jboss.lib"     value="${jboss.home}/modules"/>
@@ -97,6 +98,24 @@
 			</zipfileset>
 		</jar>
 	</target>
+
+	<target name="javadoc" depends="compile">
+		<javadoc access="package"
+				classpathref="compile.path"
+				sourcepath="${src-path}"
+				destdir="${doc-path}"
+				author="true"
+				splitindex="true"
+				use="true"
+				failonerror="true"
+				docencoding="UTF-8"
+				charset="UTF-8"
+				windowtitle="JEE6 utility classes">
+			<doctitle><![CDATA[<h1>JEE6 utility classes</h1>]]></doctitle>
+			<bottom><![CDATA[<i>Copyright &#169; 2012 all committers of JEE6 generator]]></bottom>
+		</javadoc>
+    </target>
+
 	<!-- ==================================================== -->
 	<!--              Setting up runtime targets              -->
 	<!-- ==================================================== -->

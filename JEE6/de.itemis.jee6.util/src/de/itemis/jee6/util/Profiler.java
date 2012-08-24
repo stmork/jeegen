@@ -11,12 +11,27 @@ import javax.interceptor.InvocationContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-
+/**
+ * This method implements a logging profiler which can be used as and EJB SessionBean interceptor.
+ * 
+ * @author sm
+ *
+ */
 public class Profiler
 {
 	private final static boolean isDebug = LogFactory.getLog(Profiler.class).isDebugEnabled();
 	private final static int MAX_LENGTH = 100;
 
+	/**
+	 * The profiling method. It prints the call with its objects and the return of the method with
+	 * the resulting object. Furthermore it counts the comsumed time of the called method. The method
+	 * calling is done in a performant way. If debug logging is not enabled no logging and time stopping
+	 * occur.
+	 * 
+	 * @param invocation The invocation context.
+	 * @return The result object of the called method.
+	 * @throws Exception The throwed exception of the called method.
+	 */
 	@AroundInvoke
 	public Object profile (InvocationContext invocation) throws Exception
 	{
@@ -71,6 +86,12 @@ public class Profiler
 		}
 	}
 
+	/**
+	 * This method builds a String from the method parameter objects.
+	 * 
+	 * @param params The method parameter object array.
+	 * @return The formatted object {@link String}.
+	 */
 	private static String listParams(final Object [] params)
 	{
 		if (params == null)
@@ -106,6 +127,13 @@ public class Profiler
 		}
 	}
 
+	/**
+	 * This method formats one method parameter object. It checks for null and will
+	 * reduce a {@link String} longer than {@value #MAX_LENGTH} chars to a short {@link String}.
+	 * 
+	 * @param param The method parameter object.
+	 * @return The resulting formatted {@link String}.
+	 */
 	private static String paramToString(Object param)
 	{
 		String result;
@@ -125,6 +153,14 @@ public class Profiler
 		return result;
 	}
 
+	/**
+	 * This method computes the comsumed time measured as milliseconds and formats a {@link String} for
+	 * logging.
+	 * 
+	 * @param start The start point just before method calling.
+	 * @param end The end point just after returning from method call.
+	 * @return The formatted {@link String} of the comsumed time. 
+	 */
 	private static String time(final long start, final long end)
 	{
 		final Double diff = (end - start) / 1000.0;
