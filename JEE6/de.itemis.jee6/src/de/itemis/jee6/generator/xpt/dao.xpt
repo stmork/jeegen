@@ -60,6 +60,17 @@ import javax.persistence.TypedQuery;
 «ENDIF»
 «ENDIF»
 
+/**
+ * This DAO class handles the persistence of the following entity beans:
+ * <ul>
+«FOREACH entities AS entity»
+ * <li>{@link «typeOf(entity)»}</li>
+ «ENDFOREACH»
+ * </ul>
+ * 
+ * @author sm
+ *
+ */
 abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 {
 «FOREACH properties AS property»
@@ -76,16 +87,33 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 	/*********************************************
 	 * «typeOf(entity)» «nameOf(entity)»
 	 *********************************************/
+
+	/**
+	 * This method adds the given {@link «typeOf(entity)»} entity to the database.
+	 * 
+	 * @param «parameterOf(entity)» The {@link «typeOf(entity)»} entity to add.
+	 */
 	public void «adder(entity)»(final «typeOf(entity)» «parameterOf(entity)»)
 	{
 		em.persist(«parameterOf(entity)»);
 	}
 
+	/**
+	 * This method updates the given {@link «typeOf(entity)»} object in the database.
+	 * 
+	 * @param «parameterOf(entity)» The {@link «typeOf(entity)»} object to update.
+	 * @return The reattached {@link «typeOf(entity)»} object.
+	 */
 	public «typeOf(entity)» «updater(entity)»(final «typeOf(entity)» «parameterOf(entity)»)
 	{
 		return em.merge(«parameterOf(entity)»);
 	}
 
+	/**
+	 * This method removes the givven {@link «typeOf(entity)»} from the database.
+	 * 
+	 * @param «parameterOf(entity)» The {@link «typeOf(entity)»} entity to remove.
+	 */
 	public void «remover(entity)»(«typeOf(entity)» «parameterOf(entity)»)
 	{
 «EXPAND GetReference(entity)»
@@ -94,6 +122,13 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 
 «IF hasActivationBoolean(entity)»
 «LET getId(entity) AS id»
+	/**
+	 * This method sets the activation flag of the given {@link «typeOf(entity)»} object.
+	 * 
+	 * @param «parameterOf(entity)» The {@link «typeOf(entity)»} where to set the activation flag.
+	 * @param activation The activation flag.
+	 * @return The reattached {@link «typeOf(entity)»} entity bean.
+	 */
 	public «typeOf(entity)» activate(«typeOf(entity)» «nameOf(entity)», final boolean activation)
 	{
 «IF id == null»
@@ -250,6 +285,12 @@ abstract public class «abstractDaoOf(this)»
 «LET getId(option) AS id»
 «IF id == null»
 «IF option.keys.size > 0»
+	/**
+	 * This method ensures the existance of an enumaration entry {@link «typeOf(option)» }.
+	 * @param type The enumeration entry {@link «enumOf(option)»}.
+	 * @param key The resource bundle key that belongs to this enumeration entry.
+	 * @return The resulting {@link «typeOf(option)» } entity bean.
+	 */
 	public «typeOf(option)» ensure(final «enumOf(option)» type, final String key)
 	{
 		«typeOf(option)» option = em.find(«typeOf(option)».class, type.ordinal());
@@ -262,20 +303,41 @@ abstract public class «abstractDaoOf(this)»
 		return option;
 	}
 
+	/**
+	 * This method finds a {@link «typeOf(option)» } entity bean.
+	 * @param id The ID to search for.
+	 * @return The resulting {@link «typeOf(option)» } entity bean.
+	 */
 	public «typeOf(option)» «finderOf(option)»(final «enumOf(option)» type)
 	{
 		return «finderOf(option)»(type.ordinal());
 	}
 «ENDIF»
 
+
+	/**
+	 * This method finds a {@link «typeOf(option)» } entity bean.
+	 * @param id The ID to search for.
+	 * @return The resulting {@link «typeOf(option)» } entity bean.
+	 */
 	public «typeOf(option)» «finderOf(option)»(final int id)
 «ELSE»
+
+	/**
+	 * This method finds a {@link «typeOf(option)» } entity bean.
+	 * @param id The ID to search for.
+	 * @return The resulting {@link «typeOf(option)» } entity bean.
+	 */
 	public «typeOf(option)» «finderOf(option)»(final «typeOf(id)» id)
 «ENDIF»
 	{
 		return em.find(«typeOf(option)».class, id);
 	} 
 
+	/**
+	 * This method returns a {@link List} of all {@link «typeOf(option)» } entity beans.
+	 * @return The resulting {@link List} of all {@link «typeOf(option)» } entity bean.
+	 */
 	public List<«typeOf(option)»> «listOf(option)»()
 	{
 		TypedQuery<«typeOf(option)»> query = em.createQuery(
@@ -286,6 +348,10 @@ abstract public class «abstractDaoOf(this)»
 	}
 
 «IF hasActivationBoolean(option)»
+	/**
+	 * This method returns a {@link List} of all active {@link «typeOf(option)» } entity beans.
+	 * @return The resulting {@link List} of all active {@link «typeOf(option)» } entity bean.
+	 */
 	public List<«typeOf(option)»> «listActiveOf(option)»()
 	{
 		TypedQuery<«typeOf(option)»> query = em.createQuery(
