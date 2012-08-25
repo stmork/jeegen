@@ -63,7 +63,7 @@ import javax.persistence.TypedQuery;
 /**
  * This DAO class handles the persistence of the following entity beans:
  * <ul>
-«FOREACH entities AS entity»
+«FOREACH entities.sortBy(e|e.name) AS entity»
  * <li>{@link «typeOf(entity)»}</li>
  «ENDFOREACH»
  * </ul>
@@ -85,7 +85,7 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 	}
 «ENDFOREACH»
 
-«FOREACH entities AS entity»
+«FOREACH entities.sortBy(e|e.name) AS entity»
 	/*********************************************
 	 * «typeOf(entity)» «nameOf(entity)»
 	 *********************************************/
@@ -291,7 +291,7 @@ public class «daoOf(this)» extends «abstractDaoOf(this)»
 
 «DEFINE AbstractModelDao FOR Model»
 «FILE abstractDaoFilename(this)»
-«LET entities.typeSelect(Options) AS converterList»
+«LET entities.typeSelect(Options).sortBy(o|o.name) AS converterList»
 «EXPAND utility::Header»
 package «daoPackageOf(this)»;
 
@@ -310,7 +310,7 @@ import «fqTypeOf(option)».«enumOf(option)»;
 /**
  * This session bean implementation handles the database operations of the following option beans:
  * <ul>
-«FOREACH entities.typeSelect(Options) AS option»
+«FOREACH converterList AS option»
  * <li>{@link «typeOf(option)»}</li>
  «ENDFOREACH»
  * </ul>

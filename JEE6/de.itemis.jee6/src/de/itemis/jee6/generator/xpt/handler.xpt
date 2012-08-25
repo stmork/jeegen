@@ -24,7 +24,7 @@
 
 «DEFINE ProcessHandler FOR Process»
 «FILE handlerFilename(this) IMPL»
-«LET getUiEntities() AS entities»
+«LET getUiEntities().sortBy(e|e.name) AS entities»
 «EXPAND utility::Header»
 package «handlerPackageOf(this)»;
 
@@ -41,7 +41,7 @@ import «fqTypeOf(entity)»;
  * This managed bean class implements the action handlings for the following entity beans:
  * <ul>
 «FOREACH entities AS entity»
- * <li>{@link typeOf(entity)»}</li>
+ * <li>{@link «typeOf(entity)»}</li>
 «ENDFOREACH»
  * </ul>
  */
@@ -116,7 +116,7 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 «DEFINE AbstractProcessHandler FOR Process»
 «FILE abstractHandlerFilename(this)»
 «EXPAND utility::Header»
-«LET getUiEntities() AS entities»
+«LET getUiEntities().sortBy(e|e.name) AS entities»
 package «handlerPackageOf(this)»;
 
 import javax.ejb.EJB;
@@ -135,7 +135,7 @@ import javax.faces.context.ExternalContext;
 /**
  * This abstract action handler acts for the following entity beans:
  * <ul>
-«FOREACH entities AS entity»
+«FOREACH entities.sortBy(e|e.name) AS entity»
  * <li>{@link «typeOf(entity)»}</li>
 «ENDFOREACH»
  * </ul>
@@ -162,7 +162,7 @@ abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(getMo
 		final ExternalContext context = getExternalContext();
 
 		return
-«FOREACH roles AS role SEPARATOR " || "»
+«FOREACH roles.sortBy(r|r) AS role SEPARATOR " || "»
 			context.isUserInRole("«role»")
 «ENDFOREACH»;
 «ELSE»
@@ -170,7 +170,7 @@ abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(getMo
 «ENDIF»
 	}
 
-«FOREACH entities AS entity»
+«FOREACH entities.sortBy(e|e.name) AS entity»
 	/*********************************************
 	 * «typeOf(entity)» «nameOf(entity)»
 	 *********************************************/
@@ -215,7 +215,7 @@ abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(getMo
 
 «DEFINE AbstractModelHandler FOR Model»
 «FILE abstractHandlerFilename(this)»
-«LET entities.typeSelect(Options) AS converterList»
+«LET entities.typeSelect(Options).sortBy(e|e.name) AS converterList»
 «EXPAND utility::Header»
 package «handlerPackageOf(this)»;
 
