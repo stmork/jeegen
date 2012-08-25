@@ -67,16 +67,18 @@ import javax.persistence.TypedQuery;
  * <li>{@link «typeOf(entity)»}</li>
  «ENDFOREACH»
  * </ul>
- * 
- * @author sm
- *
  */
 abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 {
 «FOREACH properties AS property»
 	@Resource(mappedName="«property.jndi»")
 	private «typeOf(property)» «nameOf(property)-»«EXPAND Default FOR property-»;
-	
+
+	/**
+	 * This is the getter of the «property.jndi» JNDI configuration property.
+	 *
+	 * @return The configured JNDI properity.
+	 */	
 	public «typeOf(property)» «getterOf(property)»()
 	{
 		return this.«nameOf(property)»;
@@ -110,7 +112,7 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 	}
 
 	/**
-	 * This method removes the givven {@link «typeOf(entity)»} from the database.
+	 * This method removes the given {@link «typeOf(entity)»} from the database.
 	 * 
 	 * @param «parameterOf(entity)» The {@link «typeOf(entity)»} entity to remove.
 	 */
@@ -144,6 +146,11 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 «ENDIF»
 
 «IF isUi(entity) && (!Options.isInstance(entity))»
+	/**
+	 * This method returns a complete {@link List} of {@link «typeOf(entity)»} entity beans.
+	 *
+	 * @return complete  {@link List} of {@link «typeOf(entity)»} entity beans.
+	 */
 	public List<«typeOf(entity)»> «listOf(entity)»()
 	{
 		TypedQuery<«typeOf(entity)»> query = em.createQuery(
@@ -155,6 +162,15 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 «ENDIF»
 
 «FOREACH entity.types.select(e|isMany(e)) AS type»
+	/**
+	 * This method adds a {@link «typeOf(type)»} entity bean to the «parameterOf(type)»
+	 * relation of the {@link «typeOf(entity)»} entity bean. Note that the given {@link «typeOf(type)»} entity
+	 * bean may not been persisted, yet!
+	 *
+	 * @param «parameterOf(entity)» The {@link «typeOf(entity)»} entity bean.
+	 * @param «parameterOf(type)» The {@link «typeOf(type)»} entity bean to remove from the relation.
+	 * @return The removed {@link «typeOf(type)»} entity bean. 
+	 */
 	public «typeOf(type)» «adderTo(entity)»(«typeOf(entity)» «parameterOf(entity)», final «typeOf(type)» «parameterOf(type)»)
 	{
 «EXPAND GetReference(entity)»
@@ -172,6 +188,13 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 	}
 
 «IF !History.isInstance(type)»
+	/**
+	 * This method removes a {@link «typeOf(type)»} entity bean to the «parameterOf(type)»
+	 * relation of the {@link «typeOf(entity)»} entity bean.
+	 *
+	 * @param «parameterOf(type)» The {@link «typeOf(type)»} entity bean to remove from the relation.
+	 * @return The removed {@link «typeOf(type)»} entity bean. 
+	 */
 	public «typeOf(entity)» «removerFrom(entity)»(«typeOf(type)» «parameterOf(type)»)
 	{
 «EXPAND GetReference((EntityRef)type)»
@@ -187,6 +210,12 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 	}
 «ENDIF»
 
+	/**
+	 * This method returns a {@link List} of {@link «typeOf(type)»} relation.
+	 *
+	 * @param «parameterOf(entity)» The {@link «typeOf(entity)»} which holds the relation.
+	 * @return {@link List} of {@link «typeOf(type)»} entity beans.
+	 */
 	public List<«typeOf(type)»> «lister(type)»(final «typeOf(entity)» «parameterOf(entity)»)
 	{
 «LET getId(entity) AS id»
@@ -244,6 +273,14 @@ import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
 import de.itemis.jee6.util.Profiler;
 
+/**
+ * This session bean implementation handles the database operations of the following option beans:
+ * <ul>
+«FOREACH entities.typeSelect(Options) AS option»
+ * <li>{@link «fqTypeOf(option)»}</li>
+ «ENDFOREACH»
+ * </ul>
+ */  
 @Stateless
 @Interceptors(Profiler.class)
 public class «daoOf(this)» extends «abstractDaoOf(this)»
@@ -260,7 +297,6 @@ package «daoPackageOf(this)»;
 
 import javax.persistence.*;
 
-
 «IF converterList.size > 0»
 import java.util.List;
 «FOREACH converterList AS option»
@@ -271,9 +307,20 @@ import «fqTypeOf(option)».«enumOf(option)»;
 «ENDFOREACH»
 «ENDIF»
 
+/**
+ * This session bean implementation handles the database operations of the following option beans:
+ * <ul>
+«FOREACH entities.typeSelect(Options) AS option»
+ * <li>{@link «typeOf(option)»}</li>
+ «ENDFOREACH»
+ * </ul>
+ */  
 abstract public class «abstractDaoOf(this)»
 {
 «FOREACH getPersistenceUnits() AS pu»
+	/**
+	 * The {@link EntityManager} to use for database operations.
+	 */
 	@PersistenceContext(unitName="«pu.persistence»")
 	protected EntityManager em;
 «ENDFOREACH»
@@ -305,7 +352,8 @@ abstract public class «abstractDaoOf(this)»
 
 	/**
 	 * This method finds a {@link «typeOf(option)» } entity bean.
-	 * @param id The ID to search for.
+	 *
+	 * @param type The {@link «enumOf(option)»} to search for.
 	 * @return The resulting {@link «typeOf(option)» } entity bean.
 	 */
 	public «typeOf(option)» «finderOf(option)»(final «enumOf(option)» type)
@@ -314,9 +362,9 @@ abstract public class «abstractDaoOf(this)»
 	}
 «ENDIF»
 
-
 	/**
 	 * This method finds a {@link «typeOf(option)» } entity bean.
+	 *
 	 * @param id The ID to search for.
 	 * @return The resulting {@link «typeOf(option)» } entity bean.
 	 */
@@ -325,6 +373,7 @@ abstract public class «abstractDaoOf(this)»
 
 	/**
 	 * This method finds a {@link «typeOf(option)» } entity bean.
+	 *
 	 * @param id The ID to search for.
 	 * @return The resulting {@link «typeOf(option)» } entity bean.
 	 */
@@ -336,6 +385,7 @@ abstract public class «abstractDaoOf(this)»
 
 	/**
 	 * This method returns a {@link List} of all {@link «typeOf(option)» } entity beans.
+	 *
 	 * @return The resulting {@link List} of all {@link «typeOf(option)» } entity bean.
 	 */
 	public List<«typeOf(option)»> «listOf(option)»()

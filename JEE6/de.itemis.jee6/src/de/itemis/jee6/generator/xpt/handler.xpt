@@ -22,85 +22,6 @@
 «EXPAND SessionController»
 «ENDDEFINE»
 
-«DEFINE AbstractProcessHandler FOR Process»
-«FILE abstractHandlerFilename(this)»
-«EXPAND utility::Header»
-«LET getUiEntities() AS entities»
-package «handlerPackageOf(this)»;
-
-import javax.ejb.EJB;
-import «fqDaoOf()»;
-«IF entities.size > 0»
-import java.util.List;
-«ENDIF»
-«FOREACH entities AS entity»
-import «fqTypeOf(entity)»;
-«ENDFOREACH»
-
-«IF roles.size > 0»
-import javax.faces.context.ExternalContext;
-«ENDIF»
-
-abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(getModel(this))»
-{
-	private static final long serialVersionUID = 1L;
-
-	@EJB
-	protected «daoOf()» dao;
-
-	/**
-	 * This method checks wether the logged in user is allowed to use this handler. If no role
-	 * is specified this method alwasy returns true.
-	 *  
-	 * @return A flag which signs the permission to use this handler.
-	 */
-	public boolean isAllowed()
-	{
-«IF roles.size > 0»
-		final ExternalContext context = getExternalContext();
-
-		return
-«FOREACH roles AS role SEPARATOR " || "»
-			context.isUserInRole("«role»")
-«ENDFOREACH»;
-«ELSE»
-		return true;
-«ENDIF»
-	}
-
-«FOREACH entities AS entity»
-	/*********************************************
-	 * «typeOf(entity)» «nameOf(entity)»
-	 *********************************************/
-
-	private «typeOf(entity)» «nameOf(entity)» = new «typeOf(entity)»();
-
-	public «typeOf(entity)» «getterOf(entity)»()
-	{
-		return «nameOf(entity)»;
-	}	
-
-	public void «setterOf(entity)»(final «typeOf(entity)» «nameOf(entity)»)
-	{
-		this.«nameOf(entity)» = «nameOf(entity)»;
-	}
-
-«IF isAbstract()»
-	abstract public List<«typeOf(entity)»> «listOf(entity)»();
-	abstract String «createEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
-	abstract String «editEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
-	abstract String «saveEntity(entity)»();
-	abstract String «removeEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
-«IF hasActivationBoolean(entity)»
-	abstract String «reactivateEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
-«ENDIF»
-«ENDIF»
-«ENDFOREACH»
-}
-«ENDLET»
-«ENDFILE»
-«ENDDEFINE»
-
 «DEFINE ProcessHandler FOR Process»
 «FILE handlerFilename(this) IMPL»
 «LET getUiEntities() AS entities»
@@ -116,6 +37,14 @@ import java.util.List;
 import «fqTypeOf(entity)»;
 «ENDFOREACH»
 
+/**
+ * This managed bean class implements the action handlings for the following entity beans:
+ * <ul>
+«FOREACH entities AS entity»
+ * <li>{@link typeOf(entity)»}</li>
+«ENDFOREACH»
+ * </ul>
+ */
 @ManagedBean
 @SessionScoped
 public class «handlerOf(this)» extends «abstractHandlerOf(this)»
@@ -184,6 +113,106 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 «ENDFILE»
 «ENDDEFINE»
 
+«DEFINE AbstractProcessHandler FOR Process»
+«FILE abstractHandlerFilename(this)»
+«EXPAND utility::Header»
+«LET getUiEntities() AS entities»
+package «handlerPackageOf(this)»;
+
+import javax.ejb.EJB;
+import «fqDaoOf()»;
+«IF entities.size > 0»
+import java.util.List;
+«ENDIF»
+«FOREACH entities AS entity»
+import «fqTypeOf(entity)»;
+«ENDFOREACH»
+
+«IF roles.size > 0»
+import javax.faces.context.ExternalContext;
+«ENDIF»
+
+/**
+ * This abstract action handler acts for the following entity beans:
+ * <ul>
+«FOREACH entities AS entity»
+ * <li>{@link «typeOf(entity)»}</li>
+«ENDFOREACH»
+ * </ul>
+ */
+abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(getModel(this))»
+{
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * This is the injected DAO reference to the {@link «daoOf()»} session bean.
+	 */
+	@EJB
+	protected «daoOf()» dao;
+
+	/**
+	 * This method checks wether the logged in user is allowed to use this handler. If no role
+	 * is specified this method alwasy returns true.
+	 *  
+	 * @return A flag which signs the permission to use this handler.
+	 */
+	public boolean isAllowed()
+	{
+«IF roles.size > 0»
+		final ExternalContext context = getExternalContext();
+
+		return
+«FOREACH roles AS role SEPARATOR " || "»
+			context.isUserInRole("«role»")
+«ENDFOREACH»;
+«ELSE»
+		return true;
+«ENDIF»
+	}
+
+«FOREACH entities AS entity»
+	/*********************************************
+	 * «typeOf(entity)» «nameOf(entity)»
+	 *********************************************/
+
+	private «typeOf(entity)» «nameOf(entity)» = new «typeOf(entity)»();
+
+	/**
+	 * The getter of the {@link «typeOf(entity)»} entity bean.
+	 *
+	 * @return The {@link «typeOf(entity)»} bean.
+	 */
+	public «typeOf(entity)» «getterOf(entity)»()
+	{
+		return «nameOf(entity)»;
+	}	
+
+	/**
+	 * The setter of the {@link «typeOf(entity)»} entity bean.
+	 *
+	 * @param «nameOf(entity)» The {@link «typeOf(entity)»} bean.
+	 */
+	public void «setterOf(entity)»(final «typeOf(entity)» «nameOf(entity)»)
+	{
+		this.«nameOf(entity)» = «nameOf(entity)»;
+	}
+
+«IF isAbstract()»
+	abstract public List<«typeOf(entity)»> «listOf(entity)»();
+	abstract String «createEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
+	abstract String «editEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
+	abstract String «saveEntity(entity)»();
+	abstract String «removeEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
+«IF hasActivationBoolean(entity)»
+	abstract String «reactivateEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
+«ENDIF»
+«ENDIF»
+«ENDFOREACH»
+}
+«ENDLET»
+«ENDFILE»
+«ENDDEFINE»
+
 «DEFINE AbstractModelHandler FOR Model»
 «FILE abstractHandlerFilename(this)»
 «LET entities.typeSelect(Options) AS converterList»
@@ -223,20 +252,46 @@ import «fqTypeOf(option)»;
 «ENDFOREACH»
 «ENDIF»
 
+/**
+ * This abstract handler base class handles the convertes of the following entity beans:
+ * <ul>
+«FOREACH converterList AS option»
+ * <li>{@link «typeOf(option)»}</li>
+«ENDFOREACH»
+ * </ul>
+ */
 abstract public class «abstractHandlerOf(this)» implements Serializable, ResourceBundleDefinitions
 {
 	private static final long serialVersionUID    = 1L;
 	private static final Log  log                 = LogFactory.getLog(AbstractHandler.class);
-
-	protected static final NumberFormat money     = NumberFormat.getCurrencyInstance();
-	protected static final String       NAV_INDEX = "«index()»";
-	protected static final String       NULL      = "[NULL]";
-
 	private ResourceBundle messages;
 	private ResourceBundle errors;
+
+	/**
+	 * A {@link NumberFormat} instance representing the money formatting.
+	 */
+	protected static final NumberFormat money     = NumberFormat.getCurrencyInstance();
+
+	/**
+	 * The default outcome of an URI.
+	 */
+	protected static final String       NAV_INDEX = "«index()»";
+
+	/**
+	 * The empty marker for selection boxes.
+	 */
+	protected static final String       NULL      = "[NULL]";
+
+	/**
+	 * A flag representing if this application is running in production mode. This value is retrieved
+	 * from the javax.faces.PROJECT_STAGE context parameter.
+	 */
 	protected boolean production;
 
 «IF converterList.size > 0»
+	/**
+	 * The options DAO bean nedded for converter operations.
+	 */
 	@EJB
 	protected «daoOf()» options;
 «ENDIF»
@@ -463,6 +518,14 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resourc
 		return messages.getString(flag ? "yes" : "no");
 	}
 
+	/**
+	 * This method sets an error message to the {@link FacesContext}.
+	 * 
+	 * @param id The JSF UI item id.
+	 * @param key The resource bundle key.
+	 * @param params The optional format objects.
+	 * @return The formatted error message.
+	 */
 	protected String error(final String id, final String key, final Object ... params)
 	{
 		final FacesContext context = FacesContext.getCurrentInstance();
@@ -512,11 +575,23 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resourc
 		return Calendar.getInstance().get(Calendar.YEAR);
 	}
 
+	/**
+	 * This method returns the actual amount ov available error messages.
+	 *
+	 * @return The amount of actual error messages.
+	 */
 	protected int getMessageCount()
 	{
 		return FacesContext.getCurrentInstance().getMessageList().size();
 	}
 
+	/**
+	 * This method throws a validation exception. The exception message is picked from
+	 * the error resource bundle and formatted with optional message objects.
+	 * 
+	 * @param key The key of the error resource bundle.
+	 * @param params Optional parameters needed to parametrize the error message.
+	 */
 	protected void validationError(final String key, final Object ... params)
 	{
 		FacesMessage msg = new FacesMessage(getError(key, params));
@@ -543,6 +618,9 @@ import javax.faces.bean.ManagedBean;
 
 import de.itemis.jee6.util.LogUtil;
 
+/**
+ * This class initializes the purchasing application.
+ */
 @ManagedBean(eager=true)
 @ApplicationScoped
 public class «applicationController()» implements Serializable
@@ -550,11 +628,14 @@ public class «applicationController()» implements Serializable
 	private static final long serialVersionUID = 1L;
 	private final static Log log = LogFactory.getLog(«applicationController()».class);
 
+	/**
+	 * This method initializes this application. It logs the application banner.
+	 */
 	@PostConstruct
 	public void init()
 	{
-		log.info("\n" + LogUtil.banner("«versionBundle()»", "«name»"));
 		log.debug(">init()");
+		log.info("\n" + LogUtil.banner("«versionBundle()»", "«name»"));
 		log.debug("<init()");
 	}
 }
@@ -567,15 +648,27 @@ public class «applicationController()» implements Serializable
 package «controllerPackageOf()»;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import «fqAbstractHandlerOf()»;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * This managed bean class handles some session tasks.
+ */
 @ManagedBean
+@SessionScoped
 public class «sessionController()» extends «abstractHandlerOf()»
 {
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * This methods log out a logged in user.
+	 * 
+	 * @param request The {@link HttpServletRequest}.
+	 * @return The outcome of the start page of this application.
+	 * @throws ServletException
+	 */
 	public String logout(final HttpServletRequest request) throws ServletException
 	{
 		request.logout();
@@ -584,11 +677,23 @@ public class «sessionController()» extends «abstractHandlerOf()»
 		return "/«index()»";
 	}
 
+	/**
+	 * This method returns true if somebody is logged in.
+	 * 
+	 * @return True if somebody is logged in.
+	 */
 	public boolean isLoggedIn()
 	{
 		return getExternalContext().getRemoteUser() != null;
 	}
 	
+	/**
+	 * This method returns the clear name of the logged in user. If nobody is
+	 * logged in an appropriate message is returned.
+	 *  
+	 * @return The clear name of the logged in user.
+	 * @throws NamingException
+	 */
 	public String getName()
 	{
 		final String login = getExternalContext().getRemoteUser();
