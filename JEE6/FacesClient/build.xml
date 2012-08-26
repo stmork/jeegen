@@ -3,6 +3,10 @@
 	<property name="src-path"     value="./src"/>
 	<property name="lib-path"     value="./lib"/>
 
+	<!-- ==================================================== -->
+	<!--              Setting up classpaths                   -->
+	<!-- ==================================================== -->
+
 	<path id="runtime.path">
 		<fileset dir="${jboss.lib}">
 			<include name="**/*.jar"/>
@@ -10,6 +14,10 @@
 		</fileset>
 		<path location="$bin"/>
 	</path>
+
+	<!-- ==================================================== -->
+	<!--              Setting up build targets                -->
+	<!-- ==================================================== -->
 
 	<target name="clean">
 		<delete dir="${bin-path}" />
