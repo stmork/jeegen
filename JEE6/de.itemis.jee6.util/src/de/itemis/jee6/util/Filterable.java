@@ -7,13 +7,12 @@ import java.util.Locale;
 
 /**
  * This interface specifies method for entity filtering.
- * @author sm
- *
  */
 public interface Filterable
 {
 	/**
 	 * This method should filter entities with a given pattern and Locale.
+	 *
 	 * @param pattern The pattern to search for.
 	 * @param locale The {@link Locale} for {@link String} comparison.
 	 * @return If the implemented instance meet the search pattern.
