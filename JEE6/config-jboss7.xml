@@ -11,7 +11,7 @@
 
 
                 <datasource jta="true" jndi-name="java:/jdbc/minimalDS" pool-name="minimalDS" enabled="true" use-ccm="true">
-                    <connection-url>jdbc:mysql://mysql.morknet.de:3306/minimal?autoReconnect=true</connection-url>
+                    <connection-url>jdbc:mysql://localhost:3306/minimal?autoReconnect=true</connection-url>
                     <driver>mysql-connector-java.jar</driver>
                     <pool>
                         <min-pool-size>10</min-pool-size>
@@ -19,11 +19,11 @@
                     </pool>
                     <security>
                         <user-name>jee6</user-name>
-                        <password>zzQNd2zwOtC4edtR</password>
+                        <password>geheim</password>
                     </security>
                 </datasource>
                 <datasource jta="true" jndi-name="java:/jdbc/facesDS" pool-name="facesDS" enabled="true" use-ccm="true">
-                    <connection-url>jdbc:mysql://mysql.morknet.de:3306/faces?autoReconnect=true</connection-url>
+                    <connection-url>jdbc:mysql://localhost:3306/faces?autoReconnect=true</connection-url>
                     <driver>mysql-connector-java.jar</driver>
                     <pool>
                         <min-pool-size>10</min-pool-size>
@@ -31,11 +31,11 @@
                     </pool>
                     <security>
                         <user-name>jee6</user-name>
-                        <password>zzQNd2zwOtC4edtR</password>
+                        <password>geheim</password>
                     </security>
                 </datasource>
                 <datasource jta="true" jndi-name="java:/jdbc/exampleDS" pool-name="exampleDS" enabled="true" use-ccm="true">
-                    <connection-url>jdbc:mysql://mysql.morknet.de:3306/example?autoReconnect=true</connection-url>
+                    <connection-url>jdbc:mysql://localhost:3306/example?autoReconnect=true</connection-url>
                     <driver>mysql-connector-java.jar</driver>
                     <pool>
                         <min-pool-size>10</min-pool-size>
@@ -43,7 +43,7 @@
                     </pool>
                     <security>
                         <user-name>jee6</user-name>
-                        <password>zzQNd2zwOtC4edtR</password>
+                        <password>geheim</password>
                     </security>
                 </datasource>
 

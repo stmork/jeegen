@@ -1,23 +1,23 @@
     <jdbc-connection-pool datasource-classname="com.mysql.jdbc.jdbc2.optional.MysqlDataSource" res-type="javax.sql.DataSource" name="example" transaction-isolation-level="read-committed">
       <property name="portNumber" value="3306"></property>
       <property name="databaseName" value="example"></property>
-      <property name="serverName" value="mysql.morknet.de"></property>
+      <property name="serverName" value="localhost"></property>
       <property name="user" value="jee6"></property>
-      <property name="password" value="zzQNd2zwOtC4edtR"></property>
+      <property name="password" value="geheim"></property>
     </jdbc-connection-pool>
     <jdbc-connection-pool datasource-classname="com.mysql.jdbc.jdbc2.optional.MysqlDataSource" res-type="javax.sql.DataSource" name="faces" transaction-isolation-level="read-committed">
       <property name="portNumber" value="3306"></property>
       <property name="databaseName" value="faces"></property>
-      <property name="serverName" value="mysql.morknet.de"></property>
+      <property name="serverName" value="localhost"></property>
       <property name="user" value="jee6"></property>
-      <property name="password" value="zzQNd2zwOtC4edtR"></property>
+      <property name="password" value="geheim"></property>
     </jdbc-connection-pool>
     <jdbc-connection-pool datasource-classname="com.mysql.jdbc.jdbc2.optional.MysqlDataSource" res-type="javax.sql.DataSource" name="minimal" transaction-isolation-level="read-committed">
       <property name="portNumber" value="3306"></property>
       <property name="databaseName" value="minimal"></property>
-      <property name="serverName" value="mysql.morknet.de"></property>
+      <property name="serverName" value="localhost"></property>
       <property name="user" value="jee6"></property>
-      <property name="password" value="zzQNd2zwOtC4edtR"></property>
+      <property name="password" value="geheim"></property>
     </jdbc-connection-pool>
 
     <jdbc-resource pool-name="example" description="" jndi-name="jdbc/exampleDS__pm"></jdbc-resource>
