@@ -1,5 +1,5 @@
 application "Test" context "/example" package de.itemis.example timeout 120 integration;
-persistence unit "exampleDS" jndi "jdbc/purchasingDS";
+persistence unit "exampleDS" jndi "jdbc/exampleDS";
 security domain "itemis";
 smtp "mail/Default";
 

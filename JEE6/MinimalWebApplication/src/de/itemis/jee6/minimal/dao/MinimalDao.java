@@ -12,7 +12,7 @@ import de.itemis.jee6.minimal.entity.MinimalEntity;
 
 @Stateless
 public class MinimalDao {
-	@PersistenceContext(unitName = "jbossDS")
+	@PersistenceContext(unitName = "minimalDS")
 	protected EntityManager em;
 
 	public void init(final MinimalEntity entity)

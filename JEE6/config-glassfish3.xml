@@ -1,0 +1,70 @@
+    <jdbc-connection-pool datasource-classname="com.mysql.jdbc.jdbc2.optional.MysqlDataSource" res-type="javax.sql.DataSource" name="example" transaction-isolation-level="read-committed">
+      <property name="portNumber" value="3306"></property>
+      <property name="databaseName" value="example"></property>
+      <property name="serverName" value="mysql.morknet.de"></property>
+      <property name="user" value="jee6"></property>
+      <property name="password" value="zzQNd2zwOtC4edtR"></property>
+    </jdbc-connection-pool>
+    <jdbc-connection-pool datasource-classname="com.mysql.jdbc.jdbc2.optional.MysqlDataSource" res-type="javax.sql.DataSource" name="faces" transaction-isolation-level="read-committed">
+      <property name="portNumber" value="3306"></property>
+      <property name="databaseName" value="faces"></property>
+      <property name="serverName" value="mysql.morknet.de"></property>
+      <property name="user" value="jee6"></property>
+      <property name="password" value="zzQNd2zwOtC4edtR"></property>
+    </jdbc-connection-pool>
+    <jdbc-connection-pool datasource-classname="com.mysql.jdbc.jdbc2.optional.MysqlDataSource" res-type="javax.sql.DataSource" name="minimal" transaction-isolation-level="read-committed">
+      <property name="portNumber" value="3306"></property>
+      <property name="databaseName" value="minimal"></property>
+      <property name="serverName" value="mysql.morknet.de"></property>
+      <property name="user" value="jee6"></property>
+      <property name="password" value="zzQNd2zwOtC4edtR"></property>
+    </jdbc-connection-pool>
+
+    <jdbc-resource pool-name="example" description="" jndi-name="jdbc/exampleDS__pm"></jdbc-resource>
+    <jdbc-resource pool-name="example" description="" jndi-name="jdbc/exampleDS__nontx"></jdbc-resource>
+    <jdbc-resource pool-name="faces" description="" jndi-name="jdbc/facesDS__pm"></jdbc-resource>
+    <jdbc-resource pool-name="faces" description="" jndi-name="jdbc/facesDS__nontx"></jdbc-resource>
+    <jdbc-resource pool-name="minimal" description="" jndi-name="jdbc/minimalDS__pm"></jdbc-resource>
+    <jdbc-resource pool-name="minimal" description="" jndi-name="jdbc/minimalDS__nontx"></jdbc-resource>
+
+    <mail-resource host="localhost" jndi-name="mail/Default" from="it@itemis.de" user="admin"></mail-resource>
+    <custom-resource res-type="javax.naming.directory.InitialDirContext" jndi-name="ldap/itemis" factory-class="de.itemis.faces.LdapFactory">
+      <property name="url" value="ldaps://master.itemis.de:636/"></property>
+    </custom-resource>
+    <custom-resource res-type="java.lang.String" jndi-name="ldap/url" factory-class="org.glassfish.resources.custom.factory.PrimitivesAndStringFactory">
+      <property name="value" value="ldaps://master.itemis.de:636/"></property>
+    </custom-resource>
+    <custom-resource res-type="java.lang.String" jndi-name="ldap/baseDN" factory-class="org.glassfish.resources.custom.factory.PrimitivesAndStringFactory">
+      <property name="value" value="dc=itemis,dc=de"></property>
+    </custom-resource>
+    <custom-resource res-type="java.lang.Boolean" description="" jndi-name="productive" factory-class="org.glassfish.resources.custom.factory.PrimitivesAndStringFactory">
+      <property name="value" value="false"></property>   
+    </custom-resource>
+
+
+
+      <application-ref ref="minimal" virtual-servers="server"></application-ref>
+      <application-ref ref="facestest" virtual-servers="server"></application-ref>
+      <application-ref ref="example" virtual-servers="server"></application-ref>
+      <resource-ref ref="jdbc/exampleDS__pm"></resource-ref>
+      <resource-ref ref="jdbc/exampleDS__nontx"></resource-ref>
+      <resource-ref ref="jdbc/facesDS__pm"></resource-ref>
+      <resource-ref ref="jdbc/facesDS__nontx"></resource-ref>
+      <resource-ref ref="jdbc/minimalDS__pm"></resource-ref>
+      <resource-ref ref="jdbc/minimalDS__nontx"></resource-ref>
+      <resource-ref ref="mail/Default"></resource-ref>
+      <resource-ref ref="ldap/itemis"></resource-ref>
+      <resource-ref ref="ldap/url"></resource-ref>
+      <resource-ref ref="ldap/baseDN"></resource-ref>
+      <resource-ref ref="productive"></resource-ref>
+
+
+
+        <auth-realm name="itemis" classname="com.sun.enterprise.security.auth.realm.ldap.LDAPRealm">
+          <property name="directory" value="ldaps://master.itemis.de:636/"></property>
+          <property name="base-dn" value="dc=itemis,dc=de"></property>
+          <property name="jaas-context" value="ldapRealm"></property>
+          <property name="group-base-dn" value="ou=groups,dc=itemis,dc=de"></property>
+          <property name="groupObject" value="posixGroup"></property>
+          <property name="group-search-filter" value="memberUid=%s"></property>   
+        </auth-realm>

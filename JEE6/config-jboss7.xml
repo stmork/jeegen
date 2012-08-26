@@ -1,0 +1,66 @@
+        <subsystem xmlns="urn:jboss:domain:naming:1.1">
+            <bindings>
+                <simple name="java:global/ldap/url" value="ldaps://master.itemis.de:636/"/>
+                <simple name="java:global/ldap/baseDN" value="dc=itemis,dc=de"/>
+                <simple name="java:global/productive" value="false" type="boolean"/>
+                <simple name="java:global/build" value="4711" type="int"/>
+                <object-factory name="java:global/ldap/itemis" module="de.itemis.jee6.ldap" class="de.itemis.faces.LdapFactory"/>
+            </bindings>
+        </subsystem>
+
+
+
+                <datasource jta="true" jndi-name="java:/jdbc/minimalDS" pool-name="minimalDS" enabled="true" use-ccm="true">
+                    <connection-url>jdbc:mysql://mysql.morknet.de:3306/minimal?autoReconnect=true</connection-url>
+                    <driver>mysql-connector-java.jar</driver>
+                    <pool>
+                        <min-pool-size>10</min-pool-size>
+                        <max-pool-size>50</max-pool-size>
+                    </pool>
+                    <security>
+                        <user-name>jee6</user-name>
+                        <password>zzQNd2zwOtC4edtR</password>
+                    </security>
+                </datasource>
+                <datasource jta="true" jndi-name="java:/jdbc/facesDS" pool-name="facesDS" enabled="true" use-ccm="true">
+                    <connection-url>jdbc:mysql://mysql.morknet.de:3306/faces?autoReconnect=true</connection-url>
+                    <driver>mysql-connector-java.jar</driver>
+                    <pool>
+                        <min-pool-size>10</min-pool-size>
+                        <max-pool-size>50</max-pool-size>
+                    </pool>
+                    <security>
+                        <user-name>jee6</user-name>
+                        <password>zzQNd2zwOtC4edtR</password>
+                    </security>
+                </datasource>
+                <datasource jta="true" jndi-name="java:/jdbc/exampleDS" pool-name="exampleDS" enabled="true" use-ccm="true">
+                    <connection-url>jdbc:mysql://mysql.morknet.de:3306/example?autoReconnect=true</connection-url>
+                    <driver>mysql-connector-java.jar</driver>
+                    <pool>
+                        <min-pool-size>10</min-pool-size>
+                        <max-pool-size>50</max-pool-size>
+                    </pool>
+                    <security>
+                        <user-name>jee6</user-name>
+                        <password>zzQNd2zwOtC4edtR</password>
+                    </security>
+                </datasource>
+
+
+                <security-domain name="itemis" cache-type="default">
+                    <authentication>
+                        <login-module code="Ldap" flag="required">
+                            <module-option name="java.naming.factory.initial" value="com.sun.jndi.ldap.LdapCtxFactory"/>
+                            <module-option name="java.naming.provider.url" value="ldaps://master.itemis.de:636/"/>
+                            <module-option name="java.naming.security.authentication" value="simple"/>
+                            <module-option name="java.naming.security.protocol" value="ssl"/>
+                            <module-option name="principalDNPrefix" value="uid="/>
+                            <module-option name="principalDNSuffix" value=",ou=Users,dc=itemis,dc=de"/>
+                            <module-option name="rolesCtxDN" value="ou=Groups,dc=itemis,dc=de"/>
+                            <module-option name="roleAttributeIsDN" value="false"/>
+                            <module-option name="roleAttributeID" value="cn"/>
+                            <module-option name="uidAttributeID" value="memberUid"/>
+                        </login-module>
+                    </authentication>
+                </security-domain>

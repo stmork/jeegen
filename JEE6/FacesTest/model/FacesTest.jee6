@@ -1,5 +1,5 @@
 application "JEE6 Test Application" context "/faces" package de.itemis.faces timeout 2 development;
-persistence unit "jbossDS" jndi "jdbc/jbossDS";
+persistence unit "facesDS" jndi "jdbc/facesDS";
 security domain "itemis";
 smtp "mail/Default";
 locale "de" default;

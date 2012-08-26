@@ -35,7 +35,7 @@ public class SessionDaoBean
 {
 	private final static Log log = LogFactory.getLog(SessionDaoBean.class);
 
-	@PersistenceContext(unitName="jbossDS")
+	@PersistenceContext(unitName="facesDS")
 	EntityManager em;
 
 	@Resource(name="mail/Default")
