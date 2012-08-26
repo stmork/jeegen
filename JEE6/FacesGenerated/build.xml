@@ -10,7 +10,6 @@
 	<property name="res-gen-path" value="./src/generated/resources"/>
 	<property name="lib-path"     value="${res-path}/WEB-INF/lib"/>
 
-
 	<property name="eclipse.home"         value="/opt/eclipse"/>
 	<property name="eclipse.home.plugins" value="${eclipse.home}/plugins"/>
 	
