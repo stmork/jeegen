@@ -41,6 +41,7 @@ Workflow
 		impldir="«getSrcPath()»"
 		srcdir="«getSrcGenPath()»"
 		resdir="«getResGenPath()»"
+		xhtmldir="«getResGenPath()»"
 	}
 }
 «ENDFILE»
