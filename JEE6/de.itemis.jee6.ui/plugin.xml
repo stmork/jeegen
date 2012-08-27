@@ -3,15 +3,15 @@
 
 <plugin>
 
-    <extension
-            point="org.eclipse.ui.editors">
+    <extension point="org.eclipse.ui.editors">
         <editor
             class="de.itemis.jee6.ui.DslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
             extensions="jee6"
             id="de.itemis.jee6.Dsl"
-            name="Dsl Editor">
+            icon="icons/jee6_16.gif"
+            name="JEE6 Editor">
         </editor>
     </extension>
     <extension
@@ -47,8 +47,7 @@
             </and>
         </definition>
     </extension>
-    <extension
-            point="org.eclipse.ui.preferencePages">
+    <extension point="org.eclipse.ui.preferencePages">
         <page
             class="de.itemis.jee6.ui.DslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="de.itemis.jee6.Dsl"
@@ -193,13 +192,13 @@
       </markerResolutionGenerator>
    </extension>
 
-   <extension
-         point="org.eclipse.ui.newWizards">
+   <extension point="org.eclipse.ui.newWizards">
       <wizard
             category="org.eclipse.xtext.projectwiz"
             class="de.itemis.jee6.ui.DslExecutableExtensionFactory:de.itemis.jee6.ui.wizard.DslNewProjectWizard"
             id="de.itemis.jee6.ui.wizard.DslNewProjectWizard"
             name="JEE6 Generator Project"
+            icon="icons/jee6_32.gif"
             project="true">
       </wizard>
    </extension>

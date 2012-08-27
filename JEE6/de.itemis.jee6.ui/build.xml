@@ -4,6 +4,7 @@
 	<property file="${basedir}/environment.properties"/>
 
 	<property name="bin-path"     value="./bin"/>
+	<property name="ico-path"     value="./icons"/>
 	<property name="src-path"     value="./src"/>
 	<property name="src-gen-path" value="./src-gen"/>
 	<property name="manifest"     value="META-INF/MANIFEST.MF"/>
@@ -79,6 +80,7 @@
 		<jar destfile="${plugin}" manifest="${manifest}">
 			<zipfileset dir=".">
 				<include name="plugin.xml"/>
+				<include name="**/*.gif"/>
 			</zipfileset>
 			<zipfileset dir="${bin-path}"/>
 		</jar>
