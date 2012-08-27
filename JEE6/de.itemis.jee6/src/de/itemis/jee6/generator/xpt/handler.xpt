@@ -64,7 +64,7 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 	 * This method returns a {@link List} of all {@link «typeOf(entity)»} beans.
 	 *
 	 * @return {@link List} of all {@link «typeOf(entity)»} beans.
-	 * @see «fqDaoOf()»#«listOf(entity)»()
+	 * @see «daoOf()»#«listOf(entity)»()
 	 */
 «IF isAbstract()»
 	@Override
@@ -81,7 +81,7 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 	 *
 	 * @param «nameOf(entity)» The new {@link «typeOf(entity)»} bean to persist.
 	 * @return The outcome where to go on success.
-	 * @see «fqDaoOf()»#«adder(entity)»(«typeOf(entity)»)
+	 * @see «daoOf()»#«adder(entity)»(«typeOf(entity)»)
 	 */
 «IF isAbstract()»
 	@Override
@@ -110,7 +110,7 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 	 * This method sets the given {@link «typeOf(entity)»} bean for editing.
 	 *
 	 * @return The outcome where to go on success.
-	 * @see «fqDaoOf()»#«updater(entity)»(«typeOf(entity)»)
+	 * @see «daoOf()»#«updater(entity)»(«typeOf(entity)»)
 	 */
 «IF isAbstract()»
 	@Override
@@ -126,7 +126,7 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 	 *
 	 * @param «nameOf(entity)» The {@link «typeOf(entity)»} bean to remove.
 	 * @return The outcome where to go on success.
-	 * @see «fqDaoOf()»#«remover(entity)»(«typeOf(entity)»)
+	 * @see «daoOf()»#«remover(entity)»(«typeOf(entity)»)
 	 */
 «IF isAbstract()»
 	@Override
@@ -142,8 +142,7 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 	 *
 	 * @param «nameOf(entity)» The {@link «typeOf(entity)»} bean to change the active flag.
 	 * @return The outcome where to go on success.
-	 * @see «fqDaoOf()»#activate(«typeOf(entity)»,boolean)
-	 * @see «fqDaoOf()»#active
+	 * @see «daoOf()»#activate(«typeOf(entity)»,boolean)
 	 */
 «IF isAbstract()»
 	@Override
