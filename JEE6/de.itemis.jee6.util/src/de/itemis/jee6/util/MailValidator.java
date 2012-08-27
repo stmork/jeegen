@@ -30,12 +30,23 @@ public class MailValidator implements Validator
 	public void validate(FacesContext context, UIComponent component, Object input)
 			throws ValidatorException
 	{
-		Matcher matcher = pattern.matcher(input.toString());
-		if(!matcher.matches())
+		if (input != null)
 		{
-			FacesMessage msg = new FacesMessage("E-mail validation failed.", "Invalid E-mail format.");
-			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-			throw new ValidatorException(msg);
+			if (input instanceof String)
+			{
+				final String email = (String)input;
+
+				if (!LogUtil.isEmpty(email))
+				{
+					Matcher matcher = pattern.matcher(email);
+					if(!matcher.matches())
+					{
+						FacesMessage msg = new FacesMessage("E-mail validation failed.", "Invalid E-mail format.");
+						msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+						throw new ValidatorException(msg);
+					}
+				}
+			}
 		}
 	}
 }

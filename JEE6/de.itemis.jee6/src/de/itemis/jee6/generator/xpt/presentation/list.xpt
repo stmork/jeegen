@@ -38,7 +38,7 @@
 						<f:facet name="header" />
 						<h:commandLink
 							value="#{msg.change}"
-							action="#{«handlerUri(p)».«editEntity()»(«nameOf(this)»)}" />
+							action="#{«handlerUri(p)».«changeEntity()»(«nameOf(this)»)}" />
 					</h:column>
 					<h:column>
 						<f:facet name="header" />

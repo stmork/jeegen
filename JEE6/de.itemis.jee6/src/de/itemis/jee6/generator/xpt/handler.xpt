@@ -33,7 +33,7 @@ import javax.faces.bean.SessionScoped;
 «IF entities.size > 0»
 import java.util.List;
 «ENDIF»
-«FOREACH entities AS entity»
+«FOREACH entities.sortBy(e|e.name) AS entity»
 import «fqTypeOf(entity)»;
 «ENDFOREACH»
 
@@ -71,7 +71,9 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 «ENDIF»
 	public List<«typeOf(entity)»> «listOf(entity)»()
 	{
-		return dao.«listOf(entity)»();
+		final List<«typeOf(entity)»> list = dao.«listOf(entity)»();
+
+		return list;
 	} 
 
 	/**
@@ -99,7 +101,7 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 «IF isAbstract()»
 	@Override
 «ENDIF»
-	public String «editEntity(entity)»(final «typeOf(entity)» «nameOf(entity)») {
+	public String «changeEntity(entity)»(final «typeOf(entity)» «nameOf(entity)») {
 		«setterOf(entity)»(«nameOf(entity)»);
 		return «navigation(this, entity)»;
 	}
@@ -245,7 +247,7 @@ abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(getMo
 «IF isAbstract()»
 	abstract public List<«typeOf(entity)»> «listOf(entity)»();
 	abstract String «createEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
-	abstract String «editEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
+	abstract String «changeEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
 	abstract String «saveEntity(entity)»();
 	abstract String «removeEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
 «IF hasActivationBoolean(entity)»
