@@ -21,6 +21,9 @@ String menu(Model m) :
 String css(Model m) :
 	"resources/css/display.css";
 
+String navigation(Process p, Entity e) :
+	"NAV_" + p.name.toUpperCase() + "_" + e.name.toUpperCase();
+
 String index(Process p) :
 	prefixOf(p) + "/index.xhtml";
 

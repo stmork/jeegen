@@ -40,7 +40,7 @@ import «fqTypeOf(entity)»;
 /**
  * This managed bean class implements the action handlings for the following entity beans:
  * <ul>
-«FOREACH entities AS entity»
+«FOREACH entities.sortBy(e|e.name) AS entity»
  * <li>{@link «typeOf(entity)»}</li>
 «ENDFOREACH»
  * </ul>
@@ -51,11 +51,21 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 {
 	private static final long serialVersionUID = 1L;
 
-«FOREACH entities AS entity»
+«FOREACH entities.sortBy(e|e.name) AS entity»
+	private static final String «navigation(this, entity)» = "«index(entity)»";
+«ENDFOREACH»
+
+«FOREACH entities.sortBy(e|e.name) AS entity»
 	/*********************************************
 	 * «typeOf(entity)» «nameOf(entity)»
 	 *********************************************/
 
+	/**
+	 * This method returns a {@link List} of all {@link «typeOf(entity)»} beans.
+	 *
+	 * @return {@link List} of all {@link «typeOf(entity)»} beans.
+	 * @see «daoOf()»#«listOf(entity)»()
+	 */
 «IF isAbstract()»
 	@Override
 «ENDIF»
@@ -64,47 +74,82 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 		return dao.«listOf(entity)»();
 	} 
 
+	/**
+	 * This method adds a new {@link «typeOf(entity)»} bean.
+	 *
+	 * @param «nameOf(entity)» The new {@link «typeOf(entity)»} bean to persist.
+	 * @return The outcome where to go on success.
+	 * @see «daoOf()»#«adder(entity)»(«typeOf(entity)»)
+	 */
 «IF isAbstract()»
 	@Override
 «ENDIF»
 	public String «createEntity(entity)»(final «typeOf(entity)» «nameOf(entity)») {
 		dao.«adder(entity)»(«nameOf(entity)»);
 		«setterOf(entity)»(new «typeOf(entity)»());
-		return "«index(entity)»";
+		return «navigation(this, entity)»;
 	}
 
+	/**
+	 * This method sets the given {@link «typeOf(entity)»} bean for editing.
+	 *
+	 * @param «nameOf(entity)» The {@link «typeOf(entity)»} bean to edit.
+	 * @return The outcome where to go on success.
+	 */
 «IF isAbstract()»
 	@Override
 «ENDIF»
 	public String «editEntity(entity)»(final «typeOf(entity)» «nameOf(entity)») {
 		«setterOf(entity)»(«nameOf(entity)»);
-		return "«index(entity)»";
+		return «navigation(this, entity)»;
 	}
 
+	/**
+	 * This method sets the given {@link «typeOf(entity)»} bean for editing.
+	 *
+	 * @param «nameOf(entity)» The {@link «typeOf(entity)»} bean to edit.
+	 * @return The outcome where to go on success.
+	 * @see «daoOf()»#«updater(entity)»(«typeOf(entity)»)
+	 */
 «IF isAbstract()»
 	@Override
 «ENDIF»
 	public String «saveEntity(entity)»() {
 		dao.«updater(entity)»(«getterOf(entity)»());
 		«setterOf(entity)»(new «typeOf(entity)»());
-		return "«index(entity)»";
+		return «navigation(this, entity)»;
 	}
 
+	/**
+	 * This method removes the given {@link «typeOf(entity)»} bean.
+	 *
+	 * @param «nameOf(entity)» The {@link «typeOf(entity)»} bean to remove.
+	 * @return The outcome where to go on success.
+	 * @see «daoOf()»#«remover(entity)»(«typeOf(entity)»)
+	 */
 «IF isAbstract()»
 	@Override
 «ENDIF»
 	public String «removeEntity(entity)»(final «typeOf(entity)» «nameOf(entity)») {
 		dao.«remover(entity)»(«nameOf(entity)»);
-		return "«index(entity)»";
+		return «navigation(this, entity)»;
 	}
 
 «IF hasActivationBoolean(entity)»
+	/**
+	 * This method changes the active flag of the given {@link «typeOf(entity)»} bean.
+	 *
+	 * @param «nameOf(entity)» The {@link «typeOf(entity)»} bean to change the active flag.
+	 * @return The outcome where to go on success.
+	 * @see «daoOf()»#activate(«typeOf(entity)»,boolean)
+	 * @see «daoOf()»#active
+	 */
 «IF isAbstract()»
 	@Override
 «ENDIF»
 	public String «reactivateEntity(entity)»(final «typeOf(entity)» «nameOf(entity)») {
 		dao.activate(«nameOf(entity)», !«nameOf(entity)».isActive());
-		return "«index(entity)»";
+		return «navigation(this, entity)»;
 	}
 «ENDIF»
 «ENDFOREACH»
