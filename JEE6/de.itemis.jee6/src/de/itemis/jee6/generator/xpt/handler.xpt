@@ -166,7 +166,7 @@ package «handlerPackageOf(this)»;
 
 import javax.ejb.EJB;
 import «fqDaoOf()»;
-«IF entities.size > 0»
+«IF (entities.size > 0) && isAbstract()»
 import java.util.List;
 «ENDIF»
 «FOREACH entities AS entity»
@@ -196,8 +196,17 @@ abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(getMo
 	protected «daoOf()» dao;
 
 	/**
-	 * This method checks wether the logged in user is allowed to use this handler. If no role
-	 * is specified this method alwasy returns true.
+«IF roles.size > 0»
+	 * This method checks wether the logged in user is allowed to use this handler.
+	 * The must be in one of the following roles:
+	 * <ul>
+«FOREACH roles.sortBy(r|r) AS role»
+	 * <li>«role»</li>
+«ENDFOREACH»
+	 * </ul>
+«ELSE»
+	 * This method returns true because everybody is allowed to access this handler. 
+«ENDIF»
 	 *  
 	 * @return A flag which signs the permission to use this handler.
 	 */
