@@ -354,7 +354,7 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resourc
 	 * This method initializes the resource bundles.
 	 */
 	@PostConstruct
-	public void getBundles()
+	private void getBundles()
 	{
 		log.debug(">getBundles()");
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -686,7 +686,7 @@ public class «applicationController()» implements Serializable
 	 * This method initializes this application. It logs the application banner.
 	 */
 	@PostConstruct
-	public void init()
+	private void init()
 	{
 		log.debug(">init()");
 		log.info("\n" + LogUtil.banner("«versionBundle()»", "«name»"));
