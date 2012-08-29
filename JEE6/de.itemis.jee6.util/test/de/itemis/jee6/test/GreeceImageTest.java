@@ -49,9 +49,18 @@ public class GreeceImageTest {
 		{
 			final byte [] array = download.downloadArray();
 			Assert.assertNotNull(array);
+			
+			String mimeType = download.getMimeType();
+			Assert.assertTrue(mimeType.startsWith("image/jpeg"));
 
-			final BufferedImage image = Download.read(array);
+			BufferedImage image = Download.parse(array);
 			Assert.assertNotNull(image);
+			
+			image = download.downloadImage();
+			Assert.assertNotNull(image);
+
+			mimeType = download.getMimeType();
+			Assert.assertNull(mimeType);
 		}
 	}
 }

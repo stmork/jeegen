@@ -3,6 +3,7 @@ package de.itemis.jee6.test;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 import junit.framework.Assert;
 
@@ -27,33 +28,42 @@ public class DownloadTest
 	}
 
 	@Test
-	public void favicon() throws IOException
+	public void image() throws IOException
 	{
 		final Download download = new Download(IMAGE_URL);
+
+		String mimeType = download.getMimeType();
+		Assert.assertNull(mimeType);
 		
 		final byte [] array = download.downloadArray();
 		Assert.assertNotNull(array);
 		
-		final String mimeType = download.getMimeType();
+		mimeType = download.getMimeType();
 		Assert.assertTrue(mimeType.startsWith("image/gif"));
 		
-		final BufferedImage image = Download.read(array);
+		BufferedImage image = Download.parse(array);
 		Assert.assertNotNull(image);
-	}
+		
+		mimeType = download.getMimeType();
+		Assert.assertTrue(mimeType.startsWith("image/gif"));
 
-	@Test
-	public void image() throws IOException
-	{
-		final Download download = new Download(IMAGE_URL);
-		final BufferedImage image = download.downloadImage();
-
+		image = download.downloadImage();
 		Assert.assertNotNull(image);
+
+		mimeType = download.getMimeType();
+		Assert.assertNull(mimeType);
 	}
 
 	@Test(expected=FileNotFoundException.class)
-	public void error() throws IOException
+	public void error404() throws IOException
 	{
 		final Download download = new Download("http://www.itemis.de/mork");
 		download.downloadArray();
+	}
+
+	@Test(expected=MalformedURLException.class)
+	public void malformedUrl() throws IOException
+	{
+		new Download("itemis");
 	}
 }

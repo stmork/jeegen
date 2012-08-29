@@ -45,7 +45,14 @@ public class Download {
 	 */
 	public BufferedImage downloadImage() throws IOException
 	{
-		return ImageIO.read(url);
+		try
+		{
+			return ImageIO.read(url);
+		}
+		finally
+		{
+			mimeType = null;
+		}
 	}
 
 	/**
@@ -110,7 +117,7 @@ public class Download {
 	 * @return The resulting {@link BufferedImage}.
 	 * @throws IOException Thrown if something went wrong.
 	 */
-	public static BufferedImage read(final byte [] buffer) throws IOException
+	public static BufferedImage parse(final byte [] buffer) throws IOException
 	{
 		final ByteArrayInputStream stream = new ByteArrayInputStream(buffer);
 
