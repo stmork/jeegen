@@ -65,7 +65,7 @@ public class Download {
 		try
 		{
 			is = connection.getInputStream();
-			int len = connection.getContentLength();
+			final int len = connection.getContentLength();
 
 			if (len > 0)
 			{
@@ -109,7 +109,8 @@ public class Download {
 	 */
 	public static BufferedImage read(final byte [] buffer) throws IOException
 	{
-		ByteArrayInputStream stream = new ByteArrayInputStream(buffer);
+		final ByteArrayInputStream stream = new ByteArrayInputStream(buffer);
+
 		return ImageIO.read(stream); 
 	}
 }

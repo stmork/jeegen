@@ -354,7 +354,7 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resourc
 	 * This method initializes the resource bundles.
 	 */
 	@PostConstruct
-	private void getBundles()
+	public void getBundles()
 	{
 		log.debug(">getBundles()");
 		FacesContext context = FacesContext.getCurrentInstance();

@@ -125,6 +125,7 @@
 			<instr instrpathref="instr.classpath" destdir="${instr-path}" metadatafile="metadata.emma" merge="true">
 				<filter excludes="org.*,com.*,edu.*,junit.*,gnu.io.*,java*"/>
 				<filter excludes="de.itemis.jee6.util.Profiler*"/>
+				<filter excludes="de.itemis.jee6.test.*"/>
 			</instr>
 		</emma>
 	</target>
