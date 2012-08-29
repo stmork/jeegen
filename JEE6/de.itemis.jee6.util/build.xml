@@ -139,6 +139,8 @@
 			<test name="de.itemis.jee6.test.UtilTest"/>
 			<test name="de.itemis.jee6.test.ErrorInfoTest"/>
 			<test name="de.itemis.jee6.test.FilterTest"/>
+			<test name="de.itemis.jee6.test.DownloadTest"/>
+			<test name="de.itemis.jee6.test.ValidatorTest"/>
 		</junit>
 	</target>
 
