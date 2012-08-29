@@ -21,7 +21,7 @@ abstract public class BaseValidator implements ResourceBundleDefinitions
 	 * This method throws a validation exception. 
 	 * @param context The {@link FacesContext}.
 	 * @param key The key of the error resource bundle.
-	 * @param params Optional parameters needed to parametrize the error message.
+	 * @param params Optional parameters needed to parameterize the error message.
 	 */
 	protected void validationError(final FacesContext context, final String key, final Object ... params)
 	{

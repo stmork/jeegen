@@ -13,6 +13,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
+import de.itemis.jee6.util.BaseValidator;
 import de.itemis.jee6.util.DateTimeUtil;
 import de.itemis.jee6.util.LogUtil;
 
@@ -20,6 +21,15 @@ public class UtilTest
 {
 	private        final DateFormat time = new SimpleDateFormat("HH:mm:ss");
 	private static final Log        log  = LogFactory.getLog(UtilTest.class);
+
+	@Test
+	public void constructor()
+	{
+		Assert.assertNotNull(new LogUtil());
+		Assert.assertNotNull(new DateTimeUtil());
+		Assert.assertNotNull(new BaseValidator() {
+		});
+	}
 
 	@Test
 	public void trace()
