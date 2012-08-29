@@ -41,7 +41,7 @@ public class Download {
 	 * This method returns a {@link BufferedImage}.
 	 * 
 	 * @return The downloaded image.
-	 * @throws IOException Thrown if womething went wrong.
+	 * @throws IOException Thrown if something went wrong.
 	 */
 	public BufferedImage downloadImage() throws IOException
 	{
