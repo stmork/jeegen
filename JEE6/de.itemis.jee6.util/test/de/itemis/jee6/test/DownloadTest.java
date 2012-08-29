@@ -21,6 +21,9 @@ public class DownloadTest
 		
 		final byte [] array = download.downloadArray();
 		Assert.assertNotNull(array);
+		
+		final String mimeType = download.getMimeType();
+		Assert.assertTrue(mimeType.startsWith("text/html"));
 	}
 
 	@Test
@@ -30,6 +33,9 @@ public class DownloadTest
 		
 		final byte [] array = download.downloadArray();
 		Assert.assertNotNull(array);
+		
+		final String mimeType = download.getMimeType();
+		Assert.assertTrue(mimeType.startsWith("image/gif"));
 		
 		final BufferedImage image = Download.read(array);
 		Assert.assertNotNull(image);

@@ -25,6 +25,7 @@ import org.apache.commons.logging.LogFactory;
 public class Download {
 	private final static Log log = LogFactory.getLog(Download.class);
 	private final URL url;
+	private       String mimeType = null;
 
 	/**
 	 * The constructor specifies the URL.
@@ -57,6 +58,7 @@ public class Download {
     {
 		InputStream is = null;
 		byte [] array = null;
+		mimeType = null;
 
 		LogUtil.debug(log, "<download(%s)", url);
 		final URLConnection connection = url.openConnection();
@@ -86,6 +88,7 @@ public class Download {
 						already += read;
 					}
 				}
+				mimeType = connection.getContentType();
 				return array;
 			}
 		}
@@ -112,5 +115,16 @@ public class Download {
 		final ByteArrayInputStream stream = new ByteArrayInputStream(buffer);
 
 		return ImageIO.read(stream); 
+	}
+	
+	/**
+	 * This getter returns the mime type of the downloaded byte array. This is only defined
+	 * after using {@link #downloadArray()}, otherwise the return value is always null.
+	 * 
+	 * @return The mime type of the {@link #downloadArray()} method call or null otherwise.
+	 */
+	public String getMimeType()
+	{
+		return this.mimeType;
 	}
 }
