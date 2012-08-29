@@ -2,13 +2,17 @@
 	<property file="${user.home}/.jee6.properties" />
 	<property file="${basedir}/build.properties"/>
 
-	<property name="war"          value="example.war"/>
-	<property name="bin-path"     value="./bin"/>
-	<property name="src-path"     value="./src/main/java"/>
-	<property name="res-path"     value="./src/main/resources"/>
-	<property name="src-gen-path" value="./src/generated/java"/>
-	<property name="res-gen-path" value="./src/generated/resources"/>
-	<property name="lib-path"     value="${res-path}/WEB-INF/lib"/>
+	<property name="war"                  value="example.war"/>
+	<property name="bin-path"             value="./bin"/>
+	<property name="src-path"             value="./src/main/java"/>
+	<property name="res-path"             value="./src/main/resources"/>
+	<property name="src-gen-path"         value="./src/generated/java"/>
+	<property name="res-gen-path"         value="./src/generated/resources"/>
+	<property name="lib-path"             value="${res-path}/WEB-INF/lib"/>
+
+	<property name="findbugs.home"        value="../FacesTest/findbugs"/>
+	<property name="findbugs.exclude"     value="../FacesTest/findbugs-exclude.xml"/>
+	<property name="findbugs.results"     value="./findbugs-results.xml"/>
 
 	<property name="eclipse.home"         value="/opt/eclipse"/>
 	<property name="eclipse.home.plugins" value="${eclipse.home}/plugins"/>
@@ -61,6 +65,18 @@
 		<pathelement path="${src-path}" />
 	</path>
 	
+	<path id="findbugs.lib">
+		<fileset dir="${findbugs.home}">
+			<include name="**/*.jar"/>
+		</fileset>  
+	</path>
+
+	<!-- ==================================================== -->
+	<!--            Setting up target definitions             -->
+	<!-- ==================================================== -->
+
+	<taskdef name="findbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask" classpathref="findbugs.lib"/>
+
 	<!-- ==================================================== -->
 	<!--              Setting up build targets                -->
 	<!-- ==================================================== -->
@@ -131,4 +147,24 @@
 	</target>
 	
 	<target name="round-trip" depends="clobber,generate,deploy"/>
+
+	<!-- ==================================================== -->
+	<!--              Setting up runtime targets              -->
+	<!-- ==================================================== -->
+
+	<target name="findbugs" depends="compile">
+		<echo message="Checking ${ant.project.name}..."/>
+		<findbugs jvmargs="-Xmx512m" home="${findbugs.home}"
+				output="xml:withMessages"
+				outputFile="${findbugs.results}"
+				classpathref="compile.path"
+				effort="max"
+				excludeFilter="${findbugs.exclude}"
+				reportlevel="low"
+				failonerror="true">
+			<sourcePath path="${main-project}/${src-path}"/>
+			<class location="${bin-path}"/> 
+			<auxclasspath refid="compile.path"/>
+		</findbugs>
+	</target>
 </project>

@@ -15,6 +15,7 @@
 	<property name="module.xml"           value="module.xml"/>
 	
 	<property name="findbugs.home"        value="./findbugs"/>
+	<property name="findbugs.exclude"     value="./findbugs-exclude.xml"/>
 	<property name="findbugs.results"     value="./findbugs-results.xml"/>
 
 	<property name="eclipse.home"         value="/opt/eclipse"/>
@@ -184,7 +185,7 @@
 				outputFile="${findbugs.results}"
 				classpathref="compile.path"
 				effort="max"
-				excludeFilter="findbugs-exclude.xml"
+				excludeFilter="${findbugs.exclude}"
 				reportlevel="low"
 				failonerror="true">
 			<sourcePath path="${main-project}/${src-path}"/>

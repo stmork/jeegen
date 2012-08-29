@@ -25,6 +25,7 @@ cd ../FacesGenerated
 ant clobber
 ant generate
 ant package
+ant findbugs
 
 cd ../FacesTest
 ant clean

@@ -686,7 +686,7 @@ public class «applicationController()» implements Serializable
 	 * This method initializes this application. It logs the application banner.
 	 */
 	@PostConstruct
-	private void init()
+	public void init()
 	{
 		log.debug(">init()");
 		log.info("\n" + LogUtil.banner("«versionBundle()»", "«name»"));
