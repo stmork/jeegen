@@ -72,6 +72,19 @@ public class UtilTest
 	{
 		Assert.assertEquals("[1 % s]", LogUtil.printf("[%d %% %s]", 1, "s"));
 	}
+
+	@Test
+	public void banner()
+	{
+		final String banner = LogUtil.banner("de.itemis.jee6.test.version", "LogUtil test");
+		log.info("\n" + banner);
+		Assert.assertNotNull(banner);
+		
+		final String [] tokens = banner.split("\n");
+		Assert.assertEquals(3, tokens.length);
+		Assert.assertEquals(tokens[0], tokens[2]);
+		Assert.assertEquals(tokens[1].length(), tokens[0].length());
+	}
 	
 	@Test
 	public void getStartOfDay()
@@ -104,7 +117,7 @@ public class UtilTest
 			}
 		}
 	}
-	
+
 	@Test
 	public void getStartOfYear()
 	{
