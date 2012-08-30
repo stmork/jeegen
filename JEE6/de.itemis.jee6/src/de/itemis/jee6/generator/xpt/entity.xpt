@@ -40,7 +40,13 @@ import «pkg»;
 «ENDFOREACH»
 
 /**
- * This class implements the «typeOf()» entity bean,
+ * This class implements the «typeOf()» entity bean. It contains the following properties:
+ * <table>
+ * <tr><th>Model type</th><th>Java type</th><th>Property name</th></tr>
+«FOREACH types AS property»
+ * <tr><td>«property.metaType.toString()»</td><td>«IF Reference.isInstance(property)»{@link «typeOf(property)»}«ELSE»«typeOf(property)»«ENDIF»</td><td>«property.name»</td></tr>
+«ENDFOREACH»
+ * </table>
  */
 «IF isAbstract()»
 @MappedSuperclass
@@ -398,6 +404,7 @@ public class «typeOf()» extends «abstractOf()»
 	 * This getter returns the value of the «nameOf()» n:1 relation.
 	 *
 	 * @return The «nameOf()» n:1 relation.
+	 * @see «typeOf()»
 	 */
 	@ManyToOne
 	public «typeOf()» «getterOf()»()
@@ -409,6 +416,7 @@ public class «typeOf()» extends «abstractOf()»
 	 * This setter sets the value of the «nameOf()» n:1 relation.
 	 *
 	 * @param «nameOf()» The new n:1 relation.
+	 * @see «typeOf()»
 	 */
 	public void «setterOf()»(final «typeOf()» «nameOf()»)
 	{
@@ -429,6 +437,7 @@ public class «typeOf()» extends «abstractOf()»
 	 * This method returns the newest entry of the «typeOf(history)» list.
 	 *
 	 * @return «typeOf(history)» The last history entry.
+	 * @see «typeOf()»
 	 */
 	@OneToOne
 	public «typeOf(history)» getLast()
@@ -440,6 +449,7 @@ public class «typeOf()» extends «abstractOf()»
 	 * This method sets the newest history entry of the «typeOf(history)» list.
 	 *
 	 * @param last The new history entry.
+	 * @see «typeOf()»
 	 */
 	public void setLast(final «typeOf(history)» last)
 	{
@@ -463,6 +473,8 @@ public class «typeOf()» extends «abstractOf()»
 	 * This method is called before persisting this entity bean. It sets
 	 * the «FOREACH auto AS date SEPARATOR " "»«nameOf(date)»«ENDFOREACH»
 	 * properties to the actual timepoint.
+	 *
+	 * @see «typeOf()»
 	 */
 	@PrePersist
 	public void prePersist()
@@ -483,6 +495,8 @@ public class «typeOf()» extends «abstractOf()»
 	 * This method is called before updating this entity bean. It sets
 	 * the «FOREACH update AS date SEPARATOR " "»«nameOf(date)»«ENDFOREACH»
 	 * properties to the actual timepoint.
+	 *
+	 * @see «typeOf()»
 	 */
 	@PreUpdate
 	public void preUpdate()
@@ -558,9 +572,10 @@ public class «typeOf()» extends «abstractOf()»
 «DEFINE Cloneable(Attribute id) FOR Entity»
 «IF cloneable»
 	/**
-	 * This method adds the initialization of the ID to zero.
+	 * This method clones this instance and initializes the ID to zero.
 	 *
 	 * @return A clone of this instance and ID set to zero or null.
+	 * see #clone()
 	 */ 
 	@Override
 	public «typeOf(this)» clone()
