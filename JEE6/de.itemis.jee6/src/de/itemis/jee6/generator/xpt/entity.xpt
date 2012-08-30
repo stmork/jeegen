@@ -541,14 +541,15 @@ public class «typeOf()» extends «abstractOf()»
 	@Override
 	public boolean equals(final Object object)
 	{
-		if ((object == null) || !(object instanceof «typeOf(this)»))
+		if (object == null)
 		{
 			return false;
 		}
-		«typeOf(this)» option = («typeOf(this)»)object;
 «IF id == null»
-		return hashCode() == option.hashCode();
+		return object instanceof «typeOf(this)» ? hashCode() == object.hashCode() : super.equals(object);
 «ELSE»
+		final «typeOf(this)» option = («typeOf(this)»)object;
+
 		return «getterOf(id)»().equals(option.«getterOf(id)»());
 «ENDIF»
 	}
