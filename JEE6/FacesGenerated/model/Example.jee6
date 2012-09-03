@@ -100,7 +100,7 @@ entity InventoryHistoryEntry cloneable
 	Option UserInfo       owner;
 	Option UserInfo       commentator;
 	Text                  utilization;
-	Text                  comment;
+	Clob                  comment;
 	Number                sell;
 };
 

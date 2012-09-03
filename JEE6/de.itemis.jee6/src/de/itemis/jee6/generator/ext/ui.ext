@@ -52,13 +52,13 @@ List[Entity] getUiEntities(Process p) :
 	p.entities.select(e|isUi(e));
 
 private Boolean isSingle(Text t) :
-	!(t.id || t.transient);
+	!t.transient;
 
 private Boolean isSingle(Blob r) :
 	false;
 
 private Boolean isSingle(Clob r) :
-	false;
+	true;
 
 private Boolean isSingle(OptionRef r) :
 	true;

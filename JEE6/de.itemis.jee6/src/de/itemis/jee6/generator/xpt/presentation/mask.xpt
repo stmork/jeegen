@@ -55,9 +55,13 @@
 							<f:validator validatorId="mailValidator"/>
 						</h:inputText>
 «ELSE»
-						<h:inputText id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" />
+						<h:inputText id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" maxlength="255" />
 «ENDIF»
 «ENDIF»
+«ENDDEFINE»
+
+«DEFINE element(Process p, Entity e) FOR jee6::Clob»
+						<h:inputTextarea id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»} cols="32" rows="7"/>
 «ENDDEFINE»
 
 «DEFINE element(Process p, Entity e) FOR jee6::Boolean»
