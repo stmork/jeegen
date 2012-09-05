@@ -13,6 +13,7 @@
 «EXPAND Web»
 «EXPAND JBoss»
 «EXPAND Glassfish»
+«EXPAND WebLogic»
 «EXPAND Faces»
 «EXPAND Log4J»
 «ENDDEFINE»
@@ -190,6 +191,21 @@ log4j.appender.R.layout.ConversionPattern=%-5p %-30.30c{1} %x - %m%n
 «ENDFOREACH»
 «EXPAND reference FOREACH getProperties()»
 </jboss-web>
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE WebLogic FOR Model»
+«FILE "WEB-INF/weblogic.xml" RES»
+<?xml version="1.0" encoding="UTF-8"?>
+<weblogic-web-app>
+	<context-root>«path»</context-root>
+«FOREACH getAllRoles() AS role»
+	<security-role-assignment>
+		<role-name>«role»</role-name>
+		<externally-defined/>
+	</security-role-assignment>
+«ENDFOREACH»
+</weblogic-web-app>
 «ENDFILE»
 «ENDDEFINE»
 
