@@ -56,6 +56,8 @@ log4j.appender.R.layout.ConversionPattern=%-5p %-30.30c{1} %x - %m%n
 «ELSE»
 			<property name="hibernate.show_sql"                     value="false" />
 «ENDIF»
+			<property name="eclipselink.ddl-generation"             value="create-tables" />
+			<property name="openjpa.jdbc.SynchronizeMappings"       value="buildSchema(ForeignKeys=true)" />
 		</properties>
 	</persistence-unit>
 «ENDFOREACH»

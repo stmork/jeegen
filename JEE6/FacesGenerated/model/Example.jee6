@@ -8,7 +8,7 @@ locale "en";
 
 param de.itemis.purchasing.CONTROLLING_EMAIL = "controlling@itemis.de"           description "Ziel aller Inventarisierungs-EMails";
 param de.itemis.purchasing.ITEMIKER          = "itemis"                          description "LDAP-Gruppe aller itemiker";
-param de.itemis.purchasing.AUTHORIZER        = "vorstand,teamleiter,controlling" description "LDAP-Gruppen (Komma-separiert) aller genehmigungsfaehigker itemiker";
+param de.itemis.purchasing.AUTHORIZER        = "vorstand,teamleiter,controlling" description "LDAP-Gruppen (komma-separiert) aller genehmigungsfaehigker itemiker";
 
 options UserInfo editable
 {
