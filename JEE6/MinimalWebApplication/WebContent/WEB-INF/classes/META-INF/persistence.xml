@@ -5,11 +5,12 @@
   <persistence-unit name="minimalDS" transaction-type="JTA">
     <jta-data-source>jdbc/minimalDS</jta-data-source>
     <properties>
-      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
-      <property name="hibernate.hbm2ddl.auto" value="update"/>
-      <property name="hibernate.cache.use_second_level_cache" value="true"/>
-      <property name="hibernate.show_sql" value="true"/>
-      <property name="eclipselink.ddl-generation" value="create-tables"/>
+		<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+		<property name="hibernate.hbm2ddl.auto" value="update"/>
+		<property name="hibernate.cache.use_second_level_cache" value="true"/>
+		<property name="hibernate.show_sql" value="true"/>
+		<property name="eclipselink.ddl-generation" value="create-tables"/>
+		<property name="openjpa.jdbc.SynchronizeMappings"       value="buildSchema(ForeignKeys=true)" />
     </properties>
   </persistence-unit>
 </persistence>
