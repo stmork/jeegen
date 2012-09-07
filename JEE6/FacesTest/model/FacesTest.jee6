@@ -67,6 +67,7 @@ process Info
 {
  	Type javax.naming.directory.DirContext "ldap/itemis" ref "java:global/ldap/itemis"; 
 	Text "ldap/baseDN" ref "java:global/ldap/baseDN";
+	Integer "build" 	ref "java:global/build";
 	Boolean default false "productive" ref "java:global/productive";
 
 	Startup, EntityEntry
