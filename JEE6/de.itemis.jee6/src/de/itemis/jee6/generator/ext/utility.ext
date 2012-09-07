@@ -1,0 +1,4 @@
+import jee6;
+
+String id() :
+	"Id";

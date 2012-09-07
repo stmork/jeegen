@@ -25,7 +25,7 @@
 «DEFINE ProcessHandler FOR Process»
 «FILE handlerFilename(this) IMPL»
 «LET getUiEntities().sortBy(e|e.name) AS entities»
-«EXPAND utility::Header»
+«EXPAND utility::HeaderImpl»
 package «handlerPackageOf(this)»;
 
 import javax.faces.bean.ManagedBean;
@@ -160,7 +160,7 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 
 «DEFINE AbstractProcessHandler FOR Process»
 «FILE abstractHandlerFilename(this)»
-«EXPAND utility::Header»
+«EXPAND utility::HeaderAbstract»
 «LET getUiEntities().sortBy(e|e.name) AS entities»
 package «handlerPackageOf(this)»;
 
@@ -270,7 +270,7 @@ abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(getMo
 «DEFINE AbstractModelHandler FOR Model»
 «FILE abstractHandlerFilename(this)»
 «LET entities.typeSelect(Options).sortBy(e|e.name) AS converterList»
-«EXPAND utility::Header»
+«EXPAND utility::HeaderAbstract»
 package «handlerPackageOf(this)»;
 
 import java.io.Serializable;
@@ -659,7 +659,7 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resourc
 
 «DEFINE ApplicationController FOR Model»
 «FILE applicationControllerFilename() IMPL»
-«EXPAND utility::Header»
+«EXPAND utility::HeaderImpl»
 package «controllerPackageOf()»;
 
 import java.io.Serializable;
@@ -698,7 +698,7 @@ public class «applicationController()» implements Serializable
 
 «DEFINE SessionController FOR Model»
 «FILE sessionControllerFilename() IMPL»
-«EXPAND utility::Header»
+«EXPAND utility::HeaderImpl»
 package «controllerPackageOf()»;
 
 import javax.faces.bean.ManagedBean;
