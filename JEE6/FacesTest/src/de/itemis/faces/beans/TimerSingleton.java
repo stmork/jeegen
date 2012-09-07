@@ -1,3 +1,6 @@
+/*
+ * $Id$
+ */
 package de.itemis.faces.beans;
 
 import java.io.IOException;
