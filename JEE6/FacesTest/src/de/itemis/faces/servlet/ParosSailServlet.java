@@ -1,9 +1,11 @@
+/*
+ * $Id$
+ */
 package de.itemis.faces.servlet;
 
 import java.io.IOException;
 
 import javax.ejb.EJB;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
@@ -38,15 +40,5 @@ public class ParosSailServlet extends HttpServlet
 		os.flush();
 		
 		log.debug("<service()");
-	}
-
-	@Override
-	public void init() throws ServletException {
-		log.debug(">init()");
-		ServletContext ctx = getServletContext();
-		log.debug(ctx.getContextPath());
-		// TODO Auto-generated method stub
-		super.init();
-		log.debug("<init()");
 	}
 }
