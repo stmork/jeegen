@@ -67,7 +67,7 @@ public class Download {
 		byte [] array = null;
 		mimeType = null;
 
-		LogUtil.debug(log, "<download(%s)", url);
+		LogUtil.debug(log, ">download(%s)", url);
 		final URLConnection connection = url.openConnection();
 		connection.setReadTimeout(1000);
 

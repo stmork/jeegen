@@ -164,7 +164,6 @@ process User roles "itemis", "extern"
 
 process Info
 {
- 	Type javax.naming.directory.DirContext "ldap/itemis" ref "java:global/ldap/itemis"; 
 	Text "ldap/baseDN" ref "java:global/ldap/baseDN";
 	Boolean default false "productive" ref "java:global/productive";
 
