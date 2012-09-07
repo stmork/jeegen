@@ -17,7 +17,7 @@
 «DEFINE AbstractEntity FOR Entity»
 «FILE abstractFilename(this)»
 «LET getId() AS id»
-«EXPAND utility::Header»
+«EXPAND utility::HeaderAbstract»
 package «packageOf(this)»;
 
 import java.io.Serializable;
@@ -103,7 +103,7 @@ public class «abstractOf(this)» implements Serializable
 «DEFINE Implementation FOR Entity»
 «IF isAbstract()»
 «FILE filename(this) IMPL»
-«EXPAND utility::Header»
+«EXPAND utility::HeaderImpl»
 package «packageOf(this)»;
 
 import javax.persistence.*;
