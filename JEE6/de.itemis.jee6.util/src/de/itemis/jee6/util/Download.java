@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -22,7 +23,13 @@ import org.apache.commons.logging.LogFactory;
  * @author sm
  *
  */
-public class Download {
+public class Download implements Serializable
+{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private final static Log log = LogFactory.getLog(Download.class);
 	private final URL url;
 	private       String mimeType = null;
@@ -67,7 +74,7 @@ public class Download {
 		byte [] array = null;
 		mimeType = null;
 
-		LogUtil.debug(log, ">download(%s)", url);
+		LogUtil.trace(log, ">download(%s)", url);
 		final URLConnection connection = url.openConnection();
 		connection.setReadTimeout(1000);
 
@@ -87,7 +94,7 @@ public class Download {
 					
 					if (read < 0)
 					{
-						log.error("Fehler!");
+						log.error("Read error loading " + getUrl());
 						return null;
 					}
 					else
@@ -105,7 +112,7 @@ public class Download {
 			{
 				is.close();
 			}
-			LogUtil.debug(log, "<download(..) = %s", array != null);
+			LogUtil.trace(log, "<download(..) = %s", array != null);
 		}
 		return array;
     }
@@ -133,5 +140,10 @@ public class Download {
 	public String getMimeType()
 	{
 		return this.mimeType;
+	}
+
+	public String getUrl()
+	{
+		return url.toString();
 	}
 }

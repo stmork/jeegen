@@ -48,8 +48,8 @@ public class AutoLoginFilter implements Filter
 			HttpServletRequest r = (HttpServletRequest)request;
 			
 	        String basic = r.getHeader("authorization"); 
-	        LogUtil.debug(log, " URI: %s", r.getRequestURI());
-	        LogUtil.debug(log, " URL: %s", r.getRequestURL());
+	        LogUtil.trace(log, " URI: %s", r.getRequestURI());
+	        LogUtil.trace(log, " URL: %s", r.getRequestURL());
 	        if ((basic != null) && basic.startsWith("Basic "))
 	        {
 	        	String principal = r.getRemoteUser();

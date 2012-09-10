@@ -3,61 +3,93 @@
  */
 package de.itemis.faces.beans;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import javax.ejb.Timeout;
+import javax.ejb.Timer;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import de.itemis.jee6.util.Download;
+import de.itemis.faces.DownloadInfo;
 
 @Singleton
 @Startup
 public class TimerSingleton
 {
 	private final static Log log = LogFactory.getLog(TimerSingleton.class);
-	
+
+	@Resource
+	javax.ejb.TimerService timerService;
+
 	@Schedule(minute="*/15",hour="*",persistent=false)
 	public void timer()
 	{
 		log.debug("  =time()");
 	}
 
-	private byte [] parosSailImage;
-	private Download parosSailDownload;
+	private final Map<String, DownloadInfo> infos = new HashMap<String, DownloadInfo>();
 	
 	@PostConstruct
 	public void init() throws IOException
 	{
-		parosSailDownload = new Download("http://www.islandsailing.gr/webcam/current.jpg");
-		update();
+		DownloadInfo info;
+
+		info = new DownloadInfo(timerService, "http://www.islandsailing.gr/webcam/current.jpg",  5);
+		infos.put("parosSail", info);
+
+		info = new DownloadInfo(timerService, "http://axis.parosweb.net/parikiaport.jpg", 60);
+		infos.put("parosWeb",  info);
+
+		info = new DownloadInfo(timerService, "http://www.naxosisland.eu/webcam/port.jpg", 10);
+		infos.put("naxos",     info);
+
+		info = new DownloadInfo(timerService, "http://daytoursantorini.com/webcam/caldera_santorini.jpg", 28);
+		infos.put("santorini", info);
 	}
 
-	@Schedule(minute="*",hour="*",persistent=false)
-	public void update() throws IOException
+	@Timeout
+	public void timeout(final Timer timer)
 	{
-		log.debug(">update()");
-		synchronized(parosSailDownload)
+		final Object object = timer.getInfo();
+
+		if (object instanceof DownloadInfo)
 		{
-			parosSailImage = parosSailDownload.downloadArray();
+			final DownloadInfo info = (DownloadInfo)object;
+			
+			try
+			{
+				info.update();
+			}
+			catch (IOException e)
+			{
+				log.error(e);
+			}
 		}
-		log.debug("<update()");
 	}
 
-	public byte [] getParosSailImage()
+	public void push(final HttpServletResponse response, final String requestURI, final String cam) throws IOException
 	{
-		synchronized(parosSailDownload)
+		if (cam != null)
 		{
-			return parosSailImage;
+			final DownloadInfo info = infos.get(cam);
+	
+			if(info != null)
+			{
+				info.push(response, requestURI, cam);
+				return;
+			}
 		}
-	}
 
-	public String getParosSailMimeType()
-	{
-		return parosSailDownload.getMimeType();
+		throw new FileNotFoundException(cam);
 	}
 }
