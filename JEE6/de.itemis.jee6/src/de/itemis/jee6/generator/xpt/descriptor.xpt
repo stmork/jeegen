@@ -13,6 +13,7 @@
 «EXPAND Web»
 «EXPAND JBoss»
 «EXPAND Glassfish»
+«EXPAND Sun»
 «EXPAND WebLogic»
 «EXPAND Faces»
 «EXPAND Log4J»
@@ -53,8 +54,10 @@ log4j.appender.R.layout.ConversionPattern=%-5p %-30.30c{1} %x - %m%n
 «ENDREM»
 «IF state == ProjectState::Development»
 			<property name="hibernate.show_sql"                     value="true" />
+			<property name="eclipselink.logging.level"              value="DEBUG"/>
 «ELSE»
 			<property name="hibernate.show_sql"                     value="false" />
+			<property name="eclipselink.logging.level"              value="INFO"/>
 «ENDIF»
 			<property name="eclipselink.ddl-generation"             value="create-tables" />
 			<property name="openjpa.jdbc.SynchronizeMappings"       value="buildSchema(ForeignKeys=true)" />
@@ -247,7 +250,7 @@ log4j.appender.R.layout.ConversionPattern=%-5p %-30.30c{1} %x - %m%n
 	</resource-ref>
 «ENDDEFINE»
 
-«DEFINE Glassfish FOR Model»
+«DEFINE Sun FOR Model»
 «FILE "WEB-INF/sun-web.xml" RES»
 <!DOCTYPE sun-web-app PUBLIC "-//Sun Microsystems, Inc.//DTD 
 GlassFish Application Server 3.0 Servlet 3.0//EN" 
@@ -260,7 +263,26 @@ GlassFish Application Server 3.0 Servlet 3.0//EN"
 		<group-name>«role»</group-name>
 	</security-role-mapping>
 «ENDFOREACH»
+	<parameter-encoding default-charset="UTF-8"/>
 </sun-web-app>
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE Glassfish FOR Model»
+«FILE "WEB-INF/glassfish-web.xml" RES»
+<!DOCTYPE sun-web-app PUBLIC "-//Sun Microsystems, Inc.//DTD 
+GlassFish Application Server 3.0 Servlet 3.0//EN" 
+"http://www.sun.com/software/appserver/dtds/sun-web-app_3_0-0.dtd">
+<glassfish-web-app>
+	<context-root>«path»</context-root>
+«FOREACH getAllRoles() AS role»
+	<security-role-mapping>
+		<role-name>«role»</role-name>
+		<group-name>«role»</group-name>
+	</security-role-mapping>
+«ENDFOREACH»
+	<parameter-encoding default-charset="UTF-8"/>
+</glassfish-web-app>
 «ENDFILE»
 «ENDDEFINE»
 
@@ -293,6 +315,10 @@ GlassFish Application Server 3.0 Servlet 3.0//EN"
 «ENDFOREACH»
 		</locale-config>
 	</application>
+	<validator>
+		<validator-id>mailValidator</validator-id>
+		<validator-class>de.itemis.jee6.util.MailValidator</validator-class>
+	</validator>
 </faces-config>
 «ENDFILE»
 «ENDDEFINE»

@@ -2,6 +2,7 @@ package de.itemis.faces;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.MalformedURLException;
 
 import javax.ejb.TimerConfig;
 import javax.ejb.TimerService;
@@ -22,17 +23,16 @@ public class DownloadInfo implements Serializable
 	private final int      refresh;
 	private byte []        array;
 
-	public DownloadInfo(final TimerService service, final String url, final int refresh) throws IOException
+	public DownloadInfo(final TimerService service, final String url, final int refresh) throws MalformedURLException
 	{
-		this.download = new Download(url);
 		this.refresh  = refresh;
+		this.download = new Download(url);
 
 		final TimerConfig config = new TimerConfig();
 		config.setPersistent(false);
 		config.setInfo(this);
 
 		service.createIntervalTimer(500L, (refresh - 1) * 1000L, config);
-		update();
 	}
 
 	public void update() throws IOException

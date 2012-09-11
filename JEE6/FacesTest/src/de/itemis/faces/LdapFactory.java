@@ -74,9 +74,23 @@ public class LdapFactory implements ObjectFactory, InitialContextFactory
 			env.put(Context.SECURITY_PRINCIPAL, part + "," + baseDN);
 			env.put(Context.SECURITY_CREDENTIALS, secret);
 		}
-		log.debug("<getObjectInstance(...)");
 
-		return getInitialContext(env);
+		Object result = null;
+
+		try
+		{
+			result = getInitialContext(env);
+		}
+		catch(NamingException ne)
+		{
+			log.error(ne.getLocalizedMessage(), ne);
+			throw ne;
+		}
+		finally
+		{
+			log.debug("<getObjectInstance(...) = " + result);
+		}
+		return result;
 	}
 
 	@Override
