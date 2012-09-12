@@ -75,6 +75,12 @@ input, select, textarea {
 	border-radius: 3px
 }
 
+.itemis_blue
+{
+	color: #004c84;
+	border-color: #004c84;
+}
+
 div.box {
 	margin: 0px;
 	padding: 8px;
