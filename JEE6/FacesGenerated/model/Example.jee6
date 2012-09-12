@@ -15,6 +15,7 @@ options UserInfo editable
 	Text id           login;
 	Text              mail;
 	Timestamp update  changed;
+	Date              birth;
 	Text              forename;
 	Text              surename;
 	Boolean           active;
@@ -121,13 +122,16 @@ options AddressOption
 entity HistoryEntry
 {
 	Timestamp auto creation;
-	Text           comment;
+	Clob           comment;
 };
 
 entity EntityEntry
 {
-	Timestamp auto creation;
-	Text           comment;
+	Timestamp auto       creation;
+	Int                  amount;
+	Text                 subject;
+	Boolean              active;
+	Clob                 comment;
 	Option AddressOption addressOption;
 };
 

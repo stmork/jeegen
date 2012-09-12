@@ -51,7 +51,7 @@
 						#{«handlerUri(p)».«nameOf(e)».«nameOf()»}
 «ELSE»
 «IF isEMail()»
-						<h:inputText id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" maxlength="128">
+						<h:inputText id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" maxlength="255">
 							<f:validator validatorId="mailValidator"/>
 						</h:inputText>
 «ELSE»
@@ -61,7 +61,7 @@
 «ENDDEFINE»
 
 «DEFINE element(Process p, Entity e) FOR jee6::Clob»
-						<h:inputTextarea id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»} cols="32" rows="7"/>
+						<h:inputTextarea id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" cols="32" rows="7"/>
 «ENDDEFINE»
 
 «DEFINE element(Process p, Entity e) FOR jee6::Boolean»
@@ -84,7 +84,7 @@
 
 «DEFINE element(Process p, Entity e) FOR jee6::Timestamp»
 «IF update || auto»
-						<h:outputText value="#{«nameOf(e)».«nameOf()»}">
+						<h:outputText value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}">
 							<f:convertDateTime type="both"/>
 						</h:outputText>
 «ELSE»
