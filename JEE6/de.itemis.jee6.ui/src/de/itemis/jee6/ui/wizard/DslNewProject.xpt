@@ -12,7 +12,7 @@
 «DEFINE model FOR DslProjectInfo»
 «FILE getModelPath() + "/" + projectName + ".jee6"-»
 // Edit model here...
-application "«projectName»"  context "/«applicationName»" package «basePackage».«applicationName.toFirstUpper()» development;
+application "«projectName»"  context "/«applicationName»" package «basePackage».«applicationName.toFirstLower()» development;
 persistence unit"«applicationName»DS" jndi "jdbc/«applicationName»DS";
 locale "de" default;
 
@@ -40,8 +40,8 @@ Workflow
 		modelpath="«getModelPath()»"
 		impldir="«getSrcPath()»"
 		srcdir="«getSrcGenPath()»"
+		xhtmldir="«getResPath()»"
 		resdir="«getResGenPath()»"
-		xhtmldir="«getResGenPath()»"
 	}
 }
 «ENDFILE»

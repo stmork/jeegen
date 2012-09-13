@@ -22,17 +22,20 @@ class PropertyInfo extends Properties {
 	PropertyInfo(final Log log, final String filename) throws IOException {
 		this.log = log;
 		InputStream is = null;
-		try {
-			url = Thread.currentThread().getContextClassLoader()
-					.getResource(filename);
+		try
+		{
+			url = Thread.currentThread().getContextClassLoader().getResource(filename);
 
 			if (url != null) {
 				is = url.openStream();
 				log.info("Reading " + url);
 				load(is);
 			}
-		} finally {
-			if (is != null) {
+		}
+		finally
+		{
+			if (is != null)
+			{
 				is.close();
 			}
 		}

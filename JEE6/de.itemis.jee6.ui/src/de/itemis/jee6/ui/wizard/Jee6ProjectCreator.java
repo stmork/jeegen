@@ -7,14 +7,21 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import org.eclipse.core.resources.IBuildConfiguration;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.jdt.core.IClasspathEntry;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaCore;
 
 public class Jee6ProjectCreator extends DslProjectCreator
 {
@@ -50,8 +57,18 @@ public class Jee6ProjectCreator extends DslProjectCreator
 			Status status = new Status(0, BUNDLE_ID, e.getMessage(), e);
 			throw new CoreException(status);
 		}
+		
+		final IJavaProject javaProject = JavaCore.create(project);
+		final IPath path = javaProject.getPath().append(WEB_CONTENT + File.separator + "WEB-INF/lib/jee6-utils.jar");
+		final IClasspathEntry entry = JavaCore.newLibraryEntry(path, null, null);
 
-		IBuildConfiguration config = project.getActiveBuildConfig();
+		IClasspathEntry [] oldEntries = javaProject.getRawClasspath();
+		IClasspathEntry [] newEntries = new IClasspathEntry[oldEntries.length + 1];
+		newEntries[0] = entry;
+		System.arraycopy(oldEntries, 0, newEntries, 1, oldEntries.length);
+		
+		javaProject.setRawClasspath(newEntries, new NullProgressMonitor());
+
 		super.enhanceProject(project, monitor);
 	}
 
