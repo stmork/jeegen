@@ -30,6 +30,15 @@ textarea {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
+	width: 100%;
+}
+
+select {
+	width: 100%;
+}
+
+input, select, textarea {
+	border-radius: 3px;
 }
 
 h1, h2, h3 {
@@ -81,10 +90,6 @@ td.top {
 
 td.mid {
 	vertical-align: middle;
-}
-
-input, select, textarea {
-	border-radius: 3px;
 }
 
 div.box {
