@@ -2,9 +2,9 @@ package de.itemis.jee6.test;
 
 import java.util.Locale;
 
-public class RemoveAllFilter extends StringFilter
+public class RemoveAllFilterTest extends StringFilterTest
 {
-	public RemoveAllFilter(final String string)
+	public RemoveAllFilterTest(final String string)
 	{
 		super(string);
 	}

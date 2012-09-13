@@ -2,9 +2,9 @@ package de.itemis.jee6.test;
 
 import java.util.Locale;
 
-public class StartsWithFilter extends StringFilter
+public class StartsWithFilterTest extends StringFilterTest
 {
-	public StartsWithFilter(String string)
+	public StartsWithFilterTest(String string)
 	{
 		super(string);
 	}

@@ -88,12 +88,12 @@
 		<jar destfile="${jar}">
 			<zipfileset dir="${bin-path}">
 				<include name="**/*.class"/>
-				<exclude name="**/*Test.class"/>
+				<exclude name="**/*Test*.class"/>
 				<exclude name="log4j.properties"/>
 			</zipfileset>
 			<zipfileset dir="${src-path}">
 				<include name="**/*.java"/>
-				<exclude name="**/*Test.java"/>
+				<exclude name="**/*Test*.java"/>
 			</zipfileset>
 		</jar>
 	</target>
