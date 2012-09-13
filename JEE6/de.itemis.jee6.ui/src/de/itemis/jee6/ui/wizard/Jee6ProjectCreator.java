@@ -7,10 +7,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
@@ -48,9 +45,9 @@ public class Jee6ProjectCreator extends DslProjectCreator
 			
 			System.out.println(projectDir);
 
-			copyFile(projectDir, "/resources/ii.png",         WEB_CONTENT + File.separator + "img");
-			copyFile(projectDir, "/resources/favicon.ico",    WEB_CONTENT + File.separator + "img");
-			copyFile(projectDir, "/resources/jee6-utils.jar", WEB_CONTENT + File.separator + "WEB-INF/lib");
+			copyFile(projectDir, "/resources/logo.png",       WEB_CONTENT + "/img");
+			copyFile(projectDir, "/resources/favicon.ico",    WEB_CONTENT + "/img");
+			copyFile(projectDir, "/resources/jee6-utils.jar", WEB_CONTENT + "/WEB-INF/lib");
 		}
 		catch(Exception e)
 		{
@@ -59,7 +56,7 @@ public class Jee6ProjectCreator extends DslProjectCreator
 		}
 		
 		final IJavaProject javaProject = JavaCore.create(project);
-		final IPath path = javaProject.getPath().append(WEB_CONTENT + File.separator + "WEB-INF/lib/jee6-utils.jar");
+		final IPath path = javaProject.getPath().append(WEB_CONTENT + "/WEB-INF/lib/jee6-utils.jar");
 		final IClasspathEntry entry = JavaCore.newLibraryEntry(path, null, null);
 
 		IClasspathEntry [] oldEntries = javaProject.getRawClasspath();
