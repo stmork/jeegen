@@ -78,11 +78,12 @@
 	
 	<target name="package" depends="compile,-version">
 		<jar destfile="${plugin}" manifest="${manifest}">
+			<zipfileset dir="${bin-path}"/>
 			<zipfileset dir=".">
 				<include name="plugin.xml"/>
 				<include name="**/*.gif"/>
+				<include name="resources/*.*"/>
 			</zipfileset>
-			<zipfileset dir="${bin-path}"/>
 		</jar>
 	</target>
 	
