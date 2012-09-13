@@ -2,9 +2,9 @@ package de.itemis.jee6.test;
 
 import java.util.Locale;
 
-public class NoopFilter extends StringFilter
+public class NoopFilterTest extends StringFilterTest
 {
-	public NoopFilter(String string)
+	public NoopFilterTest(String string)
 	{
 		super(string);
 	}

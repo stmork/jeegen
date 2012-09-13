@@ -19,7 +19,7 @@ public class FilterTest {
 	@Test
 	public void empty()
 	{
-		final FilteredList<NoopFilter> filtered = new FilteredList<NoopFilter>();
+		final FilteredList<NoopFilterTest> filtered = new FilteredList<NoopFilterTest>();
 		
 		filtered.addAll(null, null, null);
 		Assert.assertEquals(0, filtered.size());
@@ -28,11 +28,11 @@ public class FilterTest {
 	@Test
 	public void nothing()
 	{
-		final List<RemoveAllFilter> list = new ArrayList<RemoveAllFilter>(names.length);
-		final FilteredList<RemoveAllFilter> filtered = new FilteredList<RemoveAllFilter>();
+		final List<RemoveAllFilterTest> list = new ArrayList<RemoveAllFilterTest>(names.length);
+		final FilteredList<RemoveAllFilterTest> filtered = new FilteredList<RemoveAllFilterTest>();
 		for (String string : names)
 		{
-			list.add(new RemoveAllFilter(string));
+			list.add(new RemoveAllFilterTest(string));
 		}
 		filtered.addAll(list, null, Locale.getDefault());
 		Assert.assertEquals(names.length, filtered.size());
@@ -58,11 +58,11 @@ public class FilterTest {
 	@Test
 	public void all()
 	{
-		final List<NoopFilter> list = new ArrayList<NoopFilter>(names.length);
-		final FilteredList<NoopFilter> filtered = new FilteredList<NoopFilter>();
+		final List<NoopFilterTest> list = new ArrayList<NoopFilterTest>(names.length);
+		final FilteredList<NoopFilterTest> filtered = new FilteredList<NoopFilterTest>();
 		for (String string : names)
 		{
-			list.add(new NoopFilter(string));
+			list.add(new NoopFilterTest(string));
 		}
 		filtered.addAll(list, null, Locale.getDefault());
 		Assert.assertEquals(names.length, filtered.size());
@@ -88,11 +88,11 @@ public class FilterTest {
 	@Test
 	public void startsWith()
 	{
-		final List<StartsWithFilter> list = new ArrayList<StartsWithFilter>(names.length);
-		final FilteredList<StartsWithFilter> filtered = new FilteredList<StartsWithFilter>();
+		final List<StartsWithFilterTest> list = new ArrayList<StartsWithFilterTest>(names.length);
+		final FilteredList<StartsWithFilterTest> filtered = new FilteredList<StartsWithFilterTest>();
 		for (String string : names)
 		{
-			list.add(new StartsWithFilter(string));
+			list.add(new StartsWithFilterTest(string));
 		}
 
 		filtered.addAll(list, "X", Locale.getDefault());
