@@ -54,6 +54,7 @@
 	        </filterchain>
 	    </loadproperties>
 		<property name="plugin" value="de.itemis.jee6.ui_${Bundle-Version}.jar"/>
+		<echo message="Version: ${Bundle-Version}"/>
 	</target>
 
 	<target name="clean" depends="-version">
