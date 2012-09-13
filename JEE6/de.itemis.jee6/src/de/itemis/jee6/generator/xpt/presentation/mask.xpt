@@ -20,8 +20,8 @@
 				<table>
 «FOREACH attributes AS attr»
 					<tr>
-						<td>«attr.typeOf().asType()»</td>
-						<td>#{msg['«prefixOf(p)».«prefixOf()».«prefixOf(attr)»']}</td>
+						<td class="«labelClass(attr)»">«attr.typeOf().asType()»</td>
+						<td class="«labelClass(attr)»">#{msg['«prefixOf(p)».«prefixOf()».«prefixOf(attr)»']}</td>
 						<td>
 «EXPAND element(p, this) FOR attr»
 						</td>
@@ -46,6 +46,7 @@
 «ENDLET»
 «ENDDEFINE»
 
+«REM»Text Field«ENDREM»
 «DEFINE element(Process p, Entity e) FOR jee6::Text»
 «IF transient»
 						#{«handlerUri(p)».«nameOf(e)».«nameOf()»}
@@ -60,28 +61,34 @@
 «ENDIF»
 «ENDDEFINE»
 
+«REM»Text Area«ENDREM»
 «DEFINE element(Process p, Entity e) FOR jee6::Clob»
 						<h:inputTextarea id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" cols="32" rows="7"/>
 «ENDDEFINE»
 
+«REM»Checkbox«ENDREM»
 «DEFINE element(Process p, Entity e) FOR jee6::Boolean»
 						<h:selectBooleanCheckbox id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" />
 «ENDDEFINE»
 
+«REM»Integer Field«ENDREM»
 «DEFINE element(Process p, Entity e) FOR jee6::Integer»
 						<h:inputText id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" size="10"/>
 «ENDDEFINE»
 
+«REM»Number Field«ENDREM»
 «DEFINE element(Process p, Entity e) FOR jee6::Number»
 						<h:inputText id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" maxlength="10" />
 «ENDDEFINE»
 
+«REM»Date Field«ENDREM»
 «DEFINE element(Process p, Entity e) FOR jee6::Date»
 						<h:inputText id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" maxlength="10">
 							<f:convertDateTime pattern="dd.MM.yyyy"/>
 						</h:inputText>
 «ENDDEFINE»
 
+«REM»Date Field«ENDREM»
 «DEFINE element(Process p, Entity e) FOR jee6::Timestamp»
 «IF update || auto»
 						<h:outputText value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}">
@@ -94,6 +101,7 @@
 «ENDIF»
 «ENDDEFINE»
 
+«REM»Combobox«ENDREM»
 «DEFINE element(Process p, Entity e) FOR OptionRef»
 							<h:selectOneMenu id="«nameOf()»"
 									value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}"

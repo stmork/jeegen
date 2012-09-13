@@ -174,12 +174,15 @@ Workflow
 «DEFINE readme FOR DslProjectInfo»
 «FILE "README.txt"»
 Für das Kompilieren müssen folgende Bedingungen erfüllt sein:
-1. Die JEE6-Tools müssen in das Verzeichnis «getResPath()»/WEB-INF/lib kopiert
-   werden. Die Tools lassen sich über
-   https://projects.itemis.de/subversion/ejb3/trunk/JEE6/de.itemis.jee6.util/jee6-utils.jar
-   runterladen. Das JAR muss in den Build Path eingebunden werden.
-2. Eine Runtime-Umgebung muss eingerichtet werden. Unter "Window -> Preferences -> Server ->
+1. Eine Runtime-Umgebung muss eingerichtet werden. Unter "Window -> Preferences -> Server ->
    Runtime Environment" kann eine eigerichtet werden. Im erzeugten Projekt muss das unter
    "Project -> Properties -> Java Build Path -> Library -> Add Library" hinzugefügt werden.
+2. Es muss eine Data Source auf dem Application Server eingerichtet werden. Diese muss
+   "jdbc/«applicationName»DS" benannt werden.
+3. Es sollten die build.properties angepasst werden. Folgende Properties sollten gesetzt werden:
+   a) jboss.home
+   b) glassfish.home
+   Je nach verwendetem Application Server können die Home-Variablen weggelassen werden, wenn in
+   der build.xml die entsprechenden Tasks angepasst werden.
 «ENDFILE»
 «ENDDEFINE»

@@ -127,11 +127,13 @@ entity HistoryEntry
 
 entity EntityEntry
 {
+	Blob                 image;
 	Timestamp auto       creation;
 	Int                  amount;
+	Number               price;
 	Text                 subject;
-	Boolean              active;
 	Clob                 comment;
+	Boolean              active;
 	Option AddressOption addressOption;
 };
 

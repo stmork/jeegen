@@ -95,4 +95,9 @@ String getClass(Boolean b) :
 
 String getClass(Attribute a) :
 	"center";
-	
+
+String labelClass(Attribute a) :
+	"mid";
+
+String labelClass(Clob a) :
+	"top";
