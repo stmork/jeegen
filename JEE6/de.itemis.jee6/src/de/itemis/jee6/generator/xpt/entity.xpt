@@ -14,6 +14,7 @@
 «EXPAND Implementation FOREACH entities»
 «ENDDEFINE»
 
+«REM»  Abstract entity bean if any trans  «ENDREM»
 «DEFINE AbstractEntity FOR Entity»
 «FILE abstractFilename(this)»
 «LET getId() AS id»
@@ -73,33 +74,14 @@ public class «abstractOf(this)» implements Serializable
 «EXPAND Automatic»
 «EXPAND Cloneable(id)»
 «EXPAND Sorting(id)»
-	/**
-	 * This overrided method returns a summary of all properties inside this bean.
-	 *
-	 * @return Summary of all property values.
-	 */
-	@Override
-	public String toString()
-	{
-		StringBuffer buffer = new StringBuffer();
-«FOREACH types.typeSelect(Simple).reject(s|isId(s)) AS a»
-		buffer.append(" «nameOf(a)»=").append(«getterOf(a)»());
-«ENDFOREACH»
-		return MessageFormat.format("[«typeOf()»:{0}]{1}",
-«IF id == null»
-			getId(),
-«ELSE»
-			«getterOf(id)»(),
-«ENDIF»
-			buffer);
-	}
+«EXPAND toString(id)»
 }
 «ENDLET»
 «ENDFILE»
 «ENDDEFINE»
 
 
-
+«REM»  Implementation of abstract entity bean if any  «ENDREM»
 «DEFINE Implementation FOR Entity»
 «IF isAbstract()»
 «FILE filename(this) IMPL»
@@ -160,11 +142,14 @@ public class «typeOf()» extends «abstractOf()»
 
 
 
+«REM»  Abstract entity ID  «ENDREM»
 «DEFINE Id(Attribute id) FOR Entity»
+«ERROR "Abstract call of ID generation!"»
 «ENDDEFINE»
 
 
 
+«REM»  Option ID with enumeration  «ENDREM»
 «DEFINE Id(Attribute id) FOR Options»
 «IF keys.size > 0»
 	/**
@@ -320,6 +305,7 @@ public class «typeOf()» extends «abstractOf()»
 
 
 
+«REM»  Entity ID  «ENDREM»
 «DEFINE Id(Attribute id) FOR Table»
 «IF id == null»
 	private int id;
@@ -351,6 +337,7 @@ public class «typeOf()» extends «abstractOf()»
 «ENDIF»
 «ENDDEFINE»
 
+«REM»  Getter/setter for usual property  «ENDREM»
 «DEFINE Property FOR Attribute»
 «IF isTransient()»
 	/**
@@ -397,6 +384,7 @@ public class «typeOf()» extends «abstractOf()»
 
 
 
+«REM»  Backward 1:n relation (so bidirectional)  «ENDREM»
 «DEFINE Property FOR Entity»
 	private «typeOf()» «nameOf()»;
 
@@ -426,6 +414,7 @@ public class «typeOf()» extends «abstractOf()»
 
 
 
+«REM»  Getter/setter for usual properties   «ENDREM»
 «DEFINE GetterSetter FOR Entity»
 «EXPAND Property FOREACH types»
 «EXPAND Property FOREACH getEntityReferences()»
@@ -460,12 +449,7 @@ public class «typeOf()» extends «abstractOf()»
 «ENDDEFINE»
 
 
-
-«DEFINE Sorting(Attribute id) FOR Entity»
-«ENDDEFINE»
-
-
-
+«REM»  Automatic  Update  «ENDREM»
 «DEFINE Automatic FOR Entity»
 «LET types.typeSelect(Timestamp).select(e|e.auto) AS auto»
 «IF auto.size > 0»
@@ -511,6 +495,12 @@ public class «typeOf()» extends «abstractOf()»
 
 
 
+«REM»  Entity sorting do intentionally nothing  «ENDREM»
+«DEFINE Sorting(Attribute id) FOR Entity»
+«ENDDEFINE»
+
+
+«REM»  Options sorting  «ENDREM»
 «DEFINE Sorting(Attribute id) FOR Options»
 	/**
 	 * This method overrides the {@link Object#hashCode()} method to handle
@@ -597,3 +587,28 @@ public class «typeOf()» extends «abstractOf()»
 «ENDIF»
 «ENDDEFINE»
 
+
+
+«REM»  toString()  «ENDREM»
+«DEFINE toString(Attribute id) FOR Entity»
+	/**
+	 * This overrided method returns a summary of all properties inside this bean.
+	 *
+	 * @return Summary of all property values.
+	 */
+	@Override
+	public String toString()
+	{
+		StringBuffer buffer = new StringBuffer();
+«FOREACH types.typeSelect(Simple).reject(s|isId(s) || Blob.isInstance(s)) AS a»
+		buffer.append(" «nameOf(a)»=").append(«getterOf(a)»());
+«ENDFOREACH»
+		return MessageFormat.format("[«typeOf()»:{0}]{1}",
+«IF id == null»
+			getId(),
+«ELSE»
+			«getterOf(id)»(),
+«ENDIF»
+			buffer);
+	}
+«ENDDEFINE»
