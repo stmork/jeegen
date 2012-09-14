@@ -1,20 +1,20 @@
 package de.itemis.jee6.ui.wizard;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.MalformedURLException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
@@ -41,17 +41,14 @@ public class Jee6ProjectCreator extends DslProjectCreator
 	{
 		try
 		{
-			final String projectDir = project.getLocation().makeAbsolute().toOSString();
-			
-			System.out.println(projectDir);
-
-			copyFile(projectDir, "/resources/logo.png",       WEB_CONTENT + "/img");
-			copyFile(projectDir, "/resources/favicon.ico",    WEB_CONTENT + "/img");
-			copyFile(projectDir, "/resources/jee6-utils.jar", WEB_CONTENT + "/WEB-INF/lib");
+			copyFile(project, "resources/logo.png",       WEB_CONTENT + "/img");
+			copyFile(project, "resources/favicon.ico",    WEB_CONTENT + "/img");
+			copyFile(project, "resources/jee6-utils.jar", WEB_CONTENT + "/WEB-INF/lib");
 		}
 		catch(Exception e)
 		{
-			Status status = new Status(0, BUNDLE_ID, e.getMessage(), e);
+			e.printStackTrace(System.err);
+			Status status = new Status(Status.ERROR, BUNDLE_ID, e.getMessage(), e);
 			throw new CoreException(status);
 		}
 		
@@ -69,38 +66,45 @@ public class Jee6ProjectCreator extends DslProjectCreator
 		super.enhanceProject(project, monitor);
 	}
 
-	private void copyFile(final String projectDir, final String src, final String dstDir) throws MalformedURLException, IOException
+	private void createFolder(IFolder folder) throws CoreException
 	{
-		final URL  url  = FileLocator.resolve(new URL("platform:/plugin/" + BUNDLE_ID + src));
-		final File file = new File(url.getFile());
+		IContainer parent = folder.getParent();
+		if (parent instanceof IFolder)
+		{
+			createFolder((IFolder)parent);
+		}
+		if (!folder.exists())
+		{
+			folder.create(false, true, new NullProgressMonitor());
+		}
+	}
 
-		FileInputStream  fis = null;
-		FileOutputStream fos = null;
+	private void copyFile(final IProject project, final String src, final String dstDir) throws CoreException, IOException
+	{
+		final URL url = Platform.getBundle(BUNDLE_ID).getEntry(src);
+		final String urlString = url.toString();
+		InputStream stream = null;
 		
 		try
 		{
-			final byte [] buffer = new byte[(int)file.length()];
-			final String destinationDir = projectDir + File.separator + dstDir; 
+			// Create target directory.
+			final IFolder folder = project.getFolder(dstDir);
+			createFolder(folder);
 
-			File dir  = new File(destinationDir);
-			dir.mkdirs();
+			// Copy file
+			final String fileName = urlString.substring(urlString.lastIndexOf('/'));
+			final String destinationFile = "/" + dstDir + fileName;
+			final IFile file = project.getFile(destinationFile);
 
-			fis = new FileInputStream(file);
-			fis.read(buffer);
-			fos = new FileOutputStream(destinationDir + File.separator + file.getName());
-			fos.write(buffer);
+			stream = url.openStream();
+			file.create(stream, true, new NullProgressMonitor());
 		}
 		finally
 		{
-			if (fis != null)
+			if (stream != null)
 			{
-				fis.close();
-			}
-			if (fos != null)
-			{
-				fos.close();
+				stream.close();
 			}
 		}
-
 	}
 }
