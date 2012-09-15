@@ -9,6 +9,7 @@
 	<property name="src-gen-path"         value="./src/generated/java"/>
 	<property name="res-gen-path"         value="./src/generated/resources"/>
 	<property name="lib-path"             value="${res-path}/WEB-INF/lib"/>
+	<property name="img-path"             value="${res-path}/img"/>
 
 	<property name="findbugs.home"        value="../FacesTest/findbugs"/>
 	<property name="findbugs.exclude"     value="../FacesTest/findbugs-exclude.xml"/>
@@ -112,6 +113,11 @@
 		<mkdir dir="${bin-path}"/>
 		<mkdir dir="${lib-path}"/>
 		<copy file="../de.itemis.jee6.util/jee6-utils.jar" todir="${lib-path}"/>
+		<copy todir="${img-path}">
+			<fileset dir="../de.itemis.jee6.ui/resources">
+				<include name="*.*"/>
+			</fileset>
+		</copy>
 		<javac srcdir="${src-path}:${src-gen-path}" destdir="${bin-path}" debug="true" includeantruntime="false">
 			<classpath refid="compile.path"/>
 		</javac>

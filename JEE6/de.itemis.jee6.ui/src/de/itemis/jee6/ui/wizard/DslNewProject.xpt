@@ -58,6 +58,7 @@ Workflow
 	<property name="src-gen-path"         value="./«getSrcGenPath()»"/>
 	<property name="res-gen-path"         value="./«getResGenPath()»"/>
 	<property name="web-path"             value="./«getResPath()»"/>
+	<property name="doc-path"             value="../api"/>
 
 	<property name="war"                  value="«applicationName».war"/>
 
@@ -139,6 +140,23 @@ Workflow
 			<classpath refid="compile.path"/>
 		</javac>
 	</target>
+
+	<target name="javadoc" depends="compile">
+		<javadoc access="package"
+				classpathref="compile.path"
+				sourcepath="${src-path}:${src-gen-path}"
+				destdir="${doc-path}"
+				author="true"
+				splitindex="true"
+				use="true"
+				failonerror="true"
+				docencoding="UTF-8"
+				charset="UTF-8"
+				windowtitle="«this.projectName» classes">
+			<doctitle><![CDATA[<h1>«this.projectName» classes</h1>]]></doctitle>
+			<bottom><![CDATA[<i>Copyright &#169; itemis AG]]></bottom>
+		</javadoc>
+    </target>
 
 	<target name="package" depends="compile">
 		<jar destfile="${war}">

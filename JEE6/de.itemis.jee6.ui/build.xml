@@ -64,6 +64,7 @@
 
 	<target name="compile">
 		<mkdir dir="${bin-path}"/>
+		<copy file="../de.itemis.jee6.util/jee6-utils.jar" todir="resources"/>
 		<copy todir="${bin-path}">
 			<fileset dir="${src-path}">
 				<exclude name="**/*.java"/>
@@ -78,11 +79,6 @@
 	</target>
 	
 	<target name="package" depends="compile,-version">
-		<copy todir="resources">
-			<fileset dir="../de.itemis.jee6.util">
-				<include name="jee6-utils.jar"/>
-			</fileset>
-		</copy>
 		<jar destfile="${plugin}" manifest="${manifest}">
 			<zipfileset dir="${bin-path}"/>
 			<zipfileset dir=".">
