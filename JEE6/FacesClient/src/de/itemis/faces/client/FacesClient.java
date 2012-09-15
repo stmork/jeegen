@@ -11,7 +11,7 @@ import de.itemis.faces.ws.UserInfo;
 
 public class FacesClient
 {
-	@WebServiceRef(wsdlLocation="http://localhost:8080/calculator?wsdl")
+	@WebServiceRef(wsdlLocation="http://localhost:8080/faces?wsdl")
 	static FacesWebService service;
 	
 	private FacesClient()
