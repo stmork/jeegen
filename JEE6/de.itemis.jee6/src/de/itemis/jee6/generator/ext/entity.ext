@@ -1,6 +1,7 @@
 import jee6;
 
 extension de::itemis::jee6::generator::ext::model;
+extension de::itemis::jee6::generator::ext::types;
 
 History getHistory(Entity e) :
 	e.types.typeSelect(History).first();
@@ -24,6 +25,9 @@ Boolean isId(Text t) :
 String enumOf(Options o) :
 	o.name.toFirstUpper() + "Enum";
 
+String fqEnumOf(Options o) :
+	packageOf(o) + "." + enumOf(o);
+
 String createEntity(Entity e) :
 	"add" + e.name.toFirstUpper();
 
@@ -38,4 +42,6 @@ String removeEntity(Entity e) :
 	
 String reactivateEntity(Entity e) :
 	"reactivate" + e.name.toFirstUpper();
-	
+
+String enumOf(String key) :
+	key.toUpperCase().replaceAll("\\.", "_");

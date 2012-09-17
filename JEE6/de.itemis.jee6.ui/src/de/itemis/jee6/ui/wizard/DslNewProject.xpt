@@ -22,7 +22,7 @@ entity UserInfo
 	Date birth;
 };
 
-process User roles "users"
+process User
 {
 	UserInfo
 };

@@ -666,11 +666,17 @@ import java.io.Serializable;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import javax.ejb.EJB;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
 import de.itemis.jee6.util.LogUtil;
+
+import «fqDaoOf(this)»;
+«FOREACH entities.typeSelect(Options).select(e|e.isEnumeration()) AS enumeration»
+import «fqTypeOf(enumeration)».«enumOf(enumeration)»;
+«ENDFOREACH»
 
 /**
  * This class initializes the purchasing application.
@@ -682,6 +688,9 @@ public class «applicationController()» implements Serializable
 	private static final long serialVersionUID = 1L;
 	private final static Log log = LogFactory.getLog(«applicationController()».class);
 
+	@EJB
+	private «daoOf(this)» options;
+
 	/**
 	 * This method initializes this application. It logs the application banner.
 	 */
@@ -690,6 +699,11 @@ public class «applicationController()» implements Serializable
 	{
 		log.debug(">init()");
 		log.info("\n" + LogUtil.banner("«versionBundle()»", "«name»"));
+«FOREACH entities.typeSelect(Options).select(e|e.isEnumeration()) AS enumeration»
+«FOREACH enumeration.keys AS key»
+		options.ensure(«enumOf(enumeration)».«enumOf(key)», "«key»");
+«ENDFOREACH»
+«ENDFOREACH»
 		log.debug("<init()");
 	}
 }

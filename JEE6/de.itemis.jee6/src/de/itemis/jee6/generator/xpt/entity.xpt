@@ -158,7 +158,7 @@ public class «typeOf()» extends «abstractOf()»
 	public static enum «enumOf(this)»
 	{
 «FOREACH keys AS key SEPARATOR ","»
-	«key.toUpperCase().replaceAll("\\.", "_")»
+		«enumOf(key)»
 «ENDFOREACH»
 	}
 
