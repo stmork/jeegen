@@ -9,6 +9,8 @@ import de.itemis.jee6.jee6.Entity;
 import de.itemis.jee6.jee6.History;
 import de.itemis.jee6.jee6.Jee6Package;
 import de.itemis.jee6.jee6.Model;
+import de.itemis.jee6.jee6.Process;
+import de.itemis.jee6.jee6.Security;
 import de.itemis.jee6.jee6.Text;
 import de.itemis.jee6.jee6.Timestamp;
  
@@ -108,6 +110,19 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 		if (preUpdateCount > 1)
 		{
 			warning("Es macht nur eine automatische Datumsaktualisierung Sinn!", Jee6Package.Literals.TIMESTAMP__UPDATE);
+		}
+	}
+
+	@Check
+	public void checkProcessRoles(Process process)
+	{
+		final Model model    = (Model)process.eContainer();
+		final int   secCount = EcoreUtil2.typeSelect(model.getOptions(), Security.class).size();
+		final int   rolesCount = process.getRoles().size();
+
+		if ((secCount == 0) &&  (rolesCount > 0))
+		{
+			warning("Rollen machen nur Sinn, wenn JAAS konfiguriert wurde!", Jee6Package.Literals.PROCESS__ROLES);
 		}
 	}
 }

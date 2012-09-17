@@ -5,6 +5,7 @@
 
 «IMPORT jee6»
 
+«EXTENSION de::itemis::jee6::generator::ext::dao»
 «EXTENSION de::itemis::jee6::generator::ext::entity»
 «EXTENSION de::itemis::jee6::generator::ext::model»
 «EXTENSION de::itemis::jee6::generator::ext::converter»
@@ -106,12 +107,18 @@
 							<h:selectOneMenu id="«nameOf()»"
 									value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}"
 									converter="#{«handlerUri(p)».«uiConverter(type)»}">
+«IF !isEnumeration(this.type)»
 								<f:selectItem itemValue="[NULL]" itemLabel="#{msg.no_selection}"/>
+«ENDIF»
 								<f:selectItems
 										value="#{«handlerUri(p)».«uiList(type)»}"
 										itemValue="#{«nameOf(e)»}"
+«IF isEnumeration(this.type)»
+										itemLabel="#{msg[«nameOf(e)».bundleKey]}"
+«ELSE»
 										itemLabel="#{«nameOf(e)».name}"
-										var="vendor" />
+«ENDIF»
+										var="«nameOf(e)»" />
 							</h:selectOneMenu>
 «ENDDEFINE»
 

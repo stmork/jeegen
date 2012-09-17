@@ -64,6 +64,14 @@
 		#{«nameOf(e)».«nameOf()»}
 «ENDDEFINE»
 
+«DEFINE element(Process p, Entity e) FOR OptionRef»
+«IF isEnumeration(type)»
+		#{msg[«nameOf(e)».«nameOf()».bundleKey]}
+«ELSE»
+		#{msg[«nameOf(e)».«nameOf()».name]}
+«ENDIF»
+«ENDDEFINE»
+
 «DEFINE element(Process p, Entity e) FOR jee6::Boolean»
 		<h:outputText value="#{msg.yes}" rendered="#{«nameOf(e)».«nameOf()»}" />
 		<h:outputText value="#{msg.no}" rendered="#{!«nameOf(e)».«nameOf()»}" />
