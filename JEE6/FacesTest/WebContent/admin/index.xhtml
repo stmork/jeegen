@@ -14,12 +14,12 @@
 			<h:form id="user">
 				<table>
 					<tr>
-						<td>#{msg['admin.userinfo.name']}</td>
+						<td class="mid">#{msg['admin.userinfo.name']}</td>
 						<td><h:inputText id="name" value="#{sessionInfo.user.name}" /></td>
 					</tr>
 		
 					<tr>
-						<td>#{msg['admin.userinfo.mail']}</td>
+						<td class="mid">#{msg['admin.userinfo.mail']}</td>
 						<td>
 							<h:inputText id="mail" value="#{sessionInfo.user.mail}" validator="#{sessionInfo.validateMail}">
 								<f:validator validatorId="mailValidator"/>
@@ -29,14 +29,18 @@
 					</tr>
 		
 					<tr>
-						<td>#{msg['admin.userinfo.birth']}</td>
+						<td class="mid">#{msg['admin.userinfo.birth']}</td>
 						<td><h:inputText id="birth" value="#{sessionInfo.user.birth}">
 								<f:convertDateTime pattern="dd.MM.yyyy"/>
 							</h:inputText>
 						</td>
 					</tr>
 					<tr>
-						<td>#{msg['admin.userinfo.changed']}</td>
+						<td class="mid">#{msg['admin.userinfo.image']}</td>
+						<td><input type="file" accept="image/jpeg"/></td>
+					</tr>
+					<tr>
+						<td class="mid">#{msg['admin.userinfo.changed']}</td>
 						<td>
 							<h:outputText value="#{sessionInfo.user.changed}">
 								<f:convertDateTime type="both"/>
