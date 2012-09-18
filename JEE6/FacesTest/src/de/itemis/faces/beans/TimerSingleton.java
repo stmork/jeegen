@@ -58,6 +58,12 @@ public class TimerSingleton
 		infos.put("santorini", info);
 	}
 
+	/**
+	 * This method is a callback for a periodic {@link Timer} call which downloads an image for further
+	 * processing. The {@link Timer} is setup in a {@link DownloadInfo} instance.
+	 * 
+	 * @param timer
+	 */
 	@Timeout
 	public void timeout(final Timer timer)
 	{
@@ -78,6 +84,14 @@ public class TimerSingleton
 		}
 	}
 
+	/**
+	 * This method is called from a servlet to push image data into a {@link HttpServletResponse}.
+	 * 
+	 * @param response The response object to write the image data.
+	 * @param requestURI The servlet URI.
+	 * @param cam The cam parameter needed for the refresh header attribute.
+	 * @throws IOException
+	 */
 	public void push(final HttpServletResponse response, final String requestURI, final String cam) throws IOException
 	{
 		if (cam != null)
