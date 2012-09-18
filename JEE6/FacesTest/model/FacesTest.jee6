@@ -29,6 +29,7 @@ options UserInfo editable
 	Text              mail;
 	Date              birth;
 	Timestamp update  changed;
+	Blob              image;
 };
 
 entity HistoryEntry

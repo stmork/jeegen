@@ -79,7 +79,7 @@ public class SessionInfo extends AbstractHandler
 		return user;
 	}
 
-	public void setUserInfo(UserInfo user)
+	public void setUser(UserInfo user)
 	{
 		this.user = user;
 	}

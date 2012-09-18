@@ -13,6 +13,7 @@ import org.apache.commons.logging.LogFactory;
 
 import de.itemis.faces.dao.AdminDaoBean;
 import de.itemis.faces.entities.Address;
+import de.itemis.faces.entities.UserInfo;
 
 @ManagedBean
 @SessionScoped
@@ -41,5 +42,19 @@ public class AdminHandler extends AbstractAdminHandler
 		address = dao.updateAddress(getAddress());
 		log.debug("<change");
 		return "index.xhtml";
+	}
+
+	public String saveUserInfo()
+	{
+		log.debug(">saveUserInfo()");
+		setUserInfo(dao.updateUserInfo(getUserInfo()));
+		log.debug("<saveUserInfo()");
+		return "/userinfo.xhtml";
+	}
+
+	public String editUserInfo(final UserInfo user)
+	{
+		setUserInfo(user);
+		return "/userinfo.xhtml";
 	}
 }

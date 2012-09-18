@@ -54,11 +54,11 @@ public class UserHandler implements Serializable
 
 	public String change()
 	{
-		log.debug(">action");
+		log.debug(">change");
 		UserInfo user = getSessionInfo().getUser();
 		user = dao.updateUserInfo(user);
-		getSessionInfo().setUserInfo(user);
-		log.debug("<action");
+		getSessionInfo().setUser(user);
+		log.debug("<change");
 		return "/index.xhtml";
 	}
 	
@@ -69,11 +69,11 @@ public class UserHandler implements Serializable
 	
 	public String addAddress()
 	{
-		log.debug(">add");
+		log.debug(">addAddress");
 		UserInfo user = getSessionInfo().getUser();
 		Address address = dao.addToUserInfo(user, new Address());
 		getAdminHandler().setAddress(address);
-		log.debug("<add");
+		log.debug("<addAddress");
 		return "address.xhtml";
 	}
 	
@@ -89,7 +89,7 @@ public class UserHandler implements Serializable
 	{
 		log.debug(">removeAddress");
 		UserInfo user = dao.deleteFromUserInfo(address);
-		getSessionInfo().setUserInfo(user);
+		getSessionInfo().setUser(user);
 		log.debug("<removeAddress");
 		return "index.xhtml";
 	}

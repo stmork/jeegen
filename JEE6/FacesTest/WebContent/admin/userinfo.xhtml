@@ -18,28 +18,55 @@
 				<table>
 
 					<tr>
-						<td>#{msg['admin.userinfo.name']}</td>
+						<td class="mid">String</td>
+						<td class="mid">#{msg['admin.userinfo.login']}</td>
 						<td>
 
-						<h:inputText id="name" value="#{adminHandler.userInfo.name}" />
+
+
+						<h:inputText id="login" value="#{adminHandler.userInfo.login}" maxlength="255" />
+
+
 
 						</td>
 					</tr>
 
 					<tr>
-						<td>#{msg['admin.userinfo.mail']}</td>
+						<td class="mid">String</td>
+						<td class="mid">#{msg['admin.userinfo.name']}</td>
 						<td>
 
-						<h:inputText id="mail" value="#{adminHandler.userInfo.mail}" />
+
+
+						<h:inputText id="name" value="#{adminHandler.userInfo.name}" maxlength="255" />
+
+
 
 						</td>
 					</tr>
 
 					<tr>
-						<td>#{msg['admin.userinfo.birth']}</td>
+						<td class="mid">String</td>
+						<td class="mid">#{msg['admin.userinfo.mail']}</td>
 						<td>
 
-						<h:inputText id="birth" value="#{adminHandler.userInfo.birth}">
+
+
+						<h:inputText id="mail" value="#{adminHandler.userInfo.mail}" maxlength="255">
+							<f:validator validatorId="mailValidator"/>
+						</h:inputText>
+
+
+
+						</td>
+					</tr>
+
+					<tr>
+						<td class="mid">Date</td>
+						<td class="mid">#{msg['admin.userinfo.birth']}</td>
+						<td>
+
+						<h:inputText id="birth" value="#{adminHandler.userInfo.birth}" maxlength="10">
 							<f:convertDateTime pattern="dd.MM.yyyy"/>
 						</h:inputText>
 
@@ -47,9 +74,14 @@
 					</tr>
 
 					<tr>
-						<td>#{msg['admin.userinfo.changed']}</td>
+						<td class="mid">Date</td>
+						<td class="mid">#{msg['admin.userinfo.changed']}</td>
 						<td>
 
+
+						<h:outputText value="#{adminHandler.userInfo.changed}">
+							<f:convertDateTime type="both"/>
+						</h:outputText>
 
 
 						</td>
@@ -77,7 +109,14 @@
 			<h:form id="userinfo_list">
 				<h:dataTable
 						value="#{adminHandler.userInfoList}" var="userInfo"
-						styleClass="list" rowClasses="odd,even" columnClasses="left,left,center,center,command,command,command">
+						styleClass="list" rowClasses="odd,even" columnClasses="left,left,left,center,center,command,command,command">
+
+					<h:column>
+						<f:facet name="header">#{msg['admin.userinfo.login']}</f:facet>
+
+		#{userInfo.login}
+
+					</h:column>
 
 					<h:column>
 						<f:facet name="header">#{msg['admin.userinfo.name']}</f:facet>
@@ -105,7 +144,9 @@
 					<h:column>
 						<f:facet name="header">#{msg['admin.userinfo.changed']}</f:facet>
 
-		#{userInfo.changed}
+		<h:outputText value="#{userInfo.changed}">
+			<f:convertDateTime type="date" dateStyle="medium"/>
+		</h:outputText>
 
 					</h:column>
 
@@ -113,13 +154,13 @@
 						<f:facet name="header" />
 						<h:commandLink
 							value="#{msg.change}"
-							action="#{adminHandler.editUserInfo(userInfo)}" />
+							action="#{adminHandler.changeUserInfo(userInfo)}" />
 					</h:column>
 					<h:column>
 						<f:facet name="header" />
 						<h:commandLink
 							value="#{msg.remove}"
-							action="#{adminHandler.deleteUserInfo(userInfo)}" />
+							action="#{adminHandler.removeUserInfo(userInfo)}" />
 					</h:column>
 
 				</h:dataTable>
