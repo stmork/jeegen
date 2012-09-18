@@ -14,6 +14,12 @@ import org.apache.commons.logging.LogFactory;
 
 import de.itemis.jee6.util.Download;
 
+/**
+ * This class contains download information about a single image. It contains the refresh period and the image data itself
+ * 
+ * @see Download
+ *
+ */
 public class DownloadInfo implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -22,7 +28,16 @@ public class DownloadInfo implements Serializable
 	private final Download download;
 	private final int      refresh;
 	private byte []        array;
+	private String         mimeType;
 
+	/**
+	 * This constructor prepares a timer for periodic image download.
+	 * 
+	 * @param service The {@link TimerService} from the application server.
+	 * @param url The image download URL.
+	 * @param refresh The refresh period in seconds.
+	 * @throws MalformedURLException
+	 */
 	public DownloadInfo(final TimerService service, final String url, final int refresh) throws MalformedURLException
 	{
 		this.refresh  = refresh;
@@ -35,22 +50,41 @@ public class DownloadInfo implements Serializable
 		service.createIntervalTimer(500L, (refresh - 1) * 1000L, config);
 	}
 
+	/**
+	 * This callback method downloads an image and saves the image data for further processing inside this class
+	 * instance.
+	 *  
+	 * @throws IOException
+	 */
 	public void update() throws IOException
 	{
 		final byte [] array = download.downloadArray();
 
-		synchronized(download)
+		if (array != null)
 		{
-			this.array = array;
+			synchronized(download)
+			{
+				this.array = array;
+				this.mimeType = download.getMimeType();
+			}
 		}
 	}
 
+	/**
+	 * This method pushes the image data inside this class instance into a {@link HttpServletResponse}.
+	 *  
+	 * @param response The {@link HttpServletResponse}
+	 * @param uri The URI for page refresh.
+	 * @param cam The cam for the refresh URI.
+	 * @throws IOException
+	 */
 	public void push(final HttpServletResponse response, final String uri, final String cam) throws IOException
 	{
 		final byte [] image;
+
 		synchronized(download)
 		{
-			response.setContentType(download.getMimeType());
+			response.setContentType(mimeType);
 			image = array;
 		}
 
@@ -73,6 +107,4 @@ public class DownloadInfo implements Serializable
 	{
 		return String.format("[%s] %ds %s", this.getClass().getSimpleName(), refresh, download.getUrl());
 	}
-
-	
 }
