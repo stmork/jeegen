@@ -8,6 +8,8 @@ import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 
 import com.google.inject.Inject;
 
+import de.itemis.jee6.jee6.*;
+
 /**
  * Provides labels for a EObjects.
  * 
@@ -20,15 +22,93 @@ public class DslLabelProvider extends DefaultEObjectLabelProvider {
 		super(delegate);
 	}
 
-/*
-	//Labels and icons can be computed like this:
-	
-	String text(MyModel ele) {
-	  return "my "+ele.getName();
+	String text(Model model)
+	{
+		return model.getName();
 	}
-	 
-    String image(MyModel ele) {
-      return "MyModel.gif";
-    }
-*/
+	
+	String image(Model model)
+	{
+		return "jee6_16.gif";
+	}
+	
+	String text(Persistence p)
+	{
+		return p.getJndi() + " -> " + p.getPersistence();
+	}
+
+	String image(Persistence p)
+	{
+		return "outline/datasource.gif";
+	}
+
+	String image (Security s)
+	{
+		return "outline/security.gif";
+	}
+
+	String text(Locale l)
+	{
+		return l.getLanguage();
+	}
+
+	String image(Locale l)
+	{
+		return "outline/locale.gif";
+	}
+
+	String text(Mail m)
+	{
+		return m.getJndi();
+	}
+
+	String image(Mail m)
+	{
+		return "outline/mail.gif";
+	}
+
+	String image(Option o)
+	{
+		return "outline/option.gif";
+	}
+
+	String text(Entity e)
+	{
+		return e.getName().concat(" : ").concat(e.eClass().getName());
+	}
+
+	String image(Entity e)
+	{
+		return "outline/entity.gif";
+	}
+
+	String text (Attribute a)
+	{
+		return a.getName() + " : " + a.eClass().getName();
+	}
+
+	String text (EntityRef er)
+	{
+		return er.getName() + (er.isMany() ? "[] : " : " : ") + er.getType().eClass().getName();
+	}
+
+	String text (Reference r)
+	{
+		return r.getName() + " : " + r. eClass().getName();
+	}
+
+	String image(Reference r)
+	{
+		return "outline/entity.gif";
+	}
+
+	String image(Attribute a)
+	{
+		return "outline/element.gif";
+	}
+
+	String image(Property p)
+	{
+		return "outline/option.gif";
+	}
 }
