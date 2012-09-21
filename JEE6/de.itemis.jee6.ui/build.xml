@@ -63,6 +63,7 @@
 	</target>
 
 	<target name="compile">
+		<echo message="Eclipse: ${eclipse.home}"/>
 		<mkdir dir="${bin-path}"/>
 		<copy file="../de.itemis.jee6.util/jee6-utils.jar" todir="resources"/>
 		<copy todir="${bin-path}">
@@ -71,6 +72,11 @@
 			</fileset>
 			<fileset dir="${src-gen-path}">
 				<exclude name="**/*.java"/>
+			</fileset>
+			<fileset dir=".">
+				<include name="plugin.xml"/>
+				<include name="icons/**/*.*"/>
+				<include name="resources/*.*"/>
 			</fileset>
 		</copy>
 		<javac srcdir="${src-path}:${src-gen-path}" destdir="${bin-path}" debug="true" includeantruntime="false">
@@ -81,11 +87,6 @@
 	<target name="package" depends="compile,-version">
 		<jar destfile="${plugin}" manifest="${manifest}">
 			<zipfileset dir="${bin-path}"/>
-			<zipfileset dir=".">
-				<include name="plugin.xml"/>
-				<include name="**/*.gif"/>
-				<include name="resources/*.*"/>
-			</zipfileset>
 		</jar>
 	</target>
 	
