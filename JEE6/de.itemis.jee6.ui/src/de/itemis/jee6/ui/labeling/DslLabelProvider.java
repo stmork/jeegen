@@ -9,6 +9,9 @@ import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import com.google.inject.Inject;
 
 import de.itemis.jee6.jee6.*;
+import de.itemis.jee6.jee6.Boolean;
+import de.itemis.jee6.jee6.Integer;
+import de.itemis.jee6.jee6.Number;
 
 /**
  * Provides labels for a EObjects.
@@ -87,6 +90,41 @@ public class DslLabelProvider extends DefaultEObjectLabelProvider {
 		return a.getName() + " : " + a.eClass().getName();
 	}
 
+	String image(Attribute a)
+	{
+		return "outline/element.gif";
+	}
+
+	String image(Boolean a)
+	{
+		return "outline/element_bool.gif";
+	}
+
+	String image(Text a)
+	{
+		return "outline/element_text.gif";
+	}
+
+	String image(Integer a)
+	{
+		return "outline/element_integer.gif";
+	}
+
+	String image(Number a)
+	{
+		return "outline/element_number.gif";
+	}
+
+	String image(Blob a)
+	{
+		return "outline/element_blob.gif";
+	}
+
+	String image(Clob a)
+	{
+		return "outline/element_clob.gif";
+	}
+
 	String text (EntityRef er)
 	{
 		return er.getName() + (er.isMany() ? "[] : " : " : ") + er.getType().eClass().getName();
@@ -100,11 +138,6 @@ public class DslLabelProvider extends DefaultEObjectLabelProvider {
 	String image(Reference r)
 	{
 		return "outline/entity.gif";
-	}
-
-	String image(Attribute a)
-	{
-		return "outline/element.gif";
 	}
 
 	String image(Property p)
