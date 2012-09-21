@@ -19,6 +19,7 @@ import de.itemis.jee6.jee6.Locale;
 import de.itemis.jee6.jee6.Mail;
 import de.itemis.jee6.jee6.Model;
 import de.itemis.jee6.jee6.Option;
+import de.itemis.jee6.jee6.Options;
 import de.itemis.jee6.jee6.Persistence;
 import de.itemis.jee6.jee6.Property;
 import de.itemis.jee6.jee6.Reference;
@@ -97,6 +98,11 @@ public class DslLabelProvider extends DefaultEObjectLabelProvider {
 	String image(Entity e)
 	{
 		return "outline/entity.gif";
+	}
+
+	String image(Options o)
+	{
+		return o.getKeys().size() == 0 ? "outline/entity_options.gif" : "outline/entity_values.gif";
 	}
 
 	String text (Attribute a)
