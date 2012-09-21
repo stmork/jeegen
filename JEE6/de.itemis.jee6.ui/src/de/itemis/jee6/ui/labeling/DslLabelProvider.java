@@ -8,10 +8,24 @@ import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 
 import com.google.inject.Inject;
 
-import de.itemis.jee6.jee6.*;
-import de.itemis.jee6.jee6.Boolean;
-import de.itemis.jee6.jee6.Integer;
-import de.itemis.jee6.jee6.Number;
+import de.itemis.jee6.jee6.Attribute;
+import de.itemis.jee6.jee6.Blob;
+import de.itemis.jee6.jee6.BooleanProp;
+import de.itemis.jee6.jee6.Clob;
+import de.itemis.jee6.jee6.Entity;
+import de.itemis.jee6.jee6.EntityRef;
+import de.itemis.jee6.jee6.IntegerProp;
+import de.itemis.jee6.jee6.Locale;
+import de.itemis.jee6.jee6.Mail;
+import de.itemis.jee6.jee6.Model;
+import de.itemis.jee6.jee6.Option;
+import de.itemis.jee6.jee6.Persistence;
+import de.itemis.jee6.jee6.Property;
+import de.itemis.jee6.jee6.Reference;
+import de.itemis.jee6.jee6.Security;
+import de.itemis.jee6.jee6.Text;
+import de.itemis.jee6.jee6.TextProp;
+
 
 /**
  * Provides labels for a EObjects.
@@ -95,7 +109,7 @@ public class DslLabelProvider extends DefaultEObjectLabelProvider {
 		return "outline/element.gif";
 	}
 
-	String image(Boolean a)
+	String image(de.itemis.jee6.jee6.Boolean a)
 	{
 		return "outline/element_bool.gif";
 	}
@@ -105,12 +119,12 @@ public class DslLabelProvider extends DefaultEObjectLabelProvider {
 		return "outline/element_text.gif";
 	}
 
-	String image(Integer a)
+	String image(de.itemis.jee6.jee6.Integer a)
 	{
 		return "outline/element_integer.gif";
 	}
 
-	String image(Number a)
+	String image(de.itemis.jee6.jee6.Number a)
 	{
 		return "outline/element_number.gif";
 	}
@@ -138,6 +152,62 @@ public class DslLabelProvider extends DefaultEObjectLabelProvider {
 	String image(Reference r)
 	{
 		return "outline/entity.gif";
+	}
+
+	String text(Property p)
+	{
+		final StringBuffer buffer = new StringBuffer(p.getJndi());
+		
+		if (p.getOriginal() != null)
+		{
+			buffer.append(" -> ").append(p.getOriginal());
+		}
+		return buffer.toString();
+	}
+
+	String text(TextProp tp)
+	{
+		final StringBuffer buffer = new StringBuffer(tp.getJndi());
+		
+		if (tp.getValue() != null)
+		{
+			buffer.append(" = ").append(tp.getValue());
+		}
+		if (tp.getOriginal() != null)
+		{
+			buffer.append(" -> ").append(tp.getOriginal());
+		}
+		return buffer.toString();
+	}
+
+	String text(IntegerProp ip)
+	{
+		final StringBuffer buffer = new StringBuffer(ip.getJndi());
+		
+		if (ip.getValue() != 0)
+		{
+			buffer.append(" = ").append(ip.getValue());
+		}
+		if (ip.getOriginal() != null)
+		{
+			buffer.append(" -> ").append(ip.getOriginal());
+		}
+		return buffer.toString();
+	}
+
+	String text(BooleanProp bp)
+	{
+		final StringBuffer buffer = new StringBuffer(bp.getJndi());
+		
+		if (bp.getValue() != null)
+		{
+			buffer.append(" = ").append(bp.getValue());
+		}
+		if (bp.getOriginal() != null)
+		{
+			buffer.append(" -> ").append(bp.getOriginal());
+		}
+		return buffer.toString();
 	}
 
 	String image(Property p)
