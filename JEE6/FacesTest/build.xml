@@ -117,7 +117,7 @@
 	</target>
 
 	<target name="generate">
-		<echo message="${eclipse.home}"/>
+		<echo message="Eclipse: ${eclipse.home}"/>
 		<java classname="org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher" classpathref="generate.classpath" fork="true">
 			<arg value="${src-path}/FacesTest.mwe2"/>
 		</java>

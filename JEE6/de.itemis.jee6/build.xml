@@ -75,7 +75,6 @@
 	</target>
 	
 	<target name="compile">
-		<echo message="Eclipse: ${eclipse.home}"/>
 		<mkdir dir="${bin-path}"/>
 		<copy todir="${bin-path}">
 			<fileset dir="${src-path}">
