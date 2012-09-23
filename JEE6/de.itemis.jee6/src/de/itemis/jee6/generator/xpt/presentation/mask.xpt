@@ -21,7 +21,9 @@
 				<table>
 «FOREACH attributes AS attr»
 					<tr>
+«IF debug()»
 						<td class="«labelClass(attr)»">«attr.typeOf().asType()»</td>
+«ENDIF»
 						<td class="«labelClass(attr)»">#{msg['«prefixOf(p)».«prefixOf()».«prefixOf(attr)»']}</td>
 						<td>
 «EXPAND element(p, this) FOR attr»
@@ -29,6 +31,9 @@
 					</tr>
 «ENDFOREACH»
 					<tr>
+«IF debug()»
+						<td/>
+«ENDIF»
 						<td/>
 						<td><h:commandButton
 							action="#{«handlerUri(p)».«saveEntity()»}"
@@ -36,9 +41,10 @@
 «IF id == null»
 							value="#{«handlerUri(p)».«nameOf()».id == 0 ? msg.create : msg.save}" /></td>
 «ELSE»
-							value="#{«handlerUri(p)».«nameOf()».«nameOf(id)» == null ? msg.create : msg.save}" /></td>
+							value="#{«handlerUri(p)».«nameOf()».«nameOf(id)» == null ? msg.create : msg.save}" />
 «ENDIF»
 «ENDLET»
+						</td>
 					</tr>
 				</table>
 			</h:form>

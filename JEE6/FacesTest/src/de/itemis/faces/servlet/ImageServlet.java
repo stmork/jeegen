@@ -8,7 +8,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.OutputStream;
 
 import javax.ejb.EJB;
 import javax.imageio.ImageIO;
@@ -29,10 +28,8 @@ import de.itemis.faces.dao.SessionDaoBean;
 @WebServlet("/ImageServlet")
 public class ImageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final String IMAGE_TYPE = "gif";
 	private static final Log  log    = LogFactory.getLog(ImageServlet.class);
-	private static final int  width  = 240;
-	private static final int  height = 160;
-	private static final Font font   = new Font("Monospaced", Font.PLAIN, 12);
 
 	@EJB
 	private SessionDaoBean session;
@@ -68,10 +65,20 @@ public class ImageServlet extends HttpServlet {
     		HttpServletResponse response) throws ServletException, IOException
 	{
 		log.debug(">service()");
+    	session.ping();
+
+		renderImage(response, IMAGE_TYPE);
+		log.debug("<service()");
+    }
+
+	private static final int  width  = 240;
+	private static final int  height = 160;
+	private static final Font font   = new Font("Monospaced", Font.PLAIN, 12);
+
+	public static void renderImage(final HttpServletResponse response, final String type) throws IOException
+	{
     	BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     	Graphics      gfx   = image.getGraphics();
-
-    	session.ping();
 
     	gfx.setColor(Color.white);
 		gfx.fillRect(0, 0, width, height);
@@ -94,11 +101,10 @@ public class ImageServlet extends HttpServlet {
 		}
 
 		log.debug(" -write");
-    	OutputStream output = response.getOutputStream();
-		response.setContentType("image/gif");
-		ImageIO.write(image, "gif", output);
-		output.flush();
+
+		response.setContentType("image/" + IMAGE_TYPE);
+		ImageIO.write(image, type, response.getOutputStream());
+		response.flushBuffer();
 		gfx.dispose();
-		log.debug("<service()");
-    }
+	}
 }

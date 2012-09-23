@@ -190,7 +190,7 @@ Workflow
 «ENDDEFINE»
 
 «DEFINE readme FOR DslProjectInfo»
-«FILE "README.txt"»
+«FILE "LiesMich.txt"»
 Für das Kompilieren müssen folgende Bedingungen erfüllt sein:
 1. Eine Runtime-Umgebung muss eingerichtet werden. Unter "Window -> Preferences -> Server ->
    Runtime Environment" kann eine eigerichtet werden. Im erzeugten Projekt muss das unter
@@ -202,5 +202,23 @@ Für das Kompilieren müssen folgende Bedingungen erfüllt sein:
    b) glassfish.home
    Je nach verwendetem Application Server können die Home-Variablen weggelassen werden, wenn in
    der build.xml die entsprechenden Tasks angepasst werden.
+   
+Abschließend: Bitte vergessen Sie nicht, die generierten Dateien in den Pfaden «getSrcPath()» und
+«getResPath()» der Versionsverwaltung hinzuzufügen!
+«ENDFILE»
+«FILE "ReadMe.txt"»
+For compiling the source you have to:
+1. configure your server runtime environment. You can do this unnder "Window -> Preferences ->
+   Server -> Runtime Environment". You have to add this environment in your newly created project:
+   "Project -> Properties -> Java Build Path -> Library -> Add Library".
+2. You have to configure a data source inside your application server. This must be named like
+   this: "jdbc/«applicationName»DS".
+3. You should also confiuge your build.properties. You have to add the following properties:
+   a) jboss.home
+   b) glassfish.home
+   Depending on your used application server you can remove those variables and you can adjust your
+   build targets inside the build.xml file.
+   
+Finally: Do not forget to add all generated files inside «getSrcPath()» and «getResPath()» to source control!
 «ENDFILE»
 «ENDDEFINE»
