@@ -63,7 +63,6 @@
 	</target>
 
 	<target name="compile">
-		<echo message="Eclipse: ${eclipse.home}"/>
 		<mkdir dir="${bin-path}"/>
 		<copy file="../de.itemis.jee6.util/jee6-utils.jar" todir="resources"/>
 		<copy todir="${bin-path}">
