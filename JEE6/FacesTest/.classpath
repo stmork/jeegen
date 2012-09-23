@@ -14,5 +14,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/de.itemis.jee6.util"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/itextpdf-5.3.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

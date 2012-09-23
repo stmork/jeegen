@@ -7,14 +7,16 @@
 		xmlns:h="http://java.sun.com/jsf/html">
 
 <ui:composition template="/layout.xhtml">
-	<ui:define name="title">#{msg['start.title']}</ui:define>
+	<ui:define name="title">#{msg['greece.title']}</ui:define>
 	<ui:define name="content">
-		<ul>
-			<li><h:link value="#{msg.change}" outcome="/admin/index.xhtml" /></li>
-			<li><h:link value="#{msg.logout}" outcome="/logout.xhtml" /></li>
-			<li><h:link value="#{msg['image.title']}" outcome="/image.xhtml" /></li>
-			<li><h:link value="#{msg['greece.title']}" outcome="/greece.xhtml" /></li>
-		</ul>
+		<p>
+			<h:graphicImage value="/proxy/image?cam=parosWeb" />
+			<h:graphicImage value="/proxy/image?cam=parosSail"/>
+		</p>
+		<p>
+			<h:graphicImage value="/proxy/image?cam=naxos" />
+			<h:graphicImage value="/proxy/image?cam=santorini"/>
+		</p>
 	</ui:define>
 </ui:composition>
 </html>

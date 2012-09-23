@@ -47,3 +47,6 @@ cached Boolean hasSecurityDomain(Model m) :
 
 Boolean isAbstract() :
 	false;
+
+Boolean debug() :
+	false;
