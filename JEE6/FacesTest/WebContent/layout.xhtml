@@ -26,6 +26,31 @@
 		<div id="line"/>
 		<div id="mid">
 			<div class="left">
+				<ui:fragment rendered="#{!sessionController.loggedIn}">
+					<div class="box">
+						<h:form id="menue" name="login" method="post">
+							<table>
+								<tr>
+									<td class="remark">#{msg['login.login']}</td>
+								</tr>
+								<tr>
+									<td class="mid">#{msg['login.user']}:<br/>
+									<h:inputText maxlength="16" size="8" id="login" autocomplete="off" value="#{loginHandler.login}" autofocus="autofocus" /></td>
+								</tr>
+								<tr>
+									<td class="mid">#{msg['login.password']}:<br/>
+									<h:inputSecret maxlength="16" size="8" id="password" autocomplete="off" value="#{loginHandler.password}" /></td>
+								</tr>
+								<tr>
+									<td>
+										<h:commandButton type="submit" value="#{msg['login.login']}" action="#{loginHandler.doLogin()}"/>
+									</td>
+								</tr>
+							</table>
+						</h:form>
+					</div>
+					<div class="space"/>
+				</ui:fragment>
 				<div class="box">
 					<ui:include src="menu.xhtml"/>
 				</div>
