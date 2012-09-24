@@ -39,7 +39,7 @@
 							action="#{«handlerUri(p)».«saveEntity()»}"
 «LET getId() AS id»
 «IF id == null»
-							value="#{«handlerUri(p)».«nameOf()».id == 0 ? msg.create : msg.save}" /></td>
+							value="#{«handlerUri(p)».«nameOf()».id == 0 ? msg.create : msg.save}" />
 «ELSE»
 							value="#{«handlerUri(p)».«nameOf()».«nameOf(id)» == null ? msg.create : msg.save}" />
 «ENDIF»
