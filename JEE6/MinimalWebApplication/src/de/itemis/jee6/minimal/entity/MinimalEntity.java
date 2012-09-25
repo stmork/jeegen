@@ -15,7 +15,7 @@ public class MinimalEntity {
 	private String name;
 
 	@Id
-	@TableGenerator(name = "MinimalIDs", table = "IDs", pkColumnName = "id", valueColumnName = "value", pkColumnValue = "Minimal", initialValue = 1, allocationSize = 10)
+	@TableGenerator(name = "MinimalIDs", table = "IDs", pkColumnName = "id", valueColumnName = "next_value", pkColumnValue = "Minimal", initialValue = 1, allocationSize = 10)
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "MinimalIDs")
 	public int getId() {
 		return id;
