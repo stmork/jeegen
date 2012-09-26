@@ -52,7 +52,7 @@ Workflow
 		{
 			path = srcdir
 			postprocessor = org.eclipse.xpand2.output.JavaBeautifier {}
-			postprocessor = de.itemis.jee6.generator.XmlBeautifier {}
+			postprocessor = de.morknet.oaw.tools.postprocessor.XmlBeautifier {}
 		}
 		outlet =
 		{
@@ -65,7 +65,7 @@ Workflow
 		{
 			name = "RES"
 			path = resdir
-			postprocessor = de.itemis.jee6.generator.XmlBeautifier {}
+			postprocessor = de.morknet.oaw.tools.postprocessor.XmlBeautifier {}
 			postprocessor = de.morknet.oaw.tools.postprocessor.unix.UnixBeautifier
 			{
 				
