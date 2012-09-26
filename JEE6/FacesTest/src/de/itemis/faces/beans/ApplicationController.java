@@ -4,6 +4,7 @@
 package de.itemis.faces.beans;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -36,8 +37,11 @@ public class ApplicationController implements Serializable
 	@EJB
 	private InfoDaoBean info;
 
+	@EJB
+	private MultipleBean multiple;
+
 	@PostConstruct
-	public void init() throws NamingException
+	public void init() throws NamingException, SQLException
 	{
 		final DirContext ldap = info.getLdapItemis();
 		final String     ns   = ldap.getNameInNamespace();
@@ -51,6 +55,8 @@ public class ApplicationController implements Serializable
 		LogUtil.debug(log, " namespace  = %s", ns);
 		dao.ensure(AddressOptionEnum.ADDRESS_HOME, "address.home");
 		dao.ensure(AddressOptionEnum.ADDRESS_WORK, "address.work");
+		
+		multiple.xaAccess();
 		log.debug("<init()");
 	}
 }
