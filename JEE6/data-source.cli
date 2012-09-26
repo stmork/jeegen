@@ -1,0 +1,10 @@
+deploy /usr/share/java/mysql-connector-java.jar
+
+data-source add    --name=exampleDS --jndi-name=java:/jdbc/exampleDS --driver-name=mysql-connector-java.jar --connection-url=jdbc:mysql://localhost:3306/example --user-name=jee6 --password=jee6
+data-source enable --name=exampleDS
+
+data-source add    --name=facesDS   --jndi-name=java:/jdbc/facesDS   --driver-name=mysql-connector-java.jar --connection-url=jdbc:mysql://localhost:3306/faces   --user-name=jee6 --password=jee6
+data-source enable --name=facesDS
+
+data-source add    --name=minimalDS --jndi-name=java:/jdbc/minimalDS --driver-name=mysql-connector-java.jar --connection-url=jdbc:mysql://localhost:3306/minimal --user-name=jee6 --password=jee6
+data-source enable --name=minimalDS
