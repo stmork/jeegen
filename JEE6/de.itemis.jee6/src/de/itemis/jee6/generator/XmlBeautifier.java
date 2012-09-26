@@ -10,7 +10,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.eclipse.xpand2.output.FileHandle;
-import org.eclipse.xtend.typesystem.xsd.XMLBeautifier;
+import org.eclipse.xpand2.output.PostProcessor;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -18,12 +18,14 @@ import org.xml.sax.SAXException;
 import com.sun.org.apache.xml.internal.serialize.OutputFormat;
 import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 
-public class XmlBeautifier extends XMLBeautifier
+public class XmlBeautifier implements PostProcessor
 {
+	protected String[] fileExtensions = new String[] { ".xml", ".xsl", ".xsd", ".wsdd", ".wsdl" };
+
 	@Override
 	public void beforeWriteAndClose(FileHandle handle)
 	{
-		if (super.isXmlFile(handle.getAbsolutePath()))
+		if (isXmlFile(handle.getAbsolutePath()))
 		{
 			try
 			{
@@ -36,7 +38,20 @@ public class XmlBeautifier extends XMLBeautifier
 		}
 	}
 
-	private String format(final String unformattedXml) throws IOException, ParserConfigurationException, SAXException
+	@Override
+	public void afterClose(FileHandle impl)
+	{
+		// This method intentionally left blank
+	}
+
+	protected boolean isXmlFile(final String absolutePath) {
+		for (int i = 0; i < fileExtensions.length; i++)
+			if (absolutePath.endsWith(fileExtensions[i].trim()))
+				return true;
+		return false;
+	}
+
+	protected String format(final String unformattedXml) throws IOException, ParserConfigurationException, SAXException
 	{
         final Document document = parseXmlFile(unformattedXml);
         final OutputFormat format = new OutputFormat(document);
@@ -51,7 +66,7 @@ public class XmlBeautifier extends XMLBeautifier
         return out.toString();
     }
 
-	private Document parseXmlFile(final String in) throws ParserConfigurationException, SAXException, IOException
+	protected Document parseXmlFile(final String in) throws ParserConfigurationException, SAXException, IOException
 	{
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = dbf.newDocumentBuilder();

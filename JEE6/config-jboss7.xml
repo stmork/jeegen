@@ -22,6 +22,23 @@
                         <password>geheim</password>
                     </security>
                 </datasource>
+                <xa-datasource jndi-name="java:/jdbc/facesDS" pool-name="facesDS" enabled="true" use-java-context="true" use-ccm="true">
+                    <xa-datasource-property name="URL">
+                        jdbc:mysql://localhost:3306/faces?autoReconnect=true
+                    </xa-datasource-property>
+                    <xa-datasource-class>com.mysql.jdbc.jdbc2.optional.MysqlXADataSource</xa-datasource-class>
+                    <driver>mysql-connector-java.jar</driver>
+                    <transaction-isolation>TRANSACTION_REPEATABLE_READ</transaction-isolation>
+                    <xa-pool>
+                        <min-pool-size>5</min-pool-size>
+                        <max-pool-size>20</max-pool-size>
+                        <prefill>true</prefill>
+                    </xa-pool>
+                    <security>
+                        <user-name>jee6</user-name>
+                        <password>geheim</password>
+                    </security>
+                </xa-datasource>
                 <datasource jta="true" jndi-name="java:/jdbc/facesDS" pool-name="facesDS" enabled="true" use-ccm="true">
                     <connection-url>jdbc:mysql://localhost:3306/faces?autoReconnect=true</connection-url>
                     <driver>mysql-connector-java.jar</driver>
