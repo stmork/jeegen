@@ -66,17 +66,14 @@ Workflow
 			name = "RES"
 			path = resdir
 			postprocessor = de.morknet.oaw.tools.postprocessor.XmlBeautifier {}
-			postprocessor = de.morknet.oaw.tools.postprocessor.unix.UnixBeautifier
-			{
-				
-			}
+			postprocessor = de.morknet.oaw.tools.postprocessor.unix.UnixBeautifier {}
 		}
 		outlet =
 		{
 			name = "XHTML"
 			path = xhtmldir
 			overwrite = false
-			postprocessor = de.itemis.jee6.generator.XhtmlBeautifier {}
+			postprocessor = de.morknet.oaw.tools.postprocessor.XmlBeautifier {}
 		}
 	}
 }
