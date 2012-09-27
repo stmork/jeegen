@@ -40,6 +40,7 @@ log4j.appender.R.layout.ConversionPattern=%-5p %-30.30c{1} %x - %m%n
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 «FOREACH getPersistenceUnits() AS pu»
+«EXPAND utility::XmlHeader»
 	<persistence-unit name="«pu.persistence»" transaction-type="JTA">
 		<jta-data-source>«pu.jndi»</jta-data-source>
 «REM»
@@ -75,6 +76,7 @@ log4j.appender.R.layout.ConversionPattern=%-5p %-30.30c{1} %x - %m%n
 		xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 		metadata-complete="false" version="3.0">
+«EXPAND utility::XmlHeader»
 	<display-name>«this.name»</display-name>
 	<distributable />
 
@@ -183,6 +185,7 @@ log4j.appender.R.layout.ConversionPattern=%-5p %-30.30c{1} %x - %m%n
 «FILE "WEB-INF/jboss-web.xml" RES»
 <?xml version="1.0" encoding="UTF-8"?>
 <jboss-web>
+«EXPAND utility::XmlHeader»
 «FOREACH getSecurityDomains() AS sd»
 	<security-domain>java:/jaas/«sd.jaas»</security-domain>
 «ENDFOREACH»
@@ -203,6 +206,7 @@ log4j.appender.R.layout.ConversionPattern=%-5p %-30.30c{1} %x - %m%n
 «FILE "WEB-INF/weblogic.xml" RES»
 <?xml version="1.0" encoding="UTF-8"?>
 <weblogic-web-app>
+«EXPAND utility::XmlHeader»
 	<context-root>«path»</context-root>
 «FOREACH getAllRoles() AS role»
 	<security-role-assignment>
@@ -256,6 +260,7 @@ log4j.appender.R.layout.ConversionPattern=%-5p %-30.30c{1} %x - %m%n
 GlassFish Application Server 3.0 Servlet 3.0//EN" 
 "http://www.sun.com/software/appserver/dtds/sun-web-app_3_0-0.dtd">
 <sun-web-app>
+«EXPAND utility::XmlHeader»
 	<context-root>«path»</context-root>
 «FOREACH getAllRoles() AS role»
 	<security-role-mapping>
@@ -274,6 +279,7 @@ GlassFish Application Server 3.0 Servlet 3.0//EN"
 GlassFish Application Server 3.0 Servlet 3.0//EN" 
 "http://www.sun.com/software/appserver/dtds/sun-web-app_3_0-0.dtd">
 <glassfish-web-app>
+«EXPAND utility::XmlHeader»
 	<context-root>«path»</context-root>
 «FOREACH getAllRoles() AS role»
 	<security-role-mapping>
@@ -292,6 +298,7 @@ GlassFish Application Server 3.0 Servlet 3.0//EN"
 <faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee"
 		xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+«EXPAND utility::XmlHeader»
 	<application>
 		<resource-bundle>
 			<base-name>«package».messages</base-name>
