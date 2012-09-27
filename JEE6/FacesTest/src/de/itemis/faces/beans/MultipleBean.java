@@ -39,6 +39,10 @@ public class MultipleBean extends AbstractDaoBean
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void xaAccess() throws SQLException
 	{
+		Connection connection = null;
+		Statement  stmt       = null;
+		ResultSet  result     = null;
+
 		log.debug(">test()");
 		
 		try
@@ -48,19 +52,47 @@ public class MultipleBean extends AbstractDaoBean
 				log.debug("    " + type);
 			}
 
-			final Connection connection = ds.getConnection();
-			final Statement stmt = connection.createStatement();
-			final ResultSet result = stmt.executeQuery("SELECT * FROM minimal");
-			
+			connection = ds.getConnection();
+			stmt = connection.createStatement();
+			result = stmt.executeQuery("SELECT * FROM minimal");
+					
 			while (result.next())
 			{
 				log.debug("    " + result.getString("name"));
 			}
-			connection.close();
 		}
 		finally
 		{
+			close(connection, stmt, result);
 			log.debug("<test()");
+		}
+	}
+	
+	private void close(final Connection connection, final Statement stmt, final ResultSet result) throws SQLException
+	{
+		try
+		{
+			if (result != null)
+			{
+				result.close();
+			}
+		}
+		finally
+		{
+			try
+			{
+				if (stmt != null)
+				{
+					stmt.close();
+				}
+			}
+			finally
+			{
+				if (connection != null)
+				{
+					connection.close();
+				}
+			}
 		}
 	}
 }
