@@ -31,7 +31,8 @@
 	<property name="jboss.deploy"         value="${jboss.home}/standalone/deployments"/>
 
 	<property name="glassfish.home"       value="/opt/glassfish3"/>
-	<property name="glassfish.deploy"     value="${glassfish.home}/glassfish/domains/domain1/autodeploy/"/>
+	<property name="glassfish.domain"     value="domain1"/>
+	<property name="glassfish.deploy"     value="${glassfish.home}/glassfish/domains/${glassfish.domain}/autodeploy/"/>
 
 	<!-- ==================================================== -->
 	<!--              Setting up classpaths                   -->
