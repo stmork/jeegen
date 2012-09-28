@@ -1,14 +1,16 @@
-<project name="Faces Test" default="package">
+<project name="JEE6-WebApp Faces (Case study)" default="package">
 	<property file="${user.home}/.jee6.properties" />
 	<property file="${basedir}/build.properties"/>
 
 	<property name="bin-path"             value="./bin"/>
 	<property name="src-path"             value="./src"/>
+	<property name="res-path"             value="./WebContent"/>
 	<property name="src-gen-path"         value="./src-gen"/>
 	<property name="res-gen-path"         value="./res-gen"/>
-	<property name="web-path"             value="./WebContent"/>
+	<property name="lib-path"             value="${res-path}/WEB-INF/lib"/>
+	<property name="img-path"             value="${res-path}/img"/>
 	<property name="tst-path"             value="./test"/>
-	<property name="lib-path"             value="../de.itemis.jee6.util/lib"/>
+	<property name="ext-lib-path"         value="../de.itemis.jee6.util/lib"/>
 
 	<property name="war"                  value="facestest.war"/>
 	<property name="module.jar"           value="ldapcontext.jar"/>
@@ -39,7 +41,7 @@
 	<!-- ==================================================== -->
 
 	<path id="logger.path">
-		<fileset dir="${web-path}">
+		<fileset dir="${res-path}">
 			<include name="**/*.jar"/>
 		</fileset>
 	</path>
@@ -49,7 +51,7 @@
 			<include name="**/*.jar"/>
 			<exclude name="**/*jsf*1.2*.jar"/>
 		</fileset>
-		<fileset dir="${lib-path}"/>
+		<fileset dir="${ext-lib-path}"/>
 		<path refid="logger.path"/>
 	</path>
 
@@ -126,6 +128,7 @@
 
 	<target name="compile">
 		<mkdir dir="${bin-path}"/>
+		<copy file="../de.itemis.jee6.util/jee6-utils.jar" todir="${lib-path}"/>
 		<javac srcdir="${src-path}:${src-gen-path}:${tst-path}" destdir="${bin-path}" debug="true" includeantruntime="false">
 			<classpath refid="compile.path"/>
 		</javac>
@@ -145,7 +148,7 @@
 				<include name="**/*.xml"/>
 				<include name="**/*.properties"/>
 			</zipfileset>
-			<zipfileset dir="${web-path}"/>
+			<zipfileset dir="${res-path}"/>
 			<zipfileset dir="${res-gen-path}"/>
 		</jar>
 		<jar destfile="${module.jar}">

@@ -19,6 +19,7 @@ import de.itemis.faces.dao.InfoDaoBean;
 import de.itemis.faces.dao.SessionDaoBean;
 import de.itemis.faces.entities.UserInfo;
 import de.itemis.faces.handler.AbstractHandler;
+import de.itemis.jee6.util.AbstractLdapConnector;
 import de.itemis.jee6.util.LogUtil;
 
 @ManagedBean
@@ -55,12 +56,12 @@ public class SessionController extends AbstractHandler
 		{
 			final DirContext ldap = info.getLdapItemis();
 			final String namespace = ldap.getNameInNamespace();
-			final LdapClient client = new LdapClient(ldap, info.getLdapBaseDN());
+			final AbstractLdapConnector client = new LdapClient(ldap, info.getLdapBaseDN());
 			final Attributes attributes = client.getUser(login);
 
 			LogUtil.debug(log, " baseDn=%s", info.getLdapBaseDN());
 			LogUtil.debug(log, " ns=%s",     namespace);
-			LogUtil.debug(log, " gecos=%s",  LdapClient.getValue(attributes, "gecos"));
+			LogUtil.debug(log, " gecos=%s",  AbstractLdapConnector.getValue(attributes, "gecos"));
 		}
 		
 		for (UserInfo info : dao.query(1960))
