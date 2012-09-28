@@ -40,23 +40,23 @@
 	<!--              Setting up classpaths                   -->
 	<!-- ==================================================== -->
 
-	<path id="logger.path">
-		<fileset dir="${res-path}">
-			<include name="**/*.jar"/>
-		</fileset>
-	</path>
-
-	<path id="compile.path">
+	<path id="jboss.path">
 		<fileset dir="${jboss.lib}">
 			<include name="**/*.jar"/>
 			<exclude name="**/*jsf*1.2*.jar"/>
 		</fileset>
+	</path>
+
+	<path id="compile.path">
+		<path refid="jboss.path"/>
+		<fileset dir="${lib-path}"/>
 		<fileset dir="${ext-lib-path}"/>
-		<path refid="logger.path"/>
 	</path>
 
 	<path id="runtime.path">
-		<path refid="compile.path"/>
+		<path refid="jboss.path"/>
+		<fileset dir="${lib-path}"/>
+		<fileset dir="${ext-lib-path}"/>
 		<pathelement location="${bin-path}" />  
 	</path>
 
@@ -192,7 +192,7 @@
 				excludeFilter="${findbugs.exclude}"
 				reportlevel="low"
 				failonerror="true">
-			<sourcePath path="${main-project}/${src-path}"/>
+			<sourcePath path="${src-path}"/>
 			<class location="${bin-path}"/> 
 			<auxclasspath refid="compile.path"/>
 		</findbugs>

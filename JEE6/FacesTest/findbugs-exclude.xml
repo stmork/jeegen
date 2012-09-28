@@ -12,4 +12,7 @@
 	<Match>
 		<Bug pattern="SE_INNER_CLASS"/>
 	</Match>
+	<Match>
+		<Package name="~org.bouncycastle.*"/>
+	</Match>
 </FindBugsFilter>
