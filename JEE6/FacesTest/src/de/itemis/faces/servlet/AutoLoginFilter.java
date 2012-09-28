@@ -55,7 +55,8 @@ public class AutoLoginFilter implements Filter
 	        	String principal = r.getRemoteUser();
 	            if (principal == null)
 	            {
-	                String [] userdata = new String (decoder.decodeBuffer(basic.substring(6))).split(":");
+	            	byte [] text = decoder.decodeBuffer(basic.substring(6));
+	                String [] userdata = new String (text, request.getCharacterEncoding()).split(":");
 	                final String user = userdata[0];
 	
 	                LogUtil.info(log, " Automatically logging in user %s.", user);

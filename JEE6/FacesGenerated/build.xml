@@ -169,7 +169,7 @@
 				excludeFilter="${findbugs.exclude}"
 				reportlevel="low"
 				failonerror="true">
-			<sourcePath path="${main-project}/${src-path}"/>
+			<sourcePath path="${src-path}"/>
 			<class location="${bin-path}"/> 
 			<auxclasspath refid="compile.path"/>
 		</findbugs>
