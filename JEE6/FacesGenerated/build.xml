@@ -1,4 +1,4 @@
-<project name="Faces Generator Test" default="generate">
+<project name="JEE6-WebApp Example (Full generated app)" default="generate">
 	<property file="${user.home}/.jee6.properties" />
 	<property file="${basedir}/build.properties"/>
 
