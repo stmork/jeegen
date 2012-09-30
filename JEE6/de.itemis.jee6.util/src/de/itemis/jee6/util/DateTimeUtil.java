@@ -4,6 +4,7 @@
 package de.itemis.jee6.util;
 
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * This class has some methods for finding some special time points.
@@ -20,6 +21,24 @@ public class DateTimeUtil
 	{
 		Calendar cal = Calendar.getInstance();
 
+		cal.set(Calendar.MILLISECOND, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+
+		return cal;
+	}
+
+	/**
+	 * This method returns a {@link Calendar} object at the beginning of the given day.
+	 * 
+	 * @param date The {@link Date} for which the start of day should be computed. 
+	 * @return The {@link Calendar} object at the beginning of this day.
+	 */
+	public static Calendar getStartOfDay(final Date date)
+	{
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
 		cal.set(Calendar.MILLISECOND, 0);
 		cal.set(Calendar.SECOND, 0);
 		cal.set(Calendar.MINUTE, 0);
