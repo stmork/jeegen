@@ -19,8 +19,8 @@ import org.apache.commons.logging.LogFactory;
  */
 public class Profiler
 {
-	private final static boolean isDebug = LogFactory.getLog(Profiler.class).isDebugEnabled();
 	private final static int MAX_LENGTH = 100;
+	private       static boolean verbose = LogFactory.getLog(Profiler.class).isDebugEnabled();
 
 	/**
 	 * The profiling method. It prints the call with its objects and the return of the method with
@@ -35,7 +35,7 @@ public class Profiler
 	@AroundInvoke
 	public Object profile (InvocationContext invocation) throws Exception
 	{
-		if (isDebug)
+		if (isVerbose())
 		{
 			final  Log    log    = LogFactory.getLog(invocation.getTarget().getClass());
 			final  String method = invocation.getMethod().getName();
@@ -165,5 +165,25 @@ public class Profiler
 	{
 		final Double diff = (end - start) / 1000.0;
 		return diff.toString();
+	}
+
+	/**
+	 * Returns the debug logging state.
+	 * 
+	 * @return Returns true if logging is enabled.
+	 */
+	public static boolean isVerbose()
+	{
+		return verbose;
+	}
+
+	/**
+	 * Enables or disables debug logging for profiling purposes.
+	 * 
+	 * @param isVerbose If true debug logging is enabled. 
+	 */
+	public static void setVerbose(boolean isVerbose)
+	{
+		verbose = isVerbose;
 	}
 }

@@ -6,6 +6,7 @@ package de.itemis.jee6.test;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import junit.framework.Assert;
 
@@ -100,6 +101,9 @@ public class UtilTest
 	public void getStartOfDay()
 	{
 		Calendar cal = DateTimeUtil.getStartOfDay();
+		Assert.assertEquals("00:00:00", time.format(cal.getTime()));
+		
+		cal = DateTimeUtil.getStartOfDay(new Date());
 		Assert.assertEquals("00:00:00", time.format(cal.getTime()));
 	}
 	
