@@ -68,7 +68,7 @@
 «IF isEnumeration(type)»
 		#{msg[«nameOf(e)».«nameOf()».bundleKey]}
 «ELSE»
-		#{msg[«nameOf(e)».«nameOf()».name]}
+		#{«nameOf(e)».«nameOf()».name}
 «ENDIF»
 «ENDDEFINE»
 

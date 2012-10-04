@@ -118,13 +118,13 @@
 «ENDIF»
 								<f:selectItems
 										value="#{«handlerUri(p)».«uiList(type)»}"
-										itemValue="#{«nameOf(e)»}"
+										itemValue="#{«nameOf()»}"
 «IF isEnumeration(this.type)»
-										itemLabel="#{msg[«nameOf(e)».bundleKey]}"
+										itemLabel="#{msg[«nameOf()».bundleKey]}"
 «ELSE»
-										itemLabel="#{«nameOf(e)».name}"
+										itemLabel="#{«nameOf()».name}"
 «ENDIF»
-										var="«nameOf(e)»" />
+										var="«nameOf()»" />
 							</h:selectOneMenu>
 «ENDDEFINE»
 
