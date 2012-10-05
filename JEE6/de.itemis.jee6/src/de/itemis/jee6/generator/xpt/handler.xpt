@@ -281,7 +281,6 @@ abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(getMo
 	/**
 	 * This returns the history list of entity «typeOf(entity)».
 	 * 
-	 * @param «nameOf(entity)» The «typeOf(entity)» entity
 	 * @return The list of history entries.
 	 */
 	public List<«typeOf(history)»> «listOf(history.type)»()
