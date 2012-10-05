@@ -12,15 +12,15 @@
 «EXTENSION de::itemis::jee6::generator::ext::ui»
 
 «DEFINE Main FOR Model»
-«EXPAND css::Main»
 «EXPAND index»
+«EXPAND index FOREACH processes»
+«EXPAND menu»
+«EXPAND css::Main»
 «EXPAND layout»
 «IF hasSecurityDomain()»
 «EXPAND login»
 «EXPAND logout»
 «ENDIF»
-«EXPAND menu»
-«EXPAND index FOREACH processes»
 «ENDDEFINE»
 
 «DEFINE index FOR Model»
@@ -185,6 +185,7 @@
 «ENDDEFINE»
 
 «DEFINE ui(Process p) FOR Entity»
+«EXPAND history(p) FOREACH types.typeSelect(History).type»
 «FILE index(p, this) XHTML»
 «EXPAND utility::XhtmlStart»
 <ui:composition template="/«layout(getModel(p))»">
@@ -192,7 +193,22 @@
 	<ui:define name="content">
 		<h:messages layout="table" styleClass="error" />
 «EXPAND mask::Main(p)»
-«EXPAND list::Main(p)»
+«EXPAND list::entityList(p)»
+	</ui:define>
+</ui:composition>
+«EXPAND utility::XhtmlEnd»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE history(Process p) FOR Entity»
+«FILE index(p, this) XHTML»
+«EXPAND utility::XhtmlStart»
+<ui:composition template="/«layout(getModel(p))»">
+	<ui:define name="title">#{msg['«prefixOf(p)».«prefixOf(this)».title']}</ui:define>
+	<ui:define name="content">
+		<h:messages layout="table" styleClass="error" />
+«EXPAND mask::Main(p)»
+«EXPAND list::historyList(p)»
 	</ui:define>
 </ui:composition>
 «EXPAND utility::XhtmlEnd»

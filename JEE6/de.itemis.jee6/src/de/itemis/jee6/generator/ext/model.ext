@@ -45,8 +45,8 @@ cached List[Property] getProperties(Model m) :
 cached Boolean hasSecurityDomain(Model m) :
 	getSecurityDomains(m).first() != null;
 
-Boolean isAbstract() :
-	false;
+Boolean isAbstract(Process p) :
+	getModel(p).strict;
 
 Boolean debug() :
 	false;

@@ -12,7 +12,7 @@
 «DEFINE model FOR DslProjectInfo»
 «FILE getModelPath() + "/" + projectName + ".jee6"-»
 // Edit model here...
-application "«projectName»"  context "/«applicationName»" package «basePackage».«applicationName.toFirstLower()» development;
+application "«projectName»"  context "/«applicationName»" package «basePackage».«applicationName.toFirstLower()» development strict;
 persistence unit"«applicationName»DS" jndi "jdbc/«applicationName»DS";
 locale "de" default;
 

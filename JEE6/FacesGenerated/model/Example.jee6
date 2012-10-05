@@ -1,4 +1,4 @@
-application "JEE6 Generated Example" context "/example" package de.itemis.example timeout 120 integration;
+application "JEE6 Generated Example" context "/example" package de.itemis.example timeout 120 integration strict;
 persistence unit "exampleDS" jndi "jdbc/exampleDS";
 security domain "itemis";
 smtp "mail/Default";
@@ -119,7 +119,7 @@ options AddressOption
 	"address.home"
 };
 
-entity HistoryEntry
+entity HistoryEntry cloneable
 {
 	Timestamp auto creation;
 	Clob           comment;
@@ -139,6 +139,7 @@ entity EntityEntry
 
 entity Startup
 {
+	Text                   subject;
 	History HistoryEntry   history;
 	Entity  EntityEntry [] entities; 
 };

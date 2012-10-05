@@ -14,6 +14,8 @@
 «EXTENSION de::itemis::jee6::generator::ext::ui»
 
 «DEFINE Main(Process p) FOR Entity»
+			<!-- === generated mask === --> 
+			<!-- process: «p.name» entity: «name» -->
 «LET getSingleAttributes() AS attributes»
 «IF attributes.size > 0»
 		<div class="box">
