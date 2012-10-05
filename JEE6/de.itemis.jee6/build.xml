@@ -67,6 +67,10 @@
 		<delete dir="${bin-path}" />
 	</target>
 
+	<target name="undeploy" depends="-version">
+		<delete file="${eclipse.home.plugins}/${plugin}" />
+	</target>
+
 	<target name="generate">
 		<echo message="Eclipse: ${eclipse.home}"/>
 		<java classname="org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher" classpathref="generate.classpath" fork="true">
