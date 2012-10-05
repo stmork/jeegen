@@ -220,20 +220,17 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 	{
 «LET getId(entity) AS id»
 «IF id == null»
-		final TypedQuery<«typeOf(entity)»> query = em.createQuery(
-				"SELECT e FROM «typeOf(entity)» e LEFT JOIN FETCH e.«nameOf(type)» WHERE e.id = :id",
-				«typeOf(entity)».class);
-		query.setParameter("id", «parameterOf(entity)».getId());
+		final TypedQuery<«typeOf(type)»> query = em.createQuery(
+				"SELECT e FROM «typeOf(type)» e WHERE e.«parameterOf(entity)» = :entity ORDER BY e.id DESC",
+				«typeOf(type)».class);
 «ELSE»
-		final TypedQuery<«typeOf(entity)»> query = em.createQuery(
-				"SELECT e FROM «typeOf(entity)» e LEFT JOIN FETCH e.«nameOf(type)» WHERE e.«nameOf(id)» = :«nameOf(id)»",
-				«typeOf(entity)».class);
-		query.setParameter("«nameOf(id)»", «parameterOf(entity)».«getterOf(id)»());
+		final TypedQuery<«typeOf(type)»> query = em.createQuery(
+				"SELECT e FROM «typeOf(type)» e WHERE e.«parameterOf(entity)» = :entity ORDER BY e.«nameOf(id)» DESC",
+				«typeOf(type)».class);
 «ENDIF»
 «ENDLET»
-		final «typeOf(entity)» result = query.getSingleResult();
-
-		return result.«getterOf(type)»();
+		query.setParameter("entity", «parameterOf(entity)»);
+		return query.getResultList();
 	}
 «ENDFOREACH»
 «ENDFOREACH»

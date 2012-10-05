@@ -51,6 +51,9 @@ Boolean isUi(Entity e) :
 List[Entity] getUiEntities(Process p) :
 	p.entities.select(e|isUi(e));
 
+Set[Entity] getEntitiesWithHistory(List[Entity] entities) :
+	entities.union(entities.types.typeSelect(History).type).sortBy(e|e.name);
+
 private Boolean isSingle(Text t) :
 	!t.transient;
 

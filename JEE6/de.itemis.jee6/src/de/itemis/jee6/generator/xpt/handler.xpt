@@ -33,7 +33,7 @@ import javax.faces.bean.SessionScoped;
 «IF entities.size > 0»
 import java.util.List;
 «ENDIF»
-«FOREACH entities.sortBy(e|e.name) AS entity»
+«FOREACH getEntitiesWithHistory(entities) AS entity»
 import «fqTypeOf(entity)»;
 «ENDFOREACH»
 
@@ -51,7 +51,7 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 {
 	private static final long serialVersionUID = 1L;
 
-«FOREACH entities.sortBy(e|e.name) AS entity»
+«FOREACH getEntitiesWithHistory(entities) AS entity»
 	private static final String «navigation(this, entity)» = "«index(entity)»";
 «ENDFOREACH»
 
@@ -105,6 +105,44 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 		«setterOf(entity)»(«nameOf(entity)»);
 		return «navigation(this, entity)»;
 	}
+
+«LET getHistory(entity) AS history»
+«IF history != null»
+	/**
+	 * This method sets the given {@link «typeOf(entity)»} bean for history editing. The
+	 * history contains a {@link List} of {@link «typeOf(history.type)»} beans.
+	 *
+	 * @param «nameOf(entity)» The {@link «typeOf(entity)»} bean to edit.
+	 * @return The outcome where to go on success.
+	 */
+«IF isAbstract()»
+	@Override
+«ENDIF»
+	public String «historyEntity(entity)»(final «typeOf(entity)» «nameOf(entity)») {
+		final «typeOf(history.type)» last = «nameOf(entity)».getLast();  
+
+		«setterOf(entity)»(«nameOf(entity)»);
+		«setterOf(history.type)»(last != null ? last.clone() : new «typeOf(history.type)»());	
+		return «navigation(this, history.type)»;
+	}
+
+	/**
+	 * This method adds a {@link «typeOf(history.type)»} history bean to the
+	 * given {@link «typeOf(entity)»} bean for editing.
+	 *
+	 * @return The outcome where to go on success.
+	 * @see «abstractDaoOf()»#«adderTo(entity)»(«typeOf(entity)», «typeOf(history.type)»)
+	 */
+«IF isAbstract()»
+	@Override
+«ENDIF»
+	public String «saveEntity(history.type)»() {
+		final «typeOf(history.type)» «nameOf(history.type)» = dao.«adderTo(entity)»(«getterOf(entity)»(), «getterOf(history.type)»());
+		«setterOf(history.type)»(«nameOf(history.type)».clone());
+		return «navigation(this, history.type)»;
+	}
+«ENDIF»
+«ENDLET»
 
 	/**
 	 * This method sets the given {@link «typeOf(entity)»} bean for editing.
@@ -166,10 +204,10 @@ package «handlerPackageOf(this)»;
 
 import javax.ejb.EJB;
 import «fqDaoOf()»;
-«IF (entities.size > 0) && isAbstract()»
+«IF ((entities.size > 0) && isAbstract()) || (entities.types.typeSelect(History).size > 0)»
 import java.util.List;
 «ENDIF»
-«FOREACH entities AS entity»
+«FOREACH getEntitiesWithHistory(entities) AS entity»
 import «fqTypeOf(entity)»;
 «ENDFOREACH»
 
@@ -225,46 +263,74 @@ abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(getMo
 	}
 
 «FOREACH entities.sortBy(e|e.name) AS entity»
+«LET getHistory(entity) AS history»
 	/*********************************************
 	 * «typeOf(entity)» «nameOf(entity)»
 	 *********************************************/
 
 	private «typeOf(entity)» «nameOf(entity)» = new «typeOf(entity)»();
+«IF history != null»
+	private «typeOf(history.type)» «nameOf(history.type)» = new «typeOf(history.type)»();
+«ENDIF»
+
+«EXPAND GetterSetter FOR entity»
+
+«IF history != null»
+«EXPAND GetterSetter FOR history.type»
 
 	/**
-	 * The getter of the {@link «typeOf(entity)»} entity bean.
-	 *
-	 * @return The {@link «typeOf(entity)»} bean.
+	 * This returns the history list of entity «typeOf(entity)».
+	 * 
+	 * @param «nameOf(entity)» The «typeOf(entity)» entity
+	 * @return The list of history entries.
 	 */
-	public «typeOf(entity)» «getterOf(entity)»()
+	public List<«typeOf(history)»> «listOf(history.type)»()
 	{
-		return «nameOf(entity)»;
-	}	
-
-	/**
-	 * The setter of the {@link «typeOf(entity)»} entity bean.
-	 *
-	 * @param «nameOf(entity)» The {@link «typeOf(entity)»} bean.
-	 */
-	public void «setterOf(entity)»(final «typeOf(entity)» «nameOf(entity)»)
-	{
-		this.«nameOf(entity)» = «nameOf(entity)»;
+		return dao.«listOf(history.type)»(«getterOf(entity)»());
 	}
+«ENDIF»
 
 «IF isAbstract()»
 	abstract public List<«typeOf(entity)»> «listOf(entity)»();
 	abstract String «createEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
 	abstract String «changeEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
+«IF history != null»
+	abstract String «historyEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
+	abstract String «saveEntity(history.type)»();
+«ENDIF»
 	abstract String «saveEntity(entity)»();
 	abstract String «removeEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
 «IF hasActivationBoolean(entity)»
 	abstract String «reactivateEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
 «ENDIF»
 «ENDIF»
+«ENDLET»
 «ENDFOREACH»
 }
 «ENDLET»
 «ENDFILE»
+«ENDDEFINE»
+
+«DEFINE GetterSetter FOR Entity»
+	/**
+	 * The getter of the {@link «typeOf()»} entity bean.
+	 *
+	 * @return The {@link «typeOf()»} bean.
+	 */
+	public «typeOf()» «getterOf()»()
+	{
+		return «nameOf()»;
+	}	
+
+	/**
+	 * The setter of the {@link «typeOf()»} entity bean.
+	 *
+	 * @param «nameOf()» The {@link «typeOf()»} bean.
+	 */
+	public void «setterOf()»(final «typeOf()» «nameOf()»)
+	{
+		this.«nameOf()» = «nameOf()»;
+	}
 «ENDDEFINE»
 
 «DEFINE AbstractModelHandler FOR Model»
