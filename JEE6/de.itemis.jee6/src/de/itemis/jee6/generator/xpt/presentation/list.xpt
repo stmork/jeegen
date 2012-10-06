@@ -94,30 +94,37 @@
 «REM»           ===========================================================================          «ENDREM»
 
 «DEFINE element(Process p, Entity e) FOR Attribute»
-		#{«nameOf(e)».«nameOf()»}
+					#{«nameOf(e)».«nameOf()»}
 «ENDDEFINE»
 
 «DEFINE element(Process p, Entity e) FOR OptionRef»
 «IF isEnumeration(type)»
-		#{msg[«nameOf(e)».«nameOf()».bundleKey]}
+					#{msg[«nameOf(e)».«nameOf()».bundleKey]}
 «ELSE»
-		#{«nameOf(e)».«nameOf()».name}
+«LET getLabelList(this.type) AS labels»
+«IF labels.size > 0»
+					#{«nameOf(e)».«nameOf()».«nameOf(labels.first())»}"
+«ELSE»
+					<!-- This may lead into an error, because no appropriate attribute was found! -->
+					#{«nameOf(e)».«nameOf()».name}
+«ENDIF»
+«ENDLET»
 «ENDIF»
 «ENDDEFINE»
 
 «DEFINE element(Process p, Entity e) FOR jee6::Boolean»
-		<h:outputText value="#{msg.yes}" rendered="#{«nameOf(e)».«nameOf()»}" />
-		<h:outputText value="#{msg.no}" rendered="#{!«nameOf(e)».«nameOf()»}" />
+					<h:outputText value="#{msg.yes}" rendered="#{«nameOf(e)».«nameOf()»}" />
+					<h:outputText value="#{msg.no}" rendered="#{!«nameOf(e)».«nameOf()»}" />
 «ENDDEFINE»
 
 «DEFINE element(Process p, Entity e) FOR Date»
-		<h:outputText value="#{«nameOf(e)».«nameOf()»}">
-			<f:convertDateTime type="date" dateStyle="medium"/>
-		</h:outputText>
+					<h:outputText value="#{«nameOf(e)».«nameOf()»}">
+						<f:convertDateTime type="date" dateStyle="medium"/>
+					</h:outputText>
 «ENDDEFINE»
 
 «DEFINE element(Process p, Entity e) FOR Timestamp»
-		<h:outputText value="#{«nameOf(e)».«nameOf()»}">
-			<f:convertDateTime type="date" dateStyle="medium"/>
-		</h:outputText>
+					<h:outputText value="#{«nameOf(e)».«nameOf()»}">
+						<f:convertDateTime type="date" dateStyle="medium"/>
+					</h:outputText>
 «ENDDEFINE»

@@ -119,10 +119,18 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 	@Override
 «ENDIF»
 	public String «historyEntity(entity)»(final «typeOf(entity)» «nameOf(entity)») {
+«IF history.type.cloneable»
 		final «typeOf(history.type)» last = «nameOf(entity)».getLast();  
+		final «typeOf(history.type)» newHistoryEntity = (last != null ? last.clone() : new «typeOf(history.type)»()); 
 
+«FOREACH getAutoCreationTimestampList(history.type) AS timestamp»
+		newHistoryEntity.«setterOf(timestamp)»(null);
+«ENDFOREACH»
+«ELSE»
+		final «typeOf(history.type)» newHistoryEntity = new «typeOf(history.type)»();
+«ENDIF»
 		«setterOf(entity)»(«nameOf(entity)»);
-		«setterOf(history.type)»(last != null ? last.clone() : new «typeOf(history.type)»());	
+		«setterOf(history.type)»(newHistoryEntity);	
 		return «navigation(this, history.type)»;
 	}
 
@@ -137,8 +145,17 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 	@Override
 «ENDIF»
 	public String «saveEntity(history.type)»() {
+«IF history.type.cloneable»
 		final «typeOf(history.type)» «nameOf(history.type)» = dao.«adderTo(entity)»(«getterOf(entity)»(), «getterOf(history.type)»());
-		«setterOf(history.type)»(«nameOf(history.type)».clone());
+		final «typeOf(history.type)» newHistoryEntity = «nameOf(history.type)».clone(); 
+«FOREACH getAutoCreationTimestampList(history.type) AS timestamp»
+		newHistoryEntity.«setterOf(timestamp)»(null);
+«ENDFOREACH»
+		«setterOf(history.type)»(newHistoryEntity);
+«ELSE»
+		dao.«adderTo(entity)»(«getterOf(entity)»(), «getterOf(history.type)»());
+		«setterOf(history.type)»(new «typeOf(history.type)»());
+«ENDIF»
 		return «navigation(this, history.type)»;
 	}
 «ENDIF»
