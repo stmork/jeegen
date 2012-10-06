@@ -124,7 +124,14 @@
 «IF isEnumeration(this.type)»
 										itemLabel="#{msg[«nameOf()».bundleKey]}"
 «ELSE»
+«LET getLabelList(this.type) AS labels»
+«IF labels.size > 0»
+										itemLabel="#{«nameOf()».«nameOf(labels.first())»}"
+«ELSE»
+										<!-- This may lead into an error, because no appropriate attribute was found! -->
 										itemLabel="#{«nameOf()».name}"
+«ENDIF»
+«ENDLET»
 «ENDIF»
 										var="«nameOf()»" />
 							</h:selectOneMenu>

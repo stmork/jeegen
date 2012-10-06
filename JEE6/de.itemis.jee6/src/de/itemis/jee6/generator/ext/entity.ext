@@ -2,6 +2,7 @@ import jee6;
 
 extension de::itemis::jee6::generator::ext::model;
 extension de::itemis::jee6::generator::ext::types;
+extension de::itemis::jee6::generator::ext::ui;
 
 History getHistory(Entity e) :
 	e.types.typeSelect(History).first();
@@ -48,3 +49,9 @@ String reactivateEntity(Entity e) :
 
 String enumOf(String key) :
 	key.toUpperCase().replaceAll("\\.", "_");
+
+cached List[Timestamp] getAutoCreationTimestampList(Entity e) :
+	e.types.typeSelect(Timestamp).select(e|e.auto);
+
+cached List[Timestamp] getLabelList(Entity e) :
+	e.types.typeSelect(Text).select(e|e.transient || e.name == "name" || e.name == "label");
