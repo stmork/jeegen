@@ -257,6 +257,9 @@ String fqAbstractDaoOf(Model p) :
 String applicationController(Model m) :
 	"ApplicationController";
 
+String abstractApplicationController(Model m) :
+	"Abstract" + applicationController(m);
+
 String sessionController(Model m) :
 	"SessionController";
 
@@ -265,6 +268,9 @@ String controllerPackageOf(Model m) :
 
 String fqApplicationController(Model m) :
 	controllerPackageOf(m)  + "." + applicationController(m);
+
+String fqAbstractApplicationController(Model m) :
+	controllerPackageOf(m)  + "." + abstractApplicationController(m);
 
 String fqSessionController(Model m) :
 	controllerPackageOf(m)  + "." + sessionController(m);

@@ -43,7 +43,9 @@ log4j.appender.R.layout.ConversionPattern=%-5p %-30.30c{1} %x - %m%n
 «EXPAND utility::XmlHeader»
 	<persistence-unit name="«pu.persistence»" transaction-type="JTA">
 		<jta-data-source>«pu.jndi»</jta-data-source>
+«IF pu.cacheable»
 		<shared-cache-mode>ALL</shared-cache-mode>
+«ENDIF»
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
 			<property name="hibernate.hbm2ddl.auto"                 value="update" />
