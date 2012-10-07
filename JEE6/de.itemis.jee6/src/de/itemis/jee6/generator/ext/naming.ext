@@ -47,6 +47,9 @@ String abstractDaoFilename(Model m) :
 String applicationControllerFilename(Model m) :
 	fqApplicationController(m).replaceAll("\\.", "/") + ".java";
 
+String abstractApplicationControllerFilename(Model m) :
+	fqAbstractApplicationController(m).replaceAll("\\.", "/") + ".java";
+
 String sessionControllerFilename(Model m) :
 	fqSessionController(m).replaceAll("\\.", "/") + ".java";
 	

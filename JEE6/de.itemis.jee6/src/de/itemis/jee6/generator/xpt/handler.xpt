@@ -15,9 +15,10 @@
 «EXTENSION de::itemis::jee6::generator::ext::ui»
 
 «DEFINE Main FOR Model»
-«EXPAND AbstractModelHandler»
 «EXPAND AbstractProcessHandler FOREACH processes»
+«EXPAND AbstractModelHandler»
 «EXPAND ProcessHandler FOREACH processes»
+«EXPAND AbstractApplicationController»
 «EXPAND ApplicationController»
 «EXPAND SessionController»
 «ENDDEFINE»
@@ -744,16 +745,48 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resourc
 «EXPAND utility::HeaderImpl»
 package «controllerPackageOf()»;
 
-import java.io.Serializable;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import javax.ejb.EJB;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
 import de.itemis.jee6.util.LogUtil;
+
+
+/**
+ * This class initializes the purchasing application.
+ */
+@ManagedBean(eager=true)
+@ApplicationScoped
+public class «applicationController()» extends «abstractApplicationController()»
+{
+	private static final long serialVersionUID = 1L;
+	private final static Log log = LogFactory.getLog(«applicationController()».class);
+
+	/**
+	 * This method initializes this application. It logs the application banner.
+	 */
+	@PostConstruct
+	public void init()
+	{
+		log.debug(">init()");
+		super.init();
+		log.info("\n" + LogUtil.banner("«versionBundle()»", "«name»"));
+		log.debug("<init()");
+	}
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE AbstractApplicationController FOR Model»
+«FILE abstractApplicationControllerFilename()»
+«EXPAND utility::HeaderAbstract»
+package «controllerPackageOf()»;
+
+import java.io.Serializable;
+import javax.ejb.EJB;
 
 import «fqDaoOf(this)»;
 «FOREACH entities.typeSelect(Options).select(e|e.isEnumeration()) AS enumeration»
@@ -763,30 +796,23 @@ import «fqTypeOf(enumeration)».«enumOf(enumeration)»;
 /**
  * This class initializes the purchasing application.
  */
-@ManagedBean(eager=true)
-@ApplicationScoped
-public class «applicationController()» implements Serializable
+abstract public class «abstractApplicationController()» implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	private final static Log log = LogFactory.getLog(«applicationController()».class);
 
 	@EJB
-	private «daoOf(this)» options;
+	protected «daoOf(this)» options;
 
 	/**
 	 * This method initializes this application. It logs the application banner.
 	 */
-	@PostConstruct
-	public void init()
+	protected void init()
 	{
-		log.debug(">init()");
-		log.info("\n" + LogUtil.banner("«versionBundle()»", "«name»"));
 «FOREACH entities.typeSelect(Options).select(e|e.isEnumeration()) AS enumeration»
 «FOREACH enumeration.keys AS key»
 		options.ensure(«enumOf(enumeration)».«enumOf(key)», "«key»");
 «ENDFOREACH»
 «ENDFOREACH»
-		log.debug("<init()");
 	}
 }
 «ENDFILE»
