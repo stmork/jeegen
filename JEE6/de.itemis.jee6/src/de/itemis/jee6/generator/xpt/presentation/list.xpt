@@ -103,7 +103,7 @@
 «ELSE»
 «LET getLabelList(this.type) AS labels»
 «IF labels.size > 0»
-					#{«nameOf(e)».«nameOf()».«nameOf(labels.first())»}"
+					#{«nameOf(e)».«nameOf()».«nameOf(labels.first())»}
 «ELSE»
 					<!-- This may lead into an error, because no appropriate attribute was found! -->
 					#{«nameOf(e)».«nameOf()».name}
