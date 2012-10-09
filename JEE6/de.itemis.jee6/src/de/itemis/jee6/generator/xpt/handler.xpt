@@ -244,6 +244,7 @@ import javax.faces.context.ExternalContext;
 abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(getModel(this))»
 {
 	private static final long serialVersionUID = 1L;
+	protected static final String «navigation(this)» = "/«prefixOf(this)»/";
 
 	/**
 	 * This is the injected DAO reference to the {@link «daoOf()»} session bean.
@@ -850,7 +851,7 @@ public class «sessionController()» extends «abstractHandlerOf()»
 		request.logout();
 		getExternalContext().invalidateSession();
 
-		return "/«index()»";
+		return "/«index()»?faces-redirect=true";
 	}
 
 	/**
