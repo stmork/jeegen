@@ -20,7 +20,9 @@ import javax.naming.directory.SearchResult;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-
+/**
+ * This class works as a LDAP connector.
+ */
 abstract public class AbstractLdapConnector
 {
 	private final static Log log = LogFactory.getLog(AbstractLdapConnector.class);
@@ -28,11 +30,14 @@ abstract public class AbstractLdapConnector
 	private DirContext ctx;
 
 	/**
-	 * Dieser Konstruktur initialisiert auf einfache Weise eine LDAP-Verbindung
-	 * @param url URL an den LDAP-Server
-	 * @param dn Die Basis-DN, unter der der Verzeichnisbaum ist.
-	 * @param part Dieser Teil nennt den zentralen LDAP-Manager
-	 * @param secret Das Secret.
+	 * This constructor initializes a connection to a LDAP server. If the user DN and the
+	 * user secret is not null, the connection is bound with this user credential. The user
+	 * DN is a sub DN of the base DN and are concatenated internally.
+	 * 
+	 * @param url URL to the LDAP server
+	 * @param dn The base DN.
+	 * @param part The user part of the DN without the base DN.
+	 * @param secret The user secret.
 	 * @throws NamingException
 	 */
 	protected AbstractLdapConnector(
@@ -68,7 +73,7 @@ abstract public class AbstractLdapConnector
 	}
 
 	/**
-	 * Diese Methode schlieﬂt die Verbindung zum LDAP-Server. 
+	 * This method closes the LDAP connection. 
 	 */
 	public void close()
 	{
@@ -159,10 +164,11 @@ abstract public class AbstractLdapConnector
 	}
 
 	/**
-	 * Diese Methode ermittelt die Attribute eines LDAP-Eintrages.
-	 * @param partDn Die Sub-DN, unter der gesucht werden soll.
-	 * @param filter Der Suchfilter.
-	 * @return Die Attribute des Suchergebnisses.
+	 * This method returns the {@link Attributes} of a LDAP entry.
+	 * 
+	 * @param partDn Ths sub DN of the {@link Attributes}
+	 * @param filter An additional search filter.
+	 * @return The {@link Attributes} of the search result.
 	 * @throws NamingException
 	 */
 	public Attributes getAttributes(final String partDn, final String filter) throws NamingException
@@ -184,9 +190,10 @@ abstract public class AbstractLdapConnector
 	}
 
 	/**
-	 * Diese Methode ermittelt die Attribute eines Users.
-	 * @param user Der User.
-	 * @return Die Attribute des Users.
+	 * This method returns all {@link Attributes} of a user.
+	 * 
+	 * @param user The User.
+	 * @return The {@link Attributes} of the user.
 	 * @throws NamingException
 	 */
 	public Attributes getUser(final String user) throws NamingException
@@ -195,9 +202,10 @@ abstract public class AbstractLdapConnector
 	}
 
 	/**
-	 * Diese Methode ermittelt die Gruppenmitglieder einer Gruppe
-	 * @param group Der Gruppenname
-	 * @return Die Sammlung der Gruppenmitglieder.
+	 * This method returns a {@link Collection} of all group members.
+	 * 
+	 * @param group The group name.
+	 * @return The {@link Collection} of all group members.
 	 * @throws NamingException
 	 */
 	public Collection<String> getGroup(final String group) throws NamingException
@@ -211,7 +219,20 @@ abstract public class AbstractLdapConnector
 		}
 		return set;
 	}
-	
+
+	/**
+	 * This method returns the users sub DN of this LDAP connection. The sub tree of this DN contains
+	 * all users inside the LDAP server. This may be hardcoded into the implementation class.
+	 * 
+	 * @return The users sub DN.
+	 */
 	abstract protected String getUserDn();
+
+	/**
+	 * This method returns the groups sub DN of this LDAP connection. The sub tree of this DN contains
+	 * all groups inside the LDAP server. This may be hardcoded into the implementation class.
+	 * 
+	 * @return The groups sub DN.
+	 */
 	abstract protected String getGroupDn();
 }
