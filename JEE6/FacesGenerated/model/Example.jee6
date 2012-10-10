@@ -139,6 +139,11 @@ entity EntityEntry
 
 entity Startup
 {
+	Timestamp auto         creation;
+	Timestamp update       changed;
+	Timestamp              timestamp1;
+	Timestamp              timestamp2;
+	Date                   dElement;
 	Text                   subject;
 	History HistoryEntry   history;
 	Entity  EntityEntry [] entities; 
