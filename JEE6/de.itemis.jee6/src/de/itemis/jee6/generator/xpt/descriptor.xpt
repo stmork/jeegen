@@ -177,6 +177,10 @@ log4j.appender.R.layout.ConversionPattern=%-5p %-30.30c{1} %x - %m%n
 «ENDFOREACH»
 «ENDIF»
 «ENDLET»
+	<error-page>
+		<exception-type>javax.faces.application.ViewExpiredException</exception-type>
+		<location>/</location>
+	</error-page>
 </web-app>
 «ENDFILE»
 «ENDDEFINE»
