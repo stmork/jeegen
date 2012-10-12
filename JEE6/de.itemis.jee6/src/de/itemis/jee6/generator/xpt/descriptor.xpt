@@ -350,9 +350,9 @@ GlassFish Application Server 3.0 Servlet 3.0//EN"
 	<!-- ===== Created by JEE6-Generator $Id$ ===== -->
 	<!-- == Copyright (C) 2012  itemis AG == -->
 	<ui:composition template="/layout.xhtml">
-		<ui:define name="title">#{error.code404.title}</ui:define>
+		<ui:define name="title">#{err['code404.title']}</ui:define>
 		<ui:define name="content">
-			<h2>#{error.code404.message}</h2>
+			<h2>#{err['code404.message']}</h2>
 		</ui:define>
 	</ui:composition>
 </html>

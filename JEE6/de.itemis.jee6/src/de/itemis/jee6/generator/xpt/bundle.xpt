@@ -73,8 +73,8 @@
 «FILE filename IMPL»
 «ENDFILE»
 «bundleUpdate(filename, "not-found.title", "Resource not found!")»
-«bundleUpdate(filename, "error.code404.title", "Four oh four!")»
-«bundleUpdate(filename, "error.code404.message", "The requested document was not found!")»
+«bundleUpdate(filename, "code404.title", "Four oh four!")»
+«bundleUpdate(filename, "code404.message", "The requested document was not found!")»
 «bundleFlush(filename)»
 «ENDLET»
 «ENDDEFINE»
