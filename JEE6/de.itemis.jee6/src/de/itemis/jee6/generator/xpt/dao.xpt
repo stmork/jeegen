@@ -161,7 +161,7 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 	}
 «ENDIF»
 
-«FOREACH entity.types.select(e|isMany(e)) AS type»
+«FOREACH entity.types.typeSelect(Reference).select(e|isMany(e)) AS type»
 	/**
 	 * This method adds a {@link «typeOf(type)»} entity bean to the «parameterOf(type)»
 	 * relation of the {@link «typeOf(entity)»} entity bean. Note that the given {@link «typeOf(type)»} entity
@@ -218,7 +218,7 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 	 */
 	public List<«typeOf(type)»> «lister(type)»(final «typeOf(entity)» «parameterOf(entity)»)
 	{
-«LET getId(entity) AS id»
+«LET getId(type) AS id»
 «IF id == null»
 		final TypedQuery<«typeOf(type)»> query = em.createQuery(
 				"SELECT e FROM «typeOf(type)» e WHERE e.«parameterOf(entity)» = :entity ORDER BY e.id DESC",

@@ -17,6 +17,15 @@ List[Entity] getEntityReferences(Entity entity) :
 Attribute getId(Entity e) :
 	e.types.select(e|isId(e)).first();
 
+Attribute getId(History h) :
+	h.type.types.select(e|isId(e)).first();
+
+Attribute getId(EntityRef ref) :
+	ref.type.types.select(e|isId(e)).first();
+
+Attribute getId(Reference ref) :
+	null;
+
 Boolean isId(Attribute a) :
 	false;
 
