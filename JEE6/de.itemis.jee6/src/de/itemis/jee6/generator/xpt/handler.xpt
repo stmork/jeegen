@@ -643,6 +643,16 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resourc
 		log.error(message);
 		return message;
 	}
+
+	/**
+	 * This messages returns true if there are listed faces messages.
+	 *
+	 * @return True if there are any messages.
+	 */
+	protected boolean hasMessages()
+	{
+		return FacesContext.getCurrentInstance().getMessageList().size() > 0;
+	}
 	
 	/**
 	 * This method returns the localized version of "yes" or "no" depending of the selected language
