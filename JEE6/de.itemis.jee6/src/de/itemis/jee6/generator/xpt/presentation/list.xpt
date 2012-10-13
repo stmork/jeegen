@@ -24,7 +24,7 @@
 «DEFINE entityList(Process p) FOR Entity»
 			<!-- === generated list === --> 
 			<!-- process: «p.name» entity: «name» -->
-«LET getSingleAttributes() AS attributes»
+«LET getListAttributes() AS attributes»
 «IF attributes.size > 0»
 			<h:form id="«prefixOf(this)»_list">
 				<h:dataTable
@@ -74,7 +74,7 @@
 «DEFINE historyList(Process p) FOR Entity»
 			<!-- === generated history === --> 
 			<!-- process: «p.name» entity: «name» -->
-«LET getSingleAttributes() AS attributes»
+«LET getListAttributes() AS attributes»
 «IF attributes.size > 0»
 «ENDIF»
 			<h:dataTable
@@ -113,18 +113,17 @@
 «ENDDEFINE»
 
 «DEFINE element(Process p, Entity e) FOR jee6::Boolean»
-					<h:outputText value="#{msg.yes}" rendered="#{«nameOf(e)».«nameOf()»}" />
-					<h:outputText value="#{msg.no}" rendered="#{!«nameOf(e)».«nameOf()»}" />
+					<h:outputText value="#{msg[«nameOf(e)».«nameOf()» ? 'yes' : 'no']}"/>
 «ENDDEFINE»
 
 «DEFINE element(Process p, Entity e) FOR Date»
 					<h:outputText value="#{«nameOf(e)».«nameOf()»}">
-						<f:convertDateTime type="date" dateStyle="medium"/>
+						<f:convertDateTime dateStyle="medium" type="date"/>
 					</h:outputText>
 «ENDDEFINE»
 
 «DEFINE element(Process p, Entity e) FOR Timestamp»
 					<h:outputText value="#{«nameOf(e)».«nameOf()»}">
-						<f:convertDateTime type="date" dateStyle="medium"/>
+						<f:convertDateTime dateStyle="medium" type="both"/>
 					</h:outputText>
 «ENDDEFINE»

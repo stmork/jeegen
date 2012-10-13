@@ -36,7 +36,7 @@ String annotationOf(Date d) :
 /*
  * Timestamp
  */
-String typeOf(Timestamp ts) :
+String typeOf(jee6::Timestamp ts) :
 	"Date";
 
 String packageOf(Timestamp ts) :

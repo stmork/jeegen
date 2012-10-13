@@ -57,29 +57,38 @@ List[Entity] getUiEntities(Process p) :
 Set[Entity] getEntitiesWithHistory(List[Entity] entities) :
 	entities.union(entities.types.typeSelect(History).type).sortBy(e|e.name);
 
-private Boolean isSingle(Text t) :
+private Boolean isListAttribute(Text t) :
 	!t.transient;
 
-private Boolean isSingle(Blob r) :
+private Boolean isListAttribute(Blob r) :
 	false;
 
-private Boolean isSingle(Clob r) :
+private Boolean isListAttribute(Clob r) :
 	true;
 
-private Boolean isSingle(OptionRef r) :
+private Boolean isListAttribute(OptionRef r) :
 	true;
 
-private Boolean isSingle(Reference r) :
+private Boolean isListAttribute(Reference r) :
 	false;
 
-private Boolean isSingle(Attribute a) :
+private Boolean isListAttribute(Attribute a) :
 	true;
+
+private Boolean isMaskAttribute(Timestamp ts) :
+	!(ts.auto || ts.update);
+
+private Boolean isMaskAttribute(Attribute a) :
+	isListAttribute(a);
 
 Boolean isEMail(Text t) :
 	t.name.toLowerCase().contains("mail");
 
-List[Attribute] getSingleAttributes(Entity e) :
-	e.types.select(e|isSingle(e));
+List[Attribute] getMaskAttributes(Entity e) :
+	e.types.select(e|isMaskAttribute(e));
+
+List[Attribute] getListAttributes(Entity e) :
+	e.types.select(e|isListAttribute(e));
 
 List[Attribute] getMultipleAttributes(Entity e) :
 	e.types.select(e|isMany(e));

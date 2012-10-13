@@ -16,7 +16,7 @@
 «DEFINE Main(Process p) FOR Entity»
 			<!-- === generated mask === --> 
 			<!-- process: «p.name» entity: «name» -->
-«LET getSingleAttributes() AS attributes»
+«LET getMaskAttributes() AS attributes»
 «IF attributes.size > 0»
 		<div class="box">
 			<h:form id="«prefixOf()»">
@@ -93,7 +93,7 @@
 «REM»Date Field«ENDREM»
 «DEFINE element(Process p, Entity e) FOR jee6::Date»
 						<h:inputText id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" maxlength="10">
-							<f:convertDateTime pattern="dd.MM.yyyy"/>
+							<f:convertDateTime pattern="dd.MM.yyyy" type="date"/>
 						</h:inputText>
 «ENDDEFINE»
 
@@ -105,7 +105,7 @@
 						</h:outputText>
 «ELSE»
 						<h:inputText id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}">
-							<f:convertDateTime pattern="dd.MM.yyyy"/>
+							<f:convertDateTime pattern="dd.MM.yyyy" type="date"/>
 						</h:inputText>
 «ENDIF»
 «ENDDEFINE»

@@ -47,6 +47,11 @@
 «bundleUpdate(filename, prefixOf(process) + "." + prefixOf(entity) + "." + prefixOf(attr), attr.name)»
 «ENDFOREACH»
 «ENDFOREACH»
+«FOREACH getUiEntities(process) AS entity»
+«FOREACH entity.types AS attr»
+«bundleUpdate(filename, prefixOf(process) + "." + prefixOf(entity) + "." + prefixOf(attr), attr.name)»
+«ENDFOREACH»
+«ENDFOREACH»
 «ENDFOREACH»
 «bundleUpdate(filename, "back", "back")»
 «bundleUpdate(filename, "yes", "yes")»
