@@ -42,7 +42,7 @@ String removerFrom(Entity e) :
 String lister(Attribute a) :
 	"get" + typeOf(a) + "List";
 
-String sortOrder(Entity ref) :
+String sortOrder(Reference ref) :
 	"ASC";
 
 String sortOrder(History ref) :

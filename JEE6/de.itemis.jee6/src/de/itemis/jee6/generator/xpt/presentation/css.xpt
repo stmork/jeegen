@@ -37,6 +37,18 @@ select {
 	width: 100%;
 }
 
+input.date {
+	width: 6em;
+}
+
+select.hour {
+	width: 3em;
+}
+
+select.min {
+	width: 3em;
+}
+
 input, select, textarea {
 	border-radius: 3px;
 }

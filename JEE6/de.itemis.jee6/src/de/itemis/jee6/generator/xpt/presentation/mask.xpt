@@ -92,7 +92,7 @@
 
 «REM»Date Field«ENDREM»
 «DEFINE element(Process p, Entity e) FOR jee6::Date»
-						<h:inputText id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" maxlength="10">
+						<h:inputText id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" maxlength="10" styleClass="date">
 							<f:convertDateTime pattern="dd.MM.yyyy" type="date"/>
 						</h:inputText>
 «ENDDEFINE»
@@ -104,7 +104,7 @@
 							<f:convertDateTime type="both"/>
 						</h:outputText>
 «ELSE»
-						<h:inputText id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}">
+						<h:inputText id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" maxlength="10" styleClass="date">
 							<f:convertDateTime pattern="dd.MM.yyyy" type="date"/>
 						</h:inputText>
 «ENDIF»
