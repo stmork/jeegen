@@ -221,11 +221,11 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 «LET getId(type) AS id»
 «IF id == null»
 		final TypedQuery<«typeOf(type)»> query = em.createQuery(
-				"SELECT e FROM «typeOf(type)» e WHERE e.«parameterOf(entity)» = :entity ORDER BY e.id «sortOrder(entity)»",
+				"SELECT e FROM «typeOf(type)» e WHERE e.«parameterOf(entity)» = :entity ORDER BY e.id «sortOrder(type)»",
 				«typeOf(type)».class);
 «ELSE»
 		final TypedQuery<«typeOf(type)»> query = em.createQuery(
-				"SELECT e FROM «typeOf(type)» e WHERE e.«parameterOf(entity)» = :entity ORDER BY e.«nameOf(id)» «sortOrder(entity)»",
+				"SELECT e FROM «typeOf(type)» e WHERE e.«parameterOf(entity)» = :entity ORDER BY e.«nameOf(id)» «sortOrder(type)»",
 				«typeOf(type)».class);
 «ENDIF»
 «ENDLET»
