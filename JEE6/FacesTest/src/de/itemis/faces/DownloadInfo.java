@@ -92,7 +92,7 @@ public class DownloadInfo implements Serializable
 		{
 			final ServletOutputStream os = response.getOutputStream();
 
-			response.setHeader("Refresh", String.format("%d; URL=%s?cam=%s", refresh, uri, cam)); 
+			response.setHeader("Refresh", String.format("%d", refresh)); 
 			os.write(image);
 			os.flush();
 		}
