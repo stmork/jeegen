@@ -44,8 +44,8 @@ String createEntity(Entity e) :
 String changeEntity(Entity e) :
 	"change" + e.name.toFirstUpper();
 
-String historyEntity(Entity e) :
-	"history" + e.name.toFirstUpper();
+String editEntity(Entity e) :
+	"edit" + e.name.toFirstUpper();
 	
 String saveEntity(Entity e) :
 	"save" + e.name.toFirstUpper();

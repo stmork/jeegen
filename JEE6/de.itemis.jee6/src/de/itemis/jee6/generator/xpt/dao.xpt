@@ -63,7 +63,7 @@ import javax.persistence.TypedQuery;
 /**
  * This DAO class handles the persistence of the following entity beans:
  * <ul>
-«FOREACH entities.sortBy(e|e.name) AS entity»
+«FOREACH getEntitiesWithHistory(entities) AS entity»
  * <li>{@link «typeOf(entity)»}</li>
  «ENDFOREACH»
  * </ul>
@@ -85,7 +85,7 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 	}
 «ENDFOREACH»
 
-«FOREACH entities.sortBy(e|e.name) AS entity»
+«FOREACH getEntitiesWithHistory(entities) AS entity»
 	/*********************************************
 	 * «typeOf(entity)» «nameOf(entity)»
 	 *********************************************/

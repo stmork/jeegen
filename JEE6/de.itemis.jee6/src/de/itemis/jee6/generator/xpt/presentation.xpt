@@ -188,6 +188,7 @@
 
 «DEFINE ui(Process p) FOR Entity»
 «EXPAND history(p) FOREACH types.typeSelect(History).type»
+«EXPAND entities(p) FOREACH types.typeSelect(EntityRef).select(e|e.many).type»
 «FILE index(p, this) XHTML»
 «EXPAND utility::XhtmlStart»
 <ui:composition template="/«layout(getModel(p))»">
@@ -211,6 +212,21 @@
 		<h:messages layout="table" styleClass="error" />
 «EXPAND mask::Main(p)»
 «EXPAND list::historyList(p)»
+	</ui:define>
+</ui:composition>
+«EXPAND utility::XhtmlEnd»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE entities(Process p) FOR Entity»
+«FILE index(p, this) XHTML»
+«EXPAND utility::XhtmlStart»
+<ui:composition template="/«layout(getModel(p))»">
+	<ui:define name="title">#{msg['«prefixOf(p)».«prefixOf(this)».title']}</ui:define>
+	<ui:define name="content">
+		<h:messages layout="table" styleClass="error" />
+«EXPAND mask::Main(p)»
+«EXPAND list::entitiesList(p)»
 	</ui:define>
 </ui:composition>
 «EXPAND utility::XhtmlEnd»
