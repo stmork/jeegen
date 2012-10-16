@@ -12,6 +12,9 @@ String ensureOf(Options options) :
 String listOf(Entity entity) :
 	"get" + typeOf(entity).toFirstUpper() + "List";
 
+String listOf(EntityRef er) :
+	"get" + typeOf(er).toFirstUpper() + "List";
+
 String listActiveOf(Options options) :
 	"getActive" + typeOf(options).toFirstUpper() + "List";
 

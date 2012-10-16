@@ -46,9 +46,21 @@ String changeEntity(Entity e) :
 
 String editEntity(Entity e) :
 	"edit" + e.name.toFirstUpper();
+
+String editEntity(EntityRef ef) :
+	"edit" + ef.name.toFirstUpper();
+
+String editEntity(History h) :
+	"edit" + h.name.toFirstUpper();
 	
 String saveEntity(Entity e) :
 	"save" + e.name.toFirstUpper();
+	
+String saveEntity(EntityRef er) :
+	"save" + er.name.toFirstUpper();
+	
+String saveEntity(History h) :
+	"save" + h.name.toFirstUpper();
 	
 String removeEntity(Entity e) :
 	"remove" + e.name.toFirstUpper();
