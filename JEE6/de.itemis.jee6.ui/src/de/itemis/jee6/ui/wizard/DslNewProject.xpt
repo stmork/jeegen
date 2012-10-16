@@ -20,12 +20,12 @@ entity UserInfo
 {
 	Text name;
 	Date birth;
-};
+}
 
 process User
 {
 	UserInfo
-};
+}
 «ENDFILE»
 «ENDDEFINE»
 
@@ -35,6 +35,11 @@ module Generator
 
 Workflow
 {
+/*
+	component = org.eclipse.emf.mwe.utils.DirectoryCleaner {
+		directory = "«getResPath()»"
+	}
+*/
 	component = @de.itemis.jee6.generator.DslGeneratorMWE
 	{
 		modelpath="«getModelPath()»"
