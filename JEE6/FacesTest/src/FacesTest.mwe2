@@ -1,13 +1,14 @@
 module de.itemis.faces.FacesTest
 
+var	modelpath="model"
+var	impldir="src"
+var	srcdir="src-gen"
+var	resdir="res-gen"
+var xhtmldir="WebContent"
+
 Workflow
 {
-	component = @de.itemis.jee6.generator.DslGeneratorMWE
+	component = @de.itemis.jee6.generator.DslGeneratorMWE auto-inject
 	{
-		modelpath="model"
-		impldir="src"
-		srcdir="src-gen"
-		resdir="res-gen"
-		xhtmldir="WebContent"
 	}
 }

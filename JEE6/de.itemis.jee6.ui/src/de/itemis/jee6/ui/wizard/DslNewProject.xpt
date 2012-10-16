@@ -33,20 +33,22 @@ process User
 «FILE getSrcPath() + "/" + getWorkflow()-»
 module Generator
 
+var modelpath = "«getModelPath()»"
+var impldir   = "«getSrcPath()»"
+var srcdir    = "«getSrcGenPath()»"
+var xhtmldir  = "«getWebContentPath()»"
+var resdir    = "«getResGenPath()»"
+
 Workflow
 {
 /*
-	component = org.eclipse.emf.mwe.utils.DirectoryCleaner {
-		directory = "«getResPath()»"
+	component = org.eclipse.emf.mwe.utils.DirectoryCleaner
+	{
+		directory = "${xhtmldir}"
 	}
 */
-	component = @de.itemis.jee6.generator.DslGeneratorMWE
+	component = @de.itemis.jee6.generator.DslGeneratorMWE auto-inject
 	{
-		modelpath="«getModelPath()»"
-		impldir="«getSrcPath()»"
-		srcdir="«getSrcGenPath()»"
-		xhtmldir="«getResPath()»"
-		resdir="«getResGenPath()»"
 	}
 }
 «ENDFILE»
@@ -61,8 +63,9 @@ Workflow
 	<property name="bin-path"             value="./bin"/>
 	<property name="src-path"             value="./«getSrcPath()»"/>
 	<property name="src-gen-path"         value="./«getSrcGenPath()»"/>
+	<property name="res-path"             value="./«getResPath()»"/>
 	<property name="res-gen-path"         value="./«getResGenPath()»"/>
-	<property name="web-path"             value="./«getResPath()»"/>
+	<property name="web-path"             value="./«getWebContentPath()»"/>
 	<property name="doc-path"             value="../api"/>
 
 	<property name="war"                  value="«applicationName».war"/>
@@ -82,7 +85,7 @@ Workflow
 	<!-- ==================================================== -->
 
 	<path id="logger.path">
-		<fileset dir="${web-path}">
+		<fileset dir="${res-path}">
 			<include name="**/*.jar"/>
 		</fileset>
 	</path>
@@ -177,6 +180,7 @@ Workflow
 				<include name="**/*.properties"/>
 			</zipfileset>
 			<zipfileset dir="${web-path}"/>
+			<zipfileset dir="${res-path}"/>
 			<zipfileset dir="${res-gen-path}"/>
 		</jar>
 	</target>
