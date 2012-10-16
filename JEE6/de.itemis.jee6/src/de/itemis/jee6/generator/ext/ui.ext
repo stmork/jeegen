@@ -54,8 +54,14 @@ Boolean isUi(Entity e) :
 List[Entity] getUiEntities(Process p) :
 	p.entities.select(e|isUi(e));
 
+private List[Entity] getHistory(List[Attribute] a) :
+	a.typeSelect(History).type;
+
+cached Set[Entity] getManyEntites(List[Attribute] a) :
+	a.typeSelect(EntityRef).select(e|isMany(e)).type;
+
 Set[Entity] getEntitiesWithHistory(List[Entity] entities) :
-	entities.union(entities.types.typeSelect(History).type).sortBy(e|e.name);
+	entities.union(getHistory(entities.types)).union(getManyEntites(entities.types)).sortBy(e|e.name);
 
 private Boolean isListAttribute(Text t) :
 	!t.transient;

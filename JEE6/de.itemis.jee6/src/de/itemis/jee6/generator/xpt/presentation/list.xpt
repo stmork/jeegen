@@ -47,7 +47,7 @@
 						<f:facet name="header" />
 						<h:commandLink
 							value="#{msg.history}"
-							action="#{«handlerUri(p)».«historyEntity()»(«nameOf(this)»)}" />
+							action="#{«handlerUri(p)».«editEntity(getHistory().type)»(«nameOf(this)»)}" />
 					</h:column>
 «ENDIF»
 					<h:column>
@@ -72,6 +72,25 @@
 
 
 «DEFINE historyList(Process p) FOR Entity»
+			<!-- === generated history === --> 
+			<!-- process: «p.name» entity: «name» -->
+«LET getListAttributes() AS attributes»
+«IF attributes.size > 0»
+«ENDIF»
+			<h:dataTable
+					value="#{«handlerUri(p)».«uiList()»}" var="«nameOf(this)»"
+					styleClass="list" rowClasses="odd,even" columnClasses="«FOREACH attributes AS attr SEPARATOR ","»«getClass(attr)»«ENDFOREACH»,command,command,command">
+«FOREACH attributes AS attr»
+				<h:column>
+					<f:facet name="header">#{msg['«prefixOf(p)».«prefixOf(this)».«prefixOf(attr)»']}</f:facet>
+«EXPAND element(p, this) FOR attr»
+				</h:column>
+«ENDFOREACH»
+			</h:dataTable>
+«ENDLET»
+«ENDDEFINE»
+
+«DEFINE entitiesList(Process p) FOR Entity»
 			<!-- === generated history === --> 
 			<!-- process: «p.name» entity: «name» -->
 «LET getListAttributes() AS attributes»

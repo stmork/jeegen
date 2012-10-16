@@ -41,7 +41,7 @@ import «fqTypeOf(entity)»;
 /**
  * This managed bean class implements the action handlings for the following entity beans:
  * <ul>
-«FOREACH entities.sortBy(e|e.name) AS entity»
+«FOREACH getEntitiesWithHistory(entities) AS entity»
  * <li>{@link «typeOf(entity)»}</li>
 «ENDFOREACH»
  * </ul>
@@ -107,6 +107,23 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 		return «navigation(this, entity)»;
 	}
 
+«FOREACH getManyEntites(entity.types) AS manyEntity»
+«IF isAbstract()»
+	@Override
+«ENDIF»
+	public String «editEntity(manyEntity)»(final «typeOf(entity)» «nameOf(entity)») {
+		return «navigation(this, manyEntity)»;
+	}
+
+«IF isAbstract()»
+	@Override
+«ENDIF»
+	public String «saveEntity(manyEntity)»() {
+		return «navigation(this, manyEntity)»;
+	}
+
+«ENDFOREACH»
+
 «LET getHistory(entity) AS history»
 «IF history != null»
 	/**
@@ -119,7 +136,7 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 «IF isAbstract()»
 	@Override
 «ENDIF»
-	public String «historyEntity(entity)»(final «typeOf(entity)» «nameOf(entity)») {
+	public String «editEntity(history.type)»(final «typeOf(entity)» «nameOf(entity)») {
 «IF history.type.cloneable»
 		final «typeOf(history.type)» last = «nameOf(entity)».getLast();  
 		final «typeOf(history.type)» newHistoryEntity = (last != null ? last.clone() : new «typeOf(history.type)»()); 
@@ -288,14 +305,30 @@ abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(getMo
 	 *********************************************/
 
 	private «typeOf(entity)» «nameOf(entity)» = new «typeOf(entity)»();
+«FOREACH getManyEntites(entity.types) AS manyEntity»
+	private «typeOf(manyEntity)» «nameOf(manyEntity)» = new «typeOf(manyEntity)»();
+«ENDFOREACH»
+
 «IF history != null»
 	private «typeOf(history.type)» «nameOf(history.type)» = new «typeOf(history.type)»();
 «ENDIF»
 
 «EXPAND GetterSetter FOR entity»
-
+«EXPAND GetterSetter FOREACH getManyEntites(entity.types)»
 «IF history != null»
 «EXPAND GetterSetter FOR history.type»
+
+«FOREACH getManyEntites(entity.types) AS manyEntity»
+	/**
+	 * This returns the history list of entity «typeOf(entity)».
+	 * 
+	 * @return The list of history entries.
+	 */
+	public List<«typeOf(manyEntity)»> «listOf(manyEntity)»()
+	{
+		return dao.«listOf(manyEntity)»(«getterOf(entity)»());
+	}
+«ENDFOREACH»
 
 	/**
 	 * This returns the history list of entity «typeOf(entity)».
@@ -309,13 +342,21 @@ abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(getMo
 «ENDIF»
 
 «IF isAbstract()»
+«FOREACH getManyEntites(entity.types) AS manyEntity»
+	// «typeOf(manyEntity)»
+	abstract String «editEntity(manyEntity)»(final «typeOf(entity)» «nameOf(entity)»);
+	abstract String «saveEntity(manyEntity)»();
+«ENDFOREACH»
+
+«IF history != null»
+	// History management of «typeOf(history)»
+	abstract String «editEntity(history.type)»(final «typeOf(entity)» «nameOf(entity)»);
+	abstract String «saveEntity(history.type)»();
+«ENDIF»
+
 	abstract public List<«typeOf(entity)»> «listOf(entity)»();
 	abstract String «createEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
 	abstract String «changeEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
-«IF history != null»
-	abstract String «historyEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
-	abstract String «saveEntity(history.type)»();
-«ENDIF»
 	abstract String «saveEntity(entity)»();
 	abstract String «removeEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
 «IF hasActivationBoolean(entity)»

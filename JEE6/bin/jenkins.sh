@@ -2,7 +2,9 @@
 
 set -e
 
-cd de.itemis.jee6.util
+cd `dirname $0`
+
+cd ../de.itemis.jee6.util
 ant clean package javadoc emma
 
 cd ../de.itemis.jee6
