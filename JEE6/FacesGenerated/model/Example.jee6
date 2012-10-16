@@ -21,7 +21,7 @@ options UserInfo editable
 	Boolean           active;
 	Boolean           authorizer;
 	Text              name transient;
-};
+}
 
 entity Mail
 {
@@ -32,13 +32,13 @@ entity Mail
 	Text      receiver;
 	Text      cc;
 	Clob      message;
-};
+}
 
 options Vendor editable
 {
 	Text    name;
 	Boolean active;
-};
+}
 
 options Distributor editable
 {
@@ -47,7 +47,7 @@ options Distributor editable
 	Text    contact;
 	Text    phone;
 	Text    mail;
-};
+}
 
 options InventoryType editable
 {
@@ -55,7 +55,7 @@ options InventoryType editable
 	Text    label;
 	Option  Vendor vendor;
 	Boolean active;
-};
+}
 
 options OrderPosition filterable cloneable editable
 {
@@ -68,7 +68,7 @@ options OrderPosition filterable cloneable editable
 	Option UserInfo      owner;
 	Option UserInfo      authorizer;
 	Text                 position transient;
-};
+}
 
 entity Purchase
 {
@@ -77,7 +77,7 @@ entity Purchase
 	Entity OrderPosition [] positions;
 	Option Distributor      distributor;
 	Option UserInfo         buyer;
-};
+}
 
 options InventoryState
 {
@@ -92,7 +92,7 @@ options InventoryState
 	"inventory.state.enum.GIVE_AWAY",
 	"inventory.state.enum.DEFECT",
 	"inventory.state.enum.THEFT"
-};
+}
 
 entity InventoryHistoryEntry cloneable
 {
@@ -103,7 +103,7 @@ entity InventoryHistoryEntry cloneable
 	Text                  utilization;
 	Clob                  comment;
 	Number                sell;
-};
+}
 
 entity Inventory filterable
 {
@@ -111,19 +111,19 @@ entity Inventory filterable
 	Text                          serialNumber;
 	Option InventoryType          inventoryType;
 	Boolean                       infrastructure;
-};
+}
 
 options AddressOption
 {
 	"address.work",
 	"address.home"
-};
+}
 
 entity HistoryEntry cloneable
 {
 	Timestamp auto creation;
 	Clob           comment;
-};
+}
 
 entity EntityEntry
 {
@@ -135,7 +135,7 @@ entity EntityEntry
 	Clob                 comment;
 	Boolean              active;
 	Option AddressOption addressOption;
-};
+}
 
 entity Startup
 {
@@ -147,22 +147,22 @@ entity Startup
 	Text                   subject;
 	History HistoryEntry   history;
 	Entity  EntityEntry [] entities; 
-};
+}
 
 process Inventory roles "controlling","it-support","vorstand"
 {
 	Inventory, InventoryHistoryEntry
-};
+}
 
 process Ordering roles "controlling","it-support","vorstand"
 {
 	Purchase, OrderPosition
-};
+}
 
 process Admin roles "admin"
 {
 	Vendor, Distributor, InventoryType
-};
+}
 
 process User roles "itemis", "extern"
 {
@@ -172,7 +172,7 @@ process User roles "itemis", "extern"
 	Boolean default false "productive" ref "java:global/productive";
 
 	UserInfo
-};
+}
 
 process Info
 {
@@ -180,4 +180,4 @@ process Info
 	Boolean default false "productive" ref "java:global/productive";
 
 	UserInfo, Startup, EntityEntry
-};
+}

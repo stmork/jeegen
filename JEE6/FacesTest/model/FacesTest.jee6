@@ -9,7 +9,7 @@ options AddressOption
 {
 	"address.work",
 	"address.home"
-};
+}
 
 entity Address
 {
@@ -19,7 +19,7 @@ entity Address
 	Text                 location;
 	Boolean              active;
 	Option AddressOption addressOption;
-};
+}
 
 options UserInfo editable
 {
@@ -30,31 +30,31 @@ options UserInfo editable
 	Date              birth;
 	Timestamp update  changed;
 	Blob              image;
-};
+}
 
 entity HistoryEntry
 {
 	Timestamp auto creation;
 	Text           comment;
-};
+}
 
 entity EntityEntry
 {
 	Timestamp auto creation;
 	Text           comment;
 	Option AddressOption addressOption;
-};
+}
 
 entity Startup
 {
 	History HistoryEntry   history;
 	Entity  EntityEntry [] entities; 
-};
+}
 
 options Preferences editable
 {
 	Text entry;
-};
+}
 
 process Admin roles "admin"
 {
@@ -62,7 +62,7 @@ process Admin roles "admin"
 	Text "ldap/baseDN" ref "java:global/ldap/baseDN";
 
 	UserInfo, Address
-};
+}
 
 process Info
 {
@@ -72,4 +72,4 @@ process Info
 	Boolean default false "productive" ref "java:global/productive";
 
 	Startup, EntityEntry
-};
+}

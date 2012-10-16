@@ -23,13 +23,14 @@ import org.eclipse.jdt.core.JavaCore;
 public class Jee6ProjectCreator extends DslProjectCreator
 {
 	private final static String BUNDLE_ID   = "de.itemis.jee6.ui";
-	private final static String WEB_CONTENT = "WebContent";
+	private final static String WEB_CONTENT = "res";
 
 	@Override
 	protected List<String> getAllFolders()
 	{
 		List<String> defaultFolders = new ArrayList<String>(super.getAllFolders());
 		defaultFolders.add(WEB_CONTENT);
+		defaultFolders.add("WebContent");
 		defaultFolders.add("res-gen");
 		defaultFolders.add("model");
         return defaultFolders;
