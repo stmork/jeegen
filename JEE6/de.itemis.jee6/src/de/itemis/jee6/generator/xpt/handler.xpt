@@ -108,6 +108,10 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 	}
 
 «FOREACH getManyEntites(entity.types) AS manyEntity»
+	/*********************************************
+	 * 1:n entity «typeOf(entity)» «nameOf(entity)»
+	 *********************************************/
+
 «IF isAbstract()»
 	@Override
 «ENDIF»
@@ -136,7 +140,7 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 «IF isAbstract()»
 	@Override
 «ENDIF»
-	public String «editEntity(history.type)»(final «typeOf(entity)» «nameOf(entity)») {
+	public String «editEntity(history)»(final «typeOf(entity)» «nameOf(entity)») {
 «IF history.type.cloneable»
 		final «typeOf(history.type)» last = «nameOf(entity)».getLast();  
 		final «typeOf(history.type)» newHistoryEntity = (last != null ? last.clone() : new «typeOf(history.type)»()); 
@@ -162,7 +166,7 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 «IF isAbstract()»
 	@Override
 «ENDIF»
-	public String «saveEntity(history.type)»() {
+	public String «saveEntity(history)»() {
 «IF history.type.cloneable»
 		final «typeOf(history.type)» «nameOf(history.type)» = dao.«adderTo(entity)»(«getterOf(entity)»(), «getterOf(history.type)»());
 		final «typeOf(history.type)» newHistoryEntity = «nameOf(history.type)».clone(); 
@@ -298,25 +302,24 @@ abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(getMo
 «ENDIF»
 	}
 
+«FOREACH getEntitiesWithHistory(entities) AS entity»
+	/*********************************************
+	 * Property «typeOf(entity)» «nameOf(entity)»
+	 *********************************************/
+
+	private «typeOf(entity)» «nameOf(entity)» = new «typeOf(entity)»();
+
+«EXPAND GetterSetter FOR entity»
+«ENDFOREACH»
+
 «FOREACH entities.sortBy(e|e.name) AS entity»
 «LET getHistory(entity) AS history»
+
 	/*********************************************
 	 * «typeOf(entity)» «nameOf(entity)»
 	 *********************************************/
 
-	private «typeOf(entity)» «nameOf(entity)» = new «typeOf(entity)»();
-«FOREACH getManyEntites(entity.types) AS manyEntity»
-	private «typeOf(manyEntity)» «nameOf(manyEntity)» = new «typeOf(manyEntity)»();
-«ENDFOREACH»
-
 «IF history != null»
-	private «typeOf(history.type)» «nameOf(history.type)» = new «typeOf(history.type)»();
-«ENDIF»
-
-«EXPAND GetterSetter FOR entity»
-«EXPAND GetterSetter FOREACH getManyEntites(entity.types)»
-«IF history != null»
-«EXPAND GetterSetter FOR history.type»
 
 «FOREACH getManyEntites(entity.types) AS manyEntity»
 	/**
@@ -343,15 +346,15 @@ abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(getMo
 
 «IF isAbstract()»
 «FOREACH getManyEntites(entity.types) AS manyEntity»
-	// «typeOf(manyEntity)»
+	// 1:n entity management of «typeOf(manyEntity)»
 	abstract String «editEntity(manyEntity)»(final «typeOf(entity)» «nameOf(entity)»);
 	abstract String «saveEntity(manyEntity)»();
 «ENDFOREACH»
 
 «IF history != null»
 	// History management of «typeOf(history)»
-	abstract String «editEntity(history.type)»(final «typeOf(entity)» «nameOf(entity)»);
-	abstract String «saveEntity(history.type)»();
+	abstract String «editEntity(history)»(final «typeOf(entity)» «nameOf(entity)»);
+	abstract String «saveEntity(history)»();
 «ENDIF»
 
 	abstract public List<«typeOf(entity)»> «listOf(entity)»();

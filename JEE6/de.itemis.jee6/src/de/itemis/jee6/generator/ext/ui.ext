@@ -27,6 +27,9 @@ String navigation(Process p) :
 String navigation(Process p, Entity e) :
 	navigation(p) + "_" + e.name.toUpperCase();
 
+String navigation(Process p, EntityRef er) :
+	navigation(p, er.type);
+
 String index(Process p) :
 	prefixOf(p) + "/index.xhtml";
 
@@ -54,14 +57,17 @@ Boolean isUi(Entity e) :
 List[Entity] getUiEntities(Process p) :
 	p.entities.select(e|isUi(e));
 
-private List[Entity] getHistory(List[Attribute] a) :
-	a.typeSelect(History).type;
+private List[History] getHistory(List[Attribute] a) :
+	a.typeSelect(History);
 
-cached Set[Entity] getManyEntites(List[Attribute] a) :
-	a.typeSelect(EntityRef).select(e|isMany(e)).type;
+cached Set[EntityRef] getManyEntites(List[Attribute] a) :
+	a.typeSelect(EntityRef).select(e|isMany(e));
+
+cached Set[Entity] getManyEntitiesWithHistory(List[Entity] entities): 
+	getManyEntites(entities.types).type.union(getHistory(entities.types).type);
 
 Set[Entity] getEntitiesWithHistory(List[Entity] entities) :
-	entities.union(getHistory(entities.types)).union(getManyEntites(entities.types)).sortBy(e|e.name);
+	entities.union(getHistory(entities.types).type).union(getManyEntites(entities.types).type).sortBy(e|e.name);
 
 private Boolean isListAttribute(Text t) :
 	!t.transient;
