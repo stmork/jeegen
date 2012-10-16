@@ -5,10 +5,13 @@ String getSrcGenPath() :
 	"src-gen";
 
 String getResPath() :
-	"WebContent";
+	"res";
 
 String getResGenPath() :
 	"res-gen";
+
+String getWebContentPath() :
+	"WebContent";
 
 String getModelPath() :
 	"model";

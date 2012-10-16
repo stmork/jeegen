@@ -53,7 +53,9 @@
 					<td class="space"/>
 					<td class="welcome">
 						<h1><ui:insert name="title"/></h1>
+«IF hasSecurityDomain()»
 						#{msg['start.name']} #{sessionController.name}
+«ENDIF»
 					</td>
 				</tr>
 			</table>
