@@ -46,6 +46,9 @@
 «FOREACH entity.types AS attr»
 «bundleUpdate(filename, prefixOf(process) + "." + prefixOf(entity) + "." + prefixOf(attr), attr.name)»
 «ENDFOREACH»
+«FOREACH getManyEntites(entity.types) AS ref»
+«bundleUpdate(filename, prefixOf(process) + "." + prefixOf(entity) + "." + prefixOf(ref.type) + ".change", "Edit " + ref.name)»
+«ENDFOREACH»
 «ENDFOREACH»
 «FOREACH getUiEntities(process) AS entity»
 «FOREACH entity.types AS attr»

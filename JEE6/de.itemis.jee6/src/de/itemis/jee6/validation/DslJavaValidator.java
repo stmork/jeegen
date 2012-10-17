@@ -6,6 +6,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.Check;
 
 import de.itemis.jee6.jee6.Entity;
+import de.itemis.jee6.jee6.EntityRef;
 import de.itemis.jee6.jee6.History;
 import de.itemis.jee6.jee6.Jee6Package;
 import de.itemis.jee6.jee6.Model;
@@ -22,20 +23,71 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 	{
 		if (!model.getPath().startsWith("/"))
 		{
-			error("Context path does not start wit '/'!", Jee6Package.Literals.MODEL__PATH);
+			error("Der Context path beginnt nicht mit '/'!", Jee6Package.Literals.MODEL__PATH);
 		}
 	}
 	
 	@Check
 	public void checkHistory(Entity entity)
 	{
-		List<History> histories = EcoreUtil2.typeSelect(entity.getTypes(), History.class);
+		final List<History> histories = EcoreUtil2.typeSelect(entity.getTypes(), History.class);
 
 		if (histories.size() > 1)
 		{
 			for(History history : histories)
 			{
-				error ("Es darf nur max. eine Historie vorhanden sein!", history, Jee6Package.Literals.HISTORY__TYPE, 0);
+				error ("Es darf nur eine Historie vorhanden sein!", history, Jee6Package.Literals.HISTORY__TYPE, 0);
+			}
+		}
+		else
+		{
+			final List<EntityRef> entities = EcoreUtil2.typeSelect(entity.getTypes(), EntityRef.class);
+
+			for(History history : histories)
+			{
+				final Entity type = history.getType();
+
+				for (EntityRef ref : entities)
+				{
+					if (ref.isMany())
+					{
+						if (ref.getType() == type)
+						{
+							error ("Es darf keine 1:n-Relation eines Typs auch als Type einer Historie vorhanden sein!",
+									ref, Jee6Package.Literals.ENTITY_REF__TYPE, 0);
+							error ("Es darf nur eine Historie vorhanden sein!",
+									history, Jee6Package.Literals.HISTORY__TYPE, 0);
+						}
+					}
+				}
+			}			
+		}
+	}
+
+	@Check
+	public void checkManyEntities(Entity entity)
+	{
+		final List<EntityRef> entities = EcoreUtil2.typeSelect(entity.getTypes(), EntityRef.class);
+
+		for (EntityRef outerRef : entities)
+		{
+			if (outerRef.isMany())
+			{
+				final Entity type = outerRef.getType();
+				int count = 0;
+
+				for (EntityRef innerRef : entities)
+				{
+					if (innerRef.getType() == type)
+					{
+						count++;
+					}
+				}
+				if (count > 1)
+				{
+					error ("Es darf nur eine 1:n-Relation eines Typs vorhanden sein!",
+							outerRef, Jee6Package.Literals.ENTITY_REF__TYPE, 0);
+				}
 			}
 		}
 	}
