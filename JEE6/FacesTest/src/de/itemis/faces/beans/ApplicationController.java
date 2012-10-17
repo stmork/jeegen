@@ -3,8 +3,6 @@
  */
 package de.itemis.faces.beans;
 
-import java.io.Serializable;
-
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ApplicationScoped;
@@ -23,7 +21,7 @@ import de.itemis.jee6.util.Profiler;
 @ManagedBean(eager=true)
 @ApplicationScoped
 @Interceptors(Profiler.class)
-public class ApplicationController extends AbstractApplicationController implements Serializable
+public class ApplicationController extends AbstractApplicationController
 {
 	private static final long serialVersionUID = 1L;
 	private final static Log log = LogFactory.getLog(ApplicationController.class);
