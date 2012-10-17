@@ -91,21 +91,43 @@
 «ENDDEFINE»
 
 «DEFINE entitiesList(Process p) FOR Entity»
-			<!-- === generated history === --> 
+			<!-- === generated 1:n relation === --> 
 			<!-- process: «p.name» entity: «name» -->
 «LET getListAttributes() AS attributes»
 «IF attributes.size > 0»
 «ENDIF»
-			<h:dataTable
-					value="#{«handlerUri(p)».«uiList()»}" var="«nameOf(this)»"
-					styleClass="list" rowClasses="odd,even" columnClasses="«FOREACH attributes AS attr SEPARATOR ","»«getClass(attr)»«ENDFOREACH»,command,command,command">
-«FOREACH attributes AS attr»
-				<h:column>
-					<f:facet name="header">#{msg['«prefixOf(p)».«prefixOf(this)».«prefixOf(attr)»']}</f:facet>
-«EXPAND element(p, this) FOR attr»
-				</h:column>
-«ENDFOREACH»
-			</h:dataTable>
+			<h:form>
+				<h:dataTable
+						value="#{«handlerUri(p)».«uiList()»}" var="«nameOf(this)»"
+						styleClass="list" rowClasses="odd,even" columnClasses="«FOREACH attributes AS attr SEPARATOR ","»«getClass(attr)»«ENDFOREACH»,command,command,command">
+	«FOREACH attributes AS attr»
+					<h:column>
+						<f:facet name="header">#{msg['«prefixOf(p)».«prefixOf(this)».«prefixOf(attr)»']}</f:facet>
+	«EXPAND element(p, this) FOR attr»
+					</h:column>
+	«ENDFOREACH»
+					<h:column>
+						<f:facet name="header" />
+						<h:commandLink
+							value="#{msg.change}"
+							action="#{«handlerUri(p)».«changeEntity()»(«nameOf(this)»)}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header" />
+						<h:commandLink
+							value="#{msg.remove}"
+							action="#{«handlerUri(p)».«removeEntity()»(«nameOf(this)»)}" />
+					</h:column>
+«IF hasActivationBoolean()»
+					<h:column>
+						<f:facet name="header" />
+						<h:commandLink
+							value="#{«nameOf(this)».active ? msg['options.deactivate'] : msg['options.activate']}"
+							action="#{«handlerUri(p)».«reactivateEntity()»(«nameOf(this)»)}" />
+					</h:column>
+«ENDIF»
+				</h:dataTable>
+			</h:form>
 «ENDLET»
 «ENDDEFINE»
 

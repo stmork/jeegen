@@ -199,5 +199,5 @@ process Info
 	Text "ldap/baseDN" ref "java:global/ldap/baseDN";
 	Boolean default false "productive" ref "java:global/productive";
 
-	Startup, Person, Address
+	Startup, Person
 }

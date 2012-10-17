@@ -112,20 +112,73 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 	 * 1:n entity «typeOf(entity)» «nameOf(entity)»
 	 *********************************************/
 
+	/**
+	 * This method prepares the 1:n entities of the «typeOf(entity)» bean for editing.
+	 * 
+	 * @param «nameOf(entity)» The «typeOf(entity)» bean for «typeOf(manyEntity)» editing.
+	 * @return The outcome for «typeOf(manyEntity)» bean editing
+	 */
 «IF isAbstract()»
 	@Override
 «ENDIF»
-	public String «editEntity(manyEntity)»(final «typeOf(entity)» «nameOf(entity)») {
+	public String «editEntity(manyEntity.type)»(final «typeOf(entity)» «nameOf(entity)») {
+		«setterOf(entity)»(«nameOf(entity)»);
+		«setterOf(manyEntity.type)»(new «typeOf(manyEntity.type)»());
 		return «navigation(this, manyEntity)»;
 	}
 
 «IF isAbstract()»
 	@Override
 «ENDIF»
-	public String «saveEntity(manyEntity)»() {
+	public String «changeEntity(manyEntity.type)»(final «typeOf(manyEntity.type)» «nameOf(manyEntity.type)») {
+		«setterOf(manyEntity.type)»(«nameOf(manyEntity.type)»);
 		return «navigation(this, manyEntity)»;
 	}
 
+«IF isAbstract()»
+	@Override
+«ENDIF»
+	public String «removeEntity(manyEntity.type)»(final «typeOf(manyEntity.type)» «nameOf(manyEntity.type)») {
+		dao.«remover(manyEntity.type)»(«nameOf(manyEntity.type)»);
+		return «navigation(this, manyEntity)»;
+	}
+
+«IF isAbstract()»
+	@Override
+«ENDIF»
+	public String «saveEntity(manyEntity.type)»()
+	{
+		final «typeOf(manyEntity.type)» «nameOf(manyEntity.type)» = «getterOf(manyEntity.type)»();
+
+		if («nameOf(manyEntity.type)».getId() != 0)
+		{
+			dao.«updater(manyEntity.type)»(«getterOf(manyEntity.type)»());
+		}
+		else
+		{
+			dao.«adderTo(entity)»(«getterOf(entity)»(), «nameOf(manyEntity.type)»);
+		}
+		«setterOf(manyEntity.type)»(new «typeOf(manyEntity.type)»());
+		dao.«updater(manyEntity.type)»(«getterOf(manyEntity.type)»());
+		return «navigation(this, manyEntity)»;
+	}
+
+«IF hasActivationBoolean(manyEntity.type)»
+	/**
+	 * This method changes the active flag of the given {@link «typeOf(manyEntity.type)»} bean.
+	 *
+	 * @param «nameOf(manyEntity.type)» The {@link «typeOf(manyEntity.type)»} bean to change the active flag.
+	 * @return The outcome where to go on success.
+	 * @see «abstractDaoOf()»#activate(«typeOf(manyEntity.type)»,boolean)
+	 */
+«IF isAbstract()»
+	@Override
+«ENDIF»
+	public String «reactivateEntity(manyEntity.type)»(final «typeOf(manyEntity.type)» «nameOf(manyEntity.type)») {
+		dao.activate(«nameOf(manyEntity.type)», !«nameOf(manyEntity.type)».isActive());
+		return «navigation(this, manyEntity.type)»;
+	}
+«ENDIF»
 «ENDFOREACH»
 
 «LET getHistory(entity) AS history»
@@ -140,7 +193,7 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 «IF isAbstract()»
 	@Override
 «ENDIF»
-	public String «editEntity(history)»(final «typeOf(entity)» «nameOf(entity)») {
+	public String «editEntity(history.type)»(final «typeOf(entity)» «nameOf(entity)») {
 «IF history.type.cloneable»
 		final «typeOf(history.type)» last = «nameOf(entity)».getLast();  
 		final «typeOf(history.type)» newHistoryEntity = (last != null ? last.clone() : new «typeOf(history.type)»()); 
@@ -166,7 +219,7 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 «IF isAbstract()»
 	@Override
 «ENDIF»
-	public String «saveEntity(history)»() {
+	public String «saveEntity(history.type)»() {
 «IF history.type.cloneable»
 		final «typeOf(history.type)» «nameOf(history.type)» = dao.«adderTo(entity)»(«getterOf(entity)»(), «getterOf(history.type)»());
 		final «typeOf(history.type)» newHistoryEntity = «nameOf(history.type)».clone(); 
@@ -243,7 +296,7 @@ package «handlerPackageOf(this)»;
 
 import javax.ejb.EJB;
 import «fqDaoOf()»;
-«IF ((entities.size > 0) && isAbstract()) || (entities.types.typeSelect(History).size > 0)»
+«IF ((entities.size > 0) && isAbstract()) || (getManyEntitiesWithHistory(entities).size > 0)»
 import java.util.List;
 «ENDIF»
 «FOREACH getEntitiesWithHistory(entities) AS entity»
@@ -319,8 +372,6 @@ abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(getMo
 	 * «typeOf(entity)» «nameOf(entity)»
 	 *********************************************/
 
-«IF history != null»
-
 «FOREACH getManyEntites(entity.types) AS manyEntity»
 	/**
 	 * This returns the history list of entity «typeOf(entity)».
@@ -333,6 +384,7 @@ abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(getMo
 	}
 «ENDFOREACH»
 
+«IF history != null»
 	/**
 	 * This returns the history list of entity «typeOf(entity)».
 	 * 
@@ -347,21 +399,26 @@ abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(getMo
 «IF isAbstract()»
 «FOREACH getManyEntites(entity.types) AS manyEntity»
 	// 1:n entity management of «typeOf(manyEntity)»
-	abstract String «editEntity(manyEntity)»(final «typeOf(entity)» «nameOf(entity)»);
-	abstract String «saveEntity(manyEntity)»();
+	abstract String «editEntity(manyEntity.type)»(final «typeOf(entity)» «nameOf(entity)»);
+	abstract String «changeEntity(manyEntity.type)»(final «typeOf(manyEntity.type)» «nameOf(manyEntity.type)»);
+	abstract String «removeEntity(manyEntity.type)»(final «typeOf(manyEntity.type)» «nameOf(manyEntity.type)»);
+	abstract String «saveEntity(manyEntity.type)»();
+«IF hasActivationBoolean(manyEntity.type)»
+	abstract String «reactivateEntity(manyEntity.type)»(final «typeOf(manyEntity.type)» «nameOf(manyEntity.type)»);
+«ENDIF»
 «ENDFOREACH»
 
 «IF history != null»
 	// History management of «typeOf(history)»
-	abstract String «editEntity(history)»(final «typeOf(entity)» «nameOf(entity)»);
-	abstract String «saveEntity(history)»();
+	abstract String «editEntity(history.type)»(final «typeOf(entity)» «nameOf(entity)»);
+	abstract String «saveEntity(history.type)»();
 «ENDIF»
 
 	abstract public List<«typeOf(entity)»> «listOf(entity)»();
 	abstract String «createEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
 	abstract String «changeEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
-	abstract String «saveEntity(entity)»();
 	abstract String «removeEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
+	abstract String «saveEntity(entity)»();
 «IF hasActivationBoolean(entity)»
 	abstract String «reactivateEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
 «ENDIF»

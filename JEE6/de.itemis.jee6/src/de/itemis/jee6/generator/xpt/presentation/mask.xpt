@@ -17,6 +17,7 @@
 			<!-- === generated mask === --> 
 			<!-- process: «p.name» entity: «name» -->
 «LET getMaskAttributes() AS attributes»
+«LET getId() AS id»
 «IF attributes.size > 0»
 		<div class="box">
 			<h:form id="«prefixOf()»">
@@ -39,21 +40,46 @@
 						<td/>
 						<td><h:commandButton
 							action="#{«handlerUri(p)».«saveEntity()»}"
-«LET getId() AS id»
 «IF id == null»
 							value="#{«handlerUri(p)».«nameOf()».id == 0 ? msg.create : msg.save}" />
 «ELSE»
 							value="#{«handlerUri(p)».«nameOf()».«nameOf(id)» == null ? msg.create : msg.save}" />
 «ENDIF»
-«ENDLET»
 						</td>
 					</tr>
+«LET getManyEntites(types) AS manyEntities»
+«IF manyEntities.size > 0»
+«IF id == null»
+			        <ui:fragment rendered="#{«handlerUri(p)».«nameOf()».id != 0}">
+«ELSE»
+		    	    <ui:fragment rendered="#{«handlerUri(p)».«nameOf()».«nameOf(id)» != null}">
+«ENDIF»
+						<tr>
+							<td/>
+							<td>
+«FOREACH manyEntities AS entity»
+								<h:commandButton
+									value="#{msg['«prefixOf(p)».«prefixOf()».«prefixOf(entity.type)».change']}"
+									action="#{«handlerUri(p)».«editEntity(entity.type)»(«handlerUri(p)».«nameOf(this)»)}"/>
+«ENDFOREACH»
+							</td>
+						</tr>
+		        	</ui:fragment>
+«ENDIF»
+«ENDLET»
 				</table>
 			</h:form>
 		</div>
 «ENDIF»
 «ENDLET»
+«ENDLET»
 «ENDDEFINE»
+
+«DEFINE Form FOR Entity»
+«ENDDEFINE»
+
+
+
 
 «REM»Text Field«ENDREM»
 «DEFINE element(Process p, Entity e) FOR jee6::Text»
