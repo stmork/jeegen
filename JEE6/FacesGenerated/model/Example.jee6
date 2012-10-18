@@ -13,7 +13,7 @@ param de.itemis.purchasing.AUTHORIZER        = "vorstand,teamleiter,controlling"
 options UserInfo editable
 {
 	Text id           login;
-	Text              mail;
+	Email             mail;
 	Timestamp update  changed;
 	Date              birth;
 	Text              forename;
@@ -46,7 +46,7 @@ options Distributor editable
 	Boolean active;
 	Text    contact;
 	Text    phone;
-	Text    mail;
+	Email   mail;
 }
 
 options InventoryType editable
@@ -151,7 +151,8 @@ entity Startup
 
 entity Person
 {
-	Text name;
+	Text   name;
+	Email  mail;
 	Entity Address [] addresses;
 }
 

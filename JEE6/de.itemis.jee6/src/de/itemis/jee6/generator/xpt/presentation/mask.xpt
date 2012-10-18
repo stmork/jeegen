@@ -86,14 +86,16 @@
 «IF transient»
 						#{«handlerUri(p)».«nameOf(e)».«nameOf()»}
 «ELSE»
-«IF isEMail()»
+						<h:inputText id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" maxlength="255" />
+«ENDIF»
+«ENDDEFINE»
+
+«REM»EMail field«ENDREM»
+«DEFINE element(Process p, Entity e) FOR jee6::Email»
+«ERROR e.name + "/" + name»
 						<h:inputText id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" maxlength="255">
 							<f:validator validatorId="mailValidator"/>
 						</h:inputText>
-«ELSE»
-						<h:inputText id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" maxlength="255" />
-«ENDIF»
-«ENDIF»
 «ENDDEFINE»
 
 «REM»Text Area«ENDREM»

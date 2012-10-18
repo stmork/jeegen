@@ -91,6 +91,15 @@ String fqTypeOf(Text t) :
 	typeOf(t);
 
 /*
+ * Email
+ */
+String typeOf(Email t) :
+	"String";
+
+String fqTypeOf(Email t) :
+	typeOf(t);
+
+/*
  * Blob
  */
 String typeOf(Blob lob) :

@@ -26,7 +26,7 @@ options UserInfo editable
 	Text id           login;
 	Entity Address [] addresses;
 	Text              name;
-	Text              mail;
+	Email             mail;
 	Date              birth;
 	Timestamp update  changed;
 	Blob              image;

@@ -147,13 +147,13 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 	 *
 	 * @param «nameOf(manyEntity.type)» The {@link «typeOf(manyEntity.type)»} entity bean to remove.
 	 * @return The outcome to return to the 1:n relation editing.
-	 * @see «fqAbstractDaoOf()»#«remover(manyEntity.type)»(«typeOf(manyEntity.type)»)
+	 * @see «fqAbstractDaoOf()»#«removerFrom(entity)»(«typeOf(manyEntity.type)»)
 	 */
 «IF isAbstract()»
 	@Override
 «ENDIF»
 	public String «removeEntity(manyEntity.type)»(final «typeOf(manyEntity.type)» «nameOf(manyEntity.type)») {
-		dao.«remover(manyEntity.type)»(«nameOf(manyEntity.type)»);
+		dao.«removerFrom(entity)»(«nameOf(manyEntity.type)»);
 		return «navigation(this, manyEntity)»;
 	}
 

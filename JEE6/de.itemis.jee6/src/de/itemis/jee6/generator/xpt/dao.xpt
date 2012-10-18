@@ -189,8 +189,8 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 
 «IF !History.isInstance(type)»
 	/**
-	 * This method removes a {@link «typeOf(type)»} entity bean to the «parameterOf(type)»
-	 * relation of the {@link «typeOf(entity)»} entity bean.
+	 * This method removes a {@link «typeOf(type)»} entity bean from the «parameterOf(type)»
+	 * 1:n-relation of the {@link «typeOf(entity)»} entity bean.
 	 *
 	 * @param «parameterOf(type)» The {@link «typeOf(type)»} entity bean to remove from the relation.
 	 * @return The removed {@link «typeOf(type)»} entity bean. 

@@ -93,9 +93,6 @@ private Boolean isMaskAttribute(Timestamp ts) :
 private Boolean isMaskAttribute(Attribute a) :
 	isListAttribute(a);
 
-Boolean isEMail(Text t) :
-	t.name.toLowerCase().contains("mail");
-
 List[Attribute] getMaskAttributes(Entity e) :
 	e.types.select(e|isMaskAttribute(e));
 

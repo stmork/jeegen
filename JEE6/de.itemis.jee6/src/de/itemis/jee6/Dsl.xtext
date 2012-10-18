@@ -21,13 +21,14 @@ Param:			'param' name=PACKAGED_ID '=' value=STRING ('description' description=ST
 /* Types */
 Attribute:	(Simple|Reference) ';';
 
-Simple:		(Date|Timestamp|Boolean|Integer|Number|Text|Blob|Clob) name=ID (transient?='transient')?;
+Simple:		(Date|Timestamp|Boolean|Integer|Number|Text|Email|Blob|Clob) name=ID (transient?='transient')?;
 Date:		{Date}'Date';
 Timestamp:	{Timestamp}'Timestamp' (auto?='auto'|update?='update')?;
 Boolean:	{Boolean}'Boolean';
 Integer:	{Integer}'Int';
 Number:		{Number}'Number';
 Text:		{Text}'Text' (id?='id')?;
+Email:		{Email}'Email';
 Blob:		{Blob}'Blob';
 Clob:		{Clob}'Clob';
 
