@@ -127,6 +127,12 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 		return «navigation(this, manyEntity)»;
 	}
 
+	/**
+	 * Thie action method sets the specified {@link «typeOf(manyEntity.type)»} entity bean for editing.
+	 *
+	 * @param «nameOf(manyEntity.type)» The {@link «typeOf(manyEntity.type)»} entity bean to edit.
+	 * @return The outcome to return to the 1:n relation editing.
+	 */
 «IF isAbstract()»
 	@Override
 «ENDIF»
@@ -135,6 +141,14 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 		return «navigation(this, manyEntity)»;
 	}
 
+	/**
+	 * This action method removes an {@link «typeOf(manyEntity.type)»} entity bean from the
+	 * 1:n relation «nameOf(manyEntity)» of the {@link «typeOf(entity)»} entity bean.
+	 *
+	 * @param «nameOf(manyEntity.type)» The {@link «typeOf(manyEntity.type)»} entity bean to remove.
+	 * @return The outcome to return to the 1:n relation editing.
+	 * @see «fqAbstractDaoOf()»#«remover(manyEntity.type)»(«typeOf(manyEntity.type)»)
+	 */
 «IF isAbstract()»
 	@Override
 «ENDIF»
@@ -143,6 +157,14 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 		return «navigation(this, manyEntity)»;
 	}
 
+	/**
+	 * This action method saves or creates an {@link «typeOf(manyEntity.type)»} entity bean inside
+	 * an 1:n relation of the {@link «typeOf(entity)»} entity bean.
+	 *
+	 * @return The outcome to return to the 1:n relation editing.
+	 * @see «fqAbstractDaoOf()»#«updater(manyEntity.type)»(«typeOf(manyEntity.type)»)
+	 * @see «fqAbstractDaoOf()»#«adderTo(entity)»(«typeOf(entity)», «typeOf(manyEntity.type)»)
+	 */ 
 «IF isAbstract()»
 	@Override
 «ENDIF»
@@ -159,7 +181,6 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 			dao.«adderTo(entity)»(«getterOf(entity)»(), «nameOf(manyEntity.type)»);
 		}
 		«setterOf(manyEntity.type)»(new «typeOf(manyEntity.type)»());
-		dao.«updater(manyEntity.type)»(«getterOf(manyEntity.type)»());
 		return «navigation(this, manyEntity)»;
 	}
 
