@@ -27,7 +27,7 @@
 «IF debug()»
 						<td class="«labelClass(attr)»">«attr.typeOf().asType()»</td>
 «ENDIF»
-						<td class="«labelClass(attr)»">#{msg['«prefixOf(p)».«prefixOf()».«prefixOf(attr)»']}</td>
+						<td class="«labelClass(attr)»"><h:outputLabel for="«nameOf()»" value="#{msg['«prefixOf(p)».«prefixOf()».«prefixOf(attr)»']}"/></td>
 						<td>
 «EXPAND element(p, this) FOR attr»
 						</td>
