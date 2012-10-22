@@ -122,7 +122,14 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 	@Override
 «ENDIF»
 	public String «removeEntity(entity)»(final «typeOf(entity)» «nameOf(entity)») {
-		dao.«remover(entity)»(«nameOf(entity)»);
+		if («isEmpty(entity)»(«nameOf(entity)»))
+		{
+			dao.«remover(entity)»(«nameOf(entity)»);
+		}
+		else
+		{
+			error(null, "«prefixOf()».«prefixOf(entity)».not-empty");
+		}
 		return «navigation(this, entity)»;
 	}
 
@@ -218,7 +225,14 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 	@Override
 «ENDIF»
 	public String «removeEntity(manyEntity.type)»(final «typeOf(manyEntity.type)» «nameOf(manyEntity.type)») {
-		dao.«removerFrom(entity)»(«nameOf(manyEntity.type)»);
+		if («isEmpty(manyEntity.type)»(«nameOf(manyEntity.type)»))
+		{
+			dao.«removerFrom(entity)»(«nameOf(manyEntity.type)»);
+		}
+		else
+		{
+			error(null, "«prefixOf()».«prefixOf(manyEntity.type)».not-empty");
+		}
 		return «navigation(this, manyEntity)»;
 	}
 

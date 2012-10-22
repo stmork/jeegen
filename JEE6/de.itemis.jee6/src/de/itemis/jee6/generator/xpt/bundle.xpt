@@ -83,6 +83,11 @@
 «bundleUpdate(filename, "not-found.title", "Resource not found!")»
 «bundleUpdate(filename, "code404.title", "Four oh four!")»
 «bundleUpdate(filename, "code404.message", "The requested document was not found!")»
+«FOREACH processes AS process»
+«FOREACH getUiEntities(process) AS entity»
+«bundleUpdate(filename, prefixOf(process) + "." + prefixOf(entity) + ".not-empty", "Data of " + entity.name + " is not empty!")»
+«ENDFOREACH»
+«ENDFOREACH»
 «bundleFlush(filename)»
 «ENDLET»
 «ENDDEFINE»
