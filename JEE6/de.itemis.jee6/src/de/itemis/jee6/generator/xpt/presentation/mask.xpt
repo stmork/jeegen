@@ -22,12 +22,15 @@
 		<div class="box">
 			<h:form id="«prefixOf()»">
 				<table>
+					<tr>
+						<td colspan="2"><h:commandButton action="#{«handlerUri(p)».back()}" value="#{msg.back}"/></td>
+					</tr>
 «FOREACH attributes AS attr»
 					<tr>
 «IF debug()»
 						<td class="«labelClass(attr)»">«attr.typeOf().asType()»</td>
 «ENDIF»
-						<td class="«labelClass(attr)»"><h:outputLabel for="«nameOf()»" value="#{msg['«prefixOf(p)».«prefixOf()».«prefixOf(attr)»']}"/></td>
+						<td class="«labelClass(attr)»"><h:outputLabel for="«nameOf(attr)»" value="#{msg['«prefixOf(p)».«prefixOf()».«prefixOf(attr)»']}"/></td>
 						<td>
 «EXPAND element(p, this) FOR attr»
 						</td>
@@ -86,41 +89,48 @@
 «IF transient»
 						#{«handlerUri(p)».«nameOf(e)».«nameOf()»}
 «ELSE»
-						<h:inputText id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" maxlength="255" />
+						<h:inputText id="«nameOf()»" label="#{msg['«prefixOf(p)».«prefixOf(e)».«prefixOf()»']}"
+							value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" maxlength="255"/>
 «ENDIF»
 «ENDDEFINE»
 
 «REM»EMail field«ENDREM»
 «DEFINE element(Process p, Entity e) FOR jee6::Email»
 «ERROR e.name + "/" + name»
-						<h:inputText id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" maxlength="255">
+						<h:inputText id="«nameOf()»" label="#{msg['«prefixOf(p)».«prefixOf(e)».«prefixOf()»']}"
+								value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" maxlength="255">
 							<f:validator validatorId="mailValidator"/>
 						</h:inputText>
 «ENDDEFINE»
 
 «REM»Text Area«ENDREM»
 «DEFINE element(Process p, Entity e) FOR jee6::Clob»
-						<h:inputTextarea id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" cols="32" rows="7"/>
+						<h:inputTextarea id="«nameOf()»" label="#{msg['«prefixOf(p)».«prefixOf(e)».«prefixOf()»']}"
+							value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" cols="32" rows="7"/>
 «ENDDEFINE»
 
 «REM»Checkbox«ENDREM»
 «DEFINE element(Process p, Entity e) FOR jee6::Boolean»
-						<h:selectBooleanCheckbox id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" />
+						<h:selectBooleanCheckbox id="«nameOf()»" label="#{msg['«prefixOf(p)».«prefixOf(e)».«prefixOf()»']}"
+							value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" />
 «ENDDEFINE»
 
 «REM»Integer Field«ENDREM»
 «DEFINE element(Process p, Entity e) FOR jee6::Integer»
-						<h:inputText id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" size="10"/>
+						<h:inputText id="«nameOf()»" label="#{msg['«prefixOf(p)».«prefixOf(e)».«prefixOf()»']}"
+							value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" size="10"/>
 «ENDDEFINE»
 
 «REM»Number Field«ENDREM»
 «DEFINE element(Process p, Entity e) FOR jee6::Number»
-						<h:inputText id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" maxlength="10" />
+						<h:inputText id="«nameOf()»" label="#{msg['«prefixOf(p)».«prefixOf(e)».«prefixOf()»']}"
+							value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" maxlength="10" />
 «ENDDEFINE»
 
 «REM»Date Field«ENDREM»
 «DEFINE element(Process p, Entity e) FOR jee6::Date»
-						<h:inputText id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" maxlength="10" styleClass="date">
+						<h:inputText id="«nameOf()»" label="#{msg['«prefixOf(p)».«prefixOf(e)».«prefixOf()»']}"
+								value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" maxlength="10" styleClass="date">
 							<f:convertDateTime pattern="dd.MM.yyyy" type="date"/>
 						</h:inputText>
 «ENDDEFINE»
@@ -132,7 +142,8 @@
 							<f:convertDateTime type="both"/>
 						</h:outputText>
 «ELSE»
-						<h:inputText id="«nameOf()»" value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" maxlength="10" styleClass="date">
+						<h:inputText id="«nameOf()»" label="#{msg['«prefixOf(p)».«prefixOf(e)».«prefixOf()»']}"
+								value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" maxlength="10" styleClass="date">
 							<f:convertDateTime pattern="dd.MM.yyyy" type="date"/>
 						</h:inputText>
 «ENDIF»
@@ -140,7 +151,7 @@
 
 «REM»Combobox«ENDREM»
 «DEFINE element(Process p, Entity e) FOR OptionRef»
-							<h:selectOneMenu id="«nameOf()»"
+							<h:selectOneMenu id="«nameOf()»" label="#{msg['«prefixOf(p)».«prefixOf(e)».«prefixOf()»']}"
 									value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}"
 									converter="#{«handlerUri(p)».«uiConverter(type)»}">
 «IF !isEnumeration(this.type)»

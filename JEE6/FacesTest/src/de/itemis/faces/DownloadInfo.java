@@ -98,7 +98,7 @@ public class DownloadInfo implements Serializable
 		}
 		else
 		{
-			log.warn (String.format("%s not loaded", download.getUrl()));
+			log.trace (String.format("%s not loaded", download.getUrl()));
 		}
 	}
 
