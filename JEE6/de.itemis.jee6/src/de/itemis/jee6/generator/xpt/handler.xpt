@@ -112,6 +112,21 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 	}
 
 	/**
+	 * This method removes the given {@link «typeOf(entity)»} bean.
+	 *
+	 * @param «nameOf(entity)» The {@link «typeOf(entity)»} bean to remove.
+	 * @return The outcome where to go on success.
+	 * @see «fqAbstractDaoOf()»#«remover(entity)»(«typeOf(entity)»)
+	 */
+«IF isAbstract()»
+	@Override
+«ENDIF»
+	public String «removeEntity(entity)»(final «typeOf(entity)» «nameOf(entity)») {
+		dao.«remover(entity)»(«nameOf(entity)»);
+		return «navigation(this, entity)»;
+	}
+
+	/**
 	 * This method sets the given {@link «typeOf(entity)»} bean for editing.
 	 *
 	 * @return The outcome where to go on success.
@@ -127,18 +142,16 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 	}
 
 	/**
-	 * This method removes the given {@link «typeOf(entity)»} bean.
+	 * This method simply returns an outcome to return to the processes main menu.
 	 *
-	 * @param «nameOf(entity)» The {@link «typeOf(entity)»} bean to remove.
-	 * @return The outcome where to go on success.
-	 * @see «fqAbstractDaoOf()»#«remover(entity)»(«typeOf(entity)»)
+	 * @return The outcome to go to the main menu.
 	 */
 «IF isAbstract()»
 	@Override
 «ENDIF»
-	public String «removeEntity(entity)»(final «typeOf(entity)» «nameOf(entity)») {
-		dao.«remover(entity)»(«nameOf(entity)»);
-		return «navigation(this, entity)»;
+	public String «backEntity(entity)»()
+	{
+		return NAV_INDEX;
 	}
 
 «IF hasActivationBoolean(entity)»
@@ -236,6 +249,19 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 		return «navigation(this, manyEntity)»;
 	}
 
+	/**
+	 * This action method returns to the editing of the {@link «typeOf(entity)»} bean.
+	 *
+	 * @return The outcome for editing the {@link «typeOf(entity)»} bean.
+	 */  	
+«IF isAbstract()»
+	@Override
+«ENDIF»
+	public String «backEntity(manyEntity.type)»()
+	{
+		return «navigation(this, entity)»;
+	}	
+
 «IF hasActivationBoolean(manyEntity.type)»
 	/**
 	 * This method changes the active flag of the given {@link «typeOf(manyEntity.type)»} bean.
@@ -283,7 +309,7 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 	}
 
 	/**
-	 * This method adds a {@link «typeOf(history.type)»} history bean to the
+	 * This action method adds a {@link «typeOf(history.type)»} history bean to the
 	 * given {@link «typeOf(entity)»} bean for editing.
 	 *
 	 * @return The outcome where to go on success.
@@ -305,6 +331,19 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 		«setterOf(history.type)»(new «typeOf(history.type)»());
 «ENDIF»
 		return «navigation(this, history.type)»;
+	}
+
+	/**
+	 * This action method returns to the editing of the {@link «typeOf(entity)»} bean.
+	 *
+	 * @return The outcome for editing the {@link «typeOf(entity)»} bean.
+	 */  	
+«IF isAbstract()»
+	@Override
+«ENDIF»
+	public String «backEntity(history.type)»()
+	{
+		return «navigation(this, entity)»;
 	}
 «ENDIF»
 «ENDLET»
@@ -431,6 +470,7 @@ abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(getMo
 	abstract String «changeEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
 	abstract String «removeEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
 	abstract String «saveEntity(entity)»();
+	abstract String «backEntity(entity)»();
 «IF hasActivationBoolean(entity)»
 	abstract String «reactivateEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
 «ENDIF»
@@ -452,6 +492,7 @@ abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(getMo
 	abstract String «changeEntity(manyEntity.type)»(final «typeOf(manyEntity.type)» «nameOf(manyEntity.type)»);
 	abstract String «removeEntity(manyEntity.type)»(final «typeOf(manyEntity.type)» «nameOf(manyEntity.type)»);
 	abstract String «saveEntity(manyEntity.type)»();
+	abstract String «backEntity(manyEntity.type)»();
 «IF hasActivationBoolean(manyEntity.type)»
 	abstract String «reactivateEntity(manyEntity.type)»(final «typeOf(manyEntity.type)» «nameOf(manyEntity.type)»);
 «ENDIF»
@@ -472,6 +513,7 @@ abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(getMo
 	// History management of «typeOf(history)»
 	abstract String «editEntity(history.type)»(final «typeOf(entity)» «nameOf(entity)»);
 	abstract String «saveEntity(history.type)»();
+	abstract String «backEntity(history.type)»();
 «ENDIF»
 «ENDIF»
 «ENDLET»

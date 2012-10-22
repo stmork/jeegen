@@ -64,7 +64,10 @@ String saveEntity(EntityRef er) :
 	
 String saveEntity(History h) :
 	"save" + h.name.toFirstUpper();
-	
+
+String backEntity(Entity e) :
+	"backFrom" + e.name.toFirstUpper();	
+
 String removeEntity(Entity e) :
 	"remove" + e.name.toFirstUpper();
 	
