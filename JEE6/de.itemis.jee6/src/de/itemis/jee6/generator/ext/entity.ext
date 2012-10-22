@@ -52,7 +52,10 @@ String editEntity(EntityRef ef) :
 
 String editEntity(History h) :
 	"edit" + h.name.toFirstUpper();
-	
+
+String isEmpty(Entity e) :
+	"is" + e.name.toFirstUpper() + "Empty";
+
 String saveEntity(Entity e) :
 	"save" + e.name.toFirstUpper();
 	

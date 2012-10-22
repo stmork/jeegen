@@ -1,10 +1,13 @@
 package de.itemis.jee6.validation;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.Check;
 
+import de.itemis.jee6.jee6.Attribute;
 import de.itemis.jee6.jee6.Entity;
 import de.itemis.jee6.jee6.EntityRef;
 import de.itemis.jee6.jee6.History;
@@ -18,6 +21,37 @@ import de.itemis.jee6.jee6.Timestamp;
 
 public class DslJavaValidator extends AbstractDslJavaValidator
 {
+	private final static Set<String> invalidNames = new HashSet<String>();
+
+	static
+	{
+		invalidNames.add("title");
+		invalidNames.add("number");
+		invalidNames.add("integer");
+		invalidNames.add("order");
+		invalidNames.add("create");
+		invalidNames.add("update");
+		invalidNames.add("insert");
+	}
+
+	@Check
+	public void checkInvalidName(final Entity attr)
+	{
+		if (invalidNames.contains(attr.getName()))
+		{
+			error("Dieser Attributname darf nicht verwendet werden!", Jee6Package.Literals.ENTITY__NAME);
+		}
+	}
+
+	@Check
+	public void checkInvalidName(final Attribute attr)
+	{
+		if (invalidNames.contains(attr.getName()))
+		{
+			error("Dieser Attributname darf nicht verwendet werden!", Jee6Package.Literals.ATTRIBUTE__NAME);
+		}
+	}
+	
 	@Check
 	public void checkContextPath(Model model)
 	{

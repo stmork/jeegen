@@ -54,8 +54,9 @@ Boolean isUi(Table t) :
 Boolean isUi(Entity e) :
 	true;
 
-List[Entity] getUiEntities(Process p) :
-	p.entities.select(e|isUi(e));
+Set[Entity] getUiEntities(Process p) :
+//	p.entities.select(e|isUi(e));
+	JAVA de.itemis.jee6.generator.ext.ExtensionHelper.getUiEntities(de.itemis.jee6.jee6.Process);
 
 private List[History] getHistory(List[Attribute] a) :
 	a.typeSelect(History);
@@ -64,10 +65,13 @@ cached Set[EntityRef] getManyEntites(List[Attribute] a) :
 	a.typeSelect(EntityRef).select(e|isMany(e));
 
 cached Set[Entity] getManyEntitiesWithHistory(List[Entity] entities): 
-	getManyEntites(entities.types).type.union(getHistory(entities.types).type);
+//	getManyEntites(entities.types).type.union(getHistory(entities.types).type);
+	JAVA de.itemis.jee6.generator.ext.ExtensionHelper.getManyEntities(java.util.List);
+
 
 Set[Entity] getEntitiesWithHistory(List[Entity] entities) :
-	entities.union(getHistory(entities.types).type).union(getManyEntites(entities.types).type).sortBy(e|e.name);
+//	entities.union(getHistory(entities.types).type).union(getManyEntites(entities.types).type);
+	JAVA de.itemis.jee6.generator.ext.ExtensionHelper.getManyEntities(java.util.List);
 
 private Boolean isListAttribute(Text t) :
 	!t.transient;
