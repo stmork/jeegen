@@ -46,9 +46,7 @@
 «ELSE»
 									value="#{«handlerUri(p)».«nameOf()».«nameOf(id)» == null ? msg.create : msg.save}" />
 «ENDIF»
-«REM»
-							<h:commandButton action="#{«handlerUri(p)».back()}" value="#{msg.back}"/>
-«ENDREM»
+							<h:commandButton action="#{«handlerUri(p)».«backEntity()»}" value="#{msg.back}"/>
 						</td>
 					</tr>
 «LET getManyEntites(types) AS manyEntities»
