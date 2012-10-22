@@ -139,12 +139,20 @@ entity EntityEntry
 
 entity Startup
 {
+	Text                   subject;
+	Email                  mail;
+	Int                    integerEntry;
+	Number                 numberEntry;
+	Clob                   clobEntry;
+	Blob                   blobEntry;
+	Boolean                active;
+	
 	Timestamp auto         creation;
 	Timestamp update       changed;
 	Timestamp              timestamp1;
 	Timestamp              timestamp2;
 	Date                   dateElement;
-	Text                   subject;
+
 	History HistoryEntry   history;
 	Entity  EntityEntry [] entities; 
 }

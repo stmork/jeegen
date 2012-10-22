@@ -77,7 +77,7 @@
 «LET getListAttributes() AS attributes»
 «IF attributes.size > 0»
 «ENDIF»
-			<h:dataTable
+			<h:dataTable rendered="#{!empty «handlerUri(p)».«uiList()»}"
 					value="#{«handlerUri(p)».«uiList()»}" var="«nameOf(this)»"
 					styleClass="list" rowClasses="odd,even" columnClasses="«FOREACH attributes AS attr SEPARATOR ","»«getClass(attr)»«ENDFOREACH»,command,command,command">
 «FOREACH attributes AS attr»
@@ -97,7 +97,7 @@
 «IF attributes.size > 0»
 «ENDIF»
 			<h:form>
-				<h:dataTable
+				<h:dataTable rendered="#{!empty «handlerUri(p)».«uiList()»}"
 						value="#{«handlerUri(p)».«uiList()»}" var="«nameOf(this)»"
 						styleClass="list" rowClasses="odd,even" columnClasses="«FOREACH attributes AS attr SEPARATOR ","»«getClass(attr)»«ENDFOREACH»,command,command,command">
 	«FOREACH attributes AS attr»
