@@ -52,7 +52,7 @@
 «ENDIF»
 					<h:column>
 						<f:facet name="header" />
-						<h:commandLink rendered="#{«handlerUri(p)».«isEmpty(this)»(«nameOf(this)»)}"
+						<h:commandLink
 							value="#{msg.remove}"
 							action="#{«handlerUri(p)».«removeEntity()»(«nameOf(this)»)}" />
 					</h:column>
@@ -122,7 +122,7 @@
 «ENDIF»
 					<h:column>
 						<f:facet name="header" />
-						<h:commandLink rendered="#{«handlerUri(p)».«isEmpty(this)»(«nameOf(this)»)}"
+						<h:commandLink
 							value="#{msg.remove}"
 							action="#{«handlerUri(p)».«removeEntity()»(«nameOf(this)»)}" />
 					</h:column>

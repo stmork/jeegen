@@ -177,6 +177,40 @@ options AddressType
 	"address.work",
 	"address.home"
 } 
+options Member editable
+{
+	Text id login;
+	Text firstname;
+	Text lastname;
+	Text name transient;
+	Entity Address[] addresses;
+	Date birth;
+}
+
+entity Book {
+	Text id isbn;
+	Text book_title;
+	Text author;
+	Entity Copy[] copies;
+}
+
+entity Copy {
+	Timestamp auto created;
+	Boolean active;
+	History Lending lending;
+}
+
+entity Lending {
+	Option Member member;
+	Date lending_date;
+	Date return_date;
+}
+
+process Booking
+{
+	Book, Member
+}
+
 
 process Inventory roles "controlling","it-support","vorstand"
 {
