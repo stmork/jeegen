@@ -52,7 +52,7 @@
 «ENDIF»
 					<h:column>
 						<f:facet name="header" />
-						<h:commandLink
+						<h:commandLink rendered="#{«handlerUri(p)».«isEmpty(this)»(«nameOf(this)»)}"
 							value="#{msg.remove}"
 							action="#{«handlerUri(p)».«removeEntity()»(«nameOf(this)»)}" />
 					</h:column>
@@ -112,9 +112,17 @@
 							value="#{msg.change}"
 							action="#{«handlerUri(p)».«changeEntity()»(«nameOf(this)»)}" />
 					</h:column>
+«IF getHistory() != null»
 					<h:column>
 						<f:facet name="header" />
 						<h:commandLink
+							value="#{msg.history}"
+							action="#{«handlerUri(p)».«editEntity(getHistory().type)»(«nameOf(this)»)}" />
+					</h:column>
+«ENDIF»
+					<h:column>
+						<f:facet name="header" />
+						<h:commandLink rendered="#{«handlerUri(p)».«isEmpty(this)»(«nameOf(this)»)}"
 							value="#{msg.remove}"
 							action="#{«handlerUri(p)».«removeEntity()»(«nameOf(this)»)}" />
 					</h:column>

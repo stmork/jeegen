@@ -175,7 +175,7 @@
 	<ui:define name="content">
 		<h:messages layout="table" styleClass="error" />
 		<ul>
-«FOREACH entities AS entity»
+«FOREACH this.entities AS entity»
 			<li><h:link value="#{msg['«prefixOf()».«prefixOf(entity)».title']}" outcome="«index(entity)»"/></li>
 «ENDFOREACH»
 		</ul>

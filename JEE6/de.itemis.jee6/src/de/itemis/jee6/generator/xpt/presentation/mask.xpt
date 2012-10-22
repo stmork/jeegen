@@ -22,9 +22,6 @@
 		<div class="box">
 			<h:form id="«prefixOf()»">
 				<table>
-					<tr>
-						<td colspan="2"><h:commandButton action="#{«handlerUri(p)».back()}" value="#{msg.back}"/></td>
-					</tr>
 «FOREACH attributes AS attr»
 					<tr>
 «IF debug()»
@@ -41,13 +38,17 @@
 						<td/>
 «ENDIF»
 						<td/>
-						<td><h:commandButton
-							action="#{«handlerUri(p)».«saveEntity()»}"
+						<td>
+							<h:commandButton
+									action="#{«handlerUri(p)».«saveEntity()»}"
 «IF id == null»
-							value="#{«handlerUri(p)».«nameOf()».id == 0 ? msg.create : msg.save}" />
+									value="#{«handlerUri(p)».«nameOf()».id == 0 ? msg.create : msg.save}" />
 «ELSE»
-							value="#{«handlerUri(p)».«nameOf()».«nameOf(id)» == null ? msg.create : msg.save}" />
+									value="#{«handlerUri(p)».«nameOf()».«nameOf(id)» == null ? msg.create : msg.save}" />
 «ENDIF»
+«REM»
+							<h:commandButton action="#{«handlerUri(p)».back()}" value="#{msg.back}"/>
+«ENDREM»
 						</td>
 					</tr>
 «LET getManyEntites(types) AS manyEntities»

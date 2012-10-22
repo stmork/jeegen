@@ -137,7 +137,7 @@ Workflow
 
 	<target name="generate">
 		<echo message="${eclipse.home}"/>
-		<java classname="org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher" classpathref="generate.classpath" fork="true">
+		<java classname="org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher" classpathref="generate.classpath" fork="true" failonerror="true">
 			<arg value="${src-path}/«getWorkflow()»"/>
 		</java>
 	</target>
@@ -194,6 +194,8 @@ Workflow
 		<delete file="${jboss.deploy}/${war}" />
 		<delete file="${glassfish.deploy}/${war}" />
 	</target>
+	
+	<target name="round-trip" depends="generate,deploy"/>
 </project>
 «ENDFILE»
 «ENDDEFINE»
