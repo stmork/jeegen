@@ -621,7 +621,8 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resourc
 	/**
 	 * The default outcome of an URI.
 	 */
-	protected static final String       NAV_INDEX = "«index()»";
+	protected static final String       NAV_INDEX    = "«index()»";
+	protected static final String       NAV_REDIRECT = "?faces-redirect=true";
 
 	/**
 	 * The empty marker for selection boxes.
