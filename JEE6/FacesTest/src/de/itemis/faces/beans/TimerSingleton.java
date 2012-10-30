@@ -32,7 +32,7 @@ public class TimerSingleton
 	@Resource
 	javax.ejb.TimerService timerService;
 
-	@Schedule(minute="*/15",hour="*",persistent=false)
+	@Schedule(minute="*/15",hour="7-20",persistent=false)
 	public void timer()
 	{
 		log.debug("  =time()");

@@ -80,6 +80,7 @@
 «LET errorFilename(this, locale) AS filename»
 «FILE filename IMPL»
 «ENDFILE»
+«bundleUpdate(filename, "error.title", "General application fault!")»
 «bundleUpdate(filename, "not-found.title", "Resource not found!")»
 «bundleUpdate(filename, "code404.title", "Four oh four!")»
 «bundleUpdate(filename, "code404.message", "The requested document was not found!")»
