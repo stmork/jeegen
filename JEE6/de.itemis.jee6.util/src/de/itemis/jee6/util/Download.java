@@ -33,6 +33,7 @@ public class Download implements Serializable
 	private final static Log log = LogFactory.getLog(Download.class);
 	private final URL url;
 	private       String mimeType = null;
+	private final static byte [] empty = new byte[0];
 
 	/**
 	 * The constructor specifies the URL.
@@ -95,7 +96,7 @@ public class Download implements Serializable
 					if (read < 0)
 					{
 						log.error("Read error loading " + getUrl());
-						return null;
+						return empty;
 					}
 					else
 					{
