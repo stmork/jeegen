@@ -3,6 +3,7 @@
  */
 package de.itemis.jee6.util;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Hashtable;
@@ -13,6 +14,7 @@ import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
+import javax.naming.directory.BasicAttribute;
 import javax.naming.directory.DirContext;
 import javax.naming.directory.InitialDirContext;
 import javax.naming.directory.SearchResult;
@@ -27,7 +29,7 @@ abstract public class AbstractLdapConnector
 {
 	private final static Log log = LogFactory.getLog(AbstractLdapConnector.class);
 	private final String dn;
-	private DirContext ctx;
+	protected DirContext ctx;
 
 	/**
 	 * This constructor initializes a connection to a LDAP server. If the user DN and the
@@ -96,6 +98,7 @@ abstract public class AbstractLdapConnector
 	 * Diese Methode baut eine komplette DN zusammen. Die Basis-DN darf nicht angegeben werden,
 	 * da sie ja schon mit einer Instanz dieser Klasse verknüpft ist. Es wird also nur eine Sub-DN
 	 * mit angegeben. 
+	 * 
 	 * @param partDn Die Sub-DN
 	 * @return Die komplette DN.
 	 */
@@ -218,6 +221,97 @@ abstract public class AbstractLdapConnector
 			set = getValues(attributes, "memberUid");
 		}
 		return set;
+	}
+
+	/**
+	 * This method sets an {@link Attribute} with the specified key to the given
+	 * value. If the {@link Attribute} doesn't exist the {@link Attribute} is
+	 * created. If existing it will be modified. The {@link Attribute} is not
+	 * transferred to the LDAP-server. This will be done using the
+	 * {@link AbstractLdapConnector#modify(String, Attributes)} method.
+	 * 
+	 * @param attributes The {@link Attributes}.
+	 * @param key The key of the {@link Attribute} to change.
+	 * @param value The value to use.
+	 */
+	public static void setAttribute(Attributes attributes, final String key, final Object value)
+	{
+		Attribute attribute = attributes.get(key);
+
+		if (attribute == null)
+		{
+			if (value != null)
+			{
+				attribute = new BasicAttribute(key);
+				attributes.put(attribute);
+			}
+		}
+		else
+		{
+			attribute.clear();
+		}
+		if (value != null)
+		{
+			attribute.add(value);
+		}
+	}
+
+	/**
+	 * This method sets an {@link Attribute} with the specified key to the given
+	 * {@link String}. The {@link String} ist converted into an UTF-8 byte sequence.
+	 * If the {@link Attribute} doesn't exist the {@link Attribute} is
+	 * created. If existing it will be modified. The {@link Attribute} is not
+	 * transferred to the LDAP-server. This will be done using the
+	 * {@link AbstractLdapConnector#modify(String, Attributes)} method.
+	 * 
+	 * @param attributes The {@link Attributes}.
+	 * @param key The key of the {@link Attribute} to change.
+	 * @param value The value to use.
+	 * @throws UnsupportedEncodingException
+	 */
+	public static void setAttribute(final Attributes attributes, final String key, final String value) throws UnsupportedEncodingException
+	{
+		setAttribute(attributes, key, value != null ? value.getBytes("UTF-8") : null);
+	}
+
+	/**
+	 * This method creates a directory entry using the given {@link Attributes}.
+	 * 
+	 * @param partDn The partial DN to create.
+	 * @param attrs The {@link Attributes} to fill in.
+	 * @throws NamingException
+	 * @see AbstractLdapConnector#getSearchBase(String)
+	 */
+	public void create(final String partDn, final Attributes attrs) throws NamingException
+	{
+		ctx.bind(getSearchBase(partDn), null, attrs);
+	}
+
+	/**
+	 * This method modifies the given {@link Attributes} inside the given partial DN. Only the
+	 * given {@link Attributes} are modified. The other {@link Attributes} inside the DN are left
+	 * unmodified.
+	 * 
+	 * @param partDn The partial DN to modify.
+	 * @param attributes The modified {@link Attributes}.
+	 * @throws NamingException
+	 * @see AbstractLdapConnector#getSearchBase(String)
+	 */
+	public void modify(final String partDn, final Attributes attributes) throws NamingException
+	{
+		ctx.modifyAttributes(getSearchBase(partDn), DirContext.REPLACE_ATTRIBUTE, attributes);
+	}
+
+	/**
+	 * This method deletes a directory entry from the LDAP server.
+	 * 
+	 * @param partDn The partial DN to delete.
+	 * @throws NamingException
+	 * @see AbstractLdapConnector#getSearchBase(String)
+	 */
+	public void delete(final String partDn) throws NamingException
+	{
+		ctx.unbind(getSearchBase(partDn));
 	}
 
 	/**
