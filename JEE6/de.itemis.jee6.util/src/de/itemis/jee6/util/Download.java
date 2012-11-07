@@ -35,6 +35,18 @@ public class Download implements Serializable
 	private final URL url;
 	private       String mimeType = null;
 	private final static byte [] empty = new byte[0];
+	private       int timeout = 1000;
+
+	/**
+	 * The constructor specifies the URL.
+	 * @param url The URL for downloading.
+	 * @throws MalformedURLException Thrown if the URL is malformed.
+	 */
+	public Download(final String url, final int timeout) throws MalformedURLException
+	{
+		this(url);
+		this.timeout = timeout;
+	}
 
 	/**
 	 * The constructor specifies the URL.
@@ -78,7 +90,7 @@ public class Download implements Serializable
 
 		LogUtil.trace(log, ">download(%s)", url);
 		final URLConnection connection = url.openConnection();
-		connection.setReadTimeout(1000);
+		connection.setReadTimeout(getTimeout());
 
 		try
 		{
@@ -159,5 +171,13 @@ public class Download implements Serializable
 	public String getUrl()
 	{
 		return url.toString();
+	}
+
+	public int getTimeout() {
+		return timeout;
+	}
+
+	public void setTimeout(int timeout) {
+		this.timeout = timeout;
 	}
 }
