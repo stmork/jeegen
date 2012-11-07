@@ -5,6 +5,7 @@ package de.itemis.jee6.util;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -103,9 +104,21 @@ public class Download implements Serializable
 						already += read;
 					}
 				}
-				mimeType = connection.getContentType();
-				return array;
 			}
+			else
+			{
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+				array = new byte[1024];
+				int rLen;
+				
+				while ((rLen = is.read(array, 0, array.length)) >= 0)
+				{
+					baos.write(array, 0, rLen);
+				}
+				array = baos.toByteArray();
+			}
+			mimeType = connection.getContentType();
 		}
 		finally
 		{
