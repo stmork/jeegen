@@ -610,8 +610,14 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resourc
 {
 	private static final long serialVersionUID    = 1L;
 	private static final Log  log                 = LogFactory.getLog(AbstractHandler.class);
-	private ResourceBundle messages;
-	private ResourceBundle errors;
+	private static final ResourceBundle messages;
+	private static final ResourceBundle errors;
+
+	/**
+	 * A flag representing if this application is running in production mode. This value is retrieved
+	 * from the javax.faces.PROJECT_STAGE context parameter.
+	 */
+	protected static final boolean production;
 
 	/**
 	 * A {@link NumberFormat} instance representing the money formatting.
@@ -629,12 +635,6 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resourc
 	 */
 	protected static final String       NULL      = "[NULL]";
 
-	/**
-	 * A flag representing if this application is running in production mode. This value is retrieved
-	 * from the javax.faces.PROJECT_STAGE context parameter.
-	 */
-	protected boolean production;
-
 «IF converterList.size > 0»
 	/**
 	 * The options DAO bean nedded for converter operations.
@@ -646,16 +646,15 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resourc
 	/**
 	 * This method initializes the resource bundles.
 	 */
-	@PostConstruct
-	public void getBundles()
+	static
 	{
-		log.debug(">getBundles()");
+		log.info("Initializing resource bundles...");
 		FacesContext context = FacesContext.getCurrentInstance();
 		messages   = context.getApplication().getResourceBundle(context, BUNDLE_MESSAGES);
 		errors     = context.getApplication().getResourceBundle(context, BUNDLE_ERRORS);
 		production = context.getApplication().getProjectStage() == ProjectStage.Production;
 
-		if (log.isDebugEnabled())
+		if (log.isTraceEnabled())
 		{
 			ExternalContext external = context.getExternalContext();
 			log.trace(" default: " + Locale.getDefault());
