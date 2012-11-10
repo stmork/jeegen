@@ -17,14 +17,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import sun.misc.BASE64Decoder;
+import de.itemis.jee6.util.Base64;
 import de.itemis.jee6.util.LogUtil;
 
 @WebFilter(urlPatterns = {"/*"})
 public class AutoLoginFilter implements Filter
 {
 	private static final Log  log    = LogFactory.getLog(AutoLoginFilter.class);
-	private static final BASE64Decoder decoder = new BASE64Decoder();
 
 	@Override
 	public void init(FilterConfig arg0) throws ServletException
@@ -45,18 +44,18 @@ public class AutoLoginFilter implements Filter
 
 		if (request instanceof HttpServletRequest)
 		{
-			HttpServletRequest r = (HttpServletRequest)request;
-			
-	        String basic = r.getHeader("authorization"); 
-	        LogUtil.trace(log, " URI: %s", r.getRequestURI());
+			final HttpServletRequest r = (HttpServletRequest)request;
+			final String basic = r.getHeader("authorization"); 
+
+			LogUtil.trace(log, " URI: %s", r.getRequestURI());
 	        LogUtil.trace(log, " URL: %s", r.getRequestURL());
 	        if ((basic != null) && basic.startsWith("Basic "))
 	        {
-	        	String principal = r.getRemoteUser();
+	        	final String principal = r.getRemoteUser();
 	            if (principal == null)
 	            {
-	            	byte [] text = decoder.decodeBuffer(basic.substring(6));
-	                String [] userdata = new String (text, request.getCharacterEncoding()).split(":");
+	            	final byte [] text = Base64.decode(basic.substring(6));
+	                final String [] userdata = new String (text, request.getCharacterEncoding()).split(":");
 	                final String user = userdata[0];
 	
 	                LogUtil.info(log, " Automatically logging in user %s.", user);
