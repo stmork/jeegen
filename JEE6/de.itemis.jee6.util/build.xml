@@ -137,6 +137,7 @@
 			<formatter type="xml"/>
 			<jvmarg value="-Demma.coverage.out.file=coverage.emma" />
 			<jvmarg value="-Demma.coverage.out.merge=true" />
+			<test name="de.itemis.jee6.test.Base64Test"/>
 			<test name="de.itemis.jee6.test.UtilTest"/>
 			<test name="de.itemis.jee6.test.ErrorInfoTest"/>
 			<test name="de.itemis.jee6.test.FilterTest"/>
