@@ -16,7 +16,7 @@ public class Base64 {
 
     public static String encode(final String input) throws UnsupportedEncodingException
     {
-    	return encode(input.getBytes("UTF-8"));
+    	return encode(input.getBytes("ISO8859-1"));
     }
 
     /**
