@@ -11,6 +11,8 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.ejb.Lock;
+import javax.ejb.LockType;
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
@@ -65,6 +67,7 @@ public class TimerSingleton
 	 * @param timer
 	 */
 	@Timeout
+	@Lock(LockType.WRITE)
 	public void timeout(final Timer timer)
 	{
 		final Object object = timer.getInfo();
@@ -92,6 +95,7 @@ public class TimerSingleton
 	 * @param cam The cam parameter needed for the refresh header attribute.
 	 * @throws IOException
 	 */
+	@Lock(LockType.READ)
 	public void push(final HttpServletResponse response, final String requestURI, final String cam) throws IOException
 	{
 		if (cam != null)

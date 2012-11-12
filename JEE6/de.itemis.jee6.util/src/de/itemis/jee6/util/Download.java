@@ -33,8 +33,8 @@ public class Download implements Serializable
 
 	private final static Log log = LogFactory.getLog(Download.class);
 	private final URL url;
-	private       String mimeType = null;
 	private final static byte [] empty = new byte[0];
+	private       String mimeType = null;
 	private       int timeout = 1000;
 
 	/**
@@ -85,7 +85,7 @@ public class Download implements Serializable
 	public byte[] downloadArray() throws IOException
     {
 		InputStream is = null;
-		byte [] array = null;
+		byte [] array = empty;
 		mimeType = null;
 
 		LogUtil.trace(log, ">download(%s)", url);
@@ -121,7 +121,7 @@ public class Download implements Serializable
 			{
 				ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-				array = new byte[1024];
+				array = new byte[32768];
 				int rLen;
 				
 				while ((rLen = is.read(array, 0, array.length)) >= 0)
@@ -130,7 +130,7 @@ public class Download implements Serializable
 				}
 				array = baos.toByteArray();
 			}
-			mimeType = connection.getContentType();
+			mimeType = array.length > 0 ? connection.getContentType() : null;
 		}
 		finally
 		{
@@ -173,11 +173,13 @@ public class Download implements Serializable
 		return url.toString();
 	}
 
-	public int getTimeout() {
+	public int getTimeout()
+	{
 		return timeout;
 	}
 
-	public void setTimeout(int timeout) {
+	public void setTimeout(int timeout)
+	{
 		this.timeout = timeout;
 	}
 }
