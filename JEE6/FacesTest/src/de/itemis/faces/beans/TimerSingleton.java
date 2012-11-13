@@ -11,6 +11,7 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.ejb.Asynchronous;
 import javax.ejb.Lock;
 import javax.ejb.LockType;
 import javax.ejb.Schedule;
@@ -67,7 +68,6 @@ public class TimerSingleton
 	 * @param timer
 	 */
 	@Timeout
-	@Lock(LockType.WRITE)
 	public void timeout(final Timer timer)
 	{
 		final Object object = timer.getInfo();
@@ -75,15 +75,21 @@ public class TimerSingleton
 		if (object instanceof DownloadInfo)
 		{
 			final DownloadInfo info = (DownloadInfo)object;
-			
-			try
-			{
-				info.update();
-			}
-			catch (IOException e)
-			{
-//				log.error(info.toString() + ": " + e);
-			}
+
+			update(info);
+		}
+	}
+
+	@Asynchronous
+	private void update(final DownloadInfo info)
+	{
+		try
+		{
+			info.update();
+		}
+		catch (IOException e)
+		{
+//			log.error(info.toString() + ": " + e);
 		}
 	}
 
