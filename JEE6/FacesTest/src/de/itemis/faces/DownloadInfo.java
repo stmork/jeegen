@@ -3,6 +3,7 @@ package de.itemis.faces;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.MalformedURLException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.ejb.TimerConfig;
 import javax.ejb.TimerService;
@@ -25,10 +26,11 @@ public class DownloadInfo implements Serializable
 	private static final long serialVersionUID = 1L;
 	private final static Log log = LogFactory.getLog(DownloadInfo.class);
 
-	private final Download download;
-	private final int      refresh;
-	private byte []        array;
-	private String         mimeType;
+	private final AtomicBoolean lock = new AtomicBoolean();
+	private final Download      download;
+	private final int           refresh;
+	private byte []             array;
+	private String              mimeType;
 
 	/**
 	 * This constructor prepares a timer for periodic image download.
@@ -58,15 +60,25 @@ public class DownloadInfo implements Serializable
 	 */
 	public void update() throws IOException
 	{
-		final byte [] array = download.downloadArray();
-
-		if (array != null)
+		try
 		{
-			synchronized(download)
+			if (lock.compareAndSet(false, true))
 			{
-				this.array = array;
-				this.mimeType = download.getMimeType();
+				final byte [] array = download.downloadArray();
+		
+				if (array.length > 0)
+				{
+					synchronized(download)
+					{
+						this.array = array;
+						this.mimeType = download.getMimeType();
+					}
+				}
 			}
+		}
+		finally
+		{
+			lock.set(false);
 		}
 	}
 
