@@ -4,14 +4,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
-    <!-- ===== Created by JEE6-Generator $Id$ ===== -->
-    <!-- == Copyright (C) 2012  itemis AG == -->
+
     <ui:composition template="/layout.xhtml">
         <ui:define name="title">#{msg['admin.userinfo.title']}</ui:define>
         <ui:define name="content">
             <h:messages layout="table" styleClass="error"/>
-            <!-- === generated mask === -->
-            <!-- process: Admin entity: UserInfo -->
+
             <div class="box">
                 <h:form id="userinfo">
                     <table>
@@ -55,8 +53,7 @@
                     </table>
                 </h:form>
             </div>
-            <!-- === generated list === -->
-            <!-- process: Admin entity: UserInfo -->
+
             <h:form id="userinfo_list">
                 <h:dataTable
                     columnClasses="left,left,left,center,center,command,command,command"

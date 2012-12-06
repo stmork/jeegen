@@ -55,10 +55,11 @@ public class AutoLoginFilter implements Filter
 	            if (principal == null)
 	            {
 	            	final byte [] text = Base64.decode(basic.substring(6));
-	                final String [] userdata = new String (text, request.getCharacterEncoding()).split(":");
+	            	final String encoding = request.getCharacterEncoding();
+	                final String [] userdata = new String (text, encoding != null ? encoding : "UTF-8").split(":");
 	                final String user = userdata[0];
 	
-	                LogUtil.info(log, " Automatically logging in user %s.", user);
+	                LogUtil.trace(log, " Automatically logging in user %s.", user);
 	            	r.login(userdata[0], userdata[1]);
 	//            	HttpServletResponse resp = (HttpServletResponse)response;
 	//            	resp.sendRedirect(r.getRequestURL().toString());

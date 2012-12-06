@@ -70,4 +70,14 @@ public class SessionController extends AbstractHandler
 		}
 		return login != null ? dao.ensureUserInfo(login).getName() : "<???>";
 	}
+
+	/**
+	 * This method returns an caught exception.
+	 *
+	 * @return The caught exception.
+	 */
+	public Exception getException() {
+		return (Exception) getExternalContext().getRequestMap().get(
+				"javax.servlet.error.exception");
+	}
 }
