@@ -76,20 +76,14 @@ public class TimerSingleton
 		{
 			final DownloadInfo info = (DownloadInfo)object;
 
-			update(info);
-		}
-	}
-
-	@Asynchronous
-	private void update(final DownloadInfo info)
-	{
-		try
-		{
-			info.update();
-		}
-		catch (IOException e)
-		{
-//			log.error(info.toString() + ": " + e);
+			try
+			{
+				info.update();
+			}
+			catch (IOException e)
+			{
+//				log.error(info.toString() + ": " + e);
+			}
 		}
 	}
 

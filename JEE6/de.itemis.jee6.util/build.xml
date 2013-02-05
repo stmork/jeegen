@@ -1,4 +1,4 @@
-<project name="JEE6 Utilities" default="package">
+<project name="JEE6 Utilities" default="package"  xmlns:jacoco="antlib:org.jacoco.ant">
 	<property file="${user.home}/.jee6.properties" />
 	<property file="${basedir}/build.properties"/>
 
@@ -56,6 +56,10 @@
 	<taskdef name="junit" classname="org.apache.tools.ant.taskdefs.optional.junit.JUnitTask" classpathref="runtime.path"/>
 	<taskdef resource="emma_ant.properties" classpathref="runtime.path" />
 
+	<taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+		<classpath path="${lib-path}/jacocoant.jar"/>
+	</taskdef>
+	 
 	<!-- ==================================================== -->
 	<!--              Setting up build targets                -->
 	<!-- ==================================================== -->
@@ -69,6 +73,7 @@
 			<fileset dir="." includes="TEST-*.txt"/>
 			<fileset dir="." includes="coverage.*"/>
 			<fileset dir="." includes="*.emma"/>
+			<fileset dir="." includes="*.exec"/>
 		</delete>
 	</target>
 
@@ -119,46 +124,48 @@
 	<!--              Setting up runtime targets              -->
 	<!-- ==================================================== -->
 
-	<target name="instr" depends="compile" if="emma.enabled">
+	<target name="instr" depends="compile">
 		<mkdir dir="${instr-path}"/>
-		<emma>
-			<instr instrpathref="instr.classpath" destdir="${instr-path}" metadatafile="metadata.emma" merge="true">
-				<filter excludes="org.*,com.*,edu.*,junit.*,gnu.io.*,java*"/>
-				<filter excludes="de.itemis.jee6.util.Profiler*"/>
-				<filter excludes="de.itemis.jee6.test.*"/>
-			</instr>
-		</emma>
+	    <jacoco:instrument destdir="${instr-path}">
+	        <fileset dir="${bin-path}" includes="**/*.class"/>
+	    </jacoco:instrument>
 	</target>
-
+	
 	<target name="test" depends="compile">
-		<taskdef resource="emma_ant.properties" classpathref="emma.lib" />
-		<junit printsummary="on" fork="on" haltonerror="yes" haltonfailure="yes">
-			<classpath refid="emma.classpath" />
-			<formatter type="xml"/>
-			<jvmarg value="-Demma.coverage.out.file=coverage.emma" />
-			<jvmarg value="-Demma.coverage.out.merge=true" />
-			<test name="de.itemis.jee6.test.Base64Test"/>
-			<test name="de.itemis.jee6.test.UtilTest"/>
-			<test name="de.itemis.jee6.test.ErrorInfoTest"/>
-			<test name="de.itemis.jee6.test.FilterTest"/>
-			<test name="de.itemis.jee6.test.DownloadTest"/>
-			<test name="de.itemis.jee6.test.ValidatorTest"/>
-			<test name="de.itemis.jee6.test.LdapConnectionTest"/>
-			<test name="de.itemis.jee6.test.LdapTest"/>
-		</junit>
+		<jacoco:coverage>
+		    <junit fork="true" forkmode="once" haltonerror="yes" haltonfailure="yes">
+				<classpath refid="emma.classpath" />
+				<formatter type="xml"/>
+				<test name="de.itemis.jee6.test.Base64Test"/>
+				<test name="de.itemis.jee6.test.UtilTest"/>
+				<test name="de.itemis.jee6.test.ErrorInfoTest"/>
+				<test name="de.itemis.jee6.test.FilterTest"/>
+				<test name="de.itemis.jee6.test.DownloadTest"/>
+				<test name="de.itemis.jee6.test.ValidatorTest"/>
+				<test name="de.itemis.jee6.test.LdapConnectionTest"/>
+				<test name="de.itemis.jee6.test.LdapTest"/>
+		    </junit>
+		</jacoco:coverage>
 	</target>
 
-	<target name="emma" depends="instr,test">
-		<taskdef resource="emma_ant.properties" classpathref="emma.lib" />
-		<emma>
-			<report sourcepath="${src-path}:${tst-path}:${main-project}/${src-path}:${main-project}/${src-gen-path}">
-				<fileset dir=".">
-					<include name="*.emma"/>
-				</fileset>  
-				<txt  outfile="coverage.txt" />
-				<xml  outfile="coverage.xml" />
-				<html outfile="coverage.html" />
-			</report>  
-		</emma>
-	</target>  
+	<target name="jacoco" depends="instr,test">
+		<jacoco:report>
+			<executiondata>
+				<file file="jacoco.exec"/>
+			</executiondata>
+   
+			<structure name="Example Project">
+				<classfiles>
+					<fileset dir="${bin-path}"/>
+				</classfiles>
+				<sourcefiles>
+					<fileset dir="${src-path}"/>
+					<fileset dir="${tst-path}"/>
+				</sourcefiles>
+			</structure>
+			                       
+			<html destdir="${coverage-path}"/>
+			<xml destfile="coverage.xml"/>
+		</jacoco:report>
+	</target>
 </project>
