@@ -54,7 +54,6 @@
 	<!-- ==================================================== -->
 
 	<taskdef name="junit" classname="org.apache.tools.ant.taskdefs.optional.junit.JUnitTask" classpathref="runtime.path"/>
-	<taskdef resource="emma_ant.properties" classpathref="runtime.path" />
 
 	<taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
 		<classpath path="${lib-path}/jacocoant.jar"/>
