@@ -14,8 +14,7 @@
 	<property name="jboss.deploy"  value="${jboss.home}/standalone/deployments"/>
 
 	<property name="coverage-path" value="./coverage"/>	
-	<property name="instr-path"    value="./instr"/>	
-	<property name="emma.enabled"  value="true"/>
+	<property name="instr-path"    value="./instr"/>
 
 	<!-- ==================================================== -->
 	<!--              Setting up classpaths                   -->
@@ -33,7 +32,7 @@
 		<path refid="compile.path"/>
 	</path>
 
-	<path id="emma.lib">
+	<path id="coverage.lib">
 		<fileset dir="${lib-path}">
 			<include name="**/emma*.jar"/>
 		</fileset>
@@ -43,7 +42,7 @@
 		<pathelement path="${bin-path}" />
 	</path>
 
-	<path id="emma.classpath">
+	<path id="coverage.classpath">
 		<pathelement location="${instr-path}" />  
 		<pathelement location="${bin-path}" />  
 		<path refid="runtime.path"/>
@@ -125,15 +124,15 @@
 
 	<target name="instr" depends="compile">
 		<mkdir dir="${instr-path}"/>
-	    <jacoco:instrument destdir="${instr-path}">
-	        <fileset dir="${bin-path}" includes="**/*.class"/>
-	    </jacoco:instrument>
+		<jacoco:instrument destdir="${instr-path}">
+			<fileset dir="${bin-path}" includes="**/*.class"/>
+		</jacoco:instrument>
 	</target>
 	
 	<target name="test" depends="compile">
 		<jacoco:coverage>
-		    <junit fork="true" forkmode="once" haltonerror="yes" haltonfailure="yes">
-				<classpath refid="emma.classpath" />
+		    <junit printsummary="true" fork="true" forkmode="once" haltonerror="yes" haltonfailure="yes">
+				<classpath refid="coverage.classpath" />
 				<formatter type="xml"/>
 				<test name="de.itemis.jee6.test.Base64Test"/>
 				<test name="de.itemis.jee6.test.UtilTest"/>
@@ -153,13 +152,15 @@
 				<file file="jacoco.exec"/>
 			</executiondata>
    
-			<structure name="Example Project">
+			<structure name="JEE6 Utilities">
 				<classfiles>
 					<fileset dir="${bin-path}"/>
 				</classfiles>
 				<sourcefiles>
-					<fileset dir="${src-path}"/>
-					<fileset dir="${tst-path}"/>
+					<fileset dir="${src-path}">
+						<exclude name="**/Profiler.*"/>
+						<exclude name="**/test/*.java"/>
+					</fileset>
 				</sourcefiles>
 			</structure>
 			                       
