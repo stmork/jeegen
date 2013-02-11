@@ -23,26 +23,26 @@ entity Address
 
 options UserInfo editable
 {
-	Text id           login;
-	Entity Address [] addresses;
-	Text              name;
-	Email             mail;
-	Date              birth;
-	Timestamp update  changed;
-	Blob              image;
+	Text id              login;
+	Entity Address []    addresses;
+	Text                 name;
+	Email                mail;
+	Date                 birth;
+	Timestamp update     changed;
+	Blob                 image;
 }
 
 entity HistoryEntry
 {
-	Timestamp auto creation;
-	Text           comment;
+	Timestamp auto         creation;
+	Text                   comment;
 }
 
 entity EntityEntry
 {
-	Timestamp auto creation;
-	Text           comment;
-	Option AddressOption addressOption;
+	Timestamp auto         creation;
+	Text                   comment;
+	Option AddressOption   addressOption;
 }
 
 entity Startup
