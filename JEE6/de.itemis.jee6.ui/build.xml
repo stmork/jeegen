@@ -78,7 +78,9 @@
 				<include name="resources/*.*"/>
 			</fileset>
 		</copy>
-		<javac srcdir="${src-path}:${src-gen-path}" destdir="${bin-path}" debug="true" includeantruntime="false">
+		<javac srcdir="${src-path}:${src-gen-path}" destdir="${bin-path}" debug="true"
+				includeantruntime="false"
+				source="6">
 			<classpath refid="generate.classpath"/>
 		</javac>
 	</target>
