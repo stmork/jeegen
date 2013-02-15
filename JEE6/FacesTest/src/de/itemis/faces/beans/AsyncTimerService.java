@@ -34,7 +34,7 @@ public class AsyncTimerService {
 	{
 		if (semaphore.compareAndSet(false, true))
 		{
-			log.debug("+++++++++syncMethod");
+			log.debug(">>>>>>>>>syncMethod");
 			try
 			{
 				Thread.sleep(27000L);
@@ -43,8 +43,12 @@ public class AsyncTimerService {
 			{
 				log.error(e.getMessage());
 			}
-			log.debug("---------syncMethod");
+			log.debug("<<<<<<<<<syncMethod");
 			semaphore.set(false);
+		}
+		else
+		{
+			log.debug("---------syncMethod");
 		}
 	}
 }
