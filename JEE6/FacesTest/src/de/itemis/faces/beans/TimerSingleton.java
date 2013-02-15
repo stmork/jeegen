@@ -35,6 +35,7 @@ public class TimerSingleton
 	javax.ejb.TimerService timerService;
 
 	@Schedule(minute="*/15",hour="7-20",persistent=false)
+	@Lock(LockType.READ)
 	public void timer()
 	{
 		log.debug("  =time()");
@@ -67,6 +68,7 @@ public class TimerSingleton
 	 * @param timer
 	 */
 	@Timeout
+	@Lock(LockType.READ)
 	public void timeout(final Timer timer)
 	{
 		final Object object = timer.getInfo();
