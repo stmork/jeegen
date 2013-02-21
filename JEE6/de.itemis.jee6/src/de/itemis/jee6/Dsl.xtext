@@ -12,7 +12,7 @@ Model:	'application' name=STRING 'context' path=STRING 'package' package=PACKAGE
 enum ProjectState : Development='development'|Integration='integration'|Productive='productive';
 
 Option:			(Persistence|Security|Mail|Locale|Param) ';';
-Security:		{Security}('security' 'domain' jaas=STRING)?;
+Security:		'security' 'domain' jaas=STRING (clustered?='clustered')?;
 Persistence:	'persistence' 'unit' persistence=STRING 'jndi' jndi=STRING (cacheable?='cacheable' )?;
 Mail:			'smtp' jndi=STRING;
 Locale:			'locale' language=STRING (country=STRING)? (home?='default')?;

@@ -202,6 +202,11 @@ log4j.appender.R.layout.ConversionPattern=%-5p %-30.30c{1} %x - %m%n
 «EXPAND utility::XmlHeader»
 «FOREACH getSecurityDomains() AS sd»
 	<security-domain>java:/jaas/«sd.jaas»</security-domain>
+«IF sd.clustered»
+	<valve>
+		<class-name>org.apache.catalina.authenticator.SingleSignOn</class-name>
+	</valve>
+«ENDIF»
 «ENDFOREACH»
 	<context-root>«path»</context-root>
 «FOREACH getMails() AS mail»
