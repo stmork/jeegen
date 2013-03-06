@@ -66,6 +66,7 @@
 		<delete dir="${bin-path}" />
 		<delete dir="${instr-path}" />
 		<delete dir="${coverage-path}" />
+		<delete dir="${doc-path}"/>
 		<delete>
 			<fileset dir="." includes="TEST-*.xml"/>
 			<fileset dir="." includes="TEST-*.txt"/>
