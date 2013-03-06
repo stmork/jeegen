@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.validation.CheckType;
 
 import de.itemis.jee6.jee6.Attribute;
 import de.itemis.jee6.jee6.Entity;
@@ -34,7 +35,7 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 		invalidNames.add("insert");
 	}
 
-	@Check
+	@Check(CheckType.FAST)
 	public void checkInvalidName(final Entity attr)
 	{
 		if (invalidNames.contains(attr.getName()))
@@ -43,7 +44,7 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 		}
 	}
 
-	@Check
+	@Check(CheckType.FAST)
 	public void checkInvalidName(final Attribute attr)
 	{
 		if (invalidNames.contains(attr.getName()))
@@ -52,7 +53,7 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 		}
 	}
 	
-	@Check
+	@Check(CheckType.FAST)
 	public void checkContextPath(Model model)
 	{
 		if (!model.getPath().startsWith("/"))
@@ -61,7 +62,7 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 		}
 	}
 	
-	@Check
+	@Check(CheckType.FAST)
 	public void checkHistory(Entity entity)
 	{
 		final List<History> histories = EcoreUtil2.typeSelect(entity.getTypes(), History.class);
@@ -98,7 +99,7 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 		}
 	}
 
-	@Check
+	@Check(CheckType.FAST)
 	public void checkManyEntities(Entity entity)
 	{
 		final List<EntityRef> entities = EcoreUtil2.typeSelect(entity.getTypes(), EntityRef.class);
@@ -126,7 +127,7 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 		}
 	}
 
-	@Check
+	@Check(CheckType.FAST)
 	public void checkText(Text text)
 	{
 		guard(text.isId());
@@ -150,7 +151,7 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 		}
 	}
 
-	@Check
+	@Check(CheckType.FAST)
 	public void checkTimestampAuto(Timestamp timestamp)
 	{
 		int prePersistCount = 0;
@@ -175,7 +176,7 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 	}
 	
 
-	@Check
+	@Check(CheckType.FAST)
 	public void checkTimestampUpdate(Timestamp timestamp)
 	{
 		int preUpdateCount = 0;
@@ -199,7 +200,7 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 		}
 	}
 
-	@Check
+	@Check(CheckType.FAST)
 	public void checkProcessRoles(Process process)
 	{
 		final Model model    = (Model)process.eContainer();
