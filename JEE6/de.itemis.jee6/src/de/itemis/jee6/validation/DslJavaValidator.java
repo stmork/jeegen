@@ -33,6 +33,7 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 		invalidNames.add("create");
 		invalidNames.add("update");
 		invalidNames.add("insert");
+		invalidNames.add("order");
 	}
 
 	@Check(CheckType.FAST)
