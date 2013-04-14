@@ -1,5 +1,5 @@
 «REM»
-«###»	Copyright (C) 2012 itemis AG
+«###»	Copyright (C) 2013 itemis AG
 «###»	$Id$
 «ENDREM»
 
@@ -974,7 +974,7 @@ import de.itemis.jee6.util.LogUtil;
 
 
 /**
- * This class initializes the purchasing application.
+ * This class initializes the web application application.
  */
 @ManagedBean(eager=true)
 @ApplicationScoped
@@ -1012,7 +1012,7 @@ import «fqTypeOf(enumeration)».«enumOf(enumeration)»;
 «ENDFOREACH»
 
 /**
- * This class initializes the purchasing application.
+ * This class initializes the web application application.
  */
 abstract public class «abstractApplicationController()» implements Serializable
 {

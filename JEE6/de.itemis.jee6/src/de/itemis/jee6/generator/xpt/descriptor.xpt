@@ -1,5 +1,5 @@
 «REM»
-«###»	Copyright (C) 2012 itemis AG
+«###»	Copyright (C) 2013 itemis AG
 «###»	$Id$
 «ENDREM»
 
@@ -7,6 +7,7 @@
 
 «EXTENSION de::itemis::jee6::generator::ext::model»
 «EXTENSION de::itemis::jee6::generator::ext::bundle»
+«EXTENSION de::itemis::jee6::generator::ext::utility»
 
 «DEFINE Main FOR Model»
 «EXPAND Persistence»
@@ -358,7 +359,7 @@ GlassFish Application Server 3.0 Servlet 3.0//EN"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
 	<!-- ===== Created by JEE6-Generator $Id$ ===== -->
-	<!-- == Copyright (C) 2012  itemis AG == -->
+	<!-- == Copyright (C) «year()»  itemis AG == -->
 	<ui:composition template="/layout.xhtml">
 		<ui:define name="title">#{err['error.title']}</ui:define>
 		<ui:define name="content">
@@ -378,7 +379,7 @@ GlassFish Application Server 3.0 Servlet 3.0//EN"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
 	<!-- ===== Created by JEE6-Generator $Id$ ===== -->
-	<!-- == Copyright (C) 2012  itemis AG == -->
+	<!-- == Copyright (C) «year()»  itemis AG == -->
 	<ui:composition template="/layout.xhtml">
 		<ui:define name="title">#{err['code404.title']}</ui:define>
 		<ui:define name="content">

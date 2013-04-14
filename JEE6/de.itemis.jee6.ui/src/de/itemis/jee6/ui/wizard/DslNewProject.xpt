@@ -67,6 +67,7 @@ Workflow
 	<property name="res-gen-path"         value="./«getResGenPath()»"/>
 	<property name="web-path"             value="./«getWebContentPath()»"/>
 	<property name="doc-path"             value="../api"/>
+	<property name="lib-path"             value="${res-path}/WEB-INF/lib"/>
 
 	<property name="war"                  value="«applicationName».war"/>
 
