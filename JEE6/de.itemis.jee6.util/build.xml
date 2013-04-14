@@ -33,9 +33,6 @@
 	</path>
 
 	<path id="coverage.lib">
-		<fileset dir="${lib-path}">
-			<include name="**/emma*.jar"/>
-		</fileset>
 	</path>
 
 	<path id="instr.classpath">
@@ -117,7 +114,7 @@
 				charset="UTF-8"
 				windowtitle="JEE6 utility classes">
 			<doctitle><![CDATA[<h1>JEE6 utility classes</h1>]]></doctitle>
-			<bottom><![CDATA[<i>Copyright &#169; 2012 all committers of JEE6 generator]]></bottom>
+			<bottom><![CDATA[<i>Copyright &#169; 2013 all committers of JEE6 generator]]></bottom>
 		</javadoc>
     </target>
 
