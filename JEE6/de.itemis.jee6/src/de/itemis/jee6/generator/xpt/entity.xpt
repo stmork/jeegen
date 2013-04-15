@@ -43,7 +43,7 @@ import «pkg»;
 /**
  * This class implements the «typeOf()» entity bean. It contains the following properties:
  * <table>
- * <tr><th>Model type</th><th>Java type</th><th>Property name</th></tr>
+ * <tr><th align="left">Model type</th><th align="left">Java type</th><th align="left">Property name</th></tr>
 «FOREACH types AS property»
  * <tr><td>«property.metaType.toString()»</td><td>«IF Reference.isInstance(property)»{@link «typeOf(property)»}«ELSE»«typeOf(property)»«ENDIF»</td><td>«property.name»</td></tr>
 «ENDFOREACH»
