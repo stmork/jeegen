@@ -72,7 +72,7 @@
 			</div>
 		</div>
 		<div id="line"/>
-		<div class="footer">#{msg.footer}</div>
+		<div class="footer">#{msg.footer} Copyright (C) #{ver.vendor}  V#{ver['version.major']}.#{ver['version.minor']}.#{ver['version.patch']}</div>
 	</f:view>
 «EXPAND utility::XhtmlEnd»
 «ENDFILE»
