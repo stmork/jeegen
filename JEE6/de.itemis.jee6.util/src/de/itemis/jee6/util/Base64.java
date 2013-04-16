@@ -48,6 +48,7 @@ public class Base64
 		}
 		switch (size % 3)
 		{
+		default:
 		case 0:
 			break;
 		case 1:
