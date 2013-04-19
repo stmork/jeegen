@@ -72,7 +72,14 @@
 			</div>
 		</div>
 		<div id="line"/>
-		<div class="footer">#{msg.footer} Copyright (C) #{ver.vendor}  V#{ver['version.major']}.#{ver['version.minor']}.#{ver['version.patch']}</div>
+		<div class="footer">
+			<h:outputFormat value="#{msg.footer}">
+				<f:param value="#{ver['vendor']}"/>
+				<f:param value="#{ver['version.major']}"/>
+				<f:param value="#{ver['version.minor']}"/>
+				<f:param value="#{ver['version.patch']}"/>
+			</h:outputFormat>
+		</div>
 	</f:view>
 «EXPAND utility::XhtmlEnd»
 «ENDFILE»

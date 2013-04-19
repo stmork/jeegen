@@ -69,7 +69,7 @@
 «bundleUpdate(filename, "login", "Login")»
 «bundleUpdate(filename, "logout", "Logout")»
 «bundleUpdate(filename, "main", "Main menu")»
-«bundleUpdate(filename, "footer", name)»
+«bundleUpdate(filename, "footer", name + "V{1}.{2}.{3} Copyright (C)  {0}")»
 «bundleUpdate(filename, "menue", "Menu")»
 «bundleUpdate(filename, "no_selection", "-- empty --")»
 «bundleFlush(filename)»
