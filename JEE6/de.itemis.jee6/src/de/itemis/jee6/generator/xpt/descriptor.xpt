@@ -53,6 +53,7 @@ log4j.appender.R.layout.ConversionPattern=%-5p %-30.30c{1} %x - %m%n
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
 			<property name="hibernate.hbm2ddl.auto"                 value="update" />
 			<property name="hibernate.cache.use_second_level_cache" value="true"/>
+			<property name="hibernate.cache.use_minimal_puts"       value="true"/>
 «REM»
 			<property name="hibernate.cache.use_query_cache"        value="true" />
 «ENDREM»
