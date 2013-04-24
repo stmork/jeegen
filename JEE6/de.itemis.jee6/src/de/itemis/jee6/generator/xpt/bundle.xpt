@@ -31,7 +31,7 @@
 «bundleUpdate(filename, "login.user", "Login")»
 «bundleUpdate(filename, "login.password", "Password")»
 «bundleUpdate(filename, "logout.title", "Logout dialog")»
-«bundleUpdate(filename, "logout.message", "Confirm loggin out!")»
+«bundleUpdate(filename, "logout.message", "Confirm logging out!")»
 «ENDIF»
 «FOREACH entities.typeSelect(Options) AS entity»
 «FOREACH entity.keys AS key»
