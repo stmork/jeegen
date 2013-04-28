@@ -337,14 +337,9 @@ abstract public class «abstractDaoOf(this)»
 	 */
 	public «typeOf(option)» ensure(final «enumOf(option)» type, final String key)
 	{
-		«typeOf(option)» option = em.find(«typeOf(option)».class, type.ordinal());
-		
-		if (option == null)
-		{
-			option = new «typeOf(option)»(type, key);
-			em.persist(option);
-		}
-		return option;
+		final «typeOf(option)» option = new «typeOf(option)»(type, key);
+
+		return em.merge(option);
 	}
 
 	/**

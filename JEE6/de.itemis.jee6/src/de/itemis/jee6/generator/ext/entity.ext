@@ -75,7 +75,7 @@ String reactivateEntity(Entity e) :
 	"reactivate" + e.name.toFirstUpper();
 
 String enumOf(String key) :
-	key.toUpperCase().replaceAll("\\.", "_");
+	key.toUpperCase().replaceAll("\\.", "_").replaceAll("-", "_");
 
 cached List[Timestamp] getAutoCreationTimestampList(Entity e) :
 	e.types.typeSelect(Timestamp).select(e|e.auto);

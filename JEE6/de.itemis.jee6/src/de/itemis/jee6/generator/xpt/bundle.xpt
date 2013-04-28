@@ -35,7 +35,7 @@
 «ENDIF»
 «FOREACH entities.typeSelect(Options) AS entity»
 «FOREACH entity.keys AS key»
-«bundleUpdate(filename, key, key)»
+«bundleUpdate(filename, key.toLowerCase(), key)»
 «ENDFOREACH»
 «ENDFOREACH»
 «FOREACH processes AS process»

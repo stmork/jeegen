@@ -1028,7 +1028,7 @@ abstract public class «abstractApplicationController()» implements Serializable
 	{
 «FOREACH entities.typeSelect(Options).select(e|e.isEnumeration()) AS enumeration»
 «FOREACH enumeration.keys AS key»
-		options.ensure(«enumOf(enumeration)».«enumOf(key)», "«key»");
+		options.ensure(«enumOf(enumeration)».«enumOf(key)», "«key.toLowerCase()»");
 «ENDFOREACH»
 «ENDFOREACH»
 	}
