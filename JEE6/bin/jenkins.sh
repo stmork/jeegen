@@ -4,9 +4,11 @@ set -e
 
 cd `dirname $0`
 
-JVM_PATH=/usr/lib/jvm/java-6-openjdk-amd64
+OPEN_JDK=/usr/lib/jvm/java-6-openjdk-amd64
+ORACLE_JDK=/usr/lib/jvm/java-6-oracle
 
-test -d $JVM_PATH && export JAVA_HOME=$JVM_PATH
+test -d $OPEN_JDK   && export JAVA_HOME=$OPEN_JDK
+test -d $ORACLE_JDK && export JAVA_HOME=$ORACLE_JDK
 
 cd ../de.itemis.jee6.util
 ant clean package javadoc jacoco
