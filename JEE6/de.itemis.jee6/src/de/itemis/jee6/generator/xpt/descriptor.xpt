@@ -19,6 +19,7 @@
 «EXPAND Faces»
 «EXPAND Log4J»
 «EXPAND error»
+«EXPAND error403»
 «EXPAND error404»
 «ENDDEFINE»
 
@@ -188,6 +189,10 @@ log4j.appender.R.layout.ConversionPattern=%-5p %-30.30c{1} %x - %m%n
 	<error-page>
 		<exception-type>java.lang.RuntimeException</exception-type>
 		<location>/error.xhtml</location>
+	</error-page>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/error403.xhtml</location>
 	</error-page>
 	<error-page>
 		<error-code>404</error-code>
@@ -365,6 +370,28 @@ GlassFish Application Server 3.0 Servlet 3.0//EN"
 		<ui:define name="title">#{err['error.title']}</ui:define>
 		<ui:define name="content">
 			<h2>#{sessionController.exception.message}</h2>
+		</ui:define>
+	</ui:composition>
+</html>
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE error403 FOR Model»
+«FILE "error403.xhtml" XHTML»
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<!-- ===== Created by JEE6-Generator $Id$ ===== -->
+	<!-- == Copyright (C) «year()»  itemis AG == -->
+
+	<ui:composition template="/layout.xhtml">
+		<ui:define name="title">#{err['code403.title']}</ui:define>
+		<ui:define name="content">
+			<h2>#{err['code403.message']}</h2>
 		</ui:define>
 	</ui:composition>
 </html>

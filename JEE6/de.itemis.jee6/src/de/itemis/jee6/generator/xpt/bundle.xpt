@@ -82,8 +82,10 @@
 «ENDFILE»
 «bundleUpdate(filename, "error.title", "General application fault!")»
 «bundleUpdate(filename, "not-found.title", "Resource not found!")»
-«bundleUpdate(filename, "code404.title", "Four oh four!")»
+«bundleUpdate(filename, "code403.message", "Access to the requested resource has been denied!")»
+«bundleUpdate(filename, "code403.title", "Four oh three!")»
 «bundleUpdate(filename, "code404.message", "The requested document was not found!")»
+«bundleUpdate(filename, "code404.title", "Four oh four!")»
 «FOREACH processes AS process»
 «FOREACH getUiEntities(process) AS entity»
 «bundleUpdate(filename, prefixOf(process) + "." + prefixOf(entity) + ".not-empty", "Data of " + entity.name + " is not empty!")»
