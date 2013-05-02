@@ -4,6 +4,10 @@ set -e
 
 cd `dirname $0`
 
+JVM_PATH=/usr/lib/jvm/java-6-openjdk-amd64
+
+test -d $JVM_PATH && export JAVA_HOME=$JVM_PATH
+
 cd ../de.itemis.jee6.util
 ant clean package javadoc jacoco
 
