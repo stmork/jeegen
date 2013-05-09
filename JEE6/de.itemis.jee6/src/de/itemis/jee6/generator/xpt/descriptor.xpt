@@ -18,9 +18,6 @@
 «EXPAND WebLogic»
 «EXPAND Faces»
 «EXPAND Log4J»
-«EXPAND error»
-«EXPAND error403»
-«EXPAND error404»
 «ENDDEFINE»
 
 «DEFINE Log4J FOR Model»
@@ -353,67 +350,5 @@ GlassFish Application Server 3.0 Servlet 3.0//EN"
 		<validator-class>de.itemis.jee6.util.MailValidator</validator-class>
 	</validator>
 </faces-config>
-«ENDFILE»
-«ENDDEFINE»
-
-«DEFINE error FOR Model»
-«FILE "error.xhtml" XHTML»
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
-	<!-- ===== Created by JEE6-Generator $Id$ ===== -->
-	<!-- == Copyright (C) «year()»  itemis AG == -->
-	<ui:composition template="/layout.xhtml">
-		<ui:define name="title">#{err['error.title']}</ui:define>
-		<ui:define name="content">
-			<h2>#{sessionController.exception.message}</h2>
-		</ui:define>
-	</ui:composition>
-</html>
-«ENDFILE»
-«ENDDEFINE»
-
-«DEFINE error403 FOR Model»
-«FILE "error403.xhtml" XHTML»
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
-
-	<!-- ===== Created by JEE6-Generator $Id$ ===== -->
-	<!-- == Copyright (C) «year()»  itemis AG == -->
-
-	<ui:composition template="/layout.xhtml">
-		<ui:define name="title">#{err['code403.title']}</ui:define>
-		<ui:define name="content">
-			<h2>#{err['code403.message']}</h2>
-		</ui:define>
-	</ui:composition>
-</html>
-«ENDFILE»
-«ENDDEFINE»
-
-«DEFINE error404 FOR Model»
-«FILE "error404.xhtml" XHTML»
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
-	<!-- ===== Created by JEE6-Generator $Id$ ===== -->
-	<!-- == Copyright (C) «year()»  itemis AG == -->
-	<ui:composition template="/layout.xhtml">
-		<ui:define name="title">#{err['code404.title']}</ui:define>
-		<ui:define name="content">
-			<h2>#{err['code404.message']}</h2>
-		</ui:define>
-	</ui:composition>
-</html>
 «ENDFILE»
 «ENDDEFINE»

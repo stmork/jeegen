@@ -121,6 +121,9 @@ String getClass(Number n) :
 String getClass(Boolean b) :
 	"center";
 
+String getClass(Email a) :
+	"left";
+
 String getClass(Attribute a) :
 	"center";
 
