@@ -72,6 +72,7 @@
 «bundleUpdate(filename, "footer", name + " V{1}.{2}.{3} Copyright (C)  {0}")»
 «bundleUpdate(filename, "menue", "Menu")»
 «bundleUpdate(filename, "no_selection", "-- empty --")»
+«bundleUpdate(filename, "welcome", "Welcome to the " + name + " Application!")» 
 «bundleFlush(filename)»
 «ENDLET»
 «ENDDEFINE»

@@ -10,6 +10,7 @@
 «EXTENSION de::itemis::jee6::generator::ext::model»
 «EXTENSION de::itemis::jee6::generator::ext::types»
 «EXTENSION de::itemis::jee6::generator::ext::ui»
+«EXTENSION de::itemis::jee6::generator::ext::utility»
 
 «DEFINE Main FOR Model»
 «EXPAND index»
@@ -20,6 +21,9 @@
 «IF hasSecurityDomain()»
 «EXPAND login»
 «EXPAND logout»
+«EXPAND error»
+«EXPAND error403»
+«EXPAND error404»
 «ENDIF»
 «ENDDEFINE»
 
@@ -30,7 +34,7 @@
 <ui:composition template="/«layout()»">
 	<ui:define name="title">#{msg['start.title']}</ui:define>
 	<ui:define name="content">
-		<ui:include src="«menu()»"/>
+		<div><h2>#{msg.welcome}</h2></div>
 	</ui:define>
 </ui:composition>
 «EXPAND utility::XhtmlEnd»
@@ -40,47 +44,66 @@
 «DEFINE layout FOR Model»
 «FILE layout(this) XHTML»
 «EXPAND utility::XhtmlStart»
-	<f:view>
-		<h:head>
-			<title><ui:insert name="title"/></title>
-			<h:outputStylesheet library="css" name="display.css"  />
-			<link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/img/favicon.ico"/>
+    <f:view>
+        <h:head>
+            <title>
+                <ui:insert name="title"/>
+            </title>
+            <h:outputStylesheet library="css" name="display.css"/>
+            <link href="#{request.contextPath}/img/favicon.ico"
+                rel="shortcut icon" type="image/x-icon"/>
 		</h:head>
 		<div class="header">
-			<table>
-				<tr>
-					<td class="logo"><h:graphicImage value="/img/logo.png" /></td>
-					<td class="space"/>
-					<td class="welcome">
-						<h1><ui:insert name="title"/></h1>
+            <div class="boxed">
+				<div class="logo">
+					<h:outputLink value="#{request.contextPath}">
+						<h:graphicImage class="logo" value="/img/logo.png"/>
+					</h:outputLink>
+                </div>
+                <div class="right-of">
+                    <h1>
+                        <ui:insert name="title"/>
+                    </h1>
 «IF hasSecurityDomain()»
 						#{msg['start.name']} #{sessionController.name}
 «ENDIF»
-					</td>
-				</tr>
-			</table>
-		</div>
-		<div id="line"/>
-		<div id="mid">
-			<div class="left">
-				<div class="box">
-					<ui:include src="«menu()»"/>
 				</div>
 			</div>
-			<div class="content">
-				<ui:insert name="content"/>
-			</div>
-		</div>
-		<div id="line"/>
-		<div class="footer">
-			<h:outputFormat value="#{msg.footer}">
-				<f:param value="#{ver['vendor']}"/>
-				<f:param value="#{ver['version.major']}"/>
-				<f:param value="#{ver['version.minor']}"/>
-				<f:param value="#{ver['version.patch']}"/>
-			</h:outputFormat>
-		</div>
-	</f:view>
+        	<div class="clear"/>
+        </div>
+        <div class="line"/>
+        <div class="page">
+            <div class="left">
+                <div class="box">
+                    <ui:include src="menu.xhtml"/>
+                </div>
+            </div>
+<!-- Use if you want a right column
+            <div class="right">
+                <div class="box">
+
+                </div>
+            </div>
+-->
+            <div class="content">
+                <ui:insert name="content"/>
+            </div>
+        	<div class="clear"/>
+        </div>
+        <div class="line"/>
+        <div class="footer">
+        	<div class="left">
+	            <h:outputFormat value="#{msg.footer}">
+	                <f:param value="#{ver['vendor']}"/>
+	                <f:param value="#{ver['version.major']}"/>
+	                <f:param value="#{ver['version.minor']}"/>
+	                <f:param value="#{ver['version.patch']}"/>
+	            </h:outputFormat>
+        	</div>
+        	<div class="right"/>
+        	<div class="clear"/>
+        </div>
+    </f:view>
 «EXPAND utility::XhtmlEnd»
 «ENDFILE»
 «ENDDEFINE»
@@ -237,5 +260,71 @@
 	</ui:define>
 </ui:composition>
 «EXPAND utility::XhtmlEnd»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE error FOR Model»
+«FILE "error.xhtml" XHTML»
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<!-- ===== Created by JEE6-Generator $Id$ ===== -->
+	<!-- == Copyright (C) «year()»  itemis AG == -->
+
+	<ui:composition template="/layout.xhtml">
+		<ui:define name="title">#{err['error.title']}</ui:define>
+		<ui:define name="content">
+        	<div class="error">#{sessionController.exception.message}</div>
+		</ui:define>
+	</ui:composition>
+</html>
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE error403 FOR Model»
+«FILE "error403.xhtml" XHTML»
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<!-- ===== Created by JEE6-Generator $Id$ ===== -->
+	<!-- == Copyright (C) «year()»  itemis AG == -->
+
+	<ui:composition template="/layout.xhtml">
+		<ui:define name="title">#{err['code403.title']}</ui:define>
+		<ui:define name="content">
+        	<div class="error">#{err['code403.message']}</div>
+		</ui:define>
+	</ui:composition>
+</html>
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE error404 FOR Model»
+«FILE "error404.xhtml" XHTML»
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<!-- ===== Created by JEE6-Generator $Id$ ===== -->
+	<!-- == Copyright (C) «year()»  itemis AG == -->
+
+	<ui:composition template="/layout.xhtml">
+		<ui:define name="title">#{err['code404.title']}</ui:define>
+		<ui:define name="content">
+        	<div class="error">#{err['code404.message']}</div>
+		</ui:define>
+	</ui:composition>
+</html>
 «ENDFILE»
 «ENDDEFINE»
