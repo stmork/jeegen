@@ -30,7 +30,6 @@
 «DEFINE index FOR Model»
 «FILE index(this) XHTML»
 «EXPAND utility::XhtmlStart»
-
 <ui:composition template="/«layout()»">
 	<ui:define name="title">#{msg['start.title']}</ui:define>
 	<ui:define name="content">
@@ -60,16 +59,13 @@
 						<h:graphicImage class="logo" value="/img/logo.png"/>
 					</h:outputLink>
                 </div>
-                <div class="right-of">
-                    <h1>
-                        <ui:insert name="title"/>
-                    </h1>
+                <div>
+                    <h1><ui:insert name="title"/></h1>
 «IF hasSecurityDomain()»
-						#{msg['start.name']} #{sessionController.name}
+					#{msg['start.name']} #{sessionController.name}
 «ENDIF»
 				</div>
 			</div>
-        	<div class="clear"/>
         </div>
         <div class="line"/>
         <div class="page">

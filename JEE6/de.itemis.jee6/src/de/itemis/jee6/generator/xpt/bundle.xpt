@@ -44,7 +44,7 @@
 «FOREACH getEntitiesWithHistory(getUiEntities(process).toList()) AS entity»
 «bundleUpdate(filename, prefixOf(process) + "." + prefixOf(entity) + ".title", "Edit " + entity.name)»
 «FOREACH entity.types AS attr»
-«bundleUpdate(filename, prefixOf(process) + "." + prefixOf(entity) + "." + prefixOf(attr), attr.name)»
+«bundleUpdate(filename, prefixOf(process) + "." + prefixOf(entity) + "." + prefixOf(attr), attr.name.toFirstUpper())»
 «ENDFOREACH»
 «FOREACH getManyEntites(entity.types) AS ref»
 «bundleUpdate(filename, prefixOf(process) + "." + prefixOf(entity) + "." + prefixOf(ref.type) + ".change", "Edit " + ref.name)»
@@ -52,7 +52,7 @@
 «ENDFOREACH»
 «FOREACH getUiEntities(process) AS entity»
 «FOREACH entity.types AS attr»
-«bundleUpdate(filename, prefixOf(process) + "." + prefixOf(entity) + "." + prefixOf(attr), attr.name)»
+«bundleUpdate(filename, prefixOf(process) + "." + prefixOf(entity) + "." + prefixOf(attr), attr.name.toFirstUpper())»
 «ENDFOREACH»
 «ENDFOREACH»
 «ENDFOREACH»
