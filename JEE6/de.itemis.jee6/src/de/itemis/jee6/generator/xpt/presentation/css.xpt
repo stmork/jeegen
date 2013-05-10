@@ -48,16 +48,21 @@ input, select, textarea {
 /*********************/
 
 div.header {
-	padding: 0 0 10pt;
 	display: table;
+	border-spacing: 10pt;
 }
 
-div.header h1,h2
+div.header h1,h2,h3,h4,h5,h6
 {
 	margin-top: 0;
 }
 
+div.header > div.boxed {
+	display: table-row;
+}
+
 div.boxed > div {
+	display: table-cell;
 	margin-left: 10pt;
 	margin-top: 10pt;
 	padding: 5pt;
@@ -87,8 +92,7 @@ div.box ul {
 }
 
 div.logo {
-	float: left;
-	position: relative;
+	width: 40pt;
 	text-align: center;
 	vertical-align: middle;
 
