@@ -110,42 +110,44 @@
 <ui:composition template="/«layout()»">
 	<ui:define name="title">#{msg['login.title']}</ui:define>
 	<ui:define name="content">
-		<form id="login" name="login" method="post" action="j_security_check">
-			<table>
-				<tr>
-					<td></td>
-					<td class="remark">#{msg['login.do_login']}</td>
-				</tr>
-				<tr>
-					<td class="mid">#{msg['login.user']}:</td>
-					<td><h:inputText autofocus="autofocus" id="j_username" autocomplete="off" /></td>
-				</tr>
-				<tr>
-					<td class="mid">#{msg['login.password']}:</td>
-					<td><h:inputSecret id="j_password" autocomplete="off" /></td>
-				</tr>
-				<tr>
-					<td/>
-					<td>
-						<h:commandButton type="submit" value="#{msg.login}" />
-						<h:commandButton type="reset" value="#{msg.clear}" />
-					</td>
-				</tr>
-			</table>
-			<h:outputScript>
-				function setFocusOnLoginForm()
-				{
-					try
+		<div class="box">
+			<form id="login" name="login" method="post" action="j_security_check">
+				<table>
+					<tr>
+						<td></td>
+						<td class="remark">#{msg['login.do_login']}</td>
+					</tr>
+					<tr>
+						<td class="mid">#{msg['login.user']}:</td>
+						<td><h:inputText autofocus="autofocus" id="j_username" autocomplete="off" /></td>
+					</tr>
+					<tr>
+						<td class="mid">#{msg['login.password']}:</td>
+						<td><h:inputSecret id="j_password" autocomplete="off" /></td>
+					</tr>
+					<tr>
+						<td/>
+						<td>
+							<h:commandButton type="submit" value="#{msg.login}" />
+							<h:commandButton type="reset" value="#{msg.clear}" />
+						</td>
+					</tr>
+				</table>
+				<h:outputScript>
+					function setFocusOnLoginForm()
 					{
-						document.login.j_username.focus();
+						try
+						{
+							document.login.j_username.focus();
+						}
+						catch (err)
+						{
+						}
 					}
-					catch (err)
-					{
-					}
-				}
-				setFocusOnLoginForm();
-			</h:outputScript>
-		</form>
+					setFocusOnLoginForm();
+				</h:outputScript>
+			</form>
+		</div>
 	</ui:define>
 </ui:composition>
 «EXPAND utility::XhtmlEnd»
@@ -158,12 +160,14 @@
 <ui:composition template="/«layout()»">
 	<ui:define name="title">#{msg['logout.title']}</ui:define>
 	<ui:define name="content">
-		<h1>#{msg['logout.title']}</h1>
-		<h:form>
-			#{msg['logout.message']}
-			<h:commandButton value="#{msg.logout}" action="#{sessionController.logout(request)}" />
-			<h:commandButton value="#{msg.back}" action="/«index()»" />
-		</h:form>
+		<div class="box">
+			<h1>#{msg['logout.title']}</h1>
+			<h:form>
+				#{msg['logout.message']}
+				<h:commandButton value="#{msg.logout}" action="#{sessionController.logout(request)}" />
+				<h:commandButton value="#{msg.back}" action="/«index()»" />
+			</h:form>
+		</div>
 	</ui:define>
 </ui:composition>
 «EXPAND utility::XhtmlEnd»

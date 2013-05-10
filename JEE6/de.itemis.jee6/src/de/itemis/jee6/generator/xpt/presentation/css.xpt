@@ -61,6 +61,14 @@ div.header > div.boxed {
 	display: table-row;
 }
 
+div.boxed div.logo {
+	width: 40pt;
+	text-align: center;
+	vertical-align: middle;
+
+	background-color: #004c84;
+}
+
 div.boxed > div {
 	display: table-cell;
 	margin-left: 10pt;
@@ -89,14 +97,6 @@ div.box ul {
 	margin-left: 0px;
 	margin-bottom: 0px;
 	padding-left: 0px;
-}
-
-div.logo {
-	width: 40pt;
-	text-align: center;
-	vertical-align: middle;
-
-	background-color: #004c84;
 }
 
 div.right-of {
