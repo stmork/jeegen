@@ -18,12 +18,12 @@
 «EXPAND menu»
 «EXPAND css::Main»
 «EXPAND layout»
-«IF hasSecurityDomain()»
-«EXPAND login»
-«EXPAND logout»
 «EXPAND error»
 «EXPAND error403»
 «EXPAND error404»
+«IF hasSecurityDomain()»
+«EXPAND login»
+«EXPAND logout»
 «ENDIF»
 «ENDDEFINE»
 
