@@ -54,7 +54,10 @@ public class TimerSingleton
 		info = new DownloadInfo(timerService, "http://axis.parosweb.net/parikiaport.jpg", 60);
 		infos.put("parosWeb",  info);
 
-		info = new DownloadInfo(timerService, "http://www.naxosisland.eu/webcam/port.jpg", 10);
+		info = new DownloadInfo(timerService, "http://www.paros-live.gr/webcam/current.jpg", 10);
+		infos.put("parosLive",  info);
+
+		info = new DownloadInfo(timerService, "http://www.naxosisland.eu/webcam/port.jpg", 15);
 		infos.put("naxos",     info);
 
 //		info = new DownloadInfo(timerService, "http://daytoursantorini.com/webcam/caldera_santorini.jpg", 28);
