@@ -572,6 +572,7 @@ import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import javax.faces.application.FacesMessage;
@@ -846,7 +847,17 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resourc
 	 */
 	protected String getError(final String key, final Object ... params)
 	{
-		final String message = MessageFormat.format(errors.getString(key), params); 
+		String message;
+		
+		try
+		{
+			final String format = errors.getString(key);
+			message = MessageFormat.format(format, params);
+		}
+		catch (MissingResourceException mre)
+		{
+			message = key;
+		}
 		log.error(message);
 		return message;
 	}
@@ -1046,6 +1057,7 @@ import javax.faces.bean.SessionScoped;
 import «fqAbstractHandlerOf()»;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import de.itemis.jee6.util.LogUtil;
 
 /**
  * This managed bean class handles some session tasks.
@@ -1102,7 +1114,25 @@ public class «sessionController()» extends «abstractHandlerOf()»
 	 */
 	public Exception getException()
 	{
-		return (Exception)getExternalContext().getRequestMap().get("javax.servlet.error.exception");
+		return (Exception) getExternalContext().getRequestMap().get("javax.servlet.error.exception");
+	}
+	
+	/**
+	 * This method returns the exceptions error message. If this message is empty the class name is used
+	 * as a key for obtaining the message from the error resource bundle.
+	 *  
+	 * @return The error message of the sessions exception.
+	 */
+	public String getExceptionMessage()
+	{
+		final Exception exception = getException();
+		
+		String message = exception.getMessage();
+		if (LogUtil.isEmpty(message))
+		{
+			message = getError(exception.getClass().getName());
+		}
+		return message;
 	}
 }
 «ENDFILE»
