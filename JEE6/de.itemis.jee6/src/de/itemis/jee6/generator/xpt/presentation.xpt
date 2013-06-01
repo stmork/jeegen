@@ -278,7 +278,7 @@
 	<ui:composition template="/layout.xhtml">
 		<ui:define name="title">#{err['error.title']}</ui:define>
 		<ui:define name="content">
-        	<div class="error">#{sessionController.exception.message}</div>
+        	<div class="error">#{sessionController.exceptionMessage}</div>
 		</ui:define>
 	</ui:composition>
 </html>
