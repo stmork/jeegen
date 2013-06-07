@@ -1,35 +1,49 @@
 package de.itemis.jee6.minimal.handler;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ManagedBean;
+import java.util.List;
 
-import de.itemis.jee6.minimal.dao.MinimalDao;
+import javax.ejb.Stateful;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+
 import de.itemis.jee6.minimal.entity.MinimalEntity;
 
-@ManagedBean
+@Named("minimalHandler")
 @SessionScoped
-public class MinimalHandler {
-	@EJB
-	MinimalDao dao;
-
-	@PostConstruct
+@Stateful
+public class MinimalHandler
+{
+	@PersistenceContext(unitName = "minimalDS")
+	private EntityManager em;
+	
+	public List<MinimalEntity> getEntities()
+	{
+		TypedQuery<MinimalEntity> query = em.createQuery("SELECT entity FROM MinimalEntity entity", MinimalEntity.class);
+		
+		return query.getResultList();
+	}
+	
 	public void init()
 	{
 		MinimalEntity entity = new MinimalEntity();
 		entity.setName("Georg");
-		dao.init(entity);
+		em.persist(entity);
 	}
 
 	public String getExampleText()
 	{
+		System.out.println(">getExampleText()");
+		init();
 		StringBuffer buffer = new StringBuffer();
 
-		for (MinimalEntity entity : dao.getEntities())
+		for (MinimalEntity entity : getEntities())
 		{
 			buffer.append(entity.getName()).append("\n");
 		}
+		System.out.println("<getExampleText() = " + buffer);
 		return buffer.toString();
 	}
 }
