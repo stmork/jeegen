@@ -22,7 +22,10 @@ ant clean generate deploy
 cd ../de.itemis.jee6.ui
 ant clean deploy
 
-cd ../MinimalWebApplication
+cd ../MinimalWebApplicationCdi
+ant clean package
+
+cd ../MinimalWebApplicationDao
 ant clean package
 
 cd ../FacesGenerated
