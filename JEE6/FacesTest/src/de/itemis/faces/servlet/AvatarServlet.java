@@ -1,3 +1,6 @@
+/*
+ * $Id$
+ */
 package de.itemis.faces.servlet;
 
 import java.io.FileNotFoundException;
@@ -16,6 +19,9 @@ import org.apache.commons.logging.LogFactory;
 import de.itemis.faces.dao.SessionDaoBean;
 import de.itemis.faces.entities.UserInfo;
 
+/**
+ * This servlet simply shows the logged in users avatar.
+ */
 @WebServlet("/avatar")
 public class AvatarServlet extends HttpServlet
 {

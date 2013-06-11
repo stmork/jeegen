@@ -1,3 +1,6 @@
+/*
+ * $Id$
+ */
 package de.itemis.faces.servlet;
 
 import java.util.Enumeration;
