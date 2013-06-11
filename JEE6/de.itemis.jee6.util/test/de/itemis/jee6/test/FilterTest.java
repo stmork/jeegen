@@ -12,7 +12,7 @@ import de.itemis.jee6.util.FilteredList;
 public class FilterTest {
 	private static String [] names =
 		{
-			"Günter", "Walter", "Gustav", "Hildegard", "Friedbert", "Gisbert",
+			"GÃ¼nter", "Walter", "Gustav", "Hildegard", "Friedbert", "Gisbert",
 			"Adele"
 		};
 

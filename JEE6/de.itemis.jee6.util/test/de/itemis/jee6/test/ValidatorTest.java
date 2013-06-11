@@ -35,7 +35,7 @@ public class ValidatorTest
 	@Test(expected=ValidatorException.class)
 	public void invalid3()
 	{
-		validator.validate(null, null, "Übermensch@itemis.de");
+		validator.validate(null, null, "Ãœbermensch@itemis.de");
 	}
 
 	@Test(expected=ValidatorException.class)

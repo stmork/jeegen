@@ -33,7 +33,7 @@ public class Base64Test
 		recode("Test");
 		recode("Steffen A. Mork");
 		recode("itemis");
-		recode("äöü-ß-ÄÖÜ");
+		recode("Ã¤Ã¶Ã¼-ÃŸ-Ã„Ã–Ãœ");
 	}
 
 	@Test
