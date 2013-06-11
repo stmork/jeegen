@@ -1,3 +1,6 @@
+/*
+ * $Id$
+ */
 package de.itemis.faces.servlet;
 
 import java.io.File;
@@ -10,6 +13,9 @@ import javax.servlet.http.Part;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemHeaders;
 
+/**
+ * This class implements the {@link Part} interface by wrapping the {@link FileItem} class.
+ */
 public class BlobPart implements Part
 {
 	private final FileItem item;
