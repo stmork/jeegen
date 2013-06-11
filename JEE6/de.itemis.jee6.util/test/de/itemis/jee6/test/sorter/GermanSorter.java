@@ -7,9 +7,6 @@ import de.itemis.jee6.util.CollatingComparator;
 
 public class GermanSorter extends CollatingComparator<String>
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public GermanSorter()

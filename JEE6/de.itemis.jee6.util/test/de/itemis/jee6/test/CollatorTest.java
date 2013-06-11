@@ -39,15 +39,15 @@ public class CollatorTest
 	@Test
 	public void testGreek()
 	{
-		Assert.assertTrue(greek.compare("α", "ά") == 0);
-		Assert.assertTrue(greek.compare("α", "Ά") == 0);
-		Assert.assertTrue(greek.compare("Α", "ά") == 0);
-		Assert.assertTrue(greek.compare("Α", "Ά") == 0);
-
 		Assert.assertTrue(greek.compare("α", "α") == 0);
 		Assert.assertTrue(greek.compare("α", "Α") == 0);
 		Assert.assertTrue(greek.compare("Α", "α") == 0);
 		Assert.assertTrue(greek.compare("Α", "Α") == 0);
+
+		Assert.assertTrue(greek.compare("α", "ά") == 0);
+		Assert.assertTrue(greek.compare("α", "Ά") == 0);
+		Assert.assertTrue(greek.compare("Α", "ά") == 0);
+		Assert.assertTrue(greek.compare("Α", "Ά") == 0);
 
 		Assert.assertTrue(greek.compare("α", "β") < 0);
 		Assert.assertTrue(greek.compare("α", "Β") < 0);

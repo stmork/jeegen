@@ -7,9 +7,6 @@ import de.itemis.jee6.util.CollatingComparator;
 
 public class GreekSorter extends CollatingComparator<String>
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public GreekSorter()
