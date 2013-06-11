@@ -13,8 +13,12 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -71,6 +75,30 @@ public class UserHandler extends AbstractHandler
 	{
 		log.debug(">change");
 		UserInfo user = getSessionInfo().getUser();
+
+		/*
+		 * This extracts an avatar image from the request. The image is stored via the <input type="file"> tag.
+		 */
+		HttpServletRequest req = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		try
+		{
+			// The method getPart() is part of the servlet 3.0 specification.
+			final Part part = req.getPart("image");
+			
+			if ((part != null) && (part.getSize() > 0))
+			{
+				user.setImage(IOUtils.toByteArray(part.getInputStream()));
+			}
+		}
+		catch (IOException e)
+		{
+			log.error(e);
+		}
+		catch (ServletException e)
+		{
+			log.error(e);
+		}
+
 		user = dao.updateUserInfo(user);
 		getSessionInfo().setUser(user);
 		log.debug("<change");
