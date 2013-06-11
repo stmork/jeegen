@@ -96,7 +96,7 @@ abstract public class AbstractLdapConnector
 
 	/**
 	 * Diese Methode baut eine komplette DN zusammen. Die Basis-DN darf nicht angegeben werden,
-	 * da sie ja schon mit einer Instanz dieser Klasse verknüpft ist. Es wird also nur eine Sub-DN
+	 * da sie ja schon mit einer Instanz dieser Klasse verknÃ¼pft ist. Es wird also nur eine Sub-DN
 	 * mit angegeben. 
 	 * 
 	 * @param partDn Die Sub-DN
@@ -108,7 +108,7 @@ abstract public class AbstractLdapConnector
 	}
 
 	/**
-	 * Diese Methode ermittelt aus Attributen ein mit einem Schlüsselwort definiertes Einfachattribut. 
+	 * Diese Methode ermittelt aus Attributen ein mit einem SchlÃ¼sselwort definiertes Einfachattribut. 
 	 * @param attributes Die Attribute
 	 * @param key Der Attributname
 	 * @return Der Attributwert
@@ -127,7 +127,7 @@ abstract public class AbstractLdapConnector
 	}
 
 	/**
-	 * Diese Methode ermittelt aus Attributen ein mit einem Schlüsselwort definiertes Mehrfachattribut. 
+	 * Diese Methode ermittelt aus Attributen ein mit einem SchlÃ¼sselwort definiertes Mehrfachattribut. 
 	 * @param attributes Die Attribute
 	 * @param key Der Attributname
 	 * @return Eine Liste von Attributwerten.
@@ -152,11 +152,11 @@ abstract public class AbstractLdapConnector
 	}
 
 	/**
-	 * Diese Methode sucht über eine Sub-DN im LDAP-Server unter Berücksichtigung eines Suchfilters. Die
-	 * komplette DN wird wie in der Methode {@link AbstractLdapConnector#getSearchBase(String)} zusammengebaut.
-	 * @param partDn Die Sub-DN
-	 * @param filter Der Suchfilter
-	 * @return Die Suchergebnisse
+	 * This method searches for a sub DN inside a LDAP server. The complete DN is computed using the 
+	 * {@link AbstractLdapConnector#getSearchBase(String)} method.
+	 * @param partDn The sub DN
+	 * @param filter The search filter
+	 * @return The search results as a {@link NamingEnumeration}.
 	 * @throws NamingException
 	 * @see AbstractLdapConnector#getSearchBase(String)
 	 */
