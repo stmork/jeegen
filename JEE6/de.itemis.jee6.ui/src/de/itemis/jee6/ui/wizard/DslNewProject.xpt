@@ -12,7 +12,7 @@
 «DEFINE model FOR DslProjectInfo»
 «FILE getModelPath() + "/" + projectName + ".jee6"-»
 // Edit model here...
-application "«projectName»"  context "/«applicationName»" package «basePackage».«applicationName.toFirstLower()» development strict;
+application "«projectName»"  context "/«applicationName»" package «package(basePackage, applicationName)» development strict;
 persistence unit"«applicationName»DS" jndi "jdbc/«applicationName»DS";
 locale "de" default;
 
@@ -131,6 +131,14 @@ Workflow
 	<!--              Setting up build targets                -->
 	<!-- ==================================================== -->
 
+	<target name="-version">
+		<first id="version-file">
+		    <fileset dir="${basedir}/${src-path}" includes="**/version.properties" />
+		</first>
+		<property file="${toString:version-file}" />
+		<echo message="Version: ${version.major}.${version.minor}.${version.patch}"/>
+	</target>
+
 	<target name="clean">
 		<delete file="${war}" />
 		<delete dir="${bin-path}" />
@@ -143,7 +151,7 @@ Workflow
 		</java>
 	</target>
 
-	<target name="compile">
+	<target name="compile" depends="-version">
 		<mkdir dir="${bin-path}"/>
 		<javac srcdir="${src-path}:${src-gen-path}" destdir="${bin-path}" debug="true" includeantruntime="false">
 			<classpath refid="compile.path"/>
