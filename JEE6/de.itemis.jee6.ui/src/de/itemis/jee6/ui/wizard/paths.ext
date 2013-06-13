@@ -18,3 +18,6 @@ String getModelPath() :
 
 String getWorkflow() :
 	"Generator.mwe2";
+
+String package(String basePackage, String applicationName) :
+	basePackage + "." + applicationName.toFirstLower();
