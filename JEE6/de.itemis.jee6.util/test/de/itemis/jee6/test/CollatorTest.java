@@ -2,6 +2,7 @@ package de.itemis.jee6.test;
 
 import junit.framework.Assert;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import de.itemis.jee6.test.sorter.GermanSorter;
@@ -11,6 +12,13 @@ public class CollatorTest
 {
 	private final static GermanSorter german = new GermanSorter();
 	private final static GreekSorter  greek  = new GreekSorter();
+
+	@Before
+	public void asc()
+	{
+		german.asc();
+		greek.asc();
+	}
 
 	@Test
 	public void testGerman()
@@ -58,5 +66,35 @@ public class CollatorTest
 		Assert.assertTrue(greek.compare("γ", "Β") > 0);
 		Assert.assertTrue(greek.compare("Γ", "β") > 0);
 		Assert.assertTrue(greek.compare("Γ", "Β") > 0);
+	}
+	
+	@Test
+	public void testDescGerman()
+	{
+		Assert.assertTrue(german.compare("a", "b") < 0);
+		Assert.assertTrue(german.compare("a", "B") < 0);
+		Assert.assertTrue(german.compare("A", "b") < 0);
+		Assert.assertTrue(german.compare("A", "B") < 0);
+
+		german.revert();
+		Assert.assertTrue(german.compare("a", "b") > 0);
+		Assert.assertTrue(german.compare("a", "B") > 0);
+		Assert.assertTrue(german.compare("A", "b") > 0);
+		Assert.assertTrue(german.compare("A", "B") > 0);
+	}
+	
+	@Test
+	public void testDescGreek()
+	{
+		Assert.assertTrue(greek.compare("α", "β") < 0);
+		Assert.assertTrue(greek.compare("α", "Β") < 0);
+		Assert.assertTrue(greek.compare("Α", "β") < 0);
+		Assert.assertTrue(greek.compare("Α", "Β") < 0);
+		
+		greek.revert();
+		Assert.assertTrue(greek.compare("α", "β") > 0);
+		Assert.assertTrue(greek.compare("α", "Β") > 0);
+		Assert.assertTrue(greek.compare("Α", "β") > 0);
+		Assert.assertTrue(greek.compare("Α", "Β") > 0);
 	}
 }

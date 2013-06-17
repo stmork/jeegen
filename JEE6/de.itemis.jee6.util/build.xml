@@ -135,6 +135,7 @@
 				<classpath refid="coverage.classpath" />
 				<formatter type="xml"/>
 				<test name="de.itemis.jee6.test.Base64Test"/>
+				<test name="de.itemis.jee6.test.SHA1Test"/>
 				<test name="de.itemis.jee6.test.UtilTest"/>
 				<test name="de.itemis.jee6.test.CollatorTest"/>
 				<test name="de.itemis.jee6.test.ErrorInfoTest"/>

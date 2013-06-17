@@ -68,15 +68,25 @@ abstract public class CollatingComparator<T> implements Comparator<T>, Serializa
 		order = ASC;
 	}
 
-	@Override
+	/**
+	 * This abstract method implements the {@link Comparator#compare(Object, Object)} method
+	 * of the {@link Comparator} interface. By
+	 * default it calls the {@link CollatingComparator}{@link #compareLocale(Object, Object)}
+	 * method ant respects the ascending or descending sort order state.
+	 * 
+	 *  @param o1 The first object to compare.
+	 *  @param o2 The second object to compare.
+	 *  @see Comparator#compare(Object, Object)
+	 */
 	public int compare(final T o1, final T o2)
 	{
-		return compareLocale(o1, o2);
+		return compareLocale(o1, o2) * order;
 	}
 
 	/**
 	 * This abstract method provides a compare method in a locale way which is provided
-	 * by the derived class.
+	 * by the derived class. This method does not respect the sort order flag it is ment to
+	 * provide a native comparison method.
 	 * 
 	 * @param v1 The first verb
 	 * @param v2 The second verb
