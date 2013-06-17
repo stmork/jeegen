@@ -2,6 +2,9 @@ package de.itemis.jee6.util;
 
 import java.io.UnsupportedEncodingException;
 
+/**
+ * This class support encoding an decoding of BASE64 coder.
+ */
 public class Base64
 {
 	private final static char[] ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".toCharArray();
@@ -15,17 +18,22 @@ public class Base64
 		}
 	}
 
+	/**
+	 * This method encodes a text into BASE64.
+	 * @param input The text to encode.
+	 * @return The encoded text.
+	 * @throws UnsupportedEncodingException
+	 */
 	public static String encode(final String input) throws UnsupportedEncodingException
 	{
 		return encode(input.getBytes("ISO8859-1"));
 	}
 
 	/**
-	 * Translates the specified byte array into Base64 string.
-	 * 
-	 * @param buf
-	 *            the byte array (not null)
-	 * @return the translated Base64 string (not null)
+	 * This method encodes a byte array into BASE64.
+	 * @param input The text to encode.
+	 * @return The encoded text.
+	 * @throws UnsupportedEncodingException
 	 */
 	public static String encode(final byte[] buf)
 	{
