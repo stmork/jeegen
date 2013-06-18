@@ -29,14 +29,14 @@
 
 «DEFINE index FOR Model»
 «FILE index(this) XHTML»
-«EXPAND utility::XhtmlStart»
+«EXPAND utility::XhtmlFragmentStart»
 <ui:composition template="/«layout()»">
 	<ui:define name="title">#{msg['start.title']}</ui:define>
 	<ui:define name="content">
 		<div><h2>#{msg.welcome}</h2></div>
 	</ui:define>
 </ui:composition>
-«EXPAND utility::XhtmlEnd»
+«EXPAND utility::XhtmlFragmentEnd»
 «ENDFILE»
 «ENDDEFINE»
 
@@ -52,53 +52,55 @@
             <link href="#{request.contextPath}/img/favicon.ico"
                 rel="shortcut icon" type="image/x-icon"/>
 		</h:head>
-		<div class="header">
-            <div class="boxed">
-				<div class="logo">
-					<h:outputLink value="#{request.contextPath}">
-						<h:graphicImage class="logo" value="/img/logo.png"/>
-					</h:outputLink>
-                </div>
-                <div>
-                    <h1><ui:insert name="title"/></h1>
+		<body>
+			<div class="header">
+	            <div class="boxed">
+					<div class="logo">
+						<h:outputLink value="#{request.contextPath}">
+							<h:graphicImage class="logo" value="/img/logo.png" alt="«this.name»"/>
+						</h:outputLink>
+					</div>
+					<div>
+	                    <h1><ui:insert name="title"/></h1>
 «IF hasSecurityDomain()»
-					#{msg['start.name']} #{sessionController.name}
+						#{msg['start.name']} #{sessionController.name}
 «ENDIF»
+					</div>
 				</div>
-			</div>
-        </div>
-        <div class="line"/>
-        <div class="page">
-            <div class="left">
-                <div class="box">
-                    <ui:include src="menu.xhtml"/>
-                </div>
-            </div>
-<!-- Use if you want a right column
-            <div class="right">
-                <div class="box">
-
-                </div>
-            </div>
--->
-            <div class="content">
-                <ui:insert name="content"/>
-            </div>
-        	<div class="clear"/>
-        </div>
-        <div class="line"/>
-        <div class="footer">
-        	<div class="left">
-	            <h:outputFormat value="#{msg.footer}">
-	                <f:param value="#{ver['vendor']}"/>
-	                <f:param value="#{ver['version.major']}"/>
-	                <f:param value="#{ver['version.minor']}"/>
-	                <f:param value="#{ver['version.patch']}"/>
-	            </h:outputFormat>
-        	</div>
-        	<div class="right"/>
-        	<div class="clear"/>
-        </div>
+	        </div>
+	        <div class="line"/>
+	        <div class="page">
+	            <div class="left">
+	                <div class="box">
+	                    <ui:include src="menu.xhtml"/>
+	                </div>
+	            </div>
+	<!-- Use if you want a right column
+	            <div class="right">
+	                <div class="box">
+	
+	                </div>
+	            </div>
+	-->
+	            <div class="content">
+	                <ui:insert name="content"/>
+	            </div>
+	        	<div class="clear"/>
+	        </div>
+	        <div class="line"/>
+	        <div class="footer">
+	        	<div class="left">
+		            <h:outputFormat value="#{msg.footer}">
+		                <f:param value="#{ver['vendor']}"/>
+		                <f:param value="#{ver['version.major']}"/>
+		                <f:param value="#{ver['version.minor']}"/>
+		                <f:param value="#{ver['version.patch']}"/>
+		            </h:outputFormat>
+	        	</div>
+	        	<div class="right"/>
+	        	<div class="clear"/>
+	        </div>
+		</body>
     </f:view>
 «EXPAND utility::XhtmlEnd»
 «ENDFILE»
@@ -106,7 +108,7 @@
 
 «DEFINE login FOR Model»
 «FILE login(this) XHTML»
-«EXPAND utility::XhtmlStart»
+«EXPAND utility::XhtmlFragmentStart»
 <ui:composition template="/«layout()»">
 	<ui:define name="title">#{msg['login.title']}</ui:define>
 	<ui:define name="content">
@@ -150,13 +152,13 @@
 		</div>
 	</ui:define>
 </ui:composition>
-«EXPAND utility::XhtmlEnd»
+«EXPAND utility::XhtmlFragmentEnd»
 «ENDFILE»
 «ENDDEFINE»
 
 «DEFINE logout FOR Model»
 «FILE logout(this) XHTML»
-«EXPAND utility::XhtmlStart»
+«EXPAND utility::XhtmlFragmentStart»
 <ui:composition template="/«layout()»">
 	<ui:define name="title">#{msg['logout.title']}</ui:define>
 	<ui:define name="content">
@@ -170,28 +172,28 @@
 		</div>
 	</ui:define>
 </ui:composition>
-«EXPAND utility::XhtmlEnd»
+«EXPAND utility::XhtmlFragmentEnd»
 «ENDFILE»
 «ENDDEFINE»
 
 «DEFINE menu FOR Model»
 «FILE menu(this) XHTML»
-«EXPAND utility::XhtmlStart»
-					<h2>#{msg.menue}</h2>
-					<ul>
-						<li><h:link value="#{msg.main}" outcome="/«index()»" /></li>
+«EXPAND utility::XhtmlFragmentStart»
+	<h2>#{msg.menue}</h2>
+	<ul>
+		<li><h:link value="#{msg.main}" outcome="/«index()»" /></li>
 «FOREACH processes AS process»
-						<ui:fragment rendered="#{«handlerUri(process)».allowed}" >
-							<li><h:link value="#{msg.«prefixOf(process)»}" outcome="/«index(process)»" /></li>
-						</ui:fragment>
+		<ui:fragment rendered="#{«handlerUri(process)».allowed}" >
+			<li><h:link value="#{msg.«prefixOf(process)»}" outcome="/«index(process)»" /></li>
+		</ui:fragment>
 «ENDFOREACH»
 «IF hasSecurityDomain()»
-						<ui:fragment rendered="#{«sessionUri()».loggedIn}">
-							<li><h:link value="#{msg.logout}" outcome="/logout.xhtml"/></li>
-						</ui:fragment>
+		<ui:fragment rendered="#{«sessionUri()».loggedIn}">
+			<li><h:link value="#{msg.logout}" outcome="/logout.xhtml"/></li>
+		</ui:fragment>
 «ENDIF»
-					</ul>
-«EXPAND utility::XhtmlEnd»
+	</ul>
+«EXPAND utility::XhtmlFragmentEnd»
 «ENDFILE»
 «ENDDEFINE»
 
@@ -199,7 +201,7 @@
 «LET getUiEntities() AS entities»
 «EXPAND ui(this) FOREACH entities»
 «FILE index(this) XHTML»
-«EXPAND utility::XhtmlStart»
+«EXPAND utility::XhtmlFragmentStart»
 <ui:composition template="/«layout(getModel())»">
 	<ui:define name="title">#{msg['«prefixOf()».title']}</ui:define>
 	<ui:define name="content">
@@ -211,7 +213,7 @@
 		</ul>
 	</ui:define>
 </ui:composition>
-«EXPAND utility::XhtmlEnd»
+«EXPAND utility::XhtmlFragmentEnd»
 «ENDFILE»
 «ENDLET»
 «ENDDEFINE»
@@ -220,7 +222,7 @@
 «EXPAND history(p) FOREACH types.typeSelect(History).type»
 «EXPAND entities(p) FOREACH types.typeSelect(EntityRef).select(e|e.many).type»
 «FILE index(p, this) XHTML»
-«EXPAND utility::XhtmlStart»
+«EXPAND utility::XhtmlFragmentStart»
 <ui:composition template="/«layout(getModel(p))»">
 	<ui:define name="title">#{msg['«prefixOf(p)».«prefixOf(this)».title']}</ui:define>
 	<ui:define name="content">
@@ -229,13 +231,13 @@
 «EXPAND list::entityList(p)»
 	</ui:define>
 </ui:composition>
-«EXPAND utility::XhtmlEnd»
+«EXPAND utility::XhtmlFragmentEnd»
 «ENDFILE»
 «ENDDEFINE»
 
 «DEFINE history(Process p) FOR Entity»
 «FILE index(p, this) XHTML»
-«EXPAND utility::XhtmlStart»
+«EXPAND utility::XhtmlFragmentStart»
 <ui:composition template="/«layout(getModel(p))»">
 	<ui:define name="title">#{msg['«prefixOf(p)».«prefixOf(this)».title']}</ui:define>
 	<ui:define name="content">
@@ -244,13 +246,13 @@
 «EXPAND list::historyList(p)»
 	</ui:define>
 </ui:composition>
-«EXPAND utility::XhtmlEnd»
+«EXPAND utility::XhtmlFragmentEnd»
 «ENDFILE»
 «ENDDEFINE»
 
 «DEFINE entities(Process p) FOR Entity»
 «FILE index(p, this) XHTML»
-«EXPAND utility::XhtmlStart»
+«EXPAND utility::XhtmlFragmentStart»
 <ui:composition template="/«layout(getModel(p))»">
 	<ui:define name="title">#{msg['«prefixOf(p)».«prefixOf(this)».title']}</ui:define>
 	<ui:define name="content">
@@ -259,72 +261,46 @@
 «EXPAND list::entitiesList(p)»
 	</ui:define>
 </ui:composition>
-«EXPAND utility::XhtmlEnd»
+«EXPAND utility::XhtmlFragmentEnd»
 «ENDFILE»
 «ENDDEFINE»
 
 «DEFINE error FOR Model»
 «FILE "error.xhtml" XHTML»
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
-
-	<!-- ===== Created by JEE6-Generator $Id$ ===== -->
-	<!-- == Copyright (C) «year()»  itemis AG == -->
-
+«EXPAND utility::XhtmlFragmentStart»
 	<ui:composition template="/layout.xhtml">
 		<ui:define name="title">#{err['error.title']}</ui:define>
 		<ui:define name="content">
         	<div class="error">#{sessionController.exceptionMessage}</div>
 		</ui:define>
 	</ui:composition>
-</html>
+«EXPAND utility::XhtmlFragmentEnd»
 «ENDFILE»
 «ENDDEFINE»
 
 «DEFINE error403 FOR Model»
 «FILE "error403.xhtml" XHTML»
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
-
-	<!-- ===== Created by JEE6-Generator $Id$ ===== -->
-	<!-- == Copyright (C) «year()»  itemis AG == -->
-
+«EXPAND utility::XhtmlFragmentStart»
 	<ui:composition template="/layout.xhtml">
 		<ui:define name="title">#{err['code403.title']}</ui:define>
 		<ui:define name="content">
         	<div class="error">#{err['code403.message']}</div>
 		</ui:define>
 	</ui:composition>
-</html>
+«EXPAND utility::XhtmlFragmentEnd»
 «ENDFILE»
 «ENDDEFINE»
 
 «DEFINE error404 FOR Model»
 «FILE "error404.xhtml" XHTML»
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
-
-	<!-- ===== Created by JEE6-Generator $Id$ ===== -->
-	<!-- == Copyright (C) «year()»  itemis AG == -->
-
+«EXPAND utility::XhtmlFragmentStart»
 	<ui:composition template="/layout.xhtml">
 		<ui:define name="title">#{err['code404.title']}</ui:define>
 		<ui:define name="content">
         	<div class="error">#{err['code404.message']}</div>
 		</ui:define>
 	</ui:composition>
-</html>
+«EXPAND utility::XhtmlFragmentEnd»
 «ENDFILE»
 «ENDDEFINE»
