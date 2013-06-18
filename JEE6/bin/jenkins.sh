@@ -33,3 +33,6 @@ ant clobber generate package findbugs
 
 cd ../FacesTest
 ant clean generate package findbugs test
+
+cd ../de.itemis.jee6.dbauth
+ant clean generate package

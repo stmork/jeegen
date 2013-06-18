@@ -72,7 +72,8 @@ abstract public class CollatingComparator<T> implements Comparator<T>, Serializa
 	 * This abstract method implements the {@link Comparator#compare(Object, Object)} method
 	 * of the {@link Comparator} interface. By
 	 * default it calls the {@link CollatingComparator}{@link #compareLocale(Object, Object)}
-	 * method ant respects the ascending or descending sort order state.
+	 * method and respects the ascending or descending sort order state. Override this method
+	 * only if you want to use multiple {@link Locale}s for comparison reasons.
 	 * 
 	 *  @param o1 The first object to compare.
 	 *  @param o2 The second object to compare.
@@ -85,13 +86,14 @@ abstract public class CollatingComparator<T> implements Comparator<T>, Serializa
 
 	/**
 	 * This abstract method provides a compare method in a locale way which is provided
-	 * by the derived class. This method does not respect the sort order flag it is ment to
-	 * provide a native comparison method.
+	 * by the derived class. This method should not respect the sort order flag as it is ment to
+	 * provide alnoy a native {@link Locale} comparison method. You can implement cascaded
+	 * comparisons like surename, forename, etc.
 	 * 
-	 * @param v1 The first verb
-	 * @param v2 The second verb
+	 *  @param o1 The first object to compare.
+	 *  @param o2 The second object to compare.
 	 * @return An integer which is zero on equal words, a negative integer if v1 is smaller than v2 and
 	 * a positive number if v1 is greater than v2.
 	 */
-	abstract protected int compareLocale(final T v1, final T v2);
+	abstract protected int compareLocale(final T o1, final T o2);
 }

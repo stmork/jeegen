@@ -1,0 +1,19 @@
+// Edit model here...
+application "DB-Auth"  context "/dbauth" package de.itemis.jee6.dbauth development strict;
+persistence unit"authDS" jndi "jdbc/authDS";
+locale "de" default;
+
+entity AuthInfo
+{
+	Email          email;
+	Text           password;
+	Text           passwordUncoded transient;
+	Boolean        active;
+	Timestamp auto created;
+	Date           expire;
+}
+
+process User
+{
+	AuthInfo
+}
