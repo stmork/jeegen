@@ -27,131 +27,131 @@
 «ENDIF»
 «ENDDEFINE»
 
-«DEFINE index FOR Model»
-«FILE index(this) XHTML»
-«EXPAND utility::XhtmlFragmentStart»
-<ui:composition template="/«layout()»">
-	<ui:define name="title">#{msg['start.title']}</ui:define>
-	<ui:define name="content">
-		<div><h2>#{msg.welcome}</h2></div>
-	</ui:define>
-</ui:composition>
-«EXPAND utility::XhtmlFragmentEnd»
-«ENDFILE»
-«ENDDEFINE»
-
 «DEFINE layout FOR Model»
 «FILE layout(this) XHTML»
 «EXPAND utility::XhtmlStart»
-    <f:view>
-        <h:head>
-            <title>
-                <ui:insert name="title"/>
-            </title>
-            <h:outputStylesheet library="css" name="display.css"/>
-            <link href="#{request.contextPath}/img/favicon.ico"
-                rel="shortcut icon" type="image/x-icon"/>
+	<f:view>
+		<h:head>
+			<title>
+				<ui:insert name="title"/>
+			</title>
+			<h:outputStylesheet library="css" name="display.css"/>
+			<link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/img/favicon.ico" />
+			<link rel="apple-touch-icon-precomposed" href="#{request.contextPath}/resources/img/logo.png" />
 		</h:head>
 		<body>
 			<div class="header">
-	            <div class="boxed">
+				<div class="boxed">
 					<div class="logo">
 						<h:outputLink value="#{request.contextPath}">
 							<h:graphicImage class="logo" value="/img/logo.png" alt="«this.name»"/>
 						</h:outputLink>
 					</div>
 					<div>
-	                    <h1><ui:insert name="title"/></h1>
+						<h1><ui:insert name="title"/></h1>
 «IF hasSecurityDomain()»
 						#{msg['start.name']} #{sessionController.name}
 «ENDIF»
 					</div>
 				</div>
-	        </div>
-	        <div class="line"/>
-	        <div class="page">
-	            <div class="left">
-	                <div class="box">
-	                    <ui:include src="menu.xhtml"/>
-	                </div>
-	            </div>
-	<!-- Use if you want a right column
-	            <div class="right">
-	                <div class="box">
+			</div>
+			<div class="line"/>
+			<div class="page">
+				<div class="left">
+					<div class="box">
+						<ui:include src="menu.xhtml"/>
+					</div>
+				</div>
+				<!-- Use if you want a right column
+				<div class="right">
+					<div class="box">
 	
-	                </div>
-	            </div>
-	-->
-	            <div class="content">
-	                <ui:insert name="content"/>
-	            </div>
+					</div>
+				</div>
+				-->
+				<div class="content">
+					<ui:insert name="content"/>
+				</div>
 	        	<div class="clear"/>
-	        </div>
-	        <div class="line"/>
-	        <div class="footer">
-	        	<div class="left">
-		            <h:outputFormat value="#{msg.footer}">
-		                <f:param value="#{ver['vendor']}"/>
-		                <f:param value="#{ver['version.major']}"/>
-		                <f:param value="#{ver['version.minor']}"/>
-		                <f:param value="#{ver['version.patch']}"/>
-		            </h:outputFormat>
-	        	</div>
-	        	<div class="right"/>
-	        	<div class="clear"/>
-	        </div>
+			</div>
+			<div class="line"/>
+			<div class="footer">
+				<div class="left">
+					<h:outputFormat value="#{msg.footer}">
+						<f:param value="#{ver['vendor']}"/>
+						<f:param value="#{ver['version.major']}"/>
+						<f:param value="#{ver['version.minor']}"/>
+						<f:param value="#{ver['version.patch']}"/>
+					</h:outputFormat>
+				</div>
+				<div class="right"/>
+				<div class="clear"/>
+			</div>
 		</body>
-    </f:view>
+	</f:view>
 «EXPAND utility::XhtmlEnd»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE index FOR Model»
+«FILE index(this) XHTML»
+«EXPAND utility::XhtmlFragmentStart»
+	<ui:composition template="/«layout()»">
+		<ui:define name="title">#{msg['start.title']}</ui:define>
+		<ui:define name="content">
+			<div><h2>#{msg.welcome}</h2></div>
+		</ui:define>
+	</ui:composition>
+«EXPAND utility::XhtmlFragmentEnd»
 «ENDFILE»
 «ENDDEFINE»
 
 «DEFINE login FOR Model»
 «FILE login(this) XHTML»
 «EXPAND utility::XhtmlFragmentStart»
-<ui:composition template="/«layout()»">
-	<ui:define name="title">#{msg['login.title']}</ui:define>
-	<ui:define name="content">
-		<div class="box">
-			<form id="login" name="login" method="post" action="j_security_check">
-				<table>
-					<tr>
-						<td></td>
-						<td class="remark">#{msg['login.do_login']}</td>
-					</tr>
-					<tr>
-						<td class="mid">#{msg['login.user']}:</td>
-						<td><h:inputText autofocus="autofocus" id="j_username" autocomplete="off" /></td>
-					</tr>
-					<tr>
-						<td class="mid">#{msg['login.password']}:</td>
-						<td><h:inputSecret id="j_password" autocomplete="off" /></td>
-					</tr>
-					<tr>
-						<td/>
-						<td>
-							<h:commandButton type="submit" value="#{msg.login}" />
-							<h:commandButton type="reset" value="#{msg.clear}" />
-						</td>
-					</tr>
-				</table>
-				<h:outputScript>
-					function setFocusOnLoginForm()
-					{
-						try
+	<ui:composition template="/«layout()»">
+		<ui:define name="title">#{msg['login.title']}</ui:define>
+		<ui:define name="content">
+			<div class="box">
+				<form id="login" name="login" method="post" action="j_security_check">
+					<table>
+						<tr>
+							<td></td>
+							<td class="remark">#{msg['login.do_login']}</td>
+						</tr>
+						<tr>
+							<td class="mid">#{msg['login.user']}:</td>
+							<td><h:inputText autofocus="autofocus" id="j_username" autocomplete="off" /></td>
+						</tr>
+						<tr>
+							<td class="mid">#{msg['login.password']}:</td>
+							<td><h:inputSecret id="j_password" autocomplete="off" /></td>
+						</tr>
+						<tr>
+							<td/>
+							<td>
+								<h:commandButton type="submit" value="#{msg.login}" />
+								<h:commandButton type="reset" value="#{msg.clear}" />
+							</td>
+						</tr>
+					</table>
+					<h:outputScript>
+						function setFocusOnLoginForm()
 						{
-							document.login.j_username.focus();
+							try
+							{
+								document.login.j_username.focus();
+							}
+							catch (err)
+							{
+							}
 						}
-						catch (err)
-						{
-						}
-					}
-					setFocusOnLoginForm();
-				</h:outputScript>
-			</form>
-		</div>
-	</ui:define>
-</ui:composition>
+						setFocusOnLoginForm();
+					</h:outputScript>
+				</form>
+			</div>
+		</ui:define>
+	</ui:composition>
 «EXPAND utility::XhtmlFragmentEnd»
 «ENDFILE»
 «ENDDEFINE»
@@ -159,19 +159,19 @@
 «DEFINE logout FOR Model»
 «FILE logout(this) XHTML»
 «EXPAND utility::XhtmlFragmentStart»
-<ui:composition template="/«layout()»">
-	<ui:define name="title">#{msg['logout.title']}</ui:define>
-	<ui:define name="content">
-		<div class="box">
-			<h1>#{msg['logout.title']}</h1>
-			<h:form>
-				#{msg['logout.message']}
-				<h:commandButton value="#{msg.logout}" action="#{sessionController.logout(request)}" />
-				<h:commandButton value="#{msg.back}" action="/«index()»" />
-			</h:form>
-		</div>
-	</ui:define>
-</ui:composition>
+	<ui:composition template="/«layout()»">
+		<ui:define name="title">#{msg['logout.title']}</ui:define>
+		<ui:define name="content">
+			<div class="box">
+				<h1>#{msg['logout.title']}</h1>
+				<h:form>
+					#{msg['logout.message']}
+					<h:commandButton value="#{msg.logout}" action="#{sessionController.logout(request)}" />
+					<h:commandButton value="#{msg.back}" action="/«index()»" />
+				</h:form>
+			</div>
+		</ui:define>
+	</ui:composition>
 «EXPAND utility::XhtmlFragmentEnd»
 «ENDFILE»
 «ENDDEFINE»

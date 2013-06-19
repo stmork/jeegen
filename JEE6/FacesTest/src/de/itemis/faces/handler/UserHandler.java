@@ -79,7 +79,7 @@ public class UserHandler extends AbstractHandler
 		/*
 		 * This extracts an avatar image from the request. The image is stored via the <input type="file"> tag.
 		 */
-		HttpServletRequest req = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		HttpServletRequest req = (HttpServletRequest)getExternalContext().getRequest();
 		try
 		{
 			// The method getPart() is part of the servlet 3.0 specification.
