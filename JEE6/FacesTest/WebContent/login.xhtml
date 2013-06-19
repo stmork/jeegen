@@ -1,47 +1,46 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<div
 		xmlns:ui="http://java.sun.com/jsf/facelets"      
 		xmlns:h="http://java.sun.com/jsf/html">
 
-<ui:composition template="/layout.xhtml">
-	<ui:define name="title">#{msg['login.title']}</ui:define>
-	<ui:define name="content">
-		<form id="login" name="login" method="post" action="j_security_check">
-			<table>
-				<tr>
-					<td></td>
-					<td class="remark">#{msg['login.do_login']}</td>
-				</tr>
-				<tr>
-					<td class="mid">#{msg['login.user']}:</td>
-					<td><h:inputText autofocus="autofocus" id="j_username" autocomplete="off" /></td>
-				</tr>
-				<tr>
-					<td class="mid">#{msg['login.password']}:</td>
-					<td><h:inputSecret id="j_password" autocomplete="off" /></td>
-				</tr>
-				<tr>
-					<td/>
-					<td>
-						<h:commandButton type="submit" value="#{msg['login.login']}" />
-						<h:commandButton type="reset" value="#{msg.clear}" />
-					</td>
-				</tr>
-			</table>
-			<h:outputScript>
-				function setFocusOnLoginForm()
-				{
-					try
+	<ui:composition template="/layout.xhtml">
+		<ui:define name="title">#{msg['login.title']}</ui:define>
+		<ui:define name="content">
+			<form id="login" name="login" method="post" action="j_security_check">
+				<table>
+					<tr>
+						<td></td>
+						<td class="remark">#{msg['login.do_login']}</td>
+					</tr>
+					<tr>
+						<td class="mid">#{msg['login.user']}:</td>
+						<td><h:inputText autofocus="autofocus" id="j_username" autocomplete="off" /></td>
+					</tr>
+					<tr>
+						<td class="mid">#{msg['login.password']}:</td>
+						<td><h:inputSecret id="j_password" autocomplete="off" /></td>
+					</tr>
+					<tr>
+						<td/>
+						<td>
+							<h:commandButton type="submit" value="#{msg['login.login']}" />
+							<h:commandButton type="reset" value="#{msg.clear}" />
+						</td>
+					</tr>
+				</table>
+				<h:outputScript>
+					function setFocusOnLoginForm()
 					{
-						document.login.j_username.focus();
+						try
+						{
+							document.login.j_username.focus();
+						}
+						catch (err)
+						{
+						}
 					}
-					catch (err)
-					{
-					}
-				}
-				setFocusOnLoginForm();
-			</h:outputScript>
-		</form>
-	</ui:define>
-</ui:composition>
-</html>
+					setFocusOnLoginForm();
+				</h:outputScript>
+			</form>
+		</ui:define>
+	</ui:composition>
+</div>
