@@ -1,20 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
-    <!-- ===== Created by JEE6-Generator $Id$ ===== -->
-    <!-- == Copyright (C) 2013  itemis AG == -->
-    <h2>#{msg.menue}</h2>
-    <ul>
-        <li>
-            <h:link outcome="/index.xhtml" value="#{msg.main}"/>
-        </li>
-        <ui:fragment rendered="#{userHandler.allowed}">
-            <li>
-                <h:link outcome="/user/index.xhtml" value="#{msg.user}"/>
-            </li>
-        </ui:fragment>
-    </ul>
-</html>
+<div xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<!-- ===== Created by JEE6-Generator $Id$ ===== -->
+<!-- == Copyright (C) 2013  itemis AG == --> 
+
+
+	<h2>#{msg.menue}</h2>
+	<ul>
+		<li><h:link outcome="/index.xhtml" value="#{msg.main}"/></li>
+
+		<ui:fragment rendered="#{userHandler.allowed}">
+			<li><h:link outcome="/user/index.xhtml" value="#{msg.user}"/></li>
+		</ui:fragment>
+
+
+	</ul>
+
+</div>

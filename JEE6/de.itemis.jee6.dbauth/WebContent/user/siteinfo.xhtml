@@ -1,0 +1,86 @@
+<div xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<!-- ===== Created by JEE6-Generator $Id$ ===== -->
+<!-- == Copyright (C) 2013  itemis AG == --> 
+
+
+<ui:composition template="/layout.xhtml">
+	<ui:define name="title">#{msg['user.siteinfo.title']}</ui:define>
+	<ui:define name="content">
+		<h:messages layout="table" styleClass="error"/>
+
+			<!-- === generated mask === --> 
+			<!-- process: User entity: SiteInfo -->
+
+
+
+		<div class="box">
+			<h:form id="siteinfo">
+				<table>
+
+					<tr>
+
+						<td class="mid"><h:outputLabel for="name" value="#{msg['user.siteinfo.name']}"/></td>
+						<td>
+
+
+						<h:inputText id="name" label="#{msg['user.siteinfo.name']}" maxlength="255" value="#{userHandler.siteInfo.name}"/>
+
+
+						</td>
+					</tr>
+
+					<tr>
+
+						<td/>
+						<td>
+							<h:commandButton action="#{userHandler.saveSiteInfo}" value="#{userHandler.siteInfo.id == 0 ? msg.create : msg.save}"/>
+
+							<h:commandButton action="#{userHandler.backFromSiteInfo}" value="#{msg.back}"/>
+						</td>
+					</tr>
+
+
+
+				</table>
+			</h:form>
+		</div>
+
+
+
+
+
+			<!-- === generated list === --> 
+			<!-- process: User entity: SiteInfo -->
+
+
+			<h:form id="siteinfo_list">
+				<h:dataTable columnClasses="left,command,command,command" rowClasses="odd,even" styleClass="list" value="#{userHandler.siteInfoList}" var="siteInfo">
+
+					<h:column>
+						<f:facet name="header">#{msg['user.siteinfo.name']}</f:facet>
+
+					#{siteInfo.name}
+
+					</h:column>
+
+					<h:column>
+						<f:facet name="header"/>
+						<h:commandLink action="#{userHandler.changeSiteInfo(siteInfo)}" value="#{msg.change}"/>
+					</h:column>
+
+					<h:column>
+						<f:facet name="header"/>
+						<h:commandLink action="#{userHandler.removeSiteInfo(siteInfo)}" value="#{msg.remove}"/>
+					</h:column>
+
+				</h:dataTable>
+			</h:form>
+
+
+
+	</ui:define>
+</ui:composition>
+
+</div>

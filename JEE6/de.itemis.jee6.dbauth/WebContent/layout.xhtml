@@ -1,65 +1,67 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
-    <!-- ===== Created by JEE6-Generator $Id$ ===== -->
-    <!-- == Copyright (C) 2013  itemis AG == -->
-    <f:view>
-        <h:head>
-            <title>
-                <ui:insert name="title"/>
-            </title>
-            <h:outputStylesheet library="css" name="display.css"/>
-            <link href="#{request.contextPath}/img/favicon.ico"
-                rel="shortcut icon" type="image/x-icon"/>
-        </h:head>
-        <div class="header">
-            <div class="boxed">
-                <div class="logo">
-                    <h:outputLink value="#{request.contextPath}">
-                        <h:graphicImage class="logo" value="/img/logo.png"/>
-                    </h:outputLink>
-                </div>
-                <div>
-                    <h1>
-                        <ui:insert name="title"/>
-                    </h1>
-                </div>
-            </div>
-        </div>
-        <div class="line"/>
-        <div class="page">
-            <div class="left">
-                <div class="box">
-                    <ui:include src="menu.xhtml"/>
-                </div>
-            </div>
-            <!-- Use if you want a right column
-            <div class="right">
-                <div class="box">
+<!DOCTYPE html SYSTEM "html">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
 
-                </div>
-            </div>
--->
-            <div class="content">
-                <ui:insert name="content"/>
-            </div>
-            <div class="clear"/>
-        </div>
-        <div class="line"/>
-        <div class="footer">
-            <div class="left">
-                <h:outputFormat value="#{msg.footer}">
-                    <f:param value="#{ver['vendor']}"/>
-                    <f:param value="#{ver['version.major']}"/>
-                    <f:param value="#{ver['version.minor']}"/>
-                    <f:param value="#{ver['version.patch']}"/>
-                </h:outputFormat>
-            </div>
-            <div class="right"/>
-            <div class="clear"/>
-        </div>
-    </f:view>
+
+<!-- ===== Created by JEE6-Generator $Id$ ===== -->
+<!-- == Copyright (C) 2013  itemis AG == --> 
+
+
+	<f:view>
+		<h:head>
+			<title>
+				<ui:insert name="title"/>
+			</title>
+			<h:outputStylesheet library="css" name="display.css"/>
+			<link href="#{request.contextPath}/img/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+			<link href="#{request.contextPath}/resources/img/logo.png" rel="apple-touch-icon-precomposed"/>
+		</h:head>
+		<body>
+			<div class="header">
+				<div class="boxed">
+					<div class="logo">
+						<h:outputLink value="#{request.contextPath}">
+							<h:graphicImage alt="DB-Auth" class="logo" value="/img/logo.png"/>
+						</h:outputLink>
+					</div>
+					<div>
+						<h1><ui:insert name="title"/></h1>
+
+					</div>
+				</div>
+			</div>
+			<div class="line"/>
+			<div class="page">
+				<div class="left">
+					<div class="box">
+						<ui:include src="menu.xhtml"/>
+					</div>
+				</div>
+				<!-- Use if you want a right column
+				<div class="right">
+					<div class="box">
+	
+					</div>
+				</div>
+				-->
+				<div class="content">
+					<ui:insert name="content"/>
+				</div>
+	        	<div class="clear"/>
+			</div>
+			<div class="line"/>
+			<div class="footer">
+				<div class="left">
+					<h:outputFormat value="#{msg.footer}">
+						<f:param value="#{ver['vendor']}"/>
+						<f:param value="#{ver['version.major']}"/>
+						<f:param value="#{ver['version.minor']}"/>
+						<f:param value="#{ver['version.patch']}"/>
+					</h:outputFormat>
+				</div>
+				<div class="right"/>
+				<div class="clear"/>
+			</div>
+		</body>
+	</f:view>
+
 </html>
