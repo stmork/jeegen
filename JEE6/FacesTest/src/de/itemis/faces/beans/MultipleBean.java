@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.interceptor.Interceptors;
 import javax.sql.DataSource;
 
 import org.apache.commons.logging.Log;
@@ -16,11 +17,14 @@ import org.apache.commons.logging.LogFactory;
 
 import de.itemis.faces.dao.AbstractDaoBean;
 import de.itemis.faces.entities.AddressOption;
+import de.itemis.jee6.util.LogUtil;
+import de.itemis.jee6.util.Profiler;
 
 /**
  * This class tests the usage of XA data sources.
  */
 @Stateless
+@Interceptors(Profiler.class)
 public class MultipleBean extends AbstractDaoBean
 {
 	private final static Log log = LogFactory.getLog(MultipleBean.class);
@@ -43,8 +47,6 @@ public class MultipleBean extends AbstractDaoBean
 		Statement  stmt       = null;
 		ResultSet  result     = null;
 
-		log.debug(">test()");
-		
 		try
 		{
 			for (AddressOption type : getAddressOptionList())
@@ -64,7 +66,43 @@ public class MultipleBean extends AbstractDaoBean
 		finally
 		{
 			close(connection, stmt, result);
-			log.debug("<test()");
+		}
+	}
+	
+	/**
+	 * This method uses two data sources at the same time so XA data sources for the entity
+	 * manager is needed. This method uses a second pure data source injected into this bean.
+	 * The pure data source does not need to be a XA data source. Additionally the entity
+	 * manager mustn't be an extended persistence context so we can use a stateless EJB. 
+	 *  
+	 * @throws SQLException
+	 */
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void checkSsl() throws SQLException
+	{
+		Connection connection = null;
+		Statement  stmt       = null;
+		ResultSet  result     = null;
+
+		try
+		{
+			for (AddressOption type : getAddressOptionList())
+			{
+				log.debug("    " + type);
+			}
+
+			connection = ds.getConnection();
+			stmt = connection.createStatement();
+			result = stmt.executeQuery("SHOW STATUS WHERE Variable_name LIKE 'Ssl_cipher%'");
+					
+			while (result.next())
+			{
+				LogUtil.debug(log, "%-20.20s = %s", result.getString("Variable_name"), result.getString("Value"));
+			}
+		}
+		finally
+		{
+			close(connection, stmt, result);
 		}
 	}
 	

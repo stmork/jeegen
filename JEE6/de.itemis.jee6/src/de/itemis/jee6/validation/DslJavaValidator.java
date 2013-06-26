@@ -14,7 +14,10 @@ import de.itemis.jee6.jee6.EntityRef;
 import de.itemis.jee6.jee6.History;
 import de.itemis.jee6.jee6.Jee6Package;
 import de.itemis.jee6.jee6.Model;
+import de.itemis.jee6.jee6.OptionRef;
+import de.itemis.jee6.jee6.Persistence;
 import de.itemis.jee6.jee6.Process;
+import de.itemis.jee6.jee6.Reference;
 import de.itemis.jee6.jee6.Security;
 import de.itemis.jee6.jee6.Text;
 import de.itemis.jee6.jee6.Timestamp;
@@ -55,7 +58,7 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 	}
 	
 	@Check(CheckType.FAST)
-	public void checkContextPath(Model model)
+	public void checkContextPath(final Model model)
 	{
 		if (!model.getPath().startsWith("/"))
 		{
@@ -64,7 +67,7 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 	}
 	
 	@Check(CheckType.FAST)
-	public void checkHistory(Entity entity)
+	public void checkHistory(final Entity entity)
 	{
 		final List<History> histories = EcoreUtil2.typeSelect(entity.getTypes(), History.class);
 
@@ -101,7 +104,7 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 	}
 
 	@Check(CheckType.FAST)
-	public void checkManyEntities(Entity entity)
+	public void checkManyEntities(final Entity entity)
 	{
 		final List<EntityRef> entities = EcoreUtil2.typeSelect(entity.getTypes(), EntityRef.class);
 
@@ -129,7 +132,7 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 	}
 
 	@Check(CheckType.FAST)
-	public void checkText(Text text)
+	public void checkText(final Text text)
 	{
 		guard(text.isId());
 		if (text.isId())
@@ -153,7 +156,7 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 	}
 
 	@Check(CheckType.FAST)
-	public void checkTimestampAuto(Timestamp timestamp)
+	public void checkTimestampAuto(final Timestamp timestamp)
 	{
 		int prePersistCount = 0;
 
@@ -178,7 +181,7 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 	
 
 	@Check(CheckType.FAST)
-	public void checkTimestampUpdate(Timestamp timestamp)
+	public void checkTimestampUpdate(final Timestamp timestamp)
 	{
 		int preUpdateCount = 0;
 
@@ -202,7 +205,7 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 	}
 
 	@Check(CheckType.FAST)
-	public void checkProcessRoles(Process process)
+	public void checkProcessRoles(final Process process)
 	{
 		final Model model    = (Model)process.eContainer();
 		final int   secCount = EcoreUtil2.typeSelect(model.getOptions(), Security.class).size();
@@ -212,5 +215,64 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 		{
 			warning("Rollen machen nur Sinn, wenn JAAS konfiguriert wurde!", Jee6Package.Literals.PROCESS__ROLES);
 		}
+	}
+	
+	@Check(CheckType.FAST)
+	public void checkPersistenceUnits(final Model model)
+	{
+		final int persistenceUnitCount   = EcoreUtil2.typeSelect(model.getOptions(), Persistence.class).size();
+		final int entityCount = model.getEntities().size();
+
+		if ((persistenceUnitCount <= 0) &&  (entityCount > 0))
+		{
+			error("Wenn Entities definiert wurden, muss mindestens eine Persistence Unit vorliegen!",
+					Jee6Package.Literals.MODEL__OPTIONS);
+		}
+	}
+	
+	@Check(CheckType.FAST)
+	public void checkEntity(final Entity entity)
+	{
+		final Persistence persistence = getPersistenceUnit(entity);
+
+		for (EntityRef reference : EcoreUtil2.typeSelect(entity.getTypes(), EntityRef.class))
+		{
+			checkEntity(entity, reference, reference.getType(), persistence);
+		}
+
+		for (History reference : EcoreUtil2.typeSelect(entity.getTypes(), History.class))
+		{
+			checkEntity(entity, reference, reference.getType(), persistence);
+		}
+
+		for (OptionRef reference : EcoreUtil2.typeSelect(entity.getTypes(), OptionRef.class))
+		{
+			checkEntity(entity, reference, reference.getType(), persistence);
+		}
+	}
+	
+	private void checkEntity(final Entity parent, final Reference reference, final Entity entity, final Persistence persistence)
+	{
+		if (getPersistenceUnit(entity) != persistence)
+		{
+			final int position = parent.getTypes().indexOf(reference);
+
+			error(String.format(
+					"Die Persistence Unit der Referenz %s muss der Persistence Unit der umgebenden Entity %s entsprechen!",
+					entity.getName(), parent.getName()),
+					Jee6Package.Literals.ENTITY__TYPES, position);
+		}
+	}
+	
+	private Persistence getPersistenceUnit(final Entity entity)
+	{
+		Persistence persistence = entity.getPersistence();
+		
+		if (persistence == null)
+		{
+			Model model = (Model)EcoreUtil2.getRootContainer(entity);
+			persistence = EcoreUtil2.typeSelect(model.getOptions(), Persistence.class).get(0);
+		}
+		return persistence;
 	}
 }

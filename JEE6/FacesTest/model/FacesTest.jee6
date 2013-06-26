@@ -1,5 +1,7 @@
 application "JEE6 Test Application" context "/faces" package de.itemis.faces timeout 2 development;
 persistence unit "facesDS" jndi "jdbc/facesDS";
+persistence unit "authDS"  jndi "jdbc/authDS";
+
 security domain "itemis";
 smtp "mail/Default";
 locale "de" default;
@@ -48,13 +50,23 @@ entity EntityEntry
 entity Startup
 {
 	History HistoryEntry   history;
-	Entity  EntityEntry [] entities; 
+	Entity  EntityEntry [] entities;
 }
 
 options Preferences editable
 {
 	Text entry;
 }
+
+entity AuthInfo
+{ 
+	Email          email;
+	Text           password;
+	Text           passwordUncoded transient;
+	Boolean        active;
+	Timestamp auto created;
+	Date           expire;
+} persistence unit "authDS"
 
 process Admin roles "admin"
 {

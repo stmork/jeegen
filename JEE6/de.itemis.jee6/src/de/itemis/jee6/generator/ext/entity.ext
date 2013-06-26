@@ -82,3 +82,6 @@ cached List[Timestamp] getAutoCreationTimestampList(Entity e) :
 
 cached List[Timestamp] getLabelList(Entity e) :
 	e.types.typeSelect(Text).select(e|e.transient || e.name == "name" || e.name == "label");
+
+Persistence getPU(Entity entity) :
+	entity.persistence != null ? entity.persistence : getModel(entity).getPersistenceUnits().first();

@@ -9,6 +9,9 @@ cached Model getModel(EntityRef t) :
 cached Model getModel(Process p) :
 	(Model)p.eRootContainer;
 
+cached Model getModel(Persistence unit) :
+	(Model)unit.eRootContainer;
+
 cached List[Persistence] getPersistenceUnits(Model m) :
 	m.options.typeSelect(Persistence);
 

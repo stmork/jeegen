@@ -3,7 +3,9 @@
 set -e
 
 cd de.itemis.jee6
-ant generate deploy
+ant undeploy
+ant clean generate deploy
 
 cd ../de.itemis.jee6.ui
-ant deploy
+ant undeploy
+ant clean deploy
