@@ -1,5 +1,6 @@
 import jee6;
 
+extension de::itemis::jee6::generator::ext::model;
 extension de::itemis::jee6::generator::ext::types;
 extension de::itemis::jee6::generator::ext::entity;
 
@@ -50,3 +51,6 @@ String sortOrder(Reference ref) :
 
 String sortOrder(History ref) :
 	"DESC";
+
+String getPersistenceUnitName(Persistence unit) :
+	unit == getModel(unit).getPersistenceUnits().first() ? "em" : "em" + unit.name.toFirstUpper();

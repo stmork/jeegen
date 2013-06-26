@@ -53,6 +53,7 @@ public class ApplicationController extends AbstractApplicationController
 	
 			super.init();
 			multiple.xaAccess();
+			multiple.checkSsl();
 			log.info("\n" + LogUtil.banner("de.itemis.faces.version", "Faces Test Application"));
 		}
 		catch(Exception e)

@@ -318,8 +318,8 @@ abstract public class «abstractDaoOf(this)»
 	/**
 	 * The {@link EntityManager} to use for database operations.
 	 */
-	@PersistenceContext(unitName="«pu.persistence»")
-	protected EntityManager em;
+	@PersistenceContext(unitName="«pu.name»")
+	protected EntityManager «getPersistenceUnitName(pu)»;
 «ENDFOREACH»
 
 «FOREACH converterList AS option»

@@ -7,6 +7,8 @@
 
 «EXTENSION de::itemis::jee6::generator::ext::model»
 «EXTENSION de::itemis::jee6::generator::ext::bundle»
+«EXTENSION de::itemis::jee6::generator::ext::entity»
+«EXTENSION de::itemis::jee6::generator::ext::types»
 «EXTENSION de::itemis::jee6::generator::ext::utility»
 
 «DEFINE Main FOR Model»
@@ -40,10 +42,16 @@ log4j.appender.R.layout.ConversionPattern=%-5p %-30.30c{1} %x - %m%n
 		xmlns="http://java.sun.com/xml/ns/persistence"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-«FOREACH getPersistenceUnits() AS pu»
 «EXPAND utility::XmlHeader»
-	<persistence-unit name="«pu.persistence»" transaction-type="JTA">
+«FOREACH getPersistenceUnits() AS pu»
+	<persistence-unit name="«pu.name»" transaction-type="JTA">
 		<jta-data-source>«pu.jndi»</jta-data-source>
+«FOREACH entities AS entity»
+«IF getPU(entity) == pu»
+		<class>«fqTypeOf(entity)»</class>
+«ENDIF»
+«ENDFOREACH»
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
 «IF pu.cacheable»
 		<shared-cache-mode>ALL</shared-cache-mode>
 «ENDIF»

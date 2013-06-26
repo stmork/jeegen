@@ -8,6 +8,7 @@
 	<property name="src-path"     value="./src"/>
 	<property name="src-gen-path" value="./src-gen"/>
 	<property name="manifest"     value="META-INF/MANIFEST.MF"/>
+	<property name="plugin-name"  value="de.itemis.jee6.ui_" />
 
 	<property name="eclipse.home"         value="/opt/eclipse"/>
 	<property name="eclipse.home.plugins" value="${eclipse.home}/plugins"/>
@@ -53,7 +54,7 @@
 	            </tokenfilter>
 	        </filterchain>
 	    </loadproperties>
-		<property name="plugin" value="de.itemis.jee6.ui_${Bundle-Version}.jar"/>
+		<property name="plugin" value="${plugin-name}${Bundle-Version}.jar"/>
 		<echo message="Version: ${Bundle-Version}"/>
 	</target>
 
@@ -89,6 +90,14 @@
 		<jar destfile="${plugin}" manifest="${manifest}">
 			<zipfileset dir="${bin-path}"/>
 		</jar>
+	</target>
+
+	<target name="undeploy" depends="-version">
+		<delete>
+			<fileset dir="${eclipse.home.plugins}">
+				<include name="${plugin-name}*.jar"/>
+			</fileset>
+		</delete>
 	</target>
 	
 	<target name="deploy" depends="package">

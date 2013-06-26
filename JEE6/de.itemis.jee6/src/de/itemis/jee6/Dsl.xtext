@@ -13,7 +13,7 @@ enum ProjectState : Development='development'|Integration='integration'|Producti
 
 Option:			(Persistence|Security|Mail|Locale|Param) ';';
 Security:		'security' 'domain' jaas=STRING (clustered?='clustered')?;
-Persistence:	'persistence' 'unit' persistence=STRING 'jndi' jndi=STRING (cacheable?='cacheable' )?;
+Persistence:	'persistence' 'unit' name=STRING 'jndi' jndi=STRING (cacheable?='cacheable' )?;
 Mail:			'smtp' jndi=STRING;
 Locale:			'locale' language=STRING (country=STRING)? (home?='default')?;
 Param:			'param' name=PACKAGED_ID '=' value=STRING ('description' description=STRING)?;
@@ -38,7 +38,7 @@ EntityRef:	'Entity'  type=[Entity|ID] (many?='[]')? name=ID;
 OptionRef:	'Option'  type=[Options|ID] name=ID;
 
 /* Entities */
-Entity:		(Table|Options);
+Entity:		(Table|Options) ('persistence' 'unit' persistence = [Persistence|STRING])?;
 
 Table:		'entity'  name=ID (filterable?='filterable')? (cloneable?='cloneable')? '{' (types += Attribute)+ '}';
 Options:	'options' name=ID (filterable?='filterable')? (cloneable?='cloneable')?

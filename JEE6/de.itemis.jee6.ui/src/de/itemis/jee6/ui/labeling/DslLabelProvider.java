@@ -52,7 +52,7 @@ public class DslLabelProvider extends DefaultEObjectLabelProvider {
 	
 	String text(Persistence p)
 	{
-		return p.getJndi() + " -> " + p.getPersistence();
+		return p.getJndi() + " -> " + p.getName();
 	}
 
 	String image(Persistence p)
