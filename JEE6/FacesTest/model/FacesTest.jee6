@@ -51,7 +51,7 @@ entity Startup
 {
 	History HistoryEntry   history;
 	Entity  EntityEntry [] entities;
-} persistence unit  "authDS"
+}
 
 options Preferences editable
 {
