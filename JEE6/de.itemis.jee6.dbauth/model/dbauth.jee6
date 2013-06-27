@@ -11,12 +11,12 @@ entity AuthInfo
 	Boolean            active;
 	Timestamp auto     created;
 	Entity SiteAuthInfo [] sites;
-}
+} persistence unit "authDS"
 
 options SiteInfo editable
 {
 	Text name;
-}
+} persistence unit "authDS"
 
 entity SiteAuthInfo
 {
@@ -24,7 +24,7 @@ entity SiteAuthInfo
 	Timestamp auto          created;
 	Date                    expire;
 	Boolean                 active;
-}
+} persistence unit "authDS"
 
 process User
 {
