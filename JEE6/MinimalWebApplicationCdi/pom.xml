@@ -1,8 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>de.itemis.jee7</groupId>
-	<artifactId>MinimalWebApplicationCdi7</artifactId>
+	<groupId>de.itemis.jee6</groupId>
+	<artifactId>MinimalWebApplicationCdi</artifactId>
 	<packaging>war</packaging>
 	<version>1.0.0</version>
 	<name>MinimalWebApplicationCdi</name>
@@ -11,7 +11,7 @@
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
-			<version>7.0</version>
+			<version>6.0</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
@@ -19,7 +19,7 @@
 	<properties>
 		<jboss.home>/opt/jboss</jboss.home>
 		<jboss.deployments>${jboss.home}/standalone/deployments</jboss.deployments>
-		<glassfish.home>/opt/glassfish4</glassfish.home>
+		<glassfish.home>/opt/glassfish</glassfish.home>
 		<glassfish.deployments>${glassfish.home}/glassfish/domains/domain1/autodeploy</glassfish.deployments>
 	</properties>
 
@@ -41,8 +41,8 @@
 				<version>3.1</version>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.6</source>
+					<target>1.6</target>
 					<showDeprecation>true</showDeprecation>
 					<showWarnings>true</showWarnings>
 				</configuration>
