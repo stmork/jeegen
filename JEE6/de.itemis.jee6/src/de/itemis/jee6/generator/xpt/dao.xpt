@@ -97,7 +97,7 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 	 */
 	public void «adder(entity)»(final «typeOf(entity)» «parameterOf(entity)»)
 	{
-		em.persist(«parameterOf(entity)»);
+		«getPersistenceUnitName(getPU(entity))».persist(«parameterOf(entity)»);
 	}
 
 	/**
@@ -108,7 +108,7 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 	 */
 	public «typeOf(entity)» «updater(entity)»(final «typeOf(entity)» «parameterOf(entity)»)
 	{
-		return em.merge(«parameterOf(entity)»);
+		return «getPersistenceUnitName(getPU(entity))».merge(«parameterOf(entity)»);
 	}
 
 	/**
@@ -119,7 +119,7 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 	public void «remover(entity)»(«typeOf(entity)» «parameterOf(entity)»)
 	{
 «EXPAND GetReference(entity)»
-		em.remove(«parameterOf(entity)»);
+		«getPersistenceUnitName(getPU(entity))».remove(«parameterOf(entity)»);
 	}
 
 «IF hasActivationBoolean(entity)»
@@ -134,9 +134,9 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 	public «typeOf(entity)» activate(«typeOf(entity)» «nameOf(entity)», final boolean activation)
 	{
 «IF id == null»
-		«nameOf(entity)» = em.getReference(«typeOf(entity)».class, «nameOf(entity)».getId());
+		«nameOf(entity)» = «getPersistenceUnitName(getPU(entity))».getReference(«typeOf(entity)».class, «nameOf(entity)».getId());
 «ELSE»
-		«nameOf(entity)» = em.getReference(«typeOf(entity)».class, «nameOf(entity)».«getterOf(id)»());
+		«nameOf(entity)» = «getPersistenceUnitName(getPU(entity))».getReference(«typeOf(entity)».class, «nameOf(entity)».«getterOf(id)»());
 «ENDIF»
 		«nameOf(entity)».setActive(activation);
 		
@@ -153,7 +153,7 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 	 */
 	public List<«typeOf(entity)»> «listOf(entity)»()
 	{
-		TypedQuery<«typeOf(entity)»> query = em.createQuery(
+		TypedQuery<«typeOf(entity)»> query = «getPersistenceUnitName(getPU(entity))».createQuery(
 				"SELECT entity FROM «typeOf(entity)» entity",
 				«typeOf(entity)».class);
 		
@@ -182,7 +182,7 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 		«parameterOf(entity)».setLast(«parameterOf(type)»);
 «ENDIF»		
 		// Update into database
-		em.persist(«parameterOf(type)»);
+		«getPersistenceUnitName(getPU(entity))».persist(«parameterOf(type)»);
 
 		return «parameterOf(type)»;
 	}
@@ -205,7 +205,7 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 		«parameterOf(type)».«setterOf(entity)»(null);
 
 		// finally do database operations
-		em.remove(«parameterOf(type)»);
+		«getPersistenceUnitName(getPU(entity))».remove(«parameterOf(type)»);
 		return «parameterOf(entity)»;
 	}
 «ENDIF»
@@ -220,11 +220,11 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 	{
 «LET getId(type) AS id»
 «IF id == null»
-		final TypedQuery<«typeOf(type)»> query = em.createQuery(
+		final TypedQuery<«typeOf(type)»> query = «getPersistenceUnitName(getPU(entity))».createQuery(
 				"SELECT e FROM «typeOf(type)» e WHERE e.«parameterOf(entity)» = :entity ORDER BY e.id «sortOrder(type)»",
 				«typeOf(type)».class);
 «ELSE»
-		final TypedQuery<«typeOf(type)»> query = em.createQuery(
+		final TypedQuery<«typeOf(type)»> query = «getPersistenceUnitName(getPU(entity))».createQuery(
 				"SELECT e FROM «typeOf(type)» e WHERE e.«parameterOf(entity)» = :entity ORDER BY e.«nameOf(id)» «sortOrder(type)»",
 				«typeOf(type)».class);
 «ENDIF»
@@ -243,9 +243,9 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 «LET getId(entity) AS id»
 		// get correct references
 «IF id == null»
-		«parameterOf(entity)» = em.getReference(«typeOf(entity)».class, «parameterOf(entity)».getId());
+		«parameterOf(entity)» = «getPersistenceUnitName(getPU(entity))».getReference(«typeOf(entity)».class, «parameterOf(entity)».getId());
 «ELSE»
-		«parameterOf(entity)» = em.getReference(«typeOf(entity)».class, «parameterOf(entity)».«getterOf(id)»());
+		«parameterOf(entity)» = «getPersistenceUnitName(getPU(entity))».getReference(«typeOf(entity)».class, «parameterOf(entity)».«getterOf(id)»());
 «ENDIF»
 «ENDLET»
 «ENDDEFINE»
@@ -254,9 +254,9 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
 «LET getId(type.type) AS id»
 		// get correct references
 «IF id == null»
-		«parameterOf(type)» = em.getReference(«typeOf(type)».class, «parameterOf(type)».getId());
+		«parameterOf(type)» = «getPersistenceUnitName(getPU(type.type))».getReference(«typeOf(type)».class, «parameterOf(type)».getId());
 «ELSE»
-		«parameterOf(type)» = em.getReference(«typeOf(type)».class, «parameterOf(type)».«getterOf(id)»());
+		«parameterOf(type)» = «getPersistenceUnitName(getPU(type.type))».getReference(«typeOf(type)».class, «parameterOf(type)».«getterOf(id)»());
 «ENDIF»
 «ENDLET»
 «ENDDEFINE»
@@ -339,7 +339,7 @@ abstract public class «abstractDaoOf(this)»
 	{
 		final «typeOf(option)» option = new «typeOf(option)»(type, key);
 
-		return em.merge(option);
+		return «getPersistenceUnitName(getPU(option))».merge(option);
 	}
 
 	/**
@@ -372,7 +372,7 @@ abstract public class «abstractDaoOf(this)»
 	public «typeOf(option)» «finderOf(option)»(final «typeOf(id)» id)
 «ENDIF»
 	{
-		return em.find(«typeOf(option)».class, id);
+		return «getPersistenceUnitName(getPU(option))».find(«typeOf(option)».class, id);
 	} 
 
 	/**
@@ -382,7 +382,7 @@ abstract public class «abstractDaoOf(this)»
 	 */
 	public List<«typeOf(option)»> «listOf(option)»()
 	{
-		TypedQuery<«typeOf(option)»> query = em.createQuery(
+		TypedQuery<«typeOf(option)»> query = «getPersistenceUnitName(getPU(option))».createQuery(
 				"SELECT entity FROM «typeOf(option)» entity",
 				«typeOf(option)».class);
 		
@@ -396,7 +396,7 @@ abstract public class «abstractDaoOf(this)»
 	 */
 	public List<«typeOf(option)»> «listActiveOf(option)»()
 	{
-		TypedQuery<«typeOf(option)»> query = em.createQuery(
+		TypedQuery<«typeOf(option)»> query = «getPersistenceUnitName(getPU(option))».createQuery(
 				"SELECT o FROM «typeOf(option)» o WHERE o.active = TRUE",
 				«typeOf(option)».class);
 		

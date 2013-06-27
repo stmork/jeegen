@@ -26,6 +26,9 @@ ant clean deploy
 cd ../MinimalWebApplicationCdi
 ant clean package
 
+cd ../MinimalWebApplicationCdi7
+ant clean package
+
 cd ../MinimalWebApplicationDao
 ant clean package
 
