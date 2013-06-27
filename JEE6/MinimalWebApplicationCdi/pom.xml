@@ -14,19 +14,42 @@
 			<version>6.0</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.codehaus.mojo</groupId>
+			<artifactId>properties-maven-plugin</artifactId>
+			<version>1.0-alpha-2</version>
+		</dependency>
 	</dependencies>
 
 	<properties>
-		<jboss.home>/opt/jboss</jboss.home>
-		<jboss.deployments>${jboss.home}/standalone/deployments</jboss.deployments>
-		<glassfish.home>/opt/glassfish</glassfish.home>
-		<glassfish.deployments>${glassfish.home}/glassfish/domains/domain1/autodeploy</glassfish.deployments>
+		<jee6.properties>${user.home}/.jee6.properties</jee6.properties>
+		<build.properties>${user.home}/.jee6.properties</build.properties>
 	</properties>
 
 	<build>
 		<finalName>${project.name}</finalName>
 		<sourceDirectory>src\</sourceDirectory>
 		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>properties-maven-plugin</artifactId>
+				<version>1.0-alpha-2</version>
+				<executions>
+					<execution>
+						<phase>initialize</phase>
+						<goals>
+							<goal>read-project-properties</goal>
+						</goals>
+						<configuration>
+							<quiet>true</quiet>
+							<files>
+								<file>${jee6.properties}</file>
+								<file>${build.properties}</file>
+							</files>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<version>2.3</version>
@@ -54,6 +77,7 @@
 					<filesets>
 						<fileset>
 							<directory>${glassfish.home}/glassfish/domains/domain1/autodeploy/</directory>
+							<directory>${jboss.home}/standalone/deployments</directory>
 							<includes>
 								<include>${finalName}.war</include>
 							</includes>
@@ -71,11 +95,10 @@
 						<phase>install</phase>
 						<configuration>
 							<tasks>
-								<!-- <copy todir="${jboss.deployments}"> -->
-								<!-- <fileset dir="${project.build.directory}" includes="${build.finalName}.war" 
-									/> -->
-								<!-- </copy> -->
-								<copy todir="${glassfish.deployments}">
+								<copy todir="${jboss.deployments}">
+ 									<fileset dir="${jboss.home}/standalone/deployments/" includes="${build.finalName}.war" />
+								</copy>
+								<copy todir="${glassfish.home}/glassfish/domains/domain1/autodeploy/">
 									<fileset dir="${project.build.directory}" includes="${build.finalName}.war" />
 								</copy>
 							</tasks>
@@ -89,8 +112,8 @@
 						<phase>clean</phase>
 						<configuration>
 							<tasks>
-								<!-- <delete file="${jboss.deployments}/${build.finalName}.war" /> -->
-								<delete file="${glassfish.deployments}/${build.finalName}.war" />
+								<delete file="${jboss.home}/standalone/deployments/${build.finalName}.war" />
+								<delete file="${glassfish.home}/glassfish/domains/domain1/autodeploy/${build.finalName}.war" />
 							</tasks>
 						</configuration>
 						<goals>
@@ -100,6 +123,43 @@
 				</executions>
 			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.codehaus.mojo
+										</groupId>
+										<artifactId>
+											properties-maven-plugin
+										</artifactId>
+										<versionRange>
+											[1.0-alpha-2,)
+										</versionRange>
+										<goals>
+											<goal>
+												read-project-properties
+											</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 
 	<reporting>
