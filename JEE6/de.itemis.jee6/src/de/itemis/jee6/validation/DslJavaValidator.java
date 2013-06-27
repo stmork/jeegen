@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
@@ -237,30 +238,27 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 
 		for (EntityRef reference : EcoreUtil2.typeSelect(entity.getTypes(), EntityRef.class))
 		{
-			checkEntity(entity, reference, reference.getType(), persistence);
+			checkEntity(entity, reference, reference.getType(), persistence, Jee6Package.Literals.ENTITY_REF__TYPE);
 		}
 
 		for (History reference : EcoreUtil2.typeSelect(entity.getTypes(), History.class))
 		{
-			checkEntity(entity, reference, reference.getType(), persistence);
+			checkEntity(entity, reference, reference.getType(), persistence, Jee6Package.Literals.HISTORY__TYPE);
 		}
 
 		for (OptionRef reference : EcoreUtil2.typeSelect(entity.getTypes(), OptionRef.class))
 		{
-			checkEntity(entity, reference, reference.getType(), persistence);
+			checkEntity(entity, reference, reference.getType(), persistence, Jee6Package.Literals.OPTION_REF__TYPE);
 		}
 	}
 	
-	private void checkEntity(final Entity parent, final Reference reference, final Entity entity, final Persistence persistence)
+	private void checkEntity(final Entity parent, final Reference reference, final Entity entity, final Persistence persistence, final EReference literal)
 	{
 		if (getPersistenceUnit(entity) != persistence)
 		{
-			final int position = parent.getTypes().indexOf(reference);
-
 			error(String.format(
 					"Die Persistence Unit der Referenz %s muss der Persistence Unit der umgebenden Entity %s entsprechen!",
-					entity.getName(), parent.getName()),
-					Jee6Package.Literals.ENTITY__TYPES, position);
+					entity.getName(), parent.getName()), reference, literal, 0);
 		}
 	}
 	
