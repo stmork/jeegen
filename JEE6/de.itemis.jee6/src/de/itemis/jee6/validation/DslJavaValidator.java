@@ -179,7 +179,6 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 			warning("Es macht nur eine automatische Datumsmarkierung Sinn!", Jee6Package.Literals.TIMESTAMP__AUTO);
 		}
 	}
-	
 
 	@Check(CheckType.FAST)
 	public void checkTimestampUpdate(final Timestamp timestamp)
