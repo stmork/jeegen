@@ -27,7 +27,9 @@
 «IF debug()»
 						<td class="«labelClass(attr)»">«attr.typeOf().asType()»</td>
 «ENDIF»
-						<td class="«labelClass(attr)»"><h:outputLabel for="«nameOf(attr)»" value="#{msg['«prefixOf(p)».«prefixOf()».«prefixOf(attr)»']}"/></td>
+						<td class="«labelClass(attr)»">
+							<h:outputLabel for="«nameOf(attr)»" value="#{msg['«prefixOf(p)».«prefixOf()».«prefixOf(attr)»']}"/>
+						</td>
 						<td>
 «EXPAND element(p, this) FOR attr»
 						</td>
@@ -52,9 +54,9 @@
 «LET getManyEntites(types) AS manyEntities»
 «IF manyEntities.size > 0»
 «IF id == null»
-			        <ui:fragment rendered="#{«handlerUri(p)».«nameOf()».id != 0}">
+					<ui:fragment rendered="#{«handlerUri(p)».«nameOf()».id != 0}">
 «ELSE»
-		    	    <ui:fragment rendered="#{«handlerUri(p)».«nameOf()».«nameOf(id)» != null}">
+					<ui:fragment rendered="#{«handlerUri(p)».«nameOf()».«nameOf(id)» != null}">
 «ENDIF»
 						<tr>
 							<td/>
@@ -66,7 +68,7 @@
 «ENDFOREACH»
 							</td>
 						</tr>
-		        	</ui:fragment>
+					</ui:fragment>
 «ENDIF»
 «ENDLET»
 				</table>

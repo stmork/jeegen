@@ -48,7 +48,9 @@
 						</h:outputLink>
 					</div>
 					<div>
-						<h1><ui:insert name="title"/></h1>
+						<h1>
+							<ui:insert name="title"/>
+						</h1>
 «IF hasSecurityDomain()»
 						#{msg['start.name']} #{sessionController.name}
 «ENDIF»
@@ -65,14 +67,14 @@
 				<!-- Use if you want a right column
 				<div class="right">
 					<div class="box">
-	
+
 					</div>
 				</div>
 				-->
 				<div class="content">
 					<ui:insert name="content"/>
 				</div>
-	        	<div class="clear"/>
+				<div class="clear"/>
 			</div>
 			<div class="line"/>
 			<div class="footer">
@@ -99,7 +101,9 @@
 	<ui:composition template="/«layout()»">
 		<ui:define name="title">#{msg['start.title']}</ui:define>
 		<ui:define name="content">
-			<div><h2>#{msg.welcome}</h2></div>
+			<div>
+				<h2>#{msg.welcome}</h2>
+			</div>
 		</ui:define>
 	</ui:composition>
 «EXPAND utility::XhtmlFragmentEnd»
@@ -121,11 +125,15 @@
 						</tr>
 						<tr>
 							<td class="mid">#{msg['login.user']}:</td>
-							<td><h:inputText autofocus="autofocus" id="j_username" autocomplete="off" /></td>
+							<td>
+								<h:inputText autofocus="autofocus" id="j_username" autocomplete="off" />
+							</td>
 						</tr>
 						<tr>
 							<td class="mid">#{msg['login.password']}:</td>
-							<td><h:inputSecret id="j_password" autocomplete="off" /></td>
+							<td>
+								<h:inputSecret id="j_password" autocomplete="off" />
+							</td>
 						</tr>
 						<tr>
 							<td/>
@@ -184,12 +192,16 @@
 		<li><h:link value="#{msg.main}" outcome="/«index()»" /></li>
 «FOREACH processes AS process»
 		<ui:fragment rendered="#{«handlerUri(process)».allowed}" >
-			<li><h:link value="#{msg.«prefixOf(process)»}" outcome="/«index(process)»" /></li>
+			<li>
+				<h:link value="#{msg.«prefixOf(process)»}" outcome="/«index(process)»" />
+			</li>
 		</ui:fragment>
 «ENDFOREACH»
 «IF hasSecurityDomain()»
 		<ui:fragment rendered="#{«sessionUri()».loggedIn}">
-			<li><h:link value="#{msg.logout}" outcome="/logout.xhtml"/></li>
+			<li>
+				<h:link value="#{msg.logout}" outcome="/logout.xhtml"/>
+			</li>
 		</ui:fragment>
 «ENDIF»
 	</ul>
@@ -208,7 +220,9 @@
 		<h:messages layout="table" styleClass="error" />
 		<ul>
 «FOREACH this.entities AS entity»
-			<li><h:link value="#{msg['«prefixOf()».«prefixOf(entity)».title']}" outcome="«index(entity)»"/></li>
+			<li>
+				<h:link value="#{msg['«prefixOf()».«prefixOf(entity)».title']}" outcome="«index(entity)»"/>
+			</li>
 «ENDFOREACH»
 		</ul>
 	</ui:define>
@@ -271,7 +285,7 @@
 	<ui:composition template="/layout.xhtml">
 		<ui:define name="title">#{err['error.title']}</ui:define>
 		<ui:define name="content">
-        	<div class="error">#{sessionController.exceptionMessage}</div>
+			<div class="error">#{sessionController.exceptionMessage}</div>
 		</ui:define>
 	</ui:composition>
 «EXPAND utility::XhtmlFragmentEnd»
@@ -284,7 +298,7 @@
 	<ui:composition template="/layout.xhtml">
 		<ui:define name="title">#{err['code403.title']}</ui:define>
 		<ui:define name="content">
-        	<div class="error">#{err['code403.message']}</div>
+			<div class="error">#{err['code403.message']}</div>
 		</ui:define>
 	</ui:composition>
 «EXPAND utility::XhtmlFragmentEnd»
@@ -298,7 +312,7 @@
 	<ui:composition template="/layout.xhtml">
 		<ui:define name="title">#{err['code404.title']}</ui:define>
 		<ui:define name="content">
-        	<div class="error">#{err['code404.message']}</div>
+			<div class="error">#{err['code404.message']}</div>
 		</ui:define>
 	</ui:composition>
 «EXPAND utility::XhtmlFragmentEnd»
