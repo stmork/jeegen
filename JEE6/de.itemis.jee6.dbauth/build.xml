@@ -1,4 +1,3 @@
-
 <project name="JEE6 DB authorization" default="package">
 	<property file="${user.home}/.jee6.properties" />
 	<property file="${basedir}/build.properties"/>
@@ -96,6 +95,7 @@
 
 	<target name="compile" depends="-version">
 		<mkdir dir="${bin-path}"/>
+		<copy file="../de.itemis.jee6.util/jee6-utils.jar" todir="${lib-path}"/>
 		<javac srcdir="${src-path}:${src-gen-path}" destdir="${bin-path}" debug="true" includeantruntime="false">
 			<classpath refid="compile.path"/>
 		</javac>

@@ -1,6 +1,8 @@
 package de.itemis.jee6.util;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
 
@@ -38,7 +40,7 @@ public class XhtmlBeautifier extends XmlBeautifier
 			{
 				final String unformattedXml = handle.getBuffer().toString().trim(); 
 
-				handle.setBuffer(prettyPrintXml(unformattedXml, filename.endsWith("/layout.xhtml")));
+				handle.setBuffer(removeEmptyLines(prettyPrintXml(unformattedXml, filename.endsWith("/layout.xhtml"))));
 			}
 			catch (Exception e)
 			{
@@ -118,5 +120,34 @@ public class XhtmlBeautifier extends XmlBeautifier
 			log.debug(unformattedXml.equals(result));
 		}
 		return result;
+	}
+	
+	protected String removeEmptyLines(final String input) throws IOException
+	{
+		final StringReader sr = new StringReader(input);
+		BufferedReader reader = null;
+
+		try
+		{
+			final StringBuffer buffer = new StringBuffer(input.length());
+			String line;
+
+			reader = new BufferedReader(sr);
+			while ((line = reader.readLine()) != null)
+			{
+				if (line.trim().length() > 0)
+				{
+					buffer.append(line).append("\n");
+				}
+			}
+			return buffer.toString();
+		}
+		finally
+		{
+			if (reader != null)
+			{
+				reader.close();
+			}
+		}
 	}
 }
