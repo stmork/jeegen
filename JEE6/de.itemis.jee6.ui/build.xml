@@ -59,7 +59,11 @@
 	</target>
 
 	<target name="clean" depends="-version">
-		<delete file="${plugin}" />
+		<delete>
+			<fileset dir=".">
+				<include name="${plugin-name}*.jar"/>
+			</fileset>
+		</delete>
 		<delete dir="${bin-path}" />
 	</target>
 
