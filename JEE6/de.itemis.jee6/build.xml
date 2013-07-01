@@ -64,16 +64,12 @@
 	</target>
 
 	<target name="clean" depends="-version">
-		<delete file="${plugin}" />
-		<delete dir="${bin-path}" />
-	</target>
-
-	<target name="undeploy" depends="-version">
 		<delete>
-			<fileset dir="${eclipse.home.plugins}">
+			<fileset dir=".">
 				<include name="${plugin-name}*.jar"/>
 			</fileset>
 		</delete>
+		<delete dir="${bin-path}" />
 	</target>
 
 	<target name="generate" depends="clean,undeploy">
@@ -109,6 +105,14 @@
 		</jar>
 	</target>
 	
+	<target name="undeploy" depends="-version">
+		<delete>
+			<fileset dir="${eclipse.home.plugins}">
+				<include name="${plugin-name}*.jar"/>
+			</fileset>
+		</delete>
+	</target>
+
 	<target name="deploy" depends="package">
 		<copy file="${plugin}" todir="${eclipse.home.plugins}"/>
 	</target>
