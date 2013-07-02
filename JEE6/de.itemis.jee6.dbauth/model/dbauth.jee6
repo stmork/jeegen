@@ -15,6 +15,7 @@ entity AuthInfo
 
 options SiteInfo editable
 {
+	Text id                 skuPrefix;
 	Text                    name;
 } persistence unit "authDS"
 
