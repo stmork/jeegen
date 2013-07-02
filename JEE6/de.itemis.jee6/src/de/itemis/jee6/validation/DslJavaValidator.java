@@ -13,6 +13,7 @@ import de.itemis.jee6.jee6.Attribute;
 import de.itemis.jee6.jee6.Entity;
 import de.itemis.jee6.jee6.EntityRef;
 import de.itemis.jee6.jee6.History;
+import de.itemis.jee6.jee6.IdAttribute;
 import de.itemis.jee6.jee6.Jee6Package;
 import de.itemis.jee6.jee6.Model;
 import de.itemis.jee6.jee6.OptionRef;
@@ -20,7 +21,6 @@ import de.itemis.jee6.jee6.Persistence;
 import de.itemis.jee6.jee6.Process;
 import de.itemis.jee6.jee6.Reference;
 import de.itemis.jee6.jee6.Security;
-import de.itemis.jee6.jee6.Text;
 import de.itemis.jee6.jee6.Timestamp;
  
 
@@ -133,74 +133,61 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 	}
 
 	@Check(CheckType.FAST)
-	public void checkText(final Text text)
+	public void checkIdCount(final Entity entity)
 	{
-		guard(text.isId());
-		if (text.isId())
+		final Set<IdAttribute> idAttributes = new HashSet<IdAttribute>();
+
+		// Collect ID attributes
+		for (IdAttribute a : EcoreUtil2.typeSelect(entity.getTypes(), IdAttribute.class))
 		{
-			final Entity entity = (Entity)text.eContainer();
-			int idCount = 0;
-	
-			for (Text t : EcoreUtil2.typeSelect(entity.getTypes(), Text.class))
+			if (a.isId())
 			{
-				if (t.isId())
-				{
-					idCount++;
-				}
+				idAttributes.add(a);
 			}
-	
-			if (idCount > 1)
+		}
+
+		// Mark remaining ID attributes as error
+		if (idAttributes.size() > 1)
+		{
+			for (IdAttribute a : idAttributes)
 			{
-				error("Es darf nur max. ein Attribut eine ID sein!",  Jee6Package.Literals.TEXT__ID);
+				error("Es darf nur max. ein Attribut eine ID sein!", a, Jee6Package.Literals.ID_ATTRIBUTE__ID, 0);
 			}
 		}
 	}
 
 	@Check(CheckType.FAST)
-	public void checkTimestampAuto(final Timestamp timestamp)
+	public void checkTimestampAuto(final Entity entity)
 	{
-		int prePersistCount = 0;
+		final Set<Timestamp> autoTimestamps   = new HashSet<Timestamp>();
+		final Set<Timestamp> updateTimestamps = new HashSet<Timestamp>();
 
-		if (timestamp.isAuto())
+		for (Timestamp t : EcoreUtil2.typeSelect(entity.getTypes(), Timestamp.class))
 		{
-			final Entity entity = (Entity)timestamp.eContainer();
-	
-			for (Timestamp t : EcoreUtil2.typeSelect(entity.getTypes(), Timestamp.class))
+			if (t.isAuto())
 			{
-				if (t.isAuto())
-				{
-					prePersistCount++;
-				}
+				autoTimestamps.add(t);
+			}
+			if (t.isUpdate())
+			{
+				updateTimestamps.add(t);
 			}
 		}
 
-		if (prePersistCount > 1)
+		if (autoTimestamps.size() > 1)
 		{
-			warning("Es macht nur eine automatische Datumsmarkierung Sinn!", Jee6Package.Literals.TIMESTAMP__AUTO);
-		}
-	}
-
-	@Check(CheckType.FAST)
-	public void checkTimestampUpdate(final Timestamp timestamp)
-	{
-		int preUpdateCount = 0;
-
-		if (timestamp.isUpdate())
-		{
-			final Entity entity = (Entity)timestamp.eContainer();
-	
-			for (Timestamp t : EcoreUtil2.typeSelect(entity.getTypes(), Timestamp.class))
+			for (Timestamp t : autoTimestamps)
 			{
-				if (t.isUpdate())
-				{
-					preUpdateCount++;
-				}
+				warning("Es macht nur eine automatische Datumsmarkierung Sinn!", t, Jee6Package.Literals.TIMESTAMP__AUTO, 0);
 			}
 		}
-
-		if (preUpdateCount > 1)
+		
+		if (updateTimestamps.size() > 1)
 		{
-			warning("Es macht nur eine automatische Datumsaktualisierung Sinn!", Jee6Package.Literals.TIMESTAMP__UPDATE);
+			for (Timestamp t : updateTimestamps)
+			{
+				warning("Es macht nur eine automatische Datumsaktualisierung Sinn!", t, Jee6Package.Literals.TIMESTAMP__UPDATE, 0);
+			}
 		}
 	}
 

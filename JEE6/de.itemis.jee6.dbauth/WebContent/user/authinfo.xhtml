@@ -43,14 +43,14 @@
 					<tr>
 						<td/>
 						<td>
-							<h:commandButton action="#{userHandler.saveAuthInfo}" value="#{userHandler.authInfo.id == 0 ? msg.create : msg.save}"/>
+							<h:commandButton action="#{userHandler.saveAuthInfo}" value="#{userHandler.authInfo.email == null ? msg.create : msg.save}"/>
 							<h:commandButton action="#{userHandler.backFromAuthInfo}" value="#{msg.back}"/>
 						</td>
 					</tr>
 
 
 
-			        <ui:fragment rendered="#{userHandler.authInfo.id != 0}">
+			        <ui:fragment rendered="#{userHandler.authInfo.email != null}">
 						<tr>
 							<td/>
 							<td>
