@@ -29,7 +29,7 @@ Attribute getId(Reference ref) :
 Boolean isId(Attribute a) :
 	false;
 
-Boolean isId(Text t) :
+Boolean isId(IdAttribute t) :
 	t.id;
 
 String enumOf(Options o) :

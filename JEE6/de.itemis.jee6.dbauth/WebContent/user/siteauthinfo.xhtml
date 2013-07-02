@@ -1,147 +1,92 @@
 <div xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
-
-
 <!-- ===== Created by JEE6-Generator $Id$ ===== -->
 <!-- == Copyright (C) 2013  itemis AG == --> 
-
-
 <ui:composition template="/layout.xhtml">
 	<ui:define name="title">#{msg['user.siteauthinfo.title']}</ui:define>
 	<ui:define name="content">
 		<h:messages layout="table" styleClass="error"/>
-
 			<!-- === generated mask === --> 
 			<!-- process: User entity: SiteAuthInfo -->
-
-
-
 		<div class="box">
 			<h:form id="siteauthinfo">
 				<table>
-
 					<tr>
-
-						<td class="mid"><h:outputLabel for="site" value="#{msg['user.siteauthinfo.site']}"/></td>
+						<td class="mid">
+							<h:outputLabel for="site" value="#{msg['user.siteauthinfo.site']}"/>
+						</td>
 						<td>
-
 							<h:selectOneMenu converter="#{userHandler.siteInfoConverter}" id="site" label="#{msg['user.siteauthinfo.site']}" value="#{userHandler.siteAuthInfo.site}">
-
 								<f:selectItem itemLabel="#{msg.no_selection}" itemValue="[NULL]"/>
-
 								<f:selectItems itemLabel="#{site.name}" itemValue="#{site}" value="#{userHandler.siteInfoList}" var="site"/>
 							</h:selectOneMenu>
-
 						</td>
 					</tr>
-
 					<tr>
-
-						<td class="mid"><h:outputLabel for="expire" value="#{msg['user.siteauthinfo.expire']}"/></td>
+						<td class="mid">
+							<h:outputLabel for="expire" value="#{msg['user.siteauthinfo.expire']}"/>
+						</td>
 						<td>
-
 						<h:inputText id="expire" label="#{msg['user.siteauthinfo.expire']}" maxlength="10" styleClass="date" value="#{userHandler.siteAuthInfo.expire}">
 							<f:convertDateTime pattern="dd.MM.yyyy" type="date"/>
 						</h:inputText>
-
 						</td>
 					</tr>
-
 					<tr>
-
-						<td class="mid"><h:outputLabel for="active" value="#{msg['user.siteauthinfo.active']}"/></td>
+						<td class="mid">
+							<h:outputLabel for="active" value="#{msg['user.siteauthinfo.active']}"/>
+						</td>
 						<td>
-
 						<h:selectBooleanCheckbox id="active" label="#{msg['user.siteauthinfo.active']}" value="#{userHandler.siteAuthInfo.active}"/>
-
 						</td>
 					</tr>
-
 					<tr>
-
 						<td/>
 						<td>
 							<h:commandButton action="#{userHandler.saveSiteAuthInfo}" value="#{userHandler.siteAuthInfo.id == 0 ? msg.create : msg.save}"/>
-
 							<h:commandButton action="#{userHandler.backFromSiteAuthInfo}" value="#{msg.back}"/>
 						</td>
 					</tr>
-
-
-
 				</table>
 			</h:form>
 		</div>
-
-
-
-
-
 			<!-- === generated 1:n relation === --> 
 			<!-- process: User entity: SiteAuthInfo -->
-
-
-
 			<h:form>
 				<h:dataTable columnClasses="left,center,center,center,command,command,command" rendered="#{!empty userHandler.siteAuthInfoList}" rowClasses="odd,even" styleClass="list" value="#{userHandler.siteAuthInfoList}" var="siteAuthInfo">
-	
 					<h:column>
 						<f:facet name="header">#{msg['user.siteauthinfo.site']}</f:facet>
-	
-
-
-
 					#{siteAuthInfo.site.name}
-
-
-
-
 					</h:column>
-	
 					<h:column>
 						<f:facet name="header">#{msg['user.siteauthinfo.created']}</f:facet>
-	
 					<h:outputText value="#{siteAuthInfo.created}">
 						<f:convertDateTime dateStyle="medium" type="both"/>
 					</h:outputText>
-
 					</h:column>
-	
 					<h:column>
 						<f:facet name="header">#{msg['user.siteauthinfo.expire']}</f:facet>
-	
 					<h:outputText value="#{siteAuthInfo.expire}">
 						<f:convertDateTime dateStyle="medium" type="date"/>
 					</h:outputText>
-
 					</h:column>
-	
 					<h:column>
 						<f:facet name="header">#{msg['user.siteauthinfo.active']}</f:facet>
-	
 					<h:outputText value="#{msg[siteAuthInfo.active ? 'yes' : 'no']}"/>
-
 					</h:column>
-	
 					<h:column>
 						<f:facet name="header"/>
 						<h:commandLink action="#{userHandler.changeSiteAuthInfo(siteAuthInfo)}" value="#{msg.change}"/>
 					</h:column>
-
 					<h:column>
 						<f:facet name="header"/>
 						<h:commandLink action="#{userHandler.removeSiteAuthInfo(siteAuthInfo)}" value="#{msg.remove}"/>
 					</h:column>
-
 					<h:column>
 						<f:facet name="header"/>
 						<h:commandLink action="#{userHandler.reactivateSiteAuthInfo(siteAuthInfo)}" value="#{siteAuthInfo.active ? msg['options.deactivate'] : msg['options.activate']}"/>
 					</h:column>
-
 				</h:dataTable>
 			</h:form>
-
-
 	</ui:define>
 </ui:composition>
-
 </div>
