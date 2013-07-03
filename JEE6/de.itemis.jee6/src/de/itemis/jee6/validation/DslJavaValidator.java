@@ -1,6 +1,7 @@
 package de.itemis.jee6.validation;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -15,6 +16,7 @@ import de.itemis.jee6.jee6.EntityRef;
 import de.itemis.jee6.jee6.History;
 import de.itemis.jee6.jee6.IdAttribute;
 import de.itemis.jee6.jee6.Jee6Package;
+import de.itemis.jee6.jee6.Locale;
 import de.itemis.jee6.jee6.Model;
 import de.itemis.jee6.jee6.OptionRef;
 import de.itemis.jee6.jee6.Persistence;
@@ -131,18 +133,54 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 			}
 		}
 	}
+	
+	@Check(CheckType.FAST)
+	public void checkDefaultLocale(final Model model)
+	{
+		final List<Locale> locales = EcoreUtil2.typeSelect(model.getOptions(), Locale.class);
+
+		// Remove non default locales
+		Iterator<Locale> it = locales.iterator();
+		while (it.hasNext())
+		{
+			final Locale locale = it.next();
+
+			if(!locale.isHome())
+			{
+				it.remove();
+			}
+		}
+
+		// Mark remaining ID attributes as error
+		if (locales.size() > 1)
+		{
+			for (Locale locale : locales)
+			{
+				error("Es darf nur genau eine Sprache die Default Sprache sein!", locale, Jee6Package.Literals.LOCALE__HOME, 0);
+			}
+		}
+		
+		if (locales.size() == 0)
+		{
+			error("Es muss genau eine Sprache die Default Sprache sein!", Jee6Package.Literals.MODEL__OPTIONS);
+		}
+	}
 
 	@Check(CheckType.FAST)
 	public void checkIdCount(final Entity entity)
 	{
-		final Set<IdAttribute> idAttributes = new HashSet<IdAttribute>();
+		final List<IdAttribute> idAttributes = EcoreUtil2.typeSelect(entity.getTypes(), IdAttribute.class);
 
-		// Collect ID attributes
-		for (IdAttribute a : EcoreUtil2.typeSelect(entity.getTypes(), IdAttribute.class))
+		// Remove non ID attributes
+		final Iterator<IdAttribute> it = idAttributes.iterator();
+
+		while (it.hasNext())
 		{
-			if (a.isId())
+			final IdAttribute id = it.next();
+
+			if(!id.isId())
 			{
-				idAttributes.add(a);
+				it.remove();
 			}
 		}
 
