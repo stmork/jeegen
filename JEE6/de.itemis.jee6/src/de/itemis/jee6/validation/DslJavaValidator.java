@@ -41,11 +41,53 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 		invalidNames.add("insert");
 		invalidNames.add("order");
 	}
+	
+	@Check(CheckType.FAST)
+	public void checkContextPath(final Model model)
+	{
+		if (!model.getPath().startsWith("/"))
+		{
+			error("Der Context path beginnt nicht mit '/'!", Jee6Package.Literals.MODEL__PATH);
+		}
+	}
+	
+	@Check(CheckType.FAST)
+	public void checkDefaultLocale(final Model model)
+	{
+		final List<Locale> locales = EcoreUtil2.typeSelect(model.getOptions(), Locale.class);
+
+		// Remove non default locales
+		Iterator<Locale> it = locales.iterator();
+		while (it.hasNext())
+		{
+			final Locale locale = it.next();
+
+			if(!locale.isHome())
+			{
+				it.remove();
+			}
+		}
+
+		// Mark multiple default locales error.
+		if (locales.size() > 1)
+		{
+			for (Locale locale : locales)
+			{
+				error("Es darf nur genau eine Sprache die Default Sprache sein!", locale, Jee6Package.Literals.LOCALE__HOME, 0);
+			}
+		}
+		
+		// Mark missing locales as error.
+		if (locales.size() == 0)
+		{
+			error("Es muss genau eine Sprache die Default Sprache sein!", Jee6Package.Literals.MODEL__OPTIONS);
+		}
+	}
 
 	@Check(CheckType.FAST)
-	public void checkInvalidName(final Entity attr)
+	public void checkInvalidName(final Entity entity)
 	{
-		if (invalidNames.contains(attr.getName()))
+		if (invalidNames.contains(entity.getName()))
 		{
 			error("Dieser Attributname darf nicht verwendet werden!", Jee6Package.Literals.ENTITY__NAME);
 		}
@@ -57,15 +99,6 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 		if (invalidNames.contains(attr.getName()))
 		{
 			error("Dieser Attributname darf nicht verwendet werden!", Jee6Package.Literals.ATTRIBUTE__NAME);
-		}
-	}
-	
-	@Check(CheckType.FAST)
-	public void checkContextPath(final Model model)
-	{
-		if (!model.getPath().startsWith("/"))
-		{
-			error("Der Context path beginnt nicht mit '/'!", Jee6Package.Literals.MODEL__PATH);
 		}
 	}
 	
@@ -131,38 +164,6 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 							outerRef, Jee6Package.Literals.ENTITY_REF__TYPE, 0);
 				}
 			}
-		}
-	}
-	
-	@Check(CheckType.FAST)
-	public void checkDefaultLocale(final Model model)
-	{
-		final List<Locale> locales = EcoreUtil2.typeSelect(model.getOptions(), Locale.class);
-
-		// Remove non default locales
-		Iterator<Locale> it = locales.iterator();
-		while (it.hasNext())
-		{
-			final Locale locale = it.next();
-
-			if(!locale.isHome())
-			{
-				it.remove();
-			}
-		}
-
-		// Mark remaining ID attributes as error
-		if (locales.size() > 1)
-		{
-			for (Locale locale : locales)
-			{
-				error("Es darf nur genau eine Sprache die Default Sprache sein!", locale, Jee6Package.Literals.LOCALE__HOME, 0);
-			}
-		}
-		
-		if (locales.size() == 0)
-		{
-			error("Es muss genau eine Sprache die Default Sprache sein!", Jee6Package.Literals.MODEL__OPTIONS);
 		}
 	}
 
