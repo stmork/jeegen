@@ -6,6 +6,11 @@
 	<packaging>jar</packaging>
 	<version>1.1.2-SNAPSHOT</version>
 	<name>jee6-utils</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
 	<build>
 		<sourceDirectory>${basedir}/src</sourceDirectory>
 		<testSourceDirectory>${basedir}/test/</testSourceDirectory>
