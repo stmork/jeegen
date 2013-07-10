@@ -4,8 +4,9 @@
 
 	<property name="jar"           value="jee6-utils.jar"/>
 	<property name="bin-path"      value="./bin"/>
-	<property name="src-path"      value="./src"/>
-	<property name="tst-path"      value="./test"/>
+	<property name="taget-path"    value="./target"/>
+	<property name="src-path"      value="./src/main/java"/>
+	<property name="tst-path"      value="./src/test/java"/>
 	<property name="lib-path"      value="./lib"/>
 	<property name="doc-path"      value="../api"/>
 
@@ -61,6 +62,7 @@
 
 	<target name="clean">
 		<delete dir="${bin-path}" />
+		<delete dir="${target-path}" />
 		<delete dir="${instr-path}" />
 		<delete dir="${coverage-path}" />
 		<delete dir="${doc-path}"/>
