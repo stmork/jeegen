@@ -8,6 +8,9 @@ import java.text.Collator;
 import java.util.Comparator;
 import java.util.Locale;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * This base class initializes a {@link Locale} for comparison purposes.
  * @author sm
@@ -17,6 +20,7 @@ import java.util.Locale;
 abstract public class CollatingComparator<T> implements Comparator<T>, Serializable
 {
 	private static final long serialVersionUID = 1L;
+	private static final Log        log  = LogFactory.getLog(CollatingComparator.class);
 
 	/**
 	 * Flag for sorting increasing.
@@ -81,6 +85,7 @@ abstract public class CollatingComparator<T> implements Comparator<T>, Serializa
 	 */
 	public int compare(final T o1, final T o2)
 	{
+		LogUtil.debug(log, "%s - %s", o1, o2);
 		return compareLocale(o1, o2) * order;
 	}
 

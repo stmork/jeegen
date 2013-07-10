@@ -27,13 +27,13 @@ public class GreeceImageTest {
 		download(download);
 	}
 
-//	@Test
-//	public void downloadParosSailing() throws IOException
-//	{
-//		final Download download = new Download("http://www.islandsailing.gr/webcam/current.jpg");
-//		
-//		download(download);
-//	}
+	@Test
+	public void downloadParosSailing() throws IOException
+	{
+		final Download download = new Download("http://www.islandsailing.gr/webcam/current.jpg");
+		
+		download(download);
+	}
 
 	@Test
 	public void downloadSantorini() throws IOException
