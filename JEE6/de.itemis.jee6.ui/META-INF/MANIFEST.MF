@@ -24,5 +24,6 @@ Import-Package: org.apache.log4j,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: de.itemis.jee6.ui.contentassist,
  de.itemis.jee6.ui.contentassist.antlr,
- de.itemis.jee6.ui.internal
+ de.itemis.jee6.ui.internal,
+ de.itemis.jee6.ui.quickfix
 Bundle-Activator: de.itemis.jee6.ui.internal.DslActivator
