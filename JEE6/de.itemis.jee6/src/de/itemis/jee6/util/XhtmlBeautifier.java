@@ -64,7 +64,7 @@ public class XhtmlBeautifier extends XmlBeautifier
 			factory.setAttribute("indent-number", new Integer(4));
 			Transformer t = factory.newTransformer();
 	
-			t.setOutputProperty(OutputKeys.METHOD,               "xml");
+			t.setOutputProperty(OutputKeys.METHOD,               "xhtml");
 			t.setOutputProperty(OutputKeys.INDENT,               "yes");
 			t.setOutputProperty(OutputKeys.ENCODING,             "UTF-8");
 			t.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
