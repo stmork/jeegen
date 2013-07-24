@@ -40,7 +40,8 @@ public class XhtmlBeautifier extends XmlBeautifier
 			{
 				final String unformattedXml = handle.getBuffer().toString().trim(); 
 
-				handle.setBuffer(removeEmptyLines(prettyPrintXml(unformattedXml, filename.endsWith("/layout.xhtml"))));
+//				handle.setBuffer(removeEmptyLines(prettyPrintXml(unformattedXml, filename.endsWith("/layout.xhtml"))));
+				handle.setBuffer(removeEmptyLines(unformattedXml, filename.endsWith("/layout.xhtml")));
 			}
 			catch (Exception e)
 			{
@@ -122,7 +123,9 @@ public class XhtmlBeautifier extends XmlBeautifier
 		return result;
 	}
 	
-	protected String removeEmptyLines(final String input) throws IOException
+	protected String removeEmptyLines(
+			final String input,
+			final boolean isLayout) throws IOException
 	{
 		final StringReader sr = new StringReader(input);
 		BufferedReader reader = null;
