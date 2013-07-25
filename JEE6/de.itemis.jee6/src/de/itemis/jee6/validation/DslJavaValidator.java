@@ -293,7 +293,7 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 		
 		if (persistence == null)
 		{
-			Model model = (Model)EcoreUtil2.getRootContainer(entity);
+			Model model = (Model)entity.eContainer();
 			persistence = EcoreUtil2.typeSelect(model.getOptions(), Persistence.class).get(0);
 		}
 		return persistence;
