@@ -1,19 +1,60 @@
 
 package de.itemis.jee6.ui.quickfix;
 
+import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
+import org.eclipse.xtext.ui.editor.quickfix.Fix;
+import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
+import org.eclipse.xtext.validation.Issue;
 
-public class DslQuickfixProvider extends DefaultQuickfixProvider {
+import com.google.inject.Inject;
+import com.google.inject.Injector;
 
-//	@Fix(MyJavaValidator.INVALID_NAME)
-//	public void capitalizeName(final Issue issue, IssueResolutionAcceptor acceptor) {
-//		acceptor.accept(issue, "Capitalize name", "Capitalize the name.", "upcase.png", new IModification() {
-//			public void apply(IModificationContext context) throws BadLocationException {
-//				IXtextDocument xtextDocument = context.getXtextDocument();
-//				String firstLetter = xtextDocument.get(issue.getOffset(), 1);
-//				xtextDocument.replace(issue.getOffset(), 1, firstLetter.toUpperCase());
-//			}
-//		});
-//	}
+import de.itemis.jee6.formatting.EntityModification;
+import de.itemis.jee6.formatting.Jee6LinkingDiagnosticMessageProvider;
+import de.itemis.jee6.jee6.Jee6Package;
 
+public class DslQuickfixProvider extends DefaultQuickfixProvider
+{
+	@Inject
+	private Injector injector;
+
+	@Fix(Jee6LinkingDiagnosticMessageProvider.ENTITY_MISSING)
+	public void fixForMissingEntity(final Issue issue, IssueResolutionAcceptor acceptor)
+	{
+		quickFixEntity(issue, acceptor);
+	}
+
+	@Fix(Jee6LinkingDiagnosticMessageProvider.OPTION_MISSING)
+	public void fixForMissingOption(final Issue issue, IssueResolutionAcceptor acceptor)
+	{
+		quickFixOptions(issue, acceptor);
+	}
+
+	@Fix(Jee6LinkingDiagnosticMessageProvider.HISTORY_MISSING)
+	public void fixForMissingHistory(final Issue issue, IssueResolutionAcceptor acceptor)
+	{
+		quickFixEntity(issue, acceptor);
+	}
+	
+	private void quickFixEntity(final Issue issue, final IssueResolutionAcceptor acceptor)
+	{
+		final String data [] = issue.getData();
+		final ISemanticModification modification = new EntityModification(Jee6Package.Literals.TABLE, data[0]);
+
+		acceptor.accept(issue, "Create entity " + data[0], null, null, modification);
+	}
+	
+	private void quickFixOptions(final Issue issue, final IssueResolutionAcceptor acceptor)
+	{
+		final String data [] = issue.getData();
+		final ISemanticModification modification1 = new EntityModification(true,  data[0]);
+		final ISemanticModification modification2 = new EntityModification(false, data[0]);
+
+		injector.injectMembers(modification1);
+		injector.injectMembers(modification2);
+
+		acceptor.accept(issue, "Create editable options",    null, null, modification1);
+		acceptor.accept(issue, "Create enumeration options", null, null, modification2);
+	}
 }

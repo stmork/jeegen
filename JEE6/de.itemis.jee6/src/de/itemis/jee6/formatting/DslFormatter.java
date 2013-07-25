@@ -3,8 +3,12 @@
  */
 package de.itemis.jee6.formatting;
 
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter;
 import org.eclipse.xtext.formatting.impl.FormattingConfig;
+import org.eclipse.xtext.util.Pair;
+
+import de.itemis.jee6.services.DslGrammarAccess;
 
 /**
  * This class contains custom formatting description.
@@ -17,11 +21,32 @@ import org.eclipse.xtext.formatting.impl.FormattingConfig;
 public class DslFormatter extends AbstractDeclarativeFormatter {
 	
 	@Override
-	protected void configureFormatting(FormattingConfig c) {
-// It's usually a good idea to activate the following three statements.
-// They will add and preserve newlines around comments
-//		c.setLinewrap(0, 1, 2).before(getGrammarAccess().getSL_COMMENTRule());
-//		c.setLinewrap(0, 1, 2).before(getGrammarAccess().getML_COMMENTRule());
-//		c.setLinewrap(0, 1, 1).after(getGrammarAccess().getML_COMMENTRule());
+	protected void configureFormatting(FormattingConfig c)
+	{
+		final DslGrammarAccess f = (DslGrammarAccess)getGrammarAccess();
+
+		c.setAutoLinewrap(128);
+		for (Pair<Keyword, Keyword> pair : f.findKeywordPairs("{", "}"))
+		{
+			final Keyword first = pair.getFirst();
+			final Keyword second = pair.getSecond();
+
+			c.setIndentation(first, second);
+//			c.setNoSpace().before(first);
+			c.setLinewrap().before(first);
+			c.setLinewrap().after(first);
+			c.setLinewrap(2).after(second);
+		}
+
+		for (Keyword keyword : f.findKeywords(";"))
+		{
+			c.setNoSpace().before(keyword);
+			c.setLinewrap().after(keyword);
+		}
+
+		for (Keyword keyword : f.findKeywords(","))
+		{
+			c.setNoSpace().before(keyword);
+		}
 	}
 }

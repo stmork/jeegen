@@ -29,5 +29,6 @@ Export-Package: de.itemis.jee6;uses:="org.eclipse.xtext,org.eclipse.xtext.servic
  de.itemis.jee6.parser.antlr.internal; uses:="org.eclipse.emf.ecore,  org.antlr.runtime,  org.eclipse.xtext.parser.antlr,  de.itemis.jee6.services",
  de.itemis.jee6.scoping;uses:="org.eclipse.xtext.scoping.impl",
  de.itemis.jee6.services;uses:="org.eclipse.xtext,org.eclipse.xtext.common.services,org.eclipse.xtext.service",
- de.itemis.jee6.validation
+ de.itemis.jee6.validation,
+ de.itemis.jee6.serializer
 
