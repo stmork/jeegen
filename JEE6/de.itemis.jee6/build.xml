@@ -4,6 +4,7 @@
 	<property file="${basedir}/environment.properties"/>
 
 	<property name="bin-path"     value="./bin"/>
+	<property name="lib-path"     value="./lib"/>
 	<property name="src-path"     value="./src"/>
 	<property name="src-gen-path" value="./src-gen"/>
 	<property name="manifest"     value="META-INF/MANIFEST.MF"/>
