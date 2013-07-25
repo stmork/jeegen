@@ -41,7 +41,7 @@ public class XhtmlBeautifier extends XmlBeautifier
 			{
 				final String unformattedXml = handle.getBuffer().toString().trim(); 
 
-				handle.setBuffer(removeEmptyLines(prettyPrintXml(unformattedXml, filename.endsWith("/layout.xhtml"))));
+				handle.setBuffer(removeEmptyLines(prettyPrintXmlNop(unformattedXml, filename.endsWith("/layout.xhtml"))));
 			}
 			catch (Exception e)
 			{

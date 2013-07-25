@@ -36,8 +36,8 @@
 				<ui:insert name="title"/>
 			</title>
 			<h:outputStylesheet library="css" name="display.css"/>
-			<link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/img/favicon.ico" />
-			<link rel="apple-touch-icon-precomposed" href="#{request.contextPath}/resources/img/logo.png" />
+			<link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/img/favicon.ico" ></link>
+			<link rel="apple-touch-icon-precomposed" href="#{request.contextPath}/resources/img/logo.png" ></link>
 		</h:head>
 		<body>
 			<div class="header">
