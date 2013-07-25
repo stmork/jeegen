@@ -28,6 +28,7 @@ import de.morknet.oaw.tools.postprocessor.XmlBeautifier;
 public class XhtmlBeautifier extends XmlBeautifier
 {
 	private final static Log log = LogFactory.getLog(XhtmlBeautifier.class);
+	private final static String INDENT = "    ";
 
 	@Override
 	public void beforeWriteAndClose(FileHandle handle)
@@ -40,8 +41,7 @@ public class XhtmlBeautifier extends XmlBeautifier
 			{
 				final String unformattedXml = handle.getBuffer().toString().trim(); 
 
-//				handle.setBuffer(removeEmptyLines(prettyPrintXml(unformattedXml, filename.endsWith("/layout.xhtml"))));
-				handle.setBuffer(removeEmptyLines(unformattedXml, filename.endsWith("/layout.xhtml")));
+				handle.setBuffer(removeEmptyLines(prettyPrintXml(unformattedXml, filename.endsWith("/layout.xhtml"))));
 			}
 			catch (Exception e)
 			{
@@ -52,25 +52,25 @@ public class XhtmlBeautifier extends XmlBeautifier
 
 	protected String prettyPrintXml(
 			final String  unformattedXml,
-			final boolean isLayout) throws ParserConfigurationException, SAXException, IOException
+			final boolean isLayout) throws IOException
 	{
-        final Document document = parseXmlFile(unformattedXml);
-		Writer out = null;
+		Writer out    = null;
 		String result = null;
 
 		try
 		{		
 			// Create an "identity" transformer - copies input to output
-			TransformerFactory factory = TransformerFactory.newInstance();
-			factory.setAttribute("indent-number", new Integer(4));
-			Transformer t = factory.newTransformer();
+	        final Document document = parseXmlFile(unformattedXml);
+			final TransformerFactory factory = TransformerFactory.newInstance();
+			factory.setAttribute("indent-number", new Integer(INDENT.length()));
+			final Transformer t = factory.newTransformer();
 	
-			t.setOutputProperty(OutputKeys.METHOD,               "xhtml");
+			t.setOutputProperty(OutputKeys.METHOD,               "html");
 			t.setOutputProperty(OutputKeys.INDENT,               "yes");
 			t.setOutputProperty(OutputKeys.ENCODING,             "UTF-8");
 			t.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
 			t.setOutputProperty(OutputKeys.VERSION,              "5.0");
-			t.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4"); 
+			t.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", Integer.toString(INDENT.length())); 
 			if (isLayout)
 			{
 				t.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "html");
@@ -83,7 +83,8 @@ public class XhtmlBeautifier extends XmlBeautifier
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
+			result = unformattedXml;
 		}
 		finally
 		{
@@ -123,9 +124,12 @@ public class XhtmlBeautifier extends XmlBeautifier
 		return result;
 	}
 	
-	protected String removeEmptyLines(
-			final String input,
-			final boolean isLayout) throws IOException
+	protected String prettyPrintXmlNop(final String  unformattedXml, final boolean isLayout)
+	{
+		return unformattedXml;
+	}
+
+	protected String removeEmptyLines(final String input) throws IOException
 	{
 		final StringReader sr = new StringReader(input);
 		BufferedReader reader = null;
@@ -140,6 +144,11 @@ public class XhtmlBeautifier extends XmlBeautifier
 			{
 				if (line.trim().length() > 0)
 				{
+					while (line.startsWith(INDENT))
+					{
+						buffer.append("\t");
+						line = line.substring(INDENT.length());
+					}
 					buffer.append(line).append("\n");
 				}
 			}

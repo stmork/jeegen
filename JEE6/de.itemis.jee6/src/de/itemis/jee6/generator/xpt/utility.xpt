@@ -50,12 +50,12 @@
 «ENDDEFINE»
 
 «DEFINE HtmlHeader FOR Object»
-<!-- ===== Created by JEE6-Generator $«id()»$ ===== -->
-<!-- == Copyright (C) «year()»  itemis AG == --> 
+	<!-- ===== Created by JEE6-Generator $«id()»$ ===== -->
+	<!-- == Copyright (C) «year()»  itemis AG == --> 
 «ENDDEFINE»
 
 «DEFINE XmlHeader FOR Object»
-<!-- ====== Created by JEE6-Generator ====== -->
-<!-- ==== Copyright (C) «year()»  itemis AG ==== --> 
-<!-- ======================================= -->
+	<!-- ====== Created by JEE6-Generator ====== -->
+	<!-- ==== Copyright (C) «year()»  itemis AG ==== --> 
+	<!-- ======================================= -->
 «ENDDEFINE»
