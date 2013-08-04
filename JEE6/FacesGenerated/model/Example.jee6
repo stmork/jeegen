@@ -200,14 +200,8 @@ entity Copy {
 	History Lending lending;
 }
 
-options Nichtda editable
-{
-	Text example;
-}
-
 entity Lending
 {
-	Option Nichtda missing;
 	Option Member member;
 	Date lending_date;
 	Date return_date;
