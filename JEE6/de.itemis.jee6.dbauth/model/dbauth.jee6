@@ -1,7 +1,6 @@
 // Edit model here...
 application "DB-Auth"  context "/dbauth" package de.itemis.jee6.dbauth development strict;
 persistence unit"authDS" jndi "jdbc/authDS";
-persistence unit "Name" jndi "Jndi";
 locale "de" default;
 
 entity AuthInfo

@@ -15,6 +15,9 @@ cached Model getModel(Persistence unit) :
 cached List[Persistence] getPersistenceUnits(Model m) :
 	m.options.typeSelect(Persistence);
 
+cached DBType getDialect(Persistence p) :
+	p.type == null ? (DBType::MySQL) : p.type;
+
 cached List[Persistence] getMails(Model m) :
 	m.options.typeSelect(Mail);
 
