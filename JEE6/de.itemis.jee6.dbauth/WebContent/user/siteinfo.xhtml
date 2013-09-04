@@ -1,10 +1,13 @@
-<div xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
-<!-- ===== Created by JEE6-Generator $Id$ ===== -->
-<!-- == Copyright (C) 2013  itemis AG == --> 
+<div xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+	<!-- ===== Created by JEE6-Generator $Id$ ===== -->
+	<!-- == Copyright (C) 2013  itemis AG == --> 
 <ui:composition template="/layout.xhtml">
 	<ui:define name="title">#{msg['user.siteinfo.title']}</ui:define>
 	<ui:define name="content">
-		<h:messages layout="table" styleClass="error"/>
+		<h:messages layout="table" styleClass="error" />
 			<!-- === generated mask === --> 
 			<!-- process: User entity: SiteInfo -->
 		<div class="box">
@@ -15,7 +18,8 @@
 							<h:outputLabel for="skuPrefix" value="#{msg['user.siteinfo.skuprefix']}"/>
 						</td>
 						<td>
-						<h:inputText id="skuPrefix" label="#{msg['user.siteinfo.skuprefix']}" maxlength="255" value="#{userHandler.siteInfo.skuPrefix}"/>
+						<h:inputText id="skuPrefix" label="#{msg['user.siteinfo.skuprefix']}"
+							value="#{userHandler.siteInfo.skuPrefix}" maxlength="255"/>
 						</td>
 					</tr>
 					<tr>
@@ -23,13 +27,16 @@
 							<h:outputLabel for="name" value="#{msg['user.siteinfo.name']}"/>
 						</td>
 						<td>
-						<h:inputText id="name" label="#{msg['user.siteinfo.name']}" maxlength="255" value="#{userHandler.siteInfo.name}"/>
+						<h:inputText id="name" label="#{msg['user.siteinfo.name']}"
+							value="#{userHandler.siteInfo.name}" maxlength="255"/>
 						</td>
 					</tr>
 					<tr>
 						<td/>
 						<td>
-							<h:commandButton action="#{userHandler.saveSiteInfo}" value="#{userHandler.siteInfo.skuPrefix == null ? msg.create : msg.save}"/>
+							<h:commandButton
+									action="#{userHandler.saveSiteInfo}"
+									value="#{userHandler.siteInfo.skuPrefix == null ? msg.create : msg.save}" />
 							<h:commandButton action="#{userHandler.backFromSiteInfo}" value="#{msg.back}"/>
 						</td>
 					</tr>
@@ -39,7 +46,9 @@
 			<!-- === generated list === --> 
 			<!-- process: User entity: SiteInfo -->
 			<h:form id="siteinfo_list">
-				<h:dataTable columnClasses="left,left,command,command,command" rowClasses="odd,even" styleClass="list" value="#{userHandler.siteInfoList}" var="siteInfo">
+				<h:dataTable
+						value="#{userHandler.siteInfoList}" var="siteInfo"
+						styleClass="list" rowClasses="odd,even" columnClasses="left,left,command,command,command">
 					<h:column>
 						<f:facet name="header">#{msg['user.siteinfo.skuprefix']}</f:facet>
 					#{siteInfo.skuPrefix}
@@ -49,12 +58,16 @@
 					#{siteInfo.name}
 					</h:column>
 					<h:column>
-						<f:facet name="header"/>
-						<h:commandLink action="#{userHandler.changeSiteInfo(siteInfo)}" value="#{msg.change}"/>
+						<f:facet name="header" />
+						<h:commandLink
+							value="#{msg.change}"
+							action="#{userHandler.changeSiteInfo(siteInfo)}" />
 					</h:column>
 					<h:column>
-						<f:facet name="header"/>
-						<h:commandLink action="#{userHandler.removeSiteInfo(siteInfo)}" value="#{msg.remove}"/>
+						<f:facet name="header" />
+						<h:commandLink
+							value="#{msg.remove}"
+							action="#{userHandler.removeSiteInfo(siteInfo)}" />
 					</h:column>
 				</h:dataTable>
 			</h:form>

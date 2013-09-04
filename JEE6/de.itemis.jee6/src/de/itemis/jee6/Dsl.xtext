@@ -10,10 +10,11 @@ Model:	'application' name=STRING 'context' path=STRING 'package' package=PACKAGE
 	(processes += Process)*;
 
 enum ProjectState : Development='development'|Integration='integration'|Productive='productive';
+enum DBType : MySQL|DB2|Oracle;
 
 Option:			(Persistence|Security|Mail|Locale|Param) ';';
 Security:		'security' 'domain' jaas=STRING (clustered?='clustered')?;
-Persistence:	'persistence' 'unit' name=STRING 'jndi' jndi=STRING (cacheable?='cacheable' )?;
+Persistence:	'persistence' 'unit' name=STRING 'jndi' jndi=STRING (cacheable?='cacheable' )? (type=DBType)?;
 Mail:			'smtp' jndi=STRING;
 Locale:			'locale' language=STRING (country=STRING)? (home?='default')?;
 Param:			'param' name=PACKAGED_ID '=' value=STRING ('description' description=STRING)?;
