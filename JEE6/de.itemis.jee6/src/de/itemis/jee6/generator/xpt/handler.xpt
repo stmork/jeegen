@@ -251,9 +251,15 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 	{
 		final «typeOf(manyEntity.type)» «nameOf(manyEntity.type)» = «getterOf(manyEntity.type)»();
 
+«LET getId(manyEntity.type) AS id»
+«IF id == null»
 		if («nameOf(manyEntity.type)».getId() != 0)
+«ELSE»
+		if («nameOf(manyEntity.type)».«getterOf(id)»() != null)
+«ENDIF»
+«ENDLET»
 		{
-			dao.«updater(manyEntity.type)»(«getterOf(manyEntity.type)»());
+			dao.«updater(manyEntity.type)»(«nameOf(manyEntity.type)»);
 		}
 		else
 		{
