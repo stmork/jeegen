@@ -577,6 +577,14 @@ public class «typeOf()» extends «abstractOf()»
 «ELSE»
 			«nameOf(this)».«setterOf(id)»(null);
 «ENDIF»
+«LET types.typeSelect(Timestamp) AS stamps»
+«FOREACH stamps.select(e|e.auto) AS auto»
+			«setterOf(auto)»(null);
+«ENDFOREACH»
+«FOREACH stamps.select(e|e.update) AS update»
+			«setterOf(update)»(null);
+«ENDFOREACH»
+«ENDLET»
 			return «nameOf(this)»;
 		}
 		catch (CloneNotSupportedException cnse)

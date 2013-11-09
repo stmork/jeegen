@@ -96,7 +96,7 @@ options InventoryState
 
 entity InventoryHistoryEntry cloneable
 {
-	Timestamp             created;
+	Timestamp auto        created;
 	Option InventoryState state;
 	Option UserInfo       owner;
 	Option UserInfo       commentator;
@@ -109,6 +109,7 @@ entity Inventory filterable
 {
 	History InventoryHistoryEntry history; 
 	Text                          serialNumber;
+	Text                          imei;
 	Option InventoryType          inventoryType;
 	Boolean                       infrastructure;
 }
