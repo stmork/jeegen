@@ -6,13 +6,14 @@
 	<parent>
 		<groupId>de.itemis.jee6</groupId>
 		<artifactId>de.itemis.jee6.releng</artifactId>
-		<version>1.1.2</version>
+		<version>1.1.7</version>
 		<relativePath>../de.itemis.jee6.releng/pom.xml</relativePath>
 	</parent>
 	<name>jee6 DSL UI</name>
 	<artifactId>de.itemis.jee6.ui</artifactId>
 	<groupId>de.itemis.jee6</groupId>
 	<packaging>eclipse-plugin</packaging>
+	<version>1.1.1</version>
 	<build>
 		<plugins>
 			<plugin>
@@ -28,6 +29,40 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.8</version>
+				<executions>
+					<execution>
+						<id>copy</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>de.itemis.jee6</groupId>
+									<artifactId>de.itemis.jee6.utils</artifactId>
+									<version>1.1.7</version>
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${basedir}/resources</outputDirectory>
+									<destFileName>jee6-utils.jar</destFileName>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
+
+	<!-- <dependencies> -->
+	<!-- <dependency> -->
+	<!-- <groupId>de.itemis.jee6</groupId> -->
+	<!-- <artifactId>de.itemis.jee6.utils</artifactId> -->
+	<!-- </dependency> -->
+	<!-- </dependencies> -->
 </project>
