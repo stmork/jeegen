@@ -4,7 +4,7 @@
 	<groupId>de.itemis.jee6</groupId>
 	<artifactId>de.itemis.jee6.utils</artifactId>
 	<packaging>jar</packaging>
-	<version>1.1.2-SNAPSHOT</version>
+	<version>1.1.7</version>
 	<name>jee6-utils</name>
 
 	<properties>
