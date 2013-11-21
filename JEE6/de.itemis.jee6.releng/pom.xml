@@ -23,7 +23,6 @@
 		<tycho-extras-version>0.19.0</tycho-extras-version>
 		<antrun-version>1.7</antrun-version>
 		<platform-version-name>juno</platform-version-name>
-		<p2.target.repository>http://download.eclipse.org/releases/juno</p2.target.repository>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jee6.utils.version>1.1.7</jee6.utils.version>
 	</properties>
@@ -172,7 +171,7 @@
 
 	<profiles>
 		<profile>
-			<id>local-target</id>
+			<id>juno</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
@@ -180,7 +179,7 @@
 				<repository>
 					<id>jee6-target</id>
 					<layout>p2</layout>
-					<url>${p2.target.repository}</url>
+					<url>http://download.eclipse.org/releases/juno</url>
 				</repository>
 				<repository>
 					<id>oaw-tools</id>
@@ -188,7 +187,68 @@
 					<url>http://oaw.sourceforge.net/updates/</url>
 				</repository>
 				<repository>
-					<id>xtext24</id>
+					<id>xtext</id>
+					<layout>p2</layout>
+					<url>http://download.itemis.com/updates/</url>
+				</repository>
+			</repositories>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>target-platform-configuration</artifactId>
+						<version>${tycho-version}</version>
+						<configuration>
+							<environments>
+								<environment>
+									<os>linux</os>
+									<ws>gtk</ws>
+									<arch>x86</arch>
+								</environment>
+								<environment>
+									<os>linux</os>
+									<ws>gtk</ws>
+									<arch>x86_64</arch>
+								</environment>
+								<environment>
+									<os>win32</os>
+									<ws>win32</ws>
+									<arch>x86</arch>
+								</environment>
+								<environment>
+									<os>win32</os>
+									<ws>win32</ws>
+									<arch>x86_64</arch>
+								</environment>
+								<environment>
+									<os>macosx</os>
+									<ws>cocoa</ws>
+									<arch>x86_64</arch>
+								</environment>
+							</environments>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>kepler</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<repositories>
+				<repository>
+					<id>jee6-target</id>
+					<layout>p2</layout>
+					<url>http://download.eclipse.org/releases/kepler</url>
+				</repository>
+				<repository>
+					<id>oaw-tools</id>
+					<layout>p2</layout>
+					<url>http://oaw.sourceforge.net/updates/</url>
+				</repository>
+				<repository>
+					<id>xtext</id>
 					<layout>p2</layout>
 					<url>http://download.itemis.com/updates/</url>
 				</repository>
