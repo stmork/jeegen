@@ -144,6 +144,23 @@
 						<arguments>-Prelease</arguments>
 					</configuration>
 				</plugin>
+				<plugin>
+					<groupId>de.itemis.signing</groupId>
+					<artifactId>itemis-jarsigner</artifactId>
+					<version>0.0.3</version>
+					<configuration>
+						<sshKey>/opt/hudson/home/id_macbuilds</sshKey>
+					</configuration>
+					<executions>
+						<execution>
+							<id>sign</id>
+							<goals>
+								<goal>sign</goal>
+							</goals>
+							<phase>package</phase>
+						</execution>
+					</executions>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
@@ -160,12 +177,22 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</pluginRepository>
+		<pluginRepository>
+			<id>nexus-projects.itemis.de</id>
+			<url>https://projects.itemis.de/nexus/content/groups/maven-plugins/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
 	</pluginRepositories>
 
 	<repositories>
 		<repository>
 			<id>projects</id>
-  		    <url>https://projects.itemis.de/nexus/content/groups/ejb3/</url>
+			<url>https://projects.itemis.de/nexus/content/groups/ejb3/</url>
 		</repository>
 	</repositories>
 
