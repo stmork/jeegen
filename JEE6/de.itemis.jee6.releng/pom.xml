@@ -163,6 +163,13 @@
 		</pluginRepository>
 	</pluginRepositories>
 
+	<repositories>
+		<repository>
+			<id>projects</id>
+  		    <url>https://projects.itemis.de/nexus/content/groups/ejb3/</url>
+		</repository>
+	</repositories>
+
 	<profiles>
 		<profile>
 			<id>local-target</id>
