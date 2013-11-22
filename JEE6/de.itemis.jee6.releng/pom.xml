@@ -45,6 +45,23 @@
 				<version>${tycho-version}</version>
 				<extensions>true</extensions>
 			</plugin>
+			<plugin>
+				<groupId>de.itemis.signing</groupId>
+				<artifactId>itemis-jarsigner</artifactId>
+				<version>0.0.3</version>
+				<configuration>
+					<sshKey>/opt/hudson/home/id_macbuilds</sshKey>
+				</configuration>
+				<executions>
+					<execution>
+						<id>sign</id>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+						<phase>package</phase>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
@@ -143,23 +160,6 @@
 							scm:checkin</preparationGoals>
 						<arguments>-Prelease</arguments>
 					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>de.itemis.signing</groupId>
-					<artifactId>itemis-jarsigner</artifactId>
-					<version>0.0.3</version>
-					<configuration>
-						<sshKey>/opt/hudson/home/id_macbuilds</sshKey>
-					</configuration>
-					<executions>
-						<execution>
-							<id>sign</id>
-							<goals>
-								<goal>sign</goal>
-							</goals>
-							<phase>package</phase>
-						</execution>
-					</executions>
 				</plugin>
 			</plugins>
 		</pluginManagement>
