@@ -50,7 +50,7 @@
 				<artifactId>itemis-jarsigner</artifactId>
 				<version>0.0.3</version>
 				<configuration>
-					<sshKey>/opt/hudson/home/id_macbuilds</sshKey>
+					<sshKey>/opt/hudson/home/id_yakindu_cc</sshKey>
 				</configuration>
 				<executions>
 					<execution>
