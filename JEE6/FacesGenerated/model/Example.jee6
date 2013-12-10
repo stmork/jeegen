@@ -177,7 +177,8 @@ options AddressType
 {
 	"address.work",
 	"address.home"
-} 
+}
+
 options Member editable
 {
 	Text id login;
