@@ -21,7 +21,7 @@
 	<properties>
 		<tycho-version>0.19.0</tycho-version>
 		<tycho-extras-version>0.19.0</tycho-extras-version>
-		<antrun-version>1.7</antrun-version>
+		<antrun-version>1.6</antrun-version>
 		<platform-version-name>juno</platform-version-name>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jee6.utils.version>1.1.7</jee6.utils.version>
@@ -96,6 +96,25 @@
 						<encoding>UTF-8</encoding>
 					</configuration>
 				</plugin>
+<!-- 				<plugin> -->
+<!-- 					<groupId>org.codehaus.mojo</groupId> -->
+<!-- 					<artifactId>build-helper-maven-plugin</artifactId> -->
+<!-- 					<version>1.3</version> -->
+<!-- 					<executions> -->
+<!-- 						<execution> -->
+<!-- 							<id>add-source</id> -->
+<!-- 							<phase>generate-sources</phase> -->
+<!-- 							<goals> -->
+<!-- 								<goal>add-source</goal> -->
+<!-- 							</goals> -->
+<!-- 							<configuration> -->
+<!-- 								<sources> -->
+<!-- 									<source>${project.build.directory}/xtend-gen</source> -->
+<!-- 								</sources> -->
+<!-- 							</configuration> -->
+<!-- 						</execution> -->
+<!-- 					</executions> -->
+<!-- 				</plugin> -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-clean-plugin</artifactId>
@@ -143,7 +162,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-antrun-plugin</artifactId>
-					<version>${antrun-version}</version>
+					<version>1.7</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -163,13 +182,7 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
-											</build>
-<repositories>
-		<repository>
-					<id>projects</id>
-								<url>https://projects.itemis.de/nexus</url>
-										</repository>
-											</repositories>
+  </build>
 
 	<pluginRepositories>
 		<!-- Fornax Workflow Runner plugin -->
@@ -183,23 +196,13 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</pluginRepository>
-		<pluginRepository>
-			<id>nexus-projects.itemis.de</id>
-			<url>https://projects.itemis.de/nexus/content/groups/maven-plugins/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</pluginRepository>
 	</pluginRepositories>
 
 	<repositories>
 		<repository>
 			<id>projects</id>
 			<url>https://projects.itemis.de/nexus/content/groups/ejb3/</url>
-		</repository>
+    </repository>
 	</repositories>
 
 	<profiles>
@@ -212,7 +215,7 @@
 				<repository>
 					<id>jee6-target</id>
 					<layout>p2</layout>
-					<url>http://download.eclipse.org/releases/juno</url>
+					<url>${p2.target.repository}</url>
 				</repository>
 				<repository>
 					<id>oaw-tools</id>
