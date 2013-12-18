@@ -7,6 +7,9 @@ import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.ejb.AfterBegin;
+import javax.ejb.AfterCompletion;
+import javax.ejb.BeforeCompletion;
 import javax.ejb.PostActivate;
 import javax.ejb.PrePassivate;
 import javax.ejb.Remove;
@@ -16,6 +19,7 @@ import javax.interceptor.Interceptors;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import de.itemis.jee6.util.LogUtil;
 import de.itemis.jee6.util.Profiler;
 
 @Stateful
@@ -55,8 +59,26 @@ public class StatefulBean implements Serializable
 	}
 
 	@Remove
-	public void logout()
+	public void remove()
 	{
-		log.debug("  =logout() # " + this);
+		log.debug("  =remove() # " + this);
+	}
+
+	@AfterBegin
+	public void afterBegin()
+	{
+		log.debug("  =afterBegin() # " + this);
+	}
+
+	@BeforeCompletion
+	public void beforeCompletion()
+	{
+		log.debug("  =beforeCompletion() # " + this);
+	}
+
+	@AfterCompletion
+	public void afterCompletion(final boolean commit)
+	{
+		LogUtil.debug(log, "  =afterCompletion(%s) # " + this, commit);
 	}
 }

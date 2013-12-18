@@ -70,6 +70,7 @@ public class SessionInfo extends AbstractHandler
 		bean.ping();
 //		bean.logout();
 		user = null;
+		bean.remove();
 		log.debug("<close()");
 	}
 
