@@ -42,6 +42,7 @@
 «bundleUpdate(filename, prefixOf(process), process.name)»
 «bundleUpdate(filename, prefixOf(process) + ".title", "Edit " + process.name)»
 «FOREACH getEntitiesWithHistory(getUiEntities(process).toList()) AS entity»
+«bundleUpdate(filename, prefixOf(process) + "." + prefixOf(entity) + ".confirm-remove", "Do you really want to remove this " + entity.name.toLowerCase() + "?")»
 «bundleUpdate(filename, prefixOf(process) + "." + prefixOf(entity) + ".title", "Edit " + entity.name)»
 «FOREACH entity.types AS attr»
 «bundleUpdate(filename, prefixOf(process) + "." + prefixOf(entity) + "." + prefixOf(attr), attr.name.toFirstUpper())»
