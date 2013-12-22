@@ -54,6 +54,7 @@
 						<f:facet name="header" />
 						<h:commandLink
 							value="#{msg.remove}"
+							onclick="return confirm('#{msg['«prefixOf(p)».«prefixOf(this)».confirm-remove']}');"
 							action="#{«handlerUri(p)».«removeEntity()»(«nameOf(this)»)}" />
 					</h:column>
 «IF hasActivationBoolean()»
