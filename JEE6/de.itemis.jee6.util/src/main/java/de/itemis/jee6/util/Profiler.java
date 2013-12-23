@@ -3,6 +3,7 @@
  */
 package de.itemis.jee6.util;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import javax.interceptor.AroundInvoke;
@@ -17,9 +18,10 @@ import org.apache.commons.logging.LogFactory;
  * @author sm
  *
  */
-public class Profiler
+public class Profiler implements Serializable
 {
-	private final static int MAX_LENGTH = 100;
+	private final static long    serialVersionUID = 1L;
+	private final static int     MAX_LENGTH = 100;
 	private       static boolean verbose = LogFactory.getLog(Profiler.class).isDebugEnabled();
 
 	/**
