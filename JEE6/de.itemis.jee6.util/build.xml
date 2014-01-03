@@ -16,6 +16,7 @@
 
 	<property name="coverage-path" value="./coverage"/>	
 	<property name="instr-path"    value="./instr"/>
+	<property name="jacoco-exec"   value="./jacoco.exec"/>
 
 	<!-- ==================================================== -->
 	<!--              Setting up classpaths                   -->
@@ -36,12 +37,8 @@
 	<path id="coverage.lib">
 	</path>
 
-	<path id="instr.classpath">
-		<pathelement path="${bin-path}" />
-	</path>
-
 	<path id="coverage.classpath">
-		<pathelement location="${instr-path}" />  
+		<pathelement path="${bin-path}" />
 		<pathelement location="${bin-path}" />  
 		<path refid="runtime.path"/>
 	</path>
@@ -62,10 +59,11 @@
 
 	<target name="clean">
 		<delete dir="${bin-path}" />
+		<delete dir="${doc-path}"/>
 		<delete dir="${target-path}" />
 		<delete dir="${instr-path}" />
 		<delete dir="${coverage-path}" />
-		<delete dir="${doc-path}"/>
+		<delete file="${jacoco-exec}" />
 		<delete>
 			<fileset dir="." includes="TEST-*.xml"/>
 			<fileset dir="." includes="TEST-*.txt"/>
@@ -82,6 +80,7 @@
 				<exclude name="**/*.java"/>
 			</fileset>
 		</copy>
+
 		<javac srcdir="${src-path}:${tst-path}" destdir="${bin-path}" debug="true"
 				includeantruntime="false"
 				source="6" encoding="UTF-8">
@@ -124,15 +123,8 @@
 	<!--              Setting up runtime targets              -->
 	<!-- ==================================================== -->
 
-	<target name="instr" depends="compile">
-		<mkdir dir="${instr-path}"/>
-		<jacoco:instrument destdir="${instr-path}">
-			<fileset dir="${bin-path}" includes="**/*.class"/>
-		</jacoco:instrument>
-	</target>
-	
-	<target name="test" depends="compile">
-		<jacoco:coverage>
+	<target name="test" depends="clean,compile">
+		<jacoco:coverage destfile="${jacoco-exec}">
 		    <junit printsummary="true" fork="true" forkmode="once" haltonerror="yes" haltonfailure="yes">
 				<classpath refid="coverage.classpath" />
 				<formatter type="xml"/>
@@ -150,15 +142,17 @@
 		</jacoco:coverage>
 	</target>
 
-	<target name="jacoco" depends="instr,test">
+	<target name="jacoco" depends="test">
 		<jacoco:report>
 			<executiondata>
-				<file file="jacoco.exec"/>
+				<file file="${jacoco-exec}"/>
 			</executiondata>
    
 			<structure name="JEE6 Utilities">
 				<classfiles>
-					<fileset dir="${bin-path}"/>
+					<fileset dir="${bin-path}">
+						<exclude name="**/test/*.class"/>
+					</fileset>
 				</classfiles>
 				<sourcefiles>
 					<fileset dir="${src-path}">
