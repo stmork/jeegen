@@ -123,7 +123,7 @@
 	<!--              Setting up runtime targets              -->
 	<!-- ==================================================== -->
 
-	<target name="test" depends="clean,compile">
+	<target name="test" depends="compile">
 		<jacoco:coverage destfile="${jacoco-exec}">
 		    <junit printsummary="true" fork="true" forkmode="once" haltonerror="yes" haltonfailure="yes">
 				<classpath refid="coverage.classpath" />
