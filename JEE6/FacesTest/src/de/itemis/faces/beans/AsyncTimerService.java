@@ -2,6 +2,8 @@ package de.itemis.faces.beans;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.ejb.Lock;
 import javax.ejb.LockType;
 import javax.ejb.Schedule;
@@ -18,8 +20,19 @@ import de.itemis.jee6.util.Profiler;
 @Startup
 @Interceptors(Profiler.class)
 public class AsyncTimerService {
-	private final static Log log = LogFactory.getLog(AsyncTimerService.class);
+	private final static Log    log = LogFactory.getLog(AsyncTimerService.class);
 	private final AtomicBoolean semaphore = new AtomicBoolean(false);
+	private final String        LOCK_CODE = this.getClass().getSimpleName();
+
+	@EJB
+	private AtomicClusterLock atomicClusterLock;
+
+
+	@PostConstruct
+	public void init()
+	{
+		atomicClusterLock.set(LOCK_CODE, 0);
+	}
 
 	@Schedule(hour="*",minute="0",second="0",persistent=false)
 	@Lock(LockType.READ)
@@ -49,6 +62,57 @@ public class AsyncTimerService {
 		else
 		{
 			log.debug("---------syncMethod");
+		}
+	}
+
+	@Schedule(minute="*/5",hour="7-20",persistent=false)
+	@Lock(LockType.READ)
+	public void schedule1()
+	{
+		if(atomicClusterLock.compareAndSet(LOCK_CODE, 0, 1))
+		{
+			try
+			{
+				log.debug("=schedule1()");
+			}
+			finally
+			{
+				atomicClusterLock.set(LOCK_CODE, 0);
+			}
+		}
+	}
+
+	@Schedule(minute="*/5",hour="7-20",persistent=false)
+	@Lock(LockType.READ)
+	public void schedule2()
+	{
+		if(atomicClusterLock.compareAndSet(LOCK_CODE, 0, 1))
+		{
+			try
+			{
+				log.debug("=schedule2()");
+			}
+			finally
+			{
+				atomicClusterLock.set(LOCK_CODE, 0);
+			}
+		}
+	}
+
+	@Schedule(minute="*/5",hour="7-20",persistent=false)
+	@Lock(LockType.READ)
+	public void schedule3()
+	{
+		if(atomicClusterLock.compareAndSet(LOCK_CODE, 0, 1))
+		{
+			try
+			{
+				log.debug("=schedule3()");
+			}
+			finally
+			{
+				atomicClusterLock.set(LOCK_CODE, 0);
+			}
 		}
 	}
 }

@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.interceptor.Interceptors;
+import javax.persistence.Query;
 import javax.sql.DataSource;
 
 import org.apache.commons.logging.Log;
@@ -80,6 +81,18 @@ public class MultipleBean extends AbstractDaoBean
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void checkSsl() throws SQLException
 	{
+		final Query query = em.createNativeQuery("SHOW STATUS WHERE Variable_name in ( 'ssl_cipher', 'ssl_cipher_list', 'ssl_version')");
+
+		for(Object o : query.getResultList())
+		{
+			final Object [] result = (Object [])o;
+			
+			if (result.length >= 2)
+			{
+				LogUtil.info(log, "%s = %s", result[0], result[1]);
+			}
+		}
+		
 		Connection connection = null;
 		Statement  stmt       = null;
 		ResultSet  result     = null;
@@ -93,7 +106,7 @@ public class MultipleBean extends AbstractDaoBean
 
 			connection = ds.getConnection();
 			stmt = connection.createStatement();
-			result = stmt.executeQuery("SHOW STATUS WHERE Variable_name LIKE 'Ssl_cipher%'");
+			result = stmt.executeQuery("SHOW STATUS WHERE Variable_name LIKE '%ssl%'");
 					
 			while (result.next())
 			{

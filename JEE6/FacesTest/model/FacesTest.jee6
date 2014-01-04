@@ -73,6 +73,13 @@ options SiteInfo editable
 	Text name;
 } persistence unit "authDS"
 
+entity Lock
+{
+	Text id  code;
+	Int      value;
+	Text     info transient;
+}
+
 entity SiteAuthInfo
 {
 	Option         SiteInfo site;
