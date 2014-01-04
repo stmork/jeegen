@@ -18,15 +18,18 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.ejb.Timeout;
 import javax.ejb.Timer;
+import javax.interceptor.Interceptors;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import de.itemis.faces.DownloadInfo;
+import de.itemis.jee6.util.Profiler;
 
 @Singleton
 @Startup
+@Interceptors(Profiler.class)
 public class TimerSingleton
 {
 	private final static Log log = LogFactory.getLog(TimerSingleton.class);
