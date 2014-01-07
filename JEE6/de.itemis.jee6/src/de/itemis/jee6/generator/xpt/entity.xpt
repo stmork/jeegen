@@ -348,7 +348,7 @@ public class «typeOf()» extends «abstractOf()»
 	@Transient
 	public abstract «relationOfType()» «getterOf()»();
 «ELSE»
-	private «relationOfType()» «nameOf()»;
+	private «relationOfType()» «nameOf()» «defaultOf()»;
 
 «IF isId()»
 	/**

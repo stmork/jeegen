@@ -22,6 +22,9 @@ String fqTypeOf(Attribute t) :
 String annotationOf(Attribute t) :
 	"@Column";
 
+String defaultOf(Attribute t) :
+	"";
+
 /*
  * Date
  */
@@ -48,14 +51,20 @@ String annotationOf(Timestamp ts) :
 /*
  * Boolean
  */
-String typeOf(jee6::Boolean i) :
+String typeOf(jee6::Boolean b) :
 	"boolean";
 
-String packageOf(jee6::Boolean i) :
+String packageOf(jee6::Boolean b) :
 	"";
 
-String fqTypeOf(jee6::Boolean i) :
-	typeOf(i);
+String fqTypeOf(jee6::Boolean b) :
+	typeOf(b);
+
+String annotationOf(jee6::Boolean b) :
+	"@Column(nullable=false)";
+
+String defaultOf(jee6::Boolean b) :
+	b.name == "active" ? " = true" : " = false";
 
 /*
  * Integer
@@ -69,6 +78,12 @@ String packageOf(jee6::Integer i) :
 String fqTypeOf(jee6::Integer i) :
 	typeOf(i);
 
+String annotationOf(jee6::Integer i) :
+	"@Column(nullable=false)";
+
+String defaultOf(jee6::Integer i) :
+	" = 0";
+
 /*
  * Number
  */
@@ -80,6 +95,12 @@ String packageOf(Number n) :
 
 String fqTypeOf(Number n) :
 	typeOf(n);
+
+String annotationOf(Number n) :
+	"@Column(nullable=false)";
+
+String defaultOf(Number n) :
+	" = 0.0";
 
 /*
  * Text
