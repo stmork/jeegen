@@ -45,7 +45,7 @@ public class TimerSingleton
 	}
 
 	private final Map<String, DownloadInfo> infos = new HashMap<String, DownloadInfo>();
-	
+
 	@PostConstruct
 	public void init() throws MalformedURLException
 	{

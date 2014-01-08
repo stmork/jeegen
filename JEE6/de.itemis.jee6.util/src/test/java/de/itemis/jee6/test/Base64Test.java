@@ -3,8 +3,7 @@ package de.itemis.jee6.test;
 import java.io.UnsupportedEncodingException;
 import java.util.Random;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Test;
 
 import de.itemis.jee6.util.Base64;

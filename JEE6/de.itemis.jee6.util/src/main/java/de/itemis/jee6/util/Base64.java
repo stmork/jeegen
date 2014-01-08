@@ -19,11 +19,13 @@ public class Base64
 	}
 
 	/**
-	 * This method encodes a text into BASE64.
+	 * This method encodes a text into BASE64. The String is converted into an ISO 8859-1 endoded
+	 * byte array.
 	 * 
 	 * @param input The text to encode.
 	 * @return The encoded text.
 	 * @throws UnsupportedEncodingException
+	 * @see {@link #encode(byte[])}
 	 */
 	public static String encode(final String input) throws UnsupportedEncodingException
 	{

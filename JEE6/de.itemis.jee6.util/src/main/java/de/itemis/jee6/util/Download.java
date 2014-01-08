@@ -26,9 +26,6 @@ import org.apache.commons.logging.LogFactory;
  */
 public class Download implements Serializable
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private final static Log log = LogFactory.getLog(Download.class);
@@ -101,7 +98,7 @@ public class Download implements Serializable
 			{
 				array = new byte[len];
 				int already = 0;
-	
+
 				while (already < len)
 				{
 					int read = is.read(array, already, len - already);
@@ -142,7 +139,7 @@ public class Download implements Serializable
 		}
 		return array;
     }
-	
+
 	/**
 	 * This method converts an image as byte array into a {@link BufferedImage}.
 	 * 
