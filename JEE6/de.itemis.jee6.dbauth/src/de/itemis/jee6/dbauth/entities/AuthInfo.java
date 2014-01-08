@@ -22,6 +22,7 @@ import de.itemis.jee6.util.SHA1;
 @Table(name = "AuthInfo")
 public class AuthInfo extends AbstractAuthInfo {
 	private static final long serialVersionUID = 1L;
+	private static final SHA1 sha1 = new SHA1();
 
 	/**
 	 * This method is a transient getter of the virtual property passwordUncoded.
@@ -37,6 +38,6 @@ public class AuthInfo extends AbstractAuthInfo {
 	
 	public void setPasswordUncoded(final String password) throws NoSuchAlgorithmException, UnsupportedEncodingException
 	{
-		setPassword(SHA1.encode(password));
+		setPassword(sha1.encode(password));
 	}
 }
