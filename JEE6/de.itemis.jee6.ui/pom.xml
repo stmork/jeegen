@@ -13,7 +13,6 @@
 	<artifactId>de.itemis.jee6.ui</artifactId>
 	<groupId>de.itemis.jee6</groupId>
 	<packaging>eclipse-plugin</packaging>
-	<version>1.1.1</version>
 	<build>
 		<plugins>
 			<plugin>
