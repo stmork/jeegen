@@ -102,6 +102,11 @@ Everyone is permitted to copy and distribute copies of this Agreement, but in or
 This Agreement is governed by the laws of the State of New York and the intellectual property laws of the United States of America. No party to this Agreement will bring a legal action under this Agreement more than one year after the cause of action arose. Each party waives its rights to a jury trial in any resulting litigation.
    </license>
 
+   <url>
+      <update label="JEE6 Generator Update Site" url="http://jee6-generator.itemis.de/updates"/>
+      <discovery label="JEE6 Generator Update Site" url="http://jee6-generator.itemis.de/updates"/>
+   </url>
+
    <requires>
       <import plugin="de.morknet.oaw.dependencies" version="5.2.5" match="greaterOrEqual"/>
       <import plugin="de.morknet.oaw.tools5" version="5.2.4" match="greaterOrEqual"/>
@@ -111,7 +116,6 @@ This Agreement is governed by the laws of the State of New York and the intellec
       <import plugin="org.eclipse.emf.common"/>
       <import plugin="org.antlr.runtime"/>
       <import plugin="org.eclipse.xtext.common.types"/>
-      <import plugin="org.apache.log4j.source" version="1.2.15" match="greaterOrEqual"/>
       <import plugin="org.apache.commons.logging"/>
       <import plugin="org.apache.log4j"/>
       <import plugin="org.eclipse.xtext.xbase.lib"/>
@@ -134,14 +138,14 @@ This Agreement is governed by the laws of the State of New York and the intellec
          id="de.itemis.jee6"
          download-size="0"
          install-size="0"
-         version="1.1.7"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="de.itemis.jee6.ui"
          download-size="0"
          install-size="0"
-         version="1.1.1"
+         version="0.0.0"
          unpack="false"/>
 
 </feature>
