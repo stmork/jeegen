@@ -150,7 +150,7 @@ public class EntityTest {
 		}
 		Assert.assertEquals(0, map.size());
 	}
-	
+
 	@Test
 	public void listTest()
 	{

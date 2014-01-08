@@ -3,8 +3,7 @@ package de.itemis.jee6.test;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Test;
 
 import de.itemis.jee6.util.SHA1;
