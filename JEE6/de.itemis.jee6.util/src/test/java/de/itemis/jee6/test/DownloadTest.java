@@ -14,11 +14,15 @@ public class DownloadTest
 {
 	private final static String HOMEPAGE_URL = "http://eisenbahnsteuerung.org";
 	private final static String IMAGE_URL    = HOMEPAGE_URL + "/images/rcc32.gif";
+	private final static int    TIMEOUT      = 5000;
 
 	@Test
 	public void eisenbahnsteuerung() throws IOException
 	{
 		final Download download = new Download(HOMEPAGE_URL);
+
+		download.setTimeout(TIMEOUT);
+		Assert.assertEquals(TIMEOUT, download.getTimeout());
 
 		final byte [] array = download.downloadArray();
 		Assert.assertNotNull(array);
@@ -32,6 +36,24 @@ public class DownloadTest
 	{
 		final Download download = new Download("http://morknet.de");
 
+		download.setTimeout(TIMEOUT);
+		Assert.assertEquals(TIMEOUT, download.getTimeout());
+
+		final byte [] array = download.downloadArray();
+		Assert.assertNotNull(array);
+
+		final String mimeType = download.getMimeType();
+		Assert.assertTrue(mimeType.startsWith("text/html"));
+	}
+
+	@Test
+	public void jee6() throws IOException
+	{
+		final Download download = new Download("http://jee6-generator.itemis.de");
+
+		download.setTimeout(TIMEOUT);
+		Assert.assertEquals(TIMEOUT, download.getTimeout());
+
 		final byte [] array = download.downloadArray();
 		Assert.assertNotNull(array);
 
@@ -42,7 +64,10 @@ public class DownloadTest
 	@Test
 	public void itemis() throws IOException
 	{
-		final Download download = new Download("http://jee6-generator.itemis.de");
+		final Download download = new Download("http://www.itemis.de");
+
+		download.setTimeout(TIMEOUT);
+		Assert.assertEquals(TIMEOUT, download.getTimeout());
 
 		final byte [] array = download.downloadArray();
 		Assert.assertNotNull(array);
@@ -82,6 +107,10 @@ public class DownloadTest
 	public void error404() throws IOException
 	{
 		final Download download = new Download("http://morknet.de/404");
+
+		download.setTimeout(TIMEOUT);
+		Assert.assertEquals(TIMEOUT, download.getTimeout());
+
 		download.downloadArray();
 	}
 
