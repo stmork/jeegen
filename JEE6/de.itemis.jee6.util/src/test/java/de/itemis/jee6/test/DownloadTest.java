@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.SocketTimeoutException;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,9 +13,10 @@ import de.itemis.jee6.util.Download;
 
 public class DownloadTest
 {
-	private final static String HOMEPAGE_URL = "http://eisenbahnsteuerung.org";
-	private final static String IMAGE_URL    = HOMEPAGE_URL + "/images/rcc32.gif";
-	private final static int    TIMEOUT      = 5000;
+	private final static String HOMEPAGE_URL  = "http://eisenbahnsteuerung.org";
+	private final static String IMAGE_URL     = HOMEPAGE_URL + "/images/rcc32.gif";
+	private final static int    TIMEOUT       = 5000;
+	private final static int    FORCE_TIMEOUT =   50;
 
 	@Test
 	public void eisenbahnsteuerung() throws IOException
@@ -112,6 +114,21 @@ public class DownloadTest
 		Assert.assertEquals(TIMEOUT, download.getTimeout());
 
 		download.downloadArray();
+	}
+
+	@Test(expected=SocketTimeoutException.class)
+	public void timeout() throws IOException
+	{
+		final Download download = new Download("http://morknet.de");
+
+		download.setTimeout(FORCE_TIMEOUT);
+		Assert.assertEquals(FORCE_TIMEOUT, download.getTimeout());
+
+		final byte [] array = download.downloadArray();
+		Assert.assertNotNull(array);
+
+		final String mimeType = download.getMimeType();
+		Assert.assertTrue(mimeType.startsWith("text/html"));
 	}
 
 	@Test(expected=MalformedURLException.class)
