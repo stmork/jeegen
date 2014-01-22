@@ -44,11 +44,11 @@
 		</fileset>
 		<pathelement path="${src-path}" />
 	</path>
-	
+
 	<!-- ==================================================== -->
 	<!--              Setting up build targets                -->
 	<!-- ==================================================== -->
-	
+
 	<target name="-version">
 	    <loadproperties srcfile="META-INF/MANIFEST.MF">
 	        <filterchain>

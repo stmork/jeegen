@@ -1,15 +1,15 @@
-«REM»
-«###»	Copyright (C) 2013 itemis AG
-«###»	$Id$
-«ENDREM»
+Â«REMÂ»
+Â«###Â»	Copyright (C) 2013 itemis AG
+Â«###Â»	$Id$
+Â«ENDREMÂ»
 
-«IMPORT jee6»
+Â«IMPORT jee6Â»
 
-«DEFINE Main FOR Model»
-«EXPAND descriptor::Main»
-«EXPAND presentation::Main»
-«EXPAND bundle::Main»
-«EXPAND handler::Main»
-«EXPAND dao::Main»
-«EXPAND entity::Main»
-«ENDDEFINE»
+Â«DEFINE Main FOR ModelÂ»
+Â«EXPAND descriptor::MainÂ»
+Â«EXPAND presentation::MainÂ»
+Â«EXPAND bundle::MainÂ»
+Â«EXPAND handler::MainÂ»
+Â«EXPAND dao::MainÂ»
+Â«EXPAND entity::MainÂ»
+Â«ENDDEFINEÂ»

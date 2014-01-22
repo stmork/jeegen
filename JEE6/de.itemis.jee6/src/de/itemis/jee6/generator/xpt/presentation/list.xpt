@@ -1,179 +1,179 @@
-«REM»
-«###»	Copyright (C) 2012 itemis AG
-«###»	$Id$
-«ENDREM»
+Â«REMÂ»
+Â«###Â»	Copyright (C) 2012 itemis AG
+Â«###Â»	$Id$
+Â«ENDREMÂ»
 
-«IMPORT jee6»
+Â«IMPORT jee6Â»
 
-«EXTENSION de::itemis::jee6::generator::ext::dao»
-«EXTENSION de::itemis::jee6::generator::ext::entity»
-«EXTENSION de::itemis::jee6::generator::ext::model»
-«EXTENSION de::itemis::jee6::generator::ext::naming»
-«EXTENSION de::itemis::jee6::generator::ext::types»
-«EXTENSION de::itemis::jee6::generator::ext::ui»
-«EXTENSION de::itemis::jee6::generator::ext::converter»
+Â«EXTENSION de::itemis::jee6::generator::ext::daoÂ»
+Â«EXTENSION de::itemis::jee6::generator::ext::entityÂ»
+Â«EXTENSION de::itemis::jee6::generator::ext::modelÂ»
+Â«EXTENSION de::itemis::jee6::generator::ext::namingÂ»
+Â«EXTENSION de::itemis::jee6::generator::ext::typesÂ»
+Â«EXTENSION de::itemis::jee6::generator::ext::uiÂ»
+Â«EXTENSION de::itemis::jee6::generator::ext::converterÂ»
 
-«DEFINE Multiple(Process p) FOR Entity»
-«LET getMultipleAttributes() AS attributes»
-«FOREACH attributes AS attr»
-	<!-- «attr.name» -->
-«ENDFOREACH»
-«ENDLET»
-«ENDDEFINE»
+Â«DEFINE Multiple(Process p) FOR EntityÂ»
+Â«LET getMultipleAttributes() AS attributesÂ»
+Â«FOREACH attributes AS attrÂ»
+	<!-- Â«attr.nameÂ» -->
+Â«ENDFOREACHÂ»
+Â«ENDLETÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE entityList(Process p) FOR Entity»
+Â«DEFINE entityList(Process p) FOR EntityÂ»
 			<!-- === generated list === --> 
-			<!-- process: «p.name» entity: «name» -->
-«LET getListAttributes() AS attributes»
-«IF attributes.size > 0»
-			<h:form id="«prefixOf(this)»_list">
+			<!-- process: Â«p.nameÂ» entity: Â«nameÂ» -->
+Â«LET getListAttributes() AS attributesÂ»
+Â«IF attributes.size > 0Â»
+			<h:form id="Â«prefixOf(this)Â»_list">
 				<h:dataTable
-						value="#{«handlerUri(p)».«uiList()»}" var="«nameOf(this)»"
-						styleClass="list" rowClasses="odd,even" columnClasses="«FOREACH attributes AS attr SEPARATOR ","»«getClass(attr)»«ENDFOREACH»,command,command,command">
-«FOREACH attributes AS attr»
+						value="#{Â«handlerUri(p)Â».Â«uiList()Â»}" var="Â«nameOf(this)Â»"
+						styleClass="list" rowClasses="odd,even" columnClasses="Â«FOREACH attributes AS attr SEPARATOR ","Â»Â«getClass(attr)Â»Â«ENDFOREACHÂ»,command,command,command">
+Â«FOREACH attributes AS attrÂ»
 					<h:column>
-						<f:facet name="header">#{msg['«prefixOf(p)».«prefixOf(this)».«prefixOf(attr)»']}</f:facet>
-«EXPAND element(p, this) FOR attr»
+						<f:facet name="header">#{msg['Â«prefixOf(p)Â».Â«prefixOf(this)Â».Â«prefixOf(attr)Â»']}</f:facet>
+Â«EXPAND element(p, this) FOR attrÂ»
 					</h:column>
-«ENDFOREACH»
+Â«ENDFOREACHÂ»
 					<h:column>
 						<f:facet name="header" />
 						<h:commandLink
 							value="#{msg.change}"
-							action="#{«handlerUri(p)».«changeEntity()»(«nameOf(this)»)}" />
+							action="#{Â«handlerUri(p)Â».Â«changeEntity()Â»(Â«nameOf(this)Â»)}" />
 					</h:column>
-«IF getHistory() != null»
+Â«IF getHistory() != nullÂ»
 					<h:column>
 						<f:facet name="header" />
 						<h:commandLink
 							value="#{msg.history}"
-							action="#{«handlerUri(p)».«editEntity(getHistory().type)»(«nameOf(this)»)}" />
+							action="#{Â«handlerUri(p)Â».Â«editEntity(getHistory().type)Â»(Â«nameOf(this)Â»)}" />
 					</h:column>
-«ENDIF»
+Â«ENDIFÂ»
 					<h:column>
 						<f:facet name="header" />
 						<h:commandLink
 							value="#{msg.remove}"
-							onclick="return confirm('#{msg['«prefixOf(p)».«prefixOf(this)».confirm-remove']}');"
-							action="#{«handlerUri(p)».«removeEntity()»(«nameOf(this)»)}" />
+							onclick="return confirm('#{msg['Â«prefixOf(p)Â».Â«prefixOf(this)Â».confirm-remove']}');"
+							action="#{Â«handlerUri(p)Â».Â«removeEntity()Â»(Â«nameOf(this)Â»)}" />
 					</h:column>
-«IF hasActivationBoolean()»
+Â«IF hasActivationBoolean()Â»
 					<h:column>
 						<f:facet name="header" />
 						<h:commandLink
-							value="#{«nameOf(this)».active ? msg['options.deactivate'] : msg['options.activate']}"
-							action="#{«handlerUri(p)».«reactivateEntity()»(«nameOf(this)»)}" />
+							value="#{Â«nameOf(this)Â».active ? msg['options.deactivate'] : msg['options.activate']}"
+							action="#{Â«handlerUri(p)Â».Â«reactivateEntity()Â»(Â«nameOf(this)Â»)}" />
 					</h:column>
-«ENDIF»
+Â«ENDIFÂ»
 				</h:dataTable>
 			</h:form>
-«ENDIF»
-«ENDLET»
-«ENDDEFINE»
+Â«ENDIFÂ»
+Â«ENDLETÂ»
+Â«ENDDEFINEÂ»
 
 
-«DEFINE historyList(Process p) FOR Entity»
+Â«DEFINE historyList(Process p) FOR EntityÂ»
 			<!-- === generated history === --> 
-			<!-- process: «p.name» entity: «name» -->
-«LET getListAttributes() AS attributes»
-«IF attributes.size > 0»
-«ENDIF»
-			<h:dataTable rendered="#{!empty «handlerUri(p)».«uiList()»}"
-					value="#{«handlerUri(p)».«uiList()»}" var="«nameOf(this)»"
-					styleClass="list" rowClasses="odd,even" columnClasses="«FOREACH attributes AS attr SEPARATOR ","»«getClass(attr)»«ENDFOREACH»,command,command,command">
-«FOREACH attributes AS attr»
+			<!-- process: Â«p.nameÂ» entity: Â«nameÂ» -->
+Â«LET getListAttributes() AS attributesÂ»
+Â«IF attributes.size > 0Â»
+Â«ENDIFÂ»
+			<h:dataTable rendered="#{!empty Â«handlerUri(p)Â».Â«uiList()Â»}"
+					value="#{Â«handlerUri(p)Â».Â«uiList()Â»}" var="Â«nameOf(this)Â»"
+					styleClass="list" rowClasses="odd,even" columnClasses="Â«FOREACH attributes AS attr SEPARATOR ","Â»Â«getClass(attr)Â»Â«ENDFOREACHÂ»,command,command,command">
+Â«FOREACH attributes AS attrÂ»
 				<h:column>
-					<f:facet name="header">#{msg['«prefixOf(p)».«prefixOf(this)».«prefixOf(attr)»']}</f:facet>
-«EXPAND element(p, this) FOR attr»
+					<f:facet name="header">#{msg['Â«prefixOf(p)Â».Â«prefixOf(this)Â».Â«prefixOf(attr)Â»']}</f:facet>
+Â«EXPAND element(p, this) FOR attrÂ»
 				</h:column>
-«ENDFOREACH»
+Â«ENDFOREACHÂ»
 			</h:dataTable>
-«ENDLET»
-«ENDDEFINE»
+Â«ENDLETÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE entitiesList(Process p) FOR Entity»
+Â«DEFINE entitiesList(Process p) FOR EntityÂ»
 			<!-- === generated 1:n relation === --> 
-			<!-- process: «p.name» entity: «name» -->
-«LET getListAttributes() AS attributes»
-«IF attributes.size > 0»
-«ENDIF»
+			<!-- process: Â«p.nameÂ» entity: Â«nameÂ» -->
+Â«LET getListAttributes() AS attributesÂ»
+Â«IF attributes.size > 0Â»
+Â«ENDIFÂ»
 			<h:form>
-				<h:dataTable rendered="#{!empty «handlerUri(p)».«uiList()»}"
-						value="#{«handlerUri(p)».«uiList()»}" var="«nameOf(this)»"
-						styleClass="list" rowClasses="odd,even" columnClasses="«FOREACH attributes AS attr SEPARATOR ","»«getClass(attr)»«ENDFOREACH»,command,command,command">
-	«FOREACH attributes AS attr»
+				<h:dataTable rendered="#{!empty Â«handlerUri(p)Â».Â«uiList()Â»}"
+						value="#{Â«handlerUri(p)Â».Â«uiList()Â»}" var="Â«nameOf(this)Â»"
+						styleClass="list" rowClasses="odd,even" columnClasses="Â«FOREACH attributes AS attr SEPARATOR ","Â»Â«getClass(attr)Â»Â«ENDFOREACHÂ»,command,command,command">
+	Â«FOREACH attributes AS attrÂ»
 					<h:column>
-						<f:facet name="header">#{msg['«prefixOf(p)».«prefixOf(this)».«prefixOf(attr)»']}</f:facet>
-	«EXPAND element(p, this) FOR attr»
+						<f:facet name="header">#{msg['Â«prefixOf(p)Â».Â«prefixOf(this)Â».Â«prefixOf(attr)Â»']}</f:facet>
+	Â«EXPAND element(p, this) FOR attrÂ»
 					</h:column>
-	«ENDFOREACH»
+	Â«ENDFOREACHÂ»
 					<h:column>
 						<f:facet name="header" />
 						<h:commandLink
 							value="#{msg.change}"
-							action="#{«handlerUri(p)».«changeEntity()»(«nameOf(this)»)}" />
+							action="#{Â«handlerUri(p)Â».Â«changeEntity()Â»(Â«nameOf(this)Â»)}" />
 					</h:column>
-«IF getHistory() != null»
+Â«IF getHistory() != nullÂ»
 					<h:column>
 						<f:facet name="header" />
 						<h:commandLink
 							value="#{msg.history}"
-							action="#{«handlerUri(p)».«editEntity(getHistory().type)»(«nameOf(this)»)}" />
+							action="#{Â«handlerUri(p)Â».Â«editEntity(getHistory().type)Â»(Â«nameOf(this)Â»)}" />
 					</h:column>
-«ENDIF»
+Â«ENDIFÂ»
 					<h:column>
 						<f:facet name="header" />
 						<h:commandLink
 							value="#{msg.remove}"
-							action="#{«handlerUri(p)».«removeEntity()»(«nameOf(this)»)}" />
+							action="#{Â«handlerUri(p)Â».Â«removeEntity()Â»(Â«nameOf(this)Â»)}" />
 					</h:column>
-«IF hasActivationBoolean()»
+Â«IF hasActivationBoolean()Â»
 					<h:column>
 						<f:facet name="header" />
 						<h:commandLink
-							value="#{«nameOf(this)».active ? msg['options.deactivate'] : msg['options.activate']}"
-							action="#{«handlerUri(p)».«reactivateEntity()»(«nameOf(this)»)}" />
+							value="#{Â«nameOf(this)Â».active ? msg['options.deactivate'] : msg['options.activate']}"
+							action="#{Â«handlerUri(p)Â».Â«reactivateEntity()Â»(Â«nameOf(this)Â»)}" />
 					</h:column>
-«ENDIF»
+Â«ENDIFÂ»
 				</h:dataTable>
 			</h:form>
-«ENDLET»
-«ENDDEFINE»
+Â«ENDLETÂ»
+Â«ENDDEFINEÂ»
 
 
-«REM»           ===========================================================================          «ENDREM»
+Â«REMÂ»           ===========================================================================          Â«ENDREMÂ»
 
-«DEFINE element(Process p, Entity e) FOR Attribute»
-					#{«nameOf(e)».«nameOf()»}
-«ENDDEFINE»
+Â«DEFINE element(Process p, Entity e) FOR AttributeÂ»
+					#{Â«nameOf(e)Â».Â«nameOf()Â»}
+Â«ENDDEFINEÂ»
 
-«DEFINE element(Process p, Entity e) FOR OptionRef»
-«IF isEnumeration(type)»
-					#{msg[«nameOf(e)».«nameOf()».bundleKey]}
-«ELSE»
-«LET getLabelList(this.type) AS labels»
-«IF labels.size > 0»
-					#{«nameOf(e)».«nameOf()».«nameOf(labels.first())»}
-«ELSE»
+Â«DEFINE element(Process p, Entity e) FOR OptionRefÂ»
+Â«IF isEnumeration(type)Â»
+					#{msg[Â«nameOf(e)Â».Â«nameOf()Â».bundleKey]}
+Â«ELSEÂ»
+Â«LET getLabelList(this.type) AS labelsÂ»
+Â«IF labels.size > 0Â»
+					#{Â«nameOf(e)Â».Â«nameOf()Â».Â«nameOf(labels.first())Â»}
+Â«ELSEÂ»
 					<!-- This may lead into an error, because no appropriate attribute was found! -->
-					#{«nameOf(e)».«nameOf()».name}
-«ENDIF»
-«ENDLET»
-«ENDIF»
-«ENDDEFINE»
+					#{Â«nameOf(e)Â».Â«nameOf()Â».name}
+Â«ENDIFÂ»
+Â«ENDLETÂ»
+Â«ENDIFÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE element(Process p, Entity e) FOR jee6::Boolean»
-					<h:outputText value="#{msg[«nameOf(e)».«nameOf()» ? 'yes' : 'no']}"/>
-«ENDDEFINE»
+Â«DEFINE element(Process p, Entity e) FOR jee6::BooleanÂ»
+					<h:outputText value="#{msg[Â«nameOf(e)Â».Â«nameOf()Â» ? 'yes' : 'no']}"/>
+Â«ENDDEFINEÂ»
 
-«DEFINE element(Process p, Entity e) FOR Date»
-					<h:outputText value="#{«nameOf(e)».«nameOf()»}">
+Â«DEFINE element(Process p, Entity e) FOR DateÂ»
+					<h:outputText value="#{Â«nameOf(e)Â».Â«nameOf()Â»}">
 						<f:convertDateTime dateStyle="medium" type="date"/>
 					</h:outputText>
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE element(Process p, Entity e) FOR Timestamp»
-					<h:outputText value="#{«nameOf(e)».«nameOf()»}">
+Â«DEFINE element(Process p, Entity e) FOR TimestampÂ»
+					<h:outputText value="#{Â«nameOf(e)Â».Â«nameOf()Â»}">
 						<f:convertDateTime dateStyle="medium" type="both"/>
 					</h:outputText>
-«ENDDEFINE»
+Â«ENDDEFINEÂ»

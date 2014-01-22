@@ -1,19 +1,19 @@
-«IMPORT de::itemis::jee6::ui::wizard»
+Â«IMPORT de::itemis::jee6::ui::wizardÂ»
 
-«EXTENSION de::itemis::jee6::ui::wizard::paths»
+Â«EXTENSION de::itemis::jee6::ui::wizard::pathsÂ»
 
-«DEFINE main FOR DslProjectInfo»
-«EXPAND model FOR this»
-«EXPAND workflow FOR this»
-«EXPAND build FOR this»
-«EXPAND readme FOR this»
-«ENDDEFINE»
+Â«DEFINE main FOR DslProjectInfoÂ»
+Â«EXPAND model FOR thisÂ»
+Â«EXPAND workflow FOR thisÂ»
+Â«EXPAND build FOR thisÂ»
+Â«EXPAND readme FOR thisÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE model FOR DslProjectInfo»
-«FILE getModelPath() + "/" + projectName + ".jee6"-»
+Â«DEFINE model FOR DslProjectInfoÂ»
+Â«FILE getModelPath() + "/" + projectName + ".jee6"-Â»
 // Edit model here...
-application "«projectName»"  context "/«applicationName»" package «package(basePackage, applicationName)» development strict;
-persistence unit"«applicationName»DS" jndi "jdbc/«applicationName»DS";
+application "Â«projectNameÂ»"  context "/Â«applicationNameÂ»" package Â«package(basePackage, applicationName)Â» development strict;
+persistence unit"Â«applicationNameÂ»DS" jndi "jdbc/Â«applicationNameÂ»DS";
 locale "de" default;
 
 entity UserInfo
@@ -26,18 +26,18 @@ process User
 {
 	UserInfo
 }
-«ENDFILE»
-«ENDDEFINE»
+Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE workflow FOR DslProjectInfo»
-«FILE getSrcPath() + "/" + getWorkflow()-»
+Â«DEFINE workflow FOR DslProjectInfoÂ»
+Â«FILE getSrcPath() + "/" + getWorkflow()-Â»
 module Generator
 
-var modelpath = "«getModelPath()»"
-var impldir   = "«getSrcPath()»"
-var srcdir    = "«getSrcGenPath()»"
-var xhtmldir  = "«getWebContentPath()»"
-var resdir    = "«getResGenPath()»"
+var modelpath = "Â«getModelPath()Â»"
+var impldir   = "Â«getSrcPath()Â»"
+var srcdir    = "Â«getSrcGenPath()Â»"
+var xhtmldir  = "Â«getWebContentPath()Â»"
+var resdir    = "Â«getResGenPath()Â»"
 
 Workflow
 {
@@ -51,25 +51,25 @@ Workflow
 	{
 	}
 }
-«ENDFILE»
-«ENDDEFINE»
+Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE build FOR DslProjectInfo»
-«FILE "build.xml"»
-<project name="«this.projectName»" default="package">
+Â«DEFINE build FOR DslProjectInfoÂ»
+Â«FILE "build.xml"Â»
+<project name="Â«this.projectNameÂ»" default="package">
 	<property file="${user.home}/.jee6.properties" />
 	<property file="${basedir}/build.properties"/>
 
 	<property name="bin-path"             value="./bin"/>
-	<property name="src-path"             value="./«getSrcPath()»"/>
-	<property name="src-gen-path"         value="./«getSrcGenPath()»"/>
-	<property name="res-path"             value="./«getResPath()»"/>
-	<property name="res-gen-path"         value="./«getResGenPath()»"/>
-	<property name="web-path"             value="./«getWebContentPath()»"/>
+	<property name="src-path"             value="./Â«getSrcPath()Â»"/>
+	<property name="src-gen-path"         value="./Â«getSrcGenPath()Â»"/>
+	<property name="res-path"             value="./Â«getResPath()Â»"/>
+	<property name="res-gen-path"         value="./Â«getResGenPath()Â»"/>
+	<property name="web-path"             value="./Â«getWebContentPath()Â»"/>
 	<property name="doc-path"             value="../api"/>
 	<property name="lib-path"             value="${res-path}/WEB-INF/lib"/>
 
-	<property name="war"                  value="«applicationName».war"/>
+	<property name="war"                  value="Â«applicationNameÂ».war"/>
 
 	<property name="eclipse.home"         value="/opt/eclipse"/>
 	<property name="eclipse.home.plugins" value="${eclipse.home}/plugins"/>
@@ -147,7 +147,7 @@ Workflow
 	<target name="generate">
 		<echo message="${eclipse.home}"/>
 		<java classname="org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher" classpathref="generate.classpath" fork="true" failonerror="true">
-			<arg value="${src-path}/«getWorkflow()»"/>
+			<arg value="${src-path}/Â«getWorkflow()Â»"/>
 		</java>
 	</target>
 
@@ -169,8 +169,8 @@ Workflow
 				failonerror="true"
 				docencoding="UTF-8"
 				charset="UTF-8"
-				windowtitle="«this.projectName» classes">
-			<doctitle><![CDATA[<h1>«this.projectName» classes</h1>]]></doctitle>
+				windowtitle="Â«this.projectNameÂ» classes">
+			<doctitle><![CDATA[<h1>Â«this.projectNameÂ» classes</h1>]]></doctitle>
 			<bottom><![CDATA[<i>Copyright &#169; itemis AG]]></bottom>
 		</javadoc>
     </target>
@@ -206,39 +206,39 @@ Workflow
 	
 	<target name="round-trip" depends="generate,deploy"/>
 </project>
-«ENDFILE»
-«ENDDEFINE»
+Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE readme FOR DslProjectInfo»
-«FILE "LiesMich.txt"»
-Für das Kompilieren müssen folgende Bedingungen erfüllt sein:
+Â«DEFINE readme FOR DslProjectInfoÂ»
+Â«FILE "LiesMich.txt"Â»
+FÃ¼r das Kompilieren mÃ¼ssen folgende Bedingungen erfÃ¼llt sein:
 1. Eine Runtime-Umgebung muss eingerichtet werden. Unter "Window -> Preferences -> Server ->
    Runtime Environment" kann eine eigerichtet werden. Im erzeugten Projekt muss das unter
-   "Project -> Properties -> Java Build Path -> Library -> Add Library" hinzugefügt werden.
+   "Project -> Properties -> Java Build Path -> Library -> Add Library" hinzugefÃ¼gt werden.
 2. Es muss eine Data Source auf dem Application Server eingerichtet werden. Diese muss
-   "jdbc/«applicationName»DS" benannt werden.
+   "jdbc/Â«applicationNameÂ»DS" benannt werden.
 3. Es sollten die build.properties angepasst werden. Folgende Properties sollten gesetzt werden:
    a) jboss.home
    b) glassfish.home
-   Je nach verwendetem Application Server können die Home-Variablen weggelassen werden, wenn in
+   Je nach verwendetem Application Server kÃ¶nnen die Home-Variablen weggelassen werden, wenn in
    der build.xml die entsprechenden Tasks angepasst werden.
    
-Abschließend: Bitte vergessen Sie nicht, die generierten Dateien in den Pfaden «getSrcPath()» und
-«getResPath()» der Versionsverwaltung hinzuzufügen!
-«ENDFILE»
-«FILE "ReadMe.txt"»
+AbschlieÃŸend: Bitte vergessen Sie nicht, die generierten Dateien in den Pfaden Â«getSrcPath()Â» und
+Â«getResPath()Â» der Versionsverwaltung hinzuzufÃ¼gen!
+Â«ENDFILEÂ»
+Â«FILE "ReadMe.txt"Â»
 For compiling the source you have to:
 1. configure your server runtime environment. You can do this under "Window -> Preferences ->
    Server -> Runtime Environment". You have to add this environment in your newly created project:
    "Project -> Properties -> Java Build Path -> Library -> Add Library".
 2. You have to configure a data source inside your application server. This must be named like
-   this: "jdbc/«applicationName»DS".
+   this: "jdbc/Â«applicationNameÂ»DS".
 3. You should also configure your build.properties. You have to add the following properties:
    a) jboss.home
    b) glassfish.home
    Depending on your used application server you can remove those variables and you can adjust your
    build targets inside the build.xml file.
    
-Finally: Do not forget to add all generated files inside «getSrcPath()» and «getResPath()» to source control!
-«ENDFILE»
-«ENDDEFINE»
+Finally: Do not forget to add all generated files inside Â«getSrcPath()Â» and Â«getResPath()Â» to source control!
+Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»

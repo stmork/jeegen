@@ -1,185 +1,185 @@
-«REM»
-«###»	Copyright (C) 2012 itemis AG
-«###»	$Id$
-«ENDREM»
+Â«REMÂ»
+Â«###Â»	Copyright (C) 2012 itemis AG
+Â«###Â»	$Id$
+Â«ENDREMÂ»
 
-«IMPORT jee6»
+Â«IMPORT jee6Â»
 
-«EXTENSION de::itemis::jee6::generator::ext::dao»
-«EXTENSION de::itemis::jee6::generator::ext::entity»
-«EXTENSION de::itemis::jee6::generator::ext::model»
-«EXTENSION de::itemis::jee6::generator::ext::converter»
-«EXTENSION de::itemis::jee6::generator::ext::naming»
-«EXTENSION de::itemis::jee6::generator::ext::types»
-«EXTENSION de::itemis::jee6::generator::ext::ui»
+Â«EXTENSION de::itemis::jee6::generator::ext::daoÂ»
+Â«EXTENSION de::itemis::jee6::generator::ext::entityÂ»
+Â«EXTENSION de::itemis::jee6::generator::ext::modelÂ»
+Â«EXTENSION de::itemis::jee6::generator::ext::converterÂ»
+Â«EXTENSION de::itemis::jee6::generator::ext::namingÂ»
+Â«EXTENSION de::itemis::jee6::generator::ext::typesÂ»
+Â«EXTENSION de::itemis::jee6::generator::ext::uiÂ»
 
-«DEFINE Main(Process p) FOR Entity»
+Â«DEFINE Main(Process p) FOR EntityÂ»
 			<!-- === generated mask === --> 
-			<!-- process: «p.name» entity: «name» -->
-«LET getMaskAttributes() AS attributes»
-«LET getId() AS id»
-«IF attributes.size > 0»
+			<!-- process: Â«p.nameÂ» entity: Â«nameÂ» -->
+Â«LET getMaskAttributes() AS attributesÂ»
+Â«LET getId() AS idÂ»
+Â«IF attributes.size > 0Â»
 		<div class="box">
-			<h:form id="«prefixOf()»">
+			<h:form id="Â«prefixOf()Â»">
 				<table>
-«FOREACH attributes AS attr»
+Â«FOREACH attributes AS attrÂ»
 					<tr>
-«IF debug()»
-						<td class="«labelClass(attr)»">«attr.typeOf().asType()»</td>
-«ENDIF»
-						<td class="«labelClass(attr)»">
-							<h:outputLabel for="«nameOf(attr)»" value="#{msg['«prefixOf(p)».«prefixOf()».«prefixOf(attr)»']}"/>
+Â«IF debug()Â»
+						<td class="Â«labelClass(attr)Â»">Â«attr.typeOf().asType()Â»</td>
+Â«ENDIFÂ»
+						<td class="Â«labelClass(attr)Â»">
+							<h:outputLabel for="Â«nameOf(attr)Â»" value="#{msg['Â«prefixOf(p)Â».Â«prefixOf()Â».Â«prefixOf(attr)Â»']}"/>
 						</td>
 						<td>
-«EXPAND element(p, this) FOR attr»
+Â«EXPAND element(p, this) FOR attrÂ»
 						</td>
 					</tr>
-«ENDFOREACH»
+Â«ENDFOREACHÂ»
 					<tr>
-«IF debug()»
+Â«IF debug()Â»
 						<td/>
-«ENDIF»
+Â«ENDIFÂ»
 						<td/>
 						<td>
 							<h:commandButton
-									action="#{«handlerUri(p)».«saveEntity()»}"
-«IF id == null»
-									value="#{«handlerUri(p)».«nameOf()».id == 0 ? msg.create : msg.save}" />
-«ELSE»
-									value="#{«handlerUri(p)».«nameOf()».«nameOf(id)» == null ? msg.create : msg.save}" />
-«ENDIF»
-							<h:commandButton action="#{«handlerUri(p)».«backEntity()»}" value="#{msg.back}"/>
+									action="#{Â«handlerUri(p)Â».Â«saveEntity()Â»}"
+Â«IF id == nullÂ»
+									value="#{Â«handlerUri(p)Â».Â«nameOf()Â».id == 0 ? msg.create : msg.save}" />
+Â«ELSEÂ»
+									value="#{Â«handlerUri(p)Â».Â«nameOf()Â».Â«nameOf(id)Â» == null ? msg.create : msg.save}" />
+Â«ENDIFÂ»
+							<h:commandButton action="#{Â«handlerUri(p)Â».Â«backEntity()Â»}" value="#{msg.back}"/>
 						</td>
 					</tr>
-«LET getManyEntites(types) AS manyEntities»
-«IF manyEntities.size > 0»
-«IF id == null»
-					<ui:fragment rendered="#{«handlerUri(p)».«nameOf()».id != 0}">
-«ELSE»
-					<ui:fragment rendered="#{«handlerUri(p)».«nameOf()».«nameOf(id)» != null}">
-«ENDIF»
+Â«LET getManyEntites(types) AS manyEntitiesÂ»
+Â«IF manyEntities.size > 0Â»
+Â«IF id == nullÂ»
+					<ui:fragment rendered="#{Â«handlerUri(p)Â».Â«nameOf()Â».id != 0}">
+Â«ELSEÂ»
+					<ui:fragment rendered="#{Â«handlerUri(p)Â».Â«nameOf()Â».Â«nameOf(id)Â» != null}">
+Â«ENDIFÂ»
 						<tr>
 							<td/>
 							<td>
-«FOREACH manyEntities AS entity»
+Â«FOREACH manyEntities AS entityÂ»
 								<h:commandButton
-									value="#{msg['«prefixOf(p)».«prefixOf()».«prefixOf(entity.type)».change']}"
-									action="#{«handlerUri(p)».«editEntity(entity.type)»(«handlerUri(p)».«nameOf(this)»)}"/>
-«ENDFOREACH»
+									value="#{msg['Â«prefixOf(p)Â».Â«prefixOf()Â».Â«prefixOf(entity.type)Â».change']}"
+									action="#{Â«handlerUri(p)Â».Â«editEntity(entity.type)Â»(Â«handlerUri(p)Â».Â«nameOf(this)Â»)}"/>
+Â«ENDFOREACHÂ»
 							</td>
 						</tr>
 					</ui:fragment>
-«ENDIF»
-«ENDLET»
+Â«ENDIFÂ»
+Â«ENDLETÂ»
 				</table>
 			</h:form>
 		</div>
-«ENDIF»
-«ENDLET»
-«ENDLET»
-«ENDDEFINE»
+Â«ENDIFÂ»
+Â«ENDLETÂ»
+Â«ENDLETÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE Form FOR Entity»
-«ENDDEFINE»
-
-
+Â«DEFINE Form FOR EntityÂ»
+Â«ENDDEFINEÂ»
 
 
-«REM»Text Field«ENDREM»
-«DEFINE element(Process p, Entity e) FOR jee6::Text»
-«IF transient»
-						#{«handlerUri(p)».«nameOf(e)».«nameOf()»}
-«ELSE»
-						<h:inputText id="«nameOf()»" label="#{msg['«prefixOf(p)».«prefixOf(e)».«prefixOf()»']}"
-							value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" maxlength="255"/>
-«ENDIF»
-«ENDDEFINE»
 
-«REM»EMail field«ENDREM»
-«DEFINE element(Process p, Entity e) FOR jee6::Email»
-						<h:inputText id="«nameOf()»" label="#{msg['«prefixOf(p)».«prefixOf(e)».«prefixOf()»']}"
-								value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" maxlength="255">
+
+Â«REMÂ»Text FieldÂ«ENDREMÂ»
+Â«DEFINE element(Process p, Entity e) FOR jee6::TextÂ»
+Â«IF transientÂ»
+						#{Â«handlerUri(p)Â».Â«nameOf(e)Â».Â«nameOf()Â»}
+Â«ELSEÂ»
+						<h:inputText id="Â«nameOf()Â»" label="#{msg['Â«prefixOf(p)Â».Â«prefixOf(e)Â».Â«prefixOf()Â»']}"
+							value="#{Â«handlerUri(p)Â».Â«nameOf(e)Â».Â«nameOf()Â»}" maxlength="255"/>
+Â«ENDIFÂ»
+Â«ENDDEFINEÂ»
+
+Â«REMÂ»EMail fieldÂ«ENDREMÂ»
+Â«DEFINE element(Process p, Entity e) FOR jee6::EmailÂ»
+						<h:inputText id="Â«nameOf()Â»" label="#{msg['Â«prefixOf(p)Â».Â«prefixOf(e)Â».Â«prefixOf()Â»']}"
+								value="#{Â«handlerUri(p)Â».Â«nameOf(e)Â».Â«nameOf()Â»}" maxlength="255">
 							<f:validator validatorId="mailValidator"/>
 						</h:inputText>
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«REM»Text Area«ENDREM»
-«DEFINE element(Process p, Entity e) FOR jee6::Clob»
-						<h:inputTextarea id="«nameOf()»" label="#{msg['«prefixOf(p)».«prefixOf(e)».«prefixOf()»']}"
-							value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" cols="32" rows="7"/>
-«ENDDEFINE»
+Â«REMÂ»Text AreaÂ«ENDREMÂ»
+Â«DEFINE element(Process p, Entity e) FOR jee6::ClobÂ»
+						<h:inputTextarea id="Â«nameOf()Â»" label="#{msg['Â«prefixOf(p)Â».Â«prefixOf(e)Â».Â«prefixOf()Â»']}"
+							value="#{Â«handlerUri(p)Â».Â«nameOf(e)Â».Â«nameOf()Â»}" cols="32" rows="7"/>
+Â«ENDDEFINEÂ»
 
-«REM»Checkbox«ENDREM»
-«DEFINE element(Process p, Entity e) FOR jee6::Boolean»
-						<h:selectBooleanCheckbox id="«nameOf()»" label="#{msg['«prefixOf(p)».«prefixOf(e)».«prefixOf()»']}"
-							value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" />
-«ENDDEFINE»
+Â«REMÂ»CheckboxÂ«ENDREMÂ»
+Â«DEFINE element(Process p, Entity e) FOR jee6::BooleanÂ»
+						<h:selectBooleanCheckbox id="Â«nameOf()Â»" label="#{msg['Â«prefixOf(p)Â».Â«prefixOf(e)Â».Â«prefixOf()Â»']}"
+							value="#{Â«handlerUri(p)Â».Â«nameOf(e)Â».Â«nameOf()Â»}" />
+Â«ENDDEFINEÂ»
 
-«REM»Integer Field«ENDREM»
-«DEFINE element(Process p, Entity e) FOR jee6::Integer»
-						<h:inputText id="«nameOf()»" label="#{msg['«prefixOf(p)».«prefixOf(e)».«prefixOf()»']}"
-							value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" size="10"/>
-«ENDDEFINE»
+Â«REMÂ»Integer FieldÂ«ENDREMÂ»
+Â«DEFINE element(Process p, Entity e) FOR jee6::IntegerÂ»
+						<h:inputText id="Â«nameOf()Â»" label="#{msg['Â«prefixOf(p)Â».Â«prefixOf(e)Â».Â«prefixOf()Â»']}"
+							value="#{Â«handlerUri(p)Â».Â«nameOf(e)Â».Â«nameOf()Â»}" size="10"/>
+Â«ENDDEFINEÂ»
 
-«REM»Number Field«ENDREM»
-«DEFINE element(Process p, Entity e) FOR jee6::Number»
-						<h:inputText id="«nameOf()»" label="#{msg['«prefixOf(p)».«prefixOf(e)».«prefixOf()»']}"
-							value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" maxlength="10" />
-«ENDDEFINE»
+Â«REMÂ»Number FieldÂ«ENDREMÂ»
+Â«DEFINE element(Process p, Entity e) FOR jee6::NumberÂ»
+						<h:inputText id="Â«nameOf()Â»" label="#{msg['Â«prefixOf(p)Â».Â«prefixOf(e)Â».Â«prefixOf()Â»']}"
+							value="#{Â«handlerUri(p)Â».Â«nameOf(e)Â».Â«nameOf()Â»}" maxlength="10" />
+Â«ENDDEFINEÂ»
 
-«REM»Date Field«ENDREM»
-«DEFINE element(Process p, Entity e) FOR jee6::Date»
-						<h:inputText id="«nameOf()»" label="#{msg['«prefixOf(p)».«prefixOf(e)».«prefixOf()»']}"
-								value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" maxlength="10" styleClass="date">
+Â«REMÂ»Date FieldÂ«ENDREMÂ»
+Â«DEFINE element(Process p, Entity e) FOR jee6::DateÂ»
+						<h:inputText id="Â«nameOf()Â»" label="#{msg['Â«prefixOf(p)Â».Â«prefixOf(e)Â».Â«prefixOf()Â»']}"
+								value="#{Â«handlerUri(p)Â».Â«nameOf(e)Â».Â«nameOf()Â»}" maxlength="10" styleClass="date">
 							<f:convertDateTime pattern="dd.MM.yyyy" type="date"/>
 						</h:inputText>
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«REM»Date Field«ENDREM»
-«DEFINE element(Process p, Entity e) FOR jee6::Timestamp»
-«IF update || auto»
-						<h:outputText value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}">
+Â«REMÂ»Date FieldÂ«ENDREMÂ»
+Â«DEFINE element(Process p, Entity e) FOR jee6::TimestampÂ»
+Â«IF update || autoÂ»
+						<h:outputText value="#{Â«handlerUri(p)Â».Â«nameOf(e)Â».Â«nameOf()Â»}">
 							<f:convertDateTime type="both"/>
 						</h:outputText>
-«ELSE»
-						<h:inputText id="«nameOf()»" label="#{msg['«prefixOf(p)».«prefixOf(e)».«prefixOf()»']}"
-								value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" maxlength="10" styleClass="date">
+Â«ELSEÂ»
+						<h:inputText id="Â«nameOf()Â»" label="#{msg['Â«prefixOf(p)Â».Â«prefixOf(e)Â».Â«prefixOf()Â»']}"
+								value="#{Â«handlerUri(p)Â».Â«nameOf(e)Â».Â«nameOf()Â»}" maxlength="10" styleClass="date">
 							<f:convertDateTime pattern="dd.MM.yyyy" type="date"/>
 						</h:inputText>
-«ENDIF»
-«ENDDEFINE»
+Â«ENDIFÂ»
+Â«ENDDEFINEÂ»
 
-«REM»Combobox«ENDREM»
-«DEFINE element(Process p, Entity e) FOR OptionRef»
-							<h:selectOneMenu id="«nameOf()»" label="#{msg['«prefixOf(p)».«prefixOf(e)».«prefixOf()»']}"
-									value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}"
-									converter="#{«handlerUri(p)».«uiConverter(type)»}">
-«IF !isEnumeration(this.type)»
+Â«REMÂ»ComboboxÂ«ENDREMÂ»
+Â«DEFINE element(Process p, Entity e) FOR OptionRefÂ»
+							<h:selectOneMenu id="Â«nameOf()Â»" label="#{msg['Â«prefixOf(p)Â».Â«prefixOf(e)Â».Â«prefixOf()Â»']}"
+									value="#{Â«handlerUri(p)Â».Â«nameOf(e)Â».Â«nameOf()Â»}"
+									converter="#{Â«handlerUri(p)Â».Â«uiConverter(type)Â»}">
+Â«IF !isEnumeration(this.type)Â»
 								<f:selectItem itemValue="[NULL]" itemLabel="#{msg.no_selection}"/>
-«ENDIF»
+Â«ENDIFÂ»
 								<f:selectItems
-										value="#{«handlerUri(p)».«uiList(type)»}"
-										itemValue="#{«nameOf()»}"
-«IF isEnumeration(this.type)»
-										itemLabel="#{msg[«nameOf()».bundleKey]}"
-«ELSE»
-«LET getLabelList(this.type) AS labels»
-«IF labels.size > 0»
-										itemLabel="#{«nameOf()».«nameOf(labels.first())»}"
-«ELSE»
+										value="#{Â«handlerUri(p)Â».Â«uiList(type)Â»}"
+										itemValue="#{Â«nameOf()Â»}"
+Â«IF isEnumeration(this.type)Â»
+										itemLabel="#{msg[Â«nameOf()Â».bundleKey]}"
+Â«ELSEÂ»
+Â«LET getLabelList(this.type) AS labelsÂ»
+Â«IF labels.size > 0Â»
+										itemLabel="#{Â«nameOf()Â».Â«nameOf(labels.first())Â»}"
+Â«ELSEÂ»
 										<!-- This may lead into an error, because no appropriate attribute was found! -->
-										itemLabel="#{«nameOf()».name}"
-«ENDIF»
-«ENDLET»
-«ENDIF»
-										var="«nameOf()»" />
+										itemLabel="#{Â«nameOf()Â».name}"
+Â«ENDIFÂ»
+Â«ENDLETÂ»
+Â«ENDIFÂ»
+										var="Â«nameOf()Â»" />
 							</h:selectOneMenu>
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE element(Process p, Entity e) FOR jee6::Attribute»
-«this.typeOf().asType()»
-«ERROR this.typeOf().asType()»
-«REM»
+Â«DEFINE element(Process p, Entity e) FOR jee6::AttributeÂ»
+Â«this.typeOf().asType()Â»
+Â«ERROR this.typeOf().asType()Â»
+Â«REMÂ»
 Template intentionally left blank.
-«ENDREM»
-«ENDDEFINE»
+Â«ENDREMÂ»
+Â«ENDDEFINEÂ»
