@@ -1,151 +1,151 @@
-«REM»
-«###»	Copyright (C) 2013 itemis AG
-«###»	$Id$
-«ENDREM»
+Â«REMÂ»
+Â«###Â»	Copyright (C) 2013 itemis AG
+Â«###Â»	$Id$
+Â«ENDREMÂ»
 
-«IMPORT jee6»
+Â«IMPORT jee6Â»
 
-«EXTENSION de::itemis::jee6::generator::ext::bundle»
-«EXTENSION de::itemis::jee6::generator::ext::entity»
-«EXTENSION de::itemis::jee6::generator::ext::model»
-«EXTENSION de::itemis::jee6::generator::ext::types»
-«EXTENSION de::itemis::jee6::generator::ext::naming»
-«EXTENSION de::itemis::jee6::generator::ext::converter»
-«EXTENSION de::itemis::jee6::generator::ext::dao»
-«EXTENSION de::itemis::jee6::generator::ext::ui»
+Â«EXTENSION de::itemis::jee6::generator::ext::bundleÂ»
+Â«EXTENSION de::itemis::jee6::generator::ext::entityÂ»
+Â«EXTENSION de::itemis::jee6::generator::ext::modelÂ»
+Â«EXTENSION de::itemis::jee6::generator::ext::typesÂ»
+Â«EXTENSION de::itemis::jee6::generator::ext::namingÂ»
+Â«EXTENSION de::itemis::jee6::generator::ext::converterÂ»
+Â«EXTENSION de::itemis::jee6::generator::ext::daoÂ»
+Â«EXTENSION de::itemis::jee6::generator::ext::uiÂ»
 
-«DEFINE Main FOR Model»
+Â«DEFINE Main FOR ModelÂ»
 
 
-«EXPAND AbstractProcessHandler FOREACH processes»
-«EXPAND AbstractModelHandler»
-«EXPAND ProcessHandler FOREACH processes»
-«EXPAND AbstractApplicationController»
-«EXPAND ApplicationController»
-«EXPAND SessionController»
-«ENDDEFINE»
+Â«EXPAND AbstractProcessHandler FOREACH processesÂ»
+Â«EXPAND AbstractModelHandlerÂ»
+Â«EXPAND ProcessHandler FOREACH processesÂ»
+Â«EXPAND AbstractApplicationControllerÂ»
+Â«EXPAND ApplicationControllerÂ»
+Â«EXPAND SessionControllerÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE ProcessHandler FOR Process»
-«FILE handlerFilename(this) IMPL»
-«LET getUiEntities().sortBy(e|e.name) AS entities»
-«EXPAND utility::HeaderImpl»
-package «handlerPackageOf(this)»;
+Â«DEFINE ProcessHandler FOR ProcessÂ»
+Â«FILE handlerFilename(this) IMPLÂ»
+Â«LET getUiEntities().sortBy(e|e.name) AS entitiesÂ»
+Â«EXPAND utility::HeaderImplÂ»
+package Â«handlerPackageOf(this)Â»;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-«IF entities.size > 0»
+Â«IF entities.size > 0Â»
 import java.util.List;
-«ENDIF»
-«FOREACH getEntitiesWithHistory(entities) AS entity»
-import «fqTypeOf(entity)»;
-«ENDFOREACH»
+Â«ENDIFÂ»
+Â«FOREACH getEntitiesWithHistory(entities) AS entityÂ»
+import Â«fqTypeOf(entity)Â»;
+Â«ENDFOREACHÂ»
 
 /**
  * This managed bean class implements the action handlings for the following entity beans:
  * <ul>
-«FOREACH getEntitiesWithHistory(entities) AS entity»
- * <li>{@link «typeOf(entity)»}</li>
-«ENDFOREACH»
+Â«FOREACH getEntitiesWithHistory(entities) AS entityÂ»
+ * <li>{@link Â«typeOf(entity)Â»}</li>
+Â«ENDFOREACHÂ»
  * </ul>
  */
 @ManagedBean
 @SessionScoped
-public class «handlerOf(this)» extends «abstractHandlerOf(this)»
+public class Â«handlerOf(this)Â» extends Â«abstractHandlerOf(this)Â»
 {
 	private static final long serialVersionUID = 1L;
 
-«FOREACH getEntitiesWithHistory(entities) AS entity»
-	private static final String «navigation(this, entity)» = "«index(entity)»";
-«ENDFOREACH»
+Â«FOREACH getEntitiesWithHistory(entities) AS entityÂ»
+	private static final String Â«navigation(this, entity)Â» = "Â«index(entity)Â»";
+Â«ENDFOREACHÂ»
 
-«FOREACH entities.sortBy(e|e.name) AS entity»
+Â«FOREACH entities.sortBy(e|e.name) AS entityÂ»
 
 	/*********************************************
-	 * «typeOf(entity)» «nameOf(entity)»
+	 * Â«typeOf(entity)Â» Â«nameOf(entity)Â»
 	 *********************************************/
-«IF this.entities.contains(entity)»
+Â«IF this.entities.contains(entity)Â»
 
 	/**
-	 * This method returns a {@link List} of all {@link «typeOf(entity)»} beans.
+	 * This method returns a {@link List} of all {@link Â«typeOf(entity)Â»} beans.
 	 *
-	 * @return {@link List} of all {@link «typeOf(entity)»} beans.
-	 * @see «fqAbstractDaoOf()»#«listOf(entity)»()
+	 * @return {@link List} of all {@link Â«typeOf(entity)Â»} beans.
+	 * @see Â«fqAbstractDaoOf()Â»#Â«listOf(entity)Â»()
 	 */
-«IF isAbstract()»
+Â«IF isAbstract()Â»
 	@Override
-«ENDIF»
-	public List<«typeOf(entity)»> «listOf(entity)»()
+Â«ENDIFÂ»
+	public List<Â«typeOf(entity)Â»> Â«listOf(entity)Â»()
 	{
-		final List<«typeOf(entity)»> list = dao.«listOf(entity)»();
+		final List<Â«typeOf(entity)Â»> list = dao.Â«listOf(entity)Â»();
 
 		return list;
 	} 
 
 	/**
-	 * This method adds a new {@link «typeOf(entity)»} bean.
+	 * This method adds a new {@link Â«typeOf(entity)Â»} bean.
 	 *
-	 * @param «nameOf(entity)» The new {@link «typeOf(entity)»} bean to persist.
+	 * @param Â«nameOf(entity)Â» The new {@link Â«typeOf(entity)Â»} bean to persist.
 	 * @return The outcome where to go on success.
-	 * @see «fqAbstractDaoOf()»#«adder(entity)»(«typeOf(entity)»)
+	 * @see Â«fqAbstractDaoOf()Â»#Â«adder(entity)Â»(Â«typeOf(entity)Â»)
 	 */
-«IF isAbstract()»
+Â«IF isAbstract()Â»
 	@Override
-«ENDIF»
-	public String «createEntity(entity)»(final «typeOf(entity)» «nameOf(entity)») {
-		dao.«adder(entity)»(«nameOf(entity)»);
-		«setterOf(entity)»(new «typeOf(entity)»());
-		return «navigation(this, entity)»;
+Â«ENDIFÂ»
+	public String Â«createEntity(entity)Â»(final Â«typeOf(entity)Â» Â«nameOf(entity)Â») {
+		dao.Â«adder(entity)Â»(Â«nameOf(entity)Â»);
+		Â«setterOf(entity)Â»(new Â«typeOf(entity)Â»());
+		return Â«navigation(this, entity)Â»;
 	}
 
 	/**
-	 * This method sets the given {@link «typeOf(entity)»} bean for editing.
+	 * This method sets the given {@link Â«typeOf(entity)Â»} bean for editing.
 	 *
-	 * @param «nameOf(entity)» The {@link «typeOf(entity)»} bean to edit.
+	 * @param Â«nameOf(entity)Â» The {@link Â«typeOf(entity)Â»} bean to edit.
 	 * @return The outcome where to go on success.
 	 */
-«IF isAbstract()»
+Â«IF isAbstract()Â»
 	@Override
-«ENDIF»
-	public String «changeEntity(entity)»(final «typeOf(entity)» «nameOf(entity)») {
-		«setterOf(entity)»(«nameOf(entity)»);
-		return «navigation(this, entity)»;
+Â«ENDIFÂ»
+	public String Â«changeEntity(entity)Â»(final Â«typeOf(entity)Â» Â«nameOf(entity)Â») {
+		Â«setterOf(entity)Â»(Â«nameOf(entity)Â»);
+		return Â«navigation(this, entity)Â»;
 	}
 
 	/**
-	 * This method removes the given {@link «typeOf(entity)»} bean.
+	 * This method removes the given {@link Â«typeOf(entity)Â»} bean.
 	 *
-	 * @param «nameOf(entity)» The {@link «typeOf(entity)»} bean to remove.
+	 * @param Â«nameOf(entity)Â» The {@link Â«typeOf(entity)Â»} bean to remove.
 	 * @return The outcome where to go on success.
-	 * @see «fqAbstractDaoOf()»#«remover(entity)»(«typeOf(entity)»)
+	 * @see Â«fqAbstractDaoOf()Â»#Â«remover(entity)Â»(Â«typeOf(entity)Â»)
 	 */
-«IF isAbstract()»
+Â«IF isAbstract()Â»
 	@Override
-«ENDIF»
-	public String «removeEntity(entity)»(final «typeOf(entity)» «nameOf(entity)») {
-		if («isEmpty(entity)»(«nameOf(entity)»))
+Â«ENDIFÂ»
+	public String Â«removeEntity(entity)Â»(final Â«typeOf(entity)Â» Â«nameOf(entity)Â») {
+		if (Â«isEmpty(entity)Â»(Â«nameOf(entity)Â»))
 		{
-			dao.«remover(entity)»(«nameOf(entity)»);
+			dao.Â«remover(entity)Â»(Â«nameOf(entity)Â»);
 		}
 		else
 		{
-			error(null, "«prefixOf()».«prefixOf(entity)».not-empty");
+			error(null, "Â«prefixOf()Â».Â«prefixOf(entity)Â».not-empty");
 		}
-		return «navigation(this, entity)»;
+		return Â«navigation(this, entity)Â»;
 	}
 
 	/**
-	 * This method sets the given {@link «typeOf(entity)»} bean for editing.
+	 * This method sets the given {@link Â«typeOf(entity)Â»} bean for editing.
 	 *
 	 * @return The outcome where to go on success.
-	 * @see «fqAbstractDaoOf()»#«updater(entity)»(«typeOf(entity)»)
+	 * @see Â«fqAbstractDaoOf()Â»#Â«updater(entity)Â»(Â«typeOf(entity)Â»)
 	 */
-«IF isAbstract()»
+Â«IF isAbstract()Â»
 	@Override
-«ENDIF»
-	public String «saveEntity(entity)»() {
-		dao.«updater(entity)»(«getterOf(entity)»());
-		«setterOf(entity)»(new «typeOf(entity)»());
-		return «navigation(this, entity)»;
+Â«ENDIFÂ»
+	public String Â«saveEntity(entity)Â»() {
+		dao.Â«updater(entity)Â»(Â«getterOf(entity)Â»());
+		Â«setterOf(entity)Â»(new Â«typeOf(entity)Â»());
+		return Â«navigation(this, entity)Â»;
 	}
 
 	/**
@@ -153,423 +153,423 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 	 *
 	 * @return The outcome to go to the main menu.
 	 */
-«IF isAbstract()»
+Â«IF isAbstract()Â»
 	@Override
-«ENDIF»
-	public String «backEntity(entity)»()
+Â«ENDIFÂ»
+	public String Â«backEntity(entity)Â»()
 	{
 		return NAV_INDEX;
 	}
 
-«IF hasActivationBoolean(entity)»
+Â«IF hasActivationBoolean(entity)Â»
 	/**
-	 * This method changes the active flag of the given {@link «typeOf(entity)»} bean.
+	 * This method changes the active flag of the given {@link Â«typeOf(entity)Â»} bean.
 	 *
-	 * @param «nameOf(entity)» The {@link «typeOf(entity)»} bean to change the active flag.
+	 * @param Â«nameOf(entity)Â» The {@link Â«typeOf(entity)Â»} bean to change the active flag.
 	 * @return The outcome where to go on success.
-	 * @see «fqAbstractDaoOf()»#activate(«typeOf(entity)»,boolean)
+	 * @see Â«fqAbstractDaoOf()Â»#activate(Â«typeOf(entity)Â»,boolean)
 	 */
-«IF isAbstract()»
+Â«IF isAbstract()Â»
 	@Override
-«ENDIF»
-	public String «reactivateEntity(entity)»(final «typeOf(entity)» «nameOf(entity)») {
-		dao.activate(«nameOf(entity)», !«nameOf(entity)».isActive());
-		return «navigation(this, entity)»;
+Â«ENDIFÂ»
+	public String Â«reactivateEntity(entity)Â»(final Â«typeOf(entity)Â» Â«nameOf(entity)Â») {
+		dao.activate(Â«nameOf(entity)Â», !Â«nameOf(entity)Â».isActive());
+		return Â«navigation(this, entity)Â»;
 	}
-«ENDIF»
-«ENDIF»
+Â«ENDIFÂ»
+Â«ENDIFÂ»
 
-«FOREACH getManyEntites(entity.types) AS manyEntity»
+Â«FOREACH getManyEntites(entity.types) AS manyEntityÂ»
 	/*********************************************
-	 * Editing of bean «typeOf(entity)»
+	 * Editing of bean Â«typeOf(entity)Â»
 	 *********************************************/
 
 	/**
-	 * This method prepares the 1:n entities of the «typeOf(entity)» bean for editing.
+	 * This method prepares the 1:n entities of the Â«typeOf(entity)Â» bean for editing.
 	 * 
-	 * @param «nameOf(entity)» The «typeOf(entity)» bean for «typeOf(manyEntity)» editing.
-	 * @return The outcome for «typeOf(manyEntity)» bean editing
+	 * @param Â«nameOf(entity)Â» The Â«typeOf(entity)Â» bean for Â«typeOf(manyEntity)Â» editing.
+	 * @return The outcome for Â«typeOf(manyEntity)Â» bean editing
 	 */
-«IF isAbstract()»
+Â«IF isAbstract()Â»
 	@Override
-«ENDIF»
-	public String «editEntity(manyEntity.type)»(final «typeOf(entity)» «nameOf(entity)») {
-		«setterOf(entity)»(«nameOf(entity)»);
-		«setterOf(manyEntity.type)»(new «typeOf(manyEntity.type)»());
-		return «navigation(this, manyEntity)»;
+Â«ENDIFÂ»
+	public String Â«editEntity(manyEntity.type)Â»(final Â«typeOf(entity)Â» Â«nameOf(entity)Â») {
+		Â«setterOf(entity)Â»(Â«nameOf(entity)Â»);
+		Â«setterOf(manyEntity.type)Â»(new Â«typeOf(manyEntity.type)Â»());
+		return Â«navigation(this, manyEntity)Â»;
 	}
 
 	/**
-	 * Thie action method sets the specified {@link «typeOf(manyEntity.type)»} entity bean for editing.
+	 * Thie action method sets the specified {@link Â«typeOf(manyEntity.type)Â»} entity bean for editing.
 	 *
-	 * @param «nameOf(manyEntity.type)» The {@link «typeOf(manyEntity.type)»} entity bean to edit.
+	 * @param Â«nameOf(manyEntity.type)Â» The {@link Â«typeOf(manyEntity.type)Â»} entity bean to edit.
 	 * @return The outcome to return to the 1:n relation editing.
 	 */
-«IF isAbstract()»
+Â«IF isAbstract()Â»
 	@Override
-«ENDIF»
-	public String «changeEntity(manyEntity.type)»(final «typeOf(manyEntity.type)» «nameOf(manyEntity.type)») {
-		«setterOf(manyEntity.type)»(«nameOf(manyEntity.type)»);
-		return «navigation(this, manyEntity)»;
+Â«ENDIFÂ»
+	public String Â«changeEntity(manyEntity.type)Â»(final Â«typeOf(manyEntity.type)Â» Â«nameOf(manyEntity.type)Â») {
+		Â«setterOf(manyEntity.type)Â»(Â«nameOf(manyEntity.type)Â»);
+		return Â«navigation(this, manyEntity)Â»;
 	}
 
 	/**
-	 * This action method removes an {@link «typeOf(manyEntity.type)»} entity bean from the
-	 * 1:n relation «nameOf(manyEntity)» of the {@link «typeOf(entity)»} entity bean.
+	 * This action method removes an {@link Â«typeOf(manyEntity.type)Â»} entity bean from the
+	 * 1:n relation Â«nameOf(manyEntity)Â» of the {@link Â«typeOf(entity)Â»} entity bean.
 	 *
-	 * @param «nameOf(manyEntity.type)» The {@link «typeOf(manyEntity.type)»} entity bean to remove.
+	 * @param Â«nameOf(manyEntity.type)Â» The {@link Â«typeOf(manyEntity.type)Â»} entity bean to remove.
 	 * @return The outcome to return to the 1:n relation editing.
-	 * @see «fqAbstractDaoOf()»#«removerFrom(entity)»(«typeOf(manyEntity.type)»)
+	 * @see Â«fqAbstractDaoOf()Â»#Â«removerFrom(entity)Â»(Â«typeOf(manyEntity.type)Â»)
 	 */
-«IF isAbstract()»
+Â«IF isAbstract()Â»
 	@Override
-«ENDIF»
-	public String «removeEntity(manyEntity.type)»(final «typeOf(manyEntity.type)» «nameOf(manyEntity.type)») {
-		if («isEmpty(manyEntity.type)»(«nameOf(manyEntity.type)»))
+Â«ENDIFÂ»
+	public String Â«removeEntity(manyEntity.type)Â»(final Â«typeOf(manyEntity.type)Â» Â«nameOf(manyEntity.type)Â») {
+		if (Â«isEmpty(manyEntity.type)Â»(Â«nameOf(manyEntity.type)Â»))
 		{
-			dao.«removerFrom(entity)»(«nameOf(manyEntity.type)»);
+			dao.Â«removerFrom(entity)Â»(Â«nameOf(manyEntity.type)Â»);
 		}
 		else
 		{
-			error(null, "«prefixOf()».«prefixOf(manyEntity.type)».not-empty");
+			error(null, "Â«prefixOf()Â».Â«prefixOf(manyEntity.type)Â».not-empty");
 		}
-		return «navigation(this, manyEntity)»;
+		return Â«navigation(this, manyEntity)Â»;
 	}
 
 	/**
-	 * This action method saves or creates an {@link «typeOf(manyEntity.type)»} entity bean inside
-	 * an 1:n relation of the {@link «typeOf(entity)»} entity bean.
+	 * This action method saves or creates an {@link Â«typeOf(manyEntity.type)Â»} entity bean inside
+	 * an 1:n relation of the {@link Â«typeOf(entity)Â»} entity bean.
 	 *
 	 * @return The outcome to return to the 1:n relation editing.
-	 * @see «fqAbstractDaoOf()»#«updater(manyEntity.type)»(«typeOf(manyEntity.type)»)
-	 * @see «fqAbstractDaoOf()»#«adderTo(entity)»(«typeOf(entity)», «typeOf(manyEntity.type)»)
+	 * @see Â«fqAbstractDaoOf()Â»#Â«updater(manyEntity.type)Â»(Â«typeOf(manyEntity.type)Â»)
+	 * @see Â«fqAbstractDaoOf()Â»#Â«adderTo(entity)Â»(Â«typeOf(entity)Â», Â«typeOf(manyEntity.type)Â»)
 	 */ 
-«IF isAbstract()»
+Â«IF isAbstract()Â»
 	@Override
-«ENDIF»
-	public String «saveEntity(manyEntity.type)»()
+Â«ENDIFÂ»
+	public String Â«saveEntity(manyEntity.type)Â»()
 	{
-		final «typeOf(manyEntity.type)» «nameOf(manyEntity.type)» = «getterOf(manyEntity.type)»();
+		final Â«typeOf(manyEntity.type)Â» Â«nameOf(manyEntity.type)Â» = Â«getterOf(manyEntity.type)Â»();
 
-«LET getId(manyEntity.type) AS id»
-«IF id == null»
-		if («nameOf(manyEntity.type)».getId() != 0)
-«ELSE»
-		if («nameOf(manyEntity.type)».«getterOf(id)»() != null)
-«ENDIF»
-«ENDLET»
+Â«LET getId(manyEntity.type) AS idÂ»
+Â«IF id == nullÂ»
+		if (Â«nameOf(manyEntity.type)Â».getId() != 0)
+Â«ELSEÂ»
+		if (Â«nameOf(manyEntity.type)Â».Â«getterOf(id)Â»() != null)
+Â«ENDIFÂ»
+Â«ENDLETÂ»
 		{
-			dao.«updater(manyEntity.type)»(«nameOf(manyEntity.type)»);
+			dao.Â«updater(manyEntity.type)Â»(Â«nameOf(manyEntity.type)Â»);
 		}
 		else
 		{
-			dao.«adderTo(entity)»(«getterOf(entity)»(), «nameOf(manyEntity.type)»);
+			dao.Â«adderTo(entity)Â»(Â«getterOf(entity)Â»(), Â«nameOf(manyEntity.type)Â»);
 		}
-		«setterOf(manyEntity.type)»(new «typeOf(manyEntity.type)»());
-		return «navigation(this, manyEntity)»;
+		Â«setterOf(manyEntity.type)Â»(new Â«typeOf(manyEntity.type)Â»());
+		return Â«navigation(this, manyEntity)Â»;
 	}
 
 	/**
-	 * This action method returns to the editing of the {@link «typeOf(entity)»} bean.
+	 * This action method returns to the editing of the {@link Â«typeOf(entity)Â»} bean.
 	 *
-	 * @return The outcome for editing the {@link «typeOf(entity)»} bean.
+	 * @return The outcome for editing the {@link Â«typeOf(entity)Â»} bean.
 	 */  	
-«IF isAbstract()»
+Â«IF isAbstract()Â»
 	@Override
-«ENDIF»
-	public String «backEntity(manyEntity.type)»()
+Â«ENDIFÂ»
+	public String Â«backEntity(manyEntity.type)Â»()
 	{
-		return «navigation(this, entity)»;
+		return Â«navigation(this, entity)Â»;
 	}	
 
-«IF hasActivationBoolean(manyEntity.type)»
+Â«IF hasActivationBoolean(manyEntity.type)Â»
 	/**
-	 * This method changes the active flag of the given {@link «typeOf(manyEntity.type)»} bean.
+	 * This method changes the active flag of the given {@link Â«typeOf(manyEntity.type)Â»} bean.
 	 *
-	 * @param «nameOf(manyEntity.type)» The {@link «typeOf(manyEntity.type)»} bean to change the active flag.
+	 * @param Â«nameOf(manyEntity.type)Â» The {@link Â«typeOf(manyEntity.type)Â»} bean to change the active flag.
 	 * @return The outcome where to go on success.
-	 * @see «fqAbstractDaoOf()»#activate(«typeOf(manyEntity.type)»,boolean)
+	 * @see Â«fqAbstractDaoOf()Â»#activate(Â«typeOf(manyEntity.type)Â»,boolean)
 	 */
-«IF isAbstract()»
+Â«IF isAbstract()Â»
 	@Override
-«ENDIF»
-	public String «reactivateEntity(manyEntity.type)»(final «typeOf(manyEntity.type)» «nameOf(manyEntity.type)») {
-		dao.activate(«nameOf(manyEntity.type)», !«nameOf(manyEntity.type)».isActive());
-		return «navigation(this, manyEntity.type)»;
+Â«ENDIFÂ»
+	public String Â«reactivateEntity(manyEntity.type)Â»(final Â«typeOf(manyEntity.type)Â» Â«nameOf(manyEntity.type)Â») {
+		dao.activate(Â«nameOf(manyEntity.type)Â», !Â«nameOf(manyEntity.type)Â».isActive());
+		return Â«navigation(this, manyEntity.type)Â»;
 	}
-«ENDIF»
-«ENDFOREACH»
+Â«ENDIFÂ»
+Â«ENDFOREACHÂ»
 
-«LET getHistory(entity) AS history»
-«IF history != null»
+Â«LET getHistory(entity) AS historyÂ»
+Â«IF history != nullÂ»
 	/**
-	 * This method sets the given {@link «typeOf(entity)»} bean for history editing. The
-	 * history contains a {@link List} of {@link «typeOf(history.type)»} beans.
+	 * This method sets the given {@link Â«typeOf(entity)Â»} bean for history editing. The
+	 * history contains a {@link List} of {@link Â«typeOf(history.type)Â»} beans.
 	 *
-	 * @param «nameOf(entity)» The {@link «typeOf(entity)»} bean to edit.
+	 * @param Â«nameOf(entity)Â» The {@link Â«typeOf(entity)Â»} bean to edit.
 	 * @return The outcome where to go on success.
 	 */
-«IF isAbstract()»
+Â«IF isAbstract()Â»
 	@Override
-«ENDIF»
-	public String «editEntity(history.type)»(final «typeOf(entity)» «nameOf(entity)») {
-«IF history.type.cloneable»
-		final «typeOf(history.type)» last = «nameOf(entity)».getLast();  
-		final «typeOf(history.type)» newHistoryEntity = (last != null ? last.clone() : new «typeOf(history.type)»()); 
+Â«ENDIFÂ»
+	public String Â«editEntity(history.type)Â»(final Â«typeOf(entity)Â» Â«nameOf(entity)Â») {
+Â«IF history.type.cloneableÂ»
+		final Â«typeOf(history.type)Â» last = Â«nameOf(entity)Â».getLast();  
+		final Â«typeOf(history.type)Â» newHistoryEntity = (last != null ? last.clone() : new Â«typeOf(history.type)Â»()); 
 
-«FOREACH getAutoCreationTimestampList(history.type) AS timestamp»
-		newHistoryEntity.«setterOf(timestamp)»(null);
-«ENDFOREACH»
-«ELSE»
-		final «typeOf(history.type)» newHistoryEntity = new «typeOf(history.type)»();
-«ENDIF»
-		«setterOf(entity)»(«nameOf(entity)»);
-		«setterOf(history.type)»(newHistoryEntity);	
-		return «navigation(this, history.type)»;
-	}
-
-	/**
-	 * This action method adds a {@link «typeOf(history.type)»} history bean to the
-	 * given {@link «typeOf(entity)»} bean for editing.
-	 *
-	 * @return The outcome where to go on success.
-	 * @see «fqAbstractDaoOf()»#«adderTo(entity)»(«typeOf(entity)», «typeOf(history.type)»)
-	 */
-«IF isAbstract()»
-	@Override
-«ENDIF»
-	public String «saveEntity(history.type)»() {
-«IF history.type.cloneable»
-		final «typeOf(history.type)» «nameOf(history.type)» = dao.«adderTo(entity)»(«getterOf(entity)»(), «getterOf(history.type)»());
-		final «typeOf(history.type)» newHistoryEntity = «nameOf(history.type)».clone(); 
-«FOREACH getAutoCreationTimestampList(history.type) AS timestamp»
-		newHistoryEntity.«setterOf(timestamp)»(null);
-«ENDFOREACH»
-		«setterOf(history.type)»(newHistoryEntity);
-«ELSE»
-		dao.«adderTo(entity)»(«getterOf(entity)»(), «getterOf(history.type)»());
-		«setterOf(history.type)»(new «typeOf(history.type)»());
-«ENDIF»
-		return «navigation(this, history.type)»;
+Â«FOREACH getAutoCreationTimestampList(history.type) AS timestampÂ»
+		newHistoryEntity.Â«setterOf(timestamp)Â»(null);
+Â«ENDFOREACHÂ»
+Â«ELSEÂ»
+		final Â«typeOf(history.type)Â» newHistoryEntity = new Â«typeOf(history.type)Â»();
+Â«ENDIFÂ»
+		Â«setterOf(entity)Â»(Â«nameOf(entity)Â»);
+		Â«setterOf(history.type)Â»(newHistoryEntity);	
+		return Â«navigation(this, history.type)Â»;
 	}
 
 	/**
-	 * This action method returns to the editing of the {@link «typeOf(entity)»} bean.
+	 * This action method adds a {@link Â«typeOf(history.type)Â»} history bean to the
+	 * given {@link Â«typeOf(entity)Â»} bean for editing.
 	 *
-	 * @return The outcome for editing the {@link «typeOf(entity)»} bean.
+	 * @return The outcome where to go on success.
+	 * @see Â«fqAbstractDaoOf()Â»#Â«adderTo(entity)Â»(Â«typeOf(entity)Â», Â«typeOf(history.type)Â»)
+	 */
+Â«IF isAbstract()Â»
+	@Override
+Â«ENDIFÂ»
+	public String Â«saveEntity(history.type)Â»() {
+Â«IF history.type.cloneableÂ»
+		final Â«typeOf(history.type)Â» Â«nameOf(history.type)Â» = dao.Â«adderTo(entity)Â»(Â«getterOf(entity)Â»(), Â«getterOf(history.type)Â»());
+		final Â«typeOf(history.type)Â» newHistoryEntity = Â«nameOf(history.type)Â».clone(); 
+Â«FOREACH getAutoCreationTimestampList(history.type) AS timestampÂ»
+		newHistoryEntity.Â«setterOf(timestamp)Â»(null);
+Â«ENDFOREACHÂ»
+		Â«setterOf(history.type)Â»(newHistoryEntity);
+Â«ELSEÂ»
+		dao.Â«adderTo(entity)Â»(Â«getterOf(entity)Â»(), Â«getterOf(history.type)Â»());
+		Â«setterOf(history.type)Â»(new Â«typeOf(history.type)Â»());
+Â«ENDIFÂ»
+		return Â«navigation(this, history.type)Â»;
+	}
+
+	/**
+	 * This action method returns to the editing of the {@link Â«typeOf(entity)Â»} bean.
+	 *
+	 * @return The outcome for editing the {@link Â«typeOf(entity)Â»} bean.
 	 */  	
-«IF isAbstract()»
+Â«IF isAbstract()Â»
 	@Override
-«ENDIF»
-	public String «backEntity(history.type)»()
+Â«ENDIFÂ»
+	public String Â«backEntity(history.type)Â»()
 	{
-		return «navigation(this, entity)»;
+		return Â«navigation(this, entity)Â»;
 	}
-«ENDIF»
-«ENDLET»
-«ENDFOREACH»
+Â«ENDIFÂ»
+Â«ENDLETÂ»
+Â«ENDFOREACHÂ»
 }
-«ENDLET»
-«ENDFILE»
-«ENDDEFINE»
+Â«ENDLETÂ»
+Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE AbstractProcessHandler FOR Process»
-«FILE abstractHandlerFilename(this)»
-«EXPAND utility::HeaderAbstract»
-«LET getUiEntities().sortBy(e|e.name) AS entities»
-package «handlerPackageOf(this)»;
+Â«DEFINE AbstractProcessHandler FOR ProcessÂ»
+Â«FILE abstractHandlerFilename(this)Â»
+Â«EXPAND utility::HeaderAbstractÂ»
+Â«LET getUiEntities().sortBy(e|e.name) AS entitiesÂ»
+package Â«handlerPackageOf(this)Â»;
 
 import javax.ejb.EJB;
-import «fqDaoOf()»;
-«IF ((entities.size > 0) && isAbstract()) || (getManyEntitiesWithHistory(entities).size > 0)»
+import Â«fqDaoOf()Â»;
+Â«IF ((entities.size > 0) && isAbstract()) || (getManyEntitiesWithHistory(entities).size > 0)Â»
 import java.util.List;
-«ENDIF»
-«FOREACH getEntitiesWithHistory(entities) AS entity»
-import «fqTypeOf(entity)»;
-«ENDFOREACH»
+Â«ENDIFÂ»
+Â«FOREACH getEntitiesWithHistory(entities) AS entityÂ»
+import Â«fqTypeOf(entity)Â»;
+Â«ENDFOREACHÂ»
 
-«IF roles.size > 0»
+Â«IF roles.size > 0Â»
 import javax.faces.context.ExternalContext;
-«ENDIF»
+Â«ENDIFÂ»
 
 /**
  * This abstract action handler acts for the following entity beans:
  * <ul>
-«FOREACH entities.sortBy(e|e.name) AS entity»
- * <li>{@link «typeOf(entity)»}</li>
-«ENDFOREACH»
+Â«FOREACH entities.sortBy(e|e.name) AS entityÂ»
+ * <li>{@link Â«typeOf(entity)Â»}</li>
+Â«ENDFOREACHÂ»
  * </ul>
  */
-abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(getModel(this))»
+abstract public class Â«abstractHandlerOf(this)Â» extends Â«abstractHandlerOf(getModel(this))Â»
 {
 	private static final long serialVersionUID = 1L;
-	protected static final String «navigation(this)» = "/«prefixOf(this)»/";
+	protected static final String Â«navigation(this)Â» = "/Â«prefixOf(this)Â»/";
 
 	/**
-	 * This is the injected DAO reference to the {@link «daoOf()»} session bean.
+	 * This is the injected DAO reference to the {@link Â«daoOf()Â»} session bean.
 	 */
 	@EJB
-	protected «daoOf()» dao;
+	protected Â«daoOf()Â» dao;
 
 	/**
-«IF roles.size > 0»
+Â«IF roles.size > 0Â»
 	 * This method checks wether the logged in user is allowed to use this handler.
 	 * The must be in one of the following roles:
 	 * <ul>
-«FOREACH roles.sortBy(r|r) AS role»
-	 * <li>«role»</li>
-«ENDFOREACH»
+Â«FOREACH roles.sortBy(r|r) AS roleÂ»
+	 * <li>Â«roleÂ»</li>
+Â«ENDFOREACHÂ»
 	 * </ul>
-«ELSE»
+Â«ELSEÂ»
 	 * This method returns true because everybody is allowed to access this handler. 
-«ENDIF»
+Â«ENDIFÂ»
 	 *  
 	 * @return A flag which signs the permission to use this handler.
 	 */
 	public boolean isAllowed()
 	{
-«IF roles.size > 0»
+Â«IF roles.size > 0Â»
 		final ExternalContext context = getExternalContext();
 
 		return
-«FOREACH roles.sortBy(r|r) AS role SEPARATOR " || "»
-			context.isUserInRole("«role»")
-«ENDFOREACH»;
-«ELSE»
+Â«FOREACH roles.sortBy(r|r) AS role SEPARATOR " || "Â»
+			context.isUserInRole("Â«roleÂ»")
+Â«ENDFOREACHÂ»;
+Â«ELSEÂ»
 		return true;
-«ENDIF»
+Â«ENDIFÂ»
 	}
 
-«FOREACH getEntitiesWithHistory(entities) AS entity»
-«LET getHistory(entity) AS history»
+Â«FOREACH getEntitiesWithHistory(entities) AS entityÂ»
+Â«LET getHistory(entity) AS historyÂ»
 	/*********************************************
-	 * Property type=«typeOf(entity)» name=«nameOf(entity)»
+	 * Property type=Â«typeOf(entity)Â» name=Â«nameOf(entity)Â»
 	 *********************************************/
 
-	private «typeOf(entity)» «nameOf(entity)» = new «typeOf(entity)»();
+	private Â«typeOf(entity)Â» Â«nameOf(entity)Â» = new Â«typeOf(entity)Â»();
 
-«EXPAND GetterSetter FOR entity»
+Â«EXPAND GetterSetter FOR entityÂ»
 
 	/**
 	 * This method returns true if all containing 1:n relations doesn't contain any entity
 	 *
-	 * @param «nameOf(entity)» The entity bean to check.
-	 * @return true If no sub entity is listed in this {@link «typeOf(entity)»} entity bean.
+	 * @param Â«nameOf(entity)Â» The entity bean to check.
+	 * @return true If no sub entity is listed in this {@link Â«typeOf(entity)Â»} entity bean.
 	 */
-	public boolean «isEmpty(entity)»(final «typeOf(entity)» «nameOf(entity)»)
+	public boolean Â«isEmpty(entity)Â»(final Â«typeOf(entity)Â» Â«nameOf(entity)Â»)
 	{
-«FOREACH getManyEntites(entity.types) AS manyEntity»
-		if (dao.«listOf(manyEntity)»(«nameOf(entity)»).size() > 0)
+Â«FOREACH getManyEntites(entity.types) AS manyEntityÂ»
+		if (dao.Â«listOf(manyEntity)Â»(Â«nameOf(entity)Â»).size() > 0)
 		{
 			return false;
 		}
-«ENDFOREACH»
-«IF history != null»
-		if (dao.«listOf(history.type)»(«nameOf(entity)»).size() > 0)
+Â«ENDFOREACHÂ»
+Â«IF history != nullÂ»
+		if (dao.Â«listOf(history.type)Â»(Â«nameOf(entity)Â»).size() > 0)
 		{
 			return false;
 		}
-«ENDIF»
+Â«ENDIFÂ»
 		return true;
 	}
-«ENDLET»
-«ENDFOREACH»
+Â«ENDLETÂ»
+Â«ENDFOREACHÂ»
 
-«FOREACH entities.sortBy(e|e.name) AS entity»
-«LET getHistory(entity) AS history»
+Â«FOREACH entities.sortBy(e|e.name) AS entityÂ»
+Â«LET getHistory(entity) AS historyÂ»
 
 	/*********************************************
-	 * Editing of bean «typeOf(entity)»
+	 * Editing of bean Â«typeOf(entity)Â»
 	 *********************************************/
 
-«IF isAbstract() && this.entities.contains(entity)»
-	abstract public List<«typeOf(entity)»> «listOf(entity)»();
-«REM»
-«ENDREM»
-	abstract String «createEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
-	abstract String «changeEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
-	abstract String «removeEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
-	abstract String «saveEntity(entity)»();
-	abstract String «backEntity(entity)»();
-«IF hasActivationBoolean(entity)»
-	abstract String «reactivateEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
-«ENDIF»
-«ENDIF»
+Â«IF isAbstract() && this.entities.contains(entity)Â»
+	abstract public List<Â«typeOf(entity)Â»> Â«listOf(entity)Â»();
+Â«REMÂ»
+Â«ENDREMÂ»
+	abstract String Â«createEntity(entity)Â»(final Â«typeOf(entity)Â» Â«nameOf(entity)Â»);
+	abstract String Â«changeEntity(entity)Â»(final Â«typeOf(entity)Â» Â«nameOf(entity)Â»);
+	abstract String Â«removeEntity(entity)Â»(final Â«typeOf(entity)Â» Â«nameOf(entity)Â»);
+	abstract String Â«saveEntity(entity)Â»();
+	abstract String Â«backEntity(entity)Â»();
+Â«IF hasActivationBoolean(entity)Â»
+	abstract String Â«reactivateEntity(entity)Â»(final Â«typeOf(entity)Â» Â«nameOf(entity)Â»);
+Â«ENDIFÂ»
+Â«ENDIFÂ»
 
-«FOREACH getManyEntites(entity.types) AS manyEntity»
+Â«FOREACH getManyEntites(entity.types) AS manyEntityÂ»
 	/**
-	 * This returns the 1:n relation «nameOf(manyEntity)» of entity «typeOf(entity)».
+	 * This returns the 1:n relation Â«nameOf(manyEntity)Â» of entity Â«typeOf(entity)Â».
 	 * 
 	 * @return The list of history entries.
 	 */
-	public List<«typeOf(manyEntity)»> «listOf(manyEntity)»()
+	public List<Â«typeOf(manyEntity)Â»> Â«listOf(manyEntity)Â»()
 	{
-		return dao.«listOf(manyEntity)»(«getterOf(entity)»());
+		return dao.Â«listOf(manyEntity)Â»(Â«getterOf(entity)Â»());
 	}
 
-«IF isAbstract()»
-	abstract String «editEntity(manyEntity.type)»(final «typeOf(entity)» «nameOf(entity)»);
-	abstract String «changeEntity(manyEntity.type)»(final «typeOf(manyEntity.type)» «nameOf(manyEntity.type)»);
-	abstract String «removeEntity(manyEntity.type)»(final «typeOf(manyEntity.type)» «nameOf(manyEntity.type)»);
-	abstract String «saveEntity(manyEntity.type)»();
-	abstract String «backEntity(manyEntity.type)»();
-«IF hasActivationBoolean(manyEntity.type)»
-	abstract String «reactivateEntity(manyEntity.type)»(final «typeOf(manyEntity.type)» «nameOf(manyEntity.type)»);
-«ENDIF»
-«ENDIF»
-«ENDFOREACH»
+Â«IF isAbstract()Â»
+	abstract String Â«editEntity(manyEntity.type)Â»(final Â«typeOf(entity)Â» Â«nameOf(entity)Â»);
+	abstract String Â«changeEntity(manyEntity.type)Â»(final Â«typeOf(manyEntity.type)Â» Â«nameOf(manyEntity.type)Â»);
+	abstract String Â«removeEntity(manyEntity.type)Â»(final Â«typeOf(manyEntity.type)Â» Â«nameOf(manyEntity.type)Â»);
+	abstract String Â«saveEntity(manyEntity.type)Â»();
+	abstract String Â«backEntity(manyEntity.type)Â»();
+Â«IF hasActivationBoolean(manyEntity.type)Â»
+	abstract String Â«reactivateEntity(manyEntity.type)Â»(final Â«typeOf(manyEntity.type)Â» Â«nameOf(manyEntity.type)Â»);
+Â«ENDIFÂ»
+Â«ENDIFÂ»
+Â«ENDFOREACHÂ»
 
-«IF history != null»
+Â«IF history != nullÂ»
 	/**
-	 * This returns the history list of entity «typeOf(entity)».
+	 * This returns the history list of entity Â«typeOf(entity)Â».
 	 * 
 	 * @return The list of history entries.
 	 */
-	public List<«typeOf(history)»> «listOf(history.type)»()
+	public List<Â«typeOf(history)Â»> Â«listOf(history.type)Â»()
 	{
-		return dao.«listOf(history.type)»(«getterOf(entity)»());
+		return dao.Â«listOf(history.type)Â»(Â«getterOf(entity)Â»());
 	}
-«IF isAbstract()»
-	// History management of «typeOf(history)»
-	abstract String «editEntity(history.type)»(final «typeOf(entity)» «nameOf(entity)»);
-	abstract String «saveEntity(history.type)»();
-	abstract String «backEntity(history.type)»();
-«ENDIF»
-«ENDIF»
-«ENDLET»
-«ENDFOREACH»
+Â«IF isAbstract()Â»
+	// History management of Â«typeOf(history)Â»
+	abstract String Â«editEntity(history.type)Â»(final Â«typeOf(entity)Â» Â«nameOf(entity)Â»);
+	abstract String Â«saveEntity(history.type)Â»();
+	abstract String Â«backEntity(history.type)Â»();
+Â«ENDIFÂ»
+Â«ENDIFÂ»
+Â«ENDLETÂ»
+Â«ENDFOREACHÂ»
 }
-«ENDLET»
-«ENDFILE»
-«ENDDEFINE»
+Â«ENDLETÂ»
+Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE GetterSetter FOR Entity»
+Â«DEFINE GetterSetter FOR EntityÂ»
 	/**
-	 * The getter of the {@link «typeOf()»} entity bean.
+	 * The getter of the {@link Â«typeOf()Â»} entity bean.
 	 *
-	 * @return The {@link «typeOf()»} bean.
+	 * @return The {@link Â«typeOf()Â»} bean.
 	 */
-	public «typeOf()» «getterOf()»()
+	public Â«typeOf()Â» Â«getterOf()Â»()
 	{
-		return «nameOf()»;
+		return Â«nameOf()Â»;
 	}	
 
 	/**
-	 * The setter of the {@link «typeOf()»} entity bean.
+	 * The setter of the {@link Â«typeOf()Â»} entity bean.
 	 *
-	 * @param «nameOf()» The {@link «typeOf()»} bean.
+	 * @param Â«nameOf()Â» The {@link Â«typeOf()Â»} bean.
 	 */
-	public void «setterOf()»(final «typeOf()» «nameOf()»)
+	public void Â«setterOf()Â»(final Â«typeOf()Â» Â«nameOf()Â»)
 	{
-		this.«nameOf()» = «nameOf()»;
+		this.Â«nameOf()Â» = Â«nameOf()Â»;
 	}
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE AbstractModelHandler FOR Model»
-«FILE abstractHandlerFilename(this)»
-«LET entities.typeSelect(Options).sortBy(e|e.name) AS converterList»
-«EXPAND utility::HeaderAbstract»
-package «handlerPackageOf(this)»;
+Â«DEFINE AbstractModelHandler FOR ModelÂ»
+Â«FILE abstractHandlerFilename(this)Â»
+Â«LET entities.typeSelect(Options).sortBy(e|e.name) AS converterListÂ»
+Â«EXPAND utility::HeaderAbstractÂ»
+package Â«handlerPackageOf(this)Â»;
 
 import java.io.Serializable;
 import java.text.MessageFormat;
@@ -594,25 +594,25 @@ import org.apache.commons.logging.LogFactory;
 import de.itemis.jee6.util.ErrorInfo;
 import de.itemis.jee6.util.ResourceBundleDefinitions;
 
-«IF converterList.size > 0»
+Â«IF converterList.size > 0Â»
 import javax.faces.component.UIComponent;
 import javax.faces.convert.Converter;
 import javax.ejb.EJB;
-import «fqDaoOf()»;
-«FOREACH converterList AS option»
-import «fqTypeOf(option)»;
-«ENDFOREACH»
-«ENDIF»
+import Â«fqDaoOf()Â»;
+Â«FOREACH converterList AS optionÂ»
+import Â«fqTypeOf(option)Â»;
+Â«ENDFOREACHÂ»
+Â«ENDIFÂ»
 
 /**
  * This abstract handler base class handles the convertes of the following entity beans:
  * <ul>
-«FOREACH converterList AS option»
- * <li>{@link «typeOf(option)»}</li>
-«ENDFOREACH»
+Â«FOREACH converterList AS optionÂ»
+ * <li>{@link Â«typeOf(option)Â»}</li>
+Â«ENDFOREACHÂ»
  * </ul>
  */
-abstract public class «abstractHandlerOf(this)» implements Serializable, ResourceBundleDefinitions
+abstract public class Â«abstractHandlerOf(this)Â» implements Serializable, ResourceBundleDefinitions
 {
 	private static final long serialVersionUID    = 1L;
 	private static final Log  log                 = LogFactory.getLog(AbstractHandler.class);
@@ -633,7 +633,7 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resourc
 	/**
 	 * The default outcome of an URI.
 	 */
-	protected static final String       NAV_INDEX    = "«index()»";
+	protected static final String       NAV_INDEX    = "Â«index()Â»";
 	protected static final String       NAV_REDIRECT = "?faces-redirect=true";
 
 	/**
@@ -641,13 +641,13 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resourc
 	 */
 	protected static final String       NULL      = "[NULL]";
 
-«IF converterList.size > 0»
+Â«IF converterList.size > 0Â»
 	/**
 	 * The options DAO bean nedded for converter operations.
 	 */
 	@EJB
-	protected «daoOf()» options;
-«ENDIF»
+	protected Â«daoOf()Â» options;
+Â«ENDIFÂ»
 
 	/**
 	 * This method initializes the resource bundles.
@@ -681,41 +681,41 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resourc
 	}
 
 
-«FOREACH converterList AS option»
+Â«FOREACH converterList AS optionÂ»
 	/**********************************
-	 * «typeOf(option)» converter
+	 * Â«typeOf(option)Â» converter
 	 **********************************/
-	private final «converterOf(option)» «nameOf(option)» = new «converterOf(option)»();
+	private final Â«converterOf(option)Â» Â«nameOf(option)Â» = new Â«converterOf(option)Â»();
 
 	/**
 	 * This class implements a converter for converting HTML selection box IDs to option entity beans.
 	 */
-	private class «converterOf(option)» implements Converter
+	private class Â«converterOf(option)Â» implements Converter
 	{
-«LET getId(option) AS id»
+Â«LET getId(option) AS idÂ»
 		/**
-		 * This method converts an ID into its appropriate {@link «typeOf(option)»} option bean.
+		 * This method converts an ID into its appropriate {@link Â«typeOf(option)Â»} option bean.
 		 *
 		 * @param context The {@link FacesContext}
 		 * @param compoent The {@link UIComponent} belonging to the selection box.
-		 * @param input The HTML input ID to be converted into the {@link «typeOf(option)»} option bean.
+		 * @param input The HTML input ID to be converted into the {@link Â«typeOf(option)Â»} option bean.
 		 */
 		@Override
 		public Object getAsObject(final FacesContext context, final UIComponent component, final String input)
 		{
-«IF id == null»
-			return isNull(input) ? null : options.«finderOf(option)»(Integer.parseInt(input));
-«ELSE»
-			return isNull(input) ? null : options.«finderOf(option)»(input);
-«ENDIF»
+Â«IF id == nullÂ»
+			return isNull(input) ? null : options.Â«finderOf(option)Â»(Integer.parseInt(input));
+Â«ELSEÂ»
+			return isNull(input) ? null : options.Â«finderOf(option)Â»(input);
+Â«ENDIFÂ»
 		}
 
 		/**
-		 * This method converts the given {@link «typeOf(option)»} option bean into an HTML ID.
+		 * This method converts the given {@link Â«typeOf(option)Â»} option bean into an HTML ID.
 		 *
 		 * @param context The {@link FacesContext}
 		 * @param compoent The {@link UIComponent} belonging to the selection box.
-		 * @param input The {@link «typeOf(option)»} option bean.
+		 * @param input The {@link Â«typeOf(option)Â»} option bean.
 		 */
 		@Override
 		public String getAsString(FacesContext context, UIComponent component, Object input)
@@ -728,50 +728,50 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resourc
 			}
 			else
 			{
-				final «typeOf(option)» option = («typeOf(option)»)input;
-«IF id == null»
+				final Â«typeOf(option)Â» option = (Â«typeOf(option)Â»)input;
+Â«IF id == nullÂ»
 				result = Integer.toString(option.getId());
-«ELSE»
-				result = option.«getterOf(id)»();
-«ENDIF»
+Â«ELSEÂ»
+				result = option.Â«getterOf(id)Â»();
+Â«ENDIFÂ»
 			}
 			return result;
 		}
-«ENDLET»
+Â«ENDLETÂ»
 	}
 	
 	/**
-	 * This method returns a {@link List} of all {@link «typeOf(option)»} option beans.
+	 * This method returns a {@link List} of all {@link Â«typeOf(option)Â»} option beans.
 	 *
-	 * @return {@link List} of all {@link «typeOf(option)»} option beans.
+	 * @return {@link List} of all {@link Â«typeOf(option)Â»} option beans.
 	 */
-	public List<«typeOf(option)»> «listOf(option)»()
+	public List<Â«typeOf(option)Â»> Â«listOf(option)Â»()
 	{
-		return options.«listOf(option)»();
+		return options.Â«listOf(option)Â»();
 	}
 	
-«IF hasActivationBoolean(option)»
+Â«IF hasActivationBoolean(option)Â»
 	/**
-	 * This method returns a {@link List} of all active {@link «typeOf(option)»} option beans.
+	 * This method returns a {@link List} of all active {@link Â«typeOf(option)Â»} option beans.
 	 *
-	 * @return {@link List} of all {@link «typeOf(option)»} option beans.
+	 * @return {@link List} of all {@link Â«typeOf(option)Â»} option beans.
 	 */
-	public List<«typeOf(option)»> «listActiveOf(option)»()
+	public List<Â«typeOf(option)Â»> Â«listActiveOf(option)Â»()
 	{
-		return options.«listActiveOf(option)»();
+		return options.Â«listActiveOf(option)Â»();
 	}
-«ENDIF»
+Â«ENDIFÂ»
 	
 	/**
-	 * This method returns the converter for this «typeOf(option)» option bean.
+	 * This method returns the converter for this Â«typeOf(option)Â» option bean.
 	 *
-	 * @return The {@link «typeOf(option)»} option bean converter.
+	 * @return The {@link Â«typeOf(option)Â»} option bean converter.
 	 */
-	public «converterOf(option)» «converterGetter(option)»()
+	public Â«converterOf(option)Â» Â«converterGetter(option)Â»()
 	{
-		return «nameOf(option)»;
+		return Â«nameOf(option)Â»;
 	}
-«ENDFOREACH»
+Â«ENDFOREACHÂ»
 
 	/***********************
 	 *      utilities      *
@@ -971,14 +971,14 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resourc
 		throw new ValidatorException(msg);
 	}
 }
-«ENDLET»
-«ENDFILE»
-«ENDDEFINE»
+Â«ENDLETÂ»
+Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE ApplicationController FOR Model»
-«FILE applicationControllerFilename() IMPL»
-«EXPAND utility::HeaderImpl»
-package «controllerPackageOf()»;
+Â«DEFINE ApplicationController FOR ModelÂ»
+Â«FILE applicationControllerFilename() IMPLÂ»
+Â«EXPAND utility::HeaderImplÂ»
+package Â«controllerPackageOf()Â»;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -995,10 +995,10 @@ import de.itemis.jee6.util.LogUtil;
  */
 @ManagedBean(eager=true)
 @ApplicationScoped
-public class «applicationController()» extends «abstractApplicationController()»
+public class Â«applicationController()Â» extends Â«abstractApplicationController()Â»
 {
 	private static final long serialVersionUID = 1L;
-	private final static Log log = LogFactory.getLog(«applicationController()».class);
+	private final static Log log = LogFactory.getLog(Â«applicationController()Â».class);
 
 	/**
 	 * This method initializes this application. It logs the application banner.
@@ -1008,59 +1008,59 @@ public class «applicationController()» extends «abstractApplicationController()»
 	{
 		log.debug(">init()");
 		super.init();
-		log.info("\n" + LogUtil.banner("«versionBundle()»", "«name»"));
+		log.info("\n" + LogUtil.banner("Â«versionBundle()Â»", "Â«nameÂ»"));
 		log.debug("<init()");
 	}
 }
-«ENDFILE»
-«ENDDEFINE»
+Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE AbstractApplicationController FOR Model»
-«FILE abstractApplicationControllerFilename()»
-«EXPAND utility::HeaderAbstract»
-package «controllerPackageOf()»;
+Â«DEFINE AbstractApplicationController FOR ModelÂ»
+Â«FILE abstractApplicationControllerFilename()Â»
+Â«EXPAND utility::HeaderAbstractÂ»
+package Â«controllerPackageOf()Â»;
 
 import java.io.Serializable;
 import javax.ejb.EJB;
 
-import «fqDaoOf(this)»;
-«FOREACH entities.typeSelect(Options).select(e|e.isEnumeration()) AS enumeration»
-import «fqTypeOf(enumeration)».«enumOf(enumeration)»;
-«ENDFOREACH»
+import Â«fqDaoOf(this)Â»;
+Â«FOREACH entities.typeSelect(Options).select(e|e.isEnumeration()) AS enumerationÂ»
+import Â«fqTypeOf(enumeration)Â».Â«enumOf(enumeration)Â»;
+Â«ENDFOREACHÂ»
 
 /**
  * This class initializes the web application application.
  */
-abstract public class «abstractApplicationController()» implements Serializable
+abstract public class Â«abstractApplicationController()Â» implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
-	protected «daoOf(this)» options;
+	protected Â«daoOf(this)Â» options;
 
 	/**
 	 * This method initializes this application. It logs the application banner.
 	 */
 	protected void init()
 	{
-«FOREACH entities.typeSelect(Options).select(e|e.isEnumeration()) AS enumeration»
-«FOREACH enumeration.keys AS key»
-		options.ensure(«enumOf(enumeration)».«enumOf(key)», "«key.toLowerCase()»");
-«ENDFOREACH»
-«ENDFOREACH»
+Â«FOREACH entities.typeSelect(Options).select(e|e.isEnumeration()) AS enumerationÂ»
+Â«FOREACH enumeration.keys AS keyÂ»
+		options.ensure(Â«enumOf(enumeration)Â».Â«enumOf(key)Â», "Â«key.toLowerCase()Â»");
+Â«ENDFOREACHÂ»
+Â«ENDFOREACHÂ»
 	}
 }
-«ENDFILE»
-«ENDDEFINE»
+Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE SessionController FOR Model»
-«FILE sessionControllerFilename() IMPL»
-«EXPAND utility::HeaderImpl»
-package «controllerPackageOf()»;
+Â«DEFINE SessionController FOR ModelÂ»
+Â«FILE sessionControllerFilename() IMPLÂ»
+Â«EXPAND utility::HeaderImplÂ»
+package Â«controllerPackageOf()Â»;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import «fqAbstractHandlerOf()»;
+import Â«fqAbstractHandlerOf()Â»;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import de.itemis.jee6.util.LogUtil;
@@ -1070,7 +1070,7 @@ import de.itemis.jee6.util.LogUtil;
  */
 @ManagedBean
 @SessionScoped
-public class «sessionController()» extends «abstractHandlerOf()»
+public class Â«sessionController()Â» extends Â«abstractHandlerOf()Â»
 {
 	private static final long serialVersionUID = 1L;
 
@@ -1086,7 +1086,7 @@ public class «sessionController()» extends «abstractHandlerOf()»
 		request.logout();
 		getExternalContext().invalidateSession();
 
-		return "/«index()»?faces-redirect=true";
+		return "/Â«index()Â»?faces-redirect=true";
 	}
 
 	/**
@@ -1141,5 +1141,5 @@ public class «sessionController()» extends «abstractHandlerOf()»
 		return message;
 	}
 }
-«ENDFILE»
-«ENDDEFINE»
+Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»

@@ -1,110 +1,110 @@
-«REM»
-«###»	Copyright (C) 2013 itemis AG
-«###»	$Id$
-«ENDREM»
+Â«REMÂ»
+Â«###Â»	Copyright (C) 2013 itemis AG
+Â«###Â»	$Id$
+Â«ENDREMÂ»
 
-«IMPORT jee6»
+Â«IMPORT jee6Â»
 
-«EXTENSION de::itemis::jee6::generator::ext::bundle»
-«EXTENSION de::itemis::jee6::generator::ext::model»
-«EXTENSION de::itemis::jee6::generator::ext::ui»
+Â«EXTENSION de::itemis::jee6::generator::ext::bundleÂ»
+Â«EXTENSION de::itemis::jee6::generator::ext::modelÂ»
+Â«EXTENSION de::itemis::jee6::generator::ext::uiÂ»
 
-«DEFINE Main FOR Model»
-«FOREACH this.options.typeSelect(jee6::Locale) AS locale»
-«EXPAND Messages(locale)»
-«EXPAND Errors(locale)»
-«ENDFOREACH»
-«EXPAND Version»
-«ENDDEFINE»
+Â«DEFINE Main FOR ModelÂ»
+Â«FOREACH this.options.typeSelect(jee6::Locale) AS localeÂ»
+Â«EXPAND Messages(locale)Â»
+Â«EXPAND Errors(locale)Â»
+Â«ENDFOREACHÂ»
+Â«EXPAND VersionÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE Messages(Locale locale) FOR Model»
-«LET messageFilename(this, locale) AS filename»
-«FILE filename IMPL»
-«ENDFILE»
-«bundleUpdate(filename, "start.title", "Welcome to " + name + "!")»
-«bundleUpdate(filename, "start.name", "Full name")»
-«bundleUpdate(filename, "options.activate", "Activate")»
-«bundleUpdate(filename, "options.deactivate", "Deactivate")»
-«IF hasSecurityDomain()»
-«bundleUpdate(filename, "login.title", "Login dialog")»
-«bundleUpdate(filename, "login.do_login", "Please enter your login and password!")»
-«bundleUpdate(filename, "login.user", "Login")»
-«bundleUpdate(filename, "login.password", "Password")»
-«bundleUpdate(filename, "logout.title", "Logout dialog")»
-«bundleUpdate(filename, "logout.message", "Confirm logging out!")»
-«ENDIF»
-«FOREACH entities.typeSelect(Options) AS entity»
-«FOREACH entity.keys AS key»
-«bundleUpdate(filename, key.toLowerCase(), key)»
-«ENDFOREACH»
-«ENDFOREACH»
-«FOREACH processes AS process»
-«bundleUpdate(filename, prefixOf(process), process.name)»
-«bundleUpdate(filename, prefixOf(process) + ".title", "Edit " + process.name)»
-«FOREACH getEntitiesWithHistory(getUiEntities(process).toList()) AS entity»
-«bundleUpdate(filename, prefixOf(process) + "." + prefixOf(entity) + ".confirm-remove", "Do you really want to remove this " + entity.name.toLowerCase() + "?")»
-«bundleUpdate(filename, prefixOf(process) + "." + prefixOf(entity) + ".title", "Edit " + entity.name)»
-«FOREACH entity.types AS attr»
-«bundleUpdate(filename, prefixOf(process) + "." + prefixOf(entity) + "." + prefixOf(attr), attr.name.toFirstUpper())»
-«ENDFOREACH»
-«FOREACH getManyEntites(entity.types) AS ref»
-«bundleUpdate(filename, prefixOf(process) + "." + prefixOf(entity) + "." + prefixOf(ref.type) + ".change", "Edit " + ref.name)»
-«ENDFOREACH»
-«ENDFOREACH»
-«FOREACH getUiEntities(process) AS entity»
-«FOREACH entity.types AS attr»
-«bundleUpdate(filename, prefixOf(process) + "." + prefixOf(entity) + "." + prefixOf(attr), attr.name.toFirstUpper())»
-«ENDFOREACH»
-«ENDFOREACH»
-«ENDFOREACH»
-«bundleUpdate(filename, "back", "back")»
-«bundleUpdate(filename, "yes", "yes")»
-«bundleUpdate(filename, "no", "no")»
-«bundleUpdate(filename, "edit", "Edit")»
-«bundleUpdate(filename, "create", "Create")»
-«bundleUpdate(filename, "change", "Change")»
-«bundleUpdate(filename, "history", "History")»
-«bundleUpdate(filename, "remove", "Remove")»
-«bundleUpdate(filename, "clear", "Clear")»
-«bundleUpdate(filename, "save", "Save")»
-«bundleUpdate(filename, "login", "Login")»
-«bundleUpdate(filename, "logout", "Logout")»
-«bundleUpdate(filename, "main", "Main menu")»
-«bundleUpdate(filename, "footer", name + " V{1}.{2}.{3} Copyright (C)  {0}")»
-«bundleUpdate(filename, "menue", "Menu")»
-«bundleUpdate(filename, "no_selection", "-- empty --")»
-«bundleUpdate(filename, "welcome", "Welcome to the " + name + " Application!")» 
-«bundleFlush(filename)»
-«ENDLET»
-«ENDDEFINE»
+Â«DEFINE Messages(Locale locale) FOR ModelÂ»
+Â«LET messageFilename(this, locale) AS filenameÂ»
+Â«FILE filename IMPLÂ»
+Â«ENDFILEÂ»
+Â«bundleUpdate(filename, "start.title", "Welcome to " + name + "!")Â»
+Â«bundleUpdate(filename, "start.name", "Full name")Â»
+Â«bundleUpdate(filename, "options.activate", "Activate")Â»
+Â«bundleUpdate(filename, "options.deactivate", "Deactivate")Â»
+Â«IF hasSecurityDomain()Â»
+Â«bundleUpdate(filename, "login.title", "Login dialog")Â»
+Â«bundleUpdate(filename, "login.do_login", "Please enter your login and password!")Â»
+Â«bundleUpdate(filename, "login.user", "Login")Â»
+Â«bundleUpdate(filename, "login.password", "Password")Â»
+Â«bundleUpdate(filename, "logout.title", "Logout dialog")Â»
+Â«bundleUpdate(filename, "logout.message", "Confirm logging out!")Â»
+Â«ENDIFÂ»
+Â«FOREACH entities.typeSelect(Options) AS entityÂ»
+Â«FOREACH entity.keys AS keyÂ»
+Â«bundleUpdate(filename, key.toLowerCase(), key)Â»
+Â«ENDFOREACHÂ»
+Â«ENDFOREACHÂ»
+Â«FOREACH processes AS processÂ»
+Â«bundleUpdate(filename, prefixOf(process), process.name)Â»
+Â«bundleUpdate(filename, prefixOf(process) + ".title", "Edit " + process.name)Â»
+Â«FOREACH getEntitiesWithHistory(getUiEntities(process).toList()) AS entityÂ»
+Â«bundleUpdate(filename, prefixOf(process) + "." + prefixOf(entity) + ".confirm-remove", "Do you really want to remove this " + entity.name.toLowerCase() + "?")Â»
+Â«bundleUpdate(filename, prefixOf(process) + "." + prefixOf(entity) + ".title", "Edit " + entity.name)Â»
+Â«FOREACH entity.types AS attrÂ»
+Â«bundleUpdate(filename, prefixOf(process) + "." + prefixOf(entity) + "." + prefixOf(attr), attr.name.toFirstUpper())Â»
+Â«ENDFOREACHÂ»
+Â«FOREACH getManyEntites(entity.types) AS refÂ»
+Â«bundleUpdate(filename, prefixOf(process) + "." + prefixOf(entity) + "." + prefixOf(ref.type) + ".change", "Edit " + ref.name)Â»
+Â«ENDFOREACHÂ»
+Â«ENDFOREACHÂ»
+Â«FOREACH getUiEntities(process) AS entityÂ»
+Â«FOREACH entity.types AS attrÂ»
+Â«bundleUpdate(filename, prefixOf(process) + "." + prefixOf(entity) + "." + prefixOf(attr), attr.name.toFirstUpper())Â»
+Â«ENDFOREACHÂ»
+Â«ENDFOREACHÂ»
+Â«ENDFOREACHÂ»
+Â«bundleUpdate(filename, "back", "back")Â»
+Â«bundleUpdate(filename, "yes", "yes")Â»
+Â«bundleUpdate(filename, "no", "no")Â»
+Â«bundleUpdate(filename, "edit", "Edit")Â»
+Â«bundleUpdate(filename, "create", "Create")Â»
+Â«bundleUpdate(filename, "change", "Change")Â»
+Â«bundleUpdate(filename, "history", "History")Â»
+Â«bundleUpdate(filename, "remove", "Remove")Â»
+Â«bundleUpdate(filename, "clear", "Clear")Â»
+Â«bundleUpdate(filename, "save", "Save")Â»
+Â«bundleUpdate(filename, "login", "Login")Â»
+Â«bundleUpdate(filename, "logout", "Logout")Â»
+Â«bundleUpdate(filename, "main", "Main menu")Â»
+Â«bundleUpdate(filename, "footer", name + " V{1}.{2}.{3} Copyright (C)  {0}")Â»
+Â«bundleUpdate(filename, "menue", "Menu")Â»
+Â«bundleUpdate(filename, "no_selection", "-- empty --")Â»
+Â«bundleUpdate(filename, "welcome", "Welcome to the " + name + " Application!")Â» 
+Â«bundleFlush(filename)Â»
+Â«ENDLETÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE Errors(Locale locale) FOR Model»
-«LET errorFilename(this, locale) AS filename»
-«FILE filename IMPL»
-«ENDFILE»
-«bundleUpdate(filename, "error.title", "General application fault!")»
-«bundleUpdate(filename, "not-found.title", "Resource not found!")»
-«bundleUpdate(filename, "code403.message", "Access to the requested resource has been denied!")»
-«bundleUpdate(filename, "code403.title", "Four oh three!")»
-«bundleUpdate(filename, "code404.message", "The requested document was not found!")»
-«bundleUpdate(filename, "code404.title", "Four oh four!")»
-«FOREACH processes AS process»
-«FOREACH getUiEntities(process) AS entity»
-«bundleUpdate(filename, prefixOf(process) + "." + prefixOf(entity) + ".not-empty", "Data of " + entity.name + " is not empty!")»
-«ENDFOREACH»
-«ENDFOREACH»
-«bundleFlush(filename)»
-«ENDLET»
-«ENDDEFINE»
+Â«DEFINE Errors(Locale locale) FOR ModelÂ»
+Â«LET errorFilename(this, locale) AS filenameÂ»
+Â«FILE filename IMPLÂ»
+Â«ENDFILEÂ»
+Â«bundleUpdate(filename, "error.title", "General application fault!")Â»
+Â«bundleUpdate(filename, "not-found.title", "Resource not found!")Â»
+Â«bundleUpdate(filename, "code403.message", "Access to the requested resource has been denied!")Â»
+Â«bundleUpdate(filename, "code403.title", "Four oh three!")Â»
+Â«bundleUpdate(filename, "code404.message", "The requested document was not found!")Â»
+Â«bundleUpdate(filename, "code404.title", "Four oh four!")Â»
+Â«FOREACH processes AS processÂ»
+Â«FOREACH getUiEntities(process) AS entityÂ»
+Â«bundleUpdate(filename, prefixOf(process) + "." + prefixOf(entity) + ".not-empty", "Data of " + entity.name + " is not empty!")Â»
+Â«ENDFOREACHÂ»
+Â«ENDFOREACHÂ»
+Â«bundleFlush(filename)Â»
+Â«ENDLETÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE Version FOR Model»
-«LET versionFilename(this) AS filename»
-«FILE filename IMPL»
-«ENDFILE»
-«bundleUpdate(filename, "vendor", "itemis AG")»
-«bundleUpdate(filename, "version.major", "0")»
-«bundleUpdate(filename, "version.minor", "0")»
-«bundleUpdate(filename, "version.patch", "1")»
-«bundleFlush(filename)»
-«ENDLET»
-«ENDDEFINE»
+Â«DEFINE Version FOR ModelÂ»
+Â«LET versionFilename(this) AS filenameÂ»
+Â«FILE filename IMPLÂ»
+Â«ENDFILEÂ»
+Â«bundleUpdate(filename, "vendor", "itemis AG")Â»
+Â«bundleUpdate(filename, "version.major", "0")Â»
+Â«bundleUpdate(filename, "version.minor", "0")Â»
+Â«bundleUpdate(filename, "version.patch", "1")Â»
+Â«bundleFlush(filename)Â»
+Â«ENDLETÂ»
+Â«ENDDEFINEÂ»

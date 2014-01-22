@@ -9,7 +9,7 @@
 		<version>1.1.7</version>
 		<relativePath>../de.itemis.jee6.releng/pom.xml</relativePath>
 	</parent>
-	<name>jee6 DSL</name>
+	<name>JEE6 DSL</name>
 	<artifactId>de.itemis.jee6</artifactId>
 	<groupId>de.itemis.jee6</groupId>
 	<packaging>eclipse-plugin</packaging>
