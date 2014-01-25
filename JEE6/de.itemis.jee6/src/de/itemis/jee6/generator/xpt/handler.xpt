@@ -1,5 +1,5 @@
 «REM»
-«###»	Copyright (C) 2013 itemis AG
+«###»	Copyright (C) 2014 itemis AG
 «###»	$Id$
 «ENDREM»
 
@@ -15,7 +15,6 @@
 «EXTENSION de::itemis::jee6::generator::ext::ui»
 
 «DEFINE Main FOR Model»
-
 
 «EXPAND AbstractProcessHandler FOREACH processes»
 «EXPAND AbstractModelHandler»
@@ -43,7 +42,7 @@ import «fqTypeOf(entity)»;
 /**
  * This managed bean class implements the action handlings for the following entity beans:
  * <ul>
-«FOREACH getEntitiesWithHistory(entities) AS entity»
+«FOREACH getEntitiesWithHistory(entities).sortBy(e|e.name) AS entity»
  * <li>{@link «typeOf(entity)»}</li>
 «ENDFOREACH»
  * </ul>
