@@ -26,12 +26,12 @@ abstract public class CollatingComparator<T> implements Comparator<T>, Serializa
 	 * Flag for sorting increasing.
 	 */
 	public final static int ASC = 1;
-	
+
 	/**
 	 * Flag for sorting decreasing.
 	 */
 	public final static int DESC = -ASC;
-	
+
 	/**
 	 * The sort order flag.
 	 */
@@ -63,7 +63,7 @@ abstract public class CollatingComparator<T> implements Comparator<T>, Serializa
 	{
 		order = -order;
 	}
-	
+
 	/**
 	 * This method sets to ascending sort order.
 	 */
@@ -85,7 +85,7 @@ abstract public class CollatingComparator<T> implements Comparator<T>, Serializa
 	 */
 	public int compare(final T o1, final T o2)
 	{
-		LogUtil.debug(log, "%s - %s", o1, o2);
+		LogUtil.trace(log, "%s - %s", o1, o2);
 		return compareLocale(o1, o2) * order;
 	}
 

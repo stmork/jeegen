@@ -50,16 +50,16 @@
 	<!-- ==================================================== -->
 
 	<target name="-version">
-	    <loadproperties srcfile="META-INF/MANIFEST.MF">
-	        <filterchain>
-	            <linecontains>
-	                <contains value="Bundle-Version" />
-	            </linecontains>
-	            <tokenfilter>
-	                <replaceregex pattern="^Bundle-Version: d*.d*.d*s*$" replace="" />
-	            </tokenfilter>
-	        </filterchain>
-	    </loadproperties>
+	<loadproperties srcfile="META-INF/MANIFEST.MF">
+		<filterchain>
+			<linecontains>
+				<contains value="Bundle-Version" />
+			</linecontains>
+			<tokenfilter>
+				<replaceregex pattern="^Bundle-Version: d*.d*.d*s*$" replace="" />
+			</tokenfilter>
+		</filterchain>
+	</loadproperties>
 		<property name="plugin" value="${plugin-name}${Bundle-Version}.jar"/>
 		<echo message="Version: ${Bundle-Version}"/>
 	</target>
@@ -79,7 +79,7 @@
 			<arg value="${src-path}/de/itemis/jee6/GenerateDsl.mwe2"/>
 		</java>
 	</target>
-	
+
 	<target name="compile">
 		<mkdir dir="${bin-path}"/>
 		<copy todir="${bin-path}">
