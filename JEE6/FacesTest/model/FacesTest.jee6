@@ -47,8 +47,14 @@ entity EntityEntry
 	Option AddressOption   addressOption;
 }
 
-entity Startup
+entity Startup cloneable
 {
+	Timestamp auto         creation;
+	Timestamp update       changed;
+	Timestamp              timestamp1;
+	Timestamp              timestamp2;
+	Date                   dateElement;
+
 	History HistoryEntry   history;
 	Entity  EntityEntry [] entities;
 }
