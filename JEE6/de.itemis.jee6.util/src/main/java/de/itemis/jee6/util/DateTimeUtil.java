@@ -5,6 +5,7 @@ package de.itemis.jee6.util;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  * This class has some methods for finding some special time points.
@@ -13,6 +14,56 @@ import java.util.Date;
  */
 public class DateTimeUtil
 {
+	/**
+	 * This constant defines the milli seconds per minute.
+	 */
+	public final static long MILLIES_PER_MINUTE = TimeUnit.MINUTES.toMillis(1);
+
+	/**
+	 * This constant defines the milli seconds per hour.
+	 */
+	public final static long MILLIES_PER_HOUR = TimeUnit.HOURS.toMillis(1);
+
+	/**
+	 * This constant defines the milli seconds per day.
+	 */
+	public final static long MILLIES_PER_DAY  = TimeUnit.DAYS.toMillis(1);
+
+	/**
+	 * This constant defines the seconds per minute.
+	 */
+	public final static long SECONDS_PER_MINUTE = TimeUnit.MINUTES.toSeconds(1);
+
+	/**
+	 * This constant defines the seconds per hour.
+	 */
+	public final static long SECONDS_PER_HOUR = TimeUnit.HOURS.toSeconds(1);
+
+	/**
+	 * This constant defines the minutes per hour.
+	 */
+	public final static long MINUTES_PER_HOUR  = TimeUnit.HOURS.toMinutes(1);
+
+	/**
+	 * This constant defines the minutes per day.
+	 */
+	public final static long MINUTES_PER_DAY  = TimeUnit.DAYS.toMinutes(1);
+
+	/**
+	 * This constant defines the hours per day.
+	 */
+	public final static long HOURS_PER_DAY  = TimeUnit.DAYS.toHours(1);
+
+	/**
+	 * This constant defines the days per week.
+	 */
+	public final static long DAYS_PER_WEEK  = 7;
+
+	/**
+	 * This constant defines the days per year.
+	 */
+	public final static long DAYS_PER_YEAR  = 365;
+
 	/**
 	 * This method returns a {@link Calendar} object at the beginning of this day.
 	 * @return The {@link Calendar} object at the beginning of this day.
