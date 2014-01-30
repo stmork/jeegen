@@ -13,7 +13,9 @@ import org.junit.Test;
 
 import de.itemis.faces.entities.AddressOption;
 import de.itemis.faces.entities.AddressOption.AddressOptionEnum;
+import de.itemis.faces.entities.Address;
 import de.itemis.faces.entities.Preferences;
+import de.itemis.faces.entities.Startup;
 import de.itemis.faces.entities.UserInfo;
 
 public class EntityTest {
@@ -182,5 +184,17 @@ public class EntityTest {
 
 		list.clear();
 		Assert.assertEquals(0, list.size());
+	}
+
+	@Test
+	public void cloneTest()
+	{
+		final Address address = new Address();
+		final Startup s1 = new Startup();
+		final Startup s2 = s1.clone();
+
+		Assert.assertFalse(address instanceof Cloneable);
+		Assert.assertTrue(s1 instanceof Cloneable);
+		Assert.assertTrue(s2 instanceof Cloneable);
 	}
 }
