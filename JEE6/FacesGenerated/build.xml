@@ -177,7 +177,7 @@
 				excludeFilter="${findbugs.exclude}"
 				reportlevel="low"
 				failonerror="true">
-			<sourcePath path="${src-path}"/>
+			<sourcePath path="${src-path}:${src-gen-path}"/>
 			<class location="${bin-path}"/> 
 			<auxclasspath refid="compile.path"/>
 		</findbugs>

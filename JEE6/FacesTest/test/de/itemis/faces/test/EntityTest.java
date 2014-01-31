@@ -210,6 +210,8 @@ public class EntityTest {
 		Assert.assertNull(s2.getChanged());
 		Assert.assertNotNull(s2.getTimestamp1());
 		Assert.assertNotNull(s2.getTimestamp2());
+		Assert.assertEquals(s1.getTimestamp1().getTime(), s2.getTimestamp1().getTime());
+		Assert.assertEquals(s1.getTimestamp2().getTime(), s2.getTimestamp2().getTime());
 
 		final Startup s3 = s1.clone();
 		Assert.assertTrue(s3 instanceof Cloneable);
@@ -218,6 +220,8 @@ public class EntityTest {
 		Assert.assertNull(s3.getChanged());
 		Assert.assertNotNull(s3.getTimestamp1());
 		Assert.assertNotNull(s3.getTimestamp2());
+		Assert.assertEquals(s1.getTimestamp1().getTime(), s3.getTimestamp1().getTime());
+		Assert.assertEquals(s1.getTimestamp2().getTime(), s3.getTimestamp2().getTime());
 
 		Assert.assertTrue(s1.getId() != 0);
 		Assert.assertNotNull(s1.getCreation());

@@ -40,24 +40,19 @@
 	<!--              Setting up classpaths                   -->
 	<!-- ==================================================== -->
 
-	<path id="jboss.path">
+	<path id="jboss.lib">
 		<fileset dir="${jboss.lib}">
 			<include name="**/*.jar"/>
 			<exclude name="**/*jsf*1.2*.jar"/>
 		</fileset>
 	</path>
 
-	<path id="compile.path">
-		<path refid="jboss.path"/>
-		<fileset dir="${lib-path}"/>
-		<fileset dir="${ext-lib-path}"/>
-	</path>
-
-	<path id="runtime.path">
-		<path refid="jboss.path"/>
-		<fileset dir="${lib-path}"/>
-		<fileset dir="${ext-lib-path}"/>
-		<pathelement location="${bin-path}" />  
+	<path id="junit.lib">
+		<fileset dir="${eclipse.home.plugins}">
+			<include name="org.junit_4*/*.jar"/>
+			<include name="org.hamcrest*.jar"/>
+			<include name="**/ant-junit4.jar"/>
+		</fileset>
 	</path>
 
 	<path id="findbugs.lib">
@@ -93,13 +88,31 @@
 		</fileset>
 		<pathelement path="${src-path}" />
 	</path>
-	
+
+	<path id="compile.path">
+		<path refid="jboss.lib"/>
+		<path refid="junit.lib"/>
+		<fileset dir="${lib-path}"/>
+		<fileset dir="${ext-lib-path}"/>
+	</path>
+
+	<path id="runtime.path">
+		<path refid="jboss.lib"/>
+		<fileset dir="${lib-path}"/>
+		<pathelement location="${bin-path}" />  
+	</path>
+
+	<path id="junit.path">
+		<path refid="runtime.path"/>
+		<path refid="junit.lib"/>
+	</path>
+
 	<!-- ==================================================== -->
 	<!--            Setting up target definitions             -->
 	<!-- ==================================================== -->
 
 	<taskdef name="findbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask" classpathref="findbugs.lib"/>
-	<taskdef name="junit" classname="org.apache.tools.ant.taskdefs.optional.junit.JUnitTask" classpathref="runtime.path"/>
+	<taskdef name="junit" classname="org.apache.tools.ant.taskdefs.optional.junit.JUnitTask" classpathref="junit.lib"/>
 
 	<!-- ==================================================== -->
 	<!--              Setting up build targets                -->
@@ -184,7 +197,7 @@
 
 	<target name="test" depends="compile">
 		<junit printsummary="on" fork="on" haltonerror="yes" haltonfailure="yes">
-			<classpath refid="runtime.path" />
+			<classpath refid="junit.path" />
 			<formatter type="xml"/>
 			<test name="de.itemis.faces.test.EntityTest"/>
 		</junit>
@@ -200,7 +213,7 @@
 				excludeFilter="${findbugs.exclude}"
 				reportlevel="low"
 				failonerror="true">
-			<sourcePath path="${src-path}"/>
+			<sourcePath path="${src-path}:${src-gen-path}"/>
 			<class location="${bin-path}"/> 
 			<auxclasspath refid="compile.path"/>
 		</findbugs>
