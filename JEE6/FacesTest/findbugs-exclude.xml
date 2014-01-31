@@ -15,4 +15,7 @@
 	<Match>
 		<Package name="~org.bouncycastle.*"/>
 	</Match>
+	<Match>
+		<Package name="~de.itemis.faces.test.*"/>
+	</Match>
 </FindBugsFilter>
