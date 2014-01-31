@@ -1,6 +1,7 @@
 package de.itemis.faces.test;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -11,9 +12,9 @@ import java.util.Set;
 import org.junit.Assert;
 import org.junit.Test;
 
+import de.itemis.faces.entities.Address;
 import de.itemis.faces.entities.AddressOption;
 import de.itemis.faces.entities.AddressOption.AddressOptionEnum;
-import de.itemis.faces.entities.Address;
 import de.itemis.faces.entities.Preferences;
 import de.itemis.faces.entities.Startup;
 import de.itemis.faces.entities.UserInfo;
@@ -190,11 +191,38 @@ public class EntityTest {
 	public void cloneTest()
 	{
 		final Address address = new Address();
-		final Startup s1 = new Startup();
-		final Startup s2 = s1.clone();
-
 		Assert.assertFalse(address instanceof Cloneable);
+
+		final Startup s1 = new Startup();
+		final Date now = new Date();
+		s1.setId(1);
+		s1.setCreation(now);
+		s1.setChanged(now);
+		s1.setTimestamp1(now);
+		s1.setTimestamp2(now);
+
 		Assert.assertTrue(s1 instanceof Cloneable);
+
+		final Startup s2 = s1.clone();
 		Assert.assertTrue(s2 instanceof Cloneable);
+		Assert.assertEquals(0, s2.getId());
+		Assert.assertNull(s2.getCreation());
+		Assert.assertNull(s2.getChanged());
+		Assert.assertNotNull(s2.getTimestamp1());
+		Assert.assertNotNull(s2.getTimestamp2());
+
+		final Startup s3 = s1.clone();
+		Assert.assertTrue(s3 instanceof Cloneable);
+		Assert.assertEquals(0, s3.getId());
+		Assert.assertNull(s3.getCreation());
+		Assert.assertNull(s3.getChanged());
+		Assert.assertNotNull(s3.getTimestamp1());
+		Assert.assertNotNull(s3.getTimestamp2());
+
+		Assert.assertTrue(s1.getId() != 0);
+		Assert.assertNotNull(s1.getCreation());
+		Assert.assertNotNull(s1.getChanged());
+		Assert.assertNotNull(s1.getTimestamp1());
+		Assert.assertNotNull(s1.getTimestamp2());
 	}
 }
