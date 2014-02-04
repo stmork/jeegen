@@ -63,7 +63,7 @@ import javax.persistence.TypedQuery;
 /**
  * This DAO class handles the persistence of the following entity beans:
  * <ul>
-«FOREACH getEntitiesWithHistory(entities) AS entity»
+«FOREACH getEntitiesWithHistory(entities).sortBy(e|e.name) AS entity»
  * <li>{@link «typeOf(entity)»}</li>
  «ENDFOREACH»
  * </ul>
@@ -85,7 +85,7 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel()
 	}
 «ENDFOREACH»
 
-«FOREACH getEntitiesWithHistory(entities) AS entity»
+«FOREACH getEntitiesWithHistory(entities).sortBy(e|e.name) AS entity»
 	/*********************************************
 	 * «typeOf(entity)» «nameOf(entity)»
 	 *********************************************/
@@ -273,7 +273,7 @@ import de.itemis.jee6.util.Profiler;
 /**
  * This session bean implementation handles the database operations of the following option beans:
  * <ul>
-«FOREACH entities.typeSelect(Options) AS option»
+«FOREACH entities.typeSelect(Options).sortBy(e|e.name) AS option»
  * <li>{@link «fqTypeOf(option)»}</li>
  «ENDFOREACH»
  * </ul>

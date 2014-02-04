@@ -439,7 +439,7 @@ abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(ge
 «ENDIF»
 	}
 
-«FOREACH getEntitiesWithHistory(entities) AS entity»
+«FOREACH getEntitiesWithHistory(entities).sortBy(e|e.name) AS entity»
 «LET getHistory(entity) AS history»
 	/*********************************************
 	 * Property type=«typeOf(entity)» name=«nameOf(entity)»
