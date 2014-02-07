@@ -85,7 +85,7 @@ public class Jee6ProjectCreator extends DslProjectCreator
 		final URL url = Platform.getBundle(BUNDLE_ID).getEntry(src);
 		final String urlString = url.toString();
 		InputStream stream = null;
-		
+
 		try
 		{
 			// Create target directory.
