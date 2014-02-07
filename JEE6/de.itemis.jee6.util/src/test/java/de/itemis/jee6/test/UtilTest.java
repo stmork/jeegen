@@ -7,6 +7,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -69,14 +70,14 @@ public class UtilTest
 		Assert.assertTrue(LogUtil.isEmpty(" "));
 		Assert.assertFalse(LogUtil.isEmpty(" a "));
 	}
-	
+
 	@Test
 	public void format()
 	{
 		Assert.assertEquals("[1 s]", LogUtil.format("[{0} {1}]", 1, "s"));
 		Assert.assertEquals("[s 1]", LogUtil.format("[{1} {0}]", 1, "s"));
 	}
-	
+
 	@Test
 	public void printf()
 	{
@@ -89,29 +90,44 @@ public class UtilTest
 		final String banner = LogUtil.banner("de.itemis.jee6.test.version", "LogUtil test");
 		log.info("\n" + banner);
 		Assert.assertNotNull(banner);
-		
+
 		final String [] tokens = banner.split("\n");
 		Assert.assertEquals(3, tokens.length);
 		Assert.assertEquals(tokens[0], tokens[2]);
 		Assert.assertEquals(tokens[1].length(), tokens[0].length());
 	}
-	
+
 	@Test
 	public void getStartOfDay()
 	{
 		Calendar cal = DateTimeUtil.getStartOfDay();
 		Assert.assertEquals("00:00:00", time.format(cal.getTime()));
-		
+
 		cal = DateTimeUtil.getStartOfDay(new Date());
 		Assert.assertEquals("00:00:00", time.format(cal.getTime()));
 	}
-	
+
 	@Test
 	public void getLastMonth()
 	{
 		Calendar cal = DateTimeUtil.getLastMonth();
 
 		Assert.assertEquals("00:00:00", time.format(cal.getTime()));
+	}
+
+	@Test
+	public void setTime()
+	{
+		final Calendar cal = Calendar.getInstance();
+
+		for (int hour = 0; hour < TimeUnit.DAYS.toHours(1); hour++)
+		{
+			for (int min = 0; min < TimeUnit.HOURS.toMinutes(1); min++)
+			{
+				DateTimeUtil.setTime(cal, min, hour);
+				Assert.assertEquals(String.format("%02d:%02d:00", hour, min), time.format(cal.getTime()));
+			}
+		}
 	}
 
 	@Test
@@ -139,9 +155,38 @@ public class UtilTest
 			final Calendar cal = DateTimeUtil.getStartOfYear(year);
 
 			Assert.assertEquals(year, cal.get(Calendar.YEAR));
-			Assert.assertEquals(   0, cal.get(Calendar.MONTH));
+			Assert.assertEquals( Calendar.JANUARY, cal.get(Calendar.MONTH));
 			Assert.assertEquals(   1, cal.get(Calendar.DAY_OF_MONTH));
 			Assert.assertEquals("00:00:00", time.format(cal.getTime()));
 		}
+	}
+
+	@Test
+	public void getDiff()
+	{
+		final Calendar past    = DateTimeUtil.getStartOfDay( 2, 9, 2013);
+		final Calendar today   = Calendar.getInstance();
+		final Calendar future  = DateTimeUtil.getStartOfDay( 7, 7, 2014);
+		final long ROUND_UP = DateTimeUtil.MILLIES_PER_DAY - 1;
+
+		Assert.assertEquals("00:00:00", time.format(past.getTime()));
+		Assert.assertEquals(    2, past.get(Calendar.DAY_OF_MONTH));
+		Assert.assertEquals(Calendar.SEPTEMBER, past.get(Calendar.MONTH));
+		Assert.assertEquals( 2013, past.get(Calendar.YEAR));
+
+		Assert.assertEquals("00:00:00", time.format(future.getTime()));
+		Assert.assertEquals(    7, future.get(Calendar.DAY_OF_MONTH));
+		Assert.assertEquals(Calendar.JULY, future.get(Calendar.MONTH));
+		Assert.assertEquals( 2014, future.get(Calendar.YEAR));
+
+		final long diff1 = (today.getTimeInMillis()  - past.getTimeInMillis()) /
+				DateTimeUtil.MILLIES_PER_DAY;
+		final long diff2 = (future.getTimeInMillis() - today.getTimeInMillis() + ROUND_UP) /
+				DateTimeUtil.MILLIES_PER_DAY;
+		final long diff3 = (future.getTimeInMillis() - past.getTimeInMillis() + ROUND_UP) /
+				DateTimeUtil.MILLIES_PER_DAY;
+
+		System.out.printf ("%d day to past and %d days to future. Complete %d days%n", diff1, diff2, diff3);
+		Assert.assertEquals(diff3, diff1 + diff2);
 	}
 }

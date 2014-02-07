@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.Check;
@@ -41,7 +42,7 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 		invalidNames.add("insert");
 		invalidNames.add("order");
 	}
-	
+
 	@Check(CheckType.FAST)
 	public void checkContextPath(final Model model)
 	{
@@ -50,7 +51,7 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 			error("Der Context path beginnt nicht mit '/'!", Jee6Package.Literals.MODEL__PATH);
 		}
 	}
-	
+
 	@Check(CheckType.FAST)
 	public void checkDefaultLocale(final Model model)
 	{
@@ -101,7 +102,7 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 			error("Dieser Attributname darf nicht verwendet werden!", Jee6Package.Literals.ATTRIBUTE__NAME);
 		}
 	}
-	
+
 	@Check(CheckType.FAST)
 	public void checkHistory(final Entity entity)
 	{
@@ -220,7 +221,7 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 				warning("Es macht nur eine automatische Datumsmarkierung Sinn!", t, Jee6Package.Literals.TIMESTAMP__AUTO, 0);
 			}
 		}
-		
+
 		if (updateTimestamps.size() > 1)
 		{
 			for (Timestamp t : updateTimestamps)
@@ -242,7 +243,7 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 			warning("Rollen machen nur Sinn, wenn JAAS konfiguriert wurde!", Jee6Package.Literals.PROCESS__ROLES);
 		}
 	}
-	
+
 	@Check(CheckType.FAST)
 	public void checkPersistenceUnits(final Model model)
 	{
@@ -255,7 +256,7 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 					Jee6Package.Literals.MODEL__OPTIONS);
 		}
 	}
-	
+
 	@Check(CheckType.FAST)
 	public void checkEntity(final Entity entity)
 	{
@@ -276,7 +277,30 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 			checkEntity(entity, reference, reference.getType(), persistence, Jee6Package.Literals.OPTION_REF__TYPE);
 		}
 	}
-	
+
+	@Check(CheckType.FAST)
+	public void checkProcess(final Process process)
+	{
+		final EList<Entity> entities = process.getEntities();
+
+		for(Entity entity : entities)
+		{
+			for (EntityRef reference : EcoreUtil2.typeSelect(entity.getTypes(), EntityRef.class))
+			{
+				final Entity referencedEntity = reference.getType();
+
+				if (reference.isMany() && entities.contains(referencedEntity))
+				{
+					final String message = String.format(
+							"Entity \"%s\" wird im Process \"%s\" verwendet, obwohl sie in Entity \"%s\" als Many Relation referenziert wird!",
+							referencedEntity.getName(), process.getName(), entity.getName());
+
+					error(message, Jee6Package.Literals.PROCESS__ENTITIES, entities.indexOf(referencedEntity));
+				}
+			}
+		}
+	}
+
 	private void checkEntity(final Entity parent, final Reference reference, final Entity entity, final Persistence persistence, final EReference literal)
 	{
 		if (getPersistenceUnit(entity) != persistence)
@@ -286,7 +310,7 @@ public class DslJavaValidator extends AbstractDslJavaValidator
 					entity.getName(), parent.getName()), reference, literal, 0);
 		}
 	}
-	
+
 	private Persistence getPersistenceUnit(final Entity entity)
 	{
 		Persistence persistence = entity.getPersistence();
