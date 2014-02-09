@@ -35,16 +35,16 @@ import javax.faces.bean.SessionScoped;
 «IF entities.size > 0»
 import java.util.List;
 «ENDIF»
-«FOREACH getEntitiesWithHistory(entities) AS entity»
+«FOREACH getEntitiesWithHistory(entities).sortBy(e|e.name) AS entity-»
 import «fqTypeOf(entity)»;
 «ENDFOREACH»
 
 /**
- * This managed bean class implements the action handlings for the following entity beans:
+ * This managed bean class implements the action handling for the following entity beans:
  * <ul>
-«FOREACH getEntitiesWithHistory(entities).sortBy(e|e.name) AS entity»
+«FOREACH getEntitiesWithHistory(entities).sortBy(e|e.name) AS entity-»
  * <li>{@link «typeOf(entity)»}</li>
-«ENDFOREACH»
+«ENDFOREACH-»
  * </ul>
  */
 @ManagedBean
@@ -53,10 +53,9 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 {
 	private static final long serialVersionUID = 1L;
 
-«FOREACH getEntitiesWithHistory(entities).sortBy(e|e.name) AS entity»
+«FOREACH getEntitiesWithHistory(entities).sortBy(e|e.name) AS entity-»
 	private static final String «navigation(this, entity)» = "«index(entity)»";
 «ENDFOREACH»
-
 «FOREACH entities.sortBy(e|e.name) AS entity»
 
 	/*********************************************
@@ -383,7 +382,7 @@ import «fqDaoOf()»;
 «IF ((entities.size > 0) && isAbstract()) || (getManyEntitiesWithHistory(entities).size > 0)»
 import java.util.List;
 «ENDIF»
-«FOREACH getEntitiesWithHistory(entities) AS entity»
+«FOREACH getEntitiesWithHistory(entities) AS entity-»
 import «fqTypeOf(entity)»;
 «ENDFOREACH»
 
@@ -394,9 +393,9 @@ import javax.faces.context.ExternalContext;
 /**
  * This abstract action handler acts for the following entity beans:
  * <ul>
-«FOREACH entities.sortBy(e|e.name) AS entity»
+«FOREACH entities.sortBy(e|e.name) AS entity-»
  * <li>{@link «typeOf(entity)»}</li>
-«ENDFOREACH»
+«ENDFOREACH-»
  * </ul>
  */
 abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(getModel(this))»
@@ -415,9 +414,9 @@ abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(ge
 	 * This method checks wether the logged in user is allowed to use this handler.
 	 * The must be in one of the following roles:
 	 * <ul>
-«FOREACH roles.sortBy(r|r) AS role»
+«FOREACH roles.sortBy(r|r) AS role-»
 	 * <li>«role»</li>
-«ENDFOREACH»
+«ENDFOREACH-»
 	 * </ul>
 «ELSE»
 	 * This method returns true because everybody is allowed to access this handler. 
@@ -431,7 +430,7 @@ abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(ge
 		final ExternalContext context = getExternalContext();
 
 		return
-«FOREACH roles.sortBy(r|r) AS role SEPARATOR " || "»
+«FOREACH roles.sortBy(r|r) AS role SEPARATOR " || "-»
 			context.isUserInRole("«role»")
 «ENDFOREACH»;
 «ELSE»
@@ -598,7 +597,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.convert.Converter;
 import javax.ejb.EJB;
 import «fqDaoOf()»;
-«FOREACH converterList AS option»
+«FOREACH converterList AS option-»
 import «fqTypeOf(option)»;
 «ENDFOREACH»
 «ENDIF»
@@ -606,9 +605,9 @@ import «fqTypeOf(option)»;
 /**
  * This abstract handler base class handles the convertes of the following entity beans:
  * <ul>
-«FOREACH converterList AS option»
+«FOREACH converterList AS option-»
  * <li>{@link «typeOf(option)»}</li>
-«ENDFOREACH»
+«ENDFOREACH-»
  * </ul>
  */
 abstract public class «abstractHandlerOf(this)» implements Serializable, ResourceBundleDefinitions
