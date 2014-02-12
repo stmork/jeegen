@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<relativePath>../de.itemis.jee6.releng/pom.xml</relativePath>
+		<groupId>de.itemis.jee6</groupId>
+		<artifactId>de.itemis.jee6.releng</artifactId>
+		<version>1.1.7</version>
+	</parent>
+
+	<artifactId>de.itemis.jee6.product</artifactId>
+
+	<name>JEE6 DSL Product</name>
+
+	<properties>
+		<eclipse.server>http://mirror.netcologne.de/eclipse/eclipse/downloads/drops4/R-4.3.1-201309111000/</eclipse.server>
+		<ftp.server>mirror.netcologne.de</ftp.server>
+		<ftp.path>eclipse/eclipse/downloads/drops4/S-4.3RC3-201305301430</ftp.path>
+		<ftp.director.path>eclipse/tools/buckminster/products</ftp.director.path>
+
+		<eclipsesdk.osx>${eclipse.server}${eclipsesdk.osx.filename}.tar.gz</eclipsesdk.osx>
+		<eclipsesdk.osx.filename>eclipse-SDK-4.3.1-macosx-cocoa-x86_64</eclipsesdk.osx.filename>
+		<eclipsesdk.windows>${eclipse.server}${eclipsesdk.windows.filename}.zip</eclipsesdk.windows>
+		<eclipsesdk.windows.filename>eclipse-SDK-4.3.1-win32-x86_64</eclipsesdk.windows.filename>
+		<eclipsesdk.windows32>${eclipse.server}${eclipsesdk.windows32.filename}.zip</eclipsesdk.windows32>
+		<eclipsesdk.windows32.filename>eclipse-SDK-4.3.1-win32</eclipsesdk.windows32.filename>
+		<eclipsesdk.linux>${eclipse.server}${eclipsesdk.linux.filename}.tar.gz</eclipsesdk.linux>
+		<eclipsesdk.linux.filename>eclipse-SDK-4.3.1-linux-gtk-x86_64</eclipsesdk.linux.filename>
+		<eclipse.version>4.3.1</eclipse.version>
+		<appname>jee6-generator</appname>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<id>default-cli</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<taskdef name="builder" classname="at.bestsolution.releng.distrobuilder.ant.DistroBuilderTaskDef" />
+								<mkdir dir="builder" />
+								<mkdir dir="repos/shared" />
+								<!-- KEPLER DEVELOPER IDE -->
+								<mkdir dir="targets/4.3/macosx/x86_64" />
+								<mkdir dir="targets/4.3/win32/x86_64" />
+								<mkdir dir="targets/4.3/win32/x86" />
+								<mkdir dir="targets/4.3/linux/x86_64" />
+
+								<get src="http://${ftp.server}/${ftp.director.path}/director_latest.zip"
+									dest="${project.build.directory}/director_latest.zip" skipexisting="true" />
+
+								<unzip src="${project.build.directory}/director_latest.zip" dest="${project.build.directory}" />
+								<chmod file="${project.build.directory}/director/director" perm="+x" />
+
+								<!-- FETCH BASE DISTROS -->
+								<get src="${eclipsesdk.osx}" dest="targets/4.3/macosx/x86_64/eclipse-SDK-4.3.1-macosx-cocoa-x86_64.tar.gz" skipexisting="true" />
+								<get src="${eclipsesdk.windows}" dest="targets/4.3/win32/x86_64/eclipse-SDK-4.3.1-win32-x86_64.zip" skipexisting="true" />
+								<get src="${eclipsesdk.windows32}" dest="targets/4.3/win32/x86/eclipse-SDK-4.3.1-win32.zip" skipexisting="true" />
+								<get src="${eclipsesdk.linux}" dest="targets/4.3/linux/x86_64/eclipse-SDK-4.3.1-linux-gtk-x86_64.tar.gz" skipexisting="true" />
+
+
+
+								<echo>Build Distribution</echo>
+								<builder builddirectory="${project.build.directory}/build" p2directorexecutable="${project.build.directory}/director/director"
+									targetdirectory="${basedir}/targets" staticreposdirectory="${basedir}/repos" distdirectory="${project.build.directory}/dist"
+									appname="JEE6" version="${project.version}">
+
+									<updatesite url="https://builds.itemis.de/nexus/content/repositories/kepler/" />
+
+									<!-- Eclipse Platform -->
+									<installunit name="org.eclipse.egit.feature.group" />
+
+									<!-- Eclipse General Purpose Tools -->
+
+									<!-- Eclipse Modeling -->
+									<installunit name="org.eclipse.emf.sdk.feature.group" />
+									<installunit name="org.eclipse.emf.mwe.sdk.feature.group" />
+
+									<!-- Xtext, MWE2 -->
+									<updatesite url="https://builds.itemis.de/nexus/content/repositories/eclipse-modeling/" />
+									<installunit name="org.eclipse.emf.mwe2.language.sdk.feature.group" />
+									<installunit name="org.eclipse.emf.mwe2.runtime.sdk.feature.group" />
+									<installunit name="org.eclipse.xtext.sdk.feature.group" />
+									<installunit name="org.eclipse.xtext.xtend2.sdk.feature.group" />
+									<installunit name="org.eclipse.xtext.xtend2.m2e.feature.group" />
+
+									<!-- Xtext Extensions -->
+									<updatesite url="http://download.itemis.com/updates/releases/" />
+									<!-- <installunit name="de.itemis.xtext.antlr.sdk.feature.group" 
+										/> -->
+									<!-- OAW Tools -->
+									<updatesite url="http://oaw.sourceforge.net/updates/" />
+									<installunit name="de.morknet.oaw.tools5" />
+
+									<!-- JBoss Tools -->
+									<updatesite url="http://download.jboss.org/jbosstools/updates/stable/kepler" />
+									<installunit name="org.jboss.ide.eclipse.as.feature.feature.group" />
+									<!-- JEE6 Generator -->
+									<updatesite url="http://jee6-generator.itemis.de/updates/kepler/" />
+									<installunit name="de.itemis.jee6.feature.feature.group" />
+								</builder>
+								<fail message="Distro was not created">
+									<condition>
+										<length file="${project.build.directory}/dist/${eclipsesdk.linux.filename}-${appname}-${project.version}.tar.gz" when="eq" length="0" />
+									</condition>
+								</fail>
+								<tasks>
+									<mv file="${eclipsesdk.linux.filename}-${appname}-${project.version}.tar.gz" tofile="eclipse-jee6-generator-kepler-SR1-linux-gtk-x86_64.tar.gz" />
+									<mv file="${eclipsesdk.windows.filename}-${appname}-${project.version}.tar.gz" tofile="eclipse-jee6-generator-kepler-SR1-win32-x86_64.zip" />
+									<mv file="${eclipsesdk.windows32.filename}-${appname}-${project.version}.tar.gz" tofile="eclipse-jee6-generator-kepler-SR1-win32.zip" />
+									<mv file="${eclipsesdk.osx.filename}-${appname}-${project.version}.tar.gz" tofile="eclipse-jee6-generator-kepler-SR1-macosx-cocoa-x86_64.tar.gz" />
+								</tasks>
+							</target>
+						</configuration>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>ant</groupId>
+						<artifactId>ant-optional</artifactId>
+						<version>1.5.2</version>
+					</dependency>
+					<!-- <dependency> <groupId>commons-net</groupId> <artifactId>commons-net</artifactId> 
+						<version>3.2</version> </dependency> -->
+					<dependency>
+						<groupId>at.bestsolution.releng.distrobuilder</groupId>
+						<artifactId>at.bestsolution.releng.distrobuilder</artifactId>
+						<version>0.0.1-SNAPSHOT</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
+		</plugins>
+	</build>
+
+	<pluginRepositories>
+		<!-- Distrobuilder -->
+		<pluginRepository>
+			<id>cloudbees.kthoms.snapshot</id>
+			<url>https://repository-kthoms.forge.cloudbees.com/snapshot/</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+</project>
