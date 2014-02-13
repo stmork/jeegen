@@ -5,7 +5,7 @@
 	<artifactId>MinimalWebApplicationCdi</artifactId>
 	<packaging>war</packaging>
 	<version>1.0.0</version>
-	<name>MinimalWebApplicationCdi</name>
+	<name>minimal</name>
 
 	<dependencies>
 		<dependency>
