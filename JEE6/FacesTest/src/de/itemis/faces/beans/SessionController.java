@@ -80,4 +80,20 @@ public class SessionController extends AbstractHandler
 		return (Exception) getExternalContext().getRequestMap().get(
 				"javax.servlet.error.exception");
 	}
+
+	/**
+	 * This method returns the exceptions error message. If this message is empty the class name is used
+	 * as a key for obtaining the message from the error resource bundle.
+	 *  
+	 * @return The error message of the sessions exception.
+	 */
+	public String getExceptionMessage() {
+		final Exception exception = getException();
+
+		String message = exception.getMessage();
+		if (LogUtil.isEmpty(message)) {
+			message = getError(exception.getClass().getName());
+		}
+		return message;
+	}
 }

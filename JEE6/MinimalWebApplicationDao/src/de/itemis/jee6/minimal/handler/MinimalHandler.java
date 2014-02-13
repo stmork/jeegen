@@ -1,5 +1,7 @@
 package de.itemis.jee6.minimal.handler;
 
+import java.io.Serializable;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -10,7 +12,10 @@ import de.itemis.jee6.minimal.entity.MinimalEntity;
 
 @ManagedBean
 @SessionScoped
-public class MinimalHandler {
+public class MinimalHandler implements Serializable
+{
+	private static final long serialVersionUID = 1L;
+
 	@EJB
 	MinimalDao dao;
 

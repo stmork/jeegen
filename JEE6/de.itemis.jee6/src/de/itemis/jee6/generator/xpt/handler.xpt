@@ -688,8 +688,10 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resou
 	/**
 	 * This class implements a converter for converting HTML selection box IDs to option entity beans.
 	 */
-	private class «converterOf(option)» implements Converter
+	private class «converterOf(option)» implements Converter, Serializable
 	{
+		private static final long serialVersionUID    = 1L;
+
 «LET getId(option) AS id»
 		/**
 		 * This method converts an ID into its appropriate {@link «typeOf(option)»} option bean.
