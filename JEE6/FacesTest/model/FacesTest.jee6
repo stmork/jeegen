@@ -66,25 +66,21 @@ options Preferences editable
 
 entity AuthInfo
 {
-	Email              email;
-	Text               password;
-	Text               passwordUncoded transient;
-	Boolean            active;
-	Timestamp auto     created;
-	Entity SiteAuthInfo [] sites;
+	Email id                email;
+	Text                    firstName;
+	Text                    lastName; 
+	Text                    password;
+	Text                    passwordUncoded transient;
+	Boolean                 active;
+	Timestamp auto          created;
+	Entity SiteAuthInfo []  sites;
 } persistence unit "authDS"
 
 options SiteInfo editable
 {
-	Text name;
+	Text id                 skuPrefix;
+	Text                    name;
 } persistence unit "authDS"
-
-entity Lock
-{
-	Text id  code;
-	Int      value;
-	Text     info transient;
-}
 
 entity SiteAuthInfo
 {
@@ -93,6 +89,13 @@ entity SiteAuthInfo
 	Date                    expire;
 	Boolean                 active;
 } persistence unit "authDS"
+
+entity Lock
+{
+	Text id                 code;
+	Int                     value;
+	Text                    info transient;
+}
 
 process Admin roles "admin"
 {

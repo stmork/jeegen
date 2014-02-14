@@ -2,6 +2,8 @@
 	<property file="${user.home}/.jee6.properties" />
 	<property file="${basedir}/build.properties"/>
 	<property file="${basedir}/environment.properties"/>
+	<property name="ant.build.javac.source" value="1.6"/>
+	<property name="ant.build.javac.target" value="1.6"/>
 
 	<property name="bin-path"     value="./bin"/>
 	<property name="ico-path"     value="./icons"/>
@@ -44,16 +46,16 @@
 	<!-- ==================================================== -->
 	
 	<target name="-version">
-	    <loadproperties srcfile="${manifest}">
-	        <filterchain>
-	            <linecontains>
-	                <contains value="Bundle-Version" />
-	            </linecontains>
-	            <tokenfilter>
-	                <replaceregex pattern="^Bundle-Version: d*.d*.d*s*$" replace="" />
-	            </tokenfilter>
-	        </filterchain>
-	    </loadproperties>
+		<loadproperties srcfile="${manifest}">
+			<filterchain>
+				<linecontains>
+					<contains value="Bundle-Version" />
+				</linecontains>
+				<tokenfilter>
+					<replaceregex pattern="^Bundle-Version: d*.d*.d*s*$" replace="" />
+				</tokenfilter>
+			</filterchain>
+		</loadproperties>
 		<property name="plugin" value="${plugin-name}${Bundle-Version}.jar"/>
 		<echo message="Version: ${Bundle-Version}"/>
 	</target>
@@ -84,8 +86,7 @@
 			</fileset>
 		</copy>
 		<javac srcdir="${src-path}:${src-gen-path}" destdir="${bin-path}" debug="true"
-				includeantruntime="false"
-				source="6">
+				includeantruntime="false">
 			<classpath refid="generate.classpath"/>
 		</javac>
 	</target>

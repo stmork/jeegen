@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jboss.resteasy.util.HttpResponseCodes;
 
 import de.itemis.faces.beans.TimerSingleton;
 
@@ -23,14 +24,14 @@ public class ProxyImageServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
 	private static final Log  log    = LogFactory.getLog(ImageServlet.class);
-	
+
 	@EJB
 	private TimerSingleton singleton;
 
 	@Override
 	protected void service(
 			HttpServletRequest  request,
-    		HttpServletResponse response) throws ServletException, IOException
+			HttpServletResponse response) throws ServletException, IOException
 	{
 		log.trace(">service()");
 		try
@@ -43,12 +44,12 @@ public class ProxyImageServlet extends HttpServlet
 			}
 			else
 			{
-				response.sendError(404);
+				response.sendError(HttpResponseCodes.SC_NOT_FOUND);
 			}
 		}
 		catch(FileNotFoundException ioe)
 		{
-			response.sendError(404);
+			response.sendError(HttpResponseCodes.SC_NOT_FOUND);
 		}
 		log.trace("<service()");
 	}

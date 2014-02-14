@@ -27,8 +27,8 @@ public class DownloadInfo implements Serializable
 	private final static Log log = LogFactory.getLog(DownloadInfo.class);
 
 	private final AtomicBoolean lock = new AtomicBoolean();
-	private final Download      download;
-	private final int           refresh;
+	private Download            download;
+	private int                 refresh;
 	private byte []             array;
 	private String              mimeType;
 
@@ -40,16 +40,23 @@ public class DownloadInfo implements Serializable
 	 * @param refresh The refresh period in seconds.
 	 * @throws MalformedURLException
 	 */
-	public DownloadInfo(final TimerService service, final String url, final int refresh) throws MalformedURLException
+	public DownloadInfo(final TimerService service, final String url, final int refresh)
 	{
-		this.refresh  = refresh;
-		this.download = new Download(url);
-
-		final TimerConfig config = new TimerConfig();
-		config.setPersistent(false);
-		config.setInfo(this);
-
-		service.createIntervalTimer(500L, (refresh - 1) * 1000L, config);
+		try
+		{
+			this.refresh  = refresh;
+			this.download = new Download(url);
+	
+			final TimerConfig config = new TimerConfig();
+			config.setPersistent(false);
+			config.setInfo(this);
+	
+			service.createIntervalTimer(500L, (refresh - 1) * 1000L, config);
+		}
+		catch(MalformedURLException mue)
+		{
+			log.error(mue.getLocalizedMessage(), mue);
+		}
 	}
 
 	/**
@@ -96,7 +103,6 @@ public class DownloadInfo implements Serializable
 
 		synchronized(download)
 		{
-			response.setContentType(mimeType);
 			image = array;
 		}
 
@@ -104,6 +110,7 @@ public class DownloadInfo implements Serializable
 		{
 			final ServletOutputStream os = response.getOutputStream();
 
+			response.setContentType(mimeType);
 			response.setHeader("Refresh", String.format("%d", refresh)); 
 			os.write(image);
 			os.flush();

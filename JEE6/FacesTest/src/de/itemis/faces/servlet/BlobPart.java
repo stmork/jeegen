@@ -87,4 +87,9 @@ public class BlobPart implements Part
 			throw new IOException(e);
 		}
 	}
+
+	public String getSubmittedFileName()
+	{
+		return null;
+	}
 }
