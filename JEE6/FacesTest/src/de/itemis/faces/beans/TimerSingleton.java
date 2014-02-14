@@ -5,7 +5,6 @@ package de.itemis.faces.beans;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,7 +44,7 @@ public class TimerSingleton
 	private final Map<String, DownloadInfo> infos = new HashMap<String, DownloadInfo>();
 
 	@PostConstruct
-	public void init() throws MalformedURLException
+	public void init()
 	{
 		DownloadInfo info;
 

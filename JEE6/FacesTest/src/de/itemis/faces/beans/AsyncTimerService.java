@@ -9,6 +9,8 @@ import javax.ejb.LockType;
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.interceptor.Interceptors;
 
 import org.apache.commons.logging.Log;
@@ -67,6 +69,7 @@ public class AsyncTimerService {
 
 	@Schedule(minute="*/5",hour="7-20",persistent=false)
 	@Lock(LockType.READ)
+	@TransactionAttribute(TransactionAttributeType.NEVER)
 	public void schedule1()
 	{
 		if(atomicClusterLock.compareAndSet(LOCK_CODE, 0, 1))
@@ -84,6 +87,7 @@ public class AsyncTimerService {
 
 	@Schedule(minute="*/5",hour="7-20",persistent=false)
 	@Lock(LockType.READ)
+	@TransactionAttribute(TransactionAttributeType.NEVER)
 	public void schedule2()
 	{
 		if(atomicClusterLock.compareAndSet(LOCK_CODE, 0, 1))
@@ -101,6 +105,7 @@ public class AsyncTimerService {
 
 	@Schedule(minute="*/5",hour="7-20",persistent=false)
 	@Lock(LockType.READ)
+	@TransactionAttribute(TransactionAttributeType.NEVER)
 	public void schedule3()
 	{
 		if(atomicClusterLock.compareAndSet(LOCK_CODE, 0, 1))
