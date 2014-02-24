@@ -14,7 +14,7 @@
 «EXTENSION de::itemis::jee6::generator::ext::ui»
 
 «DEFINE Main(Process p) FOR Entity»
-			<!-- === generated mask === --> 
+			<!-- === generated mask === -->
 			<!-- process: «p.name» entity: «name» -->
 «LET getMaskAttributes() AS attributes»
 «LET getId() AS id»
