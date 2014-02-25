@@ -174,8 +174,9 @@
 				outputFile="${findbugs.results}"
 				classpathref="compile.path"
 				effort="max"
-				excludeFilter="${findbugs.exclude}"
+				maxRank="20"
 				reportlevel="low"
+				excludeFilter="${findbugs.exclude}"
 				failonerror="true">
 			<sourcePath path="${src-path}:${src-gen-path}"/>
 			<class location="${bin-path}"/> 
