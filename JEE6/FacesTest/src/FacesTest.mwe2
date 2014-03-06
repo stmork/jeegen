@@ -10,5 +10,6 @@ Workflow
 {
 	component = @de.itemis.jee6.generator.DslGeneratorMWE auto-inject
 	{
+		
 	}
 }

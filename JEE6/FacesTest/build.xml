@@ -86,7 +86,6 @@
 			<exclude name="**/*src*.jar"/>
 			<exclude name="**/*editor*.jar"/>
 		</fileset>
-		<pathelement path="${src-path}" />
 	</path>
 
 	<path id="compile.path">

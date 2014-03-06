@@ -10,14 +10,9 @@ var projectName = "de.itemis.jee6"
 var runtimeProject = "../${projectName}"
 
 Workflow {
-    bean = StandaloneSetup {
-	    scanClassPath = true
+	bean = StandaloneSetup {
+		scanClassPath = true
 		platformUri = "${runtimeProject}/.."
-		// registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
-        // registerGenModelFile = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
-        // registerGeneratedEPackage = "org.eclipse.xtext.xbase.XbasePackage"
-        // registerGeneratedEPackage = "org.eclipse.xtext.common.types.TypesPackage"
-        
 	}
 
 	component = DirectoryCleaner {
