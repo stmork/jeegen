@@ -43,11 +43,16 @@ Workflow
 	{
 		directory = resdir
 	}
+
 	component = org.eclipse.xpand2.Generator
 	{
 		metaModel = org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel {}
 		expand = "de::itemis::jee6::generator::xpt::modell::Main FOREACH ${slotname}"
 		skipOnErrors = false
+		globalVarDef =
+		{
+			name = "src" value = "'${impldir}'"
+		}
 
 		outlet =
 		{
