@@ -9,8 +9,8 @@ import de.itemis.jee6.jee6.Jee6Package;
 
 public class Jee6LinkingDiagnosticMessageProvider implements ILinkingDiagnosticMessageProvider
 {
-	public final static String ENTITY_MISSING = "entity missing";
-	public final static String OPTION_MISSING = "option missing";
+	public final static String ENTITY_MISSING  = "entity missing";
+	public final static String OPTION_MISSING  = "option missing";
 	public final static String HISTORY_MISSING = "history missing";
 
 	@Override
