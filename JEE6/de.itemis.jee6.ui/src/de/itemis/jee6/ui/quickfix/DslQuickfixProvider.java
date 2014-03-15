@@ -36,25 +36,30 @@ public class DslQuickfixProvider extends DefaultQuickfixProvider
 	{
 		quickFixEntity(issue, acceptor);
 	}
-	
+
 	private void quickFixEntity(final Issue issue, final IssueResolutionAcceptor acceptor)
 	{
 		final String data [] = issue.getData();
 		final ISemanticModification modification = new EntityModification(Jee6Package.Literals.TABLE, data[0]);
 
-		acceptor.accept(issue, "Create entity " + data[0], null, null, modification);
+		accept(issue, acceptor, "Create entity " + data[0], modification);
 	}
-	
+
 	private void quickFixOptions(final Issue issue, final IssueResolutionAcceptor acceptor)
 	{
 		final String data [] = issue.getData();
-		final ISemanticModification modification1 = new EntityModification(true,  data[0]);
-		final ISemanticModification modification2 = new EntityModification(false, data[0]);
+		final ISemanticModification editableOptionModification    = new EntityModification(true,  data[0]);
+		final ISemanticModification enumerationOptionModification = new EntityModification(false, data[0]);
 
-		injector.injectMembers(modification1);
-		injector.injectMembers(modification2);
+		injector.injectMembers(editableOptionModification);
+		injector.injectMembers(enumerationOptionModification);
 
-		acceptor.accept(issue, "Create editable options",    null, null, modification1);
-		acceptor.accept(issue, "Create enumeration options", null, null, modification2);
+		accept(issue, acceptor, "Create editable options", editableOptionModification);
+		accept(issue, acceptor, "Create enumeration options", enumerationOptionModification);
+	}
+
+	private void accept(final Issue issue, final IssueResolutionAcceptor acceptor, final String label, final ISemanticModification modification)
+	{
+		acceptor.accept(issue, label, label, null, modification);
 	}
 }

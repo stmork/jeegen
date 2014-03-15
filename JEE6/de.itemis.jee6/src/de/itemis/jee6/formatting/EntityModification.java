@@ -5,7 +5,6 @@ import java.util.Locale;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.linking.ILinker;
-import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
 
@@ -20,10 +19,10 @@ import de.itemis.jee6.jee6.Text;
 
 public class EntityModification implements ISemanticModification
 {
-	private final EClass eClass;
-	private final String name;
+	private final EClass  eClass;
+	private final String  name;
 	private final boolean editable;
-	
+
 	@Inject
 	private ILinker linker;
 
@@ -31,12 +30,12 @@ public class EntityModification implements ISemanticModification
 	{
 		this(eClass, name, true);
 	}
-	
+
 	public EntityModification(boolean editable, final String name)
 	{
 		this(Jee6Package.Literals.OPTIONS, name, editable);
 	}
-	
+
 	private EntityModification(final EClass eClass, final String name, final boolean editable)
 	{
 		this.eClass = eClass;
@@ -50,7 +49,7 @@ public class EntityModification implements ISemanticModification
 	{
 		final Entity entity = (Entity)Jee6Factory.eINSTANCE.create(eClass);
 		entity.setName(name);
-		
+
 		if (editable)
 		{
 			final Text text = Jee6Factory.eINSTANCE.createText();
@@ -63,10 +62,8 @@ public class EntityModification implements ISemanticModification
 			options.getKeys().add(name.toLowerCase(Locale.ROOT) + ".example");
 		}
 		final Entity parent = (Entity)element.eContainer();
-		final Model model = (Model)parent.eContainer();
-		final int index = model.getEntities().indexOf(parent);
+		final Model  model = (Model)parent.eContainer();
+		final int    index = model.getEntities().indexOf(parent);
 		model.getEntities().add(index, entity);
-		
-		linker.linkModel(model, new ListBasedDiagnosticConsumer());
 	}
 }
