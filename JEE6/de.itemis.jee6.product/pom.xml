@@ -20,14 +20,14 @@
 		<ftp.director.path>eclipse/tools/buckminster/products</ftp.director.path>
 
 		<eclipsesdk.osx>${eclipse.server}${eclipsesdk.osx.filename}.tar.gz</eclipsesdk.osx>
-		<eclipsesdk.osx.filename>eclipse-SDK-4.3.1-macosx-cocoa-x86_64</eclipsesdk.osx.filename>
+		<eclipsesdk.osx.filename>eclipse-SDK-4.3.2-macosx-cocoa-x86_64</eclipsesdk.osx.filename>
 		<eclipsesdk.windows>${eclipse.server}${eclipsesdk.windows.filename}.zip</eclipsesdk.windows>
-		<eclipsesdk.windows.filename>eclipse-SDK-4.3.1-win32-x86_64</eclipsesdk.windows.filename>
+		<eclipsesdk.windows.filename>eclipse-SDK-4.3.2-win32-x86_64</eclipsesdk.windows.filename>
 		<eclipsesdk.windows32>${eclipse.server}${eclipsesdk.windows32.filename}.zip</eclipsesdk.windows32>
-		<eclipsesdk.windows32.filename>eclipse-SDK-4.3.1-win32</eclipsesdk.windows32.filename>
+		<eclipsesdk.windows32.filename>eclipse-SDK-4.3.2-win32</eclipsesdk.windows32.filename>
 		<eclipsesdk.linux>${eclipse.server}${eclipsesdk.linux.filename}.tar.gz</eclipsesdk.linux>
-		<eclipsesdk.linux.filename>eclipse-SDK-4.3.1-linux-gtk-x86_64</eclipsesdk.linux.filename>
-		<eclipse.version>4.3.1</eclipse.version>
+		<eclipsesdk.linux.filename>eclipse-SDK-4.3.2-linux-gtk-x86_64</eclipsesdk.linux.filename>
+		<eclipse.version>4.3.2</eclipse.version>
 		<appname>jee6-generator</appname>
 	</properties>
 
@@ -98,7 +98,7 @@
 										/> -->
 									<!-- OAW Tools -->
 									<updatesite url="http://oaw.sourceforge.net/updates/" />
-									<installunit name="de.morknet.oaw.tools5" />
+									<installunit name="de.morknet.oaw.tools5"/>
 
 									<!-- JBoss Tools -->
 									<updatesite url="http://download.jboss.org/jbosstools/updates/stable/kepler" />
@@ -107,11 +107,6 @@
 									<updatesite url="http://jee6-generator.itemis.de/updates/kepler/" />
 									<installunit name="de.itemis.jee6.feature.feature.group" />
 								</builder>
-								<fail message="Distro was not created">
-									<condition>
-										<length file="${project.build.directory}/dist/${eclipsesdk.linux.filename}-${appname}-${project.version}.tar.gz" when="eq" length="0" />
-									</condition>
-								</fail>
 								<tasks>
 									<mv file="${project.build.directory}/dist/${eclipsesdk.linux.filename}-${appname}-${project.version}.tar.gz" tofile="${project.build.directory}/dist/eclipse-jee6-generator-kepler-SR1-linux-gtk-x86_64.tar.gz" />
 									<mv file="${project.build.directory}/dist/${eclipsesdk.windows.filename}-${appname}-${project.version}.tar.gz" tofile="${project.build.directory}/dist/eclipse-jee6-generator-kepler-SR1-win32-x86_64.zip" />
