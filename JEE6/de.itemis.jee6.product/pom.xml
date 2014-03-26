@@ -145,7 +145,7 @@
 								<move file="${project.build.directory}/dist/${eclipsesdk.linux32.filename}-${appname}-${project.version}.tar.gz"
 										tofile="${project.build.directory}/dist/eclipse-jee6-generator-kepler-SR1-linux-gtk.tar.gz" />
 								<!-- Windows -->
-								<move file="${project.build.directory}/dist/${eclipsesdk.windows.filename}-${appname}-${project.version}.tar.gz"
+								<move file="${project.build.directory}/dist/${eclipsesdk.windows.filename}-${appname}-${project.version}.zip"
 										tofile="${project.build.directory}/dist/eclipse-jee6-generator-kepler-SR1-win32-x86_64.zip" />
 								<move file="${project.build.directory}/dist/${eclipsesdk.windows32.filename}-${appname}-${project.version}.zip"
 										tofile="${project.build.directory}/dist/eclipse-jee6-generator-kepler-SR1-win32.zip" />
