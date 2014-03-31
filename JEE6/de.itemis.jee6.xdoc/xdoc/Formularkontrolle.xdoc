@@ -1,0 +1,240 @@
+chapter:Formularkontrolle[Formularkontrolle]
+
+Neben der allgemeinen Beschreibung der Web Applikation und die Definition der Entity Beans im Modell gibt es als weiteren großen
+Block die Definition der Prozesse. Über Prozesse kann definiert werden, für welche Entity Beans Dialogmasken generiert werden
+sollen und bei Bedarf, welche Rollen darauf Zugriff haben darf. Die Syntax lautet:
+
+code[JEELANG][process] <process-name> (code[JEELANG][roles] <roles>+) { <properties>* <entities>+ } ;
+
+Der Name eines Prozesses taucht in der URI auf. Die URL ist dann wie folgt aufgebaut:
+http://<host>/<context>/<process-name>/<entity>.xhtml. Mit dem Schlüsselwort roles kann festgelegt werden, welche Rollen darauf
+Zugriff haben. Im Prozess können beliebig viele Properties untergebracht werden. Es handelt sich dabei um Werte, die im Application
+Server konfiguriert werden und per JDNI referenziert werden. Die Auflistung der Entity Beans führt dazu, dass die dafür nötigen
+XHTML-Dateien generiert werden.
+
+Für jeden Prozess wird ein eigener Action Handler und ein eigenes DAO generiert. Hier werden die benötigten Zugriffsmethoden auf die
+konfigurierten Entity Beans und evtl. die benötigten Value Converter generiert. Die Ableitungshierarchie ist dreistufig:
+
+ul[
+    item[Action Handler
+    	ol[
+        	item[konkrete Implemenierung mit Namen <Process-name>Handler]
+        	item[abstrakte Klasse mit Namen Abstract<Process-name>Handler]
+        	item[die abstrakte Basisklasse aller Action Handler AbstractHandler]
+        ]
+	]
+	item[DAOs
+		ol[
+        	item[konkrete Implemenierung mit Namen <Process-name>Handler]
+        	item[abstrakte Klasse mit Namen Abstract<Process-name>Handler]
+        	item[die abstrakte Basisklasse aller Action Handler AbstractHandler]
+        ]
+	]
+]
+
+In den Action Handlern werden für die XHTML-Dateien die Zugriffsmethoden bereitgestellt, die wiederum auf die dazugehörigen DAOs
+zugreifen. Veranschaulicht wird das anhand folgenden Beispielmodells, dass teilweise schon bei den ref:EntityBeans[Entity Beans] beschrieben wurde:
+code[JEELANG][
+application "Eine Beispiel-Applikation"  context "/beispiel" package de.itemis.jee6.beispiel development strict;
+persistence unit"beispielDS" jndi "jdbc/exampleDS";
+locale "de" default;
+locale "el";
+ 
+options AddressOption
+{
+    "address.work",
+    "address.home"
+}
+ 
+entity Address
+{
+    Text                 street;
+    Text                 plz;
+    Text                 location;
+    Option AddressOption addressOption;
+}
+ 
+entity Person
+{
+    Text id              login;
+    Text                 forename;
+    Text                 surename;
+    Text                 name transient;
+    Entity Address \[\]    addresses;
+}
+ 
+process User
+{
+    Text                  "ldap/baseDN"  ref "java:global/ldap/baseDN";
+    Integer               "build"          ref "java:global/build";
+    Boolean default false "productive"   ref "java:global/productive";
+ 
+    Person
+}
+]
+
+section:GenerierteMethodenimActionHandler[Generierte Methoden im Action Handler]
+
+Die Klasse AbstractUserHandler liefert für die Zugriffskontrolle die Methode isAllowed(), die in der XHTML verwendet werden kann. Da
+in diesem Falle keine Zugriffsberechtigungen auf Rollen beschränkt wurden, liefert diese Methode immer code[Java][true] zurück. Ferner wird in
+diese Klasse eine Referenz auf das DAO UserDaoBean mit Namen dao vom Application Server injiziert:
+
+code[Java][
+@EJB
+protected UserDaoBean dao;
+]
+
+Für die Entity Bean Person soll ein XHTML-Formular generiert werden. Da in dieser Entity Bean eine 1:n-Relation auf die Entity Bean
+Address enthalten ist, werden die entsprechenden Zugriffsmethoden dafür gleich mit generiert. Die Methoden für die Klasse e[Person] lauten:
+code[Java][
+abstract public List<Person> getPersonList();
+abstract String addPerson(final Person person);
+abstract String changePerson(final Person person);
+abstract String removePerson(final Person person);
+abstract String savePerson();
+abstract String backFromPerson();
+]
+
+Der Action Handler e[PersonHandler] ist Session scoped. Dadurch lässt sich der Zustand der Entity Bean e[Person] speichern. Dadurch
+brauchen wir hierfür auch Zugriffsmethoden:
+code[Java][
+public Person  getPerson();
+public void    setPerson(final Person person);
+public boolean isPersonEmpty(final Person person);
+]
+
+Auf die Implementierung wurde der Übersichtlichkeit halber verzichtet. Die Methode isPersonEmpty() wurde nur generiert, weil in der
+Entity Bean Person eine 1:n-Relation enthalten ist. Für die Klasse e[Address] lauten die Zugriffsmethoden:
+
+public Address getAddress();
+public void    setAddress(final Address address);
+public boolean isAddressEmpty(final Address address);
+ 
+public List<Address> getAddressList() {
+    return dao.getAddressList(getPerson());
+}
+code[Java][
+abstract String editAddress(final Person person);
+abstract String changeAddress(final Address address);
+abstract String removeAddress(final Address address);
+abstract String saveAddress();
+abstract String backFromAddress();
+]
+
+Die entsprechenden Methoden werden im konkreten Action Handler implementiert und können nach Bedarf angepasst werden. Wäre im
+Modell für die 1:n-Relation eine History vermerkt, würde die Methode removeAddress() fehlen.
+
+
+e[Hinweis!]
+Die Methoden- und Klassennamen werden aus den Namen der entsprechenden Attribute berechnet, nicht aus deren Typnamen.
+
+section:DiegeneriertenMethodenimDAO[Die generierten Methoden im DAO]
+
+Der Action Handler nimmt von den XHTML-Seiten die Events entgegen. Das können Klick-Events, Links, Submits oder Validations sein.
+Für den Zugriff auf die Datenbank ist aber eine weitere Komponente notwendig. Diese DAOs sind als Stateless Session Beans
+implementiert. In das DAO werden Zugriffsmethoden auf die Datenbank generiert. Da jeder Prozess seinen eigenen Action Handler sowie
+sein eigenes DAO hat, kann das zum Action Handler passende DAO direkt in den Action Handler injiziert werden.
+code[Java][
+public void addPerson(final Person person);
+public Person updatePerson(final Person person);
+public void deletePerson(Person person);
+public List<Person> getPersonList();
+]
+
+Da die Entity Bean e[Person] eine 1:n-Relation enthält, sind auch entsprechende Methoden für das Hinzufügen und Entfernen aus der
+Relation vorhanden:
+code[Java][
+public Address addToPerson(Person person, final Address address);
+public Person deleteFromPerson(Address address);
+public List<Address> getAddressList(final Person person);
+]
+
+Die Methoden für die Entity Bean Address wird auch der Vollständigkeit halber aufgelistet:
+code[Java][
+public void addAddress(final Address address);
+public Address updateAddress(final Address address);
+public void deleteAddress(Address address);
+public List<Address> getAddressList();
+]
+
+section:Rollen[Rollen]
+
+Werden Rollen verwendet, muss auch eine Security Domain konfiguriert werden. Die entsprechenden Zugriffsrechte werden in die web.xml
+reingeneriert. Je nach verwendetem Application Server müssen noch weitere Deskriptoren mit weiteren Roll Mappings konfiguriert werden.
+Da sich diese Deskriptoren nicht gegenseitig beeinflussen, werden sie schon prophylaktisch vorgeneriert.
+
+Die Action Handler enthalten Methoden, um programmatisch die Rollenzugehörigkeit abzufragen. Das kann im XHTML dazu verwendet werden,
+um mittels des <ui:fragment>-Tags Blöcke nur bei Berechtigung sichbar zu machen. Da ist zum Einen die Methode boolean isAllowed().
+Diese Methode zeigt an, dass der Zugriff für den eingeloggten Benutzer erlaubt ist. Ein Beispiel dafür lautet:
+
+code[XML][
+<ui:fragment rendered="#{userHandler.allowed">
+    <!-- nur bei Berechtigung sichtbar -->
+</ui:fragment>
+]
+
+Sollte keine Rolle für den Prozess definiert worden sein, liefert diese Methode immer code[Java][true] zurück. Man kann sich also auf die
+Existenz dieser Methode verlassen.
+
+Die andere Methode heißt boolean isLoggedIn(). Mit dieser Methode wird überprüft, ob ein Benutzer überhaupt eingeloggt ist.
+
+section:Properties[Properties]
+
+Mittels Properties können auf Daten, die im Application Server konfiguriert sind mittels JNDI zugegriffen werden. So ist es möglich
+ein und dieselbe Applikation ohne Neubauen in unterschiedliche Laufzeitumgebungen zu bringen und dabei das Verhalten zu beeinflussen.
+Wenn beispielsweise Ein Produktiv- und ein Staging-System vorhanden ist, die jeweils über WebService ein anders Produktiv- und
+Staging-System aufrufen wollen, kann über diese Properties die dazu passende URL konfiguriert werden und die Applikation benutzt den
+zu ihrer Umgebung korrekten WebService. Als Datentypen können für Properties verwendet werden:
+
+ul[
+	item[Text (java.lang.String)]
+	item[Integer (code[Java][int])]
+	item[Boolean (code[Java][boolean])]
+	item[Freier Typ]
+]
+
+Die Properties werden ihren Datentypen entsprechend in das abstrakte DAO generiert.
+
+section:TextProperties[Text-Properties]
+
+Mit Text-Properties kann man Texte wie z.B. URLs in einem Application Server konfigurieren und per JNDI referenzieren. Die Syntax im
+Modell lautet:
+
+code[JEELANG][Text (default] <value>) <jndi> (code[JEELANG][ref] <original-jndi>);
+
+Aus dem Beispiel oben wird im DAO folgender Eintrag generiert:
+
+code[Java][
+@Resource(mappedName = "build")
+private int build;
+]
+
+section:BooleanProperties[Boolean-Properties]
+
+Mit Boolean-Properties kann man Texte wie z.B. URLs in einem Application Server konfigurieren und per JNDI referenzieren. Die Syntax
+im Modell lautet:
+
+code[JEELANG][Boolean (default] <true|false) <jndi> (code[JEELANG][ref] <original-jndi>);
+
+Aus dem Beispiel oben wird im DAO folgender Eintrag generiert:
+
+code[Java][
+@Resource(mappedName = "build")
+private boolean build = false;
+]
+
+In diesem Beispiel wurde ein Default mit angegeben, der mit in den Quellcode generiert wird.
+
+
+section:FreieResourceAdapter[Freie Resource Adapter]
+
+Es ist nicht nur möglich, einfache Datentypen über JNDI zu referenzieren. Bei der Syntax muss voll qualifiziert die Klasse angegeben
+werden:
+
+code[JEELANG][Type] <class-name> <jndi> (code[JEELANG][ref] <original-jndi);
+
+Aus dem Beispiel oben wird im DAO folgender Eintrag generiert:
+code[Java][
+@Resource(mappedName="ldap/itemis")
+private DirContext ldap;
+]
