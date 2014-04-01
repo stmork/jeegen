@@ -248,6 +248,11 @@
 	<profiles>
 		<profile>
 			<id>luna</id>
+
+			<properties>
+				<target.eclipse.version>Luna</target.eclipse.version>
+			</properties>
+
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
@@ -309,6 +314,11 @@
 		</profile>
 		<profile>
 			<id>kepler</id>
+
+			<properties>
+				<target.eclipse.version>Kepler</target.eclipse.version>
+			</properties>
+
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
