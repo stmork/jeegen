@@ -11,7 +11,7 @@ Require-Bundle: de.itemis.jee6,
  org.eclipse.xtext,
  org.eclipse.xtext.junit4,
  org.eclipse.xtext.ui.junit,
- org.junit4,
+ org.junit4;resolution:=optional,
  org.eclipse.ui.workbench;resolution:=optional
 Import-Package: org.apache.log4j,
  org.apache.commons.logging,
