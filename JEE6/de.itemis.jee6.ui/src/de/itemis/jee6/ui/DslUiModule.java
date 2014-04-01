@@ -4,6 +4,9 @@
 package de.itemis.jee6.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
+
+import de.itemis.jee6.ui.highlighting.DefaultHighlightingConfiguration;
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -17,5 +20,9 @@ public class DslUiModule extends de.itemis.jee6.ui.AbstractDslUiModule {
 	@Override
 	public Class<? extends org.eclipse.xtext.ui.wizard.IProjectCreator> bindIProjectCreator() {
 		return de.itemis.jee6.ui.wizard.Jee6ProjectCreator.class;
+	}
+
+	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return DefaultHighlightingConfiguration.class;
 	}
 }
