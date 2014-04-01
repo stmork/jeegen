@@ -105,8 +105,8 @@ This Agreement is governed by the laws of the State of New York and the intellec
    </license>
 
    <url>
-      <update label="JEE6 Generator Update Site" url="http://jee6-generator.itemis.de/updates"/>
-      <discovery label="JEE6 Generator Update Site" url="http://jee6-generator.itemis.de/updates"/>
+      <update label="JEE6 Generator Update Site" url="http://jee6-generator.itemis.de/updates/kepler"/>
+      <discovery label="JEE6 Generator Project Site" url="http://jee6-generator.itemis.de/"/>
    </url>
 
    <requires>
