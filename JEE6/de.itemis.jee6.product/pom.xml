@@ -6,7 +6,7 @@
 		<relativePath>../de.itemis.jee6.releng/pom.xml</relativePath>
 		<groupId>de.itemis.jee6</groupId>
 		<artifactId>de.itemis.jee6.releng</artifactId>
-		<version>1.1.7</version>
+		<version>1.1.8</version>
 	</parent>
 
 	<artifactId>de.itemis.jee6.product</artifactId>
@@ -132,9 +132,9 @@
 									<installunit name="de.morknet.oaw.tools5" />
 
 									<!-- JBoss Tools -->
-									<updatesite
-										url="http://download.jboss.org/jbosstools/updates/stable/kepler" />
-									<installunit name="org.jboss.ide.eclipse.as.feature.feature.group" />
+<!-- 									<updatesite -->
+<!-- 										url="http://download.jboss.org/jbosstools/updates/stable/kepler" /> -->
+<!-- 									<installunit name="org.jboss.ide.eclipse.as.feature.feature.group" /> -->
 									<!-- JEE6 Generator -->
 									<updatesite url="http://jee6-generator.itemis.de/updates/kepler/" />
 									<installunit name="de.itemis.jee6.feature.feature.group" />
