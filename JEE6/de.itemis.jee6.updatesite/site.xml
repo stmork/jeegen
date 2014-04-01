@@ -3,5 +3,5 @@
    <description name="JEE6 Generator Update Site" url="http://jee6-generator.itemis.de/updates">
       
    </description>
-   <feature url="features/de.itemis.jee6.feature_1.1.7.jar" id="de.itemis.jee6.feature" version="1.1.7"/>
+   <feature url="features/de.itemis.jee6.feature_1.1.8.jar" id="de.itemis.jee6.feature" version="1.1.8"/>
 </site>
