@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: de.itemis.jee6
 Bundle-Vendor: itemis AG
-Bundle-Version: 1.1.7
+Bundle-Version: 1.1.8
 Bundle-SymbolicName: de.itemis.jee6; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: de.morknet.oaw.dependencies;bundle-version="5.2.5";visibility:=reexport,

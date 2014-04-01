@@ -93,6 +93,9 @@
 			</fileset>
 			<fileset dir=".">
 				<include name="plugin.xml"/>
+				<include name="welcome.xml"/>
+				<include name="about.*"/>
+				<include name="itemis32.gif"/>
 			</fileset>
 		</copy>
 		<javac srcdir="${src-path}:${src-gen-path}" destdir="${bin-path}" debug="true"

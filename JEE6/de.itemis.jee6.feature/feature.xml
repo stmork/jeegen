@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="de.itemis.jee6.feature"
-      label="JEE6 DSL"
-      version="1.1.7">
+      label="JEE6-Generator"
+      version="1.1.8"
+      provider-name="itemis AG"
+      plugin="de.itemis.jee6">
 
-   <description url="http://www.example.com/description">
-      [Enter Feature Description here.]
+   <description url="http://jee6-generator.itemis.de">
+      Dieses Feature ermöglicht das einfache Generieren einer JEE-basierten Webapplikation.
    </description>
 
    <copyright>
-      Copyright (C) 2013 Steffen A. Mork. All rights reserved.
+      Copyright (C) 2014. itemis AG. All rights reserved.
    </copyright>
 
    <license url="http://www.eclipse.org/legal/epl-v10.html">
