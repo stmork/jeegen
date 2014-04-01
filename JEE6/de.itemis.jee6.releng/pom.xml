@@ -247,15 +247,15 @@
 
 	<profiles>
 		<profile>
-			<id>juno</id>
+			<id>luna</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<activeByDefault>false</activeByDefault>
 			</activation>
 			<repositories>
 				<repository>
 					<id>jee6-target</id>
 					<layout>p2</layout>
-					<url>${p2.target.repository}</url>
+					<url>http://download.eclipse.org/releases/luna</url>
 				</repository>
 				<repository>
 					<id>oaw-tools</id>
