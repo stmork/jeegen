@@ -51,7 +51,7 @@
         <page
             class="de.itemis.jee6.ui.DslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="de.itemis.jee6.Dsl"
-            name="Dsl">
+            name="JEE6 Generator">
             <keywordReference id="de.itemis.jee6.ui.keyword_Dsl"/>
         </page>
         <page
@@ -193,12 +193,14 @@
    </extension>
 
    <extension point="org.eclipse.ui.newWizards">
+      <category id="de.itemis.jee6.ui.category" name="JEE6 Generator">
+      </category>
       <wizard
-            category="org.eclipse.xtext.projectwiz"
+            category="de.itemis.jee6.ui.category"
             class="de.itemis.jee6.ui.DslExecutableExtensionFactory:de.itemis.jee6.ui.wizard.DslNewProjectWizard"
+            icon="icons/jee6_32.gif"
             id="de.itemis.jee6.ui.wizard.DslNewProjectWizard"
             name="JEE6 Generator Project"
-            icon="icons/jee6_32.gif"
             project="true">
       </wizard>
    </extension>
