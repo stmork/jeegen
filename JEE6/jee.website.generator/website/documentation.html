@@ -3,10 +3,10 @@
 <head>
 	<meta charset="utf-8">
 	<title>JEE6 Generator</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
 	<meta name="description"
 		content="The website of the JEE6 Generator Project">
-	<meta name="author" content="">
+	<meta name="author" content="Steffen A. Mork, Dominik Pieper">
 	<!--  styles -->
 	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>
@@ -15,6 +15,7 @@
 	
 	<!-- Le fav and touch icons -->
 	
+	<link rel="shortcut icon" href="images/favicon.png">
 	
 	<link href="css/bootstrap.css" rel="stylesheet" type='text/css'>
 	<link href="css/bootstrap-responsive.css" rel="stylesheet" type='text/css'>
@@ -67,6 +68,8 @@
 					<ul class="nav">
 						<li ><a href="download.html">Download</a></li>
 						<li class="active"><a href="documentation.html">Documentation</a></li>
+						<li ><a href="community.html">Community</a></li>
+						<li ><a href="aboutus.html">Über uns</a></li>
 						<li ><a href="http://xtext.org">Xtext</a></li>
 						<li ><a href="http://www.eclipse.org">Eclipse.org</a></li>
 					</ul>
@@ -275,7 +278,10 @@ application "Eine Beispiel-Applikation"  context "/beispiel" package de.itemis.j
 							In der Modelldatei wird als erstes Kommando die Applikation beschrieben. Die Syntax lautet:
 						</p>
 						<p>
-							<code class="prettyprint lang-jeelang">application</code> &lt;Name&gt; <code class="prettyprint lang-jeelang">context</code> &lt;Context-path&gt; <code class="prettyprint lang-jeelang">package</code> &lt;package-id&gt; (<code class="prettyprint lang-jeelang">timeout</code> &lt;timeout-minutes&gt;) (&lt;project-state&gt;) (<code class="prettyprint lang-jeelang">strict</code>);
+							</p>
+							<pre class="prettyprint lang-jeelang linenums">
+application &lt;Name&gt; context &lt;Context-Path&gt; package &lt;Package-Id&gt; (timeout &lt;Timeout-Minutes&gt;) (&lt;Project-State&gt;) (strict);</pre>
+							<p>
 						</p>
 						<p>
 							Der Name ist ein String, der im Klartext die Applikation beschreibt. Der Context-Path ist ein String, der den Applikationskontext
@@ -357,7 +363,10 @@ application "Eine Beispiel-Applikation"  context "/beispiel" package de.itemis.j
 							Datasources als XA-Datasource im Application Server konfiguriert sind. Die Syntax lautet:
 						</p>
 						<p>
-							<code class="prettyprint lang-jeelang">persistence</code> <code class="prettyprint lang-jeelang">unit</code> &lt;unit-name&gt; <code class="prettyprint lang-jeelang">jndi</code> &lt;jndi-name&gt; (<code class="prettyprint lang-jeelang">cacheable</code>) (MySQL|DB2|Oracle);
+							</p>
+							<pre class="prettyprint lang-jeelang linenums">
+persistence unit &lt;Unit-Name&gt; jndi &lt;Jndi-Name&gt; (cacheable) (MySQL|DB2|Oracle);</pre>
+							<p>
 						</p>
 						<p>
 							Der unit-name wird in der persistence.xml als Referenz innerhalb der Web Applikation verwendet. Der JNDI-Name definiert, wie die
@@ -397,7 +406,7 @@ application "Eine Beispiel-Applikation"  context "/beispiel" package de.itemis.j
 						<p>
 							</p>
 							<pre class="prettyprint lang-jeelang linenums">
-locale &lt;language&gt; (&lt;country&gt;) (default);</pre>
+locale &lt;Language&gt; (&lt;Country&gt;) (default);</pre>
 							<p>
 						</p>
 						<p>
@@ -418,7 +427,10 @@ locale &lt;language&gt; (&lt;country&gt;) (default);</pre>
 							andererseits hier im Model eingetragen werden, unter welchem JDNI-Namen der Mailservice erreichbar ist. Dazu dient die einfache Syntax:
 						</p>
 						<p>
-							<code class="prettyprint lang-jeelang">smtp</code> &lt;jndi-name&gt;;
+							</p>
+							<pre class="prettyprint lang-jeelang linenums">
+smtp &lt;Jndi-Name&gt;;</pre>
+							<p>
 						</p>
 						<p>
 							Mehr Information zum Thema Mail im JEE-Umfeld befinden sich auf diesen Seiten. Die auf diesen Seiten beschriebenen Einträge in den
@@ -446,7 +458,10 @@ private javax.mail.Session mailSession;</pre>
 							Die Syntax lautet:
 						</p>
 						<p>
-							<code class="prettyprint lang-jeelang">security domain</code> &lt;jndi-name&gt; <code class="prettyprint lang-jeelang">(clustered);</code>
+							</p>
+							<pre class="prettyprint lang-jeelang linenums">
+security domain &lt;Jndi-Name&gt; (clustered);</pre>
+							<p>
 						</p>
 						<p>
 							Das optionale Schlüsselwort <code class="prettyprint lang-jeelang">clustered</code> bestimt, ob die Security Domain in einer geclusterten Umgebung funktionsfähig
@@ -460,7 +475,10 @@ private javax.mail.Session mailSession;</pre>
 							Mit Web-Parametern kann man der Web Applikation in der web.xml Parameter übergeben. Die Syntax lautet:
 						</p>
 						<p>
-							<code class="prettyprint lang-jeelang">param</code> &lt;key&gt; = &lt;value&gt; (<code class="prettyprint lang-jeelang">description</code> &lt;description&gt;);
+							</p>
+							<pre class="prettyprint lang-jeelang linenums">
+param &lt;Key&gt; = &lt;Value&gt; (description &lt;Description&gt;);</pre>
+							<p>
 						</p>
 						<p>
 							Die Einträge können beliebig häufig im Modell eingetragen werden. Aus folgender Modellzeile:
@@ -670,7 +688,7 @@ public class Person extends AbstractPerson {
 						<p>
 							</p>
 							<pre class="prettyprint lang-jeelang linenums">
-Text (id) &lt;name&gt; (transient);</pre>
+Text (id) &lt;Name&gt; (transient);</pre>
 							<p>
 						</p>
 						<p>
@@ -710,7 +728,7 @@ Text subject;</pre>
 						<p>
 							</p>
 							<pre class="prettyprint lang-jeelang linenums">
-Int &lt;name&gt; (transient);</pre>
+Int &lt;Name&gt; (transient);</pre>
 							<p>
 						</p>
 						<p>
@@ -748,7 +766,7 @@ Int integerEntry;</pre>
 						<p>
 							</p>
 							<pre class="prettyprint lang-jeelang linenums">
-Number &lt;name&gt; (transient);</pre>
+Number &lt;Name&gt; (transient);</pre>
 							<p>
 						</p>
 						<p>
@@ -784,7 +802,7 @@ Number numberEntry;</pre>
 						<p>
 							</p>
 							<pre class="prettyprint lang-jeelang linenums">
-Email (id) &lt;name&gt; (transient);</pre>
+Email (id) &lt;Name&gt; (transient);</pre>
 							<p>
 						</p>
 						<p>
@@ -829,7 +847,7 @@ Email mail;</pre>
 						<p>
 							</p>
 							<pre class="prettyprint lang-jeelang linenums">
-Clob &lt;name&gt; (transient);</pre>
+Clob &lt;Name&gt; (transient);</pre>
 							<p>
 						</p>
 						<p>
@@ -869,7 +887,7 @@ Clob clobEntry;</pre>
 						<p>
 							</p>
 							<pre class="prettyprint lang-jeelang linenums">
-Blob &lt;name&gt; (transient);</pre>
+Blob &lt;Name&gt; (transient);</pre>
 							<p>
 						</p>
 						<p>
@@ -914,7 +932,7 @@ Blob &lt;name&gt; (transient);</pre>
 						<p>
 							</p>
 							<pre class="prettyprint lang-jeelang linenums">
-Timestamp (auto) (update) &lt;name&gt; (transient);</pre>
+Timestamp (auto) (update) &lt;Name&gt; (transient);</pre>
 							<p>
 						</p>
 						<p>
@@ -982,7 +1000,7 @@ public void preUpdate() {
 						<p>
 							</p>
 							<pre class="prettyprint lang-jeelang linenums">
-Date &lt;name&gt; (transient);</pre>
+Date &lt;Name&gt; (transient);</pre>
 							<p>
 						</p>
 						<p>
@@ -1019,7 +1037,7 @@ Date dateElement;</pre>
 						<p>
 							</p>
 							<pre class="prettyprint lang-jeelang linenums">
-Entity &lt;entity-type&gt; ([]) &lt;name&gt;;</pre>
+Entity &lt;Typ&gt; ([]) &lt;Name&gt;;</pre>
 							<p>
 						</p>
 						<p>
@@ -1039,7 +1057,7 @@ Entity &lt;entity-type&gt; ([]) &lt;name&gt;;</pre>
 						<p>
 							</p>
 							<pre class="prettyprint lang-jeelang linenums">
-Option &lt;entity-type&gt; &lt;name&gt;;</pre>
+Option &lt;Typ&gt; &lt;Name&gt;;</pre>
 							<p>
 						</p>
 						<p>
@@ -1141,7 +1159,7 @@ public void setId(final int id) {
 						<p>
 							</p>
 							<pre class="prettyprint lang-jeelang linenums">
-entity &lt;name&gt; (filterable) (cloneable) { &lt;attributes&gt;+ } (persistence unit &lt;persistence-unit&gt;) ;</pre>
+entity &lt;Name&gt; (filterable) (cloneable) { &lt;Attributes&gt;+ } (persistence unit &lt;Persistence-Unit&gt;) ;</pre>
 							<p>
 						</p>
 						<p>
@@ -1150,7 +1168,7 @@ entity &lt;name&gt; (filterable) (cloneable) { &lt;attributes&gt;+ } (persistenc
 						<p>
 							</p>
 							<pre class="prettyprint lang-jeelang linenums">
-options &lt;name&gt; (filterable) (cloneable) (editable { &lt;attributes&gt;+ }) | ( { &lt;resource-key&gt;+ }) (persistence unit &lt;persistence-unit&gt;) ;</pre>
+options &lt;Name&gt; (filterable) (cloneable) (editable { &lt;Attributes&gt;+ }) | ( { &lt;Resource-Key&gt;+ }) (persistence unit &lt;Persistence-Unit&gt;) ;</pre>
 							<p>
 						</p>
 						<p>
@@ -1256,7 +1274,10 @@ public List&lt;OrderPosition&gt; lastOrderList()
 							sollen und bei Bedarf, welche Rollen darauf Zugriff haben darf. Die Syntax lautet:
 						</p>
 						<p>
-							<code class="prettyprint lang-jeelang">process</code> &lt;process-name&gt; (<code class="prettyprint lang-jeelang">roles</code> &lt;roles&gt;+) { &lt;properties&gt;* &lt;entities&gt;+ } ;
+							</p>
+							<pre class="prettyprint lang-jeelang linenums">
+process &lt;Process-Name&gt; (roles &lt;Roles&gt;+) { &lt;Properties&gt;* &lt;Entities&gt;+ } ;</pre>
+							<p>
 						</p>
 						<p>
 							Der Name eines Prozesses taucht in der URI auf. Die URL ist dann wie folgt aufgebaut:
@@ -1496,7 +1517,10 @@ public List&lt;Address&gt; getAddressList();</pre>
 							Modell lautet:
 						</p>
 						<p>
-							<code class="prettyprint lang-jeelang">Text (default</code> &lt;value&gt;) &lt;jndi&gt; (<code class="prettyprint lang-jeelang">ref</code> &lt;original-jndi&gt;);
+							</p>
+							<pre class="prettyprint lang-jeelang linenums">
+Text (default &lt;Value&gt;) &lt;Jndi&gt; (ref &lt;Original-Jndi&gt;);</pre>
+							<p>
 						</p>
 						<p>
 							Aus dem Beispiel oben wird im DAO folgender Eintrag generiert:
@@ -1517,7 +1541,10 @@ private int build;</pre>
 							im Modell lautet:
 						</p>
 						<p>
-							<code class="prettyprint lang-jeelang">Boolean (default</code> &lt;true|false) &lt;jndi&gt; (<code class="prettyprint lang-jeelang">ref</code> &lt;original-jndi&gt;);
+							</p>
+							<pre class="prettyprint lang-jeelang linenums">
+Boolean (default &lt;true|false) &lt;Jndi&gt; (ref &lt;Original-Jndi&gt;);</pre>
+							<p>
 						</p>
 						<p>
 							Aus dem Beispiel oben wird im DAO folgender Eintrag generiert:
@@ -1541,7 +1568,10 @@ private boolean build = false;</pre>
 							werden:
 						</p>
 						<p>
-							<code class="prettyprint lang-jeelang">Type</code> &lt;class-name&gt; &lt;jndi&gt; (<code class="prettyprint lang-jeelang">ref</code> &lt;original-jndi);
+							</p>
+							<pre class="prettyprint lang-jeelang linenums">
+Type &lt;class-name&gt; &lt;Jndi&gt; (ref &lt;Original-Jndi);</pre>
+							<p>
 						</p>
 						<p>
 							Aus dem Beispiel oben wird im DAO folgender Eintrag generiert:
@@ -1565,16 +1595,12 @@ private DirContext ldap;</pre>
 					<div class="span6">
 						<h3 style="padding-top: 0px; margin-top: 0px;">Quick Links</h3>
 						<ul class="footer-links clearfix">
-							<li><a href="http://www.eclipse.org/legal/privacy.php">Privacy Policy</a></li>
-							<li><a href="http://www.eclipse.org/legal/termsofuse.php">Terms of Use</a></li>
-							<li><a href="http://www.eclipse.org/legal/copyright.php">Copyright Agent</a></li>
-							<li><a href="http://www.eclipse.org/legal/">Legal</a></li>
+							<li><a href="http://itemis.de">itemis AG</a></li>
+							<li><a href="https://www.youtube.com/user/itemisAG">itemis Youtube Kanal</a></li>
 						</ul>
 						<ul class="footer-links clearfix">
-	      			<li><a href="http://www.eclipse.org">Eclipse Home</a></li>
-							<li><a href="http://marketplace.eclipse.org/">Market Place</a></li>
-							<li><a href="http://live.eclipse.org/">Eclipse Live</a></li>
-							<li><a href="http://www.planeteclipse.org/">Eclipse Planet</a></li>
+							<li><a href="http://www.jboss.org/jbossas">JBoss Application Server 7</a></li>
+							<li><a href="http://glassfish.java.net/">Glassfish Application Server</a></li>
 						</ul>
 					</div>
 					<div class="span6">
@@ -1613,7 +1639,7 @@ private DirContext ldap;</pre>
 		registerLanguage('module|var|auto-inject|auto|inject|import|true|false', 'mwe2');
 		registerLanguage('IMPORT|EXTENSION|FILE|ENDFILE|DEFINE|ENDDEFINE|FOR|ENDFOR|FOREACH|ENDFOREACH|AS|SEPARATOR|ITERATOR|EXPAND|REM|ENDREM|PROTECT|ENDPROTECT|this|IF|ENDIF|ELSE|null', 'xpand');
 		registerLanguage('import|extension|this|create|cached|true|false|let|switch|case|if|then|else|context|WARNING|ERROR', 'check');
-		registerLanguage('application|context|package|development|strict|timeout|integration|productive|persistence|unit|jndi|cacheable|locale|default|smtp|security|domain|clustered|description|param|entity|options|option|Option|Text|Entity|transient|id|Int|Number|Email|Clob|Blob|auto|update|Timestamp|Boolean|Date|History|filterable|process|roles|ref|Type', 'jeelang');
+		registerLanguage('application|context|package|development|strict|timeout|integration|productive|persistence|unit|jndi|cacheable|locale|default|smtp|security|domain|clustered|description|param|entity|options|option|Option|Text|Entity|transient|id|Int|Number|Email|Clob|Blob|auto|update|Timestamp|Boolean|Date|History|filterable|process|roles|ref|Type|cloneable|editable|true|false', 'jeelang');
 	</script>
 </body>
 </html>

@@ -12,7 +12,9 @@ class Generator {
 		out.generateFiles(
 			new Index,
 			new Download,
-			new Documentation
+			new Documentation,
+			new Community,
+			new AboutUs
 		)
 		println("Done.")
 	}
