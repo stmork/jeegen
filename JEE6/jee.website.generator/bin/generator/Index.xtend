@@ -35,6 +35,11 @@ class Index  extends AbstractWebsite {
 	
 	<div id="intro">
 		<div class="container">
+			<h1>Was ist der JEE6 Generator?</h1>
+			<p>
+				Der JEE-6Generator ist in der Lage, eine komplette JEE6-Web-Applikation aus einem einfachen Modell zu generieren.<br/>
+				Das Framework wurde mit Xtext realisiert und ist als Eclipse-Plugin verfügbar.
+			</p>
 		</div>
 	</div>
 
@@ -87,46 +92,6 @@ class Index  extends AbstractWebsite {
 						tackle <b>errors and warnings</b> in your code instantaneously.
 						With custom <b>quick fixes</b> you can correct these with a single
 						keystroke.
-					</p>
-				</div>
-				<div class="span4">
-					<div class="thumb">
-						<a href="#"><img class="screenshot"
-							src="images/feature2_xbase2.png" alt="Image" /></a> <a
-							href="http://vimeo.com/26150627" data-rel="prettyPhoto"
-							title="Java Integration" class="zoom zoom_icon"></a>
-					</div>
-					<h4>Advanced Java Integration</h4>
-					<p>If your language targets the JVM, you'll love the Java
-						support Xtext provides. You get fully statically typed expressions
-						right embedded in your DSL and can refer to any Java type.</p>
-				</div>
-				<div class="span4">
-					<div class="thumb">
-						<a href="#"><img class="screenshot"
-							src="images/feature2_emf_integration.png" alt="Image" /></a> <a
-							href="http://vimeo.com/12824804" data-rel="prettyPhoto"
-							title="Integration with arbitrary Eclipse tools"
-							class="zoom zoom_icon"></a>
-					</div>
-					<h4>Integration with other Eclipse tools</h4>
-					<p>
-						Xtext provides a rich API to work with resources. Therefore
-						developing additional <b>graphical and structural views</b> is
-						comparably easy.
-					</p>
-				</div>
-				<div class="span4">
-					<div class="thumb">
-						<a href="#"><img class="screenshot"
-							src="images/feature2_advanced_workbench.png" alt="Image" /></a> <a
-							href="http://vimeo.com/12824746" data-rel="prettyPhoto"
-							title="More IDE Features" class="zoom zoom_icon"></a>
-					</div>
-					<h4>More IDE Features</h4>
-					<p>
-						Xtext's advanced Eclipse integration goes far beyond the editor. <b>You
-							will not feel any difference between your language and Java.</b>
 					</p>
 				</div>
 			</div>

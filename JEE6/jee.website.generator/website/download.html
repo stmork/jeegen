@@ -3,10 +3,10 @@
 <head>
 	<meta charset="utf-8">
 	<title>JEE6 Generator</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
 	<meta name="description"
 		content="The website of the JEE6 Generator Project">
-	<meta name="author" content="">
+	<meta name="author" content="Steffen A. Mork, Dominik Pieper">
 	<!--  styles -->
 	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>
@@ -15,6 +15,7 @@
 	
 	<!-- Le fav and touch icons -->
 	
+	<link rel="shortcut icon" href="images/favicon.png">
 	
 	<link href="css/bootstrap.css" rel="stylesheet" type='text/css'>
 	<link href="css/bootstrap-responsive.css" rel="stylesheet" type='text/css'>
@@ -66,6 +67,8 @@
 					<ul class="nav">
 						<li class="active"><a href="download.html">Download</a></li>
 						<li ><a href="documentation.html">Documentation</a></li>
+						<li ><a href="community.html">Community</a></li>
+						<li ><a href="aboutus.html">Über uns</a></li>
 						<li ><a href="http://xtext.org">Xtext</a></li>
 						<li ><a href="http://www.eclipse.org">Eclipse.org</a></li>
 					</ul>
@@ -80,11 +83,7 @@
 <div id="page">
 	<div class="inner">
 		<div class="container clearfix">
-			<h2>Download Options</h2>
-			<p>
-		      <strong>Check the <a href="releasenotes.html">release notes</a>.
-		      </strong>
-		    </p>
+			<h2>Downloads</h2>
 			<hr>
 			<!--table one starts-->
 			<div class="span1">&nbsp;</div>
@@ -98,27 +97,27 @@
 						</tfoot>
 						<tbody>
 					    <tr>
-							<td class="focus">Update Sites <span>Use Update Manager in Eclipse</span></td>
+							<td class="focus">Update Sites <span>Nutze den Eclipse Update Manager</span></td>
 					    </tr>
 					    <tr>
 					    	<td style="text-align: center;">
 					    	<a
 					    	rel="popover"
-					    	data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!"
+					    	data-content="This is an Eclipse Kepler update site URL, which you need to paste into the update manager within Eclipse!"
 					    	data-original-title="Right-click and 'Copy Link'"
 					    	href="http://jee6-generator.itemis.de/updates/kepler/"
 					    	class="has-popover btn btn-primary btn-large"
-					    	style="width: 70%;">Kepler</a></td>
+					    	style="width: 70%;">Release</a></td>
 					    </tr>
 					    <tr>
 							<td style="text-align: center;">
 							<a
 							  rel="popover"
-					    	data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!"
+					    	data-content="This is an Eclipse Kepler update site URL, which you need to paste into the update manager within Eclipse!"
 					    	data-original-title="Right-click and 'Copy Link'"
-							  href="http://jee6-generator.itemis.de/updates/juno/"
+							  href="http://jee6-generator.itemis.de/updates/snapshot/"
 					    	class="has-popover btn btn-primary btn-large"
-					    	style="width: 70%;">Juno</a></td>
+					    	style="width: 70%;">Snapshot</a></td>
 					    </tr>
 					</tbody>
 				    </table>
@@ -135,7 +134,7 @@
 						</tfoot>
 						<tbody>
 						    <tr>
-								<td class="focus">Full Eclipse <span>Just Download and Unzip</span></td>
+								<td class="focus">Full Eclipse <span>Einfach runterladen und entpacken</span></td>
 						    </tr>
 						    <tr>
 						    	<td style="text-align: center; white-space: nowrap;">
@@ -171,14 +170,14 @@
 		</div>
 		    <div class="container">
 						<div class="container">
-		<h2>Installation Instructions</h2>
+		<h2>Installation</h2>
 		<hr>
 		<div class="span1">&nbsp;</div>
 		  <div class="span9">
 		    <p>
-		      <strong>  The JEE6 Generator is implemented in Java, so you must have a
+		      <strong>Der JEE6 Generator ist in Java implementiert, deswegen muss zur Ausführung das
 		        <a href="http://www.oracle.com/technetwork/java/index.html">Java
-		        Runtime Environment</a> installed in order to proceed.
+		        Runtime Environment</a> installiert sein.
 		      </strong>
 		    </p>
 		    <p>
@@ -237,29 +236,24 @@
 				<div class="accordion" id="accordion2">
 				    <div class="accordion-group">
 				      <div class="accordion-heading">
-				    	<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#What_is_an_update_site_"">
-				    	  What is an update site?
+				    	<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#Was_ist_eine_Updatesite_"">
+				    	  Was ist eine Updatesite?
 				    	</a>
 				      </div>
-				      <div id="What_is_an_update_site_" class="accordion-body collapse">
+				      <div id="Was_ist_eine_Updatesite_" class="accordion-body collapse">
 				    	<div class="accordion-inner">
-				    	  Eclipse comes with a built-in update manager, that understands so called update sites.
-				    	  When in Eclipse open the <i>"Help"</i> menu and click on <i>"Install new Software..."</i>.
 				    	</div>
 				      </div>
 				    </div>
 				    <div class="accordion-group">
 				      <div class="accordion-heading">
-				    	<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#What_is_the_license_of_the_JEE6_Generator_"">
-				    	  What is the license of the JEE6 Generator?
+				    	<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#Was_ist_die_Lizenz_des_JEE6_Generators_"">
+				    	  Was ist die Lizenz des JEE6 Generators?
 				    	</a>
 				      </div>
-				      <div id="What_is_the_license_of_the_JEE6_Generator_" class="accordion-body collapse">
+				      <div id="Was_ist_die_Lizenz_des_JEE6_Generators_" class="accordion-body collapse">
 				    	<div class="accordion-inner">
-				    	  <p>The JEE6 Generator is freely available under the <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.</p>
-				    	  <p>
-				    	  	The license allows to use the JEE6 Generator for development and even for developing and selling commercial products based on the JEE6 Generator.
-				    	  </p>
+				    	  <p>Der JEE6 Generator ist frei verfügbar unter der <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.</p>
 				    	</div>
 				      </div>
 				    </div>
@@ -276,16 +270,12 @@
 					<div class="span6">
 						<h3 style="padding-top: 0px; margin-top: 0px;">Quick Links</h3>
 						<ul class="footer-links clearfix">
-							<li><a href="http://www.eclipse.org/legal/privacy.php">Privacy Policy</a></li>
-							<li><a href="http://www.eclipse.org/legal/termsofuse.php">Terms of Use</a></li>
-							<li><a href="http://www.eclipse.org/legal/copyright.php">Copyright Agent</a></li>
-							<li><a href="http://www.eclipse.org/legal/">Legal</a></li>
+							<li><a href="http://itemis.de">itemis AG</a></li>
+							<li><a href="https://www.youtube.com/user/itemisAG">itemis Youtube Kanal</a></li>
 						</ul>
 						<ul class="footer-links clearfix">
-	      			<li><a href="http://www.eclipse.org">Eclipse Home</a></li>
-							<li><a href="http://marketplace.eclipse.org/">Market Place</a></li>
-							<li><a href="http://live.eclipse.org/">Eclipse Live</a></li>
-							<li><a href="http://www.planeteclipse.org/">Eclipse Planet</a></li>
+							<li><a href="http://www.jboss.org/jbossas">JBoss Application Server 7</a></li>
+							<li><a href="http://glassfish.java.net/">Glassfish Application Server</a></li>
 						</ul>
 					</div>
 					<div class="span6">
