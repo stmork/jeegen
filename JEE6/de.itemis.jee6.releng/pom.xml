@@ -48,9 +48,10 @@
 			<plugin>
 				<groupId>de.itemis.signing</groupId>
 				<artifactId>itemis-jarsigner</artifactId>
-				<version>0.0.3</version>
+				<version>0.0.4</version>
 				<configuration>
 					<sshKey>/opt/hudson/home/id_yakindu_cc</sshKey>
+					<signerUrl>macbuilds.itemis.de</signerUrl>
 				</configuration>
 				<executions>
 					<execution>
