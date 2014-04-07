@@ -1,5 +1,7 @@
 package generator;
 
+import generator.AboutUs;
+import generator.Community;
 import generator.Documentation;
 import generator.Download;
 import generator.Index;
@@ -16,8 +18,10 @@ public class Generator {
     final File out = new File("website");
     Index _index = new Index();
     Download _download = new Download();
+    Community _community = new Community();
+    AboutUs _aboutUs = new AboutUs();
     Documentation _documentation = new Documentation();
-    Generator.generateFiles(out, _index, _download, _documentation);
+    Generator.generateFiles(out, _index, _download, _community, _aboutUs, _documentation);
     InputOutput.<String>println("Done.");
   }
   

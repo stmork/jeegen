@@ -131,11 +131,15 @@ section2:Text[Text]
 
 Das Textattribut wurde schon ausführlich erklärt. Es hat die Syntax:
 
-code[JEELANG][Text (id) <name> (transient);]
+code[JEELANG][
+	Text (id) <Name> (transient);
+]
 
 In einer XHTML-Seite wird aus der Modellzeile
 
-code[JEELANG][Text subject;]
+code[JEELANG][
+	Text subject;
+]
 
 im Formular folgendes Schnipsel generiert:
 
@@ -156,11 +160,15 @@ Integer-Datentypen werden durch das Schlüsselwort code[JEELANG][Int] gefolgt vo
 wird dabei automatisch ein entsprechender Value Converter generiert, der den Inhalt des Eingabefeldes automatisch in einen Integer
 umwandelt. Die Syntax lautet:
 
-code[JEELANG][Int <name> (transient);]
+code[JEELANG][
+	Int <Name> (transient);
+]
 
 Aus der Modellzeile
 
-code[JEELANG][Int integerEntry;]
+code[JEELANG][
+	Int integerEntry;
+]
 
 wird folgendes Schnipsel im XHTML generiert:
 code[XML][
@@ -180,11 +188,15 @@ Number-Datentypen werden durch das Schlüsselwort code[JEELANG][Number] gefolgt 
 wird dafür ein double generiert Im XHTML-Formular wird dabei automatisch ein entsprechender Value Converter generiert, der den
 Inhalt des Eingabefeldes automatisch in eine Kommazahl umwandelt. Die Syntax lautet:
 
-code[JEELANG][Number <name> (transient);]
+code[JEELANG][
+	Number <Name> (transient);
+]
 
 Aus der Modellzeile
 
-code[JEELANG][Number numberEntry;]
+code[JEELANG][
+	Number numberEntry;
+]
 
 wird folgendes Schnipsel im XHTML generiert:
 code[XML][
@@ -202,11 +214,15 @@ section2:EMail[E-Mail]
 
 Ein E-Mail-Datentyp kann als ID geführt werden und ist im Prinzip ein Textfeld mit dem Unterschied, dass ein Validator die Eingabe auf das Format einer gültigen EMail-Adresse prüft. Die Syntax lautet:
 
-code[JEELANG][Email (id) <name> (transient);]
+code[JEELANG][
+	Email (id) <Name> (transient);
+]
 
 In einer XHTML-Seite wird aus der Modellzeile
 
-code[JEELANG][Email mail;]
+code[JEELANG][
+	Email mail;
+]
 
 im Formular folgendes Schnipsel generiert:
 
@@ -231,11 +247,15 @@ Alle Textfelder werden in der Datenbank als Varchar angelegt, welche eine Länge
 mehr braucht, muss ein sog. Character Large Object benutzt werden. Im XHTML-Formular wird daraus eine Textarea generiert. Java-seitig
 ist dieser Datentyp wie Text und E-Mail ein java.lang.String. Die Syntax lautet:
 
-code[JEELANG][Clob <name> (transient);]
+code[JEELANG][
+	Clob <Name> (transient);
+]
 
 In einer XHTML-Seite wird aus der Modellzeile
 
-code[JEELANG][Clob clobEntry;]
+code[JEELANG][
+	Clob clobEntry;
+]
 
 im Formular folgendes Schnipsel generiert:
 
@@ -256,7 +276,9 @@ Will man Binärdaten in der Datenbank speichern, muss man den Datentyp code[JEEL
 code[JEELANG][Blob] benutzt wird. Java-seitig wird daraus ein byte\[\]-Array. In einer XHTML-Maske erscheinen Attribute dieses
 Typs nicht. Die Syntax lautet:
 
-code[JEELANG][Blob <name> (transient);]
+code[JEELANG][
+	Blob <Name> (transient);
+]
 
 e[Hinweis]
 Aus Gründen der Performance sollten nicht zu große Binärdaten in einer Datenbank gespeichert werden. Große Datensätze bringt man
@@ -288,11 +310,15 @@ der Entity Bean das Erzeugungsdatum in dieses Attribut gespeichert. Benutzt man 
 code[JEELANG][update], wird bei jeder Änderung der Entity Bean in der Datenbank dieses Attribut auf den aktuellen Zeitstempel gebracht. Die Syntax
 lautet:
 
-code[JEELANG][Timestamp (auto) (update) <name> (transient);]
+code[JEELANG][
+	Timestamp (auto) (update) <Name> (transient);
+]
 
 Für folgende Modellzeile
 
-code[JEELANG][Timestamp timestamp1;]
+code[JEELANG][
+	Timestamp timestamp1;
+]
 
 wird in der XHTML folgendes Schnipsel generiert:
 code[XML][
@@ -337,13 +363,13 @@ codeRef[java.util.Date] verwendet. Über die Verwendung von Datumsangaben über 
 berichtet. Die Syntax lautet:
 
 code[JEELANG][
-Date <name> (transient);
+	Date <Name> (transient);
 ]
 
 Eine automatische Aktualisierung bei Anlegen und Ändern dieses Attributtyps wie beim Timestamp existiert bei diesem Attributtypen nicht! Aus der Modellzeile
 
 code[JEELANG][
-Date dateElement;
+	Date dateElement;
 ]
 wird folgendes XHTML-Schnipsel generiert:
 code[XML][
@@ -364,7 +390,7 @@ section2:Entity[Entity]
 Mit diesem Attributtyp kann eine Relation auf eine andere Entity Bean modelliert werden. Die Syntax lautet:
 
 code[JEELANG][
-Entity <entity-type> (\[\]) <name>;
+	Entity <Typ> (\[\]) <Name>;
 ]
 
 Es wird zwischen einer 1:1- und einer 1:n-Relation unterschieden, indem dem Entity Typen das Symbol \[\] beigestellt wird.
@@ -378,14 +404,14 @@ Soll in einer Entity Bean eine 1:1-Relation in einer Combobox ausgewählt werden
 lauten. Die Syntax ist ähnlich dem code[JEELANG][Entity]-Attributtyp mit dem Unterschied, dass keine 1:n-Relation benutzt werden kann:
 
 code[JEELANG][
-Option <entity-type> <name>;
+	Option <Typ> <Name>;
 ]
 
 Die als Option referenzierte Entity Bean kann sowohl eine Enumeration sein, als auch als editierbar gekennzeichnet sein. Im Modell
 wird aus der Zeile
 
 code[JEELANG][
-Option UserInfo      owner;
+	Option UserInfo      owner;
 ]
 
 Der XHTML-Codeschnipsel:
@@ -460,13 +486,13 @@ Den Entity Beans können durch weitere Schlüsselwörter noch zusätzliche Eigen
 sich die Auflistung der Syntax:
 
 code[JEELANG][
-entity <name> (filterable) (cloneable) { <attributes>+ } (persistence unit <persistence-unit>) ;
+	entity <Name> (filterable) (cloneable) { <Attributes>+ } (persistence unit <Persistence-Unit>) ;
 ]
 
 Wie die Attribute attributes aussehen müssen wurde ja schon beschrieben. Werden für Auswahllisten Optionen verwendet, sieht die Syntax leicht erweitert aus. Hier lautet die Syntax:
 
 code[JEELANG][
-options <name> (filterable) (cloneable) (editable { <attributes>+ }) | ( { <resource-key>+ }) (persistence unit <persistence-unit>) ;
+	options <Name> (filterable) (cloneable) (editable { <Attributes>+ }) | ( { <Resource-Key>+ }) (persistence unit <Persistence-Unit>) ;
 ]
 
 Hier werden im Wesentlichen zwei Varianten unterschieden:

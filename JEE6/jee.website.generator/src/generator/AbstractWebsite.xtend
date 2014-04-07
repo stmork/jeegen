@@ -42,7 +42,7 @@ abstract class AbstractWebsite implements Resource {
 		<head>
 			<meta charset="utf-8">
 			<title>«websiteTitle»</title>
-			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
 			<meta name="description"
 				content="«websiteDescription»">
 			<meta name="author" content="">
@@ -59,7 +59,7 @@ abstract class AbstractWebsite implements Resource {
 	'''
 	
 	def websiteDescription() { 
-		'The website of the JEE6 Generator Project'
+		'Die Website des JEE6 Generator Projects'
 	}
 
 	def websiteTitle() {
@@ -112,6 +112,8 @@ abstract class AbstractWebsite implements Resource {
 		newArrayList(
 			'download.html' -> 'Download',
 			'documentation.html' -> 'Documentation',
+			'community.html' -> 'Community',
+			'aboutus.html' -> 'Über uns',
 			'http://xtext.org' -> 'Xtext',
 			'http://www.eclipse.org' -> 'Eclipse.org'
 		)
@@ -149,16 +151,12 @@ abstract class AbstractWebsite implements Resource {
 						<div class="span6">
 							<h3 style="padding-top: 0px; margin-top: 0px;">Quick Links</h3>
 							<ul class="footer-links clearfix">
-								<li><a href="http://www.eclipse.org/legal/privacy.php">Privacy Policy</a></li>
-								<li><a href="http://www.eclipse.org/legal/termsofuse.php">Terms of Use</a></li>
-								<li><a href="http://www.eclipse.org/legal/copyright.php">Copyright Agent</a></li>
-								<li><a href="http://www.eclipse.org/legal/">Legal</a></li>
+								<li><a href="http://itemis.de/">itemis AG</a></li>
+								<li><a href="https://www.youtube.com/user/itemisAG">itemis Youtube Kanal</a></li>
 							</ul>
 							<ul class="footer-links clearfix">
-		      			<li><a href="http://www.eclipse.org">Eclipse Home</a></li>
-								<li><a href="http://marketplace.eclipse.org/">Market Place</a></li>
-								<li><a href="http://live.eclipse.org/">Eclipse Live</a></li>
-								<li><a href="http://www.planeteclipse.org/">Eclipse Planet</a></li>
+		      					<li><a href="http://www.jboss.org/jbossas">JBoss Application Server 7</a></li>
+								<li><a href="http://glassfish.java.net/">Glassfish Application Server</a></li>
 							</ul>
 						</div>
 						<div class="span6">
@@ -210,7 +208,7 @@ abstract class AbstractWebsite implements Resource {
 		
 		<!-- Le fav and touch icons -->
 		
-«««		<link rel="shortcut icon" href="images/favicon.png">
+		<link rel="shortcut icon" href="images/favicon.png">
 		
 		<link href="css/bootstrap.css" rel="stylesheet" type='text/css'>
 		<link href="css/bootstrap-responsive.css" rel="stylesheet" type='text/css'>

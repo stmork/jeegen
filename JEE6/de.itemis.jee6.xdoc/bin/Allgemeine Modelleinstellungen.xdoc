@@ -2,7 +2,9 @@ chapter:AllgemeineModelleinstellungen[Allgemeine Modelleinstellungen]
 
 In der Modelldatei wird als erstes Kommando die Applikation beschrieben. Die Syntax lautet:
 
-code[JEELANG][application] <Name> code[JEELANG][context] <Context-path> code[JEELANG][package] <package-id> (code[JEELANG][timeout] <timeout-minutes>) (<project-state>) (code[JEELANG][strict]);
+code[JEELANG][
+	application <Name> context <Context-Path> package <Package-Id> (timeout <Timeout-Minutes>) (<Project-State>) (strict);
+]
 
 Der Name ist ein String, der im Klartext die Applikation beschreibt. Der Context-Path ist ein String, der den Applikationskontext
 festlegt. Dieser muss zwingend mit einem Schrägstrich "/" beginnen. Es ist der erste Teil der URI.
@@ -75,7 +77,9 @@ section2:PersistenzKontexte[Persistenz Kontexte]
 Der JEE6-Generator unterstützt mehrere Persistenz Kontexte in einer Applikation. Das setzt voraus, dass in diesem Falle die
 Datasources als XA-Datasource im Application Server konfiguriert sind. Die Syntax lautet:
 
-code[JEELANG][persistence] code[JEELANG][unit] <unit-name> code[JEELANG][jndi] <jndi-name> (code[JEELANG][cacheable]) (MySQL|DB2|Oracle);
+code[JEELANG][
+	persistence unit <Unit-Name> jndi <Jndi-Name> (cacheable) (MySQL|DB2|Oracle);
+]
 
 Der unit-name wird in der persistence.xml als Referenz innerhalb der Web Applikation verwendet. Der JNDI-Name definiert, wie die
 Datasource im Application Server wiederzufinden ist. Eine eingehende Beschreibung, wie der JDNI-Name lauten sollte, findet sich auf
@@ -103,7 +107,9 @@ Einträge in die Resource Bundles nachgetragen, sofern sie noch nicht enthalten 
 verändert. An dieser Stelle wird beschrieben, wie in der Modelldatei konfiguriert wird, welche Sprachen unterstützt werden sollen.
 Die Syntax lautet:
 
-code[JEELANG][locale <language> (<country>) (default);]
+code[JEELANG][
+	locale <Language> (<Country>) (default);
+]
 
 Die e[language] ist der ISO-Code der zu verwendenden Sprache und hat typischerweise kleine Buchstaben. Der optionale Wert e[country]
 bestimmt die ISO-Länderkennung typischerweise in Großbuchstaben. Dadurch werden landestypische Sprachvarianten unterschieden.
@@ -117,7 +123,9 @@ section2:EMail[E-Mail]
 Will die Web Applikation E-Mail verschicken, muss einerseits der Mail-Versand im Application Server konfiguriert sein, und
 andererseits hier im Model eingetragen werden, unter welchem JDNI-Namen der Mailservice erreichbar ist. Dazu dient die einfache Syntax:
 
-code[JEELANG][smtp] <jndi-name>;
+code[JEELANG][
+	smtp <Jndi-Name>;
+]
 
 Mehr Information zum Thema Mail im JEE-Umfeld befinden sich auf diesen Seiten. Die auf diesen Seiten beschriebenen Einträge in den
 genannten XML-Deskriptoren werden vom JEE6-Generator automatisch erzeugt. Die Resource muss manuell in dem DAO eingetragen werden,
@@ -137,7 +145,9 @@ Security Domain über einen JNDI-Namen referenziert werden. Dieser muss dementsp
 konfiguriert sein und benutzt den JAAS-Standard. Auf diesen Seiten befinden sich Informationen über die Konfiguration von JAAS.
 Die Syntax lautet:
 
-code[JEELANG][security domain] <jndi-name> code[JEELANG][(clustered);]
+code[JEELANG][
+	security domain <Jndi-Name> (clustered);
+]
 
 Das optionale Schlüsselwort code[JEELANG][clustered] bestimt, ob die Security Domain in einer geclusterten Umgebung funktionsfähig
 sein muss.
@@ -146,7 +156,9 @@ section2:WebParameter[Web Parameter]
 
 Mit Web-Parametern kann man der Web Applikation in der web.xml Parameter übergeben. Die Syntax lautet:
 
-code[JEELANG][param] <key> = <value> (code[JEELANG][description] <description>);
+code[JEELANG][
+	param <Key> = <Value> (description <Description>);
+]
 
 Die Einträge können beliebig häufig im Modell eingetragen werden. Aus folgender Modellzeile:
 code[JEELANG][

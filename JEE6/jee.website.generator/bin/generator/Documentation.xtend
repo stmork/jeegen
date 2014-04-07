@@ -21,15 +21,15 @@ import xdocgen.DocumentLoad
 import static extension com.google.common.io.Files.*
 
 class Documentation extends AbstractXdocBaseWebsite {
-
+	
 	new() {
 		doc = docLoader.loadDocument(xdocDocumentRootFolder)
 	}
-
+	
 	override getStandaloneSetup() {
 		new DocumentationSetup
 	}
-
+	
 	def getXdocDocumentRootFolder() {
 		'../de.itemis.jee6.xdoc/xdoc'
 	}

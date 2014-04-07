@@ -20,10 +20,7 @@ class Community extends AbstractWebsite {
 					''','''
 						mailto:jee6-generator@itemis.de
 					''','''
-						<p>
-						Du hast einen Bug gefunden oder einen Verbesserungsvorschlag?
-						Sende uns ein Mail an <strong>jee6-generator@itemis.de</strong>
-						</p>
+						 Du hast einen Bug gefunden oder einen Verbesserungsvorschlag? Sende uns ein Mail an <strong>jee6-generator@itemis.de</strong>
 					''')»
 			</div>
 		</div>

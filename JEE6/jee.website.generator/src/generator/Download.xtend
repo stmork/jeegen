@@ -29,11 +29,7 @@ class Download extends AbstractWebsite {
 		<div id="page">
 			<div class="inner">
 				<div class="container clearfix">
-					<h2>Download Options</h2>
-					<p>
-				      <strong>Check the <a href="releasenotes.html">release notes</a>.
-				      </strong>
-				    </p>
+					<h2>Downloads</h2>
 					<hr>
 					<!--table one starts-->
 					<div class="span1">&nbsp;</div>
@@ -47,7 +43,7 @@ class Download extends AbstractWebsite {
 								</tfoot>
 								<tbody>
 							    <tr>
-									<td class="focus">Update Sites <span>Use Update Manager in Eclipse</span></td>
+									<td class="focus">Update Sites <span>Nutze den Eclipse Update Manager</span></td>
 							    </tr>
 							    <tr>
 							    	<td style="text-align: center;">
@@ -65,20 +61,10 @@ class Download extends AbstractWebsite {
 									  rel="popover"
 							    	data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!"
 							    	data-original-title="Right-click and 'Copy Link'"
-									  href="http://jee6-generator.itemis.de/updates/juno/"
+									  href="http://jee6-generator.itemis.de/updates/snapshot/"
 							    	class="has-popover btn btn-primary btn-large"
-							    	style="width: 70%;">Juno</a></td>
+							    	style="width: 70%;">Snapshot</a></td>
 							    </tr>
-«««							    <tr>
-«««									<td style="text-align: center;">
-«««									<a
-«««										rel="popover"
-«««							    	data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!"
-«««							    	data-original-title="Right-click and 'Copy Link'"
-«««										href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest/"
-«««							    	class="has-popover btn btn-primary btn-large"
-«««							    	style="width: 70%;">Bleeding Edge!</a></td>
-«««							    </tr>
 							</tbody>
 						    </table>
 						</div>
@@ -94,7 +80,7 @@ class Download extends AbstractWebsite {
 								</tfoot>
 								<tbody>
 								    <tr>
-										<td class="focus">Full Eclipse <span>Just Download and Unzip</span></td>
+										<td class="focus">Full Eclipse <span>Einfach runterladen und entpacken</span></td>
 								    </tr>
 								    <tr>
 								    	<td style="text-align: center; white-space: nowrap;">
@@ -194,15 +180,12 @@ class Download extends AbstractWebsite {
 					<div class="span1">&nbsp;</div>
 					<div class="span9" id="faq">
 						<div class="accordion" id="accordion2">
-						    «faqEntry('What is an update site?','''
-								Eclipse comes with a built-in update manager, that understands so called update sites.
-								When in Eclipse open the <i>"Help"</i> menu and click on <i>"Install new Software..."</i>.
+						    «faqEntry('Was ist eine Updatesite?','''
+								Eclipse hat einen eingebauten Updatemanager, dieser arbeitet mit so genannten Updatesites als Quelle.<br />
+								In Eclipse öffne das <i>"Help"</i> Menü und klicke auf <i>"Install new Software..."</i>.
 						    ''')»
-						    «faqEntry('What is the license of the JEE6 Generator?','''
-								<p>The JEE6 Generator is freely available under the <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.</p>
-								<p>
-									The license allows to use the JEE6 Generator for development and even for developing and selling commercial products based on the JEE6 Generator.
-								</p>
+						    «faqEntry('Was ist die Lizenz des JEE6 Generators?','''
+								<p>Der JEE6 Generator frei verfügbar unter der <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.</p>
 						    ''')»
 						</div>
 			  		</div>

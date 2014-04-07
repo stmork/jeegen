@@ -1,11 +1,11 @@
 package generator
 
-class Index  extends AbstractWebsite {
-	
+class Index extends AbstractWebsite {
+
 	override path() {
 		"index.html"
 	}
-	
+
 	override contents() '''
 	<!--Container-->
 	<br/><br/><br/>
@@ -36,8 +36,9 @@ class Index  extends AbstractWebsite {
 	<div id="intro">
 		<div class="container">
 			<h1>Was ist der JEE6 Generator?</h1>
+
 			<p>
-				Der JEE-6Generator ist in der Lage, eine komplette JEE6-Web-Applikation aus einem einfachen Modell zu generieren.<br/>
+				Der JEE-6Generator ist in der Lage, eine komplette JEE6-Web-Applikation aus einem einfachen Modell zu generieren.<br />
 				Das Framework wurde mit Xtext realisiert und ist als Eclipse-Plugin verfügbar.
 			</p>
 		</div>
@@ -98,5 +99,5 @@ class Index  extends AbstractWebsite {
 		</div>
 	</div>
 	'''
-	
+
 }

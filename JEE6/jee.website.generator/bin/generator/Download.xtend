@@ -49,32 +49,22 @@ class Download extends AbstractWebsite {
 							    	<td style="text-align: center;">
 							    	<a
 							    	rel="popover"
-							    	data-content="This is an Eclipse Kepler update site URL, which you need to paste into the update manager within Eclipse!"
+							    	data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!"
 							    	data-original-title="Right-click and 'Copy Link'"
 							    	href="http://jee6-generator.itemis.de/updates/kepler/"
 							    	class="has-popover btn btn-primary btn-large"
-							    	style="width: 70%;">Release</a></td>
+							    	style="width: 70%;">Kepler</a></td>
 							    </tr>
 							    <tr>
 									<td style="text-align: center;">
 									<a
 									  rel="popover"
-							    	data-content="This is an Eclipse Kepler update site URL, which you need to paste into the update manager within Eclipse!"
+							    	data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!"
 							    	data-original-title="Right-click and 'Copy Link'"
 									  href="http://jee6-generator.itemis.de/updates/snapshot/"
 							    	class="has-popover btn btn-primary btn-large"
 							    	style="width: 70%;">Snapshot</a></td>
 							    </tr>
-«««							    <tr>
-«««									<td style="text-align: center;">
-«««									<a
-«««										rel="popover"
-«««							    	data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!"
-«««							    	data-original-title="Right-click and 'Copy Link'"
-«««										href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest/"
-«««							    	class="has-popover btn btn-primary btn-large"
-«««							    	style="width: 70%;">Bleeding Edge!</a></td>
-«««							    </tr>
 							</tbody>
 						    </table>
 						</div>
@@ -126,14 +116,14 @@ class Download extends AbstractWebsite {
 				</div>
 				    <div class="container">
 								<div class="container">
-				<h2>Installation</h2>
+				<h2>Installation Instructions</h2>
 				<hr>
 				<div class="span1">&nbsp;</div>
 				  <div class="span9">
 				    <p>
-				      <strong>Der JEE6 Generator ist in Java implementiert, deswegen muss zur Ausführung das
+				      <strong>  The JEE6 Generator is implemented in Java, so you must have a
 				        <a href="http://www.oracle.com/technetwork/java/index.html">Java
-				        Runtime Environment</a> installiert sein.
+				        Runtime Environment</a> installed in order to proceed.
 				      </strong>
 				    </p>
 				    <p>
@@ -191,11 +181,11 @@ class Download extends AbstractWebsite {
 					<div class="span9" id="faq">
 						<div class="accordion" id="accordion2">
 						    «faqEntry('Was ist eine Updatesite?','''
-«««								Eclipse comes with a built-in update manager, that understands so called update sites.
-«««								When in Eclipse open the <i>"Help"</i> menu and click on <i>"Install new Software..."</i>.
+								Eclipse hat einen eingebauten Updatemanager, dieser arbeitet mit so genannten Updatesites als Quelle.<br />
+								In Eclipse öffne das <i>"Help"</i> Menü und klicke auf <i>"Install new Software..."</i>.
 						    ''')»
 						    «faqEntry('Was ist die Lizenz des JEE6 Generators?','''
-								<p>Der JEE6 Generator ist frei verfügbar unter der <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.</p>
+								<p>Der JEE6 Generator frei verfügbar unter der <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.</p>
 						    ''')»
 						</div>
 			  		</div>

@@ -1,14 +1,12 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Generator
-Bundle-SymbolicName: jee6.website.generator
+Bundle-SymbolicName: de.itemis.jee6.website
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.xtend.lib;bundle-version="2.5.0",
  com.google.guava;bundle-version="[10.0.1,16.0.0)",
  org.eclipse.xtext.xbase.lib,
- org.eclipse.xtext.xdoc;bundle-version="0.1.0",
  org.eclipse.xtend.core;bundle-version="2.5.0";visibility:=reexport,
- de.itemis.jee6.xdoc;bundle-version="1.1.7"
-Export-Package: generator,
- xdocgen
+ de.itemis.jee6.xdoc;bundle-version="1.1.7",
+ org.eclipse.xtext.xdoc;bundle-version="0.1.0"
