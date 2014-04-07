@@ -1,6 +1,6 @@
 document[JEE6 Generator]
 
-authors[Steffen Mork]
+authors[Steffen A. Mork, Dominik Pieper]
 
 codelanguage-def[Java][
   abstract,continue,for,new,switch,assert,default,goto,package,synchronized,
@@ -95,7 +95,7 @@ codelanguage-def[JEELANG][
 	persistence, unit, jndi, cacheable, locale, default, smtp, security, domain, clustered,
 	description, param, entity, options, option, Option, Text, Entity, transient, id, Int,
 	Number, Email, Clob, Blob, auto, update, Timestamp, Boolean, Date, History, filterable,
-	process, roles, ref, Type
+	process, roles, ref, Type, cloneable, editable, true, false
 ]
 
 codelanguage-def[XML][]

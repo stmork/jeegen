@@ -4,7 +4,6 @@ import java.io.File
 import org.eclipse.xtend.core.XtendStandaloneSetup
 
 class Generator {
-	
 	def static void main(String[] args) {
 		System::setProperty("java.awt.headless", "true")
 		XtendStandaloneSetup::doSetup
@@ -12,9 +11,9 @@ class Generator {
 		out.generateFiles(
 			new Index,
 			new Download,
-			new Documentation,
 			new Community,
-			new AboutUs
+			new AboutUs,
+			new Documentation
 		)
 		println("Done.")
 	}

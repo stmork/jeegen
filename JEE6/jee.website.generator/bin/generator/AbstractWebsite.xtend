@@ -45,7 +45,7 @@ abstract class AbstractWebsite implements Resource {
 			<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
 			<meta name="description"
 				content="«websiteDescription»">
-			<meta name="author" content="Steffen A. Mork, Dominik Pieper">
+			<meta name="author" content="">
 			«stylesheets»
 			«javaScriptDocumentStart»
 		</head>
@@ -59,7 +59,7 @@ abstract class AbstractWebsite implements Resource {
 	'''
 	
 	def websiteDescription() { 
-		'The website of the JEE6 Generator Project'
+		'Die Website des JEE6 Generator Projects'
 	}
 
 	def websiteTitle() {
@@ -151,15 +151,11 @@ abstract class AbstractWebsite implements Resource {
 						<div class="span6">
 							<h3 style="padding-top: 0px; margin-top: 0px;">Quick Links</h3>
 							<ul class="footer-links clearfix">
-								<li><a href="http://itemis.de">itemis AG</a></li>
+								<li><a href="http://itemis.de/">itemis AG</a></li>
 								<li><a href="https://www.youtube.com/user/itemisAG">itemis Youtube Kanal</a></li>
 							</ul>
 							<ul class="footer-links clearfix">
-«««		      					<li><a href="http://www.eclipse.org">Eclipse Home</a></li>
-«««								<li><a href="http://marketplace.eclipse.org/">Market Place</a></li>
-«««								<li><a href="http://live.eclipse.org/">Eclipse Live</a></li>
-«««								<li><a href="http://www.planeteclipse.org/">Eclipse Planet</a></li>
-								<li><a href="http://www.jboss.org/jbossas">JBoss Application Server 7</a></li>
+		      					<li><a href="http://www.jboss.org/jbossas">JBoss Application Server 7</a></li>
 								<li><a href="http://glassfish.java.net/">Glassfish Application Server</a></li>
 							</ul>
 						</div>

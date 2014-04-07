@@ -4,7 +4,7 @@ Neben der allgemeinen Beschreibung der Web Applikation und die Definition der En
 Block die Definition der Prozesse. Über Prozesse kann definiert werden, für welche Entity Beans Dialogmasken generiert werden
 sollen und bei Bedarf, welche Rollen darauf Zugriff haben darf. Die Syntax lautet:
 
-code[JEELANG][process] <process-name> (code[JEELANG][roles] <roles>+) { <properties>* <entities>+ } ;
+code[JEELANG][process <Process-Name> (roles <Roles>+) { <Properties>* <Entities>+ } ;]
 
 Der Name eines Prozesses taucht in der URI auf. Die URL ist dann wie folgt aufgebaut:
 http://<host>/<context>/<process-name>/<entity>.xhtml. Mit dem Schlüsselwort roles kann festgelegt werden, welche Rollen darauf
@@ -200,7 +200,7 @@ section:TextProperties[Text-Properties]
 Mit Text-Properties kann man Texte wie z.B. URLs in einem Application Server konfigurieren und per JNDI referenzieren. Die Syntax im
 Modell lautet:
 
-code[JEELANG][Text (default] <value>) <jndi> (code[JEELANG][ref] <original-jndi>);
+code[JEELANG][Text (default <Value>) <Jndi> (ref <Original-Jndi>);]
 
 Aus dem Beispiel oben wird im DAO folgender Eintrag generiert:
 
@@ -214,7 +214,9 @@ section:BooleanProperties[Boolean-Properties]
 Mit Boolean-Properties kann man Texte wie z.B. URLs in einem Application Server konfigurieren und per JNDI referenzieren. Die Syntax
 im Modell lautet:
 
-code[JEELANG][Boolean (default] <true|false) <jndi> (code[JEELANG][ref] <original-jndi>);
+code[JEELANG][
+	Boolean (default <true|false) <Jndi> (ref <Original-Jndi>);
+]
 
 Aus dem Beispiel oben wird im DAO folgender Eintrag generiert:
 
@@ -231,7 +233,9 @@ section:FreieResourceAdapter[Freie Resource Adapter]
 Es ist nicht nur möglich, einfache Datentypen über JNDI zu referenzieren. Bei der Syntax muss voll qualifiziert die Klasse angegeben
 werden:
 
-code[JEELANG][Type] <class-name> <jndi> (code[JEELANG][ref] <original-jndi);
+code[JEELANG][
+	Type <class-name> <Jndi> (ref <Original-Jndi);
+]
 
 Aus dem Beispiel oben wird im DAO folgender Eintrag generiert:
 code[Java][

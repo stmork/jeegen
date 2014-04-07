@@ -70,7 +70,7 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("</title>");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    _builder.append("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">");
+    _builder.append("<meta name=\"viewport\" content=\"width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;\" />");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("<meta name=\"description\"");
@@ -119,7 +119,7 @@ public abstract class AbstractWebsite implements Resource {
   }
   
   public String websiteDescription() {
-    return "The website of the JEE6 Generator Project";
+    return "Die Website des JEE6 Generator Projects";
   }
   
   public String websiteTitle() {
@@ -235,9 +235,11 @@ public abstract class AbstractWebsite implements Resource {
   public Iterable<Pair<String,String>> topLevelMenu() {
     Pair<String,String> _mappedTo = Pair.<String, String>of("download.html", "Download");
     Pair<String,String> _mappedTo_1 = Pair.<String, String>of("documentation.html", "Documentation");
-    Pair<String,String> _mappedTo_2 = Pair.<String, String>of("http://xtext.org", "Xtext");
-    Pair<String,String> _mappedTo_3 = Pair.<String, String>of("http://www.eclipse.org", "Eclipse.org");
-    return CollectionLiterals.<Pair<String,String>>newArrayList(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3);
+    Pair<String,String> _mappedTo_2 = Pair.<String, String>of("community.html", "Community");
+    Pair<String,String> _mappedTo_3 = Pair.<String, String>of("aboutus.html", "Über uns");
+    Pair<String,String> _mappedTo_4 = Pair.<String, String>of("http://xtext.org", "Xtext");
+    Pair<String,String> _mappedTo_5 = Pair.<String, String>of("http://www.eclipse.org", "Eclipse.org");
+    return CollectionLiterals.<Pair<String,String>>newArrayList(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4, _mappedTo_5);
   }
   
   public CharSequence navBar() {
@@ -339,16 +341,10 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("<ul class=\"footer-links clearfix\">");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t");
-    _builder.append("<li><a href=\"http://www.eclipse.org/legal/privacy.php\">Privacy Policy</a></li>");
+    _builder.append("<li><a href=\"http://itemis.de/\">itemis AG</a></li>");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t");
-    _builder.append("<li><a href=\"http://www.eclipse.org/legal/termsofuse.php\">Terms of Use</a></li>");
-    _builder.newLine();
-    _builder.append("\t\t\t\t\t\t");
-    _builder.append("<li><a href=\"http://www.eclipse.org/legal/copyright.php\">Copyright Agent</a></li>");
-    _builder.newLine();
-    _builder.append("\t\t\t\t\t\t");
-    _builder.append("<li><a href=\"http://www.eclipse.org/legal/\">Legal</a></li>");
+    _builder.append("<li><a href=\"https://www.youtube.com/user/itemisAG\">itemis Youtube Kanal</a></li>");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
     _builder.append("</ul>");
@@ -356,17 +352,11 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("\t\t\t\t\t");
     _builder.append("<ul class=\"footer-links clearfix\">");
     _builder.newLine();
-    _builder.append("      \t\t\t");
-    _builder.append("<li><a href=\"http://www.eclipse.org\">Eclipse Home</a></li>");
+    _builder.append("      \t\t\t\t\t");
+    _builder.append("<li><a href=\"http://www.jboss.org/jbossas\">JBoss Application Server 7</a></li>");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t");
-    _builder.append("<li><a href=\"http://marketplace.eclipse.org/\">Market Place</a></li>");
-    _builder.newLine();
-    _builder.append("\t\t\t\t\t\t");
-    _builder.append("<li><a href=\"http://live.eclipse.org/\">Eclipse Live</a></li>");
-    _builder.newLine();
-    _builder.append("\t\t\t\t\t\t");
-    _builder.append("<li><a href=\"http://www.planeteclipse.org/\">Eclipse Planet</a></li>");
+    _builder.append("<li><a href=\"http://glassfish.java.net/\">Glassfish Application Server</a></li>");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
     _builder.append("</ul>");
@@ -466,6 +456,8 @@ public abstract class AbstractWebsite implements Resource {
     _builder.newLine();
     _builder.append("<!-- Le fav and touch icons -->");
     _builder.newLine();
+    _builder.newLine();
+    _builder.append("<link rel=\"shortcut icon\" href=\"images/favicon.png\">");
     _builder.newLine();
     _builder.newLine();
     _builder.append("<link href=\"css/bootstrap.css\" rel=\"stylesheet\" type=\'text/css\'>");
