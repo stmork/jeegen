@@ -51,6 +51,7 @@
 				<version>0.0.5-SNAPSHOT</version>
 				<configuration>
 					<sshKey>/opt/hudson/home/id_yakindu_cc</sshKey>
+					<signerUrl>signing@macbuilds.itemis.de</signerUrl>
 				</configuration>
 				<executions>
 					<execution>
