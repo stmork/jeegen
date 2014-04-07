@@ -2,8 +2,6 @@
 	<property file="${user.home}/.jee6.properties" />
 	<property file="${basedir}/build.properties" />
 	<property file="${basedir}/environment.properties" />
-	<property name="ant.build.javac.source" value="1.7" />
-	<property name="ant.build.javac.target" value="1.7" />
 
 	<property name="bin-path" value="./bin" />
 	<property name="lib-path" value="./lib" />
