@@ -1,0 +1,372 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<title>Formularkontrolle</title>
+
+<link href="book.css" rel="stylesheet" type="text/css">
+<link href="code.css" rel="stylesheet" type="text/css">
+<link rel="home" href="documentation.html" title="">
+</head>
+<body>
+<a name="Formularkontrolle"></a>
+<h1>Formularkontrolle</h1>
+<p>
+Neben der allgemeinen Beschreibung der Web Applikation und die Definition der Entity Beans im Modell gibt es als weiteren großen
+Block die Definition der Prozesse. Über Prozesse kann definiert werden, für welche Entity Beans Dialogmasken generiert werden
+sollen und bei Bedarf, welche Rollen darauf Zugriff haben darf. Die Syntax lautet:
+</p>
+<p>
+<span class="inlinecode"><span class="keyword">process</span>&nbsp;&lt;Process-Name&gt;&nbsp;(<span class="keyword">roles</span>&nbsp;&lt;Roles&gt;+)&nbsp;{&nbsp;&lt;Properties&gt;*&nbsp;&lt;Entities&gt;+&nbsp;}&nbsp;;</span>
+</p>
+<p>
+Der Name eines Prozesses taucht in der URI auf. Die URL ist dann wie folgt aufgebaut:
+http://&lt;host&gt;/&lt;context&gt;/&lt;process-name&gt;/&lt;entity&gt;.xhtml. Mit dem Schlüsselwort roles kann festgelegt werden, welche Rollen darauf
+Zugriff haben. Im Prozess können beliebig viele Properties untergebracht werden. Es handelt sich dabei um Werte, die im Application
+Server konfiguriert werden und per JDNI referenziert werden. Die Auflistung der Entity Beans führt dazu, dass die dafür nötigen
+XHTML-Dateien generiert werden.
+</p>
+<p>
+Für jeden Prozess wird ein eigener Action Handler und ein eigenes DAO generiert. Hier werden die benötigten Zugriffsmethoden auf die
+konfigurierten Entity Beans und evtl. die benötigten Value Converter generiert. Die Ableitungshierarchie ist dreistufig:
+</p>
+<p>
+<ul>
+	<li>
+		Action Handler
+		    	<ol>
+			<li>
+				konkrete Implemenierung mit Namen &lt;Process-name&gt;Handler
+			</li>
+			<li>
+				abstrakte Klasse mit Namen Abstract&lt;Process-name&gt;Handler
+			</li>
+			<li>
+				die abstrakte Basisklasse aller Action Handler AbstractHandler
+			</li>
+		</ol>
+		
+	</li>
+	<li>
+		DAOs
+				<ol>
+			<li>
+				konkrete Implemenierung mit Namen &lt;Process-name&gt;Handler
+			</li>
+			<li>
+				abstrakte Klasse mit Namen Abstract&lt;Process-name&gt;Handler
+			</li>
+			<li>
+				die abstrakte Basisklasse aller Action Handler AbstractHandler
+			</li>
+		</ol>
+		
+	</li>
+</ul>
+</p>
+<p>
+In den Action Handlern werden für die XHTML-Dateien die Zugriffsmethoden bereitgestellt, die wiederum auf die dazugehörigen DAOs
+zugreifen. Veranschaulicht wird das anhand folgenden Beispielmodells, dass teilweise schon bei den <a href="Entity%20Beans.html#EntityBeans" title="Go to &quot;Entity Beans&quot;">Entity Beans</a> beschrieben wurde:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">application</span>&nbsp;<span class="string">"Eine&nbsp;Beispiel-Applikation"</span>&nbsp;&nbsp;<span class="keyword">context</span>&nbsp;<span class="string">"/beispiel"</span>&nbsp;<span class="keyword">package</span>&nbsp;de.itemis.jee6.beispiel&nbsp;<span class="keyword">development</span>&nbsp;<span class="keyword">strict</span>;<br/>
+<span class="keyword">persistence</span>&nbsp;<span class="keyword">unit</span><span class="string">"beispielDS"</span>&nbsp;<span class="keyword">jndi</span>&nbsp;<span class="string">"jdbc/exampleDS"</span>;<br/>
+<span class="keyword">locale</span>&nbsp;<span class="string">"de"</span>&nbsp;<span class="keyword">default</span>;<br/>
+<span class="keyword">locale</span>&nbsp;<span class="string">"el"</span>;<br/>
+&nbsp;<br/>
+<span class="keyword">options</span>&nbsp;AddressOption<br/>
+{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"address.work"</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"address.home"</span><br/>
+}<br/>
+&nbsp;<br/>
+<span class="keyword">entity</span>&nbsp;Address<br/>
+{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Text</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;street;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Text</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;plz;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Text</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;location;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Option</span>&nbsp;AddressOption&nbsp;addressOption;<br/>
+}<br/>
+&nbsp;<br/>
+<span class="keyword">entity</span>&nbsp;Person<br/>
+{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Text</span>&nbsp;<span class="keyword">id</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;login;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Text</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;forename;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Text</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;surename;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Text</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;<span class="keyword">transient</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Entity</span>&nbsp;Address&nbsp;[]&nbsp;&nbsp;&nbsp;&nbsp;addresses;<br/>
+}<br/>
+&nbsp;<br/>
+<span class="keyword">process</span>&nbsp;User<br/>
+{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Text</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"ldap/baseDN"</span>&nbsp;&nbsp;<span class="keyword">ref</span>&nbsp;<span class="string">"java:global/ldap/baseDN"</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Integer&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"build"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">ref</span>&nbsp;<span class="string">"java:global/build"</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Boolean</span>&nbsp;<span class="keyword">default</span>&nbsp;<span class="keyword">false</span>&nbsp;<span class="string">"productive"</span>&nbsp;&nbsp;&nbsp;<span class="keyword">ref</span>&nbsp;<span class="string">"java:global/productive"</span>;<br/>
+&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Person<br/>
+}<br/>
+</p>
+</div>
+</div>
+</p>
+<a name="GenerierteMethodenimActionHandler"></a>
+<h2>Generierte Methoden im Action Handler</h2>
+<p>
+Die Klasse AbstractUserHandler liefert für die Zugriffskontrolle die Methode isAllowed(), die in der XHTML verwendet werden kann. Da
+in diesem Falle keine Zugriffsberechtigungen auf Rollen beschränkt wurden, liefert diese Methode immer <span class="inlinecode"><span class="keyword">true</span></span> zurück. Ferner wird in
+diese Klasse eine Referenz auf das DAO UserDaoBean mit Namen dao vom Application Server injiziert:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@EJB<br/>
+<span class="keyword">protected</span>&nbsp;UserDaoBean&nbsp;dao;<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+Für die Entity Bean Person soll ein XHTML-Formular generiert werden. Da in dieser Entity Bean eine 1:n-Relation auf die Entity Bean
+Address enthalten ist, werden die entsprechenden Zugriffsmethoden dafür gleich mit generiert. Die Methoden für die Klasse <em>Person</em> lauten:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">abstract</span>&nbsp;<span class="keyword">public</span>&nbsp;List&lt;Person&gt;&nbsp;getPersonList();<br/>
+<span class="keyword">abstract</span>&nbsp;String&nbsp;addPerson(<span class="keyword">final</span>&nbsp;Person&nbsp;person);<br/>
+<span class="keyword">abstract</span>&nbsp;String&nbsp;changePerson(<span class="keyword">final</span>&nbsp;Person&nbsp;person);<br/>
+<span class="keyword">abstract</span>&nbsp;String&nbsp;removePerson(<span class="keyword">final</span>&nbsp;Person&nbsp;person);<br/>
+<span class="keyword">abstract</span>&nbsp;String&nbsp;savePerson();<br/>
+<span class="keyword">abstract</span>&nbsp;String&nbsp;backFromPerson();<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+Der Action Handler <em>PersonHandler</em> ist Session scoped. Dadurch lässt sich der Zustand der Entity Bean <em>Person</em> speichern. Dadurch
+brauchen wir hierfür auch Zugriffsmethoden:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;Person&nbsp;&nbsp;getPerson();<br/>
+<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;&nbsp;&nbsp;&nbsp;setPerson(<span class="keyword">final</span>&nbsp;Person&nbsp;person);<br/>
+<span class="keyword">public</span>&nbsp;<span class="keyword">boolean</span>&nbsp;isPersonEmpty(<span class="keyword">final</span>&nbsp;Person&nbsp;person);<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+Auf die Implementierung wurde der Übersichtlichkeit halber verzichtet. Die Methode isPersonEmpty() wurde nur generiert, weil in der
+Entity Bean Person eine 1:n-Relation enthalten ist. Für die Klasse <em>Address</em> lauten die Zugriffsmethoden:
+</p>
+<p>
+public Address getAddress();
+public void    setAddress(final Address address);
+public boolean isAddressEmpty(final Address address);
+ 
+public List&lt;Address&gt; getAddressList() {
+    return dao.getAddressList(getPerson());
+}
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">abstract</span>&nbsp;String&nbsp;editAddress(<span class="keyword">final</span>&nbsp;Person&nbsp;person);<br/>
+<span class="keyword">abstract</span>&nbsp;String&nbsp;changeAddress(<span class="keyword">final</span>&nbsp;Address&nbsp;address);<br/>
+<span class="keyword">abstract</span>&nbsp;String&nbsp;removeAddress(<span class="keyword">final</span>&nbsp;Address&nbsp;address);<br/>
+<span class="keyword">abstract</span>&nbsp;String&nbsp;saveAddress();<br/>
+<span class="keyword">abstract</span>&nbsp;String&nbsp;backFromAddress();<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+Die entsprechenden Methoden werden im konkreten Action Handler implementiert und können nach Bedarf angepasst werden. Wäre im
+Modell für die 1:n-Relation eine History vermerkt, würde die Methode removeAddress() fehlen.
+</p>
+<p>
+<em>Hinweis!</em>
+Die Methoden- und Klassennamen werden aus den Namen der entsprechenden Attribute berechnet, nicht aus deren Typnamen.
+</p>
+<a name="DiegeneriertenMethodenimDAO"></a>
+<h2>Die generierten Methoden im DAO</h2>
+<p>
+Der Action Handler nimmt von den XHTML-Seiten die Events entgegen. Das können Klick-Events, Links, Submits oder Validations sein.
+Für den Zugriff auf die Datenbank ist aber eine weitere Komponente notwendig. Diese DAOs sind als Stateless Session Beans
+implementiert. In das DAO werden Zugriffsmethoden auf die Datenbank generiert. Da jeder Prozess seinen eigenen Action Handler sowie
+sein eigenes DAO hat, kann das zum Action Handler passende DAO direkt in den Action Handler injiziert werden.
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;addPerson(<span class="keyword">final</span>&nbsp;Person&nbsp;person);<br/>
+<span class="keyword">public</span>&nbsp;Person&nbsp;updatePerson(<span class="keyword">final</span>&nbsp;Person&nbsp;person);<br/>
+<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;deletePerson(Person&nbsp;person);<br/>
+<span class="keyword">public</span>&nbsp;List&lt;Person&gt;&nbsp;getPersonList();<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+Da die Entity Bean <em>Person</em> eine 1:n-Relation enthält, sind auch entsprechende Methoden für das Hinzufügen und Entfernen aus der
+Relation vorhanden:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;Address&nbsp;addToPerson(Person&nbsp;person,&nbsp;<span class="keyword">final</span>&nbsp;Address&nbsp;address);<br/>
+<span class="keyword">public</span>&nbsp;Person&nbsp;deleteFromPerson(Address&nbsp;address);<br/>
+<span class="keyword">public</span>&nbsp;List&lt;Address&gt;&nbsp;getAddressList(<span class="keyword">final</span>&nbsp;Person&nbsp;person);<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+Die Methoden für die Entity Bean Address wird auch der Vollständigkeit halber aufgelistet:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;addAddress(<span class="keyword">final</span>&nbsp;Address&nbsp;address);<br/>
+<span class="keyword">public</span>&nbsp;Address&nbsp;updateAddress(<span class="keyword">final</span>&nbsp;Address&nbsp;address);<br/>
+<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;deleteAddress(Address&nbsp;address);<br/>
+<span class="keyword">public</span>&nbsp;List&lt;Address&gt;&nbsp;getAddressList();<br/>
+</p>
+</div>
+</div>
+</p>
+<a name="Rollen"></a>
+<h2>Rollen</h2>
+<p>
+Werden Rollen verwendet, muss auch eine Security Domain konfiguriert werden. Die entsprechenden Zugriffsrechte werden in die web.xml
+reingeneriert. Je nach verwendetem Application Server müssen noch weitere Deskriptoren mit weiteren Roll Mappings konfiguriert werden.
+Da sich diese Deskriptoren nicht gegenseitig beeinflussen, werden sie schon prophylaktisch vorgeneriert.
+</p>
+<p>
+Die Action Handler enthalten Methoden, um programmatisch die Rollenzugehörigkeit abzufragen. Das kann im XHTML dazu verwendet werden,
+um mittels des &lt;ui:fragment&gt;-Tags Blöcke nur bei Berechtigung sichbar zu machen. Da ist zum Einen die Methode boolean isAllowed().
+Diese Methode zeigt an, dass der Zugriff für den eingeloggten Benutzer erlaubt ist. Ein Beispiel dafür lautet:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+&lt;ui:fragment&nbsp;rendered=<span class="string">"#{userHandler.allowed"</span>&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;nur&nbsp;bei&nbsp;Berechtigung&nbsp;sichtbar&nbsp;--&gt;<br/>
+&lt;/ui:fragment&gt;<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+Sollte keine Rolle für den Prozess definiert worden sein, liefert diese Methode immer <span class="inlinecode"><span class="keyword">true</span></span> zurück. Man kann sich also auf die
+Existenz dieser Methode verlassen.
+</p>
+<p>
+Die andere Methode heißt boolean isLoggedIn(). Mit dieser Methode wird überprüft, ob ein Benutzer überhaupt eingeloggt ist.
+</p>
+<a name="Properties"></a>
+<h2>Properties</h2>
+<p>
+Mittels Properties können auf Daten, die im Application Server konfiguriert sind mittels JNDI zugegriffen werden. So ist es möglich
+ein und dieselbe Applikation ohne Neubauen in unterschiedliche Laufzeitumgebungen zu bringen und dabei das Verhalten zu beeinflussen.
+Wenn beispielsweise Ein Produktiv- und ein Staging-System vorhanden ist, die jeweils über WebService ein anders Produktiv- und
+Staging-System aufrufen wollen, kann über diese Properties die dazu passende URL konfiguriert werden und die Applikation benutzt den
+zu ihrer Umgebung korrekten WebService. Als Datentypen können für Properties verwendet werden:
+</p>
+<p>
+<ul>
+	<li>
+		Text (java.lang.String)
+	</li>
+	<li>
+		Integer (<span class="inlinecode"><span class="keyword">int</span></span>)
+	</li>
+	<li>
+		Boolean (<span class="inlinecode"><span class="keyword">boolean</span></span>)
+	</li>
+	<li>
+		Freier Typ
+	</li>
+</ul>
+</p>
+<p>
+Die Properties werden ihren Datentypen entsprechend in das abstrakte DAO generiert.
+</p>
+<a name="TextProperties"></a>
+<h2>Text-Properties</h2>
+<p>
+Mit Text-Properties kann man Texte wie z.B. URLs in einem Application Server konfigurieren und per JNDI referenzieren. Die Syntax im
+Modell lautet:
+</p>
+<p>
+<span class="inlinecode"><span class="keyword">Text</span>&nbsp;(<span class="keyword">default</span>&nbsp;&lt;Value&gt;)&nbsp;&lt;Jndi&gt;&nbsp;(<span class="keyword">ref</span>&nbsp;&lt;Original-Jndi&gt;);</span>
+</p>
+<p>
+Aus dem Beispiel oben wird im DAO folgender Eintrag generiert:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@Resource(mappedName&nbsp;=&nbsp;<span class="string">"build"</span>)<br/>
+<span class="keyword">private</span>&nbsp;<span class="keyword">int</span>&nbsp;build;<br/>
+</p>
+</div>
+</div>
+</p>
+<a name="BooleanProperties"></a>
+<h2>Boolean-Properties</h2>
+<p>
+Mit Boolean-Properties kann man Texte wie z.B. URLs in einem Application Server konfigurieren und per JNDI referenzieren. Die Syntax
+im Modell lautet:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">Boolean</span>&nbsp;(<span class="keyword">default</span>&nbsp;&lt;<span class="keyword">true</span>|<span class="keyword">false</span>)&nbsp;&lt;Jndi&gt;&nbsp;(<span class="keyword">ref</span>&nbsp;&lt;Original-Jndi&gt;);<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+Aus dem Beispiel oben wird im DAO folgender Eintrag generiert:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@Resource(mappedName&nbsp;=&nbsp;<span class="string">"build"</span>)<br/>
+<span class="keyword">private</span>&nbsp;<span class="keyword">boolean</span>&nbsp;build&nbsp;=&nbsp;<span class="keyword">false</span>;<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+In diesem Beispiel wurde ein Default mit angegeben, der mit in den Quellcode generiert wird.
+</p>
+<a name="FreieResourceAdapter"></a>
+<h2>Freie Resource Adapter</h2>
+<p>
+Es ist nicht nur möglich, einfache Datentypen über JNDI zu referenzieren. Bei der Syntax muss voll qualifiziert die Klasse angegeben
+werden:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">Type</span>&nbsp;&lt;class-name&gt;&nbsp;&lt;Jndi&gt;&nbsp;(<span class="keyword">ref</span>&nbsp;&lt;Original-Jndi);<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+Aus dem Beispiel oben wird im DAO folgender Eintrag generiert:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@Resource(mappedName=<span class="string">"ldap/itemis"</span>)<br/>
+<span class="keyword">private</span>&nbsp;DirContext&nbsp;ldap;<br/>
+</p>
+</div>
+</div>
+</p>
+</body>
+</html>
