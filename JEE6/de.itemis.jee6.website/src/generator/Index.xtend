@@ -13,13 +13,13 @@ class Index extends AbstractWebsite {
 		<div class="flexslider image-slider">
 			<div class="span5 slide">
 				<h2>
-					Java Enterprise Development made <strong>Easy!</strong>
+					Java Enterprise Entwicklung <strong>leicht</strong> gemacht!
 				</h2>
 				<br />
 				<p>
-					Don't repeat yourself by implementing the same things ever and ever.
-					Use a simple DSL to generate an CRUD Prototype of your application,
-					change and extend it to your needs.
+					Wiederholen Sie nicht sich selbst, wenn Sie dieselben Dinge wieder und wieder neu implementieren.
+					Benutzen Sie eine einfache DSL, um damit einen CRUD-Prototypen Ihrer Web-Applikation zu erzeugen.
+					Ändern und erweitern Sie Ihre Web-Applikation nach Ihren Bedürfnissen.
 				</p>
 				<a href="download.html" class="btn_download"></a>
 			</div>
