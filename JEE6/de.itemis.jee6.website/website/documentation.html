@@ -15,7 +15,7 @@
 	
 	<!-- Le fav and touch icons -->
 	
-	<link rel="shortcut icon" href="images/favicon.png">
+	<link rel="shortcut icon" href="images/favicon.ico">
 	
 	<link href="css/bootstrap.css" rel="stylesheet" type='text/css'>
 	<link href="css/bootstrap-responsive.css" rel="stylesheet" type='text/css'>
@@ -121,14 +121,14 @@
 						<hr style="margin-top: 5px; margin-bottom: 5px;">
 						<p>
 							Der JEE-6Generator ist in der Lage, eine komplette JEE6-Web-Applikation aus einem einfachen Modell zu generieren.
-							Das Framework wurde mit Xtext realisiert und ist als Eclipse-Plugin verfÃŒgbar.
+							Das Framework wurde mit Xtext realisiert und ist als Eclipse-Plugin verfügbar.
 						</p>
 						<!--  section -->
 						<section id="newproject" style="padding-top: 68px; margin-top: -68px;">
 						<h2 style="padding-top: 15px;">JEE6-Projekt anlegen</h2>
 						<p>
-							Ein neues JEE6-Projekt kann mit der JEE6-Distribution einfach angelegt werden. Dazu muss der MenÃŒpunkt File -&gt; New -&gt; Project...
-							aufgerufen werden. Im sich Ã¶ffnenden Dialog wÃ€hlt man unter dem Punkt Xtext den Punkt JEE6 Generator Project aus:
+							Ein neues JEE6-Projekt kann mit der JEE6-Distribution einfach angelegt werden. Dazu muss der Menüpunkt File -&gt; New -&gt; Project...
+							aufgerufen werden. Im sich öffnenden Dialog wählt man unter dem Punkt Xtext den Punkt JEE6 Generator Project aus:
 						</p>
 						<p>
 							</p>
@@ -138,7 +138,7 @@
 							<p>
 						</p>
 						<p>
-							Danach wÃ€hlt man einen Projektnamen aus:
+							Danach wählt man einen Projektnamen aus:
 						</p>
 						<p>
 							</p>
@@ -149,8 +149,8 @@
 						</p>
 						<p>
 							Es wird danach ein Projekt namens "beispiel" angelegt. In diesem Projekt sind alle zum Bau notwendigen Dateien enthalten.
-							Die JEE6-Distribution enthÃ€lt auch schon die JBoss-Tools, mit denen die JBoss-Laufzeitumgebung definiert werden kann.
-							Diese Laufzeitumgebung muss als Library in den Build Path mit aufgenommen werden. Will man das Modell spÃ€ter mit <strong>ant</strong> bauen,
+							Die JEE6-Distribution enthält auch schon die JBoss-Tools, mit denen die JBoss-Laufzeitumgebung definiert werden kann.
+							Diese Laufzeitumgebung muss als Library in den Build Path mit aufgenommen werden. Will man das Modell später mit <strong>ant</strong> bauen,
 							empfiehlt sich das Anpassen der Datei <strong>$HOME/.jee6.properties</strong>. Hier muss eingetragen werden, wo sich die JEE6-Distribution
 							und der benutzte Application Server befindet. Die Variablen lauten:
 							</p>
@@ -161,18 +161,18 @@
 							</ul>
 							<p>
 							
-							Dies muss nur ein einziges Mal fÃŒr alle JEE6-Projekte durchgefÃŒhrt werden.
+							Dies muss nur ein einziges Mal für alle JEE6-Projekte durchgeführt werden.
 						</p>
 						<p>
-							Die letzten beiden Anmerkungen kÃ¶nnen in den Dateien $PROJECT_HOME/LiesMich.txt bzw. $PROJECT_HOME/ReadMe.txt nachgelesen werden.
+							Die letzten beiden Anmerkungen können in den Dateien $PROJECT_HOME/LiesMich.txt bzw. $PROJECT_HOME/ReadMe.txt nachgelesen werden.
 						</p>
 						</section>
 						<!--  section -->
 						<section id="improjektentwickeln" style="padding-top: 68px; margin-top: -68px;">
 						<h2 style="padding-top: 15px;">Im JEE6-Projekt entwickeln</h2>
 						<p>
-							Die Datei <strong>$PROJECT_HOME/model/beispiel.jee6</strong> ist das Modell fÃŒr unsere Web-Anwendung. Hier sollte die erste Befehlszeile den
-							eigenen BedÃŒrfnissen angepasst werden. Aus der Befehlszeile
+							Die Datei <strong>$PROJECT_HOME/model/beispiel.jee6</strong> ist das Modell für unsere Web-Anwendung. Hier sollte die erste Befehlszeile den
+							eigenen Bedürfnissen angepasst werden. Aus der Befehlszeile
 						</p>
 						<p>
 							</p>
@@ -203,9 +203,9 @@ application "Eine Beispiel-Applikation"  context "/beispiel" package de.itemis.j
 								<li>Action Handler</li>
 								<li>DAO</li>
 								<li>Entity Beans</li>
-								<li>Resource Bundles fÃŒr I18N und L10N</li>
-								<li>Eine version.properties fÃŒr die Versionsnummer.</li>
-								<li>Dateien fÃŒr Metadaten:</li>
+								<li>Resource Bundles für I18N und L10N</li>
+								<li>Eine version.properties für die Versionsnummer.</li>
+								<li>Dateien für Metadaten:</li>
 								<li><ul>
 									<li>web.xml</li>
 									<li>faces-config.xml</li>
@@ -215,10 +215,10 @@ application "Eine Beispiel-Applikation"  context "/beispiel" package de.itemis.j
 							<p>
 						</p>
 						<p>
-							Die Dateien fÃŒr den XHTML-Presentation Layer werden nur generiert, wenn die dazu benÃ¶tigte Dateien noch nicht vorhanden sind.
-							Bestehende Dateien werden durch den Generator nicht ÃŒberschrieben. Die Action Handler und DAOs werden gemÃ€Ã dem sog. Generation
-							Gap Pattern generiert. Die abstrakten Basisklassen werden bei jedem Generatorlauf neu generiert, wÃ€hrend die konkreten Klassen
-							fÃŒr die Implementierung der Business Logik nur einmal bei Fehlen generiert werden. In der abstrakten Basisklasse der DAOs werden
+							Die Dateien für den XHTML-Presentation Layer werden nur generiert, wenn die dazu benötigte Dateien noch nicht vorhanden sind.
+							Bestehende Dateien werden durch den Generator nicht überschrieben. Die Action Handler und DAOs werden gemäß dem sog. Generation
+							Gap Pattern generiert. Die abstrakten Basisklassen werden bei jedem Generatorlauf neu generiert, während die konkreten Klassen
+							für die Implementierung der Business Logik nur einmal bei Fehlen generiert werden. In der abstrakten Basisklasse der DAOs werden
 							z.B. die konfigurierten Persistenzkontexte untergebracht. Die generierten Dateien werden in folgende Verzeichnisse hinterlegt:
 						</p>
 						<p>
@@ -228,7 +228,7 @@ application "Eine Beispiel-Applikation"  context "/beispiel" package de.itemis.j
 							</ul>
 							<p>
 							
-							In diesem Verzeichnis werden die konkreten Klassen fÃŒr die Action Handler und DAOs hinterlegt. Ferner werden hier die Resource Bundles und einige Service Klassen hineingeneriert. In diesem Verzeichnis kÃ¶nnen auch weitere eigene Klassen untergebracht werden. Alles, was hier hineingeneriert wird, wird nicht wieder ÃŒberschrieben sondern nur angelegt, wenn die Klasse fehlt.
+							In diesem Verzeichnis werden die konkreten Klassen für die Action Handler und DAOs hinterlegt. Ferner werden hier die Resource Bundles und einige Service Klassen hineingeneriert. In diesem Verzeichnis können auch weitere eigene Klassen untergebracht werden. Alles, was hier hineingeneriert wird, wird nicht wieder überschrieben sondern nur angelegt, wenn die Klasse fehlt.
 							</p>
 							<ul>
 								<li>src-gen</li>
@@ -242,7 +242,7 @@ application "Eine Beispiel-Applikation"  context "/beispiel" package de.itemis.j
 							</ul>
 							<p>
 							
-							In diesem Verzeichnis werden bei Projektanlage Bilder und Libraries (JARs) angelegt. Hier kÃ¶nnen weitere Bilder untergebracht werden. Der JEE6-Generator generiert in diesem Verzeichnis nichts.
+							In diesem Verzeichnis werden bei Projektanlage Bilder und Libraries (JARs) angelegt. Hier können weitere Bilder untergebracht werden. Der JEE6-Generator generiert in diesem Verzeichnis nichts.
 							</p>
 							<ul>
 								<li>res-gen</li>
@@ -256,11 +256,11 @@ application "Eine Beispiel-Applikation"  context "/beispiel" package de.itemis.j
 							</ul>
 							<p>
 							
-							Hier werden die XHTML-Dateien und das CSS hineingelegt. Wie im src-Verzeichnis werden hier nur fehlende Dateien angelegt und bestehende nicht ÃŒberschrieben.
+							Hier werden die XHTML-Dateien und das CSS hineingelegt. Wie im src-Verzeichnis werden hier nur fehlende Dateien angelegt und bestehende nicht überschrieben.
 						</p>
 						<p>
 							<strong>Hinweis!</strong>
-							Die Inhalte der Verzeichnisse src, res und WebContent sollten der Verseinsverwaltung der Wahl zugefÃŒhrt werden, da dort auch eigene Implementierungen untergebracht sein kÃ¶nnen. Die Inhalte der Verzeichnisse src-gen und res-gen sollten nicht einer Versionsverwaltung zugefÃŒhrt werden, da sie bei jedem JEE6-Generatorlauf neu generiert werden.
+							Die Inhalte der Verzeichnisse src, res und WebContent sollten der Verseinsverwaltung der Wahl zugeführt werden, da dort auch eigene Implementierungen untergebracht sein können. Die Inhalte der Verzeichnisse src-gen und res-gen sollten nicht einer Versionsverwaltung zugeführt werden, da sie bei jedem JEE6-Generatorlauf neu generiert werden.
 						</p>
 						</section>
 					</div>
@@ -285,13 +285,13 @@ application &lt;Name&gt; context &lt;Context-Path&gt; package &lt;Package-Id&gt;
 						</p>
 						<p>
 							Der Name ist ein String, der im Klartext die Applikation beschreibt. Der Context-Path ist ein String, der den Applikationskontext
-							festlegt. Dieser muss zwingend mit einem SchrÃ€gstrich "/" beginnen. Es ist der erste Teil der URI.
+							festlegt. Dieser muss zwingend mit einem Schrägstrich "/" beginnen. Es ist der erste Teil der URI.
 						</p>
 						<p>
 							Optional kann der Session Timeout in Minuten festgelegt werden. Wird dieser nicht definiert, wird der Default des Application Servers
-							verwendet. Ãblicherweise betrÃ€gt dieser Wert 30 Minuten. Als project-state kÃ¶nnen die drei SchlÃŒsselwÃ¶rter <code class="prettyprint lang-jeelang">development</code>,
-							<code class="prettyprint lang-jeelang">integration</code> und <code class="prettyprint lang-jeelang">productive</code> dienen und beschreiben den Zustand des Projektes. AbhÃ€ngig davon wird z.B. 
-							das Logging entsprechend verschÃ€rft.
+							verwendet. Üblicherweise beträgt dieser Wert 30 Minuten. Als project-state können die drei Schlüsselwörter <code class="prettyprint lang-jeelang">development</code>,
+							<code class="prettyprint lang-jeelang">integration</code> und <code class="prettyprint lang-jeelang">productive</code> dienen und beschreiben den Zustand des Projektes. Abhängig davon wird z.B. 
+							das Logging entsprechend verschärft.
 						</p>
 						<p>
 							</p>
@@ -330,13 +330,13 @@ application &lt;Name&gt; context &lt;Context-Path&gt; package &lt;Package-Id&gt;
 							<p>
 						</p>
 						<p>
-							Als letztes optionales SchlÃŒsselwort dient <code class="prettyprint lang-jeelang">strict</code>. Es entscheidet, ob in den Basisklassen der Action Handler die Standardmethoden
-							abstrakt vordefiniert werden und somit in den konkreten Klassen vorhanden sein mÃŒssen. Dadurch wird einerseits der Code besser, 
-							allerdings kann es vorkommen, dass die geforderten Methoden tatsÃ€chlich nicht gebraucht werden. Das kann aber nur bei starker 
+							Als letztes optionales Schlüsselwort dient <code class="prettyprint lang-jeelang">strict</code>. Es entscheidet, ob in den Basisklassen der Action Handler die Standardmethoden
+							abstrakt vordefiniert werden und somit in den konkreten Klassen vorhanden sein müssen. Dadurch wird einerseits der Code besser, 
+							allerdings kann es vorkommen, dass die geforderten Methoden tatsächlich nicht gebraucht werden. Das kann aber nur bei starker 
 							Anpassung der XHTML-Masken passieren.
 						</p>
 						<p>
-							Nach dem <code class="prettyprint lang-jeelang">application</code>-Kommando werden Optionen festgelegt, die das Verhalten der Web-Applikation nÃ€her beschreiben. Danach folgen 
+							Nach dem <code class="prettyprint lang-jeelang">application</code>-Kommando werden Optionen festgelegt, die das Verhalten der Web-Applikation näher beschreiben. Danach folgen 
 							die Beschreibungen der Entity Beans, welche auf einer <a href="<ref.href»">eigenen Seite genauer beschrieben werden</a> und zuletzt die Aufgaben- bzw. 
 							Prozess-Umgebungen, in denen die Entity Beans benutzt werden sollen.
 						</p>
@@ -344,7 +344,7 @@ application &lt;Name&gt; context &lt;Context-Path&gt; package &lt;Package-Id&gt;
 						<section id="Applikationsoptionen" style="padding-top: 68px; margin-top: -68px;">
 						<h2 style="padding-top: 15px;">Applikationsoptionen</h2>
 						<p>
-							Die Applikationsoptionen beschreiben die Web Applikation nÃ€her. Sie beeinflussen folgende Eigenschaften:
+							Die Applikationsoptionen beschreiben die Web Applikation näher. Sie beeinflussen folgende Eigenschaften:
 							</p>
 							<ol>
 								<li>Persistenz Kontexte</li>
@@ -359,7 +359,7 @@ application &lt;Name&gt; context &lt;Context-Path&gt; package &lt;Package-Id&gt;
 						<section id="PersistenzKontexte" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Persistenz Kontexte</h3>
 						<p>
-							Der JEE6-Generator unterstÃŒtzt mehrere Persistenz Kontexte in einer Applikation. Das setzt voraus, dass in diesem Falle die
+							Der JEE6-Generator unterstützt mehrere Persistenz Kontexte in einer Applikation. Das setzt voraus, dass in diesem Falle die
 							Datasources als XA-Datasource im Application Server konfiguriert sind. Die Syntax lautet:
 						</p>
 						<p>
@@ -371,11 +371,11 @@ persistence unit &lt;Unit-Name&gt; jndi &lt;Jndi-Name&gt; (cacheable) (MySQL|DB2
 						<p>
 							Der unit-name wird in der persistence.xml als Referenz innerhalb der Web Applikation verwendet. Der JNDI-Name definiert, wie die
 							Datasource im Application Server wiederzufinden ist. Eine eingehende Beschreibung, wie der JDNI-Name lauten sollte, findet sich auf
-							diesen Seiten. Wird das optionale SchlÃŒsselwort cacheable verwendet, wird die Persistence Unit als Second Level Cache konfiguriert.
+							diesen Seiten. Wird das optionale Schlüsselwort cacheable verwendet, wird die Persistence Unit als Second Level Cache konfiguriert.
 						</p>
 						<p>
 							<strong>Hinweis</strong>
-							Es reicht nicht, nur das cacheable SchlÃŒsselwort zu setzen, um im Application Server Second Level Caching zu aktivieren. Es mÃŒssen
+							Es reicht nicht, nur das cacheable Schlüsselwort zu setzen, um im Application Server Second Level Caching zu aktivieren. Es müssen
 							meistens noch am Application Server selbst noch Konfigurationen vorgenommen werden.
 						</p>
 						<p>
@@ -388,19 +388,19 @@ persistence unit &lt;Unit-Name&gt; jndi &lt;Jndi-Name&gt; (cacheable) (MySQL|DB2
 							</ul>
 							<p>
 							
-							unterstÃŒtzt. Die Angabe wird nÃ¶tig, um in der generierten Datei persistence.xml den SQL-Sprachdialekt festzulegen.
+							unterstützt. Die Angabe wird nötig, um in der generierten Datei persistence.xml den SQL-Sprachdialekt festzulegen.
 						</p>
 						</section>
 						<!-- subsection -->
 						<section id="VerwendeteSprachen" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Verwendete Sprachen (Lokalisierung)</h3>
 						<p>
-							In mehrsprachigen Umgebungen ist die Lokalisierung der Applikation immer wÃŒnschenswert. Der JEE6-Generator hat fÃŒr alle Komponenten
-							eine entsprechende UnterstÃŒtzung parat. Die Auswahl der Sprache selbst wird typischerweise im Browser eingestellt. Die Web Applikation
-							erfÃ€hrt das dadurch, dass die im Browser eingestellte Sprache im Request mitgeschickt wird. Die Lokalisierung wird ÃŒber sog. Resource
-							Bundles vorgenommen. Diese werden in den XHTML-Seiten eingebunden. FÃŒr jedes Attribut, Entity Bean, etc. werden die dafÃŒr benÃ¶tigten
-							EintrÃ€ge in die Resource Bundles nachgetragen, sofern sie noch nicht enthalten sind. Bereits bestehende EintrÃ€ge werden nicht
-							verÃ€ndert. An dieser Stelle wird beschrieben, wie in der Modelldatei konfiguriert wird, welche Sprachen unterstÃŒtzt werden sollen.
+							In mehrsprachigen Umgebungen ist die Lokalisierung der Applikation immer wünschenswert. Der JEE6-Generator hat für alle Komponenten
+							eine entsprechende Unterstützung parat. Die Auswahl der Sprache selbst wird typischerweise im Browser eingestellt. Die Web Applikation
+							erfährt das dadurch, dass die im Browser eingestellte Sprache im Request mitgeschickt wird. Die Lokalisierung wird über sog. Resource
+							Bundles vorgenommen. Diese werden in den XHTML-Seiten eingebunden. Für jedes Attribut, Entity Bean, etc. werden die dafür benötigten
+							Einträge in die Resource Bundles nachgetragen, sofern sie noch nicht enthalten sind. Bereits bestehende Einträge werden nicht
+							verändert. An dieser Stelle wird beschrieben, wie in der Modelldatei konfiguriert wird, welche Sprachen unterstützt werden sollen.
 							Die Syntax lautet:
 						</p>
 						<p>
@@ -411,11 +411,11 @@ locale &lt;Language&gt; (&lt;Country&gt;) (default);</pre>
 						</p>
 						<p>
 							Die <strong>language</strong> ist der ISO-Code der zu verwendenden Sprache und hat typischerweise kleine Buchstaben. Der optionale Wert <strong>country</strong>
-							bestimmt die ISO-LÃ€nderkennung typischerweise in GroÃbuchstaben. Dadurch werden landestypische Sprachvarianten unterschieden.
+							bestimmt die ISO-Länderkennung typischerweise in Großbuchstaben. Dadurch werden landestypische Sprachvarianten unterschieden.
 						</p>
 						<p>
 							<strong>Hinweis!</strong>
-							Es muss mindestens eine Locale-Definition vorhanden sein und genau eine braucht das ansonsten optionale SchlÃŒsselwort default. Diese
+							Es muss mindestens eine Locale-Definition vorhanden sein und genau eine braucht das ansonsten optionale Schlüsselwort default. Diese
 							Sprache wird verwendet, falls die im Browser eingestellte Sprache in den Resource Bundles nicht gefunden werden konnte.
 						</p>
 						</section>
@@ -433,9 +433,9 @@ smtp &lt;Jndi-Name&gt;;</pre>
 							<p>
 						</p>
 						<p>
-							Mehr Information zum Thema Mail im JEE-Umfeld befinden sich auf diesen Seiten. Die auf diesen Seiten beschriebenen EintrÃ€ge in den
+							Mehr Information zum Thema Mail im JEE-Umfeld befinden sich auf diesen Seiten. Die auf diesen Seiten beschriebenen Einträge in den
 							genannten XML-Deskriptoren werden vom JEE6-Generator automatisch erzeugt. Die Resource muss manuell in dem DAO eingetragen werden,
-							in dem Mailing verwendet werden soll. Das dazugehÃ¶rige Code-Schnipsel sieht folgendermaÃen aus:
+							in dem Mailing verwendet werden soll. Das dazugehörige Code-Schnipsel sieht folgendermaßen aus:
 						</p>
 						<p>
 							</p>
@@ -445,16 +445,16 @@ private javax.mail.Session mailSession;</pre>
 							<p>
 						</p>
 						<p>
-							Wird fÃŒr <strong>jndi-name</strong> "mail/Default" verwendet, muss im JBoss Application Server nichts mehr konfiguriert werden.
+							Wird für <strong>jndi-name</strong> "mail/Default" verwendet, muss im JBoss Application Server nichts mehr konfiguriert werden.
 						</p>
 						</section>
 						<!-- subsection -->
 						<section id="SecurityDomain" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Security Domain</h3>
 						<p>
-							Sollen nur bestimmte User fÃŒr bestimmte Bereiche (in der JEE6-Generator-Nomenklatur "Prozesse") Zugang haben, so muss eine sog.
-							Security Domain ÃŒber einen JNDI-Namen referenziert werden. Dieser muss dementsprechen wie die E-Mail im Application Server
-							konfiguriert sein und benutzt den JAAS-Standard. Auf diesen Seiten befinden sich Informationen ÃŒber die Konfiguration von JAAS.
+							Sollen nur bestimmte User für bestimmte Bereiche (in der JEE6-Generator-Nomenklatur "Prozesse") Zugang haben, so muss eine sog.
+							Security Domain über einen JNDI-Namen referenziert werden. Dieser muss dementsprechen wie die E-Mail im Application Server
+							konfiguriert sein und benutzt den JAAS-Standard. Auf diesen Seiten befinden sich Informationen über die Konfiguration von JAAS.
 							Die Syntax lautet:
 						</p>
 						<p>
@@ -464,7 +464,7 @@ security domain &lt;Jndi-Name&gt; (clustered);</pre>
 							<p>
 						</p>
 						<p>
-							Das optionale SchlÃŒsselwort <code class="prettyprint lang-jeelang">clustered</code> bestimt, ob die Security Domain in einer geclusterten Umgebung funktionsfÃ€hig
+							Das optionale Schlüsselwort <code class="prettyprint lang-jeelang">clustered</code> bestimt, ob die Security Domain in einer geclusterten Umgebung funktionsfähig
 							sein muss.
 						</p>
 						</section>
@@ -472,7 +472,7 @@ security domain &lt;Jndi-Name&gt; (clustered);</pre>
 						<section id="WebParameter" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Web Parameter</h3>
 						<p>
-							Mit Web-Parametern kann man der Web Applikation in der web.xml Parameter ÃŒbergeben. Die Syntax lautet:
+							Mit Web-Parametern kann man der Web Applikation in der web.xml Parameter übergeben. Die Syntax lautet:
 						</p>
 						<p>
 							</p>
@@ -481,7 +481,7 @@ param &lt;Key&gt; = &lt;Value&gt; (description &lt;Description&gt;);</pre>
 							<p>
 						</p>
 						<p>
-							Die EintrÃ€ge kÃ¶nnen beliebig hÃ€ufig im Modell eingetragen werden. Aus folgender Modellzeile:
+							Die Einträge können beliebig häufig im Modell eingetragen werden. Aus folgender Modellzeile:
 							</p>
 							<pre class="prettyprint lang-jeelang linenums">
 param de.itemis.purchasing.ITEMIKER = "itemis" description "LDAP-Gruppe aller itemiker";</pre>
@@ -499,7 +499,7 @@ param de.itemis.purchasing.ITEMIKER = "itemis" description "LDAP-Gruppe aller it
 						</p>
 						<p>
 							Mit der Methode String getInitParameter(final String key) in einem Action Handler kann auf diesen Wert zugegriffen werden. Die Werte
-							sind aus Sicht des Application Servers und der Applikation selbst nicht verÃ€nderlich.
+							sind aus Sicht des Application Servers und der Applikation selbst nicht veränderlich.
 						</p>
 						</section>
 						</section>
@@ -515,14 +515,14 @@ param de.itemis.purchasing.ITEMIKER = "itemis" description "LDAP-Gruppe aller it
 						</h1>
 						<hr style="margin-top: 5px; margin-bottom: 5px;">
 						<p>
-							In der Modelldatei kÃ¶nnen Entity Beans ÃŒber die SchlÃŒsselwÃ¶rter <code class="prettyprint lang-jeelang">entity</code> und <code class="prettyprint lang-jeelang">options</code> definiert werden.
-							Options sind spezielle Entity Beans, mit denen man Auswahllisten definieren kann. Die Auswahllisten kÃ¶nnen entweder editierbar sein,
+							In der Modelldatei können Entity Beans über die Schlüsselwörter <code class="prettyprint lang-jeelang">entity</code> und <code class="prettyprint lang-jeelang">options</code> definiert werden.
+							Options sind spezielle Entity Beans, mit denen man Auswahllisten definieren kann. Die Auswahllisten können entweder editierbar sein,
 							oder als Enumeration festgelegt werden.
 						</p>
 						<p>
-							Eine einfache Entity Bean wird mit dem SchlÃŒsselwort <code class="prettyprint lang-jeelang">entity</code> eingeleitet. In ihr kÃ¶nnen beliebig viele Attribute benutzt
-							werden. Es kÃ¶nnen Text- und EMail-Felder als ID-Felder definiert werden. Wird kein ID-Feld definiert, wird automatisch ein
-							Integer-Attribut mit Namen id generiert. Eine einfache Definition sieht folgendermaÃen aus:
+							Eine einfache Entity Bean wird mit dem Schlüsselwort <code class="prettyprint lang-jeelang">entity</code> eingeleitet. In ihr können beliebig viele Attribute benutzt
+							werden. Es können Text- und EMail-Felder als ID-Felder definiert werden. Wird kein ID-Feld definiert, wird automatisch ein
+							Integer-Attribut mit Namen id generiert. Eine einfache Definition sieht folgendermaßen aus:
 							</p>
 							<pre class="prettyprint lang-jeelang linenums">
 entity Address
@@ -544,8 +544,8 @@ entity Address
 							<p>
 						</p>
 						<p>
-							Will man noch den Adresstyp zwischen privat und geschÃ€ftlich angeben, kann eine nicht editierbare <code class="prettyprint lang-jeelang">option</code> benutzt werden.
-							Diese <code class="prettyprint lang-jeelang">option</code> wird als Enumeration generiert. Als Werte kÃ¶nnen nur TextschlÃŒssel verwendet werden. Diese SchlÃŒssel
+							Will man noch den Adresstyp zwischen privat und geschäftlich angeben, kann eine nicht editierbare <code class="prettyprint lang-jeelang">option</code> benutzt werden.
+							Diese <code class="prettyprint lang-jeelang">option</code> wird als Enumeration generiert. Als Werte können nur Textschlüssel verwendet werden. Diese Schlüssel
 							werden automatisch im Resource Bundle aller definierter Sprachen angelegt, falls sie noch nicht vorhanden sind. In der Address
 							Entity Bean wird der Adresstyp AddressOption als Attributtyp <code class="prettyprint lang-jeelang">Option</code> eingebunden. In der Datenbank entsteht dadurch eine 1:1-Relation.
 						</p>
@@ -569,7 +569,7 @@ entity Address
 						</p>
 						<p>
 							In der Maske wird dadurch eine Combobox generiert. Passt man noch die Resource Bundles unter <strong>$PROJECT_HOME/src/&lt;package&gt;/messages.properties</strong>
-							an, sieht dann die Maske folgendermaÃen aus:
+							an, sieht dann die Maske folgendermaßen aus:
 						</p>
 						<p>
 							</p>
@@ -582,15 +582,15 @@ entity Address
 							Die Generierung einer Combobox erfordert noch weitere Dinge im Hintergrund:
 							</p>
 							<ol>
-								<li>FÃŒr die Combobox muss ein Value Converter fÃŒr JSF generiert werden, der die Werte aus der XHTML-Maske in Entity Bean-IDs
+								<li>Für die Combobox muss ein Value Converter für JSF generiert werden, der die Werte aus der XHTML-Maske in Entity Bean-IDs
 									konvertiert.</li>
-								<li>Die Entity Beans mÃŒssen die Methoden equals() und hash() so ÃŒberschreiben, dass Entity Beans mit denselben IDs als identisch
+								<li>Die Entity Beans müssen die Methoden equals() und hash() so überschreiben, dass Entity Beans mit denselben IDs als identisch
 									angesehen werden, sonst funktioniert der Value Converter nicht.</li>
 							</ol>
 							<p>
 							
-							Es macht natÃŒrlich Sinn, dass es Personen gibt, in denen mehrere Adressen gespeichert werden. Damit wird das Modell um die Entity Bean
-							<strong>Person</strong> ergÃ€nzt:
+							Es macht natürlich Sinn, dass es Personen gibt, in denen mehrere Adressen gespeichert werden. Damit wird das Modell um die Entity Bean
+							<strong>Person</strong> ergänzt:
 						</p>
 						<p>
 							</p>
@@ -605,9 +605,9 @@ entity Person
 						</p>
 						<p>
 							In dieser Entity Bean wird ein Textfeld als ID-Feld markiert. Dadurch gibt es kein automatisches Integer-ID-Feld mehr. Es darf nur
-							ein Feld als ID-Feld innerhalb einer Entity Bean gesetzt werden. Ferner wird mit dem SchlÃŒsselwort Entity eine 1:n-Relation
-							eingefÃŒhrt, um mehrere Adressen an die Entity Bean binden zu kÃ¶nnen. Dabei muss der Typ - in diesem Falle Address - mit den []-Zeichen
-							markiert werden, sonst wÃ€re die Relation nur 1:1. Die Maske fÃŒr die Person Entity Bean sieht folgendermaÃen aus:
+							ein Feld als ID-Feld innerhalb einer Entity Bean gesetzt werden. Ferner wird mit dem Schlüsselwort Entity eine 1:n-Relation
+							eingeführt, um mehrere Adressen an die Entity Bean binden zu können. Dabei muss der Typ - in diesem Falle Address - mit den []-Zeichen
+							markiert werden, sonst wäre die Relation nur 1:1. Die Maske für die Person Entity Bean sieht folgendermaßen aus:
 						</p>
 						<p>
 							</p>
@@ -624,10 +624,10 @@ entity Person
 						<h2 style="padding-top: 15px;">Weitere Attributtypen</h2>
 						<p>
 							Um Daten in einer Datenbank zu speichern, machen diverse Datentypen Sinn. Jedes Attribut besteht aus der Kombination Datentyp,
-							ergÃ€nzende Optionen Attributname und Transient-Flag. Wird ein Attribut abschlieÃend mit dem transient-SchlÃŒsselwort markiert, so wird
-							dieses Attribut nicht in der Datenbank gespeichert. In diesem Fall werden zwei Klassen fÃŒr die Entity Bean gemÃ€Ã den Generation Gap
-							Pattern generiert. Eine abstrakte Basisklasse enthÃ€lt die Attribute der Entity Bean, die konkrete Klasse enthÃ€lt Getter- und
-							Setter-Methoden fÃŒr die transienten Attribute. Man kann die transienten Methoden dazu verwenden, um aus anderen Attributen Werte
+							ergänzende Optionen Attributname und Transient-Flag. Wird ein Attribut abschließend mit dem transient-Schlüsselwort markiert, so wird
+							dieses Attribut nicht in der Datenbank gespeichert. In diesem Fall werden zwei Klassen für die Entity Bean gemäß den Generation Gap
+							Pattern generiert. Eine abstrakte Basisklasse enthält die Attribute der Entity Bean, die konkrete Klasse enthält Getter- und
+							Setter-Methoden für die transienten Attribute. Man kann die transienten Methoden dazu verwenden, um aus anderen Attributen Werte
 							zusammen zu bauen. Aus Vor- und Nachnamen kann man den gesamten Namen als transientes Attribut herleiten.
 						</p>
 						<p>
@@ -676,14 +676,14 @@ public class Person extends AbstractPerson {
 }</pre>
 							<p>
 							
-							Aus GrÃŒnden der Ãbersichtlichkeit wurde auf PrÃŒfen von Null-Pointern verzichtet.
-							Im Folgenden werden die Attribute aufgelistet und erklÃ€rt.
+							Aus Gründen der Übersichtlichkeit wurde auf Prüfen von Null-Pointern verzichtet.
+							Im Folgenden werden die Attribute aufgelistet und erklärt.
 						</p>
 						<!-- subsection -->
 						<section id="Text" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Text</h3>
 						<p>
-							Das Textattribut wurde schon ausfÃŒhrlich erklÃ€rt. Es hat die Syntax:
+							Das Textattribut wurde schon ausführlich erklärt. Es hat die Syntax:
 						</p>
 						<p>
 							</p>
@@ -721,7 +721,7 @@ Text subject;</pre>
 						<section id="Integer" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Integer</h3>
 						<p>
-							Integer-Datentypen werden durch das SchlÃŒsselwort <code class="prettyprint lang-jeelang">Int</code> gefolgt von einem Variablennamen eingeleitet. Im XHTML-Formular
+							Integer-Datentypen werden durch das Schlüsselwort <code class="prettyprint lang-jeelang">Int</code> gefolgt von einem Variablennamen eingeleitet. Im XHTML-Formular
 							wird dabei automatisch ein entsprechender Value Converter generiert, der den Inhalt des Eingabefeldes automatisch in einen Integer
 							umwandelt. Die Syntax lautet:
 						</p>
@@ -759,8 +759,8 @@ Int integerEntry;</pre>
 						<section id="Number" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Number</h3>
 						<p>
-							Number-Datentypen werden durch das SchlÃŒsselwort <code class="prettyprint lang-jeelang">Number</code> gefolgt von einem Variablennamen eingeleitet. Java-seitig
-							wird dafÃŒr ein double generiert Im XHTML-Formular wird dabei automatisch ein entsprechender Value Converter generiert, der den
+							Number-Datentypen werden durch das Schlüsselwort <code class="prettyprint lang-jeelang">Number</code> gefolgt von einem Variablennamen eingeleitet. Java-seitig
+							wird dafür ein double generiert Im XHTML-Formular wird dabei automatisch ein entsprechender Value Converter generiert, der den
 							Inhalt des Eingabefeldes automatisch in eine Kommazahl umwandelt. Die Syntax lautet:
 						</p>
 						<p>
@@ -797,7 +797,7 @@ Number numberEntry;</pre>
 						<section id="EMail" style="padding-top: 68px; margin-top: -68px;">
 						<h3>E-Mail</h3>
 						<p>
-							Ein E-Mail-Datentyp kann als ID gefÃŒhrt werden und ist im Prinzip ein Textfeld mit dem Unterschied, dass ein Validator die Eingabe auf das Format einer gÃŒltigen EMail-Adresse prÃŒft. Die Syntax lautet:
+							Ein E-Mail-Datentyp kann als ID geführt werden und ist im Prinzip ein Textfeld mit dem Unterschied, dass ein Validator die Eingabe auf das Format einer gültigen EMail-Adresse prüft. Die Syntax lautet:
 						</p>
 						<p>
 							</p>
@@ -840,7 +840,7 @@ Email mail;</pre>
 						<section id="Clob" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Clob</h3>
 						<p>
-							Alle Textfelder werden in der Datenbank als Varchar angelegt, welche eine LÃ€ngenbegrenzung auf 255 Zeichen beinhaltet. Wenn man
+							Alle Textfelder werden in der Datenbank als Varchar angelegt, welche eine Längenbegrenzung auf 255 Zeichen beinhaltet. Wenn man
 							mehr braucht, muss ein sog. Character Large Object benutzt werden. Im XHTML-Formular wird daraus eine Textarea generiert. Java-seitig
 							ist dieser Datentyp wie Text und E-Mail ein java.lang.String. Die Syntax lautet:
 						</p>
@@ -880,7 +880,7 @@ Clob clobEntry;</pre>
 						<section id="Blob" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Blob</h3>
 						<p>
-							Will man BinÃ€rdaten in der Datenbank speichern, muss man den Datentyp <code class="prettyprint lang-jeelang">Blob</code> verwenden, der mit dem SchlÃŒsselwort
+							Will man Binärdaten in der Datenbank speichern, muss man den Datentyp <code class="prettyprint lang-jeelang">Blob</code> verwenden, der mit dem Schlüsselwort
 							<code class="prettyprint lang-jeelang">Blob</code> benutzt wird. Java-seitig wird daraus ein byte[]-Array. In einer XHTML-Maske erscheinen Attribute dieses
 							Typs nicht. Die Syntax lautet:
 						</p>
@@ -892,7 +892,7 @@ Blob &lt;Name&gt; (transient);</pre>
 						</p>
 						<p>
 							<strong>Hinweis</strong>
-							Aus GrÃŒnden der Performance sollten nicht zu groÃe BinÃ€rdaten in einer Datenbank gespeichert werden. GroÃe DatensÃ€tze bringt man
+							Aus Gründen der Performance sollten nicht zu große Binärdaten in einer Datenbank gespeichert werden. Große Datensätze bringt man
 							besser im Dateisystem unter.
 						</p>
 						</section>
@@ -900,8 +900,8 @@ Blob &lt;Name&gt; (transient);</pre>
 						<section id="Boolean" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Boolean</h3>
 						<p>
-							Einen einfachen Booleschen Datentypen fÃŒhrt man mit dem SchlÃŒsselwort <code class="prettyprint lang-jeelang">Boolean</code> ein. Sollte der Attrributname active lauten, wird noch
-							weitere FunktionalitÃ€t generiert. In der XHTML-Maske wird in der Liste ein Kommandolink ergÃ€nzt, mit dem der Aktivierungsstatus dieses
+							Einen einfachen Booleschen Datentypen führt man mit dem Schlüsselwort <code class="prettyprint lang-jeelang">Boolean</code> ein. Sollte der Attrributname active lauten, wird noch
+							weitere Funktionalität generiert. In der XHTML-Maske wird in der Liste ein Kommandolink ergänzt, mit dem der Aktivierungsstatus dieses
 							Attributes gewechselt werden kann. Das setzt weitere Methoden im Action Handler und im DAO voraus, die automatisch mit generiert werden.
 						</p>
 						<p>
@@ -923,10 +923,10 @@ Blob &lt;Name&gt; (transient);</pre>
 						<h3>Timestamp</h3>
 						<p>
 							Mit diesem Datentypen kann ein Zeitstempel bestehend aus Uhrzeit und Kalenderdatum in der Datenbank gespeichert werden. In der Entity
-							Bean wird hierfÃŒr der Datentyp <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/Date.html"><abbr title="java.util.Date">Date</abbr></a> verwendet. Ãber die Verwendung von Datumsangaben ÃŒber Prepared Statements in EQL wird
-							in diesem Artikel berichtet. Wird dem SchlÃŒsselwort <code class="prettyprint lang-jeelang">Timestamp</code> noch ein <code class="prettyprint lang-jeelang">auto</code> beigegeben, so wird automatisch beim erstmaligem Speichern
-							der Entity Bean das Erzeugungsdatum in dieses Attribut gespeichert. Benutzt man stattdessen oder zusÃ€tzlich noch das SchlÃŒsselwort
-							<code class="prettyprint lang-jeelang">update</code>, wird bei jeder Ãnderung der Entity Bean in der Datenbank dieses Attribut auf den aktuellen Zeitstempel gebracht. Die Syntax
+							Bean wird hierfür der Datentyp <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/Date.html"><abbr title="java.util.Date">Date</abbr></a> verwendet. Über die Verwendung von Datumsangaben über Prepared Statements in EQL wird
+							in diesem Artikel berichtet. Wird dem Schlüsselwort <code class="prettyprint lang-jeelang">Timestamp</code> noch ein <code class="prettyprint lang-jeelang">auto</code> beigegeben, so wird automatisch beim erstmaligem Speichern
+							der Entity Bean das Erzeugungsdatum in dieses Attribut gespeichert. Benutzt man stattdessen oder zusätzlich noch das Schlüsselwort
+							<code class="prettyprint lang-jeelang">update</code>, wird bei jeder Änderung der Entity Bean in der Datenbank dieses Attribut auf den aktuellen Zeitstempel gebracht. Die Syntax
 							lautet:
 						</p>
 						<p>
@@ -936,7 +936,7 @@ Timestamp (auto) (update) &lt;Name&gt; (transient);</pre>
 							<p>
 						</p>
 						<p>
-							FÃŒr folgende Modellzeile
+							Für folgende Modellzeile
 						</p>
 						<p>
 							</p>
@@ -961,8 +961,8 @@ Timestamp timestamp1;</pre>
 							<p>
 						</p>
 						<p>
-							Wird beim <code class="prettyprint lang-jeelang">Timestamp</code> das SchlÃŒsselwort <code class="prettyprint lang-jeelang">auto</code> oder <code class="prettyprint lang-jeelang">update</code> ergÃ€nzt, wird kein
-							Formulareinstrag im XHTML generiert. Stattdessen werd in der Entity Bean entsprechende Methoden ergÃ€nzt:
+							Wird beim <code class="prettyprint lang-jeelang">Timestamp</code> das Schlüsselwort <code class="prettyprint lang-jeelang">auto</code> oder <code class="prettyprint lang-jeelang">update</code> ergänzt, wird kein
+							Formulareinstrag im XHTML generiert. Stattdessen werd in der Entity Bean entsprechende Methoden ergänzt:
 						</p>
 						<p>
 							</p>
@@ -993,8 +993,8 @@ public void preUpdate() {
 						<section id="Date" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Date</h3>
 						<p>
-							Mit diesem Datentypen kann ein Kalenderdatum in der Datenbank untergebracht werden. In der Entity Bean wird hierfÃŒr der Datentyp
-							<a href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/Date.html"><abbr title="java.util.Date">Date</abbr></a> verwendet. Ãber die Verwendung von Datumsangaben ÃŒber Prepared Statements in EQL wird in diesem Artikel
+							Mit diesem Datentypen kann ein Kalenderdatum in der Datenbank untergebracht werden. In der Entity Bean wird hierfür der Datentyp
+							<a href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/Date.html"><abbr title="java.util.Date">Date</abbr></a> verwendet. Über die Verwendung von Datumsangaben über Prepared Statements in EQL wird in diesem Artikel
 							berichtet. Die Syntax lautet:
 						</p>
 						<p>
@@ -1004,7 +1004,7 @@ Date &lt;Name&gt; (transient);</pre>
 							<p>
 						</p>
 						<p>
-							Eine automatische Aktualisierung bei Anlegen und Ãndern dieses Attributtyps wie beim Timestamp existiert bei diesem Attributtypen nicht! Aus der Modellzeile
+							Eine automatische Aktualisierung bei Anlegen und Ändern dieses Attributtyps wie beim Timestamp existiert bei diesem Attributtypen nicht! Aus der Modellzeile
 						</p>
 						<p>
 							</p>
@@ -1042,8 +1042,8 @@ Entity &lt;Typ&gt; ([]) &lt;Name&gt;;</pre>
 						</p>
 						<p>
 							Es wird zwischen einer 1:1- und einer 1:n-Relation unterschieden, indem dem Entity Typen das Symbol [] beigestellt wird.
-							Die 1:1-Relation wird in einem XHTML-Formular nicht dargestellt. Soll fÃŒr diesen Fall eine Combobox zur Auswahl dargestellt werden,
-							muss das Attribut als <code class="prettyprint lang-jeelang">Option</code>(s.u.) deklariert werden. FÃŒr eine 1:n-Relation wird ein Button bereitgestellt, in der
+							Die 1:1-Relation wird in einem XHTML-Formular nicht dargestellt. Soll für diesen Fall eine Combobox zur Auswahl dargestellt werden,
+							muss das Attribut als <code class="prettyprint lang-jeelang">Option</code>(s.u.) deklariert werden. Für eine 1:n-Relation wird ein Button bereitgestellt, in der
 							die Liste der Entity Beans bearbeitet werden kann.
 						</p>
 						</section>
@@ -1051,8 +1051,8 @@ Entity &lt;Typ&gt; ([]) &lt;Name&gt;;</pre>
 						<section id="Option" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Option</h3>
 						<p>
-							Soll in einer Entity Bean eine 1:1-Relation in einer Combobox ausgewÃ€hlt werden kÃ¶nnen, muss der entsprechende Attributtyp <code class="prettyprint lang-jeelang">Option</code>
-							lauten. Die Syntax ist Ã€hnlich dem <code class="prettyprint lang-jeelang">Entity</code>-Attributtyp mit dem Unterschied, dass keine 1:n-Relation benutzt werden kann:
+							Soll in einer Entity Bean eine 1:1-Relation in einer Combobox ausgewählt werden können, muss der entsprechende Attributtyp <code class="prettyprint lang-jeelang">Option</code>
+							lauten. Die Syntax ist ähnlich dem <code class="prettyprint lang-jeelang">Entity</code>-Attributtyp mit dem Unterschied, dass keine 1:n-Relation benutzt werden kann:
 						</p>
 						<p>
 							</p>
@@ -1088,19 +1088,19 @@ Option UserInfo      owner;</pre>
 							<p>
 						</p>
 						<p>
-							Der Action Handler stellt die Liste der mÃ¶glichen Auswahlelemente bereit. In diesem Falle muss die Klasse OrderingHandler die
-							Methode getUserInfoList() bereitstellen. In dem Beispiel darf die 1:1-Relation den Wert null annehmen. Soll das nicht mÃ¶glich sein,
-							muss das &lt;f:selectItem&gt;-Tag entfernt werden. ZusÃ€tzlich werden noch an der Entity Bean die Methoden hashCode() und equals() ÃŒberladen.
+							Der Action Handler stellt die Liste der möglichen Auswahlelemente bereit. In diesem Falle muss die Klasse OrderingHandler die
+							Methode getUserInfoList() bereitstellen. In dem Beispiel darf die 1:1-Relation den Wert null annehmen. Soll das nicht möglich sein,
+							muss das &lt;f:selectItem&gt;-Tag entfernt werden. Zusätzlich werden noch an der Entity Bean die Methoden hashCode() und equals() überladen.
 							Die von den generierten Action Handlern beinhalten den dazu passenden Value Converter. In diesem Beispiel stellt die Klasse
-							OrderingHandler ÃŒber die Methode getUserInfoConverter() den Converter als innere Klasse UserInfoConverter zur VerfÃŒgung.
+							OrderingHandler über die Methode getUserInfoConverter() den Converter als innere Klasse UserInfoConverter zur Verfügung.
 						</p>
 						</section>
 						<!-- subsection -->
 						<section id="History" style="padding-top: 68px; margin-top: -68px;">
 						<h3>History</h3>
 						<p>
-							Eine <code class="prettyprint lang-jeelang">History</code> ist eine spezielle Form der 1:n-Relation. Es kÃ¶nnen EintrÃ€ge in diese Liste hinzugefÃŒgt werden,
-							allerdings keine gelÃ¶scht werden. Dadurch kann ein zeitlicher Verlauf zu einer Entity Bean nachgehalten werden.
+							Eine <code class="prettyprint lang-jeelang">History</code> ist eine spezielle Form der 1:n-Relation. Es können Einträge in diese Liste hinzugefügt werden,
+							allerdings keine gelöscht werden. Dadurch kann ein zeitlicher Verlauf zu einer Entity Bean nachgehalten werden.
 						</p>
 						<p>
 							<strong>Achtung!</strong>
@@ -1113,16 +1113,16 @@ Option UserInfo      owner;</pre>
 						<h3>Besonderheiten der generierten Entity Beans</h3>
 						<p>
 							Die generierten Entity Beans bieten noch einige Eigenschaften, die den Umgang mit den Entity Beans vereinfachen. So wird die
-							toString()-Methode ÃŒberladen, um alle Attribute der Entity Bean auf einfache Weise ausgeben zu kÃ¶nnen. Das ist fÃŒr Logging-Zwecke
+							toString()-Methode überladen, um alle Attribute der Entity Bean auf einfache Weise ausgeben zu können. Das ist für Logging-Zwecke
 							besonders sinnvoll.
 						</p>
 						<p>
-							SÃ€mtliche Attribute und Methoden werden mit Javadoc-Kommentaren dokumentiert.
+							Sämtliche Attribute und Methoden werden mit Javadoc-Kommentaren dokumentiert.
 						</p>
 						<p>
-							Wird in keinen Attribut das SchlÃŒsselwort <code class="prettyprint lang-jeelang">id</code> verwendet, wird automatisch eine ID-Spalte generiert, die die IDs aus
+							Wird in keinen Attribut das Schlüsselwort <code class="prettyprint lang-jeelang">id</code> verwendet, wird automatisch eine ID-Spalte generiert, die die IDs aus
 							einer ID-Tabelle beziehen. Diese Form der ID-Generierung ist die kompatibelste Variante zwischen den Application Servern und den
-							verwendeten Datenbanken. Jede Tabelle erhÃ€lt in der IDs-Tabelle eine eigene Zeile, in denen die ID-Ranges verwaltet werden.
+							verwendeten Datenbanken. Jede Tabelle erhält in der IDs-Tabelle eine eigene Zeile, in denen die ID-Ranges verwaltet werden.
 						</p>
 						<p>
 							</p>
@@ -1153,7 +1153,7 @@ public void setId(final int id) {
 							<p>
 						</p>
 						<p>
-							Den Entity Beans kÃ¶nnen durch weitere SchlÃŒsselwÃ¶rter noch zusÃ€tzliche Eigenschaften hinzugefÃŒgt werden. Zu diesem Zweck empfiehlt
+							Den Entity Beans können durch weitere Schlüsselwörter noch zusätzliche Eigenschaften hinzugefügt werden. Zu diesem Zweck empfiehlt
 							sich die Auflistung der Syntax:
 						</p>
 						<p>
@@ -1163,7 +1163,7 @@ entity &lt;Name&gt; (filterable) (cloneable) { &lt;Attributes&gt;+ } (persistenc
 							<p>
 						</p>
 						<p>
-							Wie die Attribute attributes aussehen mÃŒssen wurde ja schon beschrieben. Werden fÃŒr Auswahllisten Optionen verwendet, sieht die Syntax leicht erweitert aus. Hier lautet die Syntax:
+							Wie die Attribute attributes aussehen müssen wurde ja schon beschrieben. Werden für Auswahllisten Optionen verwendet, sieht die Syntax leicht erweitert aus. Hier lautet die Syntax:
 						</p>
 						<p>
 							</p>
@@ -1181,28 +1181,28 @@ options &lt;Name&gt; (filterable) (cloneable) (editable { &lt;Attributes&gt;+ })
 							<p>
 							
 							Die nicht editierbaren Enumerations wurden weiter oben schon beispielhaft beschrieben. Um in einer XHTML eine andere Entity Bean
-							als 1:1-Relation in einer Auswahlbox auswÃ€hlen zu kÃ¶nnen, muss die Referenz auf diese Entity Bean als Option-Attribut benutzt werden.
-							Sie unterscheiden sich ansonsten nicht von den ÃŒblichen Entity Beans, die mit dem entity-SchlÃŒsselwort beschrieben werden.
+							als 1:1-Relation in einer Auswahlbox auswählen zu können, muss die Referenz auf diese Entity Bean als Option-Attribut benutzt werden.
+							Sie unterscheiden sich ansonsten nicht von den üblichen Entity Beans, die mit dem entity-Schlüsselwort beschrieben werden.
 						</p>
 						<p>
-							FÃŒr alle Varianten gilt, dass man die erzeugte Entity Bean in eine andere Persistenz Unit hinzufÃŒgen kann. Es ist dabei zu beachten,
-							dass alle rekursiv enthaltenen Relationen auf andere Entity Beans auch in derselben Persistenz Unit sein mÃŒssen. Der Eclipse-Editor
-							quittiert das entsprechend mit einer Fehlermarkirung im Editor udn der Generatorlauf schlÃ€gt dementsprechend fehl. LÃ€sst man die
-							Definition auf die Persistenz Unit weg, wird automatisch die erste aufgelistete gewÃ€hlt.
+							Für alle Varianten gilt, dass man die erzeugte Entity Bean in eine andere Persistenz Unit hinzufügen kann. Es ist dabei zu beachten,
+							dass alle rekursiv enthaltenen Relationen auf andere Entity Beans auch in derselben Persistenz Unit sein müssen. Der Eclipse-Editor
+							quittiert das entsprechend mit einer Fehlermarkirung im Editor udn der Generatorlauf schlägt dementsprechend fehl. Lässt man die
+							Definition auf die Persistenz Unit weg, wird automatisch die erste aufgelistete gewählt.
 						</p>
 						</section>
 						<!-- subsection -->
 						<section id="Ergebnislistenfiltern" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Ergebnislisten filtern</h3>
 						<p>
-							Speziell fÃŒr die Suche von Entity Beans aus Ergebnislisten kann das Filterable-Interface benutzt werden. Dieses Interface erfordert
-							die Implementierung der Methode public boolean filter(String pattern, Locale locale). Wird das SchlÃŒsselwort <code class="prettyprint lang-jeelang">filterable</code>
+							Speziell für die Suche von Entity Beans aus Ergebnislisten kann das Filterable-Interface benutzt werden. Dieses Interface erfordert
+							die Implementierung der Methode public boolean filter(String pattern, Locale locale). Wird das Schlüsselwort <code class="prettyprint lang-jeelang">filterable</code>
 							gesetzt, wird die Entity Bean in eine abstrakte Klasse und eine konkrete Klasse generiert. Die konkrete Klasse muss dann die besagte
 							Methode filter() implementieren. Da Suchen in Java schneller vonstatten geht, als in der Datenbank, macht das java-seitige Filtern bei
-							relativ kleinen Datenmengen Sinn. Bei groÃen Datenmengen sollte nach wie vor auf Seiten der Datenbank gefiltert werden. Ein weiterer
-							Vorteil der filter()-Methode ist, dass auf transienten Attributen gesucht werden kann. Um die MÃ¶glichkeit zu haben, sprachabhÃ€ngig zu
-							vergleichen oder zu suchen, wird der Methode filter() die entsprechende Locale mitgegeben. Ein Beispiel fÃŒr eine 
-							filter()-Implementierung kÃ¶nnte so aussehen:
+							relativ kleinen Datenmengen Sinn. Bei großen Datenmengen sollte nach wie vor auf Seiten der Datenbank gefiltert werden. Ein weiterer
+							Vorteil der filter()-Methode ist, dass auf transienten Attributen gesucht werden kann. Um die Möglichkeit zu haben, sprachabhängig zu
+							vergleichen oder zu suchen, wird der Methode filter() die entsprechende Locale mitgegeben. Ein Beispiel für eine 
+							filter()-Implementierung könnte so aussehen:
 						</p>
 						<p>
 							</p>
@@ -1215,11 +1215,11 @@ public boolean filter(String pattern, Locale locale)
 							<p>
 						</p>
 						<p>
-							In diesem Beispiel wird abhÃ€ngig von der ÃŒbergebenen Locale nach einem Suchmuster pattern in einer Bestellposition gesucht. Die
-							Bestellposition ist ein transientes Attribut. Bestellposition und Suchmuster werden gemÃ€Ã des verwendeten Locales in Kleinbuchstaben
-							umgewandelt. Die Implementierung der filter()-Methode reicht natÃŒrlich nicht aus. Es muss natÃŒrlich ÃŒber eine Datenmenge gefiltert
-							werden. Das geschieht sinnvollerweise in einem Action Handler. Dort wird ÃŒber das DAO eine Datenmenge bezogen, danach gefiltert und
-							an die ÃŒbergeordnete XHTML-Seite ÃŒbergeben. Eine solche getList()-Methode kÃ¶nnte folgendes Ausssehen haben:
+							In diesem Beispiel wird abhängig von der übergebenen Locale nach einem Suchmuster pattern in einer Bestellposition gesucht. Die
+							Bestellposition ist ein transientes Attribut. Bestellposition und Suchmuster werden gemäß des verwendeten Locales in Kleinbuchstaben
+							umgewandelt. Die Implementierung der filter()-Methode reicht natürlich nicht aus. Es muss natürlich über eine Datenmenge gefiltert
+							werden. Das geschieht sinnvollerweise in einem Action Handler. Dort wird über das DAO eine Datenmenge bezogen, danach gefiltert und
+							an die übergeordnete XHTML-Seite übergeben. Eine solche getList()-Methode könnte folgendes Ausssehen haben:
 						</p>
 						<p>
 							</p>
@@ -1241,8 +1241,8 @@ public List&lt;OrderPosition&gt; lastOrderList()
 						</p>
 						<p>
 							Die Klasse FilteredList erweitert die Klasse ArrayList und ist in der <a href="JEE6-Utils">javadoc/</a>-Bibliothek enthalten. Sie kann nur Elemente
-							aufnehmen, die das Filterable-Interface implementieren. Die Klasse ÃŒberlÃ€dt die Methoden add() und addAll(), in denen das
-							Filtern stattfindet. Es werden nur Elemente der Liste hinzugefÃŒgt, die bei Aufruf der Elementmethode filter() true zurÃŒckliefern.
+							aufnehmen, die das Filterable-Interface implementieren. Die Klasse überlädt die Methoden add() und addAll(), in denen das
+							Filtern stattfindet. Es werden nur Elemente der Liste hinzugefügt, die bei Aufruf der Elementmethode filter() true zurückliefern.
 							Das Locale wird aus dem Request ermittelt und entspricht damit der im Browser eingestellten Sprache.
 						</p>
 						</section>
@@ -1250,10 +1250,10 @@ public List&lt;OrderPosition&gt; lastOrderList()
 						<section id="EntityBeansklonen" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Entity Beans klonen</h3>
 						<p>
-							Unter UmstÃ€nden kann es nÃ¶tig sein, dass eine Entity Bean geklont wird. Ein Beispiel hierfÃŒr ist, wenn Bestellpositionen kopiert
-							werden sollen. In diesem Fall muss das SchlÃŒsselwort clonable nach dem Namen der Entity Bean mitgegeben werden. Dabei wird die
-							Methode clone() ÃŒberladen. Damit es mit der Datenbank keine Probleme gibt, wird das ID-Attribut gelÃ¶scht, um die geklonte Entity
-							Bean spÃ€ter neu persistieren zu kÃ¶nnen.
+							Unter Umständen kann es nötig sein, dass eine Entity Bean geklont wird. Ein Beispiel hierfür ist, wenn Bestellpositionen kopiert
+							werden sollen. In diesem Fall muss das Schlüsselwort clonable nach dem Namen der Entity Bean mitgegeben werden. Dabei wird die
+							Methode clone() überladen. Damit es mit der Datenbank keine Probleme gibt, wird das ID-Attribut gelöscht, um die geklonte Entity
+							Bean später neu persistieren zu können.
 						</p>
 						</section>
 						</section>
@@ -1269,8 +1269,8 @@ public List&lt;OrderPosition&gt; lastOrderList()
 						</h1>
 						<hr style="margin-top: 5px; margin-bottom: 5px;">
 						<p>
-							Neben der allgemeinen Beschreibung der Web Applikation und die Definition der Entity Beans im Modell gibt es als weiteren groÃen
-							Block die Definition der Prozesse. Ãber Prozesse kann definiert werden, fÃŒr welche Entity Beans Dialogmasken generiert werden
+							Neben der allgemeinen Beschreibung der Web Applikation und die Definition der Entity Beans im Modell gibt es als weiteren großen
+							Block die Definition der Prozesse. Über Prozesse kann definiert werden, für welche Entity Beans Dialogmasken generiert werden
 							sollen und bei Bedarf, welche Rollen darauf Zugriff haben darf. Die Syntax lautet:
 						</p>
 						<p>
@@ -1281,14 +1281,14 @@ process &lt;Process-Name&gt; (roles &lt;Roles&gt;+) { &lt;Properties&gt;* &lt;En
 						</p>
 						<p>
 							Der Name eines Prozesses taucht in der URI auf. Die URL ist dann wie folgt aufgebaut:
-							http://&lt;host&gt;/&lt;context&gt;/&lt;process-name&gt;/&lt;entity&gt;.xhtml. Mit dem SchlÃŒsselwort roles kann festgelegt werden, welche Rollen darauf
-							Zugriff haben. Im Prozess kÃ¶nnen beliebig viele Properties untergebracht werden. Es handelt sich dabei um Werte, die im Application
-							Server konfiguriert werden und per JDNI referenziert werden. Die Auflistung der Entity Beans fÃŒhrt dazu, dass die dafÃŒr nÃ¶tigen
+							http://&lt;host&gt;/&lt;context&gt;/&lt;process-name&gt;/&lt;entity&gt;.xhtml. Mit dem Schlüsselwort roles kann festgelegt werden, welche Rollen darauf
+							Zugriff haben. Im Prozess können beliebig viele Properties untergebracht werden. Es handelt sich dabei um Werte, die im Application
+							Server konfiguriert werden und per JDNI referenziert werden. Die Auflistung der Entity Beans führt dazu, dass die dafür nötigen
 							XHTML-Dateien generiert werden.
 						</p>
 						<p>
-							FÃŒr jeden Prozess wird ein eigener Action Handler und ein eigenes DAO generiert. Hier werden die benÃ¶tigten Zugriffsmethoden auf die
-							konfigurierten Entity Beans und evtl. die benÃ¶tigten Value Converter generiert. Die Ableitungshierarchie ist dreistufig:
+							Für jeden Prozess wird ein eigener Action Handler und ein eigenes DAO generiert. Hier werden die benötigten Zugriffsmethoden auf die
+							konfigurierten Entity Beans und evtl. die benötigten Value Converter generiert. Die Ableitungshierarchie ist dreistufig:
 						</p>
 						<p>
 							</p>
@@ -1309,7 +1309,7 @@ process &lt;Process-Name&gt; (roles &lt;Roles&gt;+) { &lt;Properties&gt;* &lt;En
 							<p>
 						</p>
 						<p>
-							In den Action Handlern werden fÃŒr die XHTML-Dateien die Zugriffsmethoden bereitgestellt, die wiederum auf die dazugehÃ¶rigen DAOs
+							In den Action Handlern werden für die XHTML-Dateien die Zugriffsmethoden bereitgestellt, die wiederum auf die dazugehörigen DAOs
 							zugreifen. Veranschaulicht wird das anhand folgenden Beispielmodells, dass teilweise schon bei den <a href="<ref.href»">Entity Beans</a> beschrieben wurde:
 							</p>
 							<pre class="prettyprint lang-jeelang linenums">
@@ -1355,8 +1355,8 @@ process User
 						<section id="GenerierteMethodenimActionHandler" style="padding-top: 68px; margin-top: -68px;">
 						<h2 style="padding-top: 15px;">Generierte Methoden im Action Handler</h2>
 						<p>
-							Die Klasse AbstractUserHandler liefert fÃŒr die Zugriffskontrolle die Methode isAllowed(), die in der XHTML verwendet werden kann. Da
-							in diesem Falle keine Zugriffsberechtigungen auf Rollen beschrÃ€nkt wurden, liefert diese Methode immer <code class="prettyprint lang-java">true</code> zurÃŒck. Ferner wird in
+							Die Klasse AbstractUserHandler liefert für die Zugriffskontrolle die Methode isAllowed(), die in der XHTML verwendet werden kann. Da
+							in diesem Falle keine Zugriffsberechtigungen auf Rollen beschränkt wurden, liefert diese Methode immer <code class="prettyprint lang-java">true</code> zurück. Ferner wird in
 							diese Klasse eine Referenz auf das DAO UserDaoBean mit Namen dao vom Application Server injiziert:
 						</p>
 						<p>
@@ -1367,8 +1367,8 @@ protected UserDaoBean dao;</pre>
 							<p>
 						</p>
 						<p>
-							FÃŒr die Entity Bean Person soll ein XHTML-Formular generiert werden. Da in dieser Entity Bean eine 1:n-Relation auf die Entity Bean
-							Address enthalten ist, werden die entsprechenden Zugriffsmethoden dafÃŒr gleich mit generiert. Die Methoden fÃŒr die Klasse <strong>Person</strong> lauten:
+							Für die Entity Bean Person soll ein XHTML-Formular generiert werden. Da in dieser Entity Bean eine 1:n-Relation auf die Entity Bean
+							Address enthalten ist, werden die entsprechenden Zugriffsmethoden dafür gleich mit generiert. Die Methoden für die Klasse <strong>Person</strong> lauten:
 							</p>
 							<pre class="prettyprint lang-java linenums">
 abstract public List&lt;Person&gt; getPersonList();
@@ -1380,8 +1380,8 @@ abstract String backFromPerson();</pre>
 							<p>
 						</p>
 						<p>
-							Der Action Handler <strong>PersonHandler</strong> ist Session scoped. Dadurch lÃ€sst sich der Zustand der Entity Bean <strong>Person</strong> speichern. Dadurch
-							brauchen wir hierfÃŒr auch Zugriffsmethoden:
+							Der Action Handler <strong>PersonHandler</strong> ist Session scoped. Dadurch lässt sich der Zustand der Entity Bean <strong>Person</strong> speichern. Dadurch
+							brauchen wir hierfür auch Zugriffsmethoden:
 							</p>
 							<pre class="prettyprint lang-java linenums">
 public Person  getPerson();
@@ -1390,8 +1390,8 @@ public boolean isPersonEmpty(final Person person);</pre>
 							<p>
 						</p>
 						<p>
-							Auf die Implementierung wurde der Ãbersichtlichkeit halber verzichtet. Die Methode isPersonEmpty() wurde nur generiert, weil in der
-							Entity Bean Person eine 1:n-Relation enthalten ist. FÃŒr die Klasse <strong>Address</strong> lauten die Zugriffsmethoden:
+							Auf die Implementierung wurde der Übersichtlichkeit halber verzichtet. Die Methode isPersonEmpty() wurde nur generiert, weil in der
+							Entity Bean Person eine 1:n-Relation enthalten ist. Für die Klasse <strong>Address</strong> lauten die Zugriffsmethoden:
 						</p>
 						<p>
 							public Address getAddress();
@@ -1411,8 +1411,8 @@ abstract String backFromAddress();</pre>
 							<p>
 						</p>
 						<p>
-							Die entsprechenden Methoden werden im konkreten Action Handler implementiert und kÃ¶nnen nach Bedarf angepasst werden. WÃ€re im
-							Modell fÃŒr die 1:n-Relation eine History vermerkt, wÃŒrde die Methode removeAddress() fehlen.
+							Die entsprechenden Methoden werden im konkreten Action Handler implementiert und können nach Bedarf angepasst werden. Wäre im
+							Modell für die 1:n-Relation eine History vermerkt, würde die Methode removeAddress() fehlen.
 						</p>
 						<p>
 							<strong>Hinweis!</strong>
@@ -1423,8 +1423,8 @@ abstract String backFromAddress();</pre>
 						<section id="DiegeneriertenMethodenimDAO" style="padding-top: 68px; margin-top: -68px;">
 						<h2 style="padding-top: 15px;">Die generierten Methoden im DAO</h2>
 						<p>
-							Der Action Handler nimmt von den XHTML-Seiten die Events entgegen. Das kÃ¶nnen Klick-Events, Links, Submits oder Validations sein.
-							FÃŒr den Zugriff auf die Datenbank ist aber eine weitere Komponente notwendig. Diese DAOs sind als Stateless Session Beans
+							Der Action Handler nimmt von den XHTML-Seiten die Events entgegen. Das können Klick-Events, Links, Submits oder Validations sein.
+							Für den Zugriff auf die Datenbank ist aber eine weitere Komponente notwendig. Diese DAOs sind als Stateless Session Beans
 							implementiert. In das DAO werden Zugriffsmethoden auf die Datenbank generiert. Da jeder Prozess seinen eigenen Action Handler sowie
 							sein eigenes DAO hat, kann das zum Action Handler passende DAO direkt in den Action Handler injiziert werden.
 							</p>
@@ -1436,7 +1436,7 @@ public List&lt;Person&gt; getPersonList();</pre>
 							<p>
 						</p>
 						<p>
-							Da die Entity Bean <strong>Person</strong> eine 1:n-Relation enthÃ€lt, sind auch entsprechende Methoden fÃŒr das HinzufÃŒgen und Entfernen aus der
+							Da die Entity Bean <strong>Person</strong> eine 1:n-Relation enthält, sind auch entsprechende Methoden für das Hinzufügen und Entfernen aus der
 							Relation vorhanden:
 							</p>
 							<pre class="prettyprint lang-java linenums">
@@ -1446,7 +1446,7 @@ public List&lt;Address&gt; getAddressList(final Person person);</pre>
 							<p>
 						</p>
 						<p>
-							Die Methoden fÃŒr die Entity Bean Address wird auch der VollstÃ€ndigkeit halber aufgelistet:
+							Die Methoden für die Entity Bean Address wird auch der Vollständigkeit halber aufgelistet:
 							</p>
 							<pre class="prettyprint lang-java linenums">
 public void addAddress(final Address address);
@@ -1461,13 +1461,13 @@ public List&lt;Address&gt; getAddressList();</pre>
 						<h2 style="padding-top: 15px;">Rollen</h2>
 						<p>
 							Werden Rollen verwendet, muss auch eine Security Domain konfiguriert werden. Die entsprechenden Zugriffsrechte werden in die web.xml
-							reingeneriert. Je nach verwendetem Application Server mÃŒssen noch weitere Deskriptoren mit weiteren Roll Mappings konfiguriert werden.
+							reingeneriert. Je nach verwendetem Application Server müssen noch weitere Deskriptoren mit weiteren Roll Mappings konfiguriert werden.
 							Da sich diese Deskriptoren nicht gegenseitig beeinflussen, werden sie schon prophylaktisch vorgeneriert.
 						</p>
 						<p>
-							Die Action Handler enthalten Methoden, um programmatisch die RollenzugehÃ¶rigkeit abzufragen. Das kann im XHTML dazu verwendet werden,
-							um mittels des &lt;ui:fragment&gt;-Tags BlÃ¶cke nur bei Berechtigung sichbar zu machen. Da ist zum Einen die Methode boolean isAllowed().
-							Diese Methode zeigt an, dass der Zugriff fÃŒr den eingeloggten Benutzer erlaubt ist. Ein Beispiel dafÃŒr lautet:
+							Die Action Handler enthalten Methoden, um programmatisch die Rollenzugehörigkeit abzufragen. Das kann im XHTML dazu verwendet werden,
+							um mittels des &lt;ui:fragment&gt;-Tags Blöcke nur bei Berechtigung sichbar zu machen. Da ist zum Einen die Methode boolean isAllowed().
+							Diese Methode zeigt an, dass der Zugriff für den eingeloggten Benutzer erlaubt ist. Ein Beispiel dafür lautet:
 						</p>
 						<p>
 							</p>
@@ -1478,22 +1478,22 @@ public List&lt;Address&gt; getAddressList();</pre>
 							<p>
 						</p>
 						<p>
-							Sollte keine Rolle fÃŒr den Prozess definiert worden sein, liefert diese Methode immer <code class="prettyprint lang-java">true</code> zurÃŒck. Man kann sich also auf die
+							Sollte keine Rolle für den Prozess definiert worden sein, liefert diese Methode immer <code class="prettyprint lang-java">true</code> zurück. Man kann sich also auf die
 							Existenz dieser Methode verlassen.
 						</p>
 						<p>
-							Die andere Methode heiÃt boolean isLoggedIn(). Mit dieser Methode wird ÃŒberprÃŒft, ob ein Benutzer ÃŒberhaupt eingeloggt ist.
+							Die andere Methode heißt boolean isLoggedIn(). Mit dieser Methode wird überprüft, ob ein Benutzer überhaupt eingeloggt ist.
 						</p>
 						</section>
 						<!--  section -->
 						<section id="Properties" style="padding-top: 68px; margin-top: -68px;">
 						<h2 style="padding-top: 15px;">Properties</h2>
 						<p>
-							Mittels Properties kÃ¶nnen auf Daten, die im Application Server konfiguriert sind mittels JNDI zugegriffen werden. So ist es mÃ¶glich
+							Mittels Properties können auf Daten, die im Application Server konfiguriert sind mittels JNDI zugegriffen werden. So ist es möglich
 							ein und dieselbe Applikation ohne Neubauen in unterschiedliche Laufzeitumgebungen zu bringen und dabei das Verhalten zu beeinflussen.
-							Wenn beispielsweise Ein Produktiv- und ein Staging-System vorhanden ist, die jeweils ÃŒber WebService ein anders Produktiv- und
-							Staging-System aufrufen wollen, kann ÃŒber diese Properties die dazu passende URL konfiguriert werden und die Applikation benutzt den
-							zu ihrer Umgebung korrekten WebService. Als Datentypen kÃ¶nnen fÃŒr Properties verwendet werden:
+							Wenn beispielsweise Ein Produktiv- und ein Staging-System vorhanden ist, die jeweils über WebService ein anders Produktiv- und
+							Staging-System aufrufen wollen, kann über diese Properties die dazu passende URL konfiguriert werden und die Applikation benutzt den
+							zu ihrer Umgebung korrekten WebService. Als Datentypen können für Properties verwendet werden:
 						</p>
 						<p>
 							</p>
@@ -1564,7 +1564,7 @@ private boolean build = false;</pre>
 						<section id="FreieResourceAdapter" style="padding-top: 68px; margin-top: -68px;">
 						<h2 style="padding-top: 15px;">Freie Resource Adapter</h2>
 						<p>
-							Es ist nicht nur mÃ¶glich, einfache Datentypen ÃŒber JNDI zu referenzieren. Bei der Syntax muss voll qualifiziert die Klasse angegeben
+							Es ist nicht nur möglich, einfache Datentypen über JNDI zu referenzieren. Bei der Syntax muss voll qualifiziert die Klasse angegeben
 							werden:
 						</p>
 						<p>

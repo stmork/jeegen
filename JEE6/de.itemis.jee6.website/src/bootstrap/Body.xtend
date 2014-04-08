@@ -18,7 +18,7 @@ class Body {
 			«ENDFOR»
 		</div>
 	'''
-	
+
 	def h1(AbstractSection section) '''
 		<!-- chapter -->
 		<section id="«section.hrefId»" style="padding-top: 68px; margin-top: -68px;">
