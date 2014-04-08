@@ -208,7 +208,7 @@ abstract class AbstractWebsite implements Resource {
 		
 		<!-- Le fav and touch icons -->
 		
-		<link rel="shortcut icon" href="images/favicon.png">
+		<link rel="shortcut icon" href="images/favicon.ico">
 		
 		<link href="css/bootstrap.css" rel="stylesheet" type='text/css'>
 		<link href="css/bootstrap-responsive.css" rel="stylesheet" type='text/css'>

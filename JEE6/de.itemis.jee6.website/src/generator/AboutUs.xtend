@@ -16,7 +16,7 @@ class AboutUs extends AbstractWebsite {
 			</div>
 		</div>
 	'''
-	
+
 	def entry(String img, String title, String link, String description) '''
 		<div class="row">
 			<div class="span1">&nbsp;</div>
