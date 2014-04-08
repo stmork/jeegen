@@ -27,10 +27,13 @@
 							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>${project.build.directory}/contents</outputDirectory>
+							<outputDirectory>${project.build.directory}/contents/</outputDirectory>
 							<resources>
 								<resource>
 									<directory>${basedir}/../de.itemis.jee6.xdoc/contents</directory>
+									<includes>
+                                		<include>**/*</include>
+                            		</includes>
 								</resource>
 							</resources>
 						</configuration>
