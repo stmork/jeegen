@@ -111,6 +111,7 @@ abstract class AbstractWebsite implements Resource {
 	def Iterable<Pair<String,String>> topLevelMenu() {
 		newArrayList(
 			'download.html' -> 'Download',
+			'features.html' -> 'Features',
 			'documentation.html' -> 'Documentation',
 			'community.html' -> 'Community',
 			'aboutus.html' -> 'Über uns',

@@ -11,6 +11,7 @@ class Generator {
 		out.generateFiles(
 			new Index,
 			new Download,
+			new Features,
 			new Community,
 			new AboutUs,
 			new Documentation
