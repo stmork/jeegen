@@ -25,12 +25,10 @@ class Download extends AbstractWebsite {
 	public static val WIN_32 = 'win32';
 
 	override contents() '''
-		«headline('Download')»
-		<div id="page">
-			<div class="inner">
-				<div class="container clearfix">
-					<h2>Downloads</h2>
-					<hr>
+	<div id="main" role="main">
+		<div id="maincontainer" class="clearfix centering">
+			<h2>Downloads</h2>
+			<div class="box introduction">
 					<!--table one starts-->
 					<div class="span1">&nbsp;</div>
 				    <div class="span4">

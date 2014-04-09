@@ -2,28 +2,19 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>JEE6 Generator</title>
+	<title>JEE Generator</title>
 	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
-	<meta name="description"
-		content="Die Website des JEE6 Generator Projects">
+	<meta name="description" content="Die Website des JEE Generator Projects">
 	<meta name="author" content="">
-	<!--  styles -->
-	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-	<!--[if lt IE 9]>
-	  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
-	
-	<!-- Le fav and touch icons -->
-	
 	<link rel="shortcut icon" href="images/favicon.ico">
 	
-	<link href="css/bootstrap.css" rel="stylesheet" type='text/css'>
-	<link href="css/bootstrap-responsive.css" rel="stylesheet" type='text/css'>
-	<link href="css/style.css" rel="stylesheet" type='text/css'>
-	<link href="css/shield-responsive.css" rel="stylesheet" type='text/css'>
-	<link href='css/fonts.css' rel='stylesheet' type='text/css'>
-	<link href="css/prettyPhoto.css" rel="stylesheet" media="screen" type='text/css'>
+	<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="de"> <![endif]-->
+	<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="de"> <![endif]-->
+	<!--[if IE 8]>    <html class="no-js lt-ie9" lang="de"> <![endif]-->
+	<!--[if gt IE 8]><!--> <html class="no-js" lang="de"> <!--<![endif]-->
 	<link href="google-code-prettify/prettify.css" type="text/css" rel="stylesheet"/>
+	<link href="css/general.css" type="text/css" rel="stylesheet"/>
+	<link href="css/jeegenerator.css" type="text/css" rel="stylesheet"/>
 	<!--[if lt IE 9]>
 	<link href="css/iebugs.css" rel="stylesheet" type='text/css'>
 	<![endif]-->
@@ -53,89 +44,71 @@
 	     });
 		</script>
 </head>
-<body>
-	<!-- Navbar -->
-	<div class="navbar navbar-fixed-top"
-		style="border-bottom: 1px solid #000;">
-		<div class="navbar-inner">
-			<div class="container">
-				<a class="btn btn-navbar" data-toggle="collapse"
-					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span>
-				</a> <a class="brand" href="index.html"></a>
-				<div class="nav-collapse collapse" style="height: 0px;">
-					<ul class="nav">
-						<li ><a href="download.html">Download</a></li>
+<body class="home">
+	<div id="wrap">
+		<header>
+			<div class="centering">
+				<div class="logo">
+					<a href="index.html">
+						<img src="images/logo.png" height="65" alt="JEE Generator" />
+					</a>
+				</div>
+				<nav class="menu">
+					<ul>
 						<li ><a href="features.html">Features</a></li>
-						<li ><a href="documentation.html">Dokumentation</a></li>
-						<li ><a href="community.html">Community</a></li>
 						<li ><a href="aboutus.html">Über uns</a></li>
-						<li ><a href="http://xtext.org">Xtext</a></li>
-						<li ><a href="http://www.eclipse.org">Eclipse.org</a></li>
+						<li ><a href="documentation.html">Dokumentation</a></li>
+						<li ><a href="download.html">Download</a></li>
 					</ul>
+				</nav>
+			</div>
+			<div id="slogan">
+				<div class="sloganCentering">
+					<h2>
+						<strong>Was ist der JEE Generator?</strong>
+						Der JEE-6Generator ist in der Lage, eine komplette JEE-Web-Applikation aus einem einfachen Modell zu generieren.
+						Das Framework wurde mit Xtext realisiert und ist als Eclipse-Plugin verfügbar. 
+					</h2>
 				</div>
+			</div>
+		</header>
+		<div id="homeContainer">
+			<div id="stage">
+				<div class="video centering">
+					<div class="content box" style="left: 0px;">
+						<a href="http://www.youtube.com/watch?v=spnmScZUJHc" rel="prettyPhoto" title="Vorstellung des JEE Generators">
+							<img src="images/videoThumbnail.png" alt="" style="height: 350px; width: 450px;"/>
+							<div class="overlay"></div>
+						</a>
+					</div>
+			
+					<div class="tour_next">
+						<h1>JEE Generator</h1>
+						<p><strong>Java Enterprise Entwicklung leicht gemacht!</strong></p>
+						<a href="features.html">weiter lesen</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer>
+		<div class="centering">
+			<nav>
+				<ul>
+					<li><a href="kontakt.html">Kontakt</a></li>
+					<li><a href="legal-notice.html">Impressum</a></li>
+				</ul>
+			</nav>
 	
+			<div class="logo">
+				<a href="http://www.itemis.de/"><img src="http://www.yakindu.com/resources/img/itemis_logo.png" alt="itemis" /></a>
+			</div>
+			<p>Copyright &copy; 2012&ndash;2014 <a href="http://www.itemis.de/">itemis AG</a>. Alle Rechte vorbehalten.</p>
+			<div class="powered">
+				Powered by: <a href="http://www.itemis.de/itemis-ag/services-und-loesungen/language=de/27261/eclipse-modeling"><img class="img-eclipse" src="http://www.yakindu.com/resources/img/eclipse_logo.jpg" alt="eclipse" /></a><a href="http://www.eclipse.org/Xtext/"><img src="http://www.yakindu.com/resources/img/xtext_logo.png" alt="xtext" /></a>
 			</div>
 		</div>
-	</div>
-	<!-- Navbar End -->
-<!--Container-->
-<br/><br/><br/>
-<div id="header_wrapper" class="container">
-	<div class="flexslider image-slider">
-		<div class="span5 slide">
-			<h2>
-				Java Enterprise Entwicklung <strong>leicht</strong> gemacht!
-			</h2>
-			<br />
-			<p>
-				Wiederholen Sie nicht sich selbst, wenn Sie dieselben Dinge wieder und wieder neu implementieren.
-				Benutzen Sie eine einfache DSL, um damit einen CRUD-Prototypen Ihrer Web-Applikation zu erzeugen.
-				Ändern und erweitern Sie Ihre Web-Applikation nach Ihren Bedürfnissen.
-			</p>
-			<a href="download.html" class="btn_download"></a>
-		</div>
-		<div class="span6">
-			<div class="introduction">
-				<a href="#"><img src="images/videoThumbnail.png"
-					alt="image" style="min-height: 420px; min-width: 580px;"/></a>
-				<a href="http://www.youtube.com/watch?v=spnmScZUJHc" rel="prettyPhoto" title="Vorstellung des JEE6 Generators" class="zoom zoom_icon"></a>
-			</div>
-		</div>
-	</div>
-</div>
-
-<div id="intro">
-	<div class="container">
-		<h1>Was ist der JEE6 Generator?</h1>
-
-		<p>
-			Der JEE-6Generator ist in der Lage, eine komplette JEE6-Web-Applikation aus einem einfachen Modell zu generieren.<br />
-			Das Framework wurde mit Xtext realisiert und ist als Eclipse-Plugin verfügbar.
-		</p>
-	</div>
-</div>
-	<div id="extra">
-		<div class="inner">
-			<div class="container">
-				<div class="row">
-					<div class="span6">
-						<h3 style="padding-top: 0px; margin-top: 0px;">Quick Links</h3>
-						<ul class="footer-links clearfix">
-							<li><a href="http://itemis.de/">itemis AG</a></li>
-							<li><a href="https://www.youtube.com/user/itemisAG">itemis Youtube Kanal</a></li>
-						</ul>
-						<ul class="footer-links clearfix">
-	      					<li><a href="http://www.jboss.org/jbossas">JBoss Application Server 7</a></li>
-							<li><a href="http://glassfish.java.net/">Glassfish Application Server</a></li>
-						</ul>
-					</div>
-					<div class="span6">
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	</footer>
 	<!-- Le javascript
 	    ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->

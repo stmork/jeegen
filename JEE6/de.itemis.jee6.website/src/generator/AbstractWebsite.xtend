@@ -28,7 +28,16 @@ abstract class AbstractWebsite implements Resource {
 		website.write(file.newWriterSupplier(Charsets::UTF_8))
 		println("generated '"+file+"'")
 	}
-	
+
+	def Iterable<Pair<String,String>> topLevelMenu() {
+		newArrayList(
+			'features.html' -> 'Features',
+			'aboutus.html' -> 'Über uns',
+			'documentation.html' -> 'Dokumentation',
+			'download.html' -> 'Download'
+		)
+	}
+
 	/*
 	 * the path relative the website root
 	 */
@@ -43,27 +52,28 @@ abstract class AbstractWebsite implements Resource {
 			<meta charset="utf-8">
 			<title>«websiteTitle»</title>
 			<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
-			<meta name="description"
-				content="«websiteDescription»">
+			<meta name="description" content="«websiteDescription»">
 			<meta name="author" content="">
 			«stylesheets»
 			«javaScriptDocumentStart»
 		</head>
-		<body>
-			«navBar»
-		«contents»
-			«quickLinks»
+		<body class="home">
+			<div id="wrap">
+				«header»
+				«contents»
+			</div>
+			«footer»
 			«javaScriptAtTheEnd»
 		</body>
 		</html>
 	'''
 	
 	def websiteDescription() { 
-		'Die Website des JEE6 Generator Projects'
+		'Die Website des JEE Generator Projects'
 	}
 
 	def websiteTitle() {
-		'JEE6 Generator'
+		'JEE Generator'
 	}
 	
 	def javaScriptDocumentStart() '''
@@ -107,65 +117,67 @@ abstract class AbstractWebsite implements Resource {
 	def protected boolean isPrettyPrint() { false }
 	def protected boolean isOutline() { true }
 	def protected boolean isPopover() { true }
-	
-	def Iterable<Pair<String,String>> topLevelMenu() {
-		newArrayList(
-			'download.html' -> 'Download',
-			'features.html' -> 'Features',
-			'documentation.html' -> 'Dokumentation',
-			'community.html' -> 'Community',
-			'aboutus.html' -> 'Über uns',
-			'http://xtext.org' -> 'Xtext',
-			'http://www.eclipse.org' -> 'Eclipse.org'
-		)
-	}
 
 	def navBar() '''
-		<!-- Navbar -->
-		<div class="navbar navbar-fixed-top"
-			style="border-bottom: 1px solid #000;">
-			<div class="navbar-inner">
-				<div class="container">
-					<a class="btn btn-navbar" data-toggle="collapse"
-						data-target=".nav-collapse"> <span class="icon-bar"></span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span>
-					</a> <a class="brand" href="index.html"></a>
-					<div class="nav-collapse collapse" style="height: 0px;">
-						<ul class="nav">
-							«FOR it : topLevelMenu»
-							<li «IF path == key»class="active"«ENDIF»><a href="«key»">«value»</a></li>
-							«ENDFOR»
-						</ul>
-					</div>
-		
-				</div>
-			</div>
-		</div>
-		<!-- Navbar End -->
+		<nav class="menu">
+			<ul>
+				«FOR it : topLevelMenu»
+					<li «IF path == key»class="active"«ENDIF»><a href="«key»">«value»</a></li>
+				«ENDFOR»
+			</ul>
+		</nav>
 	'''
 	
-	def quickLinks() '''
-		<div id="extra">
-			<div class="inner">
-				<div class="container">
-					<div class="row">
-						<div class="span6">
-							<h3 style="padding-top: 0px; margin-top: 0px;">Quick Links</h3>
-							<ul class="footer-links clearfix">
-								<li><a href="http://itemis.de/">itemis AG</a></li>
-								<li><a href="https://www.youtube.com/user/itemisAG">itemis Youtube Kanal</a></li>
-							</ul>
-							<ul class="footer-links clearfix">
-		      					<li><a href="http://www.jboss.org/jbossas">JBoss Application Server 7</a></li>
-								<li><a href="http://glassfish.java.net/">Glassfish Application Server</a></li>
-							</ul>
-						</div>
-						<div class="span6">
-						</div>
-					</div>
+	def header() '''
+		<header>
+			<div class="centering">
+				<div class="logo">
+					<a href="index.html">
+						<img src="images/logo.png" height="65" alt="JEE Generator" />
+					</a>
 				</div>
+				«navBar»
+			</div>
+			«slogan»
+		</header>
+	'''
+
+	def slogan() '''
+		<div id="slogan">
+			<div class="sloganCentering">
+				<h2>
+					<strong>Was ist der JEE Generator?</strong>
+					Der JEE-6Generator ist in der Lage, eine komplette JEE-Web-Applikation aus einem einfachen Modell zu generieren.
+					Das Framework wurde mit Xtext realisiert und ist als Eclipse-Plugin verfügbar. 
+				</h2>
 			</div>
 		</div>
+	'''
+
+
+
+
+
+
+	def footer() '''
+		<footer>
+			<div class="centering">
+				<nav>
+					<ul>
+						<li><a href="kontakt.html">Kontakt</a></li>
+						<li><a href="legal-notice.html">Impressum</a></li>
+					</ul>
+				</nav>
+		
+				<div class="logo">
+					<a href="http://www.itemis.de/"><img src="http://www.yakindu.com/resources/img/itemis_logo.png" alt="itemis" /></a>
+				</div>
+				<p>Copyright &copy; 2012&ndash;2014 <a href="http://www.itemis.de/">itemis AG</a>. Alle Rechte vorbehalten.</p>
+				<div class="powered">
+					Powered by: <a href="http://www.itemis.de/itemis-ag/services-und-loesungen/language=de/27261/eclipse-modeling"><img class="img-eclipse" src="http://www.yakindu.com/resources/img/eclipse_logo.jpg" alt="eclipse" /></a><a href="http://www.eclipse.org/Xtext/"><img src="http://www.yakindu.com/resources/img/xtext_logo.png" alt="xtext" /></a>
+				</div>
+			</div>
+		</footer>
 	'''
 
 	def javaScriptAtTheEnd() '''
@@ -201,30 +213,17 @@ abstract class AbstractWebsite implements Resource {
 	
 	
 	def stylesheets() '''
-		<!--  styles -->
-		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-		<!--[if lt IE 9]>
-		  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
-		
-		<!-- Le fav and touch icons -->
-		
 		<link rel="shortcut icon" href="images/favicon.ico">
 		
-		<link href="css/bootstrap.css" rel="stylesheet" type='text/css'>
-		<link href="css/bootstrap-responsive.css" rel="stylesheet" type='text/css'>
-		<link href="css/style.css" rel="stylesheet" type='text/css'>
-		<link href="css/shield-responsive.css" rel="stylesheet" type='text/css'>
-		<link href='css/fonts.css' rel='stylesheet' type='text/css'>
-		<link href="css/prettyPhoto.css" rel="stylesheet" media="screen" type='text/css'>
+		<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="de"> <![endif]-->
+		<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="de"> <![endif]-->
+		<!--[if IE 8]>    <html class="no-js lt-ie9" lang="de"> <![endif]-->
+		<!--[if gt IE 8]><!--> <html class="no-js" lang="de"> <!--<![endif]-->
 		<link href="google-code-prettify/prettify.css" type="text/css" rel="stylesheet"/>
+		<link href="css/general.css" type="text/css" rel="stylesheet"/>
+		<link href="css/jeegenerator.css" type="text/css" rel="stylesheet"/>
 		<!--[if lt IE 9]>
 		<link href="css/iebugs.css" rel="stylesheet" type='text/css'>
 		<![endif]-->
-	'''
-
-	def headline(String title) '''
-		<div id="header_wrapper" class="container" >
-		</div>
 	'''
 }

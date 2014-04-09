@@ -11,7 +11,6 @@ class ReleaseNotes  extends AbstractWebsite {
 	}
 	
 override contents() '''
-		«headline('Release Notes - Version 2.5.0 (December 2013)')»
 		<div id="page">
 	  <div class="inner">
 	    <div class="container clearfix">

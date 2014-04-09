@@ -12,13 +12,14 @@ class Generator {
 			new Index,
 			new Download,
 			new Features,
-			new Community,
+			new Kontakt,
 			new AboutUs,
-			new Documentation
+			new Documentation,
+			new LegalNotice
 		)
 		println("Done.")
 	}
-	
+
 	def static void generateFiles(File targetDir, Resource ... sites) {
 		for (site : sites) {
 			site.generateTo(targetDir)

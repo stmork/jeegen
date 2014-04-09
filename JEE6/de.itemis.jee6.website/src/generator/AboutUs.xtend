@@ -7,12 +7,11 @@ class AboutUs extends AbstractWebsite {
 	}
 	
 	override contents() '''
-	<div id="header_wrapper" class="container" >
-	</div>
-		<div id="page">
-			<div id="team" class="container clearfix"> 
-				<h2>Über uns</h2>
-				<hr/>
+	<div id="main" role="main">
+		<div id="maincontainer" class="clearfix centering">
+			<h2>Über uns</h2>
+			<div class="box introduction">
+	
 				<div id="Leute">
 					<div id="links">
 						<img src="images/mork.steffen.jpg"/>
