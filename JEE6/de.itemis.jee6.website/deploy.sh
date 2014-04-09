@@ -6,6 +6,6 @@ rsync -av --delete ${PWD}/website/ ${TMP_WEBSITE}/
 find  ${TMP_WEBSITE} -type d -name .svn | xargs rm -rf
 chmod -R g+rX,o+rX ${TMP_WEBSITE}/
 
-rsync -av --delete ${TMP_WEBSITE}/ root@updates.itemis.de:/data/jee6-generator/
+scp -a ${TMP_WEBSITE}/* root@updates.itemis.de:/data/jee6-generator/
 
 echo "Website deployed"
