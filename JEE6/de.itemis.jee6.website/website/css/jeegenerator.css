@@ -1,0 +1,175 @@
+00457C
+/* =============================================================================
+   Colors, Background images, ...
+   ========================================================================== */
+   
+body { background-image: url("img/large-bg.png"); }
+
+a:link,
+a:visited { color: #00457C; }
+
+a:hover { color: #6B645C; }
+
+
+th { color: #00457C; }
+
+
+#maincontainer h2,
+#maincontainer h3 {	color: #00457C; }
+
+
+nav.metamenu ul li strong,
+nav.metamenu ul li a { color: #999999; }
+
+nav.metamenu ul li strong,
+nav.metamenu ul li a:active,
+nav.metamenu ul li a:focus,
+nav.metamenu ul li a:hover { color: #00457C; }
+
+header div#slogan,
+header div#headline {
+  color: #ffffff;
+background: -moz-linear-gradient(left, rgba(0,69,124,0.95) 0%, rgba(51,106,150,0.95) 50%, rgba(0,69,124,0.95) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(0,69,124,0.95)), color-stop(50%,rgba(51,106,150,0.95)), color-stop(100%,rgba(0,69,124,0.95))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(left, rgba(0,69,124,0.95) 0%,rgba(51,106,150,0.95) 50%,rgba(0,69,124,0.95) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(left, rgba(0,69,124,0.95) 0%,rgba(51,106,150,0.95) 50%,rgba(0,69,124,0.95) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(left, rgba(0,69,124,0.95) 0%,rgba(51,106,150,0.95) 50%,rgba(0,69,124,0.95) 100%); /* IE10+ */
+background: linear-gradient(to right, rgba(0,69,124,0.95) 0%,rgba(51,106,150,0.95) 50%,rgba(0,69,124,0.95) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f200457c', endColorstr='#f200457c',GradientType=1 ); /* IE6-9 */
+  background-color: #00457C;
+}
+
+.box img.detail { background-color: white; }
+
+
+#stage div.tour_next { color: #00457C; }
+
+#stage .tour_next a {
+  background-image: url("img/more-button.png");
+  background-color: transparent;
+}
+
+div.next:hover { background-color: #208ccd; }
+
+.overlay { background-image: url("img/videoOverlay.png"); }
+
+.tour_next a:hover,
+.back a:hover,
+.next a:hover,
+a.generate:hover { background-color: #3DACDD; }
+
+
+.accordion h4.trigger { background-image: url("img/accordion_icons.png"); }
+
+
+input[type="text"]:focus {
+	background: #D5E9F2;
+  border-color: #00457C;
+}
+
+button[type="submit"]:hover { background-color: #00457C; }
+
+a.button:link,
+a.button:visited,
+button[type="submit"] {
+  color: white;
+	background-color: #3DACDD;
+}
+
+footer { border-color: #00457C; }
+
+
+
+/* =============================================================================
+   Forms
+   ========================================================================== */
+
+fieldset {
+  margin: 1em 0;
+  padding: .5em 1em;
+  border: 1px #00457C solid;
+}
+
+
+
+/* =============================================================================
+   Figures
+   ========================================================================== */
+
+figure { margin: 1em 0 15px; text-align: center; }
+
+figcaption {
+  margin: 10px 0 0;
+  color: #888;
+  text-align: center;
+  font-size: 13px; 
+}
+  
+
+/* =============================================================================
+   Main
+   ========================================================================== */
+   
+#maincontainer h3 {	margin-bottom: 0px; }
+
+#maincontainer img { max-width: 100%; }
+
+
+
+
+
+
+body.features #maincontainer ul,
+body.services #maincontainer ul { margin-right: 50px; }
+
+.features #maincontainer h4,
+.services #maincontainer h4 {
+	clear: both;
+	margin-right: 15px;
+	margin-top: 2em;
+}
+.features #maincontainer section,
+.services #maincontainer section { clear: both; }
+
+div.illustration { position: relative; }
+
+
+
+
+div.img-container {
+	padding: 20px 0px;	
+	text-align: center;
+  border: 1px solid #ccc;
+  
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+  
+	background: rgba(250,250,250,1); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(250,250,250,1) 0%, rgba(230,230,230,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(250,250,250,1)), color-stop(100%,rgba(230,230,230,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(250,250,250,1) 0%,rgba(230,230,230,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(250,250,250,1) 0%,rgba(230,230,230,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(250,250,250,1) 0%,rgba(230,230,230,1) 100%); /* IE10+ */
+	background: linear-gradient(top,  rgba(250,250,250,1) 0%,rgba(230,230,230,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafafa', endColorstr='#e6e6e6',GradientType=0 ); /* IE6-9 */	
+}
+
+
+
+
+
+
+/* ==|== media queries ======================================================
+   EXAMPLE Media Query for Responsive Design.
+   This example overrides the primary ('mobile first') styles
+   Modify as content requires.
+   ========================================================================== */
+
+@media only screen and (min-width: 35em) {
+  /* Style adjustments for viewports that meet the condition */
+}
+
+
+
+.floatLeft { float: left; margin: .5em 1.5em 1em 0; }

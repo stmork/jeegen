@@ -1,0 +1,60 @@
+
+/* =============================================================================
+   Colors, Background images, ...
+   ========================================================================== */
+
+body {
+  background-image: url("img/large-bg.png");
+  background-position: center 70px;
+}
+
+a:link,
+a:visited { color: darkgreen; }
+
+a:hover { color: #ec7a03; }
+
+
+#maincontainer h2,
+#maincontainer h3 {	color: darkgreen; }
+
+
+div.product {
+  color: #777;
+  width: 440px;
+  margin: 50px 0 0 25px;
+  float: left;
+  border: 1px solid #ddd;
+  background-color: white;
+  background-color: rgba(255,255,255,.5);
+}
+.product div.inner {
+  padding: 10px 25px 25px;
+}
+.product a.more {
+	position: relative;
+	display: block;
+	left: 0;
+	padding: 15px 0 11px 30px;
+	background: none no-repeat scroll 0 0;
+  font-size: 13px;
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+}	
+.product a.more:hover { background-position: 0 -48px; }
+
+.product.yr a.more { background-image: url("../../requirements/css/img/more-button.png"); }
+
+.product.yb a.more { background-image: url("../../eabridge/css/img/more-button.png"); }
+
+.product.yc a.more { background-image: url("../../traceability/css/img/more-button.png"); }
+
+div.next:hover { background-color: #419a3a; }
+
+p.more {
+  clear: both;
+  padding: 30px;
+  text-align: center;
+}
+
+footer { border-color: darkgreen; }

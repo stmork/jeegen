@@ -1,0 +1,37 @@
+@media all {
+
+	article,aside,details,figcaption,figure,
+	footer,header,hgroup,nav,section { zoom: 1; }
+
+	audio,
+	canvas,
+	video {
+		*display: inline;
+		*zoom: 1;
+	}
+
+	img {
+		-ms-interpolation-mode: bicubic;
+		zoom: 1;
+	}
+
+	.y-grid { overflow: hidden; display: block; }
+	* html .y-grid { overflow: visible; }
+
+	.y-gl,
+	.y-gr { display: inline; }
+
+	.y-equalize .y-gl {
+		float: left;
+		display: inline;
+		padding-bottom: 32767px;
+		margin-bottom: -32767px;
+	}
+	.y-equalize .y-gr {
+		float: right;
+		margin-left: -5px;
+		display: inline;
+		padding-bottom: 32767px;
+		margin-bottom: -32767px;
+	}
+}
