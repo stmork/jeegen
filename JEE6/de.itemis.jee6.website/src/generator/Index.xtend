@@ -43,61 +43,6 @@ class Index extends AbstractWebsite {
 			</p>
 		</div>
 	</div>
-
-	<div id="features">
-		<div class="container">
-			<div class="row">
-				<div class="span12">
-					<br /> <br />
-					<h1>A Selection Of Supported Features</h1>
-					<br />
-				</div>
-				<div class="span4">
-					<div class="thumb">
-						<a href="#"><img class="screenshot"
-							src="images/feature2_syntax_coloring.png" alt="Image" /></a> <a
-							href="http://vimeo.com/12824833" data-rel="prettyPhoto"
-							title="Syntax Coloring" class="zoom zoom_icon"></a>
-					</div>
-					<h4>Syntax Coloring</h4>
-					<p>
-						Out of the box, the editor supports <b>syntax coloring based
-							on the lexical structure</b> and the <b>semantic data</b> of your
-						files. Users are free to customize the highlighting and configure
-						their favorite styles.
-					</p>
-				</div>
-				<div class="span4">
-					<div class="thumb">
-						<a href="#"><img class="screenshot"
-							src="images/feature2_content_assist.png" alt="Image" /></a> <a
-							href="http://vimeo.com/12824786" data-rel="prettyPhoto"
-							title="Content Assist" class="zoom zoom_icon"></a>
-					</div>
-					<h4>Content Assist</h4>
-					<p>An Xtext editor proposes valid code completions at any place
-						in the document, helping your users with the syntactical details
-						of your language.</p>
-				</div>
-				<div class="span4">
-					<div class="thumb">
-						<a href="#"><img class="screenshot"
-							src="images/feature2_quick_fix.png" alt="Image" /></a> <a
-							href="http://vimeo.com/12824853" data-rel="prettyPhoto"
-							title="Validation and Quick Fixes" class="zoom zoom_icon"></a>
-					</div>
-					<h4>Validation and Quick Fixes</h4>
-					<p>
-						Xtext has outstanding support for static analysis and validation
-						of your models. It has never been so easy to define constraints to
-						tackle <b>errors and warnings</b> in your code instantaneously.
-						With custom <b>quick fixes</b> you can correct these with a single
-						keystroke.
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
 	'''
 
 }
