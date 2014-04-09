@@ -7,12 +7,10 @@ class Features extends AbstractWebsite {
 	}
 	
 	override contents() '''
-	<div id="header_wrapper" class="container" >
-	</div>
-		<div id="page">
-			<div id="team" class="container clearfix"> 
-				<h2>Features</h2>
-				<hr/>
+	<div id="main" role="main">
+		<div id="maincontainer" class="clearfix centering">
+			<h2>Features</h2>
+			<div class="box introduction">
 				<p>
 					Der JEE-Generator soll durch ein einfaches Modell die gesamte Infrastruktur für eine
 					Web-Anwendung generieren. Dadurch soll der Aufwand für Build und Deploy

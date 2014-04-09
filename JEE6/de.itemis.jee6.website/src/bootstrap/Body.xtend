@@ -12,11 +12,9 @@ class Body {
 	@Inject extension TargetPaths
 	
 	def body(AbstractSection rootSection) '''
-		<div id="maincontainer" class="container">
 			«FOR chapter: rootSection.sections.filter[!targetRootElement]»
 				«chapter.h1»
 			«ENDFOR»
-		</div>
 	'''
 
 	def h1(AbstractSection section) '''
