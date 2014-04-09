@@ -112,7 +112,7 @@ abstract class AbstractWebsite implements Resource {
 		newArrayList(
 			'download.html' -> 'Download',
 			'features.html' -> 'Features',
-			'documentation.html' -> 'Documentation',
+			'documentation.html' -> 'Dokumentation',
 			'community.html' -> 'Community',
 			'aboutus.html' -> 'Über uns',
 			'http://xtext.org' -> 'Xtext',
