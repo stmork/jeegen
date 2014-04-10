@@ -70,40 +70,44 @@ class Download extends AbstractWebsite {
 								<div class="pricing right">
 								    <table>
 										<tfoot>
-										    <tr>
+											<tr>
 												<td></td>
-										    </tr>
+											</tr>
 										</tfoot>
 										<tbody>
-										    <tr>
+											<tr>
 												<td class="focus">Full Eclipse <span>Einfach runterladen und entpacken</span></td>
-										    </tr>
-										    <tr>
-										    	<td style="text-align: center; white-space: nowrap;">
-										    	<a href="«getLink(OSX_64)»"
-										    	class="btn btn-primary btn-large" style="width: 45%;">OS X 64 Bit</a>&nbsp;
-										    	<a href="«getLink(OSX_32)»"
-										    	class="btn btn-primary btn-large"
-										    	style="width:20%;">32 Bit</a></td>
-										    </tr>
-										    <tr>
-										    	<td style="text-align: center; white-space: nowrap;">
-										    	<a href="«getLink(LINUX_64)»"
-										    	class="btn btn-primary btn-large"
-										    	style="width: 45%;">Linux 64 Bit</a>&nbsp;
-										    	<a href="«getLink(LINUX_32)»"
-										    	class="btn btn-primary btn-large"
-										    	style="width:20%;">32 Bit</a></td>
-										    </tr>
-										    <tr>
-										    	<td style="text-align: center; white-space: nowrap;">
-										    	<a href="«getLink(WIN_64)»"
-										    	class="btn btn-primary btn-large"
-										    	style="width: 45%;">Windows 64 Bit</a>&nbsp;
-										    	<a href="«getLink(WIN_32)»"
-										    	class="btn btn-primary btn-large"
-										    	style="width:20%;">32 Bit</a></td>
-										    </tr>
+											</tr>
+											<tr>
+												<td style="text-align: center; white-space: nowrap;">
+													<a href="«getLink(OSX_64)»"
+														class="btn btn-primary btn-large"
+														style="width: 45%;">OS X 64 Bit</a>&nbsp;
+													<a href="«getLink(OSX_32)»"
+														class="btn btn-primary btn-large"
+														style="width:20%;">32 Bit</a>
+												</td>
+											</tr>
+											<tr>
+												<td style="text-align: center; white-space: nowrap;">
+													<a href="«getLink(LINUX_64)»"
+														class="btn btn-primary btn-large"
+														style="width: 45%;">Linux 64 Bit</a>&nbsp;
+													<a href="«getLink(LINUX_32)»"
+														class="btn btn-primary btn-large"
+														style="width:20%;">32 Bit</a>
+												</td>
+											</tr>
+											<tr>
+												<td style="text-align: center; white-space: nowrap;">
+													<a href="«getLink(WIN_64)»"
+														class="btn btn-primary btn-large"
+														style="width: 45%;">Windows 64 Bit</a>&nbsp;
+													<a href="«getLink(WIN_32)»"
+														class="btn btn-primary btn-large"
+														style="width:20%;">32 Bit</a>
+												</td>
+											</tr>
 										</tbody>
 								    </table>
 								</div>
@@ -182,7 +186,7 @@ class Download extends AbstractWebsite {
 								Der JEE-Generator ist frei verfügbar unter der <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.
 							</p>
 						</div>
-			  		</div>
+					</div>
 				</div>
 			</div>
 		</div>
