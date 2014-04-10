@@ -45,31 +45,23 @@ class AboutUs extends AbstractWebsite {
 				<div id="aboutUsText">
 					<h3>Dominik Pieper</h3>
 					<p>
+						Dominik hat an der Hochschule Bochum allgemeine Informatik studiert. Seit 2011 ist er bei der itemis AG
+						ebenfalls in der Abteilung für Infrastruktur und Beschaffung.
+					</p>
+					<p>
+						Seit 2012 arbeitet Dominik mit am JEE-Generator, der modellbasiert ein einfaches Prototyping für
+						Web-Anwendungen ermöglicht. Der generierte Prototyp lässt sich einfach für beliebige Anwendungsfälle
+						erweitern. Der JEE-Generator wird intern zur Erstellung einiger hausinterner Anwendungen genutzt.
+					</p>
+					<p>
+						Eine der hausinternen Anwendungen ist das Flexmento Lizenzsystem.
+						Flexmento bildet eine Schnittstelle zwischen einem Magento-Webshop und einem FlexNet-
+						Lizenzserver. Erfolgreiche Bestellungen werden entgegengenommen, Lizenzen generiert und via E-Mail
+						an den Kunden versandt.
 					</p>
 				</div>
 			</div>
 		</div>
 	</div>
-	'''
-
-	def entry(String img, String title, String link, String description) '''
-		<div class="row">
-			<div class="span1">&nbsp;</div>
-			<div class="span9 team">
-		    <a href="«link.trim»" class="anchor-in-div"></a>
-		    <div class="row">
-			  <div class="span1 ">
-			    <img src="images/«img.trim»" alt="image" class="image_left">
-			  </div>
-			  <div class="span2 ">
-			    <h3>«title.trim»</h3>
-			 	</div>
-				<div class="span6 ">
-					«description»
-				</div>
-				</div>
-			</div>
-		  <div class="span1">&nbsp;</div>
-		</div>
 	'''
 }
