@@ -118,7 +118,7 @@ class Documentation extends AbstractXdocBaseWebsite {
 }
 
 class DocumentationSetup extends XdocStandaloneSetup implements Module {
-		
+	
 	override createInjector() {
 		val module = new XdocRuntimeModule
 		Guice::createInjector(module, this)
@@ -135,7 +135,7 @@ class DocumentationBody extends Body {
 	
 	override h1(AbstractSection chapter) '''
 		<!-- chapter -->
-		<section id="«chapter.hrefId»">
+		<section id="«chapter.hrefId»" style="padding-top: 68px; margin-top: -68px;">
 			<div class="row">
 				<div class="span8 offset3">
 					<h2 style="padding-top: 30px;">
@@ -154,8 +154,8 @@ class DocumentationBody extends Body {
 	'''
 	
 	override h2(AbstractSection section) '''
-		<section id="«section.hrefId»">
-		<h3>«section.title.toHtmlText»</h3>
+		<section id="«section.hrefId»" style="padding-top: 68px; margin-top: -68px;">
+		<h3 style="padding-top: 15px;">«section.title.toHtmlText»</h3>
 		«FOR content : section.contents»
 			«content.toHtmlParagraph»
 		«ENDFOR»
@@ -164,4 +164,6 @@ class DocumentationBody extends Body {
 		«ENDFOR»
 		</section>
 	'''
+	
+	
 }
