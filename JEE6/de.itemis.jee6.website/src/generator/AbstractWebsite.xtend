@@ -31,6 +31,7 @@ abstract class AbstractWebsite implements Resource {
 
 	def Iterable<Pair<String,String>> topLevelMenu() {
 		newArrayList(
+			'index.html' -> 'Startseite',
 			'features.html' -> 'Features',
 			'aboutus.html' -> 'Über uns',
 			'documentation.html' -> 'Dokumentation',
@@ -77,56 +78,17 @@ abstract class AbstractWebsite implements Resource {
 	}
 	
 	def javaScriptDocumentStart() '''
-		<script src="js/twitter.js" type="text/javascript"></script>
-		<script src="js/jquery-1.7.1.min.js"></script>
-		<script src="js/jquery.prettyPhoto.js" type="text/javascript"></script>
-			<script type="text/javascript">
-		     $(document).ready(function() {
-				«jsOnLoad»
-		     });
-			</script>
-	'''
-	def CharSequence jsOnLoad() '''
-		«IF isPrettyPrint»
-			prettyPrint();
-		«ENDIF»
-		$('a[data-rel]').each(function() {
-			$(this).attr('rel', $(this).data('rel'));
-		});
+		<!--[if lte IE 7]><link rel="stylesheet" href="css/iehacks.css" /><![endif]-->
 
-		$("a[rel^='prettyPhoto']").prettyPhoto({
-			animation_speed: 'fast',
-			slideshow: 5000,
-			autoplay_slideshow: false,
-			opacity: 0.80,
-			show_title: true,
-			theme: 'ligh_square',
-			overlay_gallery: false,
-			social_tools: false
-		});
-		«IF isOutline»
-			$('#nav-outline > li > a').live('click', function() {        
-				$(this).parent().find('ul').slideToggle();      
-			});
-		«ENDIF»
-		«IF isPopover()»
-			$('.has-popover').popover();
-		«ENDIF»
+		<!--[if lt IE 9]><script src="js/libs/html5shiv.js"></script><![endif]-->
+		<script src="js/libs/jquery-1.7.1.min.js"></script>
+		<script src="js/libs/modernizr-2.5.3.min.js"></script>
+		<script src="js/jquery.prettyPhoto.js" type="text/javascript"></script>
 	'''
 
 	def protected boolean isPrettyPrint() { false }
 	def protected boolean isOutline() { true }
 	def protected boolean isPopover() { true }
-
-	def navBar() '''
-		<nav class="menu">
-			<ul>
-				«FOR it : topLevelMenu»
-					<li «IF path == key»class="active"«ENDIF»><a href="«key»">«value»</a></li>
-				«ENDFOR»
-			</ul>
-		</nav>
-	'''
 	
 	def header() '''
 		<header>
@@ -142,6 +104,16 @@ abstract class AbstractWebsite implements Resource {
 		</header>
 	'''
 
+	def navBar() '''
+		<nav class="menu">
+			<ul>
+				«FOR it : topLevelMenu»
+					<li «IF path == key»«ENDIF»>«IF path == key»<strong>«value»</strong>«ELSE»<a href="«key»">«value»</a>«ENDIF»</li>
+				«ENDFOR»
+			</ul>
+		</nav>
+	'''
+
 	def slogan() '''
 		<div id="slogan">
 			<div class="sloganCentering">
@@ -153,11 +125,6 @@ abstract class AbstractWebsite implements Resource {
 			</div>
 		</div>
 	'''
-
-
-
-
-
 
 	def footer() '''
 		<footer>
@@ -181,37 +148,28 @@ abstract class AbstractWebsite implements Resource {
 	'''
 
 	def javaScriptAtTheEnd() '''
-		<!-- Le javascript
-		    ================================================== -->
-		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="js/script.js"></script>
 		
-		<script src="js/bootstrap-transition.js"></script>
-		<script src="js/bootstrap-alert.js"></script>
-		<script src="js/bootstrap-modal.js"></script>
-		<script src="js/bootstrap-dropdown.js"></script>
-		<script src="js/bootstrap-scrollspy.js"></script>
-		<script src="js/bootstrap-tab.js"></script>
-		<script src="js/bootstrap-tooltip.js"></script>
-		<script src="js/bootstrap-popover.js"></script>
-		<script src="js/bootstrap-button.js"></script>
-		<script src="js/bootstrap-collapse.js"></script>
-		<script src="js/bootstrap-carousel.js"></script>
-		<script src="js/bootstrap-typeahead.js"></script>
-
-		«IF prettyPrint»		
+		<script>
+			$(document).ready(function(){
+				$("a[rel^='prettyPhoto']").prettyPhoto({
+					social_tools: '',
+					default_width: 750,
+					default_height: 516
+				});
+			});
+		</script>
+		«IF prettyPrint»
 			<!-- include pretty-print files -->
 			<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
-			<script type="text/javascript" src="google-code-prettify/lang-xtend.js"></script>
+			<script type="text/javascript">
+				$(document).ready(function() {
+					prettyPrint();
+				});
+			</script>
 		«ENDIF»
-		
-		<!-- Include the plug-in -->
-		<script src="js/jquery.easing.1.3.js" type="text/javascript"></script>
-		<script src="js/custom.js" type="text/javascript"></script>
 	'''
 
-	
-	
-	
 	def stylesheets() '''
 		<link rel="shortcut icon" href="images/favicon.ico">
 		

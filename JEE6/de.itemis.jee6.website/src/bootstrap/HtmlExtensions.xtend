@@ -90,9 +90,8 @@ class HtmlExtensions {
 		} else {
 			''
 		}
-		
 	}
-	
+
 	def toHtmlText(Object element) {
 		toHtml(element, IN_PARAGRAPH)
 	}

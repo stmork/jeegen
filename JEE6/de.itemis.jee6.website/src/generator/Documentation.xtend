@@ -72,14 +72,13 @@ class Documentation extends AbstractXdocBaseWebsite {
 			<div id="maincontainer" class="clearfix centering">
 				<h2>Dokumentation</h2>
 				<div class="box introduction">
-			
-				<!--Container-->
-				<div id="header_wrapper" class="container">
-					«doc.menu»
-				</div>
-				<div id="page">  
-					<div class="inner">
-						«doc.body»
+					<div id="header_wrapper" class="container">
+						«doc.menu»
+					</div>
+					<div id="page">  
+						<div class="inner">
+							«doc.body»
+						</div>
 					</div>
 				</div>
 			</div>
@@ -89,15 +88,13 @@ class Documentation extends AbstractXdocBaseWebsite {
 	def menu(Document doc) '''
 		<ul id="nav-outline">
 			«FOR chapter : doc.chapters»
-				<li><a href="«chapter.href»">«chapter.title.toHtmlText»</a>
+				<li><a href="«chapter.href»">«chapter.title.toHtmlText»</a></li>
 				«FOR section : chapter.subSections BEFORE '<ul>' AFTER '</ul>'»
 					<li><a href="«section.href»">«section.title.toHtmlText»</a></li>
 				«ENDFOR»
 				</li>
 			«ENDFOR»
 			«FOR part : doc.parts»
-				<li>&nbsp;</li>
-				<li style="color : #333;">«part.title.toHtmlText»</li>
 				«FOR chapter : part.chapters»
 					<li><a href="«chapter.href»">«chapter.title.toHtmlText»</a>
 					«FOR section : chapter.subSections BEFORE '<ul>' AFTER '</ul>'»
@@ -111,9 +108,7 @@ class Documentation extends AbstractXdocBaseWebsite {
 	'''
 
 	def additionalLinks() '''
-		<li>&nbsp;</li>
 		<li style="color : #333;">Additional Resources
-«««		<li><a href="documentation/2.5.0/Xtext%20Documentation.pdf">Documentation <img src="images/pdf_icon.gif"></a>
 		<li><a href="javadoc/">API Documentation (JavaDoc)</a>
 	'''
 	
@@ -143,9 +138,9 @@ class DocumentationBody extends Body {
 		<section id="«chapter.hrefId»" style="padding-top: 68px; margin-top: -68px;">
 			<div class="row">
 				<div class="span8 offset3">
-					<h1 style="padding-top: 30px;">
+					<h2 style="padding-top: 30px;">
 						«chapter.title.toHtmlText»
-					</h1>
+					</h2>
 					<hr style="margin-top: 5px; margin-bottom: 5px;">
 					«FOR content : chapter.contents»
 						«content?.toHtmlParagraph»
@@ -159,14 +154,13 @@ class DocumentationBody extends Body {
 	'''
 	
 	override h2(AbstractSection section) '''
-		<!--  section -->
 		<section id="«section.hrefId»" style="padding-top: 68px; margin-top: -68px;">
-		<h2 style="padding-top: 15px;">«section.title.toHtmlText»</h2>
+		<h3 style="padding-top: 15px;">«section.title.toHtmlText»</h3>
 		«FOR content : section.contents»
 			«content.toHtmlParagraph»
 		«ENDFOR»
 		«FOR subsection: section.sections»
-			«subsection.h3plus(3)»
+			«subsection.h3plus(4)»
 		«ENDFOR»
 		</section>
 	'''
