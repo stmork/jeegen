@@ -167,12 +167,9 @@ class Download extends AbstractWebsite {
 						</ul>
 					</section>
 					</div>
-				<div class="span1">&nbsp;</div>
 				</div>
 				<div class="container">
 					<h2>FAQs</h2>
-					<hr />
-					<div class="span1">&nbsp;</div>
 					<div class="span9" id="faq">
 						<div class="accordion" id="accordion2">
 						    <h3>Was ist eine Updatesite?</h3>
@@ -186,7 +183,6 @@ class Download extends AbstractWebsite {
 							</p>
 						</div>
 			  		</div>
-					<div class="span1">&nbsp;</div>
 				</div>
 			</div>
 		</div>
