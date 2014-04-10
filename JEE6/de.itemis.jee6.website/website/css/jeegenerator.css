@@ -1,4 +1,3 @@
-00457C
 /* =============================================================================
    Colors, Background images, ...
    ========================================================================== */
@@ -16,7 +15,6 @@ th { color: #00457C; }
 
 #maincontainer h2,
 #maincontainer h3 {	color: #00457C; }
-
 
 nav.metamenu ul li strong,
 nav.metamenu ul li a { color: #999999; }
@@ -120,7 +118,9 @@ div #aboutUsImage {
 	border: 1px solid #BBBBBB;
 }
 
-
+.codebox {
+	font-size: 0.5em;
+}
 
 
 body.features #maincontainer ul,
@@ -156,10 +156,138 @@ div.img-container {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fafafa', endColorstr='#e6e6e6',GradientType=0 ); /* IE6-9 */	
 }
 
+.thumbnail > img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+}
 
 
+/*  ==========================================================================
+	Tables
+	========================================================================== */
 
+table.table {
+	font-size: 0.6em;
+	border: 1px solid #ccc;
+}
 
+table.table td {
+	border: 1px solid #ccc;
+}
+
+/*  ==========================================================================
+	Pricing
+	========================================================================== */
+
+.clearfix {
+	clear: both;
+}
+
+.pricing {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #D4D4D4;
+    border-image: none;
+    border-radius: 5px 5px 9px 9px;
+    border-style: solid;
+    border-width: 0px 1px 0px 1px;
+}
+
+.right table {
+	float: right;
+	margin-right: 10px;
+}
+
+.left table {
+	float: left;
+	margin-left: 10px;
+}
+
+.pricing table {
+    color: #C0C2C2;
+    font-family: 'Lato',sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    width: 40%;
+}
+.pricing thead th {
+    background: none repeat scroll 0 0 #333333;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    color: #F4F4F4;
+    float: left;
+    font-family: 'Lato',sans-serif;
+    font-size: 24px;
+    padding: 13px 8%;
+    text-align: center;
+    text-transform: uppercase;
+    width: 84.3%;
+}
+.pricing tfoot td {
+    background: none repeat scroll 0 0 #EDEDED;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    padding: 20px 8%;
+    width: 84.3%;
+}
+.pricing td {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-bottom: 1px solid #D4D4D4;
+    border-top: 1px solid #FFFFFF;
+    float: left;
+    padding: 10px 8%;
+    width: 84.3%;
+}
+
+.pricing td.focus {
+    background: none repeat scroll 0 0 #333333;
+    border-bottom: 1px solid #D4D4D4;
+    color: #FFFFFF;
+    font-family: 'Lato',sans-serif;
+    font-size: 32px;
+    font-weight: 400;
+    padding: 25px 8%;
+    text-align: center;
+    width: 84.3%;
+}
+
+.pricing td.focus span {
+    display: block;
+    font-size: 10px;
+    margin-top: 5px;
+}
+
+.btn {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #F5F5F5;
+    background-image: -moz-linear-gradient(center top , #FFFFFF, #E6E6E6);
+    background-repeat: repeat-x;
+    border-color: #CCCCCC #CCCCCC #B3B3B3;
+    border-image: none;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+    display: inline-block;
+    margin-bottom: 0;
+    padding: 4px 10px;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    vertical-align: middle;
+/* 	font-size: 13px; */
+/* 	line-height: 18px; */
+}
+.pricing a {
+    color: #AA1111;
+    text-decoration: none;
+}
 
 /* ==|== media queries ======================================================
    EXAMPLE Media Query for Responsive Design.
@@ -170,7 +298,5 @@ div.img-container {
 @media only screen and (min-width: 35em) {
   /* Style adjustments for viewports that meet the condition */
 }
-
-
 
 .floatLeft { float: left; margin: .5em 1.5em 1em 0; }
