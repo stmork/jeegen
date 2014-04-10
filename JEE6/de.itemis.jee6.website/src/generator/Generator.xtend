@@ -14,7 +14,8 @@ class Generator {
 			new Features,
 			new Kontakt,
 			new AboutUs,
-			new Documentation
+			new Documentation,
+			new LegalNotice
 		)
 		println("Done.")
 	}
