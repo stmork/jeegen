@@ -113,11 +113,10 @@ class Download extends AbstractWebsite {
 				<div class="container">
 				<h2>Installation Instructions</h2>
 				<hr>
-				<div class="span1">&nbsp;</div>
 				  <div class="span9">
 				    <p>
 				      <strong>  Der JEE-Generator ist in Java implementiert, daher muss die 
-				        <a href="http://www.oracle.com/technetwork/java/index.html">Java
+						<a href="http://www.oracle.com/technetwork/java/index.html">Java
 				        Runtime Environment</a> installiert sein.
 				      </strong>
 				    </p>
@@ -132,11 +131,13 @@ class Download extends AbstractWebsite {
 				    </h2>
 				      <ol>
 				        <li>Download die Distribution zum passenden Betriebssystem.</li>
-				        <li>Das Archiv muss im Verzeichnis der Wahl ausgepackt werden
-								<strong>Windows Benutzer sollten ein Verzeichnis möglichst in der Nähe des Wurzelverzeichnisses wählen
+				        <li>
+				        	Das Archiv muss im Verzeichnis der Wahl ausgepackt werden
+							<strong>
+								Windows Benutzer sollten ein Verzeichnis möglichst in der Nähe des Wurzelverzeichnisses wählen
 								da Windows nur komplette Pfade mit maximal 256 Zeichen akzeptiert und Eclipse eine tiefe
 								Verzeichnisstruktur benutzt.
-								</strong>
+							</strong>
 				        </li>
 				        <li>
 				        	Danach kann Eclipse gestartet werden und der gewünschte Workspace ausgewählt werden. Ein Workspace
@@ -153,12 +154,12 @@ class Download extends AbstractWebsite {
 				    </p>
 				      <ul>
 				        <li>
-								    Wähle
-								<strong>  Help -&gt; Install New Software...
-								</strong> aus der Menüleiste und
-								<strong>  Add...
-								</strong> Geben Sie eine der Update Site URLs von oben an.
-								    Diese Site fasst alle benötigten Komponenten und Abhängigkeiten für den JEE-Generator zusammen.
+							Wähle
+							<strong>  Help -&gt; Install New Software...
+							</strong> aus der Menüleiste und
+							<strong>  Add...
+							</strong> Geben Sie eine der Update Site URLs von oben an.
+							Diese Site fasst alle benötigten Komponenten und Abhängigkeiten für den JEE-Generator zusammen.
 				        </li>
 				        <li>Wähle <i>JEE-Generator</i> aus der Kategorie <i>JEE-Generator</i> und durch wiederholtes Klicken von
 				        	<i>Next</i> und einem abschließenden <i>Finish</i> wird die Installation abgeschlossen.
@@ -172,39 +173,19 @@ class Download extends AbstractWebsite {
 				</div>
 				<div class="container">
 					<h2>FAQs</h2>
-					<hr />
-					<div class="span1">&nbsp;</div>
 					<div class="span9" id="faq">
-						<div class="accordion" id="accordion2">
-						    «faqEntry('Was ist eine Updatesite?','''
-								Eclipse hat einen eingebauten Updatemanager, dieser arbeitet mit so genannten Updatesites als Quelle.<br />
-								In Eclipse öffne das <i>"Help"</i> Menü und klicke auf <i>"Install new Software..."</i>.
-						    ''')»
-						    «faqEntry('Was ist die Lizenz des JEE-Generators?','''
-								<p>Der JEE-Generator ist frei verfügbar unter der <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.</p>
-						    ''')»
-						</div>
+					    <h3>Was ist eine Updatesite?</h3>
+						<p>
+							Eclipse hat einen eingebauten Updatemanager, dieser arbeitet mit so genannten Updatesites als Quelle.<br />
+							In Eclipse öffne das <i>"Help"</i> Menü und klicke auf <i>"Install new Software..."</i>.
+						</p>
+					    <h3>Was ist die Lizenz des JEE-Generators?</h3>
+						<p>
+							Der JEE-Generator ist frei verfügbar unter der <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.
+						</p>
 			  		</div>
-					<div class="span1">&nbsp;</div>
 				</div>
 			</div>
 		</div>
 	'''
-
-	def faqEntry(String question, CharSequence answer) '''
-		«val key = question.replaceAll('\\W','_')»
-		<div class="accordion-group">
-		  <div class="accordion-heading">
-			<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#«key»"">
-			  «question»
-			</a>
-		  </div>
-		  <div id="«key»" class="accordion-body collapse">
-			<div class="accordion-inner">
-			  «answer»
-			</div>
-		  </div>
-		</div>
-	'''
-
 }
