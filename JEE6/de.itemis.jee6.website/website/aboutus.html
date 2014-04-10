@@ -18,12 +18,31 @@
 	<!--[if lt IE 9]>
 	<link href="css/iebugs.css" rel="stylesheet" type='text/css'>
 	<![endif]-->
-	<!--[if lte IE 7]><link rel="stylesheet" href="css/iehacks.css" /><![endif]-->
-	
-	<!--[if lt IE 9]><script src="js/libs/html5shiv.js"></script><![endif]-->
-	<script src="js/libs/jquery-1.7.1.min.js"></script>
-	<script src="js/libs/modernizr-2.5.3.min.js"></script>
+	<script src="js/twitter.js" type="text/javascript"></script>
+	<script src="js/jquery-1.7.1.min.js"></script>
 	<script src="js/jquery.prettyPhoto.js" type="text/javascript"></script>
+		<script type="text/javascript">
+	     $(document).ready(function() {
+			$('a[data-rel]').each(function() {
+				$(this).attr('rel', $(this).data('rel'));
+			});
+			
+			$("a[rel^='prettyPhoto']").prettyPhoto({
+				animation_speed: 'fast',
+				slideshow: 5000,
+				autoplay_slideshow: false,
+				opacity: 0.80,
+				show_title: true,
+				theme: 'ligh_square',
+				overlay_gallery: false,
+				social_tools: false
+			});
+			$('#nav-outline > li > a').live('click', function() {        
+				$(this).parent().find('ul').slideToggle();      
+			});
+			$('.has-popover').popover();
+	     });
+		</script>
 </head>
 <body class="home">
 	<div id="wrap">
@@ -36,9 +55,8 @@
 				</div>
 				<nav class="menu">
 					<ul>
-						<li ><a href="index.html">Startseite</a></li>
 						<li ><a href="features.html">Features</a></li>
-						<li ><strong>Über uns</strong></li>
+						<li class="active"><a href="aboutus.html">Ãber uns</a></li>
 						<li ><a href="documentation.html">Dokumentation</a></li>
 						<li ><a href="download.html">Download</a></li>
 					</ul>
@@ -49,54 +67,53 @@
 					<h2>
 						<strong>Was ist der JEE-Generator?</strong>
 						Der JEE-Generator ist in der Lage, eine komplette JEE-Web-Applikation aus einem einfachen Modell zu generieren.
-						Das Framework wurde mit Xtext realisiert und ist als Eclipse-Plugin verfügbar. 
+						Das Framework wurde mit Xtext realisiert und ist als Eclipse-Plugin verfÃŒgbar. 
 					</h2>
 				</div>
 			</div>
 		</header>
 		<div id="main" role="main">
 			<div id="maincontainer" class="clearfix centering">
-				<h2>Über uns</h2>
+				<h2>Ãber uns</h2>
 				<div class="box introduction">
 		
-					<div id="aboutUsImage">
-						<img src="images/mork.steffen.jpg"/>
-					</div>
-					<div id="aboutUsText">
-						<h3>Steffen A. Mork</h3>
-						<p>
-							Steffen hat an der Universität Dortmund Kerninformatik studiert. Nach seinem Studium hat er
-							im Bereich Dokumentenmanagement und Java Enterprise erste Erfahrungen gesammelt. Seit 2005
-							ist er bei der itemis AG für die Infrastruktur und Beschaffung verantwortlich. Als Software
-							Entwickler hat er mehrere Frameworks entwickelt:
-						</p>
-						<p>
-							Die modellgetriebene Server-Konfiguration ermöglicht es auf einfache Weise, den Soll-Zustand
-							der itemis-Server zu verwalten. Die Konfiguration wird zentral generiert und berücksichtigt
-							Abhängigkeiten zwischen den Diensten über alle Standorte hinweg.
-						</p>
-						<p>
-							Für die modell(-bau-)basierte <a href="http://eisenbahnsteuerung.org">Eisenbahnsteuerung</a>
-							hat er sowohl die auf CAN-Bus basierenden Steuerungs-Controller programmiert, als auch
-							das Frontend des Eclipse basierten Frontends.
-						</p>
-						<p>
-							Seit 2012 arbeitet Steffen an dem <a href="http://www.jee-generator.de">JEE-Generator</a>, der
-							modellbasiert ein einfaches Prototyping für Web-Anwendungen ermöglicht. Einige dieser Web-Anwendungen
-							werden hausintern verwendet, um die Produktivität zu erhöhen.
-						</p>
-					</div>
-					<div id="aboutUsImage">
-						<img src="images/pieper.dominik.jpg"/>
-					</div>
-					<div id="aboutUsText">
-						<h3>Dominik Pieper</h3>
-						<p>
-						</p>
+					<div id="Leute">
+						<div id="links">
+							<img src="images/mork.steffen.jpg"/>
+							<h3>Steffen A. Mork</h3>
+							<p>
+								Steffen hat an der UniversitÃ€t Dortmund Kerninformatik studiert. Nach seinem Studium hat er
+								im Bereich Dokumentenmanagement und Java Enterprise erste Erfahrungen gesammelt. Seit 2005
+								ist er bei der itemis AG fÃŒr die Infrastruktur und Beschaffung verantwortlich. Als Software
+								Entwickler hat er mehrere Frameworks entwickelt:
+								<ul>
+									<li>
+										Die modellgetriebene Server-Konfiguration ermÃ¶glicht es auf einfache Weise, den Soll-Zustand
+										der itemis-Server zu verwalten. Die Konfiguration wird zentral generiert und berÃŒcksichtigt
+										AbhÃ€ngigkeiten zwischen den Diensten ÃŒber alle Standorte hinweg.
+									</li>
+									<li>
+										FÃŒr die modell(-bau-)basierte <a href="http://eisenbahnsteuerung.org">Eisenbahnsteuerung</a>
+										hat er sowohl die auf CAN-Bus basierenden Steuerungs-Controller programmiert, als auch
+										das Frontend des Eclipse basierten Frontends.
+									</li>
+									<li>
+										Seit 2012 arbeitet Steffen an dem <a href="http://www.jee-generator.de">JEE-Generator</a>, der
+										modellbasiert ein einfaches Prototyping fÃŒr Web-Anwendungen ermÃ¶glicht. Einige dieser Web-Anwendungen
+										werden hausintern verwendet, um die ProduktivitÃ€t zu erhÃ¶hen.
+									</li>
+								</ul>
+							</p>
+						</div>
+						<div id="rechts">
+							<img src="images/pieper.dominik.jpg"/>
+							<h3>Dominik Pieper</h3>
+							<p>
+							</p>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 	</div>
 	<footer>
 		<div class="centering">
@@ -116,16 +133,26 @@
 			</div>
 		</div>
 	</footer>
-	<script src="js/script.js"></script>
+	<!-- Le javascript
+	    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
 	
-	<script>
-		$(document).ready(function(){
-			$("a[rel^='prettyPhoto']").prettyPhoto({
-				social_tools: '',
-				default_width: 750,
-				default_height: 516
-			});
-		});
-	</script>
+	<script src="js/bootstrap-transition.js"></script>
+	<script src="js/bootstrap-alert.js"></script>
+	<script src="js/bootstrap-modal.js"></script>
+	<script src="js/bootstrap-dropdown.js"></script>
+	<script src="js/bootstrap-scrollspy.js"></script>
+	<script src="js/bootstrap-tab.js"></script>
+	<script src="js/bootstrap-tooltip.js"></script>
+	<script src="js/bootstrap-popover.js"></script>
+	<script src="js/bootstrap-button.js"></script>
+	<script src="js/bootstrap-collapse.js"></script>
+	<script src="js/bootstrap-carousel.js"></script>
+	<script src="js/bootstrap-typeahead.js"></script>
+	
+	
+	<!-- Include the plug-in -->
+	<script src="js/jquery.easing.1.3.js" type="text/javascript"></script>
+	<script src="js/custom.js" type="text/javascript"></script>
 </body>
 </html>
