@@ -30,106 +30,103 @@ class Download extends AbstractWebsite {
 			<h2>Downloads</h2>
 			<div class="box introduction">
 					<!--table one starts-->
-					<div class="span1">&nbsp;</div>
 					<div class="span4">
-						<div class="pricing">
-							<table>
-								<tfoot>
+						<div class="clearfix">
+							<div class="pricing left">
+								<table>
+									<tfoot>
+										<tr>
+											<td></td>
+										</tr>
+									</tfoot>
+									<tbody>
 									<tr>
-										<td></td>
+										<td class="focus">Update Sites <span>Nutze den Eclipse Update Manager</span></td>
 									</tr>
-								</tfoot>
-								<tbody>
-								<tr>
-									<td class="focus">Update Sites <span>Nutze den Eclipse Update Manager</span></td>
-								</tr>
-								<tr>
-									<td style="text-align: center;">
-									<a
-									rel="popover"
-									data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!"
-									data-original-title="Right-click and 'Copy Link'"
-									href="http://jee6-generator.itemis.de/updates/kepler/"
-									class="has-popover btn btn-primary btn-large"
-									style="width: 70%;">Kepler</a></td>
-								</tr>
-								<tr>
-									<td style="text-align: center;">
-									<a
-									  rel="popover"
-									data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!"
-									data-original-title="Right-click and 'Copy Link'"
-									  href="http://jee6-generator.itemis.de/updates/snapshot/"
-									class="has-popover btn btn-primary btn-large"
-									style="width: 70%;">Snapshot</a></td>
-								</tr>
-							</tbody>
-						    </table>
-						</div>
-				    </div>
-				    <div class="span1">&nbsp;</div>
-				    <div class="span4">
-						<div class="pricing">
-						    <table>
-								<tfoot>
-								    <tr>
-										<td></td>
-								    </tr>
-								</tfoot>
-								<tbody>
-								    <tr>
-										<td class="focus">Full Eclipse <span>Einfach runterladen und entpacken</span></td>
-								    </tr>
-								    <tr>
-								    	<td style="text-align: center; white-space: nowrap;">
-								    	<a href="«getLink(OSX_64)»"
-								    	class="btn btn-primary btn-large" style="width: 45%;">OS X 64 Bit</a>&nbsp;
-								    	<a href="«getLink(OSX_32)»"
-								    	class="btn btn-primary btn-large"
-								    	style="width:20%;">32 Bit</a></td>
-								    </tr>
-								    <tr>
-								    	<td style="text-align: center; white-space: nowrap;">
-								    	<a href="«getLink(LINUX_64)»"
-								    	class="btn btn-primary btn-large"
-								    	style="width: 45%;">Linux 64 Bit</a>&nbsp;
-								    	<a href="«getLink(LINUX_32)»"
-								    	class="btn btn-primary btn-large"
-								    	style="width:20%;">32 Bit</a></td>
-								    </tr>
-								    <tr>
-								    	<td style="text-align: center; white-space: nowrap;">
-								    	<a href="«getLink(WIN_64)»"
-								    	class="btn btn-primary btn-large"
-								    	style="width: 45%;">Windows 64 Bit</a>&nbsp;
-								    	<a href="«getLink(WIN_32)»"
-								    	class="btn btn-primary btn-large"
-								    	style="width:20%;">32 Bit</a></td>
-								    </tr>
+									<tr>
+										<td style="text-align: center;">
+										<a
+										rel="popover"
+										data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!"
+										data-original-title="Right-click and 'Copy Link'"
+										href="http://jee6-generator.itemis.de/updates/kepler/"
+										class="has-popover btn btn-primary btn-large"
+										style="width: 70%;">Kepler</a></td>
+									</tr>
+									<tr>
+										<td style="text-align: center;">
+										<a
+										  rel="popover"
+										data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!"
+										data-original-title="Right-click and 'Copy Link'"
+										  href="http://jee6-generator.itemis.de/updates/snapshot/"
+										class="has-popover btn btn-primary btn-large"
+										style="width: 70%;">Snapshot</a></td>
+									</tr>
 								</tbody>
-						    </table>
+							    </table>
+							</div>
+						    <div class="span4">
+								<div class="pricing right">
+								    <table>
+										<tfoot>
+										    <tr>
+												<td></td>
+										    </tr>
+										</tfoot>
+										<tbody>
+										    <tr>
+												<td class="focus">Full Eclipse <span>Einfach runterladen und entpacken</span></td>
+										    </tr>
+										    <tr>
+										    	<td style="text-align: center; white-space: nowrap;">
+										    	<a href="«getLink(OSX_64)»"
+										    	class="btn btn-primary btn-large" style="width: 45%;">OS X 64 Bit</a>&nbsp;
+										    	<a href="«getLink(OSX_32)»"
+										    	class="btn btn-primary btn-large"
+										    	style="width:20%;">32 Bit</a></td>
+										    </tr>
+										    <tr>
+										    	<td style="text-align: center; white-space: nowrap;">
+										    	<a href="«getLink(LINUX_64)»"
+										    	class="btn btn-primary btn-large"
+										    	style="width: 45%;">Linux 64 Bit</a>&nbsp;
+										    	<a href="«getLink(LINUX_32)»"
+										    	class="btn btn-primary btn-large"
+										    	style="width:20%;">32 Bit</a></td>
+										    </tr>
+										    <tr>
+										    	<td style="text-align: center; white-space: nowrap;">
+										    	<a href="«getLink(WIN_64)»"
+										    	class="btn btn-primary btn-large"
+										    	style="width: 45%;">Windows 64 Bit</a>&nbsp;
+										    	<a href="«getLink(WIN_32)»"
+										    	class="btn btn-primary btn-large"
+										    	style="width:20%;">32 Bit</a></td>
+										    </tr>
+										</tbody>
+								    </table>
+								</div>
+							</div>
 						</div>
 					</div>
-					<div class="span1">&nbsp;</div>
 				</div>
-				 	<div class="container">
-						<div class="container">
+				<div class="container">
+					<div class="container">
 						<h2>Installation Instructions</h2>
-						<hr/>
-				<div class="span1">&nbsp;</div>
-				  <div class="span9">
-				    <p>
-				      <strong>  Der JEE-Generator ist in Java implementiert, daher muss die
-				        <a href="http://www.oracle.com/technetwork/java/index.html">Java
-				        Runtime Environment</a> installiert sein.
-				      </strong>
-				    </p>
-					<p>
-						Es gibt zwei einfache Wege, den JEE-Generator ans Laufen zu bringen. Eine vorkonfigurierte Eclipse-Distribution
-						ist bereits mit allen notwendigen Plugins vorinstalliert verfügbar. Alternativ kann über eine Update Site
-						ein Eclipse mit allen notwendigen Plugins nachinstalliert werden.
-					</p>
-					<!--  section -->
+				  		<div class="span9">
+				    		<p>
+				      			<strong>  Der JEE-Generator ist in Java implementiert, daher muss die
+				        		<a href="http://www.oracle.com/technetwork/java/index.html">Java
+				        		Runtime Environment</a> installiert sein.
+				      			</strong>
+				    		</p>
+							<p>
+								Es gibt zwei einfache Wege, den JEE-Generator ans Laufen zu bringen. Eine vorkonfigurierte Eclipse-Distribution
+								ist bereits mit allen notwendigen Plugins vorinstalliert verfügbar. Alternativ kann über eine Update Site
+								ein Eclipse mit allen notwendigen Plugins nachinstalliert werden.
+							</p>
+							<!--  section -->
 					<section id="InstallDistro" style="padding-top: 68px; margin-top: -68px;">
 						<h2>  Installiere vorkonfiguriertes Eclipse</h2>
 						<ol>
@@ -159,7 +156,7 @@ class Download extends AbstractWebsite {
 								</strong> aus der Menüleiste und
 								<strong>  Add...
 								</strong> Geben Sie eine der Update Site URLs von oben an.
-									Diese Site fasst alle benötigten Komponenten und Abhängigkeiten für den JEE-Generator zusammen.
+								Diese Site fasst alle benötigten Komponenten und Abhängigkeiten für den JEE-Generator zusammen.
 							</li>
 							<li>Wähle <i>JEE-Generator</i> aus der Kategorie <i>JEE-Generator</i> und durch wiederholtes Klicken von
 								<i>Next</i> und einem abschließenden <i>Finish</i> wird die Installation abgeschlossen.
@@ -178,13 +175,15 @@ class Download extends AbstractWebsite {
 					<div class="span1">&nbsp;</div>
 					<div class="span9" id="faq">
 						<div class="accordion" id="accordion2">
-						    «faqEntry('Was ist eine Updatesite?','''
+						    <h3>Was ist eine Updatesite?</h3>
+							<p>
 								Eclipse hat einen eingebauten Updatemanager, dieser arbeitet mit so genannten Updatesites als Quelle.<br />
 								In Eclipse öffne das <i>"Help"</i> Menü und klicke auf <i>"Install new Software..."</i>.
-						    ''')»
-						    «faqEntry('Was ist die Lizenz des JEE-Generators?','''
-								<p>Der JEE-Generator ist frei verfügbar unter der <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.</p>
-						    ''')»
+							</p>
+						    <h3>Was ist die Lizenz des JEE-Generators?</h3>
+							<p>
+								Der JEE-Generator ist frei verfügbar unter der <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.
+							</p>
 						</div>
 			  		</div>
 					<div class="span1">&nbsp;</div>
@@ -192,21 +191,4 @@ class Download extends AbstractWebsite {
 			</div>
 		</div>
 	'''
-
-	def faqEntry(String question, CharSequence answer) '''
-		«val key = question.replaceAll('\\W','_')»
-		<div class="accordion-group">
-		  <div class="accordion-heading">
-			<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#«key»"">
-			  «question»
-			</a>
-		  </div>
-		  <div id="«key»" class="accordion-body collapse">
-			<div class="accordion-inner">
-			  «answer»
-			</div>
-		  </div>
-		</div>
-	'''
-
 }
