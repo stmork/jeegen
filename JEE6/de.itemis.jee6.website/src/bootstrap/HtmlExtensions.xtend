@@ -112,7 +112,7 @@ class HtmlExtensions {
 		<a name="«name.quote»"></a>
 	'''
 	
-	def protected dispatch CharSequence toHtml(Ref it, ParagraphState state) '''<a href="<ref.href»">«contents.toHtml(state)»</a>'''
+	def protected dispatch CharSequence toHtml(Ref it, ParagraphState state) '''<a href="«ref.href»">«contents.toHtml(state)»</a>'''
 	
 	def protected dispatch CharSequence toHtml(OrderedList it, ParagraphState state) { '''
 			<ol>
@@ -186,7 +186,7 @@ class HtmlExtensions {
 				x.contents.size == 1
 			default: false
 		}) {
-			'''<pre class="prettyprint lang-«language?.name?.toLowerCase?:'xtend'» linenums">«markCodeBegin»
+			'''<pre class="codebox prettyprint lang-«language?.name?.toLowerCase?:'xtend'» linenums">«markCodeBegin»
 			«code.trimCode»«markCodeEnd»</pre>'''.insert(state)
 		} else {
 			'''<code class="prettyprint lang-«language?.name?.toLowerCase?:'xtend'»">«code.trimCode»</code>'''
