@@ -84,6 +84,15 @@ abstract class AbstractWebsite implements Resource {
 		<script src="js/libs/jquery-1.7.1.min.js"></script>
 		<script src="js/libs/modernizr-2.5.3.min.js"></script>
 		<script src="js/jquery.prettyPhoto.js" type="text/javascript"></script>
+		«IF prettyPrint»
+		<!-- include pretty-print files -->
+		<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				prettyPrint();
+			});
+		</script>
+		«ENDIF»
 	'''
 
 	def protected boolean isPrettyPrint() { false }
@@ -159,15 +168,6 @@ abstract class AbstractWebsite implements Resource {
 				});
 			});
 		</script>
-		«IF prettyPrint»
-			<!-- include pretty-print files -->
-			<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
-			<script type="text/javascript">
-				$(document).ready(function() {
-					prettyPrint();
-				});
-			</script>
-		«ENDIF»
 	'''
 
 	def stylesheets() '''
