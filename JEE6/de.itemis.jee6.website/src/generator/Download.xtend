@@ -116,58 +116,59 @@ class Download extends AbstractWebsite {
 				<div class="span1">&nbsp;</div>
 				  <div class="span9">
 				    <p>
-				      <strong>  The JEE6 Generator is implemented in Java, so you must have a
+				      <strong>  Der JEE-Generator ist in Java implementiert, daher muss die 
 				        <a href="http://www.oracle.com/technetwork/java/index.html">Java
-				        Runtime Environment</a> installed in order to proceed.
+				        Runtime Environment</a> installiert sein.
 				      </strong>
 				    </p>
 				    <p>
-				      There are two easy ways to get the JEE6 Generator up and running. A pre-configured Eclipse distribution is available
-				      which has already all the necessary plug-ins installed. Alternatively, you can install the JEE6 Generator into your
-				      existing Eclipse by means of the Eclipse update mechanism.
+				    	Es gibt zwei einfache Wege, den JEE-Generator ans Laufen zu bringen. Eine vorkonfigurierte Eclipse-Distribution
+				    	ist bereits mit allen notwendigen Plugins vorinstalliert verfügbar. Alternativ kann über eine Update Site 
+				    	ein Eclipse mit allen notwendigen Plugins nachinstalliert werden.
 				    </p>
 				    <!--  section -->
 				    <section id="InstallDistro" style="padding-top: 68px; margin-top: -68px;">
-				    <h2>  Install Pre-Configured Eclipse
+				    <h2>  Installiere vorkonfiguriertes Eclipse
 				    </h2>
 				      <ol>
-				        <li>Download the distribution from above that matches your OS.</li>
-				        <li>Unzip the archive into the directory of your choice.
-								<strong>  Windows Users should choose a directory close to the root since the zip contains a
-								deeply nested folder structure. The maximum path length on windows may not exceed 256 characters.
+				        <li>Download die Distribution zum passenden Betriebssystem.</li>
+				        <li>Das Archiv muss im Verzeichnis der Wahl ausgepackt werden
+								<strong>Windows Benutzer sollten ein Verzeichnis möglichst in der Nähe des Wurzelverzeichnisses wählen
+								da Windows nur komplette Pfade mit maximal 256 Zeichen akzeptiert und Eclipse eine tiefe
+								Verzeichnisstruktur benutzt.
 								</strong>
 				        </li>
-				        <li>Launch Eclipse and select the workspace location. A workspace location is the directory for your user data
-								    and project files.
+				        <li>
+				        	Danach kann Eclipse gestartet werden und der gewünschte Workspace ausgewählt werden. Ein Workspace
+				        	ist das Verzeichnis für die Benutzerdaten und Projektdateien.
 				        </li>
 				      </ol>
 				    </section>
 				    <!--  section -->
 				    <section style="padding-top: 68px; margin-top: -68px;">
-				    <h2>  Install the JEE6 Generator from Update Site
+				    <h2>  JEE-Generator von der Update Site installieren 
 				    </h2>
 				    <p>
-				      If you have an Eclipse running :
+				      Wenn Eclipse läuft: 
 				    </p>
 				      <ul>
 				        <li>
-								    Choose
+								    Wähle
 								<strong>  Help -&gt; Install New Software...
-								</strong> from the menu bar and
+								</strong> aus der Menüleiste und
 								<strong>  Add...
-								</strong> Insert one of the update site URLs from above.
-								    This site aggregates all the necessary and optional components and dependencies of the JEE6 Generator.
+								</strong> Geben Sie eine der Update Site URLs von oben an.
+								    Diese Site fasst alle benötigten Komponenten und Abhängigkeiten für den JEE-Generator zusammen.
 				        </li>
-				        <li>Select the <i>JEE6 DSL</i> from the category <i>JEE6-Generator</i> and
-				        complete the wizard by clicking the <i>Next</i> button until you can click <i>Finish</i>.
+				        <li>Wähle <i>JEE-Generator</i> aus der Kategorie <i>JEE-Generator</i> und durch wiederholtes Klicken von
+				        	<i>Next</i> und einem abschließenden <i>Finish</i> wird die Installation abgeschlossen.
 				        </li>
 				        <li>
-								    After a quick download and a restart of Eclipse, the JEE6 Generator is ready to use.
+							Nach einem kurzen Download steht der JEE-Generator zum Gebrauch zur Verfügung.
 				        </li>
 				      </ul>
 				    </section>
 				  </div>
-				<div class="span1">&nbsp;</div>
 				</div>
 				<div class="container">
 					<h2>FAQs</h2>
@@ -179,8 +180,8 @@ class Download extends AbstractWebsite {
 								Eclipse hat einen eingebauten Updatemanager, dieser arbeitet mit so genannten Updatesites als Quelle.<br />
 								In Eclipse öffne das <i>"Help"</i> Menü und klicke auf <i>"Install new Software..."</i>.
 						    ''')»
-						    «faqEntry('Was ist die Lizenz des JEE6 Generators?','''
-								<p>Der JEE6 Generator frei verfügbar unter der <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.</p>
+						    «faqEntry('Was ist die Lizenz des JEE-Generators?','''
+								<p>Der JEE-Generator ist frei verfügbar unter der <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.</p>
 						    ''')»
 						</div>
 			  		</div>

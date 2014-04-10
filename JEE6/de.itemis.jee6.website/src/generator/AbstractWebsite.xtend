@@ -144,7 +144,7 @@ abstract class AbstractWebsite implements Resource {
 			<div class="sloganCentering">
 				<h2>
 					<strong>Was ist der JEE Generator?</strong>
-					Der JEE-6Generator ist in der Lage, eine komplette JEE-Web-Applikation aus einem einfachen Modell zu generieren.
+					Der JEE-Generator ist in der Lage, eine komplette JEE-Web-Applikation aus einem einfachen Modell zu generieren.
 					Das Framework wurde mit Xtext realisiert und ist als Eclipse-Plugin verfügbar. 
 				</h2>
 			</div>
