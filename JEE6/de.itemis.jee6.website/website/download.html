@@ -18,31 +18,12 @@
 	<!--[if lt IE 9]>
 	<link href="css/iebugs.css" rel="stylesheet" type='text/css'>
 	<![endif]-->
-	<script src="js/twitter.js" type="text/javascript"></script>
-	<script src="js/jquery-1.7.1.min.js"></script>
+	<!--[if lte IE 7]><link rel="stylesheet" href="css/iehacks.css" /><![endif]-->
+	
+	<!--[if lt IE 9]><script src="js/libs/html5shiv.js"></script><![endif]-->
+	<script src="js/libs/jquery-1.7.1.min.js"></script>
+	<script src="js/libs/modernizr-2.5.3.min.js"></script>
 	<script src="js/jquery.prettyPhoto.js" type="text/javascript"></script>
-		<script type="text/javascript">
-	     $(document).ready(function() {
-			$('a[data-rel]').each(function() {
-				$(this).attr('rel', $(this).data('rel'));
-			});
-			
-			$("a[rel^='prettyPhoto']").prettyPhoto({
-				animation_speed: 'fast',
-				slideshow: 5000,
-				autoplay_slideshow: false,
-				opacity: 0.80,
-				show_title: true,
-				theme: 'ligh_square',
-				overlay_gallery: false,
-				social_tools: false
-			});
-			$('#nav-outline > li > a').live('click', function() {        
-				$(this).parent().find('ul').slideToggle();      
-			});
-			$('.has-popover').popover();
-	     });
-		</script>
 </head>
 <body class="home">
 	<div id="wrap">
@@ -55,10 +36,11 @@
 				</div>
 				<nav class="menu">
 					<ul>
+						<li ><a href="index.html">Startseite</a></li>
 						<li ><a href="features.html">Features</a></li>
-						<li ><a href="aboutus.html">Ãber uns</a></li>
+						<li ><a href="aboutus.html">Über uns</a></li>
 						<li ><a href="documentation.html">Dokumentation</a></li>
-						<li class="active"><a href="download.html">Download</a></li>
+						<li ><strong>Download</strong></li>
 					</ul>
 				</nav>
 			</div>
@@ -67,7 +49,7 @@
 					<h2>
 						<strong>Was ist der JEE-Generator?</strong>
 						Der JEE-Generator ist in der Lage, eine komplette JEE-Web-Applikation aus einem einfachen Modell zu generieren.
-						Das Framework wurde mit Xtext realisiert und ist als Eclipse-Plugin verfÃŒgbar. 
+						Das Framework wurde mit Xtext realisiert und ist als Eclipse-Plugin verfügbar. 
 					</h2>
 				</div>
 			</div>
@@ -173,7 +155,7 @@
 					    </p>
 						<p>
 							Es gibt zwei einfache Wege, den JEE-Generator ans Laufen zu bringen. Eine vorkonfigurierte Eclipse-Distribution
-							ist bereits mit allen notwendigen Plugins vorinstalliert verfÃŒgbar. Alternativ kann ÃŒber eine Update Site
+							ist bereits mit allen notwendigen Plugins vorinstalliert verfügbar. Alternativ kann über eine Update Site
 							ein Eclipse mit allen notwendigen Plugins nachinstalliert werden.
 						</p>
 						<!--  section -->
@@ -182,14 +164,14 @@
 							<ol>
 								<li>Download die Distribution zum passenden Betriebssystem.</li>
 								<li>Das Archiv muss im Verzeichnis der Wahl ausgepackt werden
-									<strong>Windows Benutzer sollten ein Verzeichnis mÃ¶glichst in der NÃ€he des Wurzelverzeichnisses wÃ€hlen,
+									<strong>Windows Benutzer sollten ein Verzeichnis möglichst in der Nähe des Wurzelverzeichnisses wählen,
 									da Windows nur komplette Pfade mit maximal 256 Zeichen akzeptiert und Eclipse eine tiefe
 									Verzeichnisstruktur benutzt.
 									</strong>
 								</li>
 								<li>
-									Danach kann Eclipse gestartet werden und der gewÃŒnschte Workspace ausgewÃ€hlt werden. Ein Workspace
-									ist das Verzeichnis fÃŒr die Benutzerdaten und Projektdateien.
+									Danach kann Eclipse gestartet werden und der gewünschte Workspace ausgewählt werden. Ein Workspace
+									ist das Verzeichnis für die Benutzerdaten und Projektdateien.
 								</li>
 							</ol>
 						</section>
@@ -197,22 +179,22 @@
 						<section style="padding-top: 68px; margin-top: -68px;">
 							<h2>  JEE-Generator von der Update Site installieren  </h2>
 							<p>
-								Wenn Eclipse lÃ€uft:
+								Wenn Eclipse läuft:
 							</p>
 							<ul>
 								<li>
-									WÃ€hle
+									Wähle
 									<strong>  Help -&gt; Install New Software...
-									</strong> aus der MenÃŒleiste und
+									</strong> aus der Menüleiste und
 									<strong>  Add...
 									</strong> Geben Sie eine der Update Site URLs von oben an.
-										Diese Site fasst alle benÃ¶tigten Komponenten und AbhÃ€ngigkeiten fÃŒr den JEE-Generator zusammen.
+										Diese Site fasst alle benötigten Komponenten und Abhängigkeiten für den JEE-Generator zusammen.
 								</li>
-								<li>WÃ€hle <i>JEE-Generator</i> aus der Kategorie <i>JEE-Generator</i> und durch wiederholtes Klicken von
-									<i>Next</i> und einem abschlieÃenden <i>Finish</i> wird die Installation abgeschlossen.
+								<li>Wähle <i>JEE-Generator</i> aus der Kategorie <i>JEE-Generator</i> und durch wiederholtes Klicken von
+									<i>Next</i> und einem abschließenden <i>Finish</i> wird die Installation abgeschlossen.
 								</li>
 								<li>
-									Nach einem kurzen Download steht der JEE-Generator zum Gebrauch zur VerfÃŒgung.
+									Nach einem kurzen Download steht der JEE-Generator zum Gebrauch zur Verfügung.
 								</li>
 							</ul>
 						</section>
@@ -234,7 +216,7 @@
 							      <div id="Was_ist_eine_Updatesite_" class="accordion-body collapse">
 							    	<div class="accordion-inner">
 							    	  Eclipse hat einen eingebauten Updatemanager, dieser arbeitet mit so genannten Updatesites als Quelle.<br />
-							    	  In Eclipse Ã¶ffne das <i>"Help"</i> MenÃŒ und klicke auf <i>"Install new Software..."</i>.
+							    	  In Eclipse öffne das <i>"Help"</i> Menü und klicke auf <i>"Install new Software..."</i>.
 							    	</div>
 							      </div>
 							    </div>
@@ -246,7 +228,7 @@
 							      </div>
 							      <div id="Was_ist_die_Lizenz_des_JEE_Generators_" class="accordion-body collapse">
 							    	<div class="accordion-inner">
-							    	  <p>Der JEE-Generator ist frei verfÃŒgbar unter der <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.</p>
+							    	  <p>Der JEE-Generator ist frei verfügbar unter der <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.</p>
 							    	</div>
 							      </div>
 							    </div>
@@ -275,26 +257,16 @@
 			</div>
 		</div>
 	</footer>
-	<!-- Le javascript
-	    ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="js/script.js"></script>
 	
-	<script src="js/bootstrap-transition.js"></script>
-	<script src="js/bootstrap-alert.js"></script>
-	<script src="js/bootstrap-modal.js"></script>
-	<script src="js/bootstrap-dropdown.js"></script>
-	<script src="js/bootstrap-scrollspy.js"></script>
-	<script src="js/bootstrap-tab.js"></script>
-	<script src="js/bootstrap-tooltip.js"></script>
-	<script src="js/bootstrap-popover.js"></script>
-	<script src="js/bootstrap-button.js"></script>
-	<script src="js/bootstrap-collapse.js"></script>
-	<script src="js/bootstrap-carousel.js"></script>
-	<script src="js/bootstrap-typeahead.js"></script>
-	
-	
-	<!-- Include the plug-in -->
-	<script src="js/jquery.easing.1.3.js" type="text/javascript"></script>
-	<script src="js/custom.js" type="text/javascript"></script>
+	<script>
+		$(document).ready(function(){
+			$("a[rel^='prettyPhoto']").prettyPhoto({
+				social_tools: '',
+				default_width: 750,
+				default_height: 516
+			});
+		});
+	</script>
 </body>
 </html>
