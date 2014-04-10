@@ -12,10 +12,9 @@ class Generator {
 			new Index,
 			new Download,
 			new Features,
-			new Kontakt,
+			new Community,
 			new AboutUs,
-			new Documentation,
-			new LegalNotice
+			new Documentation
 		)
 		println("Done.")
 	}

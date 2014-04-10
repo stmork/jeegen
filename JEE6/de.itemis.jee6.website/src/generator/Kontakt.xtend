@@ -16,7 +16,7 @@ class Kontakt extends AbstractWebsite {
 					''','''
 						Bug gefunden?
 					''','''
-						mailto:info@jee-generator.de
+						mailto:jee6-generator@itemis.de
 					''','''
 						 Du hast einen Bug gefunden oder einen Verbesserungsvorschlag? Sende uns ein Mail an <strong>info@jee-generator.de</strong>
 					''')»

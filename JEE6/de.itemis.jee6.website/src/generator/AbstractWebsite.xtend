@@ -43,9 +43,9 @@ abstract class AbstractWebsite implements Resource {
 	 * the path relative the website root
 	 */
 	def String path()
-
+	
 	def CharSequence contents()
-
+	
 	def website() '''
 		<!DOCTYPE html>
 		<html lang="en">
@@ -58,7 +58,7 @@ abstract class AbstractWebsite implements Resource {
 			«stylesheets»
 			«javaScriptDocumentStart»
 		</head>
-		<body class="«IF path == "index.html"»home«ENDIF»">
+		<body class="home">
 			<div id="wrap">
 				«header»
 				«contents»
@@ -84,37 +84,12 @@ abstract class AbstractWebsite implements Resource {
 		<script src="js/libs/jquery-1.7.1.min.js"></script>
 		<script src="js/libs/modernizr-2.5.3.min.js"></script>
 		<script src="js/jquery.prettyPhoto.js" type="text/javascript"></script>
-		«IF prettyPrint»
-		<script type="text/javascript">
-			$(document).ready(function() {
-				prettyPrint();
-				$('a[data-rel]').each(function() {
-					$(this).attr('rel', $(this).data('rel'));
-				});
-				
-				$("a[rel^='prettyPhoto']").prettyPhoto({
-					animation_speed: 'fast',
-					slideshow: 5000,
-					autoplay_slideshow: false,
-					opacity: 0.80,
-					show_title: true,
-					theme: 'ligh_square',
-					overlay_gallery: false,
-					social_tools: false
-				});
-				$('#nav-outline > li > a').live('click', function() {        
-					$(this).parent().find('ul').slideToggle();      
-				});
-				$('.has-popover').popover();
-			});
-		</script>
-		«ENDIF»
 	'''
 
 	def protected boolean isPrettyPrint() { false }
 	def protected boolean isOutline() { true }
 	def protected boolean isPopover() { true }
-
+	
 	def header() '''
 		<header>
 			<div class="centering">
@@ -143,7 +118,7 @@ abstract class AbstractWebsite implements Resource {
 		<div id="slogan">
 			<div class="sloganCentering">
 				<h2>
-					<strong>Was ist der JEE Generator?</strong>
+					<strong>Was ist der JEE-Generator?</strong>
 					Der JEE-Generator ist in der Lage, eine komplette JEE-Web-Applikation aus einem einfachen Modell zu generieren.
 					Das Framework wurde mit Xtext realisiert und ist als Eclipse-Plugin verfügbar. 
 				</h2>
@@ -162,11 +137,11 @@ abstract class AbstractWebsite implements Resource {
 				</nav>
 		
 				<div class="logo">
-					<a href="http://www.itemis.de/"><img src="images/itemis_logo.png" alt="itemis" /></a>
+					<a href="http://www.itemis.de/"><img src="http://www.yakindu.com/resources/img/itemis_logo.png" alt="itemis" /></a>
 				</div>
 				<p>Copyright &copy; 2012&ndash;2014 <a href="http://www.itemis.de/">itemis AG</a>. Alle Rechte vorbehalten.</p>
 				<div class="powered">
-					Powered by: <a href="http://www.itemis.de/itemis-ag/services-und-loesungen/language=de/27261/eclipse-modeling"><img class="img-eclipse" src="images/eclipse_logo.jpg" alt="eclipse" /></a><a href="http://www.eclipse.org/Xtext/"><img src="images/xtext_logo.png" alt="xtext" /></a>
+					Powered by: <a href="http://www.itemis.de/itemis-ag/services-und-loesungen/language=de/27261/eclipse-modeling"><img class="img-eclipse" src="http://www.yakindu.com/resources/img/eclipse_logo.jpg" alt="eclipse" /></a><a href="http://www.eclipse.org/Xtext/"><img src="http://www.yakindu.com/resources/img/xtext_logo.png" alt="xtext" /></a>
 				</div>
 			</div>
 		</footer>
@@ -185,8 +160,13 @@ abstract class AbstractWebsite implements Resource {
 			});
 		</script>
 		«IF prettyPrint»
-		<!-- include pretty-print files -->
-		<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
+			<!-- include pretty-print files -->
+			<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
+			<script type="text/javascript">
+				$(document).ready(function() {
+					prettyPrint();
+				});
+			</script>
 		«ENDIF»
 	'''
 
