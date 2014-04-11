@@ -72,13 +72,11 @@ class Documentation extends AbstractXdocBaseWebsite {
 			<div id="maincontainer" class="clearfix centering">
 				<h2>Dokumentation</h2>
 				<div class="box introduction">
-					<div id="header_wrapper" class="container">
+					<div id="dokumentation_toc" class="container">
 						«doc.menu»
 					</div>
-					<div id="page">  
-						<div class="inner">
-							«doc.body»
-						</div>
+					<div id="dokumentation_content">  
+						«doc.body»
 					</div>
 				</div>
 			</div>
@@ -138,18 +136,17 @@ class DocumentationBody extends Body {
 
 	override h1(AbstractSection chapter) '''
 		<section id="«chapter.hrefId»">
-			<div class="row">
-				<h2 style="padding-top: 30px;">
-					«chapter.title.toHtmlText»
-				</h2>
-				<hr style="margin-top: 5px; margin-bottom: 5px;">
-				«FOR content : chapter.contents»
-					«content?.toHtmlParagraph»
-				«ENDFOR»
-				«FOR section: chapter.sections»
-					«section.h2»
-				«ENDFOR»
-			</div>
+			<h2 style="padding-top: 30px;">
+				«chapter.title.toHtmlText»
+			</h2>
+			<hr style="margin-top: 5px; margin-bottom: 5px;">
+			«FOR content : chapter.contents»
+				«content?.toHtmlParagraph»
+			«ENDFOR»
+			«FOR section: chapter.sections»
+				«section.h2»
+			«ENDFOR»
+			«topButton»
 		</section>
 	'''
 
@@ -162,6 +159,13 @@ class DocumentationBody extends Body {
 			«FOR subsection: section.sections»
 				«subsection.h3plus(4)»
 			«ENDFOR»
+			«topButton»
 		</section>
+	'''
+	
+	def topButton() '''
+		<div class="button">
+			<a href="#dokumentation_toc">top</a>
+		</div>
 	'''
 }
