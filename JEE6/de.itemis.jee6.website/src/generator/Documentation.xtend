@@ -136,10 +136,9 @@ class DocumentationBody extends Body {
 
 	override h1(AbstractSection chapter) '''
 		<section id="«chapter.hrefId»">
-			<h2 style="padding-top: 30px;">
+			<h2>
 				«chapter.title.toHtmlText»
 			</h2>
-			<hr style="margin-top: 5px; margin-bottom: 5px;">
 			«FOR content : chapter.contents»
 				«content?.toHtmlParagraph»
 			«ENDFOR»
@@ -165,7 +164,7 @@ class DocumentationBody extends Body {
 	
 	def topButton() '''
 		<div class="button">
-			<a href="#dokumentation_toc">top</a>
+			<a href="#maincontainer">top</a>
 		</div>
 	'''
 }

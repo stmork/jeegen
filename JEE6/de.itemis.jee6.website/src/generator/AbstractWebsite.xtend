@@ -52,7 +52,6 @@ abstract class AbstractWebsite implements Resource {
 		<head>
 			<meta charset="utf-8">
 			<title>«websiteTitle»</title>
-			<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
 			<meta name="description" content="«websiteDescription»">
 			<meta name="author" content="">
 			«stylesheets»
@@ -126,11 +125,9 @@ abstract class AbstractWebsite implements Resource {
 	def slogan() '''
 		<div id="slogan">
 			<div class="sloganCentering">
-				<h2>
-					<strong>Was ist der JEE-Generator?</strong>
-					Der JEE-Generator ist in der Lage, eine komplette JEE-Web-Applikation aus einem einfachen Modell zu generieren.
-					Das Framework wurde mit Xtext realisiert und ist als Eclipse-Plugin verfügbar. 
-				</h2>
+				<h2>Was ist der JEE-Generator?</h2>
+				<h3>Der JEE-Generator ist in der Lage, eine komplette JEE-Web-Applikation aus einem einfachen Modell zu generieren.
+					Das Framework wurde mit Xtext realisiert und ist als Eclipse-Plugin verfügbar. </h3>
 			</div>
 		</div>
 	'''

@@ -7,16 +7,16 @@ audio, canvas, video { display: inline-block; *display: inline; *zoom: 1; }
 audio:not([controls]) { display: none; }
 [hidden] { display: none; }
 
-
 /* =============================================================================
    Base
    ========================================================================== */
 
 html {
-  font-size: 100%;
+  
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
 }
+
 html,
 button,
 input,
@@ -32,7 +32,7 @@ body {
   background: white no-repeat;
   background-position: center top;
   margin: 0;
-  font-size: 16px;
+  
   line-height: 1.4;
 }
 
@@ -54,6 +54,7 @@ hr {
   clear: both;
   visibility: hidden;
 }
+
 hr.seperator {
   visibility: visible;
   height: 1px;
@@ -87,7 +88,7 @@ dfn { font-style: italic; }
 pre, code, kbd, samp {
   font-family: monospace, serif;
   _font-family: 'courier new', monospace;
-  font-size: 1em;
+  
 }
 
 /* Improve readability of pre-formatted text in all browsers */
@@ -105,12 +106,12 @@ q:after {
   content: none;
 }
 
-small { font-size: 85%; }
+small {  }
 
 
 /* Position subscript and superscript content without affecting line-height: h5bp.com/k */
 sub, sup {
-  font-size: 75%;
+  
   line-height: 0;
   position: relative;
   vertical-align: baseline;
@@ -139,17 +140,17 @@ h4 {
 	margin-bottom: 8px;
 }
 
-h1 small, h2 small, h3 small, h4 small, h5 small { font-size: 14px; }
+h1 small, h2 small, h3 small, h4 small, h5 small {  }
 
 #maincontainer div#benefit h3 {
-  font-size: 18px;
+  
   margin-bottom: 10px;
   padding-right: 10px;
 }
 #maincontainer #benefit div.box h3 { margin-right: 0; }
 
-p.small { font-size: 11px; }
-p.small small { font-size: 1em; }
+p.small {  }
+p.small small {  }
 
 
 
@@ -204,7 +205,7 @@ figcaption {
   margin: 10px 0 0;
   color: #888;
   text-align: center;
-  font-size: 14px; 
+   
 }
 
 
@@ -247,7 +248,7 @@ button,
 input,
 select,
 textarea {
-  font-size: 100%;
+  
   margin: 0;
   vertical-align: baseline;
   *vertical-align: middle;
@@ -373,12 +374,12 @@ td { }
    ========================================================================== */
 
 #maincontainer h2 {
-	font-size: 28px;
+	
 	margin-right: 10px;
 	margin-top: 1.2em;
 }
 #maincontainer h3 {
-	font-size: 22px;
+	
 	margin: 2em 0 0; /* TODO */
 }
 #maincontainer h4 { margin: 2.25em 0 1em; } /* TODO (Req) */
@@ -423,16 +424,15 @@ p.metainfo {
 	top: 5px;
 	right: 0;
   color: #666666;
-  font-size: 12px;
+  
   padding: 3px 10px;
 }
 
 /* meta info ende */
 
 nav.menu {
-  position: absolute;
-  top: 55px;
-  right: 0px;
+	float: right;
+	margin-top: 1em;
 }
 
 .menu ul {
@@ -444,6 +444,7 @@ nav.menu {
 .menu ul li {
 	border-right: 1px solid white;
 	display: table-cell;
+	font-size: .8em;
 }
 
 .menu ul li:first-child a,
@@ -462,7 +463,7 @@ nav.menu {
 .menu ul li strong,
 .lightbox a.lightbox-button {
   font-weight: bold;
-  font-size: 13px;
+  
   margin: 0px;
   text-decoration: none;
 	border: 1px solid #ccc;
@@ -505,47 +506,44 @@ nav.menu {
 	background: linear-gradient(to bottom,  rgba(230,230,230,1) 0%,rgba(250,250,250,1) 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e6e6e6', endColorstr='#fafafa',GradientType=0 ); /* IE6-9 */
 }
-
+header  {
+	padding-top: 1em;
+	
+}
 
 header div#slogan,
 header div#headline {
   position: relative;
   z-index: 10;
-  margin: 20px auto 0;
-  padding: 10px 0 21px;
+  margin: 2em auto 0;
+  padding: 1em 0;
   background-color: #ddd;
+  font-size: 1.1em;
 }
 
 header #slogan h2,
 header #headline h2 {
-  font-size: 20px;
-  margin: 0;
-  padding: 0;
+  font-weight: 900;
 }
-header #slogan h2 strong {
-  color: white;
-  font-size: 26px;
-  display: block;
-  line-height: 1.9;
-  white-space: nowrap;
-}
-#slogan h2 {
+#slogan h3 {
   font-weight: normal;
 }
 header #headline h2 {
-  font-size: 36px;
+  
   padding: 10px 40px 0;
   line-height: 1.3; 
 }
 
 header div.centering { position: relative; }
 
-header div.logo { padding: 23px 0 5px; }
+header div.logo { 
+	float: left;
+}
 
 
 
 .box { padding-right: 20px; }
-.box h3 { font-size: 17px; }
+.box h3 {  }
 .box img.detail {
   border: 1px solid #bbb;
   background-color: white;
@@ -559,7 +557,7 @@ header div.logo { padding: 23px 0 5px; }
 
 .box.introduction {
   color: #666;
-  font-size: 20px;
+  
   padding: 0;
   margin: 0 0 30px;
   clear: both;
@@ -581,7 +579,7 @@ a .box h3 {
 /* Trial Download */
 div.trialdownload {
   float: right;
-  font-size: 12px;
+  
   margin: 10px 30px 10px 0; 
 }
 div.trialdownload a { font-weight: bold; text-decoration: none; }
@@ -595,7 +593,7 @@ div.trialdownload a:active { text-decoration: underline; }
 
 div.language {
   float: right;
-  font-size: 12px;
+  
   margin: 10px 0 0; 
 }
 div.language a,
@@ -613,13 +611,12 @@ div.language a:active { text-decoration: underline; }
    ========================================================================== */
 
 div#stage {
-  position: relative;
   height: 533px;
   width: 100%;
   background: url(img/stage_bg.gif) bottom repeat-x;
 }
 #stage div.video {
-  height: 480px;
+  height: 400px;
   position: relative;
 }
 #stage .video div.content {
@@ -642,11 +639,11 @@ div#stage {
 #stage div.tour_next h1 {
 	margin: 0 0 10px 0;
 	border-bottom: 2px solid lightgray;
-	font-size: 27px;
+	
 }
 #stage div.tour_next p {
   color: #777;
-  font-size: 16px;
+  
 }
 
 /* #stage .tour_next a { */
@@ -702,7 +699,7 @@ a.gallery {
 .next a,
 a.generate,
 div.next {
-  font-size: 13px;
+  
   font-weight: bold;
   text-decoration: none;
   background-color: #999;
@@ -729,7 +726,7 @@ div.back {
 }
 
 p.back {
-  font-size: 14px;
+  
   float: left;
 }
 
@@ -748,7 +745,7 @@ div.pagination {
   color: inherit;
   background-color: white;
   text-align: center;
-  font-size: .9em;
+  
   overflow: hidden;
   padding: 5px 0;
   margin: 0 auto 20px;
@@ -800,7 +797,7 @@ div#producttour div.tourbox {	padding-bottom: 42px; }
    ========================================================================== */
 
 div.contact {
-  font-size: 16px;
+  
   padding: 25px;
   margin-right: 20px;
   border: 1px solid #ccc;
@@ -826,23 +823,23 @@ div.contact {
   float: right;
   color: white;
   display: inline;
-  font-size: 20px;
+  
   font-weight: bold;
 }
 #maincontainer .contact h2 { margin-top: 0; }
 
 #maincontainer .contact h3 {
-  font-size: 17px;
+  
   margin: 10px 0;
 }
 
 .contact span.label,
 .contact label {
-	font-size: 13px;
+	
 	font-weight: bold;
 }
 .contact label small {
-  font-size: 14px;
+  
   font-weight: normal;
   line-height: 1.4; 
 }
@@ -854,7 +851,7 @@ div.contact {
   background: linear-gradient(to bottom, #E6E6E6 0%, #FAFAFA 100%) repeat scroll 0 0 transparent;
   border: 1px solid #BBBBBB;
   color: #333333;
-  font-size: 18px;
+  
   margin: 0 10px 10px 0;
   padding: 5px;
   width: 95%;
@@ -866,7 +863,7 @@ div.contact {
   background: linear-gradient(to bottom, #E6E6E6 0%, #FAFAFA 100%) repeat scroll 0 0 transparent;
   border: 1px solid #BBBBBB;
   color: #333333;
-  font-size: 18px;
+  
   margin: 0 10px 10px 0;
   padding: 5px 5px 6px 5px;
   width: 98%;
@@ -891,7 +888,7 @@ div.contact {
   margin-left: 0;
   margin-top: 1.6em;
   padding: 0;
-  font-size: 13px;
+  
   font-weight: bold;
 }
 .contact ul li {
@@ -918,7 +915,7 @@ ul.downloadlist li {
   padding-left: 30px;
   list-style: none;
 }
-ul.downloadlist li strong { font-size: 1.1em; }
+ul.downloadlist li strong {  }
 
 ul.downloadlist li.windows { background: url(img/ico-win.png) 5px 2px no-repeat; }
 
@@ -954,11 +951,11 @@ div.contact {	overflow: hidden; }
 
 .contact td,
 .contact th {
-  font-size: 19px;
+  
   font-weight: bold;
 }
 
-.contact td small { font-size: 15px; }
+.contact td small {  }
 
 
 
@@ -966,7 +963,7 @@ div.contact {	overflow: hidden; }
 
 input[type="text"] {
   border: 1px solid #bbb;
-  font-size: 18px;
+  
   height: 25px;
   margin: 0 10px 10px 0;
   padding: 5px;
@@ -993,7 +990,7 @@ button[type="submit"] {
   margin: 15px 0 0;
   padding: 8px 20px;
   font-weight: bold;
-  font-size: 17px;
+  
   border: none;
 	border-radius: 5px;
   text-decoration: none;
@@ -1027,7 +1024,7 @@ div.accordion { margin-bottom: 45px; }
 
 .accordion h4.trigger {
   margin-bottom: 0;
-  font-size: 18px;
+  
   background: none no-repeat scroll 0 -228px transparent; /* background-image wird in der main.css definiert! */
   padding-left: 30px;
 }
@@ -1128,11 +1125,12 @@ body > #wrap {
 footer {
 	clear: both;
   border-top: 2px solid black;
-  background: white;
-  font-size: 12px;
-  margin-top: -59px;
+  background: #fff;
+  height: 4.5em;
+  margin-top: -4.5em;
   position: relative;
   padding-bottom: 1.4em;
+  font-size: .8em;
 }
 footer:after {
   content: ".";
@@ -1165,7 +1163,7 @@ footer p {
 }
 footer a:link,
 footer a:visited {
-  font-size: 12px;
+  
   font-weight: bold;
   text-decoration: none;	
 }
@@ -1189,7 +1187,6 @@ mark.todo {
   background-color: #ffa;
   font-weight: bold; 
 }
-
 
 /* =============================================================================
    Lightbox
@@ -1258,8 +1255,6 @@ div.lightbox {
 .clearfix:before, .clearfix:after { content: ""; display: table; }
 .clearfix:after { clear: both; }
 .clearfix { *zoom: 1; }
-
-
 
 /* ==|== print styles =======================================================
    Print styles.
@@ -1459,3 +1454,10 @@ div.dark_rounded #pp_full_res .pp_inline,div.dark_square #pp_full_res .pp_inline
 
 /* Anpassungen */
 .pp_play { display: none; }
+
+
+@media (max-width : 320px) {
+	html, body {
+		font-size: 1.2em;
+	}
+}

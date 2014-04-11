@@ -6,12 +6,8 @@ body { background-image: url("img/large-bg.png"); }
 
 a:link,
 a:visited { color: #00457C; }
-
 a:hover { color: #6B645C; }
-
-
 th { color: #00457C; }
-
 
 #maincontainer h2,
 #maincontainer h3 {	color: #00457C; }
@@ -83,8 +79,6 @@ fieldset {
   border: 1px #00457C solid;
 }
 
-
-
 /* =============================================================================
    Figures
    ========================================================================== */
@@ -95,7 +89,7 @@ figcaption {
   margin: 10px 0 0;
   color: #888;
   text-align: center;
-  font-size: 13px; 
+   
 }
   
 
@@ -103,18 +97,31 @@ figcaption {
    Main
    ========================================================================== */
    
-#maincontainer h3 {	margin-bottom: 0px; }
+#maincontainer h3 {	margin-bottom: 1em; }
 
 div#aboutUsImage img { max-width: 200px; }
 
 div #aboutUsImage {
 	float: left;
-	margin: 0 30px 20px 0;
+	margin: 0 1em 1em 0;
 	border: 1px solid #BBBBBB;
+}
+div #aboutUsText {
+	padding-right: 1em;
 }
 
 .codebox {
-	font-size: 0.5em;
+	font-size: .8em;
+	margin: 0;
+	padding: 0;
+}
+.codebox ol {
+	margin: 0;
+	padding: 0 0 0 3.7em;
+}
+.codebox li {
+	margin: 0;
+	padding: 0;
 }
 
 
@@ -162,7 +169,7 @@ div.img-container {
 	background-color: #00457C;
 	border-radius: 5px;
 	color: #FFFFFF !important;
-	font-size: 13px;
+	
 	font-weight: bold;
 	text-decoration: none;
 	display: inline-block;
@@ -179,7 +186,7 @@ div.img-container {
 	========================================================================== */
 
 table.table {
-	font-size: 0.6em;
+	
 	border: 1px solid #ccc;
 }
 
@@ -215,7 +222,7 @@ table.table td {
 .downloadbox table {
     color: #C0C2C2;
     font-family: 'Lato',sans-serif;
-    font-size: 12px;
+    font-size: .8em;
     font-weight: 400;
     width: 40%;
 }
@@ -226,17 +233,21 @@ table.table td {
     color: #F4F4F4;
     float: left;
     font-family: 'Lato',sans-serif;
-    font-size: 24px;
+    
     padding: 13px 8%;
     text-align: center;
     text-transform: uppercase;
     width: 84.3%;
 }
+.downloadbox thead th h2 {
+	margin: .5em 0 !important;
+	color: #fff !important;
+}
 .downloadbox tfoot td {
     background: none repeat scroll 0 0 #EDEDED;
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
-    padding: 20px 8%;
+    padding: .5em 8%;
     width: 84.3%;
 }
 .downloadbox td {
@@ -253,7 +264,7 @@ table.table td {
     border-bottom: 1px solid #D4D4D4;
     color: #FFFFFF;
     font-family: 'Lato',sans-serif;
-    font-size: 32px;
+    
     font-weight: 400;
     padding: 25px 8%;
     text-align: center;
@@ -262,7 +273,7 @@ table.table td {
 
 .downloadbox td.focus span {
     display: block;
-    font-size: 10px;
+    
     margin-top: 5px;
 }
 
@@ -286,7 +297,7 @@ table.table td {
     text-align: center;
     text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
     vertical-align: middle;
-/* 	font-size: 13px; */
+/* 	 */
 /* 	line-height: 18px; */
 }
 
@@ -299,16 +310,16 @@ table.table td {
 	Dokumentation
 	========================================================================== */
 #dokumentation_toc {
-	font-size: .75em;
+	
 	line-height: .75;
 }
 
-c li {
+#dokumentation_toc li {
 	list-style: none;
 }
 
 #dokumentation_content .button a {
-	font-size: .5em;
+	
 	padding: .2em .4em;
 	position: absolute;
 	right: 5em;
