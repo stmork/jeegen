@@ -103,10 +103,13 @@ class Download extends AbstractWebsite {
 	<div class="clearfix">
 		<div class="downloadbox left">
 			<table>
-				<tbody>
+		    	<thead>
 					<tr>
-						<td class="focus">Update Sites <span>Nutze den Eclipse Update Manager</span></td>
+						<th class="focus"><h2>Update Sites</h2> <span>Nutze den Eclipse Update Manager</span></th>
 					</tr>
+		    	</thead>
+				<tfoot><tr><td></td></tr></tfoot>
+				<tbody>
 					<tr>
 						<td style="text-align: center;">
 							<a href="http://jee6-generator.itemis.de/updates/kepler/" class="btn" style="width: 70%;">Kepler</a>
@@ -118,15 +121,17 @@ class Download extends AbstractWebsite {
 						</td>
 					</tr>
 				</tbody>
-				<tfoot><tr><td></td></tr></tfoot>
 		    </table>
 		</div>
 		<div class="downloadbox right">
 		    <table>
-				<tbody>
+		    	<thead>
 					<tr>
-						<td class="focus">Full Eclipse <span>Einfach runterladen und entpacken</span></td>
+						<th class="focus"><h2>Full Eclipse</h2> <span>Einfach runterladen und entpacken</span></th>
 					</tr>
+		    	</thead>
+				<tfoot><tr><td></td></tr></tfoot>
+				<tbody>
 					<tr>
 						<td style="text-align: center; white-space: nowrap;">
 							<a href="«getLink(OSX_64)»"
@@ -152,7 +157,6 @@ class Download extends AbstractWebsite {
 						</td>
 					</tr>
 				</tbody>
-				<tfoot><tr><td></td></tr></tfoot>
 		    </table>
 		</div>
 	</div>
