@@ -37,9 +37,9 @@ class Documentation extends AbstractXdocBaseWebsite {
 	override path() {
 		"documentation.html"
 	}
-	
+
 	val Document doc
-	
+
 	@Inject DocumentLoad docLoader
 	@Inject extension Body
 	@Inject extension HtmlExtensions
@@ -53,7 +53,7 @@ class Documentation extends AbstractXdocBaseWebsite {
 		super.generateTo(targetDir)
 		copyImages(doc, targetDir)
 	}
-	
+
 	def copyImages(Document doc, File targetDir) {
 		val iter = EcoreUtil::getAllContents(doc.eResource.resourceSet, true)
 		iter.filter(typeof(ImageRef)).forEach[
@@ -66,7 +66,7 @@ class Documentation extends AbstractXdocBaseWebsite {
 			source.newInputStreamSupplier.copy(target)
 		]
 	}
-	
+
 	override contents() '''
 		<div id="main" role="main">
 			<div id="maincontainer" class="clearfix centering">
@@ -108,8 +108,12 @@ class Documentation extends AbstractXdocBaseWebsite {
 	'''
 
 	def additionalLinks() '''
-		<li style="color : #333;">Additional Resources
-		<li><a href="javadoc/">API Documentation (JavaDoc)</a>
+		<li><strong>Additional Resources</strong></li>
+		<li>
+			<ul>
+				<li><a href="javadoc/">API Documentation (JavaDoc)</a></li>
+			</ul>
+		</li>
 	'''
 	
 	override protected getDocument() {
@@ -118,7 +122,6 @@ class Documentation extends AbstractXdocBaseWebsite {
 }
 
 class DocumentationSetup extends XdocStandaloneSetup implements Module {
-		
 	override createInjector() {
 		val module = new XdocRuntimeModule
 		Guice::createInjector(module, this)
@@ -132,7 +135,7 @@ class DocumentationSetup extends XdocStandaloneSetup implements Module {
 class DocumentationBody extends Body {
 	@Inject extension XdocExtensions
 	@Inject extension HtmlExtensions
-	
+
 	override h1(AbstractSection chapter) '''
 		<!-- chapter -->
 		<section id="«chapter.hrefId»">
@@ -150,9 +153,10 @@ class DocumentationBody extends Body {
 					«ENDFOR»
 				</div>
 			</div>
+			
 		</section>
 	'''
-	
+
 	override h2(AbstractSection section) '''
 		<section id="«section.hrefId»">
 		<h3>«section.title.toHtmlText»</h3>
