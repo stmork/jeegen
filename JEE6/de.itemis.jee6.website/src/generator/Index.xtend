@@ -28,7 +28,10 @@ class Index extends AbstractWebsite {
 		
 				<div class="tour_next">
 					<h1>JEE Generator</h1>
-					<p><strong>Java Enterprise Entwicklung leicht gemacht!</strong></p>
+					<p>
+						<strong>Java Enterprise Entwicklung leicht gemacht!</strong>
+						Schauen Sie sich zur Einführung dieses Video an. Für weitere Informationen einfach 
+					</p>
 					<div class="button">
 						<a href="features.html"><strong>»</strong> weiter lesen</a>
 					</div>
