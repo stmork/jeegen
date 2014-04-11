@@ -648,14 +648,15 @@ div#stage {
   color: #777;
   font-size: 16px;
 }
-#stage .tour_next a {
-	position: relative;
-	display: block;
-	left: 0px;
-	padding: 15px 0 11px 30px;
-	background: none no-repeat scroll 0 0 #ddd;  /* more-button.png, transparent */
-}
-#stage .tour_next a:hover { background-position: 0 -48px; }
+
+/* #stage .tour_next a { */
+/* 	position: relative; */
+/* 	display: block; */
+/* 	left: 0px; */
+/* 	padding: 15px 0 11px 30px; */
+/* 	background: none no-repeat scroll 0 0 #ddd;  more-button.png, transparent */
+/* } */
+/* #stage .tour_next a:hover { background-position: 0 -48px; } */
 
 
 

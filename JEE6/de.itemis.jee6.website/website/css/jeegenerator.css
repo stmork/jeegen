@@ -42,11 +42,6 @@ header div#headline {
 
 #stage div.tour_next { color: #00457C; }
 
-#stage .tour_next a {
-  background-image: url("img/more-button.png");
-  background-color: transparent;
-}
-
 div.next:hover { background-color: #208ccd; }
 
 .overlay { background-image: url("img/videoOverlay.png"); }
@@ -70,7 +65,7 @@ button[type="submit"]:hover { background-color: #00457C; }
 a.button:link,
 a.button:visited,
 button[type="submit"] {
-  color: white;
+ 	color: white;
 	background-color: #3DACDD;
 }
 
@@ -161,6 +156,21 @@ div.img-container {
     margin-left: auto;
     margin-right: auto;
     max-width: 100%;
+}
+
+.button a {
+	background-color: #00457C;
+	border-radius: 5px;
+	color: #FFFFFF !important;
+	font-size: 13px;
+	font-weight: bold;
+	text-decoration: none;
+	display: inline-block;
+}
+
+.button a:hover {
+	background-color: #999999;
+	color: #FFFFFF !important;
 }
 
 
@@ -279,6 +289,7 @@ table.table td {
 /* 	font-size: 13px; */
 /* 	line-height: 18px; */
 }
+
 .downloadbox a {
     color: #00457C;
     text-decoration: none;
@@ -287,15 +298,21 @@ table.table td {
 /*  ==========================================================================
 	Dokumentation
 	========================================================================== */
-#header_wrapper {
+#dokumentation_toc {
 	font-size: .75em;
 	line-height: .75;
 }
 
-#header_wrapper li {
+c li {
 	list-style: none;
 }
 
+#dokumentation_content .button a {
+	font-size: .5em;
+	padding: .2em .4em;
+	position: absolute;
+	right: 5em;
+}
 
 /* ==|== media queries ======================================================
    EXAMPLE Media Query for Responsive Design.
