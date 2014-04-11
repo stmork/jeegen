@@ -137,35 +137,31 @@ class DocumentationBody extends Body {
 	@Inject extension HtmlExtensions
 
 	override h1(AbstractSection chapter) '''
-		<!-- chapter -->
 		<section id="«chapter.hrefId»">
 			<div class="row">
-				<div class="span8 offset3">
-					<h2 style="padding-top: 30px;">
-						«chapter.title.toHtmlText»
-					</h2>
-					<hr style="margin-top: 5px; margin-bottom: 5px;">
-					«FOR content : chapter.contents»
-						«content?.toHtmlParagraph»
-					«ENDFOR»
-					«FOR section: chapter.sections»
-						«section.h2»
-					«ENDFOR»
-				</div>
+				<h2 style="padding-top: 30px;">
+					«chapter.title.toHtmlText»
+				</h2>
+				<hr style="margin-top: 5px; margin-bottom: 5px;">
+				«FOR content : chapter.contents»
+					«content?.toHtmlParagraph»
+				«ENDFOR»
+				«FOR section: chapter.sections»
+					«section.h2»
+				«ENDFOR»
 			</div>
-			
 		</section>
 	'''
 
 	override h2(AbstractSection section) '''
 		<section id="«section.hrefId»">
-		<h3>«section.title.toHtmlText»</h3>
-		«FOR content : section.contents»
-			«content.toHtmlParagraph»
-		«ENDFOR»
-		«FOR subsection: section.sections»
-			«subsection.h3plus(4)»
-		«ENDFOR»
+			<h3>«section.title.toHtmlText»</h3>
+			«FOR content : section.contents»
+				«content.toHtmlParagraph»
+			«ENDFOR»
+			«FOR subsection: section.sections»
+				«subsection.h3plus(4)»
+			«ENDFOR»
 		</section>
 	'''
 }

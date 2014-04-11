@@ -11,31 +11,9 @@ class Kontakt extends AbstractWebsite {
 		<div id="maincontainer" class="clearfix centering">
 			<h2>Kontakt</h2>
 			<div class="box introduction">
-				«entry('''
-						icon-bug-blue.png
-					''','''
-						Bug gefunden?
-					''','''
-						mailto:info@jee-generator.de
-					''','''
-						 Du hast einen Bug gefunden oder einen Verbesserungsvorschlag? Sende uns ein Mail an <strong>info@jee-generator.de</strong>
-					''')»
-			</div>
-		</div>
-	'''
-
-	def entry(String img, String title, String link, String description) '''
-		<div class="row">
-			<div class="span9 team">
-		    <a href="«link.trim»" class="anchor-in-div"></a>
-		    <div class="row">
-			  <div class="span2 ">
-			    <h3>«title.trim»</h3>
-			 	</div>
-				<div class="span6 ">
-					«description»
-				</div>
-				</div>
+				<h3>Bug gefunden?</h3>
+				Du hast einen Bug gefunden oder einen Verbesserungsvorschlag? Sende uns ein Mail an:
+				<a href="mailto:info@jee-generator.de"><strong>info@jee-generator.de</strong></a>
 			</div>
 		</div>
 	'''

@@ -32,71 +32,67 @@ class Download extends AbstractWebsite {
 				«downloadBoxes»
 			</div>
 			<div class="container">
-				<div class="container">
-					<h2>Installation Instructions</h2>
-			  		<div class="span9">
-			    		<p>
-			      			<strong>Der JEE-Generator ist in Java implementiert, daher muss die
-			        		<a href="http://www.oracle.com/technetwork/java/index.html">Java
-			        		Runtime Environment</a> installiert sein.
-			      			</strong>
-			    		</p>
-						<p>
-							Es gibt zwei einfache Wege, den JEE-Generator ans Laufen zu bringen. Eine vorkonfigurierte Eclipse-Distribution
-							ist bereits mit allen notwendigen Plugins vorinstalliert verfügbar. Alternativ kann über eine Update Site
-							ein Eclipse mit allen notwendigen Plugins nachinstalliert werden.
-						</p>
-						<section id="InstallDistro" style="padding-top: 68px; margin-top: -68px;">
-							<h2>  Installiere vorkonfiguriertes Eclipse</h2>
-							<ol>
-								<li>Download die Distribution zum passenden Betriebssystem.</li>
-								<li>
-									Das Archiv muss im Verzeichnis der Wahl ausgepackt werden
-									<strong>Windows Benutzer sollten ein Verzeichnis möglichst in der Nähe des Wurzelverzeichnisses wählen,
-									da Windows nur komplette Pfade mit maximal 256 Zeichen akzeptiert und Eclipse eine tiefe
-									Verzeichnisstruktur benutzt.
-									</strong>
-								</li>
-								<li>
-									Danach kann Eclipse gestartet werden und der gewünschte Workspace ausgewählt werden. Ein Workspace
-									ist das Verzeichnis für die Benutzerdaten und Projektdateien.
-								</li>
-							</ol>
-						</section>
-						<section style="padding-top: 68px; margin-top: -68px;">
-							<h2>  JEE-Generator von der Update Site installieren  </h2>
-							<p>
-								Wenn Eclipse läuft:
-							</p>
-							<ul>
-								<li>
-									Wähle <strong>Help -&gt; Install New Software...</strong> aus der Menüleiste und
-									<strong>  Add...</strong> Geben Sie eine der Update Site URLs von oben an.
-									Diese Site fasst alle benötigten Komponenten und Abhängigkeiten für den JEE-Generator zusammen.
-								</li>
-								<li>Wähle <i>JEE-Generator</i> aus der Kategorie <i>JEE-Generator</i> und durch wiederholtes Klicken von
-									<i>Next</i> und einem abschließenden <i>Finish</i> wird die Installation abgeschlossen.
-								</li>
-								<li>
-									Nach einem kurzen Download steht der JEE-Generator zum Gebrauch zur Verfügung.
-								</li>
-							</ul>
-						</section>
-					</div>
-				</div>
-				<div class="container">
-					<h2>FAQs</h2>
-					<div class="accordion" id="accordion2">
-						<h3>Was ist eine Updatesite?</h3>
-						<p>
-							Eclipse hat einen eingebauten Updatemanager, dieser arbeitet mit so genannten Updatesites als Quelle.<br />
-							In Eclipse öffne das <i>"Help"</i> Menü und klicke auf <i>"Install new Software..."</i>.
-						</p>
-					    <h3>Was ist die Lizenz des JEE-Generators?</h3>
-						<p>
-							Der JEE-Generator ist frei verfügbar unter der <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.
-						</p>
-					</div>
+				<h2>Installation Instructions</h2>
+	    		<p>
+	      			<strong>Der JEE-Generator ist in Java implementiert, daher muss die
+	        		<a href="http://www.oracle.com/technetwork/java/index.html">Java
+	        		Runtime Environment</a> installiert sein.
+	      			</strong>
+	    		</p>
+				<p>
+					Es gibt zwei einfache Wege, den JEE-Generator ans Laufen zu bringen. Eine vorkonfigurierte Eclipse-Distribution
+					ist bereits mit allen notwendigen Plugins vorinstalliert verfügbar. Alternativ kann über eine Update Site
+					ein Eclipse mit allen notwendigen Plugins nachinstalliert werden.
+				</p>
+				<section>
+					<h2>  Installiere vorkonfiguriertes Eclipse</h2>
+					<ol>
+						<li>Download die Distribution zum passenden Betriebssystem.</li>
+						<li>
+							Das Archiv muss im Verzeichnis der Wahl ausgepackt werden
+							<strong>Windows Benutzer sollten ein Verzeichnis möglichst in der Nähe des Wurzelverzeichnisses wählen,
+							da Windows nur komplette Pfade mit maximal 256 Zeichen akzeptiert und Eclipse eine tiefe
+							Verzeichnisstruktur benutzt.
+							</strong>
+						</li>
+						<li>
+							Danach kann Eclipse gestartet werden und der gewünschte Workspace ausgewählt werden. Ein Workspace
+							ist das Verzeichnis für die Benutzerdaten und Projektdateien.
+						</li>
+					</ol>
+				</section>
+				<section>
+					<h2>JEE-Generator von der Update Site installieren  </h2>
+					<p>
+						Wenn Eclipse läuft:
+						<ul>
+							<li>
+								Wähle <strong>Help -&gt; Install New Software...</strong> aus der Menüleiste und
+								<strong>  Add...</strong> Geben Sie eine der Update Site URLs von oben an.
+								Diese Site fasst alle benötigten Komponenten und Abhängigkeiten für den JEE-Generator zusammen.
+							</li>
+							<li>Wähle <i>JEE-Generator</i> aus der Kategorie <i>JEE-Generator</i> und durch wiederholtes Klicken von
+								<i>Next</i> und einem abschließenden <i>Finish</i> wird die Installation abgeschlossen.
+							</li>
+							<li>
+								Nach einem kurzen Download steht der JEE-Generator zum Gebrauch zur Verfügung.
+							</li>
+						</ul>
+					</p>
+				</section>
+			</div>
+			<div class="container">
+				<h2>FAQs</h2>
+				<div>
+					<h3>Was ist eine Updatesite?</h3>
+					<p>
+						Eclipse hat einen eingebauten Updatemanager, dieser arbeitet mit so genannten Updatesites als Quelle.<br />
+						In Eclipse öffne das <i>"Help"</i> Menü und klicke auf <i>"Install new Software..."</i>.
+					</p>
+				    <h3>Was ist die Lizenz des JEE-Generators?</h3>
+					<p>
+						Der JEE-Generator ist frei verfügbar unter der <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.
+					</p>
 				</div>
 			</div>
 		</div>
