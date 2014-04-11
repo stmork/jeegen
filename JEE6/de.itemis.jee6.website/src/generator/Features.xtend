@@ -19,7 +19,19 @@ class Features extends AbstractWebsite {
 					Web-Anwendung zu unterschiedlichen Zwecken (z.B. Live-Betrieb, Staging und Testing)
 					deployed werden.
 				</p>
-	
+
+				<p>
+					Der Generator generiert eine Web-Applikation, die folgende Frameworks des JEE6-Standards
+					benutzt:
+					<ul>
+						<li>Servlet API 3.0</li>
+						<li>XHTML/JSF 2.0</li>
+						<li>EJB 3.1</li>
+						<li>JAAS</li>
+						<li>Java Mail</li>
+					</ul>
+				</p>
+
 				<p>
 					Die Entity Beans werden typabhängig als Maske dargestellt und können thematisch sortiert
 					werden, welche wiederumg rollenbasiert abgesichert werden können. Die Daten können nach dem
