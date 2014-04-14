@@ -116,7 +116,7 @@ class Documentation extends AbstractXdocBaseWebsite {
 	
 	override protected getDocument() {
 		doc
-	}
+	}	
 }
 
 class DocumentationSetup extends XdocStandaloneSetup implements Module {

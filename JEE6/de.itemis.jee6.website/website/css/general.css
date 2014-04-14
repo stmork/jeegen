@@ -2,17 +2,31 @@
    HTML5 display definitions
    ========================================================================== */
 
-article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { display: block; }
-audio, canvas, video { display: inline-block; *display: inline; *zoom: 1; }
-audio:not([controls]) { display: none; }
-[hidden] { display: none; }
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
+	display: block;
+}
+
+audio,
+canvas,
+video {
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+}
+
+audio:not([controls]) {
+	display: none;
+}
+
+[hidden] {
+	display: none;
+}
 
 /* =============================================================================
    Base
    ========================================================================== */
 
 html {
-  
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
 }
@@ -25,7 +39,10 @@ textarea {
   font-family: sans-serif;
   color: #222;
 }
-html, body { min-height: 100%; }
+
+html, body {
+	min-height: 100%;
+}
 
 body {
   color: #444;
@@ -35,12 +52,14 @@ body {
   line-height: 1.4;
 }
 
-
 .floatRight {
   float: right;
   margin: .5em 0 1em 1.5em;
 }
-.floatRight img { margin: 0; }
+
+.floatRight img {
+	margin: 0;
+}
 
 
 .floatLeft {
@@ -87,7 +106,6 @@ dfn { font-style: italic; }
 pre, code, kbd, samp {
   font-family: monospace, serif;
   _font-family: 'courier new', monospace;
-  
 }
 
 /* Improve readability of pre-formatted text in all browsers */
@@ -97,7 +115,9 @@ pre {
   pre-wrap; word-wrap: break-word;
 }
 
-q { quotes: none; }
+q {
+	quotes: none;
+}
 
 q:before,
 q:after {
@@ -110,12 +130,14 @@ small {  }
 
 /* Position subscript and superscript content without affecting line-height: h5bp.com/k */
 sub, sup {
-  
   line-height: 0;
   position: relative;
   vertical-align: baseline;
 }
-sup { top: -0.5em; }
+
+sup {
+	top: -0.5em;
+}
 
 sub { bottom: -0.25em; }
 
@@ -139,20 +161,12 @@ h4 {
 	margin-bottom: 8px;
 }
 
-h1 small, h2 small, h3 small, h4 small, h5 small {  }
-
 #maincontainer div#benefit h3 {
-  
   margin-bottom: 10px;
   padding-right: 10px;
 }
+
 #maincontainer #benefit div.box h3 { margin-right: 0; }
-
-p.small {  }
-p.small small {  }
-
-
-
 
 /* =============================================================================
    Lists
@@ -164,8 +178,13 @@ ol {
   padding: 0 0 0 20px;
 }
 
-li {  margin-bottom: 10px; }
-dd { margin: 0 0 0 40px; }
+li {
+	margin-bottom: 10px;
+}
+
+dd {
+	margin: 0 0 0 40px;
+}
 
 nav ul,
 nav ol {
