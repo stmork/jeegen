@@ -1,7 +1,9 @@
+@IMPORT url("general.css");
+
 /* =============================================================================
    Colors, Background images, ...
    ========================================================================== */
-   
+
 body { background-image: url("img/large-bg.png"); }
 
 a:link,
@@ -186,7 +188,6 @@ div.img-container {
 	========================================================================== */
 
 table.table {
-	
 	border: 1px solid #ccc;
 }
 
@@ -273,7 +274,6 @@ table.table td {
 
 .downloadbox td.focus span {
     display: block;
-    
     margin-top: 5px;
 }
 
@@ -306,6 +306,8 @@ table.table td {
     text-decoration: none;
 }
 
+.floatLeft { float: left; margin: .5em 1.5em 1em 0; }
+
 /*  ==========================================================================
 	Dokumentation
 	========================================================================== */
@@ -319,7 +321,6 @@ table.table td {
 }
 
 #dokumentation_content .button a {
-	
 	padding: .2em .4em;
 	position: absolute;
 	right: 5em;
@@ -335,4 +336,19 @@ table.table td {
   /* Style adjustments for viewports that meet the condition */
 }
 
-.floatLeft { float: left; margin: .5em 1.5em 1em 0; }
+@media print{
+	header,
+	footer {
+		display: none;
+	}
+
+	div#maincontainer {
+		border: none;
+	}
+
+	.thumbnail > img {
+    	display: block;
+    	margin-left: 0;
+    	max-width: 100%;
+	}
+}

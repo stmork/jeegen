@@ -48,7 +48,10 @@ abstract class AbstractWebsite implements Resource {
 	
 	def website() '''
 		<!DOCTYPE html>
-		<html lang="en">
+		<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="de"> <![endif]-->
+		<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="de"> <![endif]-->
+		<!--[if IE 8]>    <html class="no-js lt-ie9" lang="de"> <![endif]-->
+		<!--[if gt IE 8]><!--> <html class="no-js" lang="de"> <!--<![endif]-->
 		<head>
 			<meta charset="utf-8">
 			<title>«websiteTitle»</title>
@@ -169,13 +172,9 @@ abstract class AbstractWebsite implements Resource {
 
 	def stylesheets() '''
 		<link rel="shortcut icon" href="images/favicon.ico">
-		
-		<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="de"> <![endif]-->
-		<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="de"> <![endif]-->
-		<!--[if IE 8]>    <html class="no-js lt-ie9" lang="de"> <![endif]-->
-		<!--[if gt IE 8]><!--> <html class="no-js" lang="de"> <!--<![endif]-->
+
 		<link href="google-code-prettify/prettify.css" type="text/css" rel="stylesheet"/>
-		<link href="css/general.css" type="text/css" rel="stylesheet"/>
+«««		<link href="css/general.css" type="text/css" rel="stylesheet"/>
 		<link href="css/jeegenerator.css" type="text/css" rel="stylesheet"/>
 		<!--[if lt IE 9]>
 		<link href="css/iebugs.css" rel="stylesheet" type='text/css'>
