@@ -337,6 +337,10 @@ table.table td {
 }
 
 @media print{
+	@page {
+		size: landscape;
+	}
+
 	header,
 	footer {
 		display: none;
@@ -344,11 +348,20 @@ table.table td {
 
 	div#maincontainer {
 		border: none;
+		padding: 3em;
 	}
 
 	.thumbnail > img {
     	display: block;
     	margin-left: 0;
     	max-width: 100%;
+	}
+
+	.thumbnail {
+		page-break-inside:avoid;
+	}
+
+	.button {
+		display: none;
 	}
 }

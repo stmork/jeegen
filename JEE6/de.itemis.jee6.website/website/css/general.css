@@ -166,7 +166,9 @@ h4 {
   padding-right: 10px;
 }
 
-#maincontainer #benefit div.box h3 { margin-right: 0; }
+#maincontainer #benefit div.box h3 {
+	margin-right: 0;
+}
 
 /* =============================================================================
    Lists
@@ -1144,10 +1146,9 @@ footer {
 	clear: both;
   border-top: 2px solid black;
   background: #fff;
-  height: 4.5em;
-  margin-top: -4.5em;
+  height: 7em;
+  margin-top: -7em;
   position: relative;
-  padding-bottom: 1.4em;
   font-size: .8em;
 }
 footer:after {
