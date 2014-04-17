@@ -5,6 +5,7 @@ import java.util.Locale;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.linking.ILinker;
+import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
 
@@ -65,5 +66,7 @@ public class EntityModification implements ISemanticModification
 		final Model  model = (Model)parent.eContainer();
 		final int    index = model.getEntities().indexOf(parent);
 		model.getEntities().add(index, entity);
+
+		linker.linkModel(model, new ListBasedDiagnosticConsumer());
 	}
 }
