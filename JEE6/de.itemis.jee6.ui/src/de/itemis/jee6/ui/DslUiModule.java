@@ -4,9 +4,8 @@
 package de.itemis.jee6.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
-
-import de.itemis.jee6.ui.highlighting.DefaultHighlightingConfiguration;
 
 /**
  * Use this class to register components to be used within the IDE.
