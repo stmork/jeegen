@@ -18,18 +18,18 @@ public class MinimalHandler
 {
 	@PersistenceContext(unitName = "minimalDS")
 	private EntityManager em;
-	
+
 	public List<MinimalEntity> getEntities()
 	{
 		TypedQuery<MinimalEntity> query = em.createQuery("SELECT entity FROM MinimalEntity entity", MinimalEntity.class);
-		
+
 		return query.getResultList();
 	}
-	
+
 	public void init()
 	{
 		MinimalEntity entity = new MinimalEntity();
-		entity.setName("Georg");
+		entity.setName("Dr. Georg M. Pietrek");
 		em.persist(entity);
 	}
 
