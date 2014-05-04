@@ -10,6 +10,8 @@ import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,8 +22,6 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import de.itemis.jee7.util.LogUtil;
 
@@ -32,7 +32,7 @@ import de.itemis.jee7.util.LogUtil;
  */
 public class MultipartRequestWrapper extends HttpServletRequestWrapper
 {
-	private final static Log log = LogFactory.getLog(MultipartRequestWrapper.class);
+	private final static Logger log = Logger.getLogger(MultipartRequestWrapper.class.getName());
 	private final Hashtable<String, String[]> params = new Hashtable<String, String[]>();
 	private final Hashtable<String, Part> parts = new Hashtable<String, Part>();
 
@@ -40,7 +40,7 @@ public class MultipartRequestWrapper extends HttpServletRequestWrapper
 	{
 		super(request);
 		
-		log.debug(">MultipartRequestWrapper()");
+		log.log(Level.FINE, ">MultipartRequestWrapper()");
 		final DiskFileItemFactory factory = new DiskFileItemFactory();
 
 		factory.setRepository(new File(System.getProperty("java.io.tmpdir")));
@@ -69,11 +69,11 @@ public class MultipartRequestWrapper extends HttpServletRequestWrapper
 		}
 		catch (FileUploadException e)
 		{
-			log.error(e);
+			log.log(Level.SEVERE, e.getMessage());
 		}
 		finally
 		{
-			log.debug("<MultipartRequestWrapper()");
+			log.log(Level.FINE, "<MultipartRequestWrapper()");
 		}
 	}
 

@@ -3,6 +3,9 @@
  */
 package de.itemis.faces.beans;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.naming.NamingException;
@@ -10,9 +13,6 @@ import javax.naming.directory.Attributes;
 import javax.naming.directory.DirContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import de.itemis.faces.LdapClient;
 import de.itemis.faces.dao.InfoDaoBean;
@@ -25,11 +25,8 @@ import de.itemis.jee7.util.LogUtil;
 @ManagedBean
 public class SessionController extends AbstractHandler
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	private static final Log  log = LogFactory.getLog(SessionController.class);
+	private static final Logger  log = Logger.getLogger(SessionController.class.getName());
 
 	@EJB
 	private SessionDaoBean dao;
@@ -39,12 +36,12 @@ public class SessionController extends AbstractHandler
 
 	public String logout(final HttpServletRequest request) throws ServletException
 	{
-		log.debug(">Logout");
-		log.debug(" " +getExternalContext().getRemoteUser());
+		log.log(Level.FINE, ">Logout");
+		log.log(Level.FINE, " " +getExternalContext().getRemoteUser());
 		request.logout();
 		getExternalContext().invalidateSession();
-		log.debug(" " +getExternalContext().getRemoteUser());
-		log.debug("<Logout");
+		log.log(Level.FINE, " " +getExternalContext().getRemoteUser());
+		log.log(Level.FINE, "<Logout");
 
 		return "/index.xhtml";
 	}
@@ -66,7 +63,7 @@ public class SessionController extends AbstractHandler
 		
 		for (UserInfo info : dao.query(1960))
 		{
-			log.debug(info);
+			log.log(Level.FINE, info.toString());
 		}
 		return login != null ? dao.ensureUserInfo(login).getName() : "<???>";
 	}

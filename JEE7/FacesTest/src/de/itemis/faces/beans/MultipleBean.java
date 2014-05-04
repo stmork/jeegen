@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
@@ -12,9 +14,6 @@ import javax.ejb.TransactionAttributeType;
 import javax.interceptor.Interceptors;
 import javax.persistence.Query;
 import javax.sql.DataSource;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import de.itemis.faces.dao.AbstractDaoBean;
 import de.itemis.faces.entities.AddressOption;
@@ -28,7 +27,7 @@ import de.itemis.jee7.util.Profiler;
 @Interceptors(Profiler.class)
 public class MultipleBean extends AbstractDaoBean
 {
-	private final static Log log = LogFactory.getLog(MultipleBean.class);
+	private final static Logger log = Logger.getLogger(MultipleBean.class.getName());
 	
 	@Resource(mappedName="java:/jdbc/minimalDS")
 	private DataSource ds; 
@@ -52,7 +51,7 @@ public class MultipleBean extends AbstractDaoBean
 		{
 			for (AddressOption type : getAddressOptionList())
 			{
-				log.debug("    " + type);
+				log.log(Level.FINE, "    " + type);
 			}
 
 			connection = ds.getConnection();
@@ -61,7 +60,7 @@ public class MultipleBean extends AbstractDaoBean
 					
 			while (result.next())
 			{
-				log.debug("    " + result.getString("name"));
+				log.log(Level.FINE, "    " + result.getString("name"));
 			}
 		}
 		finally
@@ -101,7 +100,7 @@ public class MultipleBean extends AbstractDaoBean
 		{
 			for (AddressOption type : getAddressOptionList())
 			{
-				log.debug("    " + type);
+				log.log(Level.FINE, "    " + type);
 			}
 
 			connection = ds.getConnection();

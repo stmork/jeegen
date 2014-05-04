@@ -1,12 +1,12 @@
 package de.itemis.faces.handler;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import de.itemis.jee7.util.LogUtil;
 
@@ -15,7 +15,7 @@ import de.itemis.jee7.util.LogUtil;
 public class LoginHandler extends AbstractHandler
 {
 	private static final long serialVersionUID = 1L;
-	private static final Log log = LogFactory.getLog(LoginHandler.class);
+	private static final Logger log = Logger.getLogger(LoginHandler.class.getName());
 	private String login;
 	private String password;
 
@@ -39,7 +39,7 @@ public class LoginHandler extends AbstractHandler
 	{
 		String outcome = "auth.xhtml?faces-redirect=true";
 
-		log.debug(">doLogin()");
+		log.log(Level.FINE, ">doLogin()");
 		HttpServletRequest request = (HttpServletRequest)getExternalContext().getRequest();
 		try
 		{
@@ -54,7 +54,7 @@ public class LoginHandler extends AbstractHandler
 		finally
 		{
 			setPassword(null);
-			log.debug(">doLogin() = " + outcome);
+			log.log(Level.FINE, ">doLogin() = " + outcome);
 		}
 		return outcome;
 	}
