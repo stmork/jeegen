@@ -7,6 +7,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -20,16 +22,13 @@ import javax.ejb.Timer;
 import javax.ejb.TimerService;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import de.itemis.faces.DownloadInfo;
 
 @Singleton
 @Startup
 public class TimerSingleton
 {
-	private final static Log log = LogFactory.getLog(TimerSingleton.class);
+	private final static Logger log = Logger.getLogger(TimerSingleton.class.getName());
 
 	@Resource
 	private TimerService timerService;
@@ -38,7 +37,7 @@ public class TimerSingleton
 	@Lock(LockType.READ)
 	public void timer()
 	{
-		log.debug("  =time()");
+		log.log(Level.FINE, "  =time()");
 	}
 
 	private final Map<String, DownloadInfo> infos = new HashMap<String, DownloadInfo>();

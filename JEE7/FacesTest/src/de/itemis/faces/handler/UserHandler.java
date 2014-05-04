@@ -5,6 +5,8 @@ package de.itemis.faces.handler;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
@@ -19,8 +21,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -45,7 +45,7 @@ import de.itemis.faces.servlet.ImageServlet;
 public class UserHandler extends AbstractHandler
 {
 	private static final long serialVersionUID = 1L;
-	private final static Log log = LogFactory.getLog(UserHandler.class);
+	private final static Logger log = Logger.getLogger(UserHandler.class.getName());
 
 	@EJB
 	private AdminDaoBean dao;
@@ -73,7 +73,7 @@ public class UserHandler extends AbstractHandler
 
 	public String change()
 	{
-		log.debug(">change");
+		log.log(Level.FINE, ">change");
 		UserInfo user = getSessionInfo().getUser();
 
 		/*
@@ -92,16 +92,16 @@ public class UserHandler extends AbstractHandler
 		}
 		catch (IOException e)
 		{
-			log.error(e);
+			log.log(Level.FINE, e.toString());
 		}
 		catch (ServletException e)
 		{
-			log.error(e);
+			log.log(Level.FINE, e.toString());
 		}
 
 		user = dao.updateUserInfo(user);
 		getSessionInfo().setUser(user);
-		log.debug("<change");
+		log.log(Level.FINE, "<change");
 		return "/index.xhtml";
 	}
 
@@ -171,28 +171,28 @@ public class UserHandler extends AbstractHandler
 	
 	public String addAddress()
 	{
-		log.debug(">addAddress");
+		log.log(Level.FINE, ">addAddress");
 		UserInfo user = getSessionInfo().getUser();
 		Address address = dao.addToUserInfo(user, new Address());
 		getAdminHandler().setAddress(address);
-		log.debug("<addAddress");
+		log.log(Level.FINE, "<addAddress");
 		return "address.xhtml";
 	}
 	
 	public String editAddress(final Address address)
 	{
-		log.debug(">editAddress");
+		log.log(Level.FINE, ">editAddress");
 		getAdminHandler().setAddress(address);
-		log.debug("<editAddress");
+		log.log(Level.FINE, "<editAddress");
 		return "address.xhtml";
 	}
 	
 	public String removeAddress(final Address address)
 	{
-		log.debug(">removeAddress");
+		log.log(Level.FINE, ">removeAddress");
 		UserInfo user = dao.deleteFromUserInfo(address);
 		getSessionInfo().setUser(user);
-		log.debug("<removeAddress");
+		log.log(Level.FINE, "<removeAddress");
 		return "index.xhtml";
 	}
 }

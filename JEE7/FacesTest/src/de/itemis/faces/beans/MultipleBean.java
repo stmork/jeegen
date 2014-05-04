@@ -28,7 +28,7 @@ import de.itemis.jee7.util.Profiler;
 public class MultipleBean extends AbstractDaoBean
 {
 	private final static Logger log = Logger.getLogger(MultipleBean.class.getName());
-	
+
 	@Resource(mappedName="java:/jdbc/minimalDS")
 	private DataSource ds; 
 

@@ -184,25 +184,22 @@
 			</command>
 		</menuContribution>
 	</extension>
-   <!-- quickfix marker resolution generator -->
-   <extension
-         point="org.eclipse.ui.ide.markerResolution">
-      <markerResolutionGenerator
-            class="de.itemis.jee7.ui.DslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
-      </markerResolutionGenerator>
-   </extension>
+	<!-- quickfix marker resolution generator -->
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="de.itemis.jee7.ui.DslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
+		</markerResolutionGenerator>
+	</extension>
 
-   <extension point="org.eclipse.ui.newWizards">
-      <category id="de.itemis.jee7.ui.category" name="JEE-Generators">
-      </category>
-      <wizard
-            category="de.itemis.jee7.ui.category"
-            class="de.itemis.jee7.ui.DslExecutableExtensionFactory:de.itemis.jee7.ui.wizard.DslNewProjectWizard"
-            icon="icons/jee7_32.gif"
-            id="de.itemis.jee7.ui.wizard.DslNewProjectWizard"
-            name="JEE7 Generator Project"
-            project="true">
-      </wizard>
-   </extension>
-
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="de.itemis.jee.ui.category" name="JEE-Generators">
+		</category>
+		<wizard
+			category="de.itemis.jee.ui.category"
+			class="de.itemis.jee7.ui.DslExecutableExtensionFactory:de.itemis.jee7.ui.wizard.DslNewProjectWizard"
+			icon="icons/jee7_32.gif"
+			id="de.itemis.jee7.ui.wizard.DslNewProjectWizard"
+			name="JEE7 Generator Project"
+			project="true">
+		</wizard>
+	</extension>
 </plugin>
