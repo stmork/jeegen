@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: de.itemis.jee6.doc
-Bundle-SymbolicName: de.itemis.jee6.doc;singleton:=true
-Bundle-Version: 1.1.8.qualifier
+Bundle-Name: de.itemis.jee7.doc
+Bundle-SymbolicName: de.itemis.jee7.doc;singleton:=true
+Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: itemis AG
 Eclipse-LazyStart: true
 Bundle-ActivationPolicy: lazy

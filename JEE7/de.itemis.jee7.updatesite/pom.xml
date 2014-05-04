@@ -3,16 +3,16 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<relativePath>../de.itemis.jee6.releng/pom.xml</relativePath>
-		<groupId>de.itemis.jee6</groupId>
-		<artifactId>de.itemis.jee6.releng</artifactId>
-		<version>1.1.8-SNAPSHOT</version>
+		<relativePath>../de.itemis.jee7.releng/pom.xml</relativePath>
+		<groupId>de.itemis.jee7</groupId>
+		<artifactId>de.itemis.jee7.releng</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>de.itemis.jee6.updatesite</artifactId>
+	<artifactId>de.itemis.jee7.updatesite</artifactId>
 	<packaging>eclipse-repository</packaging>
 
-	<name>JEE6 DSL Update Site</name>
+	<name>JEE7 DSL Update Site</name>
 
 	<build>
 		<plugins>
@@ -58,7 +58,7 @@
 							<siteTemplateFolder>templates</siteTemplateFolder>
 							<!-- Symbols are used while expanding index.html template -->
 							<symbols>
-								<update.site.name>JEE6 Generator Repository</update.site.name>
+								<update.site.name>JEE7 Generator Repository</update.site.name>
 								<update.site.description>This URL can be used inside eclipse for
 									installing new software.</update.site.description>
 								<update.site.version>${project.version}</update.site.version>
