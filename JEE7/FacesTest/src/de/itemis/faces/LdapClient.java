@@ -3,7 +3,7 @@ package de.itemis.faces;
 import javax.naming.NamingException;
 import javax.naming.directory.DirContext;
 
-import de.itemis.jee6.util.AbstractLdapConnector;
+import de.itemis.jee7.util.AbstractLdapConnector;
 
 public class LdapClient extends AbstractLdapConnector
 {

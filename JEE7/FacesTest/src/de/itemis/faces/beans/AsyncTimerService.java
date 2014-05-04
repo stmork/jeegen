@@ -16,7 +16,7 @@ import javax.interceptor.Interceptors;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import de.itemis.jee6.util.Profiler;
+import de.itemis.jee7.util.Profiler;
 
 @Singleton
 @Startup

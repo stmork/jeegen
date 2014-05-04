@@ -9,7 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import de.itemis.faces.entities.Lock;
-import de.itemis.jee6.util.Profiler;
+import de.itemis.jee7.util.Profiler;
 
 @Stateless
 @Interceptors(Profiler.class)

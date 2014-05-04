@@ -8,7 +8,7 @@ package de.itemis.faces.dao;
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
 
-import de.itemis.jee6.util.Profiler;
+import de.itemis.jee7.util.Profiler;
 
 @Stateless
 @Interceptors(Profiler.class)
