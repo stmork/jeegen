@@ -193,7 +193,7 @@
    </extension>
 
    <extension point="org.eclipse.ui.newWizards">
-      <category id="de.itemis.jee6.ui.category" name="JEE6 Generator">
+      <category id="de.itemis.jee6.ui.category" name="JEE-Generators">
       </category>
       <wizard
             category="de.itemis.jee6.ui.category"
