@@ -1,0 +1,21 @@
+<div xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+	<!-- ===== Created by JEE6-Generator $Id$ ===== -->
+	<!-- == Copyright (C) 2013  itemis AG == --> 
+<ui:composition template="/layout.xhtml">
+	<ui:define name="title">#{msg['user.title']}</ui:define>
+	<ui:define name="content">
+		<h:messages layout="table" styleClass="error" />
+		<ul>
+			<li>
+				<h:link value="#{msg['user.authinfo.title']}" outcome="authinfo.xhtml"/>
+			</li>
+			<li>
+				<h:link value="#{msg['user.siteinfo.title']}" outcome="siteinfo.xhtml"/>
+			</li>
+		</ul>
+	</ui:define>
+</ui:composition>
+</div>

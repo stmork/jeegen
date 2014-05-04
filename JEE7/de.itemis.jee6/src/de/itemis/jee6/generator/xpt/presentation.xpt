@@ -1,0 +1,320 @@
+«REM»
+«###»	Copyright (C) 2014 itemis AG
+«###»	$Id$
+«ENDREM»
+
+«IMPORT jee6»
+
+«IMPORT de::itemis::jee6::generator::xpt::presentation»
+
+«EXTENSION de::itemis::jee6::generator::ext::model»
+«EXTENSION de::itemis::jee6::generator::ext::types»
+«EXTENSION de::itemis::jee6::generator::ext::ui»
+«EXTENSION de::itemis::jee6::generator::ext::utility»
+
+«DEFINE Main FOR Model»
+«EXPAND index»
+«EXPAND index FOREACH processes»
+«EXPAND menu»
+«EXPAND css::Main»
+«EXPAND layout»
+«EXPAND error»
+«EXPAND error403»
+«EXPAND error404»
+«IF hasSecurityDomain()»
+«EXPAND login»
+«EXPAND logout»
+«ENDIF»
+«ENDDEFINE»
+
+«DEFINE layout FOR Model»
+«FILE layout(this) XHTML»
+«EXPAND utility::XhtmlStart»
+	<f:view>
+		<h:head>
+			<title>
+				<ui:insert name="title"/>
+			</title>
+			<h:outputStylesheet library="css" name="display.css"/>
+			<link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/img/favicon.ico" />
+			<link rel="apple-touch-icon-precomposed" href="#{request.contextPath}/resources/img/logo.png" />
+		</h:head>
+		<body>
+			<div class="header">
+				<div class="boxed">
+					<div class="logo">
+						<h:outputLink value="#{request.contextPath}">
+							<h:graphicImage class="logo" value="/img/logo.png" alt="«this.name»"/>
+						</h:outputLink>
+					</div>
+					<div>
+						<h1>
+							<ui:insert name="title"/>
+						</h1>
+«IF hasSecurityDomain()»
+						#{msg['start.name']} #{sessionController.name}
+«ENDIF»
+					</div>
+				</div>
+			</div>
+			<div class="line"/>
+			<div class="page">
+				<div class="left">
+					<div class="box">
+						<ui:include src="menu.xhtml"/>
+					</div>
+				</div>
+				<!-- Use if you want a right column
+				<div class="right">
+					<div class="box">
+
+					</div>
+				</div>
+				-->
+				<div class="content">
+					<ui:insert name="content"/>
+				</div>
+				<div class="clear"/>
+			</div>
+			<div class="line"/>
+			<div class="footer">
+				<div class="left">
+					<h:outputFormat value="#{msg.footer}">
+						<f:param value="#{ver['vendor']}"/>
+						<f:param value="#{ver['version.major']}"/>
+						<f:param value="#{ver['version.minor']}"/>
+						<f:param value="#{ver['version.patch']}"/>
+					</h:outputFormat>
+				</div>
+				<div class="right"/>
+				<div class="clear"/>
+			</div>
+		</body>
+	</f:view>
+«EXPAND utility::XhtmlEnd»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE index FOR Model»
+«FILE index(this) XHTML»
+«EXPAND utility::XhtmlFragmentStart»
+	<ui:composition template="/«layout()»">
+		<ui:define name="title">#{msg['start.title']}</ui:define>
+		<ui:define name="content">
+			<div>
+				<h2>#{msg.welcome}</h2>
+			</div>
+		</ui:define>
+	</ui:composition>
+«EXPAND utility::XhtmlFragmentEnd»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE login FOR Model»
+«FILE login(this) XHTML»
+«EXPAND utility::XhtmlFragmentStart»
+	<ui:composition template="/«layout()»">
+		<ui:define name="title">#{msg['login.title']}</ui:define>
+		<ui:define name="content">
+			<div class="box">
+				<form id="login" name="login" method="post" action="j_security_check">
+					<table>
+						<tr>
+							<td></td>
+							<td class="remark">#{msg['login.do_login']}</td>
+						</tr>
+						<tr>
+							<td class="mid">#{msg['login.user']}:</td>
+							<td>
+								<h:inputText autofocus="autofocus" id="j_username" autocomplete="off" />
+							</td>
+						</tr>
+						<tr>
+							<td class="mid">#{msg['login.password']}:</td>
+							<td>
+								<h:inputSecret id="j_password" autocomplete="off" />
+							</td>
+						</tr>
+						<tr>
+							<td/>
+							<td>
+								<h:commandButton type="submit" value="#{msg.login}" />
+								<h:commandButton type="reset" value="#{msg.clear}" />
+							</td>
+						</tr>
+					</table>
+					<h:outputScript>
+						function setFocusOnLoginForm()
+						{
+							try
+							{
+								document.login.j_username.focus();
+							}
+							catch (err)
+							{
+							}
+						}
+						setFocusOnLoginForm();
+					</h:outputScript>
+				</form>
+			</div>
+		</ui:define>
+	</ui:composition>
+«EXPAND utility::XhtmlFragmentEnd»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE logout FOR Model»
+«FILE logout(this) XHTML»
+«EXPAND utility::XhtmlFragmentStart»
+	<ui:composition template="/«layout()»">
+		<ui:define name="title">#{msg['logout.title']}</ui:define>
+		<ui:define name="content">
+			<div class="box">
+				<h1>#{msg['logout.title']}</h1>
+				<h:form>
+					#{msg['logout.message']}
+					<h:commandButton value="#{msg.logout}" action="#{sessionController.logout(request)}" />
+					<h:commandButton value="#{msg.back}" action="/«index()»" />
+				</h:form>
+			</div>
+		</ui:define>
+	</ui:composition>
+«EXPAND utility::XhtmlFragmentEnd»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE menu FOR Model»
+«FILE menu(this) XHTML»
+«EXPAND utility::XhtmlFragmentStart»
+	<h2>#{msg.menue}</h2>
+	<ul>
+		<li><h:link value="#{msg.main}" outcome="/«index()»" /></li>
+«FOREACH processes AS process»
+		<ui:fragment rendered="#{«handlerUri(process)».allowed}" >
+			<li>
+				<h:link value="#{msg.«prefixOf(process)»}" outcome="/«index(process)»" />
+			</li>
+		</ui:fragment>
+«ENDFOREACH»
+«IF hasSecurityDomain()»
+		<ui:fragment rendered="#{«sessionUri()».loggedIn}">
+			<li>
+				<h:link value="#{msg.logout}" outcome="/logout.xhtml"/>
+			</li>
+		</ui:fragment>
+«ENDIF»
+	</ul>
+«EXPAND utility::XhtmlFragmentEnd»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE index FOR Process»
+«LET getUiEntities() AS entities»
+«EXPAND ui(this) FOREACH entities»
+«FILE index(this) XHTML»
+«EXPAND utility::XhtmlFragmentStart»
+<ui:composition template="/«layout(getModel())»">
+	<ui:define name="title">#{msg['«prefixOf()».title']}</ui:define>
+	<ui:define name="content">
+		<h:messages layout="table" styleClass="error" />
+		<ul>
+«FOREACH this.entities AS entity»
+			<li>
+				<h:link value="#{msg['«prefixOf()».«prefixOf(entity)».title']}" outcome="«index(entity)»"/>
+			</li>
+«ENDFOREACH»
+		</ul>
+	</ui:define>
+</ui:composition>
+«EXPAND utility::XhtmlFragmentEnd»
+«ENDFILE»
+«ENDLET»
+«ENDDEFINE»
+
+«DEFINE ui(Process p) FOR Entity»
+«EXPAND history(p) FOREACH types.typeSelect(History).type»
+«EXPAND entities(p) FOREACH types.typeSelect(EntityRef).select(e|e.many).type»
+«FILE index(p, this) XHTML»
+«EXPAND utility::XhtmlFragmentStart»
+<ui:composition template="/«layout(getModel(p))»">
+	<ui:define name="title">#{msg['«prefixOf(p)».«prefixOf(this)».title']}</ui:define>
+	<ui:define name="content">
+		<h:messages layout="table" styleClass="error" />
+«EXPAND mask::Main(p)»
+«EXPAND list::entityList(p)»
+	</ui:define>
+</ui:composition>
+«EXPAND utility::XhtmlFragmentEnd»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE history(Process p) FOR Entity»
+«FILE index(p, this) XHTML»
+«EXPAND utility::XhtmlFragmentStart»
+<ui:composition template="/«layout(getModel(p))»">
+	<ui:define name="title">#{msg['«prefixOf(p)».«prefixOf(this)».title']}</ui:define>
+	<ui:define name="content">
+		<h:messages layout="table" styleClass="error" />
+«EXPAND mask::Main(p)»
+«EXPAND list::historyList(p)»
+	</ui:define>
+</ui:composition>
+«EXPAND utility::XhtmlFragmentEnd»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE entities(Process p) FOR Entity»
+«FILE index(p, this) XHTML»
+«EXPAND utility::XhtmlFragmentStart»
+<ui:composition template="/«layout(getModel(p))»">
+	<ui:define name="title">#{msg['«prefixOf(p)».«prefixOf(this)».title']}</ui:define>
+	<ui:define name="content">
+		<h:messages layout="table" styleClass="error" />
+«EXPAND mask::Main(p)»
+«EXPAND list::entitiesList(p)»
+	</ui:define>
+</ui:composition>
+«EXPAND utility::XhtmlFragmentEnd»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE error FOR Model»
+«FILE "error.xhtml" XHTML»
+«EXPAND utility::XhtmlFragmentStart»
+	<ui:composition template="/layout.xhtml">
+		<ui:define name="title">#{err['error.title']}</ui:define>
+		<ui:define name="content">
+			<div class="error">#{sessionController.exceptionMessage}</div>
+		</ui:define>
+	</ui:composition>
+«EXPAND utility::XhtmlFragmentEnd»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE error403 FOR Model»
+«FILE "error403.xhtml" XHTML»
+«EXPAND utility::XhtmlFragmentStart»
+	<ui:composition template="/layout.xhtml">
+		<ui:define name="title">#{err['code403.title']}</ui:define>
+		<ui:define name="content">
+			<div class="error">#{err['code403.message']}</div>
+		</ui:define>
+	</ui:composition>
+«EXPAND utility::XhtmlFragmentEnd»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE error404 FOR Model»
+«FILE "error404.xhtml" XHTML»
+<?xml version="1.0" encoding="UTF-8"?>
+«EXPAND utility::XhtmlFragmentStart»
+	<ui:composition template="/layout.xhtml">
+		<ui:define name="title">#{err['code404.title']}</ui:define>
+		<ui:define name="content">
+			<div class="error">#{err['code404.message']}</div>
+		</ui:define>
+	</ui:composition>
+«EXPAND utility::XhtmlFragmentEnd»
+«ENDFILE»
+«ENDDEFINE»

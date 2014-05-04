@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>de.itemis.jee6</groupId>
+		<artifactId>de.itemis.jee6.releng</artifactId>
+		<version>1.1.8-SNAPSHOT</version>
+		<relativePath>../de.itemis.jee6.releng/pom.xml</relativePath>
+	</parent>
+
+	<name>JEE6 DSL Doc</name>
+
+	<artifactId>de.itemis.jee6.doc</artifactId>
+	<groupId>de.itemis.jee6</groupId>
+	<packaging>eclipse-plugin</packaging>
+	<build>
+		<plugins>
+ 			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/contents/</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${basedir}/../de.itemis.jee6.xdoc/contents</directory>
+									<includes>
+                                		<include>**/*</include>
+                            		</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

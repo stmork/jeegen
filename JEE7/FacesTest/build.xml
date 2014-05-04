@@ -1,0 +1,221 @@
+<project name="JEE6-WebApp Faces (Case study)" default="package">
+	<property file="${user.home}/.jee6.properties" />
+	<property file="${basedir}/build.properties"/>
+
+	<property name="bin-path"             value="./bin"/>
+	<property name="src-path"             value="./src"/>
+	<property name="res-path"             value="./WebContent"/>
+	<property name="src-gen-path"         value="./src-gen"/>
+	<property name="res-gen-path"         value="./res-gen"/>
+	<property name="lib-path"             value="${res-path}/WEB-INF/lib"/>
+	<property name="img-path"             value="${res-path}/img"/>
+	<property name="tst-path"             value="./test"/>
+	<property name="ext-lib-path"         value="../de.itemis.jee6.util/lib"/>
+
+	<property name="war"                  value="facestest.war"/>
+	<property name="module.jar"           value="ldapcontext.jar"/>
+	<property name="module.xml"           value="module.xml"/>
+	
+	<property name="findbugs.home"        value="./findbugs"/>
+	<property name="findbugs.exclude"     value="./findbugs-exclude.xml"/>
+	<property name="findbugs.results"     value="./findbugs-results.xml"/>
+
+	<property name="eclipse.home"         value="/opt/eclipse"/>
+	<property name="eclipse.home.plugins" value="${eclipse.home}/plugins"/>
+
+	<property name="coverage-path"        value="./coverage"/>	
+	<property name="instr-path"           value="./instr"/>	
+	<property name="emma.enabled"         value="true"/>
+
+	<property name="jboss.home"           value="/opt/jboss-as-7.1.1.Final"/>
+	<property name="jboss.lib"            value="${jboss.home}/modules"/>
+	<property name="jboss.module"         value="${jboss.lib}/de/itemis/jee6/ldap/main"/>
+	<property name="jboss.deploy"         value="${jboss.home}/standalone/deployments"/>
+
+	<property name="glassfish.home"       value="/opt/glassfish3"/>
+	<property name="glassfish.domain"     value="domain1"/>
+	<property name="glassfish.deploy"     value="${glassfish.home}/glassfish/domains/${glassfish.domain}/autodeploy/"/>
+
+	<!-- ==================================================== -->
+	<!--              Setting up classpaths                   -->
+	<!-- ==================================================== -->
+
+	<path id="jboss.lib">
+		<fileset dir="${jboss.lib}">
+			<include name="**/*.jar"/>
+			<exclude name="**/*jsf*1.2*.jar"/>
+		</fileset>
+	</path>
+
+	<path id="junit.lib">
+		<fileset dir="${eclipse.home.plugins}">
+			<include name="org.junit_4*/*.jar"/>
+			<include name="org.hamcrest*.jar"/>
+			<include name="**/ant-junit4.jar"/>
+		</fileset>
+	</path>
+
+	<path id="findbugs.lib">
+		<fileset dir="${findbugs.home}">
+			<include name="**/*.jar"/>
+		</fileset>  
+	</path>
+
+	<path id="generate.classpath">
+		<fileset dir="${eclipse.home.plugins}">
+			<include name="com.google.guava*.jar"/>
+			<include name="com.google.inject*.jar"/>
+			<include name="com.ibm.icu*.jar"/>
+			<include name="de.itemis.*.jar"/>
+			<include name="de.morknet.oaw.*.jar"/>
+			<include name="org.antlr.runtime*.jar"/>
+			<include name="org.apache.commons.cli*.jar"/>
+			<include name="org.apache.commons.logging*.jar"/>
+			<include name="org.apache.log4j*.jar"/>
+			<include name="org.eclipse.emf.*.jar"/>
+			<include name="org.eclipse.xpand*.jar"/>
+			<include name="org.eclipse.xtend*.jar"/>
+			<include name="org.eclipse.xtext*.jar"/>
+			<include name="org.eclipse.text*.jar"/>
+			<include name="org.eclipse.jdt*.jar"/>
+			<include name="org.eclipse.equi*.jar"/>
+			<include name="javax.inject*.jar"/>
+			<include name="stringtemplate*.jar"/>
+
+			<exclude name="**/*source*.jar"/>
+			<exclude name="**/*src*.jar"/>
+			<exclude name="**/*editor*.jar"/>
+		</fileset>
+	</path>
+
+	<path id="compile.path">
+		<path refid="jboss.lib"/>
+		<path refid="junit.lib"/>
+		<fileset dir="${lib-path}"/>
+		<fileset dir="${ext-lib-path}"/>
+	</path>
+
+	<path id="runtime.path">
+		<path refid="jboss.lib"/>
+		<fileset dir="${lib-path}"/>
+		<pathelement location="${bin-path}" />  
+	</path>
+
+	<path id="junit.path">
+		<path refid="runtime.path"/>
+		<path refid="junit.lib"/>
+	</path>
+
+	<!-- ==================================================== -->
+	<!--            Setting up target definitions             -->
+	<!-- ==================================================== -->
+
+	<taskdef name="findbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask" classpathref="findbugs.lib"/>
+	<taskdef name="junit" classname="org.apache.tools.ant.taskdefs.optional.junit.JUnitTask" classpathref="junit.lib"/>
+
+	<!-- ==================================================== -->
+	<!--              Setting up build targets                -->
+	<!-- ==================================================== -->
+
+	<target name="-version">
+		<first id="version-file">
+		    <fileset dir="${basedir}/${src-path}" includes="**/version.properties" />
+		</first>
+		<property file="${toString:version-file}" />
+		<echo message="Version: ${version.major}.${version.minor}.${version.patch}"/>
+	</target>
+
+	<target name="clean">
+		<delete file="${findbugs.results}"/>
+		<delete file="${war}" />
+		<delete dir="${bin-path}" />
+		<delete dir="${instr-path}" />
+		<delete dir="${coverage-path}" />
+		<delete>
+			<fileset dir="." includes="TEST-*.xml"/>
+			<fileset dir="." includes="TEST-*.txt"/>
+			<fileset dir="." includes="coverage.*"/>
+			<fileset dir="." includes="*.emma"/>
+		</delete>
+	</target>
+
+	<target name="generate">
+		<echo message="Eclipse: ${eclipse.home}"/>
+		<java classname="org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher" classpathref="generate.classpath" fork="true">
+			<arg value="${src-path}/FacesTest.mwe2"/>
+		</java>
+	</target>
+
+	<target name="compile" depends="-version">
+		<mkdir dir="${bin-path}"/>
+		<copy file="../de.itemis.jee6.util/jee6-utils.jar" todir="${lib-path}"/>
+		<javac srcdir="${src-path}:${src-gen-path}:${tst-path}" destdir="${bin-path}" debug="true" includeantruntime="false">
+			<classpath refid="compile.path"/>
+		</javac>
+	</target>
+
+	<target name="package" depends="compile">
+		<jar destfile="${war}">
+			<zipfileset dir="${bin-path}" prefix="WEB-INF/classes">
+				<include name="**/*.class"/>
+				<exclude name="**/*Test.class"/>
+			</zipfileset>
+			<zipfileset dir="${src-path}" prefix="WEB-INF/classes">
+				<include name="**/*.xml"/>
+				<include name="**/*.properties"/>
+			</zipfileset>
+			<zipfileset dir="${src-gen-path}" prefix="WEB-INF/classes">
+				<include name="**/*.xml"/>
+				<include name="**/*.properties"/>
+			</zipfileset>
+			<zipfileset dir="${res-path}"/>
+			<zipfileset dir="${res-gen-path}"/>
+		</jar>
+		<jar destfile="${module.jar}">
+			<zipfileset dir="${bin-path}">
+				<include name="**/LdapFactory.class"/>
+			</zipfileset>
+		</jar>
+	</target>
+	
+	<target name="deploy" depends="package">
+		<copy file="${module.jar}" todir="${jboss.module}"/>
+		<copy file="${module.xml}" todir="${jboss.module}"/>
+		<copy file="${war}" todir="${jboss.deploy}" />
+		<copy file="${war}" todir="${glassfish.deploy}" />
+	</target>
+	
+	<target name="undeploy">
+		<delete file="${jboss.deploy}/${war}" />
+		<delete file="${glassfish.deploy}/${war}" />
+	</target>
+
+	<!-- ==================================================== -->
+	<!--              Setting up runtime targets              -->
+	<!-- ==================================================== -->
+
+	<target name="test" depends="compile">
+		<junit printsummary="on" fork="on" haltonerror="yes" haltonfailure="yes">
+			<classpath refid="junit.path" />
+			<formatter type="xml"/>
+			<test name="de.itemis.faces.test.EntityTest"/>
+		</junit>
+	</target>
+
+	<target name="findbugs" depends="compile">
+		<echo message="Checking ${ant.project.name}..."/>
+		<findbugs jvmargs="-Xmx512m" home="${findbugs.home}"
+				output="xml:withMessages"
+				outputFile="${findbugs.results}"
+				classpathref="compile.path"
+				effort="max"
+				maxRank="20"
+				reportlevel="low"
+				excludeFilter="${findbugs.exclude}"
+				failonerror="true">
+			<sourcePath path="${src-path}:${src-gen-path}"/>
+			<class location="${bin-path}"/> 
+			<auxclasspath refid="compile.path"/>
+		</findbugs>
+	</target>
+</project>

@@ -1,0 +1,17 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"      
+		xmlns:f="http://java.sun.com/jsf/core"      
+		xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/layout.xhtml">
+		<ui:define name="title">#{msg['start.title']}</ui:define>
+		<ui:define name="content">
+			<ul>
+				<li><h:link value="#{msg.change}" outcome="/admin/index.xhtml" /></li>
+				<li><h:link value="#{msg.logout}" outcome="/logout.xhtml" /></li>
+				<li><h:link value="#{msg['image.title']}" outcome="/image.xhtml" /></li>
+				<li><h:link value="#{msg['greece.title']}" outcome="/greece.xhtml" /></li>
+			</ul>
+		</ui:define>
+	</ui:composition>
+</div>

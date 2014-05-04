@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+	<f:view>
+		<h:head>
+			<title><ui:insert name="title"/></title>
+			<h:outputStylesheet library="css" name="display.css"  />
+			<link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/img/favicon.ico"/>
+		</h:head>
+		<div class="header">
+			<table>
+				<tr>
+					<td class="logo"><h:graphicImage value="/img/ii.png" /></td>
+					<td class="space"/>
+					<td class="welcome">
+						<h1><ui:insert name="title"/></h1>
+						#{msg['start.name']} #{sessionController.name}
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div id="line"/>
+		<div id="mid">
+			<div class="left">
+				<ui:fragment rendered="#{!sessionController.loggedIn}">
+					<div class="box">
+						<h:form id="menue" name="login" method="post">
+							<table>
+								<tr>
+									<td class="remark">#{msg['login.login']}</td>
+								</tr>
+								<tr>
+									<td class="mid">#{msg['login.user']}:<br/>
+									<h:inputText maxlength="16" size="8" id="login" autocomplete="off" value="#{loginHandler.login}" autofocus="autofocus" /></td>
+								</tr>
+								<tr>
+									<td class="mid">#{msg['login.password']}:<br/>
+									<h:inputSecret maxlength="16" size="8" id="password" autocomplete="off" value="#{loginHandler.password}" /></td>
+								</tr>
+								<tr>
+									<td>
+										<h:commandButton type="submit" value="#{msg['login.login']}" action="#{loginHandler.doLogin()}"/>
+									</td>
+								</tr>
+							</table>
+						</h:form>
+					</div>
+					<div class="space"/>
+				</ui:fragment>
+				<div class="box">
+					<ui:include src="menu.xhtml"/>
+				</div>
+			</div>
+			<div class="content">
+				<ui:insert name="content"/>
+			</div>
+		</div>
+		<div id="line"/>
+		<div class="footer">#{msg.footer}</div>
+	</f:view>
+</html>

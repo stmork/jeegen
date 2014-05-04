@@ -1,0 +1,23 @@
+String getSrcPath() :
+	"src";
+
+String getSrcGenPath() :
+	"src-gen";
+
+String getResPath() :
+	"res";
+
+String getResGenPath() :
+	"res-gen";
+
+String getWebContentPath() :
+	"WebContent";
+
+String getModelPath() :
+	"model";
+
+String getWorkflow() :
+	"Generator.mwe2";
+
+String package(String basePackage, String applicationName) :
+	basePackage + "." + applicationName.toFirstLower();

@@ -1,0 +1,19 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"      
+		xmlns:f="http://java.sun.com/jsf/core"      
+		xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/layout.xhtml">
+	<ui:define name="title">#{msg['greece.title']}</ui:define>
+	<ui:define name="content">
+		<p>
+			<h:graphicImage value="/proxy/image?cam=parosWeb" />
+			<h:graphicImage value="/proxy/image?cam=parosSail"/>
+		</p>
+		<p>
+			<h:graphicImage value="/proxy/image?cam=naxos" />
+			<h:graphicImage value="/proxy/image?cam=santorini"/>
+		</p>
+	</ui:define>
+</ui:composition>
+</div>

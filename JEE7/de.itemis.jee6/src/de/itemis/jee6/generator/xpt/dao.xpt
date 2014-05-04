@@ -1,0 +1,435 @@
+«REM»
+«###»	Copyright (C) 2014 itemis AG
+«###»	$Id$
+«ENDREM»
+
+«IMPORT jee6»
+
+«EXTENSION de::itemis::jee6::generator::ext::entity»
+«EXTENSION de::itemis::jee6::generator::ext::model»
+«EXTENSION de::itemis::jee6::generator::ext::types»
+«EXTENSION de::itemis::jee6::generator::ext::naming»
+«EXTENSION de::itemis::jee6::generator::ext::converter»
+«EXTENSION de::itemis::jee6::generator::ext::dao»
+«EXTENSION de::itemis::jee6::generator::ext::ui»
+
+«DEFINE Main FOR Model»
+«EXPAND AbstractProcessDao FOREACH processes»
+«EXPAND ProcessDao FOREACH  processes»
+«EXPAND ModelDao»
+«EXPAND AbstractModelDao»
+«ENDDEFINE»
+
+«DEFINE ProcessDao FOR Process»
+«FILE daoFilename(this) IMPL»
+«EXPAND utility::HeaderImpl»
+package «daoPackageOf(this)»;
+
+import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
+import de.itemis.jee6.util.Profiler;
+
+@Stateless
+@Interceptors(Profiler.class)
+public class «daoOf(this)» extends
+«IF hasAbstractDao()»
+«abstractDaoOf(this)»
+«ELSE»
+«abstractDaoOf(getModel())»
+«ENDIF»
+{
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE AbstractProcessDao FOR Process»
+«IF hasAbstractDao()»
+«FILE abstractDaoFilename(this)»
+«EXPAND utility::HeaderAbstract»
+package «daoPackageOf(this)»;
+
+«IF properties.size > 0»
+import javax.annotation.Resource;
+«ENDIF»
+
+«IF entities.size > 0»
+import «packageOf(entities.first())».*;
+«IF entities.types.exists(e|isMany(e)) || entities.exists(e|isUi(e) && (!Options.isInstance(e)))»
+import java.util.List;
+import javax.persistence.TypedQuery;
+«ENDIF»
+«ENDIF»
+
+/**
+ * This DAO class handles the persistence of the following entity beans:
+ * <ul>
+«FOREACH getEntitiesWithHistory(entities).sortBy(e|e.name) AS entity-»
+ * <li>{@link «typeOf(entity)»}</li>
+ «ENDFOREACH-»
+ * </ul>
+ */
+abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel())»
+{
+«FOREACH properties AS property»
+	@Resource(mappedName="«property.jndi»")
+	private «typeOf(property)» «nameOf(property)-»«EXPAND Default FOR property-»;
+
+	/**
+	 * This is the getter of the «property.jndi» JNDI configuration property.
+	 *
+	 * @return The configured JNDI properity.
+	 */	
+	public «typeOf(property)» «getterOf(property)»()
+	{
+		return this.«nameOf(property)»;
+	}
+«ENDFOREACH»
+
+«FOREACH getEntitiesWithHistory(entities).sortBy(e|e.name) AS entity»
+	/*********************************************
+	 * «typeOf(entity)» «nameOf(entity)»
+	 *********************************************/
+
+	/**
+	 * This method adds the given {@link «typeOf(entity)»} entity to the database.
+	 * 
+	 * @param «parameterOf(entity)» The {@link «typeOf(entity)»} entity to add.
+	 */
+	public void «adder(entity)»(final «typeOf(entity)» «parameterOf(entity)»)
+	{
+		«getPersistenceUnitName(getPU(entity))».persist(«parameterOf(entity)»);
+	}
+
+	/**
+	 * This method updates the given {@link «typeOf(entity)»} object in the database.
+	 * 
+	 * @param «parameterOf(entity)» The {@link «typeOf(entity)»} object to update.
+	 * @return The reattached {@link «typeOf(entity)»} object.
+	 */
+	public «typeOf(entity)» «updater(entity)»(final «typeOf(entity)» «parameterOf(entity)»)
+	{
+		return «getPersistenceUnitName(getPU(entity))».merge(«parameterOf(entity)»);
+	}
+
+	/**
+	 * This method removes the given {@link «typeOf(entity)»} from the database.
+	 * 
+	 * @param «parameterOf(entity)» The {@link «typeOf(entity)»} entity to remove.
+	 */
+	public void «remover(entity)»(«typeOf(entity)» «parameterOf(entity)»)
+	{
+«EXPAND GetReference(entity)»
+		«getPersistenceUnitName(getPU(entity))».remove(«parameterOf(entity)»);
+	}
+
+«IF hasActivationBoolean(entity)»
+«LET getId(entity) AS id»
+	/**
+	 * This method sets the activation flag of the given {@link «typeOf(entity)»} object.
+	 * 
+	 * @param «parameterOf(entity)» The {@link «typeOf(entity)»} where to set the activation flag.
+	 * @param activation The activation flag.
+	 * @return The reattached {@link «typeOf(entity)»} entity bean.
+	 */
+	public «typeOf(entity)» activate(«typeOf(entity)» «nameOf(entity)», final boolean activation)
+	{
+«IF id == null»
+		«nameOf(entity)» = «getPersistenceUnitName(getPU(entity))».getReference(«typeOf(entity)».class, «nameOf(entity)».getId());
+«ELSE»
+		«nameOf(entity)» = «getPersistenceUnitName(getPU(entity))».getReference(«typeOf(entity)».class, «nameOf(entity)».«getterOf(id)»());
+«ENDIF»
+		«nameOf(entity)».setActive(activation);
+		
+		return «nameOf(entity)»;
+	}
+«ENDLET»
+«ENDIF»
+
+«IF isUi(entity) && (!Options.isInstance(entity))»
+	/**
+	 * This method returns a complete {@link List} of {@link «typeOf(entity)»} entity beans.
+	 *
+	 * @return complete  {@link List} of {@link «typeOf(entity)»} entity beans.
+	 */
+	public List<«typeOf(entity)»> «listOf(entity)»()
+	{
+		TypedQuery<«typeOf(entity)»> query = «getPersistenceUnitName(getPU(entity))».createQuery(
+				"SELECT entity FROM «typeOf(entity)» entity",
+				«typeOf(entity)».class);
+		
+		return query.getResultList();
+	}
+«ENDIF»
+
+«FOREACH entity.types.typeSelect(Reference).select(e|isMany(e)) AS type»
+	/**
+	 * This method adds a {@link «typeOf(type)»} entity bean to the «parameterOf(type)»
+	 * relation of the {@link «typeOf(entity)»} entity bean. Note that the given {@link «typeOf(type)»} entity
+	 * bean may not been persisted, yet!
+	 *
+	 * @param «parameterOf(entity)» The {@link «typeOf(entity)»} entity bean.
+	 * @param «parameterOf(type)» The {@link «typeOf(type)»} entity bean to remove from the relation.
+	 * @return The removed {@link «typeOf(type)»} entity bean. 
+	 */
+	public «typeOf(type)» «adderTo(entity)»(«typeOf(entity)» «parameterOf(entity)», final «typeOf(type)» «parameterOf(type)»)
+	{
+«EXPAND GetReference(entity)»
+
+		// Link new «nameOf(type)»
+		«parameterOf(type)».«setterOf(entity)»(«parameterOf(entity)»);
+		«parameterOf(entity)».«getterOf(type)»().add(«parameterOf(type)»);
+«IF History.isInstance(type)»
+		«parameterOf(entity)».setLast(«parameterOf(type)»);
+«ENDIF»		
+		// Update into database
+		«getPersistenceUnitName(getPU(entity))».persist(«parameterOf(type)»);
+
+		return «parameterOf(type)»;
+	}
+
+«IF !History.isInstance(type)»
+	/**
+	 * This method removes a {@link «typeOf(type)»} entity bean from the «parameterOf(type)»
+	 * 1:n-relation of the {@link «typeOf(entity)»} entity bean.
+	 *
+	 * @param «parameterOf(type)» The {@link «typeOf(type)»} entity bean to remove from the relation.
+	 * @return The removed {@link «typeOf(type)»} entity bean. 
+	 */
+	public «typeOf(entity)» «removerFrom(entity)»(«typeOf(type)» «parameterOf(type)»)
+	{
+«EXPAND GetReference((EntityRef)type)»
+		final «typeOf(entity)» «parameterOf(entity)» = «parameterOf(type)».«getterOf(entity)»();
+		
+		// Unlink
+		«parameterOf(entity)».«getterOf(type)»().remove(«parameterOf(type)»);
+		«parameterOf(type)».«setterOf(entity)»(null);
+
+		// finally do database operations
+		«getPersistenceUnitName(getPU(entity))».remove(«parameterOf(type)»);
+		return «parameterOf(entity)»;
+	}
+«ENDIF»
+
+	/**
+	 * This method returns a {@link List} of {@link «typeOf(type)»} relation.
+	 *
+	 * @param «parameterOf(entity)» The {@link «typeOf(entity)»} which holds the relation.
+	 * @return {@link List} of {@link «typeOf(type)»} entity beans.
+	 */
+	public List<«typeOf(type)»> «lister(type)»(final «typeOf(entity)» «parameterOf(entity)»)
+	{
+«LET getId(type) AS id»
+«IF id == null»
+		final TypedQuery<«typeOf(type)»> query = «getPersistenceUnitName(getPU(entity))».createQuery(
+				"SELECT e FROM «typeOf(type)» e WHERE e.«parameterOf(entity)» = :entity ORDER BY e.id «sortOrder(type)»",
+				«typeOf(type)».class);
+«ELSE»
+		final TypedQuery<«typeOf(type)»> query = «getPersistenceUnitName(getPU(entity))».createQuery(
+				"SELECT e FROM «typeOf(type)» e WHERE e.«parameterOf(entity)» = :entity ORDER BY e.«nameOf(id)» «sortOrder(type)»",
+				«typeOf(type)».class);
+«ENDIF»
+«ENDLET»
+		query.setParameter("entity", «parameterOf(entity)»);
+		return query.getResultList();
+	}
+«ENDFOREACH»
+«ENDFOREACH»
+}
+«ENDFILE»
+«ENDIF»
+«ENDDEFINE»
+
+«DEFINE GetReference(Entity entity) FOR Process»
+«LET getId(entity) AS id»
+		// get correct references
+«IF id == null»
+		«parameterOf(entity)» = «getPersistenceUnitName(getPU(entity))».getReference(«typeOf(entity)».class, «parameterOf(entity)».getId());
+«ELSE»
+		«parameterOf(entity)» = «getPersistenceUnitName(getPU(entity))».getReference(«typeOf(entity)».class, «parameterOf(entity)».«getterOf(id)»());
+«ENDIF»
+«ENDLET»
+«ENDDEFINE»
+
+«DEFINE GetReference(EntityRef type) FOR Process»
+«LET getId(type.type) AS id»
+		// get correct references
+«IF id == null»
+		«parameterOf(type)» = «getPersistenceUnitName(getPU(type.type))».getReference(«typeOf(type)».class, «parameterOf(type)».getId());
+«ELSE»
+		«parameterOf(type)» = «getPersistenceUnitName(getPU(type.type))».getReference(«typeOf(type)».class, «parameterOf(type)».«getterOf(id)»());
+«ENDIF»
+«ENDLET»
+«ENDDEFINE»
+
+«DEFINE ModelDao FOR Model»
+«FILE daoFilename(this)»
+«EXPAND utility::HeaderAbstract»
+package «daoPackageOf(this)»;
+
+import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
+import de.itemis.jee6.util.Profiler;
+
+/**
+ * This session bean implementation handles the database operations of the following option beans:
+ * <ul>
+«FOREACH entities.typeSelect(Options).sortBy(e|e.name) AS option-»
+ * <li>{@link «fqTypeOf(option)»}</li>
+ «ENDFOREACH-»
+ * </ul>
+ */  
+@Stateless
+@Interceptors(Profiler.class)
+public class «daoOf(this)» extends «abstractDaoOf(this)»
+{
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE AbstractModelDao FOR Model»
+«FILE abstractDaoFilename(this)»
+«LET entities.typeSelect(Options).sortBy(o|o.name) AS converterList»
+«EXPAND utility::HeaderAbstract»
+package «daoPackageOf(this)»;
+
+import javax.persistence.*;
+
+«IF converterList.size > 0»
+import java.util.List;
+«FOREACH converterList AS option»
+import «fqTypeOf(option)»;
+«IF isEnumeration(option)»
+import «fqTypeOf(option)».«enumOf(option)»;
+«ENDIF»
+«ENDFOREACH»
+«ENDIF»
+
+/**
+ * This session bean implementation handles the database operations of the following option beans:
+ * <ul>
+«FOREACH converterList AS option-»
+ * <li>{@link «typeOf(option)»}</li>
+ «ENDFOREACH-»
+ * </ul>
+ */  
+abstract public class «abstractDaoOf(this)»
+{
+«FOREACH getPersistenceUnits() AS pu»
+	/**
+	 * The {@link EntityManager} to use for database operations.
+	 */
+	@PersistenceContext(unitName="«pu.name»")
+	protected EntityManager «getPersistenceUnitName(pu)»;
+«ENDFOREACH»
+
+«FOREACH converterList AS option»
+	/**********************************
+	 * «typeOf(option)»
+	 **********************************/
+«LET getId(option) AS id»
+«IF id == null»
+«IF option.keys.size > 0»
+	/**
+	 * This method ensures the existance of an enumaration entry {@link «typeOf(option)» }.
+	 * @param type The enumeration entry {@link «enumOf(option)»}.
+	 * @param key The resource bundle key that belongs to this enumeration entry.
+	 * @return The resulting {@link «typeOf(option)» } entity bean.
+	 */
+	public «typeOf(option)» ensure(final «enumOf(option)» type, final String key)
+	{
+		final «typeOf(option)» option = new «typeOf(option)»(type, key);
+
+		return «getPersistenceUnitName(getPU(option))».merge(option);
+	}
+
+	/**
+	 * This method finds a {@link «typeOf(option)» } entity bean.
+	 *
+	 * @param type The {@link «enumOf(option)»} to search for.
+	 * @return The resulting {@link «typeOf(option)» } entity bean.
+	 */
+	public «typeOf(option)» «finderOf(option)»(final «enumOf(option)» type)
+	{
+		return «finderOf(option)»(type.ordinal());
+	}
+«ENDIF»
+
+	/**
+	 * This method finds a {@link «typeOf(option)» } entity bean.
+	 *
+	 * @param id The ID to search for.
+	 * @return The resulting {@link «typeOf(option)» } entity bean.
+	 */
+	public «typeOf(option)» «finderOf(option)»(final int id)
+«ELSE»
+
+	/**
+	 * This method finds a {@link «typeOf(option)» } entity bean.
+	 *
+	 * @param id The ID to search for.
+	 * @return The resulting {@link «typeOf(option)» } entity bean.
+	 */
+	public «typeOf(option)» «finderOf(option)»(final «typeOf(id)» id)
+«ENDIF»
+	{
+		return «getPersistenceUnitName(getPU(option))».find(«typeOf(option)».class, id);
+	} 
+
+	/**
+	 * This method returns a {@link List} of all {@link «typeOf(option)» } entity beans.
+	 *
+	 * @return The resulting {@link List} of all {@link «typeOf(option)» } entity bean.
+	 */
+	public List<«typeOf(option)»> «listOf(option)»()
+	{
+		TypedQuery<«typeOf(option)»> query = «getPersistenceUnitName(getPU(option))».createQuery(
+				"SELECT entity FROM «typeOf(option)» entity",
+				«typeOf(option)».class);
+		
+		return query.getResultList();
+	}
+
+«IF hasActivationBoolean(option)»
+	/**
+	 * This method returns a {@link List} of all active {@link «typeOf(option)» } entity beans.
+	 * @return The resulting {@link List} of all active {@link «typeOf(option)» } entity bean.
+	 */
+	public List<«typeOf(option)»> «listActiveOf(option)»()
+	{
+		TypedQuery<«typeOf(option)»> query = «getPersistenceUnitName(getPU(option))».createQuery(
+				"SELECT o FROM «typeOf(option)» o WHERE o.active = TRUE",
+				«typeOf(option)».class);
+		
+		return query.getResultList();
+	}
+«ENDIF»
+«ENDLET»
+«ENDFOREACH»
+}
+«ENDLET»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE Default FOR jee6::Property»
+«REM»
+// No default for other JNDI Properties
+«ENDREM»
+«ENDDEFINE»
+
+«DEFINE Default FOR TextProp»
+«IF value != null»
+= "«value»"
+«ENDIF»
+«ENDDEFINE»
+
+«DEFINE Default FOR IntegerProp»
+«IF value != null»
+= «value»
+«ENDIF»
+«ENDDEFINE»
+
+«DEFINE Default FOR BooleanProp»
+«IF value != null»
+= «value»
+«ENDIF»
+«ENDDEFINE»

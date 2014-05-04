@@ -1,0 +1,239 @@
+
+body {
+	padding: 0px;
+	margin: 0px;
+	font-family: sans-serif;
+	font-style: normal;
+	background-color: #fff;
+	color: #004c84;
+}
+
+a:LINK {
+	color: #004c84;
+}
+
+a:VISITED {
+	color: #004c84;
+}
+
+textarea {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+h1, h2, h3 {
+	margin-top: 6px;
+	margin-bottom: 2px;
+}
+
+table, tr, td, th {
+	text-align: left;
+	margin: 0px;
+	padding: 3px;
+	vertical-align: top;
+}
+
+div.space {
+	margin-top: 6px;
+	padding: opx;
+}
+
+tr.odd {
+	background-color: #fff;
+}
+
+tr.even {
+	background-color: #ffd;
+}
+
+td.nowrap {
+	text-align: left;
+	white-space: nowrap;
+}
+
+td.left {
+	text-align: left;
+}
+
+td.center {
+	text-align: center;
+}
+
+td.right {
+	text-align: right;
+	white-space: nowrap;
+}
+
+td.top {
+	vertical-align: text-top;
+}
+
+td.mid {
+	vertical-align: middle;
+}
+
+input, select, textarea {
+	border-radius: 3px;
+	vertical-align: middle;
+}
+
+div.box {
+	margin: 0px;
+	padding: 8px;
+	color: #004c84;
+	background-color: #f8f8f8;
+	border-style: solid;
+	border-color: #004c84;
+	border-width: 1px;
+	border-radius: 5px;
+}
+
+div.box ul {
+	list-style: none;
+	margin-left: 0px;
+	margin-bottom: 0px;
+	padding-left: 0px;
+}
+
+div.box h2 {
+	margin-top: 0px;
+}
+
+td.logo {
+	width: 48px;
+	text-align: center;
+	background-color: #004c84;
+	vertical-align: middle;
+}
+
+div.header td.space {
+	border-width: 0px;
+	padding: 0px;
+	width: 8px;
+}
+
+td.welcome {
+	margin-left: 6px;
+	background-color: #f8f8f8;
+	vertical-align: middle;
+}
+
+div.header {
+	margin: 0px;
+	padding: 0px;
+	background-color: #fff;
+	border-width: 0px;
+}
+
+div.header table {
+	margin: 0px;
+	padding: 10px;
+	border-spacing: 0px;
+}
+
+div.header td {
+	padding: 8px;
+	border-style: solid;
+	border-color: #004c84;
+	border-width: 1px;
+	border-radius: 5px;
+}
+
+table.grid {
+	margin: 0px;
+	padding: 0px;
+	border-spacing: 0px;
+}
+
+table.grid td {
+	margin: 0px;
+	padding: 0px;
+}
+
+table.grid td.box {
+	margin: 0px;
+	padding: 8px;
+}
+
+td.box {
+	padding: 8px;
+	background-color: #f8f8f8;
+	border-style: solid;
+	border-color: #004c84;
+	border-width: 1px;
+	border-radius: 5px;
+}
+
+table.list {
+	margin-top: 6px;
+	padding: 5px;
+	background-color: #f8f8f8;
+	border-style: solid;
+	border-color: #004c84;
+	border-width: 1px;
+	border-radius: 4px;
+}
+
+#mid {
+	margin: 0px;
+	padding: 0px;
+	position: relative;
+	width: 100%;
+}
+
+div.left {
+	padding: 10px;
+	position: static;
+	float: left;
+	max-width: 15%;
+}
+
+div {
+	position: static;
+}
+
+div.left-of {
+	float: left;
+	position: relative;
+}
+
+div.content {
+	padding: 10px;
+/*	background-color: #fee; */
+	position: relative;
+	float: left;
+	left: 0px;
+	max-width: 85%;
+	overflow: auto;
+}
+
+div.footer {
+	margin: 0px;
+	padding: 10px;
+	clear: both;
+	background-color: #fff;
+}
+
+#line {
+	height: 2px;
+	clear: both;
+	margin: 0px;
+	padding: 0px;
+	background-color: #004c84;
+}
+
+table.error {
+	margin: 0px 0px 6px 0px;
+	padding: 8px;
+	color: #004c84;
+	background-color: #ffe7e7;
+	border-style: solid;
+	border-color: #df9898;
+	border-width: 1px;
+	border-radius: 5px;
+}
+
+table.error tbody tr td {
+	background-color: #ffe7e7;
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<FindBugsFilter>
+	<Match>
+		<Bug pattern="EI_EXPOSE_REP"/>
+	</Match>
+	<Match>
+		<Bug pattern="EI_EXPOSE_REP2"/>
+	</Match>
+	<Match>
+		<Bug pattern="SE_BAD_FIELD"/>
+	</Match>
+	<Match>
+		<Bug pattern="SE_INNER_CLASS"/>
+	</Match>
+	<Match>
+		<Package name="~org.bouncycastle.*"/>
+	</Match>
+	<Match>
+		<Package name="~de.itemis.faces.test.*"/>
+	</Match>
+</FindBugsFilter>

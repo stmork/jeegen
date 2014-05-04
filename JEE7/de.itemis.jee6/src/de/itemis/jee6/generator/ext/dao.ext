@@ -1,0 +1,56 @@
+import jee6;
+
+extension de::itemis::jee6::generator::ext::model;
+extension de::itemis::jee6::generator::ext::types;
+extension de::itemis::jee6::generator::ext::entity;
+
+String finderOf(Options options) :
+	"find" + typeOf(options).toFirstUpper();
+
+String ensureOf(Options options) :
+	"ensure" + typeOf(options).toFirstUpper();
+
+String listOf(Entity entity) :
+	"get" + typeOf(entity).toFirstUpper() + "List";
+
+String listOf(EntityRef er) :
+	"get" + typeOf(er).toFirstUpper() + "List";
+
+String listActiveOf(Options options) :
+	"getActive" + typeOf(options).toFirstUpper() + "List";
+
+Boolean hasActivationBoolean(Entity o) :
+	o.types.typeSelect(jee6::Boolean).exists(b|b.name == "active");
+
+Boolean isEnumeration(Options option) :
+	(option.keys.size > 0) && (getId(option) == null);
+
+Boolean hasAbstractDao(Process p) :
+	(p.properties.size > 0) || (p.entities.size > 0);
+
+String adder(Entity e) :
+	"add" + typeOf(e);
+
+String adderTo(Entity e) :
+	"addTo" + typeOf(e);
+
+String updater(Entity e) :
+	"update" + typeOf(e);
+
+String remover(Entity e) :
+	"delete" + typeOf(e);
+
+String removerFrom(Entity e) :
+	"deleteFrom" + typeOf(e);
+
+String lister(Attribute a) :
+	"get" + typeOf(a) + "List";
+
+String sortOrder(Reference ref) :
+	"ASC";
+
+String sortOrder(History ref) :
+	"DESC";
+
+String getPersistenceUnitName(Persistence unit) :
+	unit == getModel(unit).getPersistenceUnits().first() ? "em" : "em" + unit.name.toFirstUpper();
