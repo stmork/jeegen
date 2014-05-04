@@ -1,4 +1,4 @@
-application "JEE6 Generated Example" context "/example" package de.itemis.example timeout 120 integration strict;
+application "JEE7 Generated Example" context "/example" package de.itemis.example timeout 120 integration strict;
 persistence unit "exampleDS" jndi "jdbc/exampleDS" cacheable;
 security domain "itemis";
 smtp "mail/Default";

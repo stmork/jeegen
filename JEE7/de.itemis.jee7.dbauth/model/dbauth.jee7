@@ -1,5 +1,4 @@
-// Edit model here...
-application "DB-Auth"  context "/dbauth" package de.itemis.jee6.dbauth development strict;
+application "DB-Auth"  context "/dbauth" package de.itemis.jee7.dbauth development strict;
 persistence unit"authDS" jndi "jdbc/authDS";
 locale "de" default;
 

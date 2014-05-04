@@ -40,7 +40,7 @@ public class DslQuickfixProvider extends DefaultQuickfixProvider
 	private void quickFixEntity(final Issue issue, final IssueResolutionAcceptor acceptor)
 	{
 		final String data [] = issue.getData();
-		final ISemanticModification modification = new EntityModification(jee7Package.Literals.TABLE, data[0]);
+		final ISemanticModification modification = new EntityModification(Jee7Package.Literals.TABLE, data[0]);
 
 		accept(issue, acceptor, "Create entity " + data[0], modification);
 	}

@@ -4,26 +4,14 @@ set -e
 
 cd `dirname $0`
 
-OPEN_JDK=/usr/lib/jvm/java-6-openjdk-amd64
-ORACLE_JDK=/usr/lib/jvm/java-6-oracle
-APPLE_JDK=/System//Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
-
-java -version
-
-test -d $OPEN_JDK   && export JAVA_HOME=$OPEN_JDK
-test -d $ORACLE_JDK && export JAVA_HOME=$ORACLE_JDK
-test -d $APPLE_JDK  && export JAVA_HOME=$APPLE_JDK
-
-echo $JAVA_HOME
-
-cd ../de.itemis.jee6.util
+cd ../de.itemis.jee7.util
 ant clean package javadoc jacoco
 
-cd ../de.itemis.jee6
+cd ../de.itemis.jee7
 ant undeploy
 ant clean generate deploy
 
-cd ../de.itemis.jee6.ui
+cd ../de.itemis.jee7.ui
 ant undeploy
 ant clean deploy
 
@@ -42,5 +30,5 @@ ant clobber generate package findbugs
 cd ../FacesTest
 ant clean generate package findbugs test
 
-cd ../de.itemis.jee6.dbauth
+cd ../de.itemis.jee7.dbauth
 ant clean generate package

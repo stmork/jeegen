@@ -127,9 +127,9 @@
 				failonerror="true"
 				docencoding="UTF-8"
 				charset="UTF-8"
-				windowtitle="JEE6 utility classes">
-			<doctitle><![CDATA[<h1>JEE6 utility classes</h1>]]></doctitle>
-			<bottom><![CDATA[<i>Copyright &#169; 2013 all committers of JEE6 generator]]></bottom>
+				windowtitle="JEE7 utility classes">
+			<doctitle><![CDATA[<h1>JEE7 utility classes</h1>]]></doctitle>
+			<bottom><![CDATA[<i>Copyright &#169; 2013 all committers of JEE7 generator]]></bottom>
 		</javadoc>
     </target>
 
@@ -162,7 +162,7 @@
 				<file file="${jacoco-exec}"/>
 			</executiondata>
 
-			<structure name="JEE6 Utilities">
+			<structure name="JEE7 Utilities">
 				<classfiles>
 					<fileset dir="${bin-path}">
 						<exclude name="**/test/*.class"/>

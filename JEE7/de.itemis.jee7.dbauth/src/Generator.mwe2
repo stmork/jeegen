@@ -14,7 +14,7 @@ Workflow
 		directory = "${xhtmldir}"
 	}
 */
-	component = @de.itemis.jee6.generator.DslGeneratorMWE auto-inject
+	component = @de.itemis.jee7.generator.DslGeneratorMWE auto-inject
 	{
 	}
 }
