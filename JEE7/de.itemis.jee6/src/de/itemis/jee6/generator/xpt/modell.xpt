@@ -1,0 +1,15 @@
+«REM»
+«###»	Copyright (C) 2014 itemis AG
+«###»	$Id$
+«ENDREM»
+
+«IMPORT jee6»
+
+«DEFINE Main FOR Model»
+«EXPAND descriptor::Main»
+«EXPAND presentation::Main»
+«EXPAND bundle::Main»
+«EXPAND handler::Main»
+«EXPAND dao::Main»
+«EXPAND entity::Main»
+«ENDDEFINE»

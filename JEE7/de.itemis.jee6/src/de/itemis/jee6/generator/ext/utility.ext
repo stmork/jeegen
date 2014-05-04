@@ -1,0 +1,7 @@
+import jee6;
+
+String id() :
+	"Id";
+
+Integer year() :
+	JAVA de.itemis.jee6.generator.Tools.year();

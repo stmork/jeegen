@@ -1,0 +1,64 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"      
+		xmlns:f="http://java.sun.com/jsf/core"      
+		xmlns:h="http://java.sun.com/jsf/html">
+	
+	<ui:composition template="/layout.xhtml">
+		<ui:define name="title">#{msg['admin.address.title']}</ui:define>
+		<ui:define name="content">
+			<h:messages layout="table" styleClass="error" />
+			<div class="box">
+				<h:form id="address">
+					<table>
+						<tr>
+							<td>#{msg['admin.address.street']}</td>
+							<td><h:inputText id="street" value="#{adminHandler.address.street}" /></td>
+						</tr>
+			
+						<tr>
+							<td>#{msg['admin.address.plz']}</td>
+							<td><h:inputText id="plz" value="#{adminHandler.address.plz}" /></td>
+						</tr>
+						<tr>
+							<td>#{msg['admin.address.location']}</td>
+							<td><h:inputText id="location" value="#{adminHandler.address.location}" /></td>
+						</tr>
+						<tr>
+							<td>#{msg['admin.address.active']}</td>
+							<td><h:selectBooleanCheckbox id="active" value="#{adminHandler.address.active}" /></td>
+						</tr>
+						<tr>
+							<td>#{msg['admin.address.option']}</td>
+							<td>
+								<h:selectOneMenu id="type" value="#{adminHandler.address.addressOption}" converter="#{adminHandler.addressOptionConverter}">
+									<f:selectItems value="#{adminHandler.addressOptionList}"
+										itemValue="#{option}" var="option" itemLabel="#{msg[option.bundleKey]}" />
+								</h:selectOneMenu>
+							</td>
+						</tr>
+						<tr>		
+							<td></td>
+							<td>
+								<h:commandButton value="#{msg.change}" action="#{adminHandler.saveAddress()}" />
+								<h:commandButton value="#{msg.back}" action="index.xhtml" />
+							</td>
+						</tr>
+					</table>
+					<h:outputScript>
+						function setFocusOnLoginForm()
+						{
+							try
+							{
+								document.getElementById('address:street').focus();
+							}
+							catch (err)
+							{
+							}
+						}
+						setFocusOnLoginForm();
+					</h:outputScript>
+				</h:form>
+			</div>
+		</ui:define>
+	</ui:composition>
+</div>

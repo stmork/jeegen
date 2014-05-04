@@ -1,0 +1,76 @@
+<project name="JEE6 Generator Website" default="generate">
+	<property file="${user.home}/.jee6.properties" />
+	<property file="${basedir}/build.properties" />
+	<property file="${basedir}/environment.properties" />
+
+	<property name="bin-path" value="./bin" />
+	<property name="lib-path" value="./lib" />
+	<property name="src-path" value="./src" />
+	<property name="src-gen-path" value="./xtend-gen" />
+	<property name="manifest" value="META-INF/MANIFEST.MF" />
+
+	<property name="eclipse.home" value="/opt/eclipse" />
+	<property name="eclipse.home.plugins" value="${eclipse.home}/plugins" />
+
+	<!-- ==================================================== -->
+	<!--              Setting up classpaths                   -->
+	<!-- ==================================================== -->
+
+	<path id="generate.classpath">
+		<fileset dir="${eclipse.home.plugins}">
+			<include name="com.google.guava*.jar" />
+			<include name="com.google.inject*.jar" />
+			<include name="com.ibm.icu*.jar" />
+			<include name="de.itemis.*.jar" />
+			<include name="de.morknet.oaw.*.jar" />
+			<include name="org.antlr.*.jar" />
+			<include name="org.apache.commons.cli*.jar" />
+			<include name="org.apache.commons.logging*.jar" />
+			<include name="org.apache.log4j*.jar" />
+			<include name="org.eclipse.emf.*.jar" />
+			<include name="org.eclipse.xtend*.jar" />
+			<include name="org.eclipse.xtend*.jar" />
+			<include name="org.eclipse.xtext*.jar" />
+			<include name="org.eclipse.text*.jar" />
+			<include name="org.eclipse.jdt*.jar" />
+			<include name="org.eclipse.equi*.jar" />
+			<include name="javax.inject*.jar" />
+			<include name="stringtemplate*.jar" />
+
+			<exclude name="**/*source*.jar" />
+			<exclude name="**/*src*.jar" />
+			<exclude name="**/*editor*.jar" />
+		</fileset>
+		<pathelement path="${src-path}" />
+	</path>
+
+	<!-- ==================================================== -->
+	<!--              Setting up build targets                -->
+	<!-- ==================================================== -->
+
+	<target name="clean">
+		<delete dir="${bin-path}" />
+	</target>
+
+	<target name="generate" depends="compile">
+		<echo message="Generate Website" />
+		<java classname="generator.Generator" classpathref="generate.classpath" fork="true">
+			<classpath>
+				<pathelement path="${bin-path}" />
+			</classpath>
+		</java>
+	</target>
+
+	<target name="compile" depends="clean">
+		<mkdir dir="${bin-path}" />
+		<javac srcdir="${src-path}:${src-gen-path}" destdir="${bin-path}" debug="true" includeantruntime="false">
+			<classpath refid="generate.classpath" />
+		</javac>
+	</target>
+
+	<target name="deploy">
+		<exec executable="/bin/bash" dir="${basedir}">
+			<arg line="deploy.sh" />
+		</exec>
+	</target>
+</project>

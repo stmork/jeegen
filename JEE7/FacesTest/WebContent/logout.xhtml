@@ -1,0 +1,17 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"      
+		xmlns:f="http://java.sun.com/jsf/core"      
+		xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/layout.xhtml">
+	<ui:define name="title">#{msg['logout.title']}</ui:define>
+	<ui:define name="content">
+		<h1>#{msg['logout.title']}</h1>
+		<h:form>
+			#{msg['logout.message']}
+			<h:commandButton value="#{msg.logout}" action="#{sessionController.logout(request)}" />
+			<h:commandButton value="#{msg.back}" action="/index.xhtml" />
+		</h:form>
+	</ui:define>
+</ui:composition>
+</div>

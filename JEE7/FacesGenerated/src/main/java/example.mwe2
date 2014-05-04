@@ -1,0 +1,14 @@
+module example
+
+var modelpath = "model"
+var	impldir   = "src/main/java"
+var	srcdir    = "src/generated/java"
+var	resdir    = "src/generated/resources"
+var	xhtmldir  = "src/main/resources"
+
+Workflow
+{
+	component = @de.itemis.jee6.generator.DslGeneratorMWE auto-inject
+	{
+	}
+}

@@ -1,0 +1,20 @@
+module Generator
+
+var modelpath = "model"
+var impldir   = "src"
+var srcdir    = "src-gen"
+var xhtmldir  = "WebContent"
+var resdir    = "res-gen"
+
+Workflow
+{
+/*
+	component = org.eclipse.emf.mwe.utils.DirectoryCleaner
+	{
+		directory = "${xhtmldir}"
+	}
+*/
+	component = @de.itemis.jee6.generator.DslGeneratorMWE auto-inject
+	{
+	}
+}

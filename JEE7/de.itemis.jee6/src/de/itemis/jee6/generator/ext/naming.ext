@@ -1,0 +1,79 @@
+import jee6;
+
+extension de::itemis::jee6::generator::ext::types;
+
+String asType(String s) :
+	JAVA de.itemis.jee6.generator.ext.ExtensionHelper.asType(java.lang.String);
+
+String nameOf(Attribute t) :
+	t.name.toFirstLower();
+
+String parameterOf(Attribute t) :
+	typeOf(t).toFirstLower();
+
+String nameOf(Entity t) :
+	t.name.toFirstLower();
+
+String parameterOf(Entity t) :
+	typeOf(t).toFirstLower();
+
+String filename(Entity e) :
+	fqTypeOf(e).replaceAll("\\.", "/") + ".java";
+
+String abstractFilename(Entity e) :
+	fqAbstractTypeOf(e).replaceAll("\\.", "/") + ".java";
+
+String handlerFilename(Process p) :
+	fqHandlerOf(p).replaceAll("\\.", "/") + ".java";
+
+String abstractHandlerFilename(Process p) :
+	fqAbstractHandlerOf(p).replaceAll("\\.", "/") + ".java";
+
+String abstractHandlerFilename(Model m) :
+	fqAbstractHandlerOf(m).replaceAll("\\.", "/") + ".java";
+
+String daoFilename(Process p) :
+	fqDaoOf(p).replaceAll("\\.", "/") + ".java";
+
+String abstractDaoFilename(Process p) :
+	fqAbstractDaoOf(p).replaceAll("\\.", "/") + ".java";
+
+String daoFilename(Model m) :
+	fqDaoOf(m).replaceAll("\\.", "/") + ".java";
+
+String abstractDaoFilename(Model m) :
+	fqAbstractDaoOf(m).replaceAll("\\.", "/") + ".java";
+
+String applicationControllerFilename(Model m) :
+	fqApplicationController(m).replaceAll("\\.", "/") + ".java";
+
+String abstractApplicationControllerFilename(Model m) :
+	fqAbstractApplicationController(m).replaceAll("\\.", "/") + ".java";
+
+String sessionControllerFilename(Model m) :
+	fqSessionController(m).replaceAll("\\.", "/") + ".java";
+	
+String getterOf(jee6::Boolean t) :
+	"is" + nameOf(t).toFirstUpper();
+
+String getterOf(Attribute t) :
+	"get" + nameOf(t).toFirstUpper();
+
+String setterOf(Attribute t) :
+	"set" + nameOf(t).toFirstUpper();
+
+String getterOf(Entity t) :
+	"get" + nameOf(t).toFirstUpper();
+
+String setterOf(Entity t) :
+	"set" + nameOf(t).toFirstUpper();
+
+String nameOf(Property prop) :
+	asType(prop.jndi);
+
+String getterOf(jee6::Property p) :
+	"get" + nameOf(p).toFirstUpper();
+
+String getterOf(jee6::BooleanProp p) :
+	"is" + nameOf(p).toFirstUpper();
+	

@@ -1,0 +1,47 @@
+<project name="Faces Web Client" default="run">
+	<property name="bin-path"     value="./bin"/>
+	<property name="src-path"     value="./src"/>
+	<property name="lib-path"     value="./lib"/>
+
+	<!-- ==================================================== -->
+	<!--              Setting up classpaths                   -->
+	<!-- ==================================================== -->
+
+	<path id="runtime.path">
+		<fileset dir="${jboss.lib}">
+			<include name="**/*.jar"/>
+			<exclude name="**/*jsf*1.2*.jar"/>
+		</fileset>
+		<path location="$bin"/>
+	</path>
+
+	<!-- ==================================================== -->
+	<!--              Setting up build targets                -->
+	<!-- ==================================================== -->
+
+	<target name="clean">
+		<delete dir="${bin-path}" />
+	</target>
+	
+	<target name="generate">
+		<mkdir dir="${bin-path}"/>
+		<exec executable="wsimport">
+			<arg value="-keep"/>
+			<arg value="-d"/>
+			<arg path="${bin-path}"/>
+			<arg value="-s"/>
+			<arg path="${src-path}"/>
+			<arg value="http://localhost:8080/faces/FacesWS?wsdl"/>
+		</exec>
+	</target>
+
+	<target name="compile">
+		<mkdir dir="${bin-path}"/>
+		<javac srcdir="${src-path}" destdir="${bin-path}" debug="true" includeantruntime="false">
+		</javac>
+	</target>
+		
+	<target name="run" depends="compile">
+		<java classpath="${bin-path}" classname="de.itemis.faces.client.FacesClient" fork="on"/>
+	</target>
+</project>

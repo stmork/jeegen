@@ -1,0 +1,249 @@
+application "JEE6 Generated Example" context "/example" package de.itemis.example timeout 120 integration strict;
+persistence unit "exampleDS" jndi "jdbc/exampleDS" cacheable;
+security domain "itemis";
+smtp "mail/Default";
+
+locale "de" default;
+locale "en";
+
+param de.itemis.purchasing.CONTROLLING_EMAIL = "controlling@itemis.de"           description "Ziel aller Inventarisierungs-EMails";
+param de.itemis.purchasing.ITEMIKER          = "itemis"                          description "LDAP-Gruppe aller itemiker";
+param de.itemis.purchasing.AUTHORIZER        = "vorstand,teamleiter,controlling" description "LDAP-Gruppen (komma-separiert) aller genehmigungsfaehigker itemiker";
+
+options UserInfo editable
+{
+	Text id           login;
+	Email             mail;
+	Timestamp update  changed;
+	Date              birth;
+	Text              forename;
+	Text              surename;
+	Boolean           active;
+	Boolean           authorizer;
+	Text              name transient;
+}
+
+entity Mail
+{
+	Timestamp created;
+	Timestamp sent;
+	Text      subject;
+	Text      sender;
+	Text      receiver;
+	Text      cc;
+	Clob      message;
+}
+
+options Vendor editable
+{
+	Text    name;
+	Boolean active;
+}
+
+options Distributor editable
+{
+	Text    name;
+	Boolean active;
+	Text    contact;
+	Text    phone;
+	Email   mail;
+}
+
+options InventoryType editable
+{
+	Text id type;
+	Text    label;
+	Option  Vendor vendor;
+	Boolean active;
+}
+
+options OrderPosition filterable cloneable editable
+{
+	Option InventoryType inventoryType;
+	Int                  amount;
+	Text                 model;
+	Text                 comment;
+	Timestamp            received;
+	Boolean              canceled;
+	Option UserInfo      owner;
+	Option UserInfo      authorizer;
+	Text                 position transient;
+}
+
+entity Purchase
+{
+	Timestamp auto          created;
+	Text                    article;
+	Entity OrderPosition [] positions;
+	Option Distributor      distributor;
+	Option UserInfo         buyer;
+}
+
+options InventoryState
+{
+	"inventory.state.enum.UNKNOWN",
+	"inventory.state.enum.ORDERED",
+	"inventory.state.enum.RECEIVED",
+	"inventory.state.enum.IN_USE",
+	"inventory.state.enum.REPAIR",
+	"inventory.state.enum.NOT_IN_USE",
+	"inventory.state.enum.MARKED_FOR_SELL",
+	"inventory.state.enum.SOLD",
+	"inventory.state.enum.GIVE_AWAY",
+	"inventory.state.enum.DEFECT",
+	"inventory.state.enum.THEFT"
+}
+
+entity InventoryHistoryEntry cloneable
+{
+	Timestamp auto        created;
+	Option InventoryState state;
+	Option UserInfo       owner;
+	Option UserInfo       commentator;
+	Text                  utilization;
+	Clob                  comment;
+	Number                sell;
+}
+
+entity Inventory filterable
+{
+	History InventoryHistoryEntry history; 
+	Text                          serialNumber;
+	Text                          imei;
+	Option InventoryType          inventoryType;
+	Boolean                       infrastructure;
+}
+
+options AddressOption
+{
+	"address.work",
+	"address.home"
+}
+
+entity HistoryEntry cloneable
+{
+	Timestamp auto creation;
+	Clob           comment;
+}
+
+entity EntityEntry
+{
+	Blob                 image;
+	Timestamp auto       creation;
+	Int                  amount;
+	Number               price;
+	Text                 subject;
+	Clob                 comment;
+	Boolean              active;
+	Option AddressOption addressOption;
+}
+
+entity Startup
+{
+	Text                   subject;
+	Email                  mail;
+	Int                    integerEntry;
+	Number                 numberEntry;
+	Clob                   clobEntry;
+	Blob                   blobEntry;
+	Boolean                active;
+	
+	Timestamp auto         creation;
+	Timestamp update       changed;
+	Timestamp              timestamp1;
+	Timestamp              timestamp2;
+	Date                   dateElement;
+
+	History HistoryEntry   history;
+	Entity  EntityEntry [] entities; 
+}
+
+entity Person
+{
+	Text   name;
+	Email  mail;
+	Entity Address [] addresses;
+}
+
+entity Address
+{
+	Text street;
+	Text zip;
+	Text location;
+	Option AddressType type;
+}
+
+options AddressType
+{
+	"address.work",
+	"address.home"
+}
+
+options Member editable
+{
+	Text id login;
+	Text firstname;
+	Text lastname;
+	Text name transient;
+	Entity Address[] addresses;
+	Date birth;
+}
+
+entity Book {
+	Text id isbn;
+	Text book_title;
+	Text author;
+	Entity Copy[] copies;
+}
+
+entity Copy {
+	Timestamp auto created;
+	Boolean active;
+	History Lending lending;
+}
+
+entity Lending
+{
+	Option Member member;
+	Date lending_date;
+	Date return_date;
+}
+
+process Booking
+{
+	Book, Member
+}
+
+
+process Inventory roles "controlling","it-support","vorstand"
+{
+	Inventory
+}
+
+process Ordering roles "controlling","it-support","vorstand"
+{
+	Purchase
+}
+
+process Admin roles "admin"
+{
+	Vendor, Distributor, InventoryType
+}
+
+process User roles "itemis", "extern"
+{
+	Text default "ldaps://master.itemis.de:636/" "ldap/url" ref "java:global/ldap/url";
+	Text "ldap/baseDN"  ref "java:global/ldap/baseDN";
+	Integer "build" 	ref "java:global/build";
+	Boolean default false "productive" ref "java:global/productive";
+
+	UserInfo
+}
+
+process Info
+{
+	Text "ldap/baseDN" ref "java:global/ldap/baseDN";
+	Boolean default false "productive" ref "java:global/productive";
+
+	Startup, Person
+}

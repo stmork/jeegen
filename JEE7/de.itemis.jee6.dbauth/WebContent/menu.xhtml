@@ -1,0 +1,16 @@
+<div xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+	<!-- ===== Created by JEE6-Generator $Id$ ===== -->
+	<!-- == Copyright (C) 2013  itemis AG == --> 
+	<h2>#{msg.menue}</h2>
+	<ul>
+		<li><h:link value="#{msg.main}" outcome="/index.xhtml" /></li>
+		<ui:fragment rendered="#{userHandler.allowed}" >
+			<li>
+				<h:link value="#{msg.user}" outcome="/user/index.xhtml" />
+			</li>
+		</ui:fragment>
+	</ul>
+</div>

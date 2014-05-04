@@ -1,0 +1,113 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<!-- ===== Created by JEE6-Generator $Id$ ===== -->
+<!-- == Copyright (C) 2013  itemis AG == --> 
+
+
+<ui:composition template="/layout.xhtml">
+	<ui:define name="title">#{msg['user.authinfo.title']}</ui:define>
+	<ui:define name="content">
+		<h:messages layout="table" styleClass="error"/>
+
+		<!-- === generated mask === --> 
+		<!-- process: User entity: AuthInfo -->
+
+		<div class="box">
+			<h:form id="authinfo">
+				<table>
+					<tr>
+						<td class="mid"><h:outputLabel for="email" value="#{msg['user.authinfo.email']}"/></td>
+						<td>
+						<h:inputText id="email" label="#{msg['user.authinfo.email']}" maxlength="255" value="#{userHandler.authInfo.email}">
+							<f:validator validatorId="mailValidator"/>
+						</h:inputText>
+						</td>
+					</tr>
+
+					<tr>
+						<td class="mid"><h:outputLabel for="password" value="#{msg['user.authinfo.password']}"/></td>
+						<td>
+						<h:inputSecret id="password" label="#{msg['user.authinfo.password']}" maxlength="255" value="#{userHandler.authInfo.passwordUncoded}"/>
+						</td>
+					</tr>
+
+					<tr>
+						<td class="mid"><h:outputLabel for="active" value="#{msg['user.authinfo.active']}"/></td>
+						<td>
+						<h:selectBooleanCheckbox id="active" label="#{msg['user.authinfo.active']}" value="#{userHandler.authInfo.active}"/>
+						</td>
+					</tr>
+
+					<tr>
+						<td/>
+						<td>
+							<h:commandButton action="#{userHandler.saveAuthInfo}" value="#{userHandler.authInfo.email == null ? msg.create : msg.save}"/>
+							<h:commandButton action="#{userHandler.backFromAuthInfo}" value="#{msg.back}"/>
+						</td>
+					</tr>
+
+
+
+			        <ui:fragment rendered="#{userHandler.authInfo.email != null}">
+						<tr>
+							<td/>
+							<td>
+								<h:commandButton action="#{userHandler.editSiteAuthInfo(userHandler.authInfo)}" value="#{msg['user.authinfo.siteauthinfo.change']}"/>
+							</td>
+						</tr>
+		        	</ui:fragment>
+				</table>
+			</h:form>
+		</div>
+
+		<!-- === generated list === --> 
+		<!-- process: User entity: AuthInfo -->
+
+		<h:form id="authinfo_list">
+			<h:dataTable columnClasses="left,left,center,center,command,command,command" rowClasses="odd,even" styleClass="list" value="#{userHandler.authInfoList}" var="authInfo">
+
+				<h:column>
+					<f:facet name="header">#{msg['user.authinfo.email']}</f:facet>
+					#{authInfo.email}
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">#{msg['user.authinfo.password']}</f:facet>
+					#{authInfo.password}
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">#{msg['user.authinfo.active']}</f:facet>
+					<h:outputText value="#{msg[authInfo.active ? 'yes' : 'no']}"/>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">#{msg['user.authinfo.created']}</f:facet>
+					<h:outputText value="#{authInfo.created}">
+						<f:convertDateTime dateStyle="medium" type="both"/>
+					</h:outputText>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header"/>
+					<h:commandLink action="#{userHandler.changeAuthInfo(authInfo)}" value="#{msg.change}"/>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header"/>
+					<h:commandLink action="#{userHandler.removeAuthInfo(authInfo)}" value="#{msg.remove}"/>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header"/>
+					<h:commandLink action="#{userHandler.reactivateAuthInfo(authInfo)}" value="#{authInfo.active ? msg['options.deactivate'] : msg['options.activate']}"/>
+				</h:column>
+
+			</h:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+</div>
