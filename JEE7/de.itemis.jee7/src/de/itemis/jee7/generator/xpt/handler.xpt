@@ -578,6 +578,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.application.ProjectStage;
@@ -585,9 +587,6 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.servlet.http.HttpSession;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import de.itemis.jee7.util.ErrorInfo;
 import de.itemis.jee7.util.ResourceBundleDefinitions;
@@ -612,8 +611,8 @@ import «fqTypeOf(option)»;
  */
 abstract public class «abstractHandlerOf(this)» implements Serializable, ResourceBundleDefinitions
 {
-	private static final long serialVersionUID    = 1L;
-	private static final Log  log                 = LogFactory.getLog(AbstractHandler.class);
+	private static final long   serialVersionUID    = 1L;
+	private static final Logger log                 = Logger.getLogger(«abstractHandlerOf(this)».class.getName());
 	private static final ResourceBundle messages;
 	private static final ResourceBundle errors;
 
@@ -652,30 +651,30 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resou
 	 */
 	static
 	{
-		log.info("Initializing resource bundles...");
+		log.log(Level.CONFIG, "Initializing resource bundles...");
 		FacesContext context = FacesContext.getCurrentInstance();
 		messages   = context.getApplication().getResourceBundle(context, BUNDLE_MESSAGES);
 		errors     = context.getApplication().getResourceBundle(context, BUNDLE_ERRORS);
 		production = context.getApplication().getProjectStage() == ProjectStage.Production;
 
-		if (log.isTraceEnabled())
+		if (log.isLoggable(Level.FINER))
 		{
 			ExternalContext external = context.getExternalContext();
-			log.trace(" default: " + Locale.getDefault());
-			log.trace(" req.:    " + external.getRequestLocale());
+			log.log(Level.FINER, " default: " + Locale.getDefault());
+			log.log(Level.FINER, " req.:    " + external.getRequestLocale());
 			Iterator<Locale> locales = external.getRequestLocales();
 			if (locales != null)
 			{
 				while(locales.hasNext())
 				{
 					Locale locale = locales.next();
-					log.trace(" o " + locale);
+					log.log(Level.FINER, " o " + locale);
 				}
 			}
-			log.trace(" msg: " + messages.getLocale());
-			log.trace(" err: " + errors.getLocale());
+			log.log(Level.FINER, " msg: " + messages.getLocale());
+			log.log(Level.FINER, " err: " + errors.getLocale());
 		}
-		log.debug("<getBundles()");
+		log.log(Level.FINE, "<getBundles()");
 	}
 
 
@@ -864,7 +863,7 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resou
 		{
 			message = key;
 		}
-		log.error(message);
+		log.log(Level.SEVERE, message);
 		return message;
 	}
 
@@ -980,8 +979,8 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resou
 «EXPAND utility::HeaderImpl»
 package «controllerPackageOf()»;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
@@ -997,8 +996,8 @@ import de.itemis.jee7.util.LogUtil;
 @ApplicationScoped
 public class «applicationController()» extends «abstractApplicationController()»
 {
-	private static final long serialVersionUID = 1L;
-	private final static Log log = LogFactory.getLog(«applicationController()».class);
+	private static final long   serialVersionUID = 1L;
+	private final static Logger log = Logger.getLogger(«applicationController()».class.getName());
 
 	/**
 	 * This method initializes this application. It logs the application banner.
@@ -1006,10 +1005,10 @@ public class «applicationController()» extends «abstractApplicationController
 	@PostConstruct
 	public void init()
 	{
-		log.debug(">init()");
+		log.log(Level.FINE, ">init()");
 		super.init();
-		log.info("\n" + LogUtil.banner("«versionBundle()»", "«name»"));
-		log.debug("<init()");
+		log.log(Level.CONFIG, "\n" + LogUtil.banner("«versionBundle()»", "«name»"));
+		log.log(Level.FINE, "<init()");
 	}
 }
 «ENDFILE»

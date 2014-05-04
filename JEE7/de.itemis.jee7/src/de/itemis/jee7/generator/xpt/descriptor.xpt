@@ -38,10 +38,11 @@ log4j.appender.R.layout.ConversionPattern=%-5p %-30.30c{1} %x - %m%n
 «DEFINE Persistence FOR Model»
 «FILE "WEB-INF/classes/META-INF/persistence.xml" RES»
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.0"
-		xmlns="http://java.sun.com/xml/ns/persistence"
-		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+<persistence
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/persistence"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_1.xsd"
+	version="2.1">
 «EXPAND utility::XmlHeader»
 «FOREACH getPersistenceUnits() AS pu»
 	<persistence-unit name="«pu.name»" transaction-type="JTA">
@@ -51,7 +52,7 @@ log4j.appender.R.layout.ConversionPattern=%-5p %-30.30c{1} %x - %m%n
 		<class>«fqTypeOf(entity)»</class>
 «ENDIF»
 «ENDFOREACH»
-        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 «IF pu.cacheable»
 		<shared-cache-mode>ALL</shared-cache-mode>
 «ENDIF»
@@ -82,10 +83,11 @@ log4j.appender.R.layout.ConversionPattern=%-5p %-30.30c{1} %x - %m%n
 «DEFINE Web FOR Model»
 «FILE "WEB-INF/web.xml" RES»
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-		xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-		metadata-complete="false" version="3.0">
+<web-app
+		xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+		version="3.1">
 «EXPAND utility::XmlHeader»
 	<display-name>«this.name»</display-name>
 	<distributable />
