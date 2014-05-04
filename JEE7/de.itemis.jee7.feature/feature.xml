@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="de.itemis.jee6.feature"
-      label="JEE6-Generator"
-      version="1.1.8.qualifier"
+      id="de.itemis.jee7.feature"
+      label="JEE7-Generator"
+      version="1.0.0.qualifier"
       provider-name="itemis AG"
-      plugin="de.itemis.jee6">
+      plugin="de.itemis.jee7">
 
-   <description url="http://jee6-generator.itemis.de">
+   <description url="http://www.jee-generator.de">
       Dieses Feature ermöglicht das einfache Generieren einer JEE-basierten Webapplikation.
    </description>
 
@@ -105,8 +105,8 @@ This Agreement is governed by the laws of the State of New York and the intellec
    </license>
 
    <url>
-      <update label="JEE6 Generator Update Site" url="http://jee6-generator.itemis.de/updates/kepler"/>
-      <discovery label="JEE6 Generator Project Site" url="http://jee6-generator.itemis.de/"/>
+      <update label="JEE Generator Update Site" url="http://www.jee-generator.de/updates/kepler"/>
+      <discovery label="JEE Generator Project Site" url="http://www.jee-generator.de/"/>
    </url>
 
    <requires>
@@ -121,7 +121,7 @@ This Agreement is governed by the laws of the State of New York and the intellec
       <import plugin="org.apache.commons.logging"/>
       <import plugin="org.apache.log4j"/>
       <import plugin="org.eclipse.xtext.xbase.lib"/>
-      <import plugin="de.itemis.jee6"/>
+      <import plugin="de.itemis.jee7"/>
       <import plugin="org.eclipse.xtext.ui"/>
       <import plugin="org.eclipse.ui.editors" version="3.5.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.ide" version="3.5.0" match="greaterOrEqual"/>
@@ -137,21 +137,21 @@ This Agreement is governed by the laws of the State of New York and the intellec
    </requires>
 
    <plugin
-         id="de.itemis.jee6"
+         id="de.itemis.jee7"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="de.itemis.jee6.ui"
+         id="de.itemis.jee7.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="de.itemis.jee6.doc"
+         id="de.itemis.jee7.doc"
          download-size="0"
          install-size="0"
          version="0.0.0"/>
