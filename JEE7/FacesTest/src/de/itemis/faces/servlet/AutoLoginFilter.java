@@ -4,6 +4,8 @@
 package de.itemis.faces.servlet;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -14,16 +16,13 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import de.itemis.jee7.util.Base64;
 import de.itemis.jee7.util.LogUtil;
 
 @WebFilter(urlPatterns = {"/*"})
 public class AutoLoginFilter implements Filter
 {
-	private static final Log  log    = LogFactory.getLog(AutoLoginFilter.class);
+	private static final Logger log    = Logger.getLogger(AutoLoginFilter.class.getName());
 
 	@Override
 	public void init(FilterConfig arg0) throws ServletException
@@ -40,7 +39,7 @@ public class AutoLoginFilter implements Filter
 			ServletRequest  request,
 			ServletResponse response,
 			FilterChain filter) throws IOException, ServletException {
-		log.trace(">doFilter()");
+		log.log(Level.FINER, ">doFilter()");
 
 		if (request instanceof HttpServletRequest)
 		{
@@ -70,6 +69,6 @@ public class AutoLoginFilter implements Filter
         {
         	filter.doFilter(request, response);
         }
-		log.trace("<doFilter()");
+		log.log(Level.FINER, "<doFilter()");
 	}
 }

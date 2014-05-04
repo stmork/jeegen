@@ -1,6 +1,8 @@
 package de.itemis.faces.ws;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.ejb.EJB;
 import javax.jws.WebMethod;
@@ -60,18 +62,18 @@ public class FacesWebService {
 	@WebMethod
 	public List<UserInfo> getUsers()
 	{
-		log.debug(">getUsers()");
+		log.log(Level.FINE, ">getUsers()");
 		final List<UserInfo> users = session.getAllUsers();
 		
 		for (UserInfo user : users)
 		{
-			log.debug(" " + user);
+			log.log(Level.FINE, " " + user);
 			for(Address address : user.getAddresses())
 			{
 				address.setUserInfo(null);
 			}
 		}
-		log.debug("<getUsers() = ...");
+		log.log(Level.FINE, "<getUsers() = ...");
 		
 		return users;
 	}
@@ -79,12 +81,12 @@ public class FacesWebService {
 	@WebMethod
 	public void test()
 	{
-		log.debug(">test()");
+		log.log(Level.FINE, ">test()");
 		Startup startup = new Startup();
 		
 		info.addStartup(startup);
 		startup = info.updateStartup(startup);
-		log.debug(" " + startup);
+		log.log(Level.FINE, " " + startup);
 
 		for (int i = 0; i < 10; i++)
 		{
@@ -92,16 +94,16 @@ public class FacesWebService {
 			entry.setComment("Persist automatically - " + i);
 			entry.setAddressOption(info.findAddressOption(AddressOptionEnum.ADDRESS_HOME));
 			entry = info.addToStartup(startup, entry);
-			log.debug(" ====== " + entry);
+			log.log(Level.FINE, " ====== " + entry);
 		}
 
 		for (EntityEntry entry : info.getEntityEntryList(startup))
 		{
-			log.debug(" ====== " + entry);
+			log.log(Level.FINE, " ====== " + entry);
 			info.deleteFromStartup(entry);
 		}
 
 		info.deleteStartup(startup);
-		log.debug("<test()");
+		log.log(Level.FINE, "<test()");
 	}
 }

@@ -4,6 +4,8 @@
 package de.itemis.faces.beans;
 
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -16,9 +18,6 @@ import javax.ejb.Remove;
 import javax.ejb.Stateful;
 import javax.interceptor.Interceptors;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import de.itemis.jee7.util.LogUtil;
 import de.itemis.jee7.util.Profiler;
 
@@ -27,53 +26,53 @@ import de.itemis.jee7.util.Profiler;
 public class StatefulBean implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	private final static Log log = LogFactory.getLog(StatefulBean.class);
+	private final static Logger log = Logger.getLogger(StatefulBean.class.getName());
 
 	@PostConstruct
 	public void init()
 	{
-		log.debug("  =construct() # " + this);
+		log.log(Level.FINE, "  =construct() # " + this);
 	}
 
 	@PreDestroy
 	public void destroy()
 	{
-		log.debug("  =destroy() # " + this);
+		log.log(Level.FINE, "  =destroy() # " + this);
 	}
 
 	@PostActivate
 	public void activate()
 	{
-		log.debug("  =activate() # " + this);
+		log.log(Level.FINE, "  =activate() # " + this);
 	}
 
 	@PrePassivate
 	public void passivate()
 	{
-		log.debug("  =passivate() # " + this);
+		log.log(Level.FINE, "  =passivate() # " + this);
 	}
 
 	public void ping()
 	{
-		log.debug("  =ping() # " + this);
+		log.log(Level.FINE, "  =ping() # " + this);
 	}
 
 	@Remove
 	public void remove()
 	{
-		log.debug("  =remove() # " + this);
+		log.log(Level.FINE, "  =remove() # " + this);
 	}
 
 	@AfterBegin
 	public void afterBegin()
 	{
-		log.debug("  =afterBegin() # " + this);
+		log.log(Level.FINE, "  =afterBegin() # " + this);
 	}
 
 	@BeforeCompletion
 	public void beforeCompletion()
 	{
-		log.debug("  =beforeCompletion() # " + this);
+		log.log(Level.FINE, "  =beforeCompletion() # " + this);
 	}
 
 	@AfterCompletion

@@ -14,13 +14,7 @@
 In der Modelldatei wird als erstes Kommando die Applikation beschrieben. Die Syntax lautet:
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="keyword">application</span>&nbsp;&lt;Name&gt;&nbsp;<span class="keyword">context</span>&nbsp;&lt;Context-Path&gt;&nbsp;<span class="keyword">package</span>&nbsp;&lt;Package-Id&gt;&nbsp;(<span class="keyword">timeout</span>&nbsp;&lt;Timeout-Minutes&gt;)&nbsp;(&lt;Project-State&gt;)&nbsp;(<span class="keyword">strict</span>);<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode"><span class="keyword">application</span>&nbsp;&lt;Name&gt;&nbsp;<span class="keyword">context</span>&nbsp;&lt;Context-Path&gt;&nbsp;<span class="keyword">package</span>&nbsp;&lt;Package-Id&gt;&nbsp;(<span class="keyword">timeout</span>&nbsp;&lt;Timeout-Minutes&gt;)&nbsp;(&lt;Project-State&gt;)&nbsp;(<span class="keyword">strict</span>);</span>
 </p>
 <p>
 Der Name ist ein String, der im Klartext die Applikation beschreibt. Der Context-Path ist ein String, der den Applikationskontext
@@ -160,13 +154,7 @@ Der JEE6-Generator unterstützt mehrere Persistenz Kontexte in einer Applikation.
 Datasources als XA-Datasource im Application Server konfiguriert sind. Die Syntax lautet:
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="keyword">persistence</span>&nbsp;<span class="keyword">unit</span>&nbsp;&lt;Unit-Name&gt;&nbsp;<span class="keyword">jndi</span>&nbsp;&lt;Jndi-Name&gt;&nbsp;(<span class="keyword">cacheable</span>)&nbsp;(MySQL|DB2|Oracle);<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode"><span class="keyword">persistence</span>&nbsp;<span class="keyword">unit</span>&nbsp;&lt;Unit-Name&gt;&nbsp;<span class="keyword">jndi</span>&nbsp;&lt;Jndi-Name&gt;&nbsp;(<span class="keyword">cacheable</span>)&nbsp;(MySQL|DB2|Oracle);</span>
 </p>
 <p>
 Der unit-name wird in der persistence.xml als Referenz innerhalb der Web Applikation verwendet. Der JNDI-Name definiert, wie die
@@ -206,13 +194,7 @@ verändert. An dieser Stelle wird beschrieben, wie in der Modelldatei konfigurier
 Die Syntax lautet:
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="keyword">locale</span>&nbsp;&lt;Language&gt;&nbsp;(&lt;Country&gt;)&nbsp;(<span class="keyword">default</span>);<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode"><span class="keyword">locale</span>&nbsp;&lt;Language&gt;&nbsp;(&lt;Country&gt;)&nbsp;(<span class="keyword">default</span>);</span>
 </p>
 <p>
 Die <em>language</em> ist der ISO-Code der zu verwendenden Sprache und hat typischerweise kleine Buchstaben. Der optionale Wert <em>country</em>
@@ -230,13 +212,7 @@ Will die Web Applikation E-Mail verschicken, muss einerseits der Mail-Versand im
 andererseits hier im Model eingetragen werden, unter welchem JDNI-Namen der Mailservice erreichbar ist. Dazu dient die einfache Syntax:
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="keyword">smtp</span>&nbsp;&lt;Jndi-Name&gt;;<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode"><span class="keyword">smtp</span>&nbsp;&lt;Jndi-Name&gt;;</span>
 </p>
 <p>
 Mehr Information zum Thema Mail im JEE-Umfeld befinden sich auf diesen Seiten. Die auf diesen Seiten beschriebenen Einträge in den
@@ -248,7 +224,7 @@ in dem Mailing verwendet werden soll. Das dazugehörige Code-Schnipsel sieht folg
 <div class="incode">
 <p class="code">
 @Resource(name=<span class="string">"&lt;jndi-name&gt;"</span>)<br/>
-<span class="keyword">private</span>&nbsp;javax.mail.Session&nbsp;mailSession;<br/>
+<span class="keyword">private</span>&nbsp;javax.mail.Session&nbsp;mailSession;
 </p>
 </div>
 </div>
@@ -265,13 +241,7 @@ konfiguriert sein und benutzt den JAAS-Standard. Auf diesen Seiten befinden sich
 Die Syntax lautet:
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="keyword">security</span>&nbsp;<span class="keyword">domain</span>&nbsp;&lt;Jndi-Name&gt;&nbsp;(<span class="keyword">clustered</span>);<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode"><span class="keyword">security</span>&nbsp;<span class="keyword">domain</span>&nbsp;&lt;Jndi-Name&gt;&nbsp;(<span class="keyword">clustered</span>);</span>
 </p>
 <p>
 Das optionale Schlüsselwort <span class="inlinecode"><span class="keyword">clustered</span></span> bestimt, ob die Security Domain in einer geclusterten Umgebung funktionsfähig
@@ -283,24 +253,11 @@ sein muss.
 Mit Web-Parametern kann man der Web Applikation in der web.xml Parameter übergeben. Die Syntax lautet:
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="keyword">param</span>&nbsp;&lt;Key&gt;&nbsp;=&nbsp;&lt;Value&gt;&nbsp;(<span class="keyword">description</span>&nbsp;&lt;Description&gt;);<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode"><span class="keyword">param</span>&nbsp;&lt;Key&gt;&nbsp;=&nbsp;&lt;Value&gt;&nbsp;(<span class="keyword">description</span>&nbsp;&lt;Description&gt;);</span>
 </p>
 <p>
 Die Einträge können beliebig häufig im Modell eingetragen werden. Aus folgender Modellzeile:
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="keyword">param</span>&nbsp;de.itemis.purchasing.ITEMIKER&nbsp;=&nbsp;<span class="string">"itemis"</span>&nbsp;<span class="keyword">description</span>&nbsp;<span class="string">"LDAP-Gruppe&nbsp;aller&nbsp;itemiker"</span>;<br/>
-</p>
-</div>
-</div>
-
+<span class="inlinecode"><span class="keyword">param</span>&nbsp;de.itemis.purchasing.ITEMIKER&nbsp;=&nbsp;<span class="string">"itemis"</span>&nbsp;<span class="keyword">description</span>&nbsp;<span class="string">"LDAP-Gruppe&nbsp;aller&nbsp;itemiker"</span>;</span>
 wird in der web.xml:
 <div class="literallayout">
 <div class="incode">
@@ -309,7 +266,7 @@ wird in der web.xml:
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;description&gt;LDAP-Gruppe&nbsp;aller&nbsp;itemiker&lt;/description&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;param-name&gt;de.itemis.purchasing.ITEMIKER&lt;/param-name&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;param-value&gt;itemis&lt;/param-value&gt;<br/>
-&lt;/context-param&gt;<br/>
+&lt;/context-param&gt;
 </p>
 </div>
 </div>

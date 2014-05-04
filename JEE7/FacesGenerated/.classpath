@@ -6,8 +6,12 @@
 	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="src" path="model"/>
 	<classpathentry kind="src" path="src/main/java"/>
-	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.jboss.ide.eclipse.as.core.server.runtime.runtimeTarget/JBoss 7.1 Runtime"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.jboss.ide.eclipse.as.core.server.runtime.runtimeTarget/WildFly 8.0 Runtime">
+		<attributes>
+			<attribute name="owner.project.facets" value="jst.web"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/de.itemis.jee6.util"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/de.itemis.jee7.util"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

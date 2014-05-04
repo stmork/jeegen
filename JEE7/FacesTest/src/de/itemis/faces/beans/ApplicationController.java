@@ -3,15 +3,15 @@
  */
 package de.itemis.faces.beans;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.interceptor.Interceptors;
 import javax.naming.directory.DirContext;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import de.itemis.faces.dao.AdminDaoBean;
 import de.itemis.faces.dao.InfoDaoBean;
@@ -24,7 +24,7 @@ import de.itemis.jee7.util.Profiler;
 public class ApplicationController extends AbstractApplicationController
 {
 	private static final long serialVersionUID = 1L;
-	private final static Log log = LogFactory.getLog(ApplicationController.class);
+	private final static Logger log = Logger.getLogger(ApplicationController.class.getName());
 
 	@EJB
 	private AdminDaoBean dao;
@@ -39,13 +39,13 @@ public class ApplicationController extends AbstractApplicationController
 	@Override
 	public void init()
 	{
-		log.debug(">init()");
+		log.log(Level.FINE, ">init()");
 		try
 		{
 			final DirContext ldap = info.getLdapItemis();
 			final String     ns   = ldap.getNameInNamespace();
 
-			log.debug(ldap);
+			log.log(Level.FINE, ldap.toString());
 			LogUtil.debug(log, " url        = %s", dao.getLdapUrl());
 			LogUtil.debug(log, " baseDN     = %s", dao.getLdapBaseDN());
 			LogUtil.debug(log, " productive = %s", info.isProductive());
@@ -60,6 +60,6 @@ public class ApplicationController extends AbstractApplicationController
 		{
 			throw new RuntimeException(e);
 		}
-		log.debug("<init()");
+		log.log(Level.FINE, "<init()");
 	}
 }
