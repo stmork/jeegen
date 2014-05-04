@@ -27,7 +27,7 @@ Integer-Attribut mit Namen id generiert. Eine einfache Definition sieht folgende
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Text</span>&nbsp;&nbsp;&nbsp;&nbsp;street;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Text</span>&nbsp;&nbsp;&nbsp;&nbsp;plz;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Text</span>&nbsp;&nbsp;&nbsp;&nbsp;location;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -65,7 +65,7 @@ Entity Bean wird der Adresstyp AddressOption als Attributtyp <span class="inline
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Text</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;plz;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Text</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;location;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Option</span>&nbsp;AddressOption&nbsp;addressOption;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -107,7 +107,7 @@ Es macht natürlich Sinn, dass es Personen gibt, in denen mehrere Adressen gespei
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Text</span>&nbsp;<span class="keyword">id</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;login;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Text</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Entity</span>&nbsp;Address&nbsp;[]&nbsp;&nbsp;&nbsp;&nbsp;addresses;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -150,7 +150,7 @@ zusammen zu bauen. Aus Vor- und Nachnamen kann man den gesamten Namen als transi
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Text</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;surename;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Text</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;<span class="keyword">transient</span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Entity</span>&nbsp;Address&nbsp;[]&nbsp;&nbsp;&nbsp;&nbsp;addresses;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -186,7 +186,7 @@ Daraus wird in der Datei <em>$PROJECT_HOME/src/&lt;package&gt;/entites/Person.ja
 &nbsp;&nbsp;&nbsp;&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;getSurename()&nbsp;+&nbsp;<span class="string">",&nbsp;"</span>&nbsp;+&nbsp;getForename();<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -200,13 +200,25 @@ Im Folgenden werden die Attribute aufgelistet und erklärt.
 Das Textattribut wurde schon ausführlich erklärt. Es hat die Syntax:
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">Text</span>&nbsp;(<span class="keyword">id</span>)&nbsp;&lt;Name&gt;&nbsp;(<span class="keyword">transient</span>);</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">Text</span>&nbsp;(<span class="keyword">id</span>)&nbsp;&lt;Name&gt;&nbsp;(<span class="keyword">transient</span>);<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 In einer XHTML-Seite wird aus der Modellzeile
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">Text</span>&nbsp;subject;</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">Text</span>&nbsp;subject;<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 im Formular folgendes Schnipsel generiert:
@@ -222,7 +234,7 @@ im Formular folgendes Schnipsel generiert:
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h:inputText&nbsp;id=<span class="string">"subject"</span>&nbsp;label=<span class="string">"#{msg[&apos;info.startup.subject&apos;]}"</span>&nbsp;maxlength=<span class="string">"255"</span>&nbsp;value=<span class="string">"#{infoHandler.startup.subject}"</span>/&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;/td&gt;<br/>
-&lt;/tr&gt;
+&lt;/tr&gt;<br/>
 </p>
 </div>
 </div>
@@ -235,13 +247,25 @@ wird dabei automatisch ein entsprechender Value Converter generiert, der den Inh
 umwandelt. Die Syntax lautet:
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">Int</span>&nbsp;&lt;Name&gt;&nbsp;(<span class="keyword">transient</span>);</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">Int</span>&nbsp;&lt;Name&gt;&nbsp;(<span class="keyword">transient</span>);<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 Aus der Modellzeile
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">Int</span>&nbsp;integerEntry;</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">Int</span>&nbsp;integerEntry;<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 wird folgendes Schnipsel im XHTML generiert:
@@ -255,7 +279,7 @@ wird folgendes Schnipsel im XHTML generiert:
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h:inputText&nbsp;id=<span class="string">"integerEntry"</span>&nbsp;label=<span class="string">"#{msg[&apos;info.startup.integerentry&apos;]}"</span>&nbsp;size=<span class="string">"10"</span>&nbsp;value=<span class="string">"#{infoHandler.startup.integerEntry}"</span>/&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;/td&gt;<br/>
-&lt;/tr&gt;
+&lt;/tr&gt;<br/>
 </p>
 </div>
 </div>
@@ -268,13 +292,25 @@ wird dafür ein double generiert Im XHTML-Formular wird dabei automatisch ein ent
 Inhalt des Eingabefeldes automatisch in eine Kommazahl umwandelt. Die Syntax lautet:
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">Number</span>&nbsp;&lt;Name&gt;&nbsp;(<span class="keyword">transient</span>);</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">Number</span>&nbsp;&lt;Name&gt;&nbsp;(<span class="keyword">transient</span>);<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 Aus der Modellzeile
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">Number</span>&nbsp;numberEntry;</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">Number</span>&nbsp;numberEntry;<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 wird folgendes Schnipsel im XHTML generiert:
@@ -288,7 +324,7 @@ wird folgendes Schnipsel im XHTML generiert:
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h:inputText&nbsp;id=<span class="string">"numberEntry"</span>&nbsp;label=<span class="string">"#{msg[&apos;info.startup.numberentry&apos;]}"</span>&nbsp;maxlength=<span class="string">"10"</span>&nbsp;value=<span class="string">"#{infoHandler.startup.numberEntry}"</span>/&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;/td&gt;<br/>
-&lt;/tr&gt;
+&lt;/tr&gt;<br/>
 </p>
 </div>
 </div>
@@ -299,13 +335,25 @@ wird folgendes Schnipsel im XHTML generiert:
 Ein E-Mail-Datentyp kann als ID geführt werden und ist im Prinzip ein Textfeld mit dem Unterschied, dass ein Validator die Eingabe auf das Format einer gültigen EMail-Adresse prüft. Die Syntax lautet:
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">Email</span>&nbsp;(<span class="keyword">id</span>)&nbsp;&lt;Name&gt;&nbsp;(<span class="keyword">transient</span>);</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">Email</span>&nbsp;(<span class="keyword">id</span>)&nbsp;&lt;Name&gt;&nbsp;(<span class="keyword">transient</span>);<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 In einer XHTML-Seite wird aus der Modellzeile
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">Email</span>&nbsp;mail;</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">Email</span>&nbsp;mail;<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 im Formular folgendes Schnipsel generiert:
@@ -323,7 +371,7 @@ im Formular folgendes Schnipsel generiert:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;f:validator&nbsp;validatorId=<span class="string">"mailValidator"</span>/&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/h:inputText&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;/td&gt;<br/>
-&lt;/tr&gt;
+&lt;/tr&gt;<br/>
 </p>
 </div>
 </div>
@@ -339,13 +387,25 @@ mehr braucht, muss ein sog. Character Large Object benutzt werden. Im XHTML-Form
 ist dieser Datentyp wie Text und E-Mail ein java.lang.String. Die Syntax lautet:
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">Clob</span>&nbsp;&lt;Name&gt;&nbsp;(<span class="keyword">transient</span>);</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">Clob</span>&nbsp;&lt;Name&gt;&nbsp;(<span class="keyword">transient</span>);<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 In einer XHTML-Seite wird aus der Modellzeile
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">Clob</span>&nbsp;clobEntry;</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">Clob</span>&nbsp;clobEntry;<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 im Formular folgendes Schnipsel generiert:
@@ -361,7 +421,7 @@ im Formular folgendes Schnipsel generiert:
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h:inputTextarea&nbsp;cols=<span class="string">"32"</span>&nbsp;id=<span class="string">"clobEntry"</span>&nbsp;label=<span class="string">"#{msg[&apos;info.startup.clobentry&apos;]}"</span>&nbsp;rows=<span class="string">"7"</span>&nbsp;value=<span class="string">"#{infoHandler.startup.clobEntry}"</span>/&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;/td&gt;<br/>
-&lt;/tr&gt;
+&lt;/tr&gt;<br/>
 </p>
 </div>
 </div>
@@ -374,7 +434,13 @@ Will man Binärdaten in der Datenbank speichern, muss man den Datentyp <span clas
 Typs nicht. Die Syntax lautet:
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">Blob</span>&nbsp;&lt;Name&gt;&nbsp;(<span class="keyword">transient</span>);</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">Blob</span>&nbsp;&lt;Name&gt;&nbsp;(<span class="keyword">transient</span>);<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 <em>Hinweis</em>
@@ -399,7 +465,7 @@ Attributes gewechselt werden kann. Das setzt weitere Methoden im Action Handler 
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h:selectBooleanCheckbox&nbsp;id=<span class="string">"active"</span>&nbsp;label=<span class="string">"#{msg[&apos;info.startup.active&apos;]}"</span>&nbsp;value=<span class="string">"#{infoHandler.startup.active}"</span>/&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;/td&gt;<br/>
-&lt;/tr&gt;
+&lt;/tr&gt;<br/>
 </p>
 </div>
 </div>
@@ -415,13 +481,25 @@ der Entity Bean das Erzeugungsdatum in dieses Attribut gespeichert. Benutzt man 
 lautet:
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">Timestamp</span>&nbsp;(<span class="keyword">auto</span>)&nbsp;(<span class="keyword">update</span>)&nbsp;&lt;Name&gt;&nbsp;(<span class="keyword">transient</span>);</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">Timestamp</span>&nbsp;(<span class="keyword">auto</span>)&nbsp;(<span class="keyword">update</span>)&nbsp;&lt;Name&gt;&nbsp;(<span class="keyword">transient</span>);<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 Für folgende Modellzeile
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">Timestamp</span>&nbsp;timestamp1;</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">Timestamp</span>&nbsp;timestamp1;<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 wird in der XHTML folgendes Schnipsel generiert:
@@ -437,7 +515,7 @@ wird in der XHTML folgendes Schnipsel generiert:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;f:convertDateTime&nbsp;pattern=<span class="string">"dd.MM.yyyy"</span>&nbsp;type=<span class="string">"date"</span>/&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/h:inputText&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;/td&gt;<br/>
-&lt;/tr&gt;
+&lt;/tr&gt;<br/>
 </p>
 </div>
 </div>
@@ -455,7 +533,7 @@ Formulareinstrag im XHTML generiert. Stattdessen werd in der Entity Bean entspre
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(getCreation()&nbsp;==&nbsp;<span class="keyword">null</span>)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setCreation(<span class="keyword">new</span>&nbsp;Date());<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -468,7 +546,7 @@ angegeben werden.
 @PreUpdate<br/>
 <span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;preUpdate()&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;setChanged(<span class="keyword">new</span>&nbsp;Date());<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -484,13 +562,26 @@ Mit diesem Datentypen kann ein Kalenderdatum in der Datenbank untergebracht werd
 berichtet. Die Syntax lautet:
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">Date</span>&nbsp;&lt;Name&gt;&nbsp;(<span class="keyword">transient</span>);</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">Date</span>&nbsp;&lt;Name&gt;&nbsp;(<span class="keyword">transient</span>);<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 Eine automatische Aktualisierung bei Anlegen und Ändern dieses Attributtyps wie beim Timestamp existiert bei diesem Attributtypen nicht! Aus der Modellzeile
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">Date</span>&nbsp;dateElement;</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">Date</span>&nbsp;dateElement;<br/>
+</p>
+</div>
+</div>
+
 wird folgendes XHTML-Schnipsel generiert:
 <div class="literallayout">
 <div class="incode">
@@ -504,7 +595,7 @@ wird folgendes XHTML-Schnipsel generiert:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;f:convertDateTime&nbsp;pattern=<span class="string">"dd.MM.yyyy"</span>&nbsp;type=<span class="string">"date"</span>/&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/h:inputText&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;/td&gt;<br/>
-&lt;/tr&gt;
+&lt;/tr&gt;<br/>
 </p>
 </div>
 </div>
@@ -515,7 +606,13 @@ wird folgendes XHTML-Schnipsel generiert:
 Mit diesem Attributtyp kann eine Relation auf eine andere Entity Bean modelliert werden. Die Syntax lautet:
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">Entity</span>&nbsp;&lt;Typ&gt;&nbsp;([])&nbsp;&lt;Name&gt;;</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">Entity</span>&nbsp;&lt;Typ&gt;&nbsp;([])&nbsp;&lt;Name&gt;;<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 Es wird zwischen einer 1:1- und einer 1:n-Relation unterschieden, indem dem Entity Typen das Symbol [] beigestellt wird.
@@ -530,14 +627,26 @@ Soll in einer Entity Bean eine 1:1-Relation in einer Combobox ausgewählt werden 
 lauten. Die Syntax ist ähnlich dem <span class="inlinecode"><span class="keyword">Entity</span></span>-Attributtyp mit dem Unterschied, dass keine 1:n-Relation benutzt werden kann:
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">Option</span>&nbsp;&lt;Typ&gt;&nbsp;&lt;Name&gt;;</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">Option</span>&nbsp;&lt;Typ&gt;&nbsp;&lt;Name&gt;;<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 Die als Option referenzierte Entity Bean kann sowohl eine Enumeration sein, als auch als editierbar gekennzeichnet sein. Im Modell
 wird aus der Zeile
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">Option</span>&nbsp;UserInfo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;owner;</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">Option</span>&nbsp;UserInfo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;owner;<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 Der XHTML-Codeschnipsel:
@@ -554,7 +663,7 @@ Der XHTML-Codeschnipsel:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;f:selectItems&nbsp;itemLabel=<span class="string">"#{owner.name}"</span>&nbsp;itemValue=<span class="string">"#{owner}"</span>&nbsp;value=<span class="string">"#{orderingHandler.userInfoList}"</span>&nbsp;var=<span class="string">"owner"</span>/&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/h:selectOneMenu&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;/td&gt;<br/>
-&lt;/tr&gt;
+&lt;/tr&gt;<br/>
 </p>
 </div>
 </div>
@@ -618,7 +727,7 @@ verwendeten Datenbanken. Jede Tabelle erhält in der IDs-Tabelle eine eigene Zeil
 &nbsp;*/</span><br/>
 <span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setId(<span class="keyword">final</span>&nbsp;<span class="keyword">int</span>&nbsp;id)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.id&nbsp;=&nbsp;id;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -628,13 +737,25 @@ Den Entity Beans können durch weitere Schlüsselwörter noch zusätzliche Eigenscha
 sich die Auflistung der Syntax:
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">entity</span>&nbsp;&lt;Name&gt;&nbsp;(<span class="keyword">filterable</span>)&nbsp;(<span class="keyword">cloneable</span>)&nbsp;{&nbsp;&lt;Attributes&gt;+&nbsp;}&nbsp;(<span class="keyword">persistence</span>&nbsp;<span class="keyword">unit</span>&nbsp;&lt;Persistence-Unit&gt;)&nbsp;;</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">entity</span>&nbsp;&lt;Name&gt;&nbsp;(<span class="keyword">filterable</span>)&nbsp;(<span class="keyword">cloneable</span>)&nbsp;{&nbsp;&lt;Attributes&gt;+&nbsp;}&nbsp;(<span class="keyword">persistence</span>&nbsp;<span class="keyword">unit</span>&nbsp;&lt;Persistence-Unit&gt;)&nbsp;;<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 Wie die Attribute attributes aussehen müssen wurde ja schon beschrieben. Werden für Auswahllisten Optionen verwendet, sieht die Syntax leicht erweitert aus. Hier lautet die Syntax:
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">options</span>&nbsp;&lt;Name&gt;&nbsp;(<span class="keyword">filterable</span>)&nbsp;(<span class="keyword">cloneable</span>)&nbsp;(<span class="keyword">editable</span>&nbsp;{&nbsp;&lt;Attributes&gt;+&nbsp;})&nbsp;|&nbsp;(&nbsp;{&nbsp;&lt;Resource-Key&gt;+&nbsp;})&nbsp;(<span class="keyword">persistence</span>&nbsp;<span class="keyword">unit</span>&nbsp;&lt;Persistence-Unit&gt;)&nbsp;;</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">options</span>&nbsp;&lt;Name&gt;&nbsp;(<span class="keyword">filterable</span>)&nbsp;(<span class="keyword">cloneable</span>)&nbsp;(<span class="keyword">editable</span>&nbsp;{&nbsp;&lt;Attributes&gt;+&nbsp;})&nbsp;|&nbsp;(&nbsp;{&nbsp;&lt;Resource-Key&gt;+&nbsp;})&nbsp;(<span class="keyword">persistence</span>&nbsp;<span class="keyword">unit</span>&nbsp;&lt;Persistence-Unit&gt;)&nbsp;;<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 Hier werden im Wesentlichen zwei Varianten unterschieden:
@@ -677,7 +798,7 @@ filter()-Implementierung könnte so aussehen:
 <span class="keyword">public</span>&nbsp;<span class="keyword">boolean</span>&nbsp;filter(String&nbsp;pattern,&nbsp;Locale&nbsp;locale)<br/>
 {<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;getPosition().toLowerCase(locale).contains(pattern.toLowerCase(locale));<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -705,7 +826,7 @@ an die übergeordnete XHTML-Seite übergeben. Eine solche getList()-Methode könnte
 &nbsp;&nbsp;&nbsp;&nbsp;FilteredList&lt;OrderPosition&gt;&nbsp;filtered&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;FilteredList&lt;OrderPosition&gt;();<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;filtered.addAll(lastOrderList,&nbsp;pattern,&nbsp;getExternalContext().getRequestLocale());<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;filtered;<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
