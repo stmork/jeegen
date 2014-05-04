@@ -147,7 +147,7 @@ entity Startup
 	Clob                   clobEntry;
 	Blob                   blobEntry;
 	Boolean                active;
-	
+
 	Timestamp auto         creation;
 	Timestamp update       changed;
 	Timestamp              timestamp1;
