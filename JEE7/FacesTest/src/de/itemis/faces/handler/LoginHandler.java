@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import de.itemis.jee6.util.LogUtil;
+import de.itemis.jee7.util.LogUtil;
 
 @ManagedBean
 @RequestScoped

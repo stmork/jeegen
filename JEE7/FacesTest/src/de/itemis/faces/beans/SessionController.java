@@ -19,8 +19,8 @@ import de.itemis.faces.dao.InfoDaoBean;
 import de.itemis.faces.dao.SessionDaoBean;
 import de.itemis.faces.entities.UserInfo;
 import de.itemis.faces.handler.AbstractHandler;
-import de.itemis.jee6.util.AbstractLdapConnector;
-import de.itemis.jee6.util.LogUtil;
+import de.itemis.jee7.util.AbstractLdapConnector;
+import de.itemis.jee7.util.LogUtil;
 
 @ManagedBean
 public class SessionController extends AbstractHandler

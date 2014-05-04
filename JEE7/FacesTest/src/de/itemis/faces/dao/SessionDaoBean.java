@@ -26,8 +26,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import de.itemis.faces.entities.UserInfo;
-import de.itemis.jee6.util.DateTimeUtil;
-import de.itemis.jee6.util.Profiler;
+import de.itemis.jee7.util.DateTimeUtil;
+import de.itemis.jee7.util.Profiler;
 
 @Stateless
 @Interceptors(Profiler.class)

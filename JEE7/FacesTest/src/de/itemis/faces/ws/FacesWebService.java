@@ -17,7 +17,7 @@ import de.itemis.faces.entities.AddressOption.AddressOptionEnum;
 import de.itemis.faces.entities.EntityEntry;
 import de.itemis.faces.entities.Startup;
 import de.itemis.faces.entities.UserInfo;
-import de.itemis.jee6.util.LogUtil;
+import de.itemis.jee7.util.LogUtil;
 
 @WebService(serviceName="FacesWS")
 public class FacesWebService {

@@ -22,7 +22,7 @@ import de.itemis.faces.dao.SessionDaoBean;
 import de.itemis.faces.entities.UserInfo;
 import de.itemis.faces.handler.AbstractHandler;
 import de.itemis.faces.handler.AdminHandler;
-import de.itemis.jee6.util.Profiler;
+import de.itemis.jee7.util.Profiler;
 
 @ManagedBean
 @SessionScoped

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import de.itemis.jee6.util.Download;
+import de.itemis.jee7.util.Download;
 
 /**
  * This class contains download information about a single image. It contains the refresh period and the image data itself

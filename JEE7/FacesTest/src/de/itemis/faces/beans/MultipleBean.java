@@ -18,8 +18,8 @@ import org.apache.commons.logging.LogFactory;
 
 import de.itemis.faces.dao.AbstractDaoBean;
 import de.itemis.faces.entities.AddressOption;
-import de.itemis.jee6.util.LogUtil;
-import de.itemis.jee6.util.Profiler;
+import de.itemis.jee7.util.LogUtil;
+import de.itemis.jee7.util.Profiler;
 
 /**
  * This class tests the usage of XA data sources.

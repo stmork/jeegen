@@ -23,7 +23,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import de.itemis.jee6.util.LogUtil;
+import de.itemis.jee7.util.LogUtil;
 
 /**
  * This class wrapps a multipart request in a way that usual request handler can continue working. Especsially

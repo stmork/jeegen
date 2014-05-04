@@ -15,8 +15,8 @@ import org.apache.commons.logging.LogFactory;
 
 import de.itemis.faces.dao.AdminDaoBean;
 import de.itemis.faces.dao.InfoDaoBean;
-import de.itemis.jee6.util.LogUtil;
-import de.itemis.jee6.util.Profiler;
+import de.itemis.jee7.util.LogUtil;
+import de.itemis.jee7.util.Profiler;
 
 @ManagedBean(eager=true)
 @ApplicationScoped

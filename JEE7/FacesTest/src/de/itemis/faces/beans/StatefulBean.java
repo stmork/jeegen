@@ -19,8 +19,8 @@ import javax.interceptor.Interceptors;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import de.itemis.jee6.util.LogUtil;
-import de.itemis.jee6.util.Profiler;
+import de.itemis.jee7.util.LogUtil;
+import de.itemis.jee7.util.Profiler;
 
 @Stateful
 @Interceptors(Profiler.class)
