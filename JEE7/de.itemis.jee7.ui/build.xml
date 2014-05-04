@@ -10,7 +10,7 @@
 	<property name="src-path"     value="./src"/>
 	<property name="src-gen-path" value="./src-gen"/>
 	<property name="manifest"     value="META-INF/MANIFEST.MF"/>
-	<property name="plugin-name"  value="de.itemis.jee6.ui_" />
+	<property name="plugin-name"  value="de.itemis.jee7.ui_" />
 
 	<property name="eclipse.home"         value="/opt/eclipse"/>
 	<property name="eclipse.home.plugins" value="${eclipse.home}/plugins"/>
@@ -71,7 +71,7 @@
 
 	<target name="compile">
 		<mkdir dir="${bin-path}"/>
-		<copy file="../de.itemis.jee6.util/jee6-utils.jar" todir="resources"/>
+		<copy file="../de.itemis.jee7.util/jee7-utils.jar" todir="resources"/>
 		<copy todir="${bin-path}">
 			<fileset dir="${src-path}">
 				<exclude name="**/*.java"/>

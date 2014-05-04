@@ -1,5 +1,5 @@
-<project name="JEE6 Generator Website" default="generate">
-	<property file="${user.home}/.jee6.properties" />
+<project name="JEE7 Generator Website" default="generate">
+	<property file="${user.home}/.jee7.properties" />
 	<property file="${basedir}/build.properties" />
 	<property file="${basedir}/environment.properties" />
 

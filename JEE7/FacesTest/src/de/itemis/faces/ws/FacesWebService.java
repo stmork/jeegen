@@ -6,9 +6,6 @@ import javax.ejb.EJB;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import de.itemis.faces.beans.StatefulBean;
 import de.itemis.faces.dao.InfoDaoBean;
 import de.itemis.faces.dao.SessionDaoBean;
@@ -21,7 +18,7 @@ import de.itemis.jee7.util.LogUtil;
 
 @WebService(serviceName="FacesWS")
 public class FacesWebService {
-	private final static Log log = LogFactory.getLog(FacesWebService.class);
+	private final static Logger log = Logger.getLogger(FacesWebService.class.getName());
 
 	@EJB
 	private SessionDaoBean session;
