@@ -6,6 +6,8 @@ package de.itemis.faces.dao;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -22,9 +24,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import de.itemis.faces.entities.UserInfo;
 import de.itemis.jee7.util.DateTimeUtil;
 import de.itemis.jee7.util.Profiler;
@@ -33,7 +32,7 @@ import de.itemis.jee7.util.Profiler;
 @Interceptors(Profiler.class)
 public class SessionDaoBean
 {
-	private final static Log log = LogFactory.getLog(SessionDaoBean.class);
+	private final static Logger log = Logger.getLogger(SessionDaoBean.class.getName());
 
 	@PersistenceContext(unitName="facesDS")
 	EntityManager em;
@@ -44,18 +43,18 @@ public class SessionDaoBean
 	@PostConstruct
 	public void construct()
 	{
-		log.debug("  =construct() # " + this);
+		log.log(Level.FINE, "  =construct() # " + this);
 	}
 
 	@PreDestroy
 	public void destroy()
 	{
-		log.debug("  =destroy() # " + this);
+		log.log(Level.FINE, "  =destroy() # " + this);
 	}
 
 	public void ping()
 	{
-		log.debug("  =ping() # " + this);
+		log.log(Level.FINE, "  =ping() # " + this);
 	}
 
 	public UserInfo ensureUserInfo(String login)
@@ -125,11 +124,11 @@ public class SessionDaoBean
         }
         catch (MessagingException me)
         {
-            log.error(me.getMessage(), me);
+            log.log(Level.SEVERE, me.getMessage(), me);
 		}
 		catch (UnsupportedEncodingException uee)
 		{
-            log.error(uee.getMessage(), uee);
+            log.log(Level.SEVERE, uee.getMessage(), uee);
 		}
 	}
 }

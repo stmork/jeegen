@@ -1,4 +1,4 @@
-<project name="JEE7-WebApp Minimal CDI für JEE7" default="package">
+<project name="JEE6-WebApp Minimal CDI für JEE6" default="package">
 	<property file="${user.home}/.jee7.properties" />
 	<property file="${basedir}/build.properties"/>
 

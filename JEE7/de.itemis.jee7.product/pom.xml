@@ -3,15 +3,15 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<relativePath>../de.itemis.jee6.releng/pom.xml</relativePath>
-		<groupId>de.itemis.jee6</groupId>
-		<artifactId>de.itemis.jee6.releng</artifactId>
-		<version>1.1.8.qualifier</version>
+		<relativePath>../de.itemis.jee7.releng/pom.xml</relativePath>
+		<groupId>de.itemis.jee7</groupId>
+		<artifactId>de.itemis.jee7.releng</artifactId>
+		<version>1.0.0.qualifier</version>
 	</parent>
 
-	<artifactId>de.itemis.jee6.product</artifactId>
+	<artifactId>de.itemis.jee7.product</artifactId>
 
-	<name>JEE6 DSL Product</name>
+	<name>JEE7 DSL Product</name>
 
 	<properties>
 		<eclipse.server>https://master.itemis.de/software/Eclipse/4.3/</eclipse.server>

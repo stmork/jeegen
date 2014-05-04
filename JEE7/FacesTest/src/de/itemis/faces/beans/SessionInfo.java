@@ -3,6 +3,9 @@
  */
 package de.itemis.faces.beans;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.security.RolesAllowed;
@@ -14,9 +17,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.interceptor.Interceptors;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import de.itemis.faces.dao.SessionDaoBean;
 import de.itemis.faces.entities.UserInfo;
@@ -31,47 +31,47 @@ import de.itemis.jee7.util.Profiler;
 public class SessionInfo extends AbstractHandler
 {
 	private static final long serialVersionUID = 1L;
-	private static final Log log = LogFactory.getLog(SessionInfo.class);
+	private static final Logger log = Logger.getLogger(SessionInfo.class.getName());
 
 	@EJB
 	private SessionDaoBean dao;
-	
+
 	@EJB
 	private StatefulBean bean;
 
 	@ManagedProperty(value="#{addressInfo}")
 	private AdminHandler addressInfo;
-	
+
 	private UserInfo user;
-	
+
 	@PostConstruct
 	public void init()
 	{
 		if (user == null)
 		{
-			log.debug(">init()");
-			log.debug(" " + getSession());
+			log.log(Level.FINE, ">init()");
+			log.log(Level.FINE, " " + getSession());
 			final String login = getExternalContext().getRemoteUser();
-			
+
 			if (login != null)
 			{
 				user = dao.ensureUserInfo(login);
-				log.debug(" " + login);
+				log.log(Level.FINE, " " + login);
 			}
-			log.debug("<init()");
+			log.log(Level.FINE, "<init()");
 		}
 	}
 
 	@PreDestroy
 	public void close()
 	{
-		log.debug(">close()");
-		log.debug(" " + getSession());
+		log.log(Level.FINE, ">close()");
+		log.log(Level.FINE, " " + getSession());
 		bean.ping();
 //		bean.logout();
 		user = null;
 		bean.remove();
-		log.debug("<close()");
+		log.log(Level.FINE, "<close()");
 	}
 
 	@RolesAllowed(value="admin")
@@ -88,7 +88,7 @@ public class SessionInfo extends AbstractHandler
 	public void validateMail(FacesContext context, UIComponent component, Object input)
 			throws ValidatorException
 	{
-		log.debug(" validateMail() " + getUser());
+		log.log(Level.FINE, " validateMail() " + getUser());
 	}
 
 	public AdminHandler getAddressInfo() {
@@ -98,12 +98,12 @@ public class SessionInfo extends AbstractHandler
 	public void setAddressInfo(AdminHandler addressInfo) {
 		this.addressInfo = addressInfo;
 	}
-	
+
 	public String testMail()
 	{
-		log.debug(">testMail()");
+		log.log(Level.FINE, ">testMail()");
 		dao.sendMail(user);
-		log.debug("<testMail()");
+		log.log(Level.FINE, "<testMail()");
 		return NAV_INDEX;
 	}
 }

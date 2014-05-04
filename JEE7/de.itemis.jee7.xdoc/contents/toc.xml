@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <toc topic="contents/documentation.html" label="JEE6 Generator" >
 	<topic href="contents/documentation_11.html#JEE6%20Generator_11" label="Getting Started" >
-		<topic href="contents/JEE6-Generator.html#JEE6Generator" label="JEE6-Generator" >
-			<topic href="contents/JEE6-Generator.html#newproject" label="JEE6-Projekt anlegen" >
+		<topic href="contents/JEE7-Generator.html#JEE6Generator" label="JEE6-Generator" >
+			<topic href="contents/JEE7-Generator.html#newproject" label="JEE7-Projekt anlegen" >
 			</topic>
-			<topic href="contents/JEE6-Generator.html#improjektentwickeln" label="Im JEE6-Projekt entwickeln" >
+			<topic href="contents/JEE7-Generator.html#improjektentwickeln" label="Im JEE7-Projekt entwickeln" >
 			</topic>
 		</topic>
 		<topic href="contents/Allgemeine%20Modelleinstellungen.html#AllgemeineModelleinstellungen" label="Allgemeine Modelleinstellungen" >

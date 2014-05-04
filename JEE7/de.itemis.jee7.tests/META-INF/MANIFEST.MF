@@ -1,12 +1,12 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: de.itemis.jee6.tests
+Bundle-Name: de.itemis.jee7.tests
 Bundle-Vendor: itemis AG
-Bundle-Version: 1.0.0
-Bundle-SymbolicName: de.itemis.jee6.tests; singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: de.itemis.jee7.tests;singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: de.itemis.jee6,
- de.itemis.jee6.ui,
+Require-Bundle: de.itemis.jee7,
+ de.itemis.jee7.ui,
  org.eclipse.core.runtime,
  org.eclipse.xtext,
  org.eclipse.xtext.junit4,
@@ -16,13 +16,10 @@ Require-Bundle: de.itemis.jee6,
  de.itemis.jee7,
  de.itemis.jee7.ui
 Import-Package: org.apache.log4j,
- org.apache.commons.logging,
  org.junit.runner;version="4.5.0",
  org.junit.runner.manipulation;version="4.5.0",
  org.junit.runner.notification;version="4.5.0",
  org.junit.runners;version="4.5.0",
  org.junit.runners.model;version="4.5.0",
  org.hamcrest.core
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: de.itemis.jee6,
- de.itemis.jee7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7

@@ -1,6 +1,8 @@
 package de.itemis.faces.beans;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -13,16 +15,13 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.interceptor.Interceptors;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import de.itemis.jee7.util.Profiler;
 
 @Singleton
 @Startup
 @Interceptors(Profiler.class)
 public class AsyncTimerService {
-	private final static Log    log = LogFactory.getLog(AsyncTimerService.class);
+	private final static Logger log = Logger.getLogger(AsyncTimerService.class.getName());
 	private final AtomicBoolean semaphore = new AtomicBoolean(false);
 	private final String        LOCK_CODE = this.getClass().getSimpleName();
 
@@ -40,30 +39,30 @@ public class AsyncTimerService {
 	@Lock(LockType.READ)
 	public void schedule()
 	{
-		log.debug(">schedule");
+		log.log(Level.FINE, ">schedule");
 		syncMethod();
-		log.debug("<schedule");
+		log.log(Level.FINE, "<schedule");
 	}
 
 	private void syncMethod()
 	{
 		if (semaphore.compareAndSet(false, true))
 		{
-			log.debug(">>>>>>>>>syncMethod");
+			log.log(Level.FINE, ">>>>>>>>>syncMethod");
 			try
 			{
 				Thread.sleep(27000L);
 			}
 			catch (InterruptedException e)
 			{
-				log.error(e.getMessage());
+				log.log(Level.SEVERE, e.getMessage());
 			}
-			log.debug("<<<<<<<<<syncMethod");
+			log.log(Level.FINE, "<<<<<<<<<syncMethod");
 			semaphore.set(false);
 		}
 		else
 		{
-			log.debug("---------syncMethod");
+			log.log(Level.FINE, "---------syncMethod");
 		}
 	}
 
@@ -76,7 +75,7 @@ public class AsyncTimerService {
 		{
 			try
 			{
-				log.debug("=schedule1()");
+				log.log(Level.FINE, "=schedule1()");
 			}
 			finally
 			{
@@ -94,7 +93,7 @@ public class AsyncTimerService {
 		{
 			try
 			{
-				log.debug("=schedule2()");
+				log.log(Level.FINE, "=schedule2()");
 			}
 			finally
 			{
@@ -112,7 +111,7 @@ public class AsyncTimerService {
 		{
 			try
 			{
-				log.debug("=schedule3()");
+				log.log(Level.FINE, "=schedule3()");
 			}
 			finally
 			{

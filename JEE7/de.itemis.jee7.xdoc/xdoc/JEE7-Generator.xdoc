@@ -3,10 +3,10 @@ chapter:JEE6Generator[JEE6-Generator]
 Der JEE-6Generator ist in der Lage, eine komplette JEE6-Web-Applikation aus einem einfachen Modell zu generieren.
 Das Framework wurde mit Xtext realisiert und ist als Eclipse-Plugin verfügbar.
 
-section:newproject[JEE6-Projekt anlegen]
+section:newproject[JEE7-Projekt anlegen]
 
-Ein neues JEE6-Projekt kann mit der JEE6-Distribution einfach angelegt werden. Dazu muss der Menüpunkt File -> New -> Project...
-aufgerufen werden. Im sich öffnenden Dialog wählt man unter dem Punkt Xtext den Punkt JEE6 Generator Project aus:
+Ein neues JEE7-Projekt kann mit der JEE7-Distribution einfach angelegt werden. Dazu muss der Menüpunkt File -> New -> Project...
+aufgerufen werden. Im sich öffnenden Dialog wählt man unter dem Punkt Xtext den Punkt JEE7 Generator Project aus:
 
 img[images/NewProject1.png][][][]
 
@@ -15,33 +15,33 @@ Danach wählt man einen Projektnamen aus:
 img[images/NewProject2.png][][][]
 
 Es wird danach ein Projekt namens "beispiel" angelegt. In diesem Projekt sind alle zum Bau notwendigen Dateien enthalten.
-Die JEE6-Distribution enthält auch schon die JBoss-Tools, mit denen die JBoss-Laufzeitumgebung definiert werden kann.
+Die JEE7-Distribution enthält auch schon die JBoss-Tools, mit denen die JBoss-Laufzeitumgebung definiert werden kann.
 Diese Laufzeitumgebung muss als Library in den Build Path mit aufgenommen werden. Will man das Modell später mit e[ant] bauen,
-empfiehlt sich das Anpassen der Datei e[$HOME/.jee6.properties]. Hier muss eingetragen werden, wo sich die JEE6-Distribution
+empfiehlt sich das Anpassen der Datei e[$HOME/.jee7.properties]. Hier muss eingetragen werden, wo sich die JEE7-Distribution
 und der benutzte Application Server befindet. Die Variablen lauten:
 ul[
 	item[eclipse.home]
 	item[jboss.home]
 	item[glassfish.home]
 ]
-Dies muss nur ein einziges Mal für alle JEE6-Projekte durchgeführt werden.
+Dies muss nur ein einziges Mal für alle JEE7-Projekte durchgeführt werden.
 
 Die letzten beiden Anmerkungen können in den Dateien $PROJECT_HOME/LiesMich.txt bzw. $PROJECT_HOME/ReadMe.txt nachgelesen werden.
 
-section:improjektentwickeln[Im JEE6-Projekt entwickeln]
+section:improjektentwickeln[Im JEE7-Projekt entwickeln]
 
-Die Datei e[$PROJECT_HOME/model/beispiel.jee6] ist das Modell für unsere Web-Anwendung. Hier sollte die erste Befehlszeile den
+Die Datei e[$PROJECT_HOME/model/beispiel.jee7] ist das Modell für unsere Web-Anwendung. Hier sollte die erste Befehlszeile den
 eigenen Bedürfnissen angepasst werden. Aus der Befehlszeile
 
 code[JEELANG][
-	application "beispiel"  context "/beispiel" package org.example.jee6.beispiel development strict;
+	application "beispiel"  context "/beispiel" package org.example.jee7.beispiel development strict;
 	...
 ]
 
 kann z.B. die Package-Definition und der Klartextname der Applikation angepasst werden.
 
 code[JEELANG][
-	application "Eine Beispiel-Applikation"  context "/beispiel" package de.itemis.jee6.beispiel development strict;
+	application "Eine Beispiel-Applikation"  context "/beispiel" package de.itemis.jee7.beispiel development strict;
 	...
 ]
 
@@ -75,14 +75,14 @@ z.B. die konfigurierten Persistenzkontexte untergebracht. Die generierten Dateie
 ul[item[src]]
 In diesem Verzeichnis werden die konkreten Klassen für die Action Handler und DAOs hinterlegt. Ferner werden hier die Resource Bundles und einige Service Klassen hineingeneriert. In diesem Verzeichnis können auch weitere eigene Klassen untergebracht werden. Alles, was hier hineingeneriert wird, wird nicht wieder überschrieben sondern nur angelegt, wenn die Klasse fehlt.
 ul[item[src-gen]]
-Hier werden die abstrakten Klassen und Entity Beans untergebracht. Diese werden bei jedem JEE6-Generatorlauf neu generiert.
+Hier werden die abstrakten Klassen und Entity Beans untergebracht. Diese werden bei jedem JEE7-Generatorlauf neu generiert.
 ul[item[res]]
-In diesem Verzeichnis werden bei Projektanlage Bilder und Libraries (JARs) angelegt. Hier können weitere Bilder untergebracht werden. Der JEE6-Generator generiert in diesem Verzeichnis nichts.
+In diesem Verzeichnis werden bei Projektanlage Bilder und Libraries (JARs) angelegt. Hier können weitere Bilder untergebracht werden. Der JEE7-Generator generiert in diesem Verzeichnis nichts.
 ul[item[res-gen]]
-In diesem Verzeichnis werden die Deployment Deskriptoren generiert. Diese Dateien werden bei jedem JEE6-Generatorlauf neu generiert.
+In diesem Verzeichnis werden die Deployment Deskriptoren generiert. Diese Dateien werden bei jedem JEE7-Generatorlauf neu generiert.
 ul[item[WebContent]]
 Hier werden die XHTML-Dateien und das CSS hineingelegt. Wie im src-Verzeichnis werden hier nur fehlende Dateien angelegt und bestehende nicht überschrieben.
 
 e[Hinweis!]
-Die Inhalte der Verzeichnisse src, res und WebContent sollten der Verseinsverwaltung der Wahl zugeführt werden, da dort auch eigene Implementierungen untergebracht sein können. Die Inhalte der Verzeichnisse src-gen und res-gen sollten nicht einer Versionsverwaltung zugeführt werden, da sie bei jedem JEE6-Generatorlauf neu generiert werden.
+Die Inhalte der Verzeichnisse src, res und WebContent sollten der Verseinsverwaltung der Wahl zugeführt werden, da dort auch eigene Implementierungen untergebracht sein können. Die Inhalte der Verzeichnisse src-gen und res-gen sollten nicht einer Versionsverwaltung zugeführt werden, da sie bei jedem JEE7-Generatorlauf neu generiert werden.
 
