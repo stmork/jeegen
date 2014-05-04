@@ -193,10 +193,10 @@
    </extension>
 
    <extension point="org.eclipse.ui.newWizards">
-      <category id="de.itemis.jee6.ui.category" name="JEE-Generators">
+      <category id="de.itemis.jee.ui.category" name="JEE-Generators">
       </category>
       <wizard
-            category="de.itemis.jee6.ui.category"
+            category="de.itemis.jee.ui.category"
             class="de.itemis.jee6.ui.DslExecutableExtensionFactory:de.itemis.jee6.ui.wizard.DslNewProjectWizard"
             icon="icons/jee6_32.gif"
             id="de.itemis.jee6.ui.wizard.DslNewProjectWizard"
