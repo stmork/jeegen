@@ -38,11 +38,11 @@ log4j.appender.R.layout.ConversionPattern=%-5p %-30.30c{1} %x - %m%n
 «DEFINE Persistence FOR Model»
 «FILE "WEB-INF/classes/META-INF/persistence.xml" RES»
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/persistence"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_1.xsd"
-	version="2.1">
+<persistence 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns="http://java.sun.com/xml/ns/persistence"
+		xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_1.xsd"
+		version="2.1">
 «EXPAND utility::XmlHeader»
 «FOREACH getPersistenceUnits() AS pu»
 	<persistence-unit name="«pu.name»" transaction-type="JTA">
@@ -83,14 +83,16 @@ log4j.appender.R.layout.ConversionPattern=%-5p %-30.30c{1} %x - %m%n
 «DEFINE Web FOR Model»
 «FILE "WEB-INF/web.xml" RES»
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app
-		xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-		version="3.1">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_1.xsd" 
+		xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_1.xsd" 
+		metadata-complete="false" version="3.1"> 
 «EXPAND utility::XmlHeader»
 	<display-name>«this.name»</display-name>
+
+	<!--
 	<distributable />
+	-->
 
 «FOREACH options.typeSelect(Param) AS param»
 	<context-param>
@@ -289,9 +291,8 @@ log4j.appender.R.layout.ConversionPattern=%-5p %-30.30c{1} %x - %m%n
 
 «DEFINE Sun FOR Model»
 «FILE "WEB-INF/sun-web.xml" RES»
-<!DOCTYPE sun-web-app PUBLIC "-//Sun Microsystems, Inc.//DTD 
-GlassFish Application Server 3.0 Servlet 3.0//EN" 
-"http://www.sun.com/software/appserver/dtds/sun-web-app_3_0-0.dtd">
+<!DOCTYPE sun-web-app PUBLIC "-//Sun Microsystems, Inc.//DTD GlassFish Application Server 3.0 Servlet 3.0//EN" 
+	"http://www.sun.com/software/appserver/dtds/sun-web-app_3_0-0.dtd">
 <sun-web-app>
 «EXPAND utility::XmlHeader»
 	<context-root>«path»</context-root>
@@ -328,8 +329,9 @@ GlassFish Application Server 3.0 Servlet 3.0//EN"
 «DEFINE Faces FOR Model»
 «FILE "WEB-INF/faces-config.xml" RES»
 <?xml version="1.0" encoding="UTF-8"?>
-<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+<faces-config
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 		xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
 		http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
 		version="2.2">
