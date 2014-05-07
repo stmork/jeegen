@@ -60,7 +60,7 @@ public class XhtmlBeautifier extends XmlBeautifier
 		try
 		{		
 			// Create an "identity" transformer - copies input to output
-	        final Document document = parseXmlFile(unformattedXml);
+			final Document document = parseXmlFile(unformattedXml);
 			final TransformerFactory factory = TransformerFactory.newInstance();
 			factory.setAttribute("indent-number", new Integer(INDENT.length()));
 			final Transformer t = factory.newTransformer();
@@ -100,7 +100,7 @@ public class XhtmlBeautifier extends XmlBeautifier
 			final String  unformattedXml,
 			final boolean isLayout) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, ClassCastException
 	{
-        final Document                  document = parseXmlFile(unformattedXml);
+		final Document                  document = parseXmlFile(unformattedXml);
 		final DOMImplementationRegistry registry = DOMImplementationRegistry.newInstance();
 		final DOMImplementationLS       impl     = (DOMImplementationLS)registry.getDOMImplementation("LS");
 		final LSSerializer              writer   = impl.createLSSerializer();

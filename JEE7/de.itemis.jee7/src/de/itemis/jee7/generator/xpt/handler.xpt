@@ -30,8 +30,11 @@
 «EXPAND utility::HeaderImpl»
 package «handlerPackageOf(this)»;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
+import de.itemis.jee7.util.Profiled;
 «IF entities.size > 0»
 import java.util.List;
 «ENDIF»
@@ -47,8 +50,10 @@ import «fqTypeOf(entity)»;
 «ENDFOREACH-»
  * </ul>
  */
-@ManagedBean
+@Named
 @SessionScoped
+@Transactional(value=TxType.REQUIRED)
+@Profiled
 public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 {
 	private static final long serialVersionUID = 1L;
@@ -789,7 +794,7 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resou
 	 *
 	 * @return The {@link ExternalContext}
 	 */
-	protected final ExternalContext getExternalContext()
+	protected ExternalContext getExternalContext()
 	{
 		final FacesContext context = FacesContext.getCurrentInstance();
 
@@ -802,7 +807,7 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resou
 	 * @param key The key of the servlet init parameter.
 	 * @return The resulting servlet init parameter.
 	 */
-	protected final String getInitParameter(final String key)
+	protected String getInitParameter(final String key)
 	{
 		return getExternalContext().getInitParameter(key);
 	}
@@ -812,7 +817,7 @@ abstract public class «abstractHandlerOf(this)» implements Serializable, Resou
 	 *
 	 * @return The {@link HttpSession} object.
 	 */
-	protected final HttpSession getSession()
+	protected HttpSession getSession()
 	{
 		ExternalContext context = getExternalContext();
 		

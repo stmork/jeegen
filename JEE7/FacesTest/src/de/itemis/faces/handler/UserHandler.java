@@ -10,11 +10,11 @@ import java.util.logging.Logger;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.inject.Named;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,9 +38,11 @@ import de.itemis.faces.dao.AdminDaoBean;
 import de.itemis.faces.entities.Address;
 import de.itemis.faces.entities.UserInfo;
 import de.itemis.faces.servlet.ImageServlet;
+import de.itemis.jee7.util.Profiled;
 
-@ManagedBean
+@Named
 @SessionScoped
+@Profiled
 @RolesAllowed(value="admin")
 public class UserHandler extends AbstractHandler
 {

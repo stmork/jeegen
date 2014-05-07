@@ -7,16 +7,16 @@
 
 package de.itemis.faces.handler;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-
 import java.util.List;
 
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
+
+import de.itemis.faces.dao.AbstractInfoDaoBean;
 import de.itemis.faces.entities.EntityEntry;
-
 import de.itemis.faces.entities.HistoryEntry;
-
 import de.itemis.faces.entities.Startup;
+import de.itemis.jee7.util.Profiled;
 
 /**
  * This managed bean class implements the action handlings for the following entity beans:
@@ -30,8 +30,9 @@ import de.itemis.faces.entities.Startup;
 
  * </ul>
  */
-@ManagedBean
+@Named
 @SessionScoped
+@Profiled
 public class InfoHandler extends AbstractInfoHandler {
 	private static final long serialVersionUID = 1L;
 

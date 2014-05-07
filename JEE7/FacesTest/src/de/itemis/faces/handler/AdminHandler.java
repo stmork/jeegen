@@ -7,14 +7,14 @@
 
 package de.itemis.faces.handler;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-
 import java.util.List;
 
-import de.itemis.faces.entities.Address;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 
+import de.itemis.faces.entities.Address;
 import de.itemis.faces.entities.UserInfo;
+import de.itemis.jee7.util.Profiled;
 
 /**
  * This managed bean class implements the action handlings for the following entity beans:
@@ -26,8 +26,9 @@ import de.itemis.faces.entities.UserInfo;
 
  * </ul>
  */
-@ManagedBean
+@Named
 @SessionScoped
+@Profiled
 public class AdminHandler extends AbstractAdminHandler {
 	private static final long serialVersionUID = 1L;
 

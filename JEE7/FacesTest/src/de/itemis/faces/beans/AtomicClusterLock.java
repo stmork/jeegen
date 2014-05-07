@@ -3,16 +3,15 @@ package de.itemis.faces.beans;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import de.itemis.faces.entities.Lock;
-import de.itemis.jee7.util.Profiler;
+import de.itemis.jee7.util.Profiled;
 
 @Stateless
-@Interceptors(Profiler.class)
+@Profiled
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 public class AtomicClusterLock
 {

@@ -16,13 +16,12 @@ import javax.ejb.PostActivate;
 import javax.ejb.PrePassivate;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
-import javax.interceptor.Interceptors;
 
 import de.itemis.jee7.util.LogUtil;
-import de.itemis.jee7.util.Profiler;
+import de.itemis.jee7.util.Profiled;
 
 @Stateful
-@Interceptors(Profiler.class)
+@Profiled
 public class StatefulBean implements Serializable
 {
 	private static final long serialVersionUID = 1L;

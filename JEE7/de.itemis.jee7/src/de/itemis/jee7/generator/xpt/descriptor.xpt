@@ -13,27 +13,18 @@
 
 «DEFINE Main FOR Model»
 «EXPAND Persistence»
+«EXPAND Beans»
 «EXPAND Web»
 «EXPAND JBoss»
 «EXPAND Glassfish»
 «EXPAND Sun»
 «EXPAND WebLogic»
 «EXPAND Faces»
-«EXPAND Log4J»
 «ENDDEFINE»
 
-«DEFINE Log4J FOR Model»
-«FILE "log4j.properties"»
-«IF state == ProjectState::Productive»
-log4j.rootLogger=info, R
-«ELSE»
-log4j.rootLogger=debug, R
-«ENDIF»
-log4j.appender.R=org.apache.log4j.ConsoleAppender
-log4j.appender.R.layout=org.apache.log4j.PatternLayout
-log4j.appender.R.layout.ConversionPattern=%-5p %-30.30c{1} %x - %m%n
-«ENDFILE»
-«ENDDEFINE»
+«REM»
+###############  Persistence.xml
+«ENDREM»
 
 «DEFINE Persistence FOR Model»
 «FILE "WEB-INF/classes/META-INF/persistence.xml" RES»
@@ -79,6 +70,22 @@ log4j.appender.R.layout.ConversionPattern=%-5p %-30.30c{1} %x - %m%n
 </persistence>
 «ENDFILE»
 «ENDDEFINE»
+
+«REM»
+###############  beans.xml
+«ENDREM»
+
+«DEFINE Beans FOR Model»
+«FILE "WEB-INF/beans.xml" RES»
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://xmlns.jcp.org/xml/ns/javaee" version="1.1" bean-discovery-mode="all">
+</beans>
+«ENDFILE»
+«ENDDEFINE»
+
+«REM»
+###############  web.xml
+«ENDREM»
 
 «DEFINE Web FOR Model»
 «FILE "WEB-INF/web.xml" RES»
@@ -325,6 +332,10 @@ GlassFish Application Server 3.0 Servlet 3.0//EN"
 </glassfish-web-app>
 «ENDFILE»
 «ENDDEFINE»
+
+«REM»
+###############  faces-config.xml
+«ENDREM»
 
 «DEFINE Faces FOR Model»
 «FILE "WEB-INF/faces-config.xml" RES»

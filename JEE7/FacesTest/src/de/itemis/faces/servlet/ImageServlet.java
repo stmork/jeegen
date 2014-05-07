@@ -9,6 +9,8 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.ejb.EJB;
 import javax.imageio.ImageIO;
@@ -18,79 +20,78 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import de.itemis.faces.dao.SessionDaoBean;
+import de.itemis.jee7.util.Profiled;
 
 /**
  * Servlet implementation class ImageServlet
  */
 @WebServlet("/example.gif")
+@Profiled
 public class ImageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String IMAGE_TYPE = "gif";
-	private static final Log  log    = LogFactory.getLog(ImageServlet.class);
+	private static final Logger  log    = Logger.getLogger(ImageServlet.class.getName());
 
 	@EJB
 	private SessionDaoBean session;
 
 	/**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ImageServlet()
-    {
-        super();
-    }
-    
-    @Override
-    public void init() throws ServletException
-    {
-    	log.debug(">init()");
-    	super.init();
-    	log("=init()");
-    	log.debug("<init()");
-    }
-    
-    @Override
-    public void destroy()
-    {
-    	log.debug(">destroy()");
-    	log("=destroy()");
-    	super.destroy();
-    	log.debug("<destroy()");
-    }
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public ImageServlet()
+	{
+		super();
+	}
+
+	@Override
+	public void init() throws ServletException
+	{
+		log.log(Level.FINE, ">init()");
+		super.init();
+		log("=init()");
+		log.log(Level.FINE, "<init()");
+	}
+	
+	@Override
+	public void destroy()
+	{
+		log.log(Level.FINE, ">destroy()");
+		log("=destroy()");
+		super.destroy();
+		log.log(Level.FINE, "<destroy()");
+	}
 
 	@Override
 	protected void service(HttpServletRequest request,
-    		HttpServletResponse response) throws ServletException, IOException
+			HttpServletResponse response) throws ServletException, IOException
 	{
-		log.debug(">service()");
-    	session.ping();
+		log.log(Level.FINE, ">service()");
+		session.ping();
 
 		renderImage(response, IMAGE_TYPE);
-		log.debug("<service()");
-    }
+		log.log(Level.FINE, "<service()");
+	}
 
 	private static final int  width  = 240;
 	private static final int  height = 160;
 	private static final Font MONOSPACED   = new Font(Font.MONOSPACED, Font.PLAIN, 12);
 	private static final Font SERIF        = new Font(Font.SERIF, Font.PLAIN,      36);
 	private static final Font SANS_SERIF   = new Font(Font.SANS_SERIF, Font.PLAIN, 36);
-
+	
 	public static void renderImage(final HttpServletResponse response, final String type) throws IOException
 	{
-    	final BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-    	final Graphics2D    gfx   = image.createGraphics();
+		final BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		final Graphics2D    gfx   = image.createGraphics();
 
-    	gfx.setBackground(Color.white);
-    	gfx.clearRect(0, 0, width, height);
-    	gfx.setRenderingHint(RenderingHints.KEY_ANTIALIASING,      RenderingHints.VALUE_ANTIALIAS_ON);
+		gfx.setBackground(Color.white);
+		gfx.clearRect(0, 0, width, height);
+		gfx.setRenderingHint(RenderingHints.KEY_ANTIALIASING,      RenderingHints.VALUE_ANTIALIAS_ON);
 		gfx.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
-    	log.debug(" -draw");
+		log.log(Level.FINE, " -draw");
 
-    	gfx.setColor(Color.green);
+		gfx.setColor(Color.green);
 		gfx.drawLine(0, 0, width, height);
 		gfx.drawLine(0, height, width, 0);
 
@@ -100,7 +101,7 @@ public class ImageServlet extends HttpServlet {
 		gfx.drawRoundRect(20, 18, 80, 60, 5, 5);
 
 		gfx.setColor(Color.red);
-    	gfx.setFont(MONOSPACED);
+		gfx.setFont(MONOSPACED);
 		for (int y = 0;y < height; y += 16)
 		{
 			gfx.drawString(String.format("x: %3d", y), 0, y);
@@ -114,7 +115,7 @@ public class ImageServlet extends HttpServlet {
 		gfx.setFont(SANS_SERIF);
 		gfx.drawString(Font.SANS_SERIF, 47, height-19);
 		
-		log.debug(" -write");
+		log.log(Level.FINE, " -write");
 
 		response.setContentType("image/" + IMAGE_TYPE);
 		ImageIO.write(image, type, response.getOutputStream());

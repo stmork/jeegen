@@ -11,20 +11,19 @@ import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import javax.interceptor.Interceptors;
 import javax.persistence.Query;
 import javax.sql.DataSource;
 
 import de.itemis.faces.dao.AbstractDaoBean;
 import de.itemis.faces.entities.AddressOption;
 import de.itemis.jee7.util.LogUtil;
-import de.itemis.jee7.util.Profiler;
+import de.itemis.jee7.util.Profiled;
 
 /**
  * This class tests the usage of XA data sources.
  */
 @Stateless
-@Interceptors(Profiler.class)
+@Profiled
 public class MultipleBean extends AbstractDaoBean
 {
 	private final static Logger log = Logger.getLogger(MultipleBean.class.getName());
