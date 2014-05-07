@@ -10,24 +10,23 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
-import javax.interceptor.Interceptors;
+import javax.inject.Named;
 
 import de.itemis.faces.dao.SessionDaoBean;
 import de.itemis.faces.entities.UserInfo;
 import de.itemis.faces.handler.AbstractHandler;
 import de.itemis.faces.handler.AdminHandler;
-import de.itemis.jee7.util.Profiler;
+import de.itemis.jee7.util.Profiled;
 
-@ManagedBean
+@Named
 @SessionScoped
+@Profiled
 @RolesAllowed(value="admin")
-@Interceptors(Profiler.class)
 public class SessionInfo extends AbstractHandler
 {
 	private static final long serialVersionUID = 1L;

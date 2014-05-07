@@ -7,7 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
+import javax.inject.Named;
 import javax.naming.NamingException;
 import javax.naming.directory.Attributes;
 import javax.naming.directory.DirContext;
@@ -21,8 +21,10 @@ import de.itemis.faces.entities.UserInfo;
 import de.itemis.faces.handler.AbstractHandler;
 import de.itemis.jee7.util.AbstractLdapConnector;
 import de.itemis.jee7.util.LogUtil;
+import de.itemis.jee7.util.Profiled;
 
-@ManagedBean
+@Named
+@Profiled
 public class SessionController extends AbstractHandler
 {
 	private static final long serialVersionUID = 1L;
@@ -53,12 +55,14 @@ public class SessionController extends AbstractHandler
 		{
 			final DirContext ldap = info.getLdapItemis();
 			final String namespace = ldap.getNameInNamespace();
-			final AbstractLdapConnector client = new LdapClient(ldap, info.getLdapBaseDN());
-			final Attributes attributes = client.getUser(login);
+			try(final AbstractLdapConnector client = new LdapClient(ldap, info.getLdapBaseDN()))
+			{
+				final Attributes attributes = client.getUser(login);
 
-			LogUtil.debug(log, " baseDn=%s", info.getLdapBaseDN());
-			LogUtil.debug(log, " ns=%s",     namespace);
-			LogUtil.debug(log, " gecos=%s",  AbstractLdapConnector.getValue(attributes, "gecos"));
+				LogUtil.debug(log, " baseDn=%s", info.getLdapBaseDN());
+				LogUtil.debug(log, " ns=%s",     namespace);
+				LogUtil.debug(log, " gecos=%s",  AbstractLdapConnector.getValue(attributes, "gecos"));
+			}
 		}
 		
 		for (UserInfo info : dao.query(1960))

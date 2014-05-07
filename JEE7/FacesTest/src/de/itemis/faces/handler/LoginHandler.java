@@ -3,15 +3,17 @@ package de.itemis.faces.handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 import de.itemis.jee7.util.LogUtil;
+import de.itemis.jee7.util.Profiled;
 
-@ManagedBean
+@Named
 @RequestScoped
+@Profiled
 public class LoginHandler extends AbstractHandler
 {
 	private static final long serialVersionUID = 1L;

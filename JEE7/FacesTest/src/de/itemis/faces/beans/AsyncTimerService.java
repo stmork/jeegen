@@ -13,13 +13,12 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import javax.interceptor.Interceptors;
 
-import de.itemis.jee7.util.Profiler;
+import de.itemis.jee7.util.Profiled;
 
 @Singleton
 @Startup
-@Interceptors(Profiler.class)
+@Profiled
 public class AsyncTimerService {
 	private final static Logger log = Logger.getLogger(AsyncTimerService.class.getName());
 	private final AtomicBoolean semaphore = new AtomicBoolean(false);
@@ -66,7 +65,7 @@ public class AsyncTimerService {
 		}
 	}
 
-	@Schedule(minute="*/5",hour="7-20",persistent=false)
+//	@Schedule(minute="*/5",hour="7-20",persistent=false)
 	@Lock(LockType.READ)
 	@TransactionAttribute(TransactionAttributeType.NEVER)
 	public void schedule1()
@@ -84,7 +83,7 @@ public class AsyncTimerService {
 		}
 	}
 
-	@Schedule(minute="*/5",hour="7-20",persistent=false)
+//	@Schedule(minute="*/5",hour="7-20",persistent=false)
 	@Lock(LockType.READ)
 	@TransactionAttribute(TransactionAttributeType.NEVER)
 	public void schedule2()
@@ -102,7 +101,7 @@ public class AsyncTimerService {
 		}
 	}
 
-	@Schedule(minute="*/5",hour="7-20",persistent=false)
+//	@Schedule(minute="*/5",hour="7-20",persistent=false)
 	@Lock(LockType.READ)
 	@TransactionAttribute(TransactionAttributeType.NEVER)
 	public void schedule3()

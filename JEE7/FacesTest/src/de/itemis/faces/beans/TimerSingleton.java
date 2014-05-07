@@ -86,7 +86,7 @@ public class TimerSingleton
 			}
 			catch (IOException e)
 			{
-//				log.error(info.toString() + ": " + e);
+//				log.log(Level.SEVERE, info.toString() + ": " + e);
 			}
 		}
 	}

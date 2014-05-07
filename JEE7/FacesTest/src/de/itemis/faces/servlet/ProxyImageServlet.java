@@ -5,6 +5,8 @@ package de.itemis.faces.servlet;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -13,8 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jboss.resteasy.util.HttpResponseCodes;
 
 import de.itemis.faces.beans.TimerSingleton;
@@ -23,7 +23,7 @@ import de.itemis.faces.beans.TimerSingleton;
 public class ProxyImageServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
-	private static final Log  log    = LogFactory.getLog(ImageServlet.class);
+	private static final Logger  log    = Logger.getLogger(ImageServlet.class.getName());
 
 	@EJB
 	private TimerSingleton singleton;
@@ -33,7 +33,7 @@ public class ProxyImageServlet extends HttpServlet
 			HttpServletRequest  request,
 			HttpServletResponse response) throws ServletException, IOException
 	{
-		log.trace(">service()");
+		log.log(Level.FINER, ">service()");
 		try
 		{
 			final String parameter = request.getParameter("cam");
@@ -51,6 +51,6 @@ public class ProxyImageServlet extends HttpServlet
 		{
 			response.sendError(HttpResponseCodes.SC_NOT_FOUND);
 		}
-		log.trace("<service()");
+		log.log(Level.FINER, "<service()");
 	}
 }

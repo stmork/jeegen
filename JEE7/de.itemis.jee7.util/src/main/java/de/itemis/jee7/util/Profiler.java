@@ -8,15 +8,20 @@ import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.annotation.Priority;
 import javax.interceptor.AroundInvoke;
+import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
 /**
- * This method implements a logging profiler which can be used as and EJB SessionBean interceptor.
+ * This method implements a logging profiler which can be used as and EJB SessionBean {@link Interceptor}.
  * 
  * @author sm
  *
  */
+@Profiled
+@Interceptor
+@Priority(Interceptor.Priority.APPLICATION+1)
 public class Profiler implements Serializable
 {
 	private final static long    serialVersionUID = 1L;
@@ -25,24 +30,26 @@ public class Profiler implements Serializable
 
 	/**
 	 * The profiling method. It prints the call with its objects and the return of the method with
-	 * the resulting object. Furthermore it counts the comsumed time of the called method. The method
-	 * calling is done in a performant way. If debug logging is not enabled no logging and time stopping
+	 * the resulting object. Furthermore it counts the consumed time of the called method. The method
+	 * calling is done in a performing way. If debug logging is not enabled no logging and time stopping
 	 * occur.
 	 * 
 	 * @param invocation The invocation context.
 	 * @return The result object of the called method.
-	 * @throws Exception The throwed exception of the called method.
+	 * @throws Exception The thrown exception of the called method.
 	 */
 	@AroundInvoke
 	public Object profile (InvocationContext invocation) throws Exception
 	{
 		if (isVerbose())
 		{
-			final  Logger log    = Logger.getLogger(invocation.getTarget().getClass().getName());
-			final  String method = invocation.getMethod().getName();
-			Object        result = null;
-	
-			LogUtil.debug(log, "  >%s(%s)", method, listParams(invocation.getParameters()));
+			final  String method  = invocation.getMethod().getName();
+			final  String clsName = invocation.getTarget().getClass().getName().split("\\$")[0];
+			final  String space   = space(clsName);
+			final  Logger log     = Logger.getLogger(clsName);
+			Object        result  = null;
+
+			LogUtil.debug(log, "%s>%s(%s)", space, method, listParams(invocation.getParameters()));
 
 			final long start  = System.currentTimeMillis();
 			try
@@ -52,7 +59,7 @@ public class Profiler implements Serializable
 			}
 			catch(Exception e)
 			{
-				LogUtil.error(log, "!  %s() - %s", method, e.getMessage());
+				LogUtil.error(log, "!%s%s() - %s", space, method, e.getMessage());
 				throw e;
 			}
 			finally
@@ -61,7 +68,7 @@ public class Profiler implements Serializable
 
 				StringBuffer buffer = new StringBuffer();
 
-				buffer.append("  <").append(method).append("(...)");
+				buffer.append(space).append("<").append(method).append("(...)");
 				if (result != null)
 				{
 					String resultText = result.toString();
@@ -85,6 +92,19 @@ public class Profiler implements Serializable
 		{
 			return invocation.proceed();
 		}
+	}
+
+	private static String space(final String className)
+	{
+		if (className.contains("Dao"))
+		{
+			return "    ";
+		}
+		else if (className.contains("Handler"))
+		{
+			return "  ";
+		}
+		return "";
 	}
 
 	/**
@@ -155,12 +175,12 @@ public class Profiler implements Serializable
 	}
 
 	/**
-	 * This method computes the comsumed time measured as milliseconds and formats a {@link String} for
+	 * This method computes the consumed time measured as milliseconds and formats a {@link String} for
 	 * logging.
 	 * 
 	 * @param start The start point just before method calling.
 	 * @param end The end point just after returning from method call.
-	 * @return The formatted {@link String} of the comsumed time. 
+	 * @return The formatted {@link String} of the consumed time. 
 	 */
 	private static String time(final long start, final long end)
 	{

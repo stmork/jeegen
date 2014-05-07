@@ -6,39 +6,38 @@ package de.itemis.faces.servlet;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * This class is a request wrapper for usual request. It is like a loopback request for testing purposes.
  */
 public class SimpleRequestWrapper extends HttpServletRequestWrapper
 {
-	private final static Log log = LogFactory.getLog(MultipartRequestWrapper.class);
+	private final static Logger log = Logger.getLogger(MultipartRequestWrapper.class.getName());
 	private final Hashtable<String, String[]> params = new Hashtable<String, String[]>();
 
 	public SimpleRequestWrapper(HttpServletRequest request)
 	{
 		super(request);
-		log.debug(">SimpleRequestWrapper()");
+		log.log(Level.FINE, ">SimpleRequestWrapper()");
 		for (Map.Entry<String, String[]> entry : super.getParameterMap().entrySet())
 		{
 			params.put(entry.getKey(), entry.getValue());
 			
-			if (log.isDebugEnabled())
+			if (log.isLoggable(Level.FINE))
 			{
-				log.debug("   " + entry.getKey());
+				log.log(Level.FINE, "   " + entry.getKey());
 				for (String value : entry.getValue())
 				{
-					log.debug("      [" + value + "]");
+					log.log(Level.FINE, "      [" + value + "]");
 				}
 			}
 		}
-		log.debug("<SimpleRequestWrapper()");
+		log.log(Level.FINE, "<SimpleRequestWrapper()");
 	}
 
 	@Override

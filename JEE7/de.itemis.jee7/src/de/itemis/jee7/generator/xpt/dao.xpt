@@ -26,11 +26,10 @@
 package «daoPackageOf(this)»;
 
 import javax.ejb.Stateless;
-import javax.interceptor.Interceptors;
-import de.itemis.jee7.util.Profiler;
+import de.itemis.jee7.util.Profiled;
 
 @Stateless
-@Interceptors(Profiler.class)
+@Profiled
 public class «daoOf(this)» extends
 «IF hasAbstractDao()»
 «abstractDaoOf(this)»
@@ -267,8 +266,7 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel()
 package «daoPackageOf(this)»;
 
 import javax.ejb.Stateless;
-import javax.interceptor.Interceptors;
-import de.itemis.jee7.util.Profiler;
+import de.itemis.jee7.util.Profiled;
 
 /**
  * This session bean implementation handles the database operations of the following option beans:
@@ -279,7 +277,7 @@ import de.itemis.jee7.util.Profiler;
  * </ul>
  */  
 @Stateless
-@Interceptors(Profiler.class)
+@Profiled
 public class «daoOf(this)» extends «abstractDaoOf(this)»
 {
 }
