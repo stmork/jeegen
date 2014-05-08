@@ -79,8 +79,7 @@ public class Download implements Serializable
 	 * @throws IOException Thrown if womething went wrong.
 	 */
 	public byte[] downloadArray() throws IOException
-    {
-		InputStream is = null;
+	{
 		byte [] array = empty;
 		mimeType = null;
 
@@ -88,9 +87,8 @@ public class Download implements Serializable
 		final URLConnection connection = url.openConnection();
 		connection.setReadTimeout(getTimeout());
 
-		try
+		try(InputStream is = connection.getInputStream())
 		{
-			is = connection.getInputStream();
 			final int len = connection.getContentLength();
 
 			if (len > 0)
@@ -115,25 +113,22 @@ public class Download implements Serializable
 			}
 			else
 			{
-				ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-				array = new byte[32768];
-				int rLen;
-				
-				while ((rLen = is.read(array, 0, array.length)) >= 0)
+				try(ByteArrayOutputStream baos = new ByteArrayOutputStream())
 				{
-					baos.write(array, 0, rLen);
+					array = new byte[32768];
+					int rLen;
+
+					while ((rLen = is.read(array, 0, array.length)) >= 0)
+					{
+						baos.write(array, 0, rLen);
+					}
+					array = baos.toByteArray();
 				}
-				array = baos.toByteArray();
 			}
 			mimeType = array.length > 0 ? connection.getContentType() : null;
 		}
 		finally
 		{
-			if (is != null)
-			{
-				is.close();
-			}
 			LogUtil.trace(log, "<download(..) = %s", array != null);
 		}
 		return array;

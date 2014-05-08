@@ -1062,8 +1062,8 @@ abstract public class «abstractApplicationController()» implements Serializabl
 «EXPAND utility::HeaderImpl»
 package «controllerPackageOf()»;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 import «fqAbstractHandlerOf()»;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -1072,7 +1072,7 @@ import de.itemis.jee7.util.LogUtil;
 /**
  * This managed bean class handles some session tasks.
  */
-@ManagedBean
+@Named
 @SessionScoped
 public class «sessionController()» extends «abstractHandlerOf()»
 {
