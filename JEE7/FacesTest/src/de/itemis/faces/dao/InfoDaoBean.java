@@ -12,5 +12,6 @@ import de.itemis.jee7.util.Profiler;
 
 @Stateless
 @Interceptors(Profiler.class)
-public class InfoDaoBean extends AbstractInfoDaoBean {
+public class InfoDaoBean extends AbstractInfoDaoBean
+{
 }

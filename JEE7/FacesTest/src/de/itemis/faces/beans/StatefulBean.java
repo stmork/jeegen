@@ -16,6 +16,7 @@ import javax.ejb.PostActivate;
 import javax.ejb.PrePassivate;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
+import javax.inject.Inject;
 
 import de.itemis.jee7.util.LogUtil;
 import de.itemis.jee7.util.Profiled;
@@ -25,7 +26,9 @@ import de.itemis.jee7.util.Profiled;
 public class StatefulBean implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	private final static Logger log = Logger.getLogger(StatefulBean.class.getName());
+
+	@Inject
+	private Logger log;
 
 	@PostConstruct
 	public void init()

@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
@@ -17,8 +18,10 @@ import javax.servlet.http.HttpServletRequestWrapper;
  */
 public class SimpleRequestWrapper extends HttpServletRequestWrapper
 {
-	private final static Logger log = Logger.getLogger(MultipartRequestWrapper.class.getName());
 	private final Hashtable<String, String[]> params = new Hashtable<String, String[]>();
+
+	@Inject
+	private Logger log;
 
 	public SimpleRequestWrapper(HttpServletRequest request)
 	{

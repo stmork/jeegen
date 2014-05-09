@@ -15,6 +15,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import de.itemis.faces.dao.SessionDaoBean;
@@ -30,7 +31,9 @@ import de.itemis.jee7.util.Profiled;
 public class SessionInfo extends AbstractHandler
 {
 	private static final long serialVersionUID = 1L;
-	private static final Logger log = Logger.getLogger(SessionInfo.class.getName());
+
+	@Inject
+	private Logger log;
 
 	@EJB
 	private SessionDaoBean dao;

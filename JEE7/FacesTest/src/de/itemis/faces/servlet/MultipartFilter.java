@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.inject.Inject;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -27,7 +28,8 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 @WebFilter(urlPatterns = { "/admin/*" })
 public class MultipartFilter implements Filter
 {
-	private final static Logger log = Logger.getLogger(MultipartFilter.class.getName());
+	@Inject
+	private Logger log;
 
 	@Override
 	public void init(FilterConfig arg0) throws ServletException

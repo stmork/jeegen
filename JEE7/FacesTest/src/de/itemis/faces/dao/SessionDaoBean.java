@@ -13,6 +13,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.interceptor.Interceptors;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -32,7 +33,8 @@ import de.itemis.jee7.util.Profiler;
 @Interceptors(Profiler.class)
 public class SessionDaoBean
 {
-	private final static Logger log = Logger.getLogger(SessionDaoBean.class.getName());
+	@Inject
+	private Logger log;
 
 	@PersistenceContext(unitName="facesDS")
 	EntityManager em;

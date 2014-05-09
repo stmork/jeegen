@@ -52,6 +52,12 @@ String abstractApplicationControllerFilename(Model m) :
 
 String sessionControllerFilename(Model m) :
 	fqSessionController(m).replaceAll("\\.", "/") + ".java";
+
+String producerFilename(Model m) :
+	fqProducer(m).replaceAll("\\.", "/") + ".java";
+
+String abstractProducerFilename(Model m) :
+	fqAbstractProducer(m).replaceAll("\\.", "/") + ".java";
 	
 String getterOf(jee7::Boolean t) :
 	"is" + nameOf(t).toFirstUpper();

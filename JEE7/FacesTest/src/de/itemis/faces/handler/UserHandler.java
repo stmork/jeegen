@@ -14,6 +14,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -47,7 +48,10 @@ import de.itemis.jee7.util.Profiled;
 public class UserHandler extends AbstractHandler
 {
 	private static final long serialVersionUID = 1L;
-	private final static Logger log = Logger.getLogger(UserHandler.class.getName());
+//	private final static Logger log = Logger.getLogger(UserHandler.class.getName());
+
+	@Inject
+	private Logger log;
 
 	@EJB
 	private AdminDaoBean dao;

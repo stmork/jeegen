@@ -7,6 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.naming.NamingException;
 import javax.naming.directory.Attributes;
@@ -28,7 +29,9 @@ import de.itemis.jee7.util.Profiled;
 public class SessionController extends AbstractHandler
 {
 	private static final long serialVersionUID = 1L;
-	private static final Logger  log = Logger.getLogger(SessionController.class.getName());
+
+	@Inject
+	private Logger  log;
 
 	@EJB
 	private SessionDaoBean dao;
