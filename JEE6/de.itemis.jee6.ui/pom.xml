@@ -4,11 +4,12 @@
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>de.itemis.jee6</groupId>
-		<artifactId>de.itemis.jee6.releng</artifactId>
-		<version>1.1.8-SNAPSHOT</version>
-		<relativePath>../de.itemis.jee6.releng/pom.xml</relativePath>
+		<groupId>de.itemis.jee</groupId>
+		<artifactId>de.itemis.jee.releng</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../../Updatesite/de.itemis.jee.releng/pom.xml</relativePath>
 	</parent>
+
 	<name>JEE6 DSL UI</name>
 	<artifactId>de.itemis.jee6.ui</artifactId>
 	<groupId>de.itemis.jee6</groupId>
@@ -57,4 +58,5 @@
 			</plugin>
 		</plugins>
 	</build>
+	<version>1.1.8-SNAPSHOT</version>
 </project>

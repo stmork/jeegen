@@ -17,7 +17,7 @@ das Logging entsprechend verschärft.
 table[
 	tr[
 		td[]
-		td[Datei]
+		td[e[Datei]]
 		td[code[JEELANG][development]]
 		td[code[JEELANG][integration]]
 		td[code[JEELANG][productive]]
@@ -31,14 +31,14 @@ table[
 	]
 	tr[
 		td[Property hibernate.show_sql]
-		td[res-ren/WEB-INF/classes/META-INF/persistence.xml]
+		td[e[res-gen/WEB-INF/classes/META-INF/persistence.xml]]
 		td[true]
 		td[false]
 		td[false]
 	]
 	tr[
 		td[Property eclipselink.logging.level]
-		td[e[res-ren/WEB-INF/classes/META-INF/persistence.xml]]
+		td[e[res-gen/WEB-INF/classes/META-INF/persistence.xml]]
 		td[DEBUG]
 		td[INFO]
 		td[INFO]
