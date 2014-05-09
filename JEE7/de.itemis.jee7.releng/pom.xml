@@ -11,10 +11,8 @@
 
 	<modules>
 		<module>../de.itemis.jee7</module>
-		<!-- <module>../de.itemis.jee7.util</module> -->
 		<module>../de.itemis.jee7.ui</module>
 		<module>../de.itemis.jee7.feature</module>
-		<module>../de.itemis.jee7.updatesite</module>
 		<module>../de.itemis.jee7.doc</module>
 	</modules>
 
