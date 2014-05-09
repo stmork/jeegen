@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<site>
-   <description name="JEE Generator Update Site" url="http://www.jee-generator.de/updates/kepler">
-      
-   </description>
-   <feature url="features/de.itemis.jee7.feature_1.0.0.qualifier.jar" id="de.itemis.jee7.feature" version="1.0.0.qualifier"/>
-</site>

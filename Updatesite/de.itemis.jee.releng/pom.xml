@@ -2,19 +2,12 @@
 <project
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<name>JEE6 DSL Releng</name>
+	<name>JEE7 DSL Releng</name>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>de.itemis.jee6</groupId>
-	<artifactId>de.itemis.jee6.releng</artifactId>
-	<version>1.1.8-SNAPSHOT</version>
+	<groupId>de.itemis.jee</groupId>
+	<artifactId>de.itemis.jee.releng</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-
-	<modules>
-		<module>../de.itemis.jee6</module>
-		<module>../de.itemis.jee6.ui</module>
-		<module>../de.itemis.jee6.feature</module>
-		<module>../de.itemis.jee6.doc</module>
-	</modules>
 
 	<!-- this is the parent POM from which all modules inherit common settings -->
 	<properties>
@@ -22,8 +15,21 @@
 		<tycho-extras-version>0.19.0</tycho-extras-version>
 		<antrun-version>1.6</antrun-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jee6.utils.version>1.1.7</jee6.utils.version>
+		<jee7.utils.version>1.0.0</jee7.utils.version>
 	</properties>
+
+	<modules>
+		<module>../../JEE7/de.itemis.jee7</module>
+		<module>../../JEE7/de.itemis.jee7.ui</module>
+		<module>../../JEE7/de.itemis.jee7.feature</module>
+		<module>../../JEE7/de.itemis.jee7.doc</module>
+		<module>../../JEE6/de.itemis.jee6</module>
+		<module>../../JEE6/de.itemis.jee6.ui</module>
+		<module>../../JEE6/de.itemis.jee6.feature</module>
+		<module>../../JEE6/de.itemis.jee6.doc</module>
+		<module>../de.itemis.jee.updatesite</module>
+	</modules>
+
 	<build>
 		<!--resources> <resource> <directory> [your folder here] </directory> </resource> 
 			</resources -->
@@ -115,8 +121,8 @@
 					<version>${tycho-version}</version>
 					<configuration>
 						<encoding>UTF-8</encoding>
-						<source>6.0</source>
-						<target>6.0</target>
+						<source>7.0</source>
+						<target>7.0</target>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -127,25 +133,6 @@
 						<encoding>UTF-8</encoding>
 					</configuration>
 				</plugin>
-				<!-- <plugin> -->
-				<!-- <groupId>org.codehaus.mojo</groupId> -->
-				<!-- <artifactId>build-helper-maven-plugin</artifactId> -->
-				<!-- <version>1.3</version> -->
-				<!-- <executions> -->
-				<!-- <execution> -->
-				<!-- <id>add-source</id> -->
-				<!-- <phase>generate-sources</phase> -->
-				<!-- <goals> -->
-				<!-- <goal>add-source</goal> -->
-				<!-- </goals> -->
-				<!-- <configuration> -->
-				<!-- <sources> -->
-				<!-- <source>${project.build.directory}/xtend-gen</source> -->
-				<!-- </sources> -->
-				<!-- </configuration> -->
-				<!-- </execution> -->
-				<!-- </executions> -->
-				<!-- </plugin> -->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-clean-plugin</artifactId>
@@ -249,7 +236,6 @@
 	<profiles>
 		<profile>
 			<id>luna</id>
-
 			<properties>
 				<target.eclipse.version>Luna</target.eclipse.version>
 			</properties>
@@ -257,6 +243,7 @@
 			<activation>
 				<activeByDefault>false</activeByDefault>
 			</activation>
+
 			<repositories>
 				<repository>
 					<id>jee6-target</id>
@@ -325,7 +312,7 @@
 			</activation>
 			<repositories>
 				<repository>
-					<id>jee6-target</id>
+					<id>jee7-target</id>
 					<layout>p2</layout>
 					<url>http://download.eclipse.org/releases/kepler</url>
 				</repository>
