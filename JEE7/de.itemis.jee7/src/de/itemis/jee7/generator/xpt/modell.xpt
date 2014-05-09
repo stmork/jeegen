@@ -5,6 +5,14 @@
 
 «IMPORT jee7»
 
+«EXTENSION de::itemis::jee7::generator::ext::bundle»
+«EXTENSION de::itemis::jee7::generator::ext::entity»
+«EXTENSION de::itemis::jee7::generator::ext::model»
+«EXTENSION de::itemis::jee7::generator::ext::naming»
+«EXTENSION de::itemis::jee7::generator::ext::types»
+«EXTENSION de::itemis::jee7::generator::ext::dao»
+«EXTENSION de::itemis::jee7::generator::ext::ui»
+
 «DEFINE Main FOR Model»
 «EXPAND descriptor::Main»
 «EXPAND presentation::Main»
@@ -12,4 +20,219 @@
 «EXPAND handler::Main»
 «EXPAND dao::Main»
 «EXPAND entity::Main»
+«EXPAND ApplicationController»
+«EXPAND AbstractApplicationController»
+«EXPAND Producer»
+«EXPAND AbstractProducer»
+«EXPAND SessionController»
+«ENDDEFINE»
+
+«DEFINE ApplicationController FOR Model»
+«FILE applicationControllerFilename() IMPL»
+«EXPAND utility::HeaderImpl»
+package «controllerPackageOf()»;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
+
+import de.itemis.jee7.util.LogUtil;
+import javax.inject.Inject;
+
+/**
+ * This class initializes the web application application.
+ */
+@ManagedBean(eager=true)
+@ApplicationScoped
+public class «applicationController()» extends «abstractApplicationController()»
+{
+	private static final long   serialVersionUID = 1L;
+
+	@Inject
+	private Logger log;
+
+	/**
+	 * This method initializes this application. It logs the application banner.
+	 */
+	@PostConstruct
+	public void init()
+	{
+		log.log(Level.FINE, ">init()");
+		super.init();
+		log.log(Level.CONFIG, "\n" + LogUtil.banner("«versionBundle()»", "«name»"));
+		log.log(Level.FINE, "<init()");
+	}
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE AbstractApplicationController FOR Model»
+«FILE abstractApplicationControllerFilename()»
+«EXPAND utility::HeaderAbstract»
+package «controllerPackageOf()»;
+
+import java.io.Serializable;
+import javax.ejb.EJB;
+
+import «fqDaoOf(this)»;
+«FOREACH entities.typeSelect(Options).select(e|e.isEnumeration()) AS enumeration»
+import «fqTypeOf(enumeration)».«enumOf(enumeration)»;
+«ENDFOREACH»
+
+/**
+ * This class initializes the web application application.
+ */
+abstract public class «abstractApplicationController()» implements Serializable
+{
+	private static final long serialVersionUID = 1L;
+
+	@EJB
+	protected «daoOf(this)» options;
+
+	/**
+	 * This method initializes this application. It logs the application banner.
+	 */
+	protected void init()
+	{
+«FOREACH entities.typeSelect(Options).select(e|e.isEnumeration()) AS enumeration»
+«FOREACH enumeration.keys AS key»
+		options.ensure(«enumOf(enumeration)».«enumOf(key)», "«key.toLowerCase()»");
+«ENDFOREACH»
+«ENDFOREACH»
+	}
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE SessionController FOR Model»
+«FILE sessionControllerFilename() IMPL»
+«EXPAND utility::HeaderImpl»
+package «controllerPackageOf()»;
+
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
+import «fqAbstractHandlerOf()»;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import de.itemis.jee7.util.LogUtil;
+
+/**
+ * This managed bean class handles some session tasks.
+ */
+@Named
+@SessionScoped
+public class «sessionController()» extends «abstractHandlerOf()»
+{
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * This methods log out a logged in user.
+	 * 
+	 * @param request The {@link HttpServletRequest}.
+	 * @return The outcome of the start page of this application.
+	 * @throws ServletException
+	 */
+	public String logout(final HttpServletRequest request) throws ServletException
+	{
+		request.logout();
+		getExternalContext().invalidateSession();
+
+		return "/«index()»?faces-redirect=true";
+	}
+
+	/**
+	 * This method returns true if somebody is logged in.
+	 * 
+	 * @return True if somebody is logged in.
+	 */
+	public boolean isLoggedIn()
+	{
+		return getExternalContext().getRemoteUser() != null;
+	}
+	
+	/**
+	 * This method returns the clear name of the logged in user. If nobody is
+	 * logged in an appropriate message is returned.
+	 *  
+	 * @return The clear name of the logged in user.
+	 * @throws NamingException
+	 */
+	public String getName()
+	{
+		final String login = getExternalContext().getRemoteUser();
+
+		return login != null ? login : "<???>";
+	}
+	
+	/**
+	 * This method returns an caught exception.
+	 *
+	 * @return The caught exception.
+	 */
+	public Exception getException()
+	{
+		return (Exception) getExternalContext().getRequestMap().get("javax.servlet.error.exception");
+	}
+	
+	/**
+	 * This method returns the exceptions error message. If this message is empty the class name is used
+	 * as a key for obtaining the message from the error resource bundle.
+	 *  
+	 * @return The error message of the sessions exception.
+	 */
+	public String getExceptionMessage()
+	{
+		final Exception exception = getException();
+		
+		String message = exception.getMessage();
+		if (LogUtil.isEmpty(message))
+		{
+			message = getError(exception.getClass().getName());
+		}
+		return message;
+	}
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE AbstractProducer FOR Model»
+«FILE abstractProducerFilename()»
+«EXPAND utility::HeaderImpl»
+package «controllerPackageOf()»;
+
+import java.util.logging.Logger;
+import javax.enterprise.inject.spi.InjectionPoint;
+
+abstract public class «abstractProducer()»
+{
+	abstract public Logger produceLogger(final InjectionPoint injector);
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE Producer FOR Model»
+«FILE producerFilename() IMPL»
+«EXPAND utility::HeaderImpl»
+package «controllerPackageOf()»;
+
+import java.io.Serializable;
+import java.util.logging.Logger;
+
+import javax.enterprise.inject.Produces;
+import javax.enterprise.inject.spi.InjectionPoint;
+
+public class «producer()» extends «abstractProducer()» implements Serializable
+{
+	private static final long serialVersionUID = 1L;
+	@Produces
+	@Override
+	public Logger produceLogger(final InjectionPoint injector)
+	{
+		return Logger.getLogger(injector.getMember().getDeclaringClass().getName());
+	}
+}
+«ENDFILE»
 «ENDDEFINE»

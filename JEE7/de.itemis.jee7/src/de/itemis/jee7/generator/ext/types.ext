@@ -293,6 +293,12 @@ String abstractApplicationController(Model m) :
 String sessionController(Model m) :
 	"SessionController";
 
+String producer(Model m) :
+	"Producer";
+
+String abstractProducer(Model m) :
+	"AbstractProducer";
+
 String controllerPackageOf(Model m) :
 	m.package + ".beans";
 
@@ -304,6 +310,12 @@ String fqAbstractApplicationController(Model m) :
 
 String fqSessionController(Model m) :
 	controllerPackageOf(m)  + "." + sessionController(m);
+
+String fqProducer(Model m) :
+	controllerPackageOf(m)  + "." + producer(m);
+
+String fqAbstractProducer(Model m) :
+	controllerPackageOf(m)  + "." + abstractProducer(m);
 
 /*
  * Properties

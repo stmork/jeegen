@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +26,9 @@ import de.itemis.faces.entities.UserInfo;
 public class AvatarServlet extends HttpServlet
 {
 	private static final long   serialVersionUID = 1L;
-	private static final Logger log    = Logger.getLogger(AvatarServlet.class.getName());
+
+	@Inject
+	private Logger log;
 
 	@EJB
 	private SessionDaoBean dao;

@@ -11,6 +11,7 @@ import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.inject.Inject;
 import javax.persistence.Query;
 import javax.sql.DataSource;
 
@@ -26,7 +27,8 @@ import de.itemis.jee7.util.Profiled;
 @Profiled
 public class MultipleBean extends AbstractDaoBean
 {
-	private final static Logger log = Logger.getLogger(MultipleBean.class.getName());
+	@Inject
+	private Logger log;
 
 	@Resource(mappedName="java:/jdbc/minimalDS")
 	private DataSource ds; 

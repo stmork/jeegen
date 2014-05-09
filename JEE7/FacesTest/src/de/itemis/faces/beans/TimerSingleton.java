@@ -20,6 +20,7 @@ import javax.ejb.Startup;
 import javax.ejb.Timeout;
 import javax.ejb.Timer;
 import javax.ejb.TimerService;
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 
 import de.itemis.faces.DownloadInfo;
@@ -28,7 +29,8 @@ import de.itemis.faces.DownloadInfo;
 @Startup
 public class TimerSingleton
 {
-	private final static Logger log = Logger.getLogger(TimerSingleton.class.getName());
+	@Inject
+	private Logger log;
 
 	@Resource
 	private TimerService timerService;

@@ -13,6 +13,7 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.inject.Inject;
 
 import de.itemis.jee7.util.Profiled;
 
@@ -20,13 +21,14 @@ import de.itemis.jee7.util.Profiled;
 @Startup
 @Profiled
 public class AsyncTimerService {
-	private final static Logger log = Logger.getLogger(AsyncTimerService.class.getName());
 	private final AtomicBoolean semaphore = new AtomicBoolean(false);
 	private final String        LOCK_CODE = this.getClass().getSimpleName();
 
+	@Inject
+	private Logger log;
+
 	@EJB
 	private AtomicClusterLock atomicClusterLock;
-
 
 	@PostConstruct
 	public void init()

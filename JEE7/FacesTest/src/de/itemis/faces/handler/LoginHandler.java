@@ -4,6 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,9 +18,11 @@ import de.itemis.jee7.util.Profiled;
 public class LoginHandler extends AbstractHandler
 {
 	private static final long serialVersionUID = 1L;
-	private static final Logger log = Logger.getLogger(LoginHandler.class.getName());
 	private String login;
 	private String password;
+
+	@Inject
+	private Logger log;
 
 	public String getLogin() {
 		return login;

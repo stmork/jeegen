@@ -10,6 +10,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.inject.Inject;
 import javax.naming.directory.DirContext;
 
 import de.itemis.faces.dao.AdminDaoBean;
@@ -23,7 +24,9 @@ import de.itemis.jee7.util.Profiled;
 public class ApplicationController extends AbstractApplicationController
 {
 	private static final long serialVersionUID = 1L;
-	private final static Logger log = Logger.getLogger(ApplicationController.class.getName());
+
+	@Inject
+	private Logger log;
 
 	@EJB
 	private AdminDaoBean dao;
