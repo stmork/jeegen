@@ -117,6 +117,11 @@ class Download extends AbstractWebsite {
 					</tr>
 					<tr>
 						<td style="text-align: center;">
+							<a href="http://jee6-generator.itemis.de/updates/luna/" class="btn" style="width: 70%;">Luna</a>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align: center;">
 							<a href="http://jee6-generator.itemis.de/updates/snapshot/" class="btn" style="width: 70%;">Snapshot</a>
 						</td>
 					</tr>
