@@ -111,7 +111,7 @@ This Agreement is governed by the laws of the State of New York and the intellec
 
    <requires>
       <import plugin="de.morknet.oaw.dependencies" version="5.2.5" match="greaterOrEqual"/>
-      <import plugin="de.morknet.oaw.tools5" version="5.2.4" match="greaterOrEqual"/>
+      <import plugin="de.morknet.oaw.tools5" version="5.2.5" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtext"/>
       <import plugin="org.eclipse.xtext.util"/>
       <import plugin="org.eclipse.emf.ecore"/>
