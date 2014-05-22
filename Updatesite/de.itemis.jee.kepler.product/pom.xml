@@ -11,7 +11,7 @@
 
 	<artifactId>de.itemis.jee6.product</artifactId>
 
-	<name>JEE6 DSL Product</name>
+	<name>JEE DSL Product</name>
 
 	<properties>
 		<eclipse.server>https://master.itemis.de/software/Eclipse/4.3/</eclipse.server>
@@ -32,7 +32,7 @@
 		<eclipsesdk.linux>${eclipse.server}${eclipsesdk.linux.filename}.tar.gz</eclipsesdk.linux>
 		<eclipsesdk.linux.filename>eclipse-SDK-${eclipse.version}-linux-gtk-x86_64</eclipsesdk.linux.filename>
 		<eclipse.version>4.3.2</eclipse.version>
-		<appname>jee6-generator</appname>
+		<appname>jee-generator</appname>
 	</properties>
 
 	<build>
@@ -138,6 +138,7 @@
 									<!-- JEE6 Generator -->
 									<updatesite url="http://jee6-generator.itemis.de/updates/kepler/" />
 									<installunit name="de.itemis.jee6.feature.feature.group" />
+									<installunit name="de.itemis.jee7.feature.feature.group" />
 								</builder>
 								<!-- Linux -->
 								<move file="${project.build.directory}/dist/${eclipsesdk.linux.filename}-${appname}-${project.version}.tar.gz"
