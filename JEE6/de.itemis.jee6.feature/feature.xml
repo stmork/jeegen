@@ -6,7 +6,7 @@
       provider-name="itemis AG"
       plugin="de.itemis.jee6">
 
-   <description url="http://jee6-generator.itemis.de">
+   <description url="http://www.jee-generator.de">
       Dieses Feature ermöglicht das einfache Generieren einer JEE-basierten Webapplikation.
    </description>
 
@@ -105,13 +105,12 @@ This Agreement is governed by the laws of the State of New York and the intellec
    </license>
 
    <url>
-      <update label="JEE6 Generator Update Site" url="http://jee6-generator.itemis.de/updates/kepler"/>
-      <discovery label="JEE6 Generator Project Site" url="http://jee6-generator.itemis.de/"/>
+      <update label="JEE Generator Update Site" url="http://www.jee-generator.de/updates/kepler"/>
+      <discovery label="JEE Generator Project Site" url="http://www.jee-generator.de/"/>
    </url>
 
    <requires>
       <import plugin="de.morknet.oaw.dependencies" version="5.2.5" match="greaterOrEqual"/>
-      <import plugin="de.morknet.oaw.tools5" version="5.2.5" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtext"/>
       <import plugin="org.eclipse.xtext.util"/>
       <import plugin="org.eclipse.emf.ecore"/>
@@ -134,6 +133,7 @@ This Agreement is governed by the laws of the State of New York and the intellec
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.xtend"/>
       <import plugin="org.eclipse.xpand"/>
+      <import feature="de.morknet.oaw.tools5" version="5.2.5" match="greaterOrEqual"/>
    </requires>
 
    <plugin
