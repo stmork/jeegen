@@ -45,7 +45,7 @@
 								<artifactItem>
 									<groupId>de.itemis.jee7</groupId>
 									<artifactId>de.itemis.jee7.utils</artifactId>
-									<version>1.0.0</version>
+									<version>1.0.1</version>
 									<type>jar</type>
 									<overWrite>true</overWrite>
 									<outputDirectory>${basedir}/resources</outputDirectory>
