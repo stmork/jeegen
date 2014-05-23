@@ -111,6 +111,7 @@
 			</zipfileset>
 			<zipfileset dir="${src-path}">
 				<include name="**/*.java"/>
+				<include name="**/*.xml"/>
 				<exclude name="**/test/**/*.java"/>
 			</zipfileset>
 		</jar>
