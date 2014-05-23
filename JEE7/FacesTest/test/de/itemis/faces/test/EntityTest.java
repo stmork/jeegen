@@ -37,7 +37,7 @@ public class EntityTest {
 			set.add(new AddressOption(element));
 		}
 		Assert.assertEquals(values.length, set.size());
-		
+
 		for (AddressOption option : set)
 		{
 			System.out.println(option + "/" + option.getBundleKey());

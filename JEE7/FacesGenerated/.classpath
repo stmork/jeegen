@@ -13,5 +13,6 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/de.itemis.jee7.util"/>
+	<classpathentry kind="lib" path="src/main/resources/WEB-INF/lib/jee7-utils.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
