@@ -7,19 +7,17 @@
 
 package de.itemis.faces.handler;
 
+import java.util.List;
+
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.transaction.Transactional;
 import javax.transaction.Transactional.TxType;
 
-import de.itemis.jee7.util.Profiled;
-
-import java.io.Serializable;
-import java.util.List;
-
 import de.itemis.faces.entities.EntityEntry;
 import de.itemis.faces.entities.HistoryEntry;
 import de.itemis.faces.entities.Startup;
+import de.itemis.jee7.util.Profiled;
 
 /**
  * This managed bean class implements the action handling for the following entity beans:
@@ -33,7 +31,8 @@ import de.itemis.faces.entities.Startup;
 @SessionScoped
 @Transactional(value = TxType.REQUIRED)
 @Profiled
-public class InfoHandler extends AbstractInfoHandler implements Serializable{
+public class InfoHandler extends AbstractInfoHandler
+{
 	private static final long serialVersionUID = 1L;
 
 	private static final String NAV_INFO_ENTITYENTRY = "entityentry.xhtml";

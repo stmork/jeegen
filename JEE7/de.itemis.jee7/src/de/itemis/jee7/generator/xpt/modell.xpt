@@ -22,8 +22,6 @@
 «EXPAND entity::Main»
 «EXPAND ApplicationController»
 «EXPAND AbstractApplicationController»
-«EXPAND Producer»
-«EXPAND AbstractProducer»
 «EXPAND SessionController»
 «ENDDEFINE»
 
@@ -117,6 +115,9 @@ import javax.inject.Named;
 import «fqAbstractHandlerOf()»;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
+import de.itemis.jee7.util.Profiled;
 import de.itemis.jee7.util.LogUtil;
 
 /**
@@ -124,6 +125,8 @@ import de.itemis.jee7.util.LogUtil;
  */
 @Named
 @SessionScoped
+@Transactional(value=TxType.REQUIRED)
+@Profiled
 public class «sessionController()» extends «abstractHandlerOf()»
 {
 	private static final long serialVersionUID = 1L;
@@ -193,45 +196,6 @@ public class «sessionController()» extends «abstractHandlerOf()»
 			message = getError(exception.getClass().getName());
 		}
 		return message;
-	}
-}
-«ENDFILE»
-«ENDDEFINE»
-
-«DEFINE AbstractProducer FOR Model»
-«FILE abstractProducerFilename()»
-«EXPAND utility::HeaderImpl»
-package «controllerPackageOf()»;
-
-import java.util.logging.Logger;
-import javax.enterprise.inject.spi.InjectionPoint;
-
-abstract public class «abstractProducer()»
-{
-	abstract public Logger produceLogger(final InjectionPoint injector);
-}
-«ENDFILE»
-«ENDDEFINE»
-
-«DEFINE Producer FOR Model»
-«FILE producerFilename() IMPL»
-«EXPAND utility::HeaderImpl»
-package «controllerPackageOf()»;
-
-import java.io.Serializable;
-import java.util.logging.Logger;
-
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.InjectionPoint;
-
-public class «producer()» extends «abstractProducer()» implements Serializable
-{
-	private static final long serialVersionUID = 1L;
-	@Produces
-	@Override
-	public Logger produceLogger(final InjectionPoint injector)
-	{
-		return Logger.getLogger(injector.getMember().getDeclaringClass().getName());
 	}
 }
 «ENDFILE»
