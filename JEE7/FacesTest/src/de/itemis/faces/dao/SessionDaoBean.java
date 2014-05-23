@@ -14,7 +14,6 @@ import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.interceptor.Interceptors;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -27,10 +26,10 @@ import javax.persistence.TypedQuery;
 
 import de.itemis.faces.entities.UserInfo;
 import de.itemis.jee7.util.DateTimeUtil;
-import de.itemis.jee7.util.Profiler;
+import de.itemis.jee7.util.Profiled;
 
 @Stateless
-@Interceptors(Profiler.class)
+@Profiled
 public class SessionDaoBean
 {
 	@Inject
