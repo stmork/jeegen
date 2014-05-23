@@ -11,15 +11,14 @@ import java.util.logging.Logger;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
 
 import org.apache.commons.io.IOUtils;
 
@@ -45,6 +44,7 @@ import de.itemis.jee7.util.Profiled;
 @SessionScoped
 @Profiled
 @RolesAllowed(value="admin")
+@Transactional(value = TxType.REQUIRED)
 public class UserHandler extends AbstractHandler
 {
 	private static final long serialVersionUID = 1L;
@@ -56,57 +56,43 @@ public class UserHandler extends AbstractHandler
 	@EJB
 	private AdminDaoBean dao;
 
-	@ManagedProperty(value="#{sessionInfo}")
+	@Inject
 	private SessionInfo sessionInfo;
 
-	@ManagedProperty(value="#{adminHandler}")
+	@Inject
 	private AdminHandler adminHandler;
 
-	public SessionInfo getSessionInfo() {
-		return sessionInfo;
-	}
-	public void setSessionInfo(SessionInfo sessionInfo) {
-		this.sessionInfo = sessionInfo;
-	}
+	private Part image;
 
-	
-	public AdminHandler getAdminHandler() {
-		return adminHandler;
+	public Part getImage()
+	{
+		return this.image;
 	}
-	public void setAdminHandler(AdminHandler adminHandler) {
-		this.adminHandler = adminHandler;
+	
+	public void setImage(final Part image)
+	{
+		this.image = image;
 	}
 
 	public String change()
 	{
 		log.log(Level.FINE, ">change");
-		UserInfo user = getSessionInfo().getUser();
+		UserInfo user = sessionInfo.getUser();
 
-		/*
-		 * This extracts an avatar image from the request. The image is stored via the <input type="file"> tag.
-		 */
-		HttpServletRequest req = (HttpServletRequest)getExternalContext().getRequest();
 		try
 		{
-			// The method getPart() is part of the servlet 3.0 specification.
-			final Part part = req.getPart("image");
-			
-			if ((part != null) && (part.getSize() > 0))
+			if ((image != null) && (image.getSize() > 0))
 			{
-				user.setImage(IOUtils.toByteArray(part.getInputStream()));
+				user.setImage(IOUtils.toByteArray(image.getInputStream()));
 			}
 		}
 		catch (IOException e)
 		{
 			log.log(Level.FINE, e.toString());
 		}
-		catch (ServletException e)
-		{
-			log.log(Level.FINE, e.toString());
-		}
 
 		user = dao.updateUserInfo(user);
-		getSessionInfo().setUser(user);
+		sessionInfo.setUser(user);
 		log.log(Level.FINE, "<change");
 		return "/index.xhtml";
 	}
@@ -172,15 +158,15 @@ public class UserHandler extends AbstractHandler
 
 	public List<Address> getAddressList()
 	{
-		return dao.getAddressList(getSessionInfo().getUser());
+		return dao.getAddressList(sessionInfo.getUser());
 	}
-	
+
 	public String addAddress()
 	{
 		log.log(Level.FINE, ">addAddress");
-		UserInfo user = getSessionInfo().getUser();
+		UserInfo user = sessionInfo.getUser();
 		Address address = dao.addToUserInfo(user, new Address());
-		getAdminHandler().setAddress(address);
+		adminHandler.setAddress(address);
 		log.log(Level.FINE, "<addAddress");
 		return "address.xhtml";
 	}
@@ -188,16 +174,16 @@ public class UserHandler extends AbstractHandler
 	public String editAddress(final Address address)
 	{
 		log.log(Level.FINE, ">editAddress");
-		getAdminHandler().setAddress(address);
+		adminHandler.setAddress(address);
 		log.log(Level.FINE, "<editAddress");
 		return "address.xhtml";
 	}
-	
+
 	public String removeAddress(final Address address)
 	{
 		log.log(Level.FINE, ">removeAddress");
 		UserInfo user = dao.deleteFromUserInfo(address);
-		getSessionInfo().setUser(user);
+		sessionInfo.setUser(user);
 		log.log(Level.FINE, "<removeAddress");
 		return "index.xhtml";
 	}

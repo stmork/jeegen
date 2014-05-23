@@ -6,12 +6,11 @@
 package de.itemis.faces.dao;
 
 import javax.ejb.Stateless;
-import javax.interceptor.Interceptors;
 
-import de.itemis.jee7.util.Profiler;
+import de.itemis.jee7.util.Profiled;
 
 @Stateless
-@Interceptors(Profiler.class)
+@Profiled
 public class InfoDaoBean extends AbstractInfoDaoBean
 {
 }

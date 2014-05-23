@@ -11,6 +11,8 @@ import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
 
 import de.itemis.faces.entities.Address;
 import de.itemis.faces.entities.UserInfo;
@@ -29,6 +31,7 @@ import de.itemis.jee7.util.Profiled;
 @Named
 @SessionScoped
 @Profiled
+@Transactional(value = TxType.REQUIRED)
 public class AdminHandler extends AbstractAdminHandler {
 	private static final long serialVersionUID = 1L;
 

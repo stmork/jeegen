@@ -8,6 +8,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
 
 import de.itemis.jee7.util.LogUtil;
 import de.itemis.jee7.util.Profiled;
@@ -15,6 +17,7 @@ import de.itemis.jee7.util.Profiled;
 @Named
 @RequestScoped
 @Profiled
+@Transactional(value = TxType.REQUIRED)
 public class LoginHandler extends AbstractHandler
 {
 	private static final long serialVersionUID = 1L;

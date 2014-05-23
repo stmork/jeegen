@@ -11,23 +11,24 @@ import javax.annotation.PreDestroy;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
 
 import de.itemis.faces.dao.SessionDaoBean;
 import de.itemis.faces.entities.UserInfo;
 import de.itemis.faces.handler.AbstractHandler;
-import de.itemis.faces.handler.AdminHandler;
 import de.itemis.jee7.util.Profiled;
 
 @Named
 @SessionScoped
 @Profiled
 @RolesAllowed(value="admin")
+@Transactional(value = TxType.REQUIRED)
 public class SessionInfo extends AbstractHandler
 {
 	private static final long serialVersionUID = 1L;
@@ -40,9 +41,6 @@ public class SessionInfo extends AbstractHandler
 
 	@EJB
 	private StatefulBean bean;
-
-	@ManagedProperty(value="#{addressInfo}")
-	private AdminHandler addressInfo;
 
 	private UserInfo user;
 
@@ -91,14 +89,6 @@ public class SessionInfo extends AbstractHandler
 			throws ValidatorException
 	{
 		log.log(Level.FINE, " validateMail() " + getUser());
-	}
-
-	public AdminHandler getAddressInfo() {
-		return addressInfo;
-	}
-
-	public void setAddressInfo(AdminHandler addressInfo) {
-		this.addressInfo = addressInfo;
 	}
 
 	public String testMail()

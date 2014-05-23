@@ -7,6 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.naming.NamingException;
@@ -14,6 +15,8 @@ import javax.naming.directory.Attributes;
 import javax.naming.directory.DirContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
 
 import de.itemis.faces.LdapClient;
 import de.itemis.faces.dao.InfoDaoBean;
@@ -25,7 +28,9 @@ import de.itemis.jee7.util.LogUtil;
 import de.itemis.jee7.util.Profiled;
 
 @Named
+@SessionScoped
 @Profiled
+@Transactional(value = TxType.REQUIRED)
 public class SessionController extends AbstractHandler
 {
 	private static final long serialVersionUID = 1L;
