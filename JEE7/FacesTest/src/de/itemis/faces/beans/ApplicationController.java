@@ -50,7 +50,7 @@ public class ApplicationController extends AbstractApplicationController
 			LogUtil.debug(log, " baseDN     = %s", dao.getLdapBaseDN());
 			LogUtil.debug(log, " productive = %s", info.isProductive());
 			LogUtil.debug(log, " namespace  = %s", ns);
-	
+
 			super.init();
 			multiple.xaAccess();
 			multiple.checkSsl();
