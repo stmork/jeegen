@@ -8,6 +8,7 @@
 		<li><h:link value="#{msg.main}"   outcome="/index.xhtml" /></li>
 		<ui:fragment rendered="#{sessionController.loggedIn}">
 			<li><h:link value="#{msg.change}" outcome="/admin/index.xhtml" /></li>
+			<li><h:link value="#{msg['info.title']}"   outcome="/info/index.xhtml" /></li>
 			<li><h:link value="#{msg.logout}" outcome="/logout.xhtml"/></li>
 		</ui:fragment>
 	</ul>

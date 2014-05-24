@@ -36,7 +36,7 @@ public class AvatarServlet extends HttpServlet
 	@Override
 	protected void service(
 			HttpServletRequest  request,
-    		HttpServletResponse response) throws ServletException, IOException
+			HttpServletResponse response) throws ServletException, IOException
 	{
 		log.log(Level.FINER, ">service()");
 		try

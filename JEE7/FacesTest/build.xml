@@ -119,13 +119,13 @@
 
 	<target name="-version">
 		<first id="version-file">
-		    <fileset dir="${basedir}/${src-path}" includes="**/version.properties" />
+			<fileset dir="${basedir}/${src-path}" includes="**/version.properties" />
 		</first>
 		<property file="${toString:version-file}" />
 		<echo message="Version: ${version.major}.${version.minor}.${version.patch}"/>
 	</target>
 
-	<target name="clean">
+		<target name="clean">
 		<delete file="${findbugs.results}"/>
 		<delete file="${war}" />
 		<delete dir="${bin-path}" />
