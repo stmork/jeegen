@@ -16,11 +16,9 @@ import javax.naming.directory.DirContext;
 import de.itemis.faces.dao.AdminDaoBean;
 import de.itemis.faces.dao.InfoDaoBean;
 import de.itemis.jee7.util.LogUtil;
-import de.itemis.jee7.util.Profiled;
 
 @ManagedBean(eager=true)
 @ApplicationScoped
-@Profiled
 public class ApplicationController extends AbstractApplicationController
 {
 	private static final long serialVersionUID = 1L;
