@@ -47,7 +47,7 @@
 	
 	<target name="-version">
 		<tstamp>
-			<format property="current.time" pattern="yyyyMMddhhmmss" />
+			<format property="current.time" pattern="yyyyMMddhhmm" />
 		</tstamp>
 		<loadproperties srcfile="${manifest}">
 			<filterchain>
