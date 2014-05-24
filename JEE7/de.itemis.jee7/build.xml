@@ -24,7 +24,7 @@
 			<include name="com.google.guava*.jar"/>
 			<include name="com.google.inject*.jar"/>
 			<include name="com.ibm.icu*.jar"/>
-			<include name="de.itemis.*.jar"/>
+			<include name="de.itemis.xtext.*.jar"/>
 			<include name="de.morknet.oaw.*.jar"/>
 			<include name="org.antlr.*.jar"/>
 			<include name="org.apache.commons.cli*.jar"/>
