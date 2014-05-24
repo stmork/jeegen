@@ -11,8 +11,8 @@
 <a name="Formularkontrolle"></a>
 <h1>Formularkontrolle</h1>
 <p>
-Neben der allgemeinen Beschreibung der Web Applikation und die Definition der Entity Beans im Modell gibt es als weiteren großen
-Block die Definition der Prozesse. Über Prozesse kann definiert werden, für welche Entity Beans Dialogmasken generiert werden
+Neben der allgemeinen Beschreibung der Web Applikation und die Definition der Entity Beans im Modell gibt es als weiteren groÃŸen
+Block die Definition der Prozesse. Ãœber Prozesse kann definiert werden, fÃ¼r welche Entity Beans Dialogmasken generiert werden
 sollen und bei Bedarf, welche Rollen darauf Zugriff haben darf. Die Syntax lautet:
 </p>
 <p>
@@ -20,14 +20,14 @@ sollen und bei Bedarf, welche Rollen darauf Zugriff haben darf. Die Syntax laute
 </p>
 <p>
 Der Name eines Prozesses taucht in der URI auf. Die URL ist dann wie folgt aufgebaut:
-http://&lt;host&gt;/&lt;context&gt;/&lt;process-name&gt;/&lt;entity&gt;.xhtml. Mit dem Schlüsselwort roles kann festgelegt werden, welche Rollen darauf
-Zugriff haben. Im Prozess können beliebig viele Properties untergebracht werden. Es handelt sich dabei um Werte, die im Application
-Server konfiguriert werden und per JDNI referenziert werden. Die Auflistung der Entity Beans führt dazu, dass die dafür nötigen
+http://&lt;host&gt;/&lt;context&gt;/&lt;process-name&gt;/&lt;entity&gt;.xhtml. Mit dem SchlÃ¼sselwort roles kann festgelegt werden, welche Rollen darauf
+Zugriff haben. Im Prozess kÃ¶nnen beliebig viele Properties untergebracht werden. Es handelt sich dabei um Werte, die im Application
+Server konfiguriert werden und per JDNI referenziert werden. Die Auflistung der Entity Beans fÃ¼hrt dazu, dass die dafÃ¼r nÃ¶tigen
 XHTML-Dateien generiert werden.
 </p>
 <p>
-Für jeden Prozess wird ein eigener Action Handler und ein eigenes DAO generiert. Hier werden die benötigten Zugriffsmethoden auf die
-konfigurierten Entity Beans und evtl. die benötigten Value Converter generiert. Die Ableitungshierarchie ist dreistufig:
+FÃ¼r jeden Prozess wird ein eigener Action Handler und ein eigenes DAO generiert. Hier werden die benÃ¶tigten Zugriffsmethoden auf die
+konfigurierten Entity Beans und evtl. die benÃ¶tigten Value Converter generiert. Die Ableitungshierarchie ist dreistufig:
 </p>
 <p>
 <ul>
@@ -64,7 +64,7 @@ konfigurierten Entity Beans und evtl. die benötigten Value Converter generiert. 
 </ul>
 </p>
 <p>
-In den Action Handlern werden für die XHTML-Dateien die Zugriffsmethoden bereitgestellt, die wiederum auf die dazugehörigen DAOs
+In den Action Handlern werden fÃ¼r die XHTML-Dateien die Zugriffsmethoden bereitgestellt, die wiederum auf die dazugehÃ¶rigen DAOs
 zugreifen. Veranschaulicht wird das anhand folgenden Beispielmodells, dass teilweise schon bei den <a href="Entity%20Beans.html#EntityBeans" title="Go to &quot;Entity Beans&quot;">Entity Beans</a> beschrieben wurde:
 <div class="literallayout">
 <div class="incode">
@@ -112,8 +112,8 @@ zugreifen. Veranschaulicht wird das anhand folgenden Beispielmodells, dass teilw
 <a name="GenerierteMethodenimActionHandler"></a>
 <h2>Generierte Methoden im Action Handler</h2>
 <p>
-Die Klasse AbstractUserHandler liefert für die Zugriffskontrolle die Methode isAllowed(), die in der XHTML verwendet werden kann. Da
-in diesem Falle keine Zugriffsberechtigungen auf Rollen beschränkt wurden, liefert diese Methode immer <span class="inlinecode"><span class="keyword">true</span></span> zurück. Ferner wird in
+Die Klasse AbstractUserHandler liefert fÃ¼r die Zugriffskontrolle die Methode isAllowed(), die in der XHTML verwendet werden kann. Da
+in diesem Falle keine Zugriffsberechtigungen auf Rollen beschrÃ¤nkt wurden, liefert diese Methode immer <span class="inlinecode"><span class="keyword">true</span></span> zurÃ¼ck. Ferner wird in
 diese Klasse eine Referenz auf das DAO UserDaoBean mit Namen dao vom Application Server injiziert:
 </p>
 <p>
@@ -127,8 +127,8 @@ diese Klasse eine Referenz auf das DAO UserDaoBean mit Namen dao vom Application
 </div>
 </p>
 <p>
-Für die Entity Bean Person soll ein XHTML-Formular generiert werden. Da in dieser Entity Bean eine 1:n-Relation auf die Entity Bean
-Address enthalten ist, werden die entsprechenden Zugriffsmethoden dafür gleich mit generiert. Die Methoden für die Klasse <em>Person</em> lauten:
+FÃ¼r die Entity Bean Person soll ein XHTML-Formular generiert werden. Da in dieser Entity Bean eine 1:n-Relation auf die Entity Bean
+Address enthalten ist, werden die entsprechenden Zugriffsmethoden dafÃ¼r gleich mit generiert. Die Methoden fÃ¼r die Klasse <em>Person</em> lauten:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
@@ -143,8 +143,8 @@ Address enthalten ist, werden die entsprechenden Zugriffsmethoden dafür gleich m
 </div>
 </p>
 <p>
-Der Action Handler <em>PersonHandler</em> ist Session scoped. Dadurch lässt sich der Zustand der Entity Bean <em>Person</em> speichern. Dadurch
-brauchen wir hierfür auch Zugriffsmethoden:
+Der Action Handler <em>PersonHandler</em> ist Session scoped. Dadurch lÃ¤sst sich der Zustand der Entity Bean <em>Person</em> speichern. Dadurch
+brauchen wir hierfÃ¼r auch Zugriffsmethoden:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
@@ -156,8 +156,8 @@ brauchen wir hierfür auch Zugriffsmethoden:
 </div>
 </p>
 <p>
-Auf die Implementierung wurde der Übersichtlichkeit halber verzichtet. Die Methode isPersonEmpty() wurde nur generiert, weil in der
-Entity Bean Person eine 1:n-Relation enthalten ist. Für die Klasse <em>Address</em> lauten die Zugriffsmethoden:
+Auf die Implementierung wurde der Ãœbersichtlichkeit halber verzichtet. Die Methode isPersonEmpty() wurde nur generiert, weil in der
+Entity Bean Person eine 1:n-Relation enthalten ist. FÃ¼r die Klasse <em>Address</em> lauten die Zugriffsmethoden:
 </p>
 <p>
 public Address getAddress();
@@ -180,8 +180,8 @@ public List&lt;Address&gt; getAddressList() {
 </div>
 </p>
 <p>
-Die entsprechenden Methoden werden im konkreten Action Handler implementiert und können nach Bedarf angepasst werden. Wäre im
-Modell für die 1:n-Relation eine History vermerkt, würde die Methode removeAddress() fehlen.
+Die entsprechenden Methoden werden im konkreten Action Handler implementiert und kÃ¶nnen nach Bedarf angepasst werden. WÃ¤re im
+Modell fÃ¼r die 1:n-Relation eine History vermerkt, wÃ¼rde die Methode removeAddress() fehlen.
 </p>
 <p>
 <em>Hinweis!</em>
@@ -190,8 +190,8 @@ Die Methoden- und Klassennamen werden aus den Namen der entsprechenden Attribute
 <a name="DiegeneriertenMethodenimDAO"></a>
 <h2>Die generierten Methoden im DAO</h2>
 <p>
-Der Action Handler nimmt von den XHTML-Seiten die Events entgegen. Das können Klick-Events, Links, Submits oder Validations sein.
-Für den Zugriff auf die Datenbank ist aber eine weitere Komponente notwendig. Diese DAOs sind als Stateless Session Beans
+Der Action Handler nimmt von den XHTML-Seiten die Events entgegen. Das kÃ¶nnen Klick-Events, Links, Submits oder Validations sein.
+FÃ¼r den Zugriff auf die Datenbank ist aber eine weitere Komponente notwendig. Diese DAOs sind als Stateless Session Beans
 implementiert. In das DAO werden Zugriffsmethoden auf die Datenbank generiert. Da jeder Prozess seinen eigenen Action Handler sowie
 sein eigenes DAO hat, kann das zum Action Handler passende DAO direkt in den Action Handler injiziert werden.
 <div class="literallayout">
@@ -206,7 +206,7 @@ sein eigenes DAO hat, kann das zum Action Handler passende DAO direkt in den Act
 </div>
 </p>
 <p>
-Da die Entity Bean <em>Person</em> eine 1:n-Relation enthält, sind auch entsprechende Methoden für das Hinzufügen und Entfernen aus der
+Da die Entity Bean <em>Person</em> eine 1:n-Relation enthÃ¤lt, sind auch entsprechende Methoden fÃ¼r das HinzufÃ¼gen und Entfernen aus der
 Relation vorhanden:
 <div class="literallayout">
 <div class="incode">
@@ -219,7 +219,7 @@ Relation vorhanden:
 </div>
 </p>
 <p>
-Die Methoden für die Entity Bean Address wird auch der Vollständigkeit halber aufgelistet:
+Die Methoden fÃ¼r die Entity Bean Address wird auch der VollstÃ¤ndigkeit halber aufgelistet:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
@@ -235,13 +235,13 @@ Die Methoden für die Entity Bean Address wird auch der Vollständigkeit halber au
 <h2>Rollen</h2>
 <p>
 Werden Rollen verwendet, muss auch eine Security Domain konfiguriert werden. Die entsprechenden Zugriffsrechte werden in die web.xml
-reingeneriert. Je nach verwendetem Application Server müssen noch weitere Deskriptoren mit weiteren Roll Mappings konfiguriert werden.
+reingeneriert. Je nach verwendetem Application Server mÃ¼ssen noch weitere Deskriptoren mit weiteren Roll Mappings konfiguriert werden.
 Da sich diese Deskriptoren nicht gegenseitig beeinflussen, werden sie schon prophylaktisch vorgeneriert.
 </p>
 <p>
-Die Action Handler enthalten Methoden, um programmatisch die Rollenzugehörigkeit abzufragen. Das kann im XHTML dazu verwendet werden,
-um mittels des &lt;ui:fragment&gt;-Tags Blöcke nur bei Berechtigung sichbar zu machen. Da ist zum Einen die Methode boolean isAllowed().
-Diese Methode zeigt an, dass der Zugriff für den eingeloggten Benutzer erlaubt ist. Ein Beispiel dafür lautet:
+Die Action Handler enthalten Methoden, um programmatisch die RollenzugehÃ¶rigkeit abzufragen. Das kann im XHTML dazu verwendet werden,
+um mittels des &lt;ui:fragment&gt;-Tags BlÃ¶cke nur bei Berechtigung sichbar zu machen. Da ist zum Einen die Methode boolean isAllowed().
+Diese Methode zeigt an, dass der Zugriff fÃ¼r den eingeloggten Benutzer erlaubt ist. Ein Beispiel dafÃ¼r lautet:
 </p>
 <p>
 <div class="literallayout">
@@ -255,20 +255,20 @@ Diese Methode zeigt an, dass der Zugriff für den eingeloggten Benutzer erlaubt i
 </div>
 </p>
 <p>
-Sollte keine Rolle für den Prozess definiert worden sein, liefert diese Methode immer <span class="inlinecode"><span class="keyword">true</span></span> zurück. Man kann sich also auf die
+Sollte keine Rolle fÃ¼r den Prozess definiert worden sein, liefert diese Methode immer <span class="inlinecode"><span class="keyword">true</span></span> zurÃ¼ck. Man kann sich also auf die
 Existenz dieser Methode verlassen.
 </p>
 <p>
-Die andere Methode heißt boolean isLoggedIn(). Mit dieser Methode wird überprüft, ob ein Benutzer überhaupt eingeloggt ist.
+Die andere Methode heiÃŸt boolean isLoggedIn(). Mit dieser Methode wird Ã¼berprÃ¼ft, ob ein Benutzer Ã¼berhaupt eingeloggt ist.
 </p>
 <a name="Properties"></a>
 <h2>Properties</h2>
 <p>
-Mittels Properties können auf Daten, die im Application Server konfiguriert sind mittels JNDI zugegriffen werden. So ist es möglich
+Mittels Properties kÃ¶nnen auf Daten, die im Application Server konfiguriert sind mittels JNDI zugegriffen werden. So ist es mÃ¶glich
 ein und dieselbe Applikation ohne Neubauen in unterschiedliche Laufzeitumgebungen zu bringen und dabei das Verhalten zu beeinflussen.
-Wenn beispielsweise Ein Produktiv- und ein Staging-System vorhanden ist, die jeweils über WebService ein anders Produktiv- und
-Staging-System aufrufen wollen, kann über diese Properties die dazu passende URL konfiguriert werden und die Applikation benutzt den
-zu ihrer Umgebung korrekten WebService. Als Datentypen können für Properties verwendet werden:
+Wenn beispielsweise Ein Produktiv- und ein Staging-System vorhanden ist, die jeweils Ã¼ber WebService ein anders Produktiv- und
+Staging-System aufrufen wollen, kann Ã¼ber diese Properties die dazu passende URL konfiguriert werden und die Applikation benutzt den
+zu ihrer Umgebung korrekten WebService. Als Datentypen kÃ¶nnen fÃ¼r Properties verwendet werden:
 </p>
 <p>
 <ul>
@@ -345,7 +345,7 @@ In diesem Beispiel wurde ein Default mit angegeben, der mit in den Quellcode gen
 <a name="FreieResourceAdapter"></a>
 <h2>Freie Resource Adapter</h2>
 <p>
-Es ist nicht nur möglich, einfache Datentypen über JNDI zu referenzieren. Bei der Syntax muss voll qualifiziert die Klasse angegeben
+Es ist nicht nur mÃ¶glich, einfache Datentypen Ã¼ber JNDI zu referenzieren. Bei der Syntax muss voll qualifiziert die Klasse angegeben
 werden:
 </p>
 <p>

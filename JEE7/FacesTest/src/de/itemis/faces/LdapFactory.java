@@ -4,6 +4,8 @@
 package de.itemis.faces;
 
 import java.util.Hashtable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.naming.Context;
 import javax.naming.Name;
@@ -14,12 +16,9 @@ import javax.naming.directory.InitialDirContext;
 import javax.naming.spi.InitialContextFactory;
 import javax.naming.spi.ObjectFactory;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 public class LdapFactory implements ObjectFactory, InitialContextFactory
 {
-	private final static Log log = LogFactory.getLog(LdapFactory.class);
+	private final static Logger  log = Logger.getLogger(LdapFactory.class.getName());
 
 	@Override
 	public Object getObjectInstance(
@@ -28,8 +27,8 @@ public class LdapFactory implements ObjectFactory, InitialContextFactory
 			Context         nameCtx,
 			Hashtable<?, ?> environment) throws Exception
 	{
-		log.debug(">getObjectInstance(...)");
-		log.debug(obj);
+		log.log(Level.FINE, ">getObjectInstance(...)");
+		log.log(Level.FINE, obj.toString());
 
 		String url    = "ldaps://master.itemis.de:636/";
 		String baseDN = "dc=itemis,dc=de";
@@ -67,7 +66,7 @@ public class LdapFactory implements ObjectFactory, InitialContextFactory
 		env.put(Context.SECURITY_AUTHENTICATION, "simple");
 		env.put(Context.PROVIDER_URL, url);
 
-		log.debug(" url=" + url);
+		log.log(Level.FINE, " url=" + url);
 
 		if ((part != null) && (secret != null))
 		{
@@ -83,12 +82,12 @@ public class LdapFactory implements ObjectFactory, InitialContextFactory
 		}
 		catch(NamingException ne)
 		{
-			log.error(ne.getLocalizedMessage(), ne);
+			log.log(Level.SEVERE, ne.getLocalizedMessage(), ne);
 			throw ne;
 		}
 		finally
 		{
-			log.debug("<getObjectInstance(...) = " + result);
+			log.log(Level.FINE, "<getObjectInstance(...) = " + result);
 		}
 		return result;
 	}

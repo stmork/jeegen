@@ -11,14 +11,14 @@
 <a name="EntityBeans"></a>
 <h1>Entity Beans</h1>
 <p>
-In der Modelldatei können Entity Beans über die Schlüsselwörter <span class="inlinecode"><span class="keyword">entity</span></span> und <span class="inlinecode"><span class="keyword">options</span></span> definiert werden.
-Options sind spezielle Entity Beans, mit denen man Auswahllisten definieren kann. Die Auswahllisten können entweder editierbar sein,
+In der Modelldatei kÃ¶nnen Entity Beans Ã¼ber die SchlÃ¼sselwÃ¶rter <span class="inlinecode"><span class="keyword">entity</span></span> und <span class="inlinecode"><span class="keyword">options</span></span> definiert werden.
+Options sind spezielle Entity Beans, mit denen man Auswahllisten definieren kann. Die Auswahllisten kÃ¶nnen entweder editierbar sein,
 oder als Enumeration festgelegt werden.
 </p>
 <p>
-Eine einfache Entity Bean wird mit dem Schlüsselwort <span class="inlinecode"><span class="keyword">entity</span></span> eingeleitet. In ihr können beliebig viele Attribute benutzt
-werden. Es können Text- und EMail-Felder als ID-Felder definiert werden. Wird kein ID-Feld definiert, wird automatisch ein
-Integer-Attribut mit Namen id generiert. Eine einfache Definition sieht folgendermaßen aus:
+Eine einfache Entity Bean wird mit dem SchlÃ¼sselwort <span class="inlinecode"><span class="keyword">entity</span></span> eingeleitet. In ihr kÃ¶nnen beliebig viele Attribute benutzt
+werden. Es kÃ¶nnen Text- und EMail-Felder als ID-Felder definiert werden. Wird kein ID-Feld definiert, wird automatisch ein
+Integer-Attribut mit Namen id generiert. Eine einfache Definition sieht folgendermaÃŸen aus:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
@@ -44,8 +44,8 @@ Nach einem Generatorlauf kann die Applikation deployed werden. Die Maske sieht d
 </div>
 </p>
 <p>
-Will man noch den Adresstyp zwischen privat und geschäftlich angeben, kann eine nicht editierbare <span class="inlinecode"><span class="keyword">option</span></span> benutzt werden.
-Diese <span class="inlinecode"><span class="keyword">option</span></span> wird als Enumeration generiert. Als Werte können nur Textschlüssel verwendet werden. Diese Schlüssel
+Will man noch den Adresstyp zwischen privat und geschÃ¤ftlich angeben, kann eine nicht editierbare <span class="inlinecode"><span class="keyword">option</span></span> benutzt werden.
+Diese <span class="inlinecode"><span class="keyword">option</span></span> wird als Enumeration generiert. Als Werte kÃ¶nnen nur TextschlÃ¼ssel verwendet werden. Diese SchlÃ¼ssel
 werden automatisch im Resource Bundle aller definierter Sprachen angelegt, falls sie noch nicht vorhanden sind. In der Address
 Entity Bean wird der Adresstyp AddressOption als Attributtyp <span class="inlinecode"><span class="keyword">Option</span></span> eingebunden. In der Datenbank entsteht dadurch eine 1:1-Relation.
 </p>
@@ -72,7 +72,7 @@ Entity Bean wird der Adresstyp AddressOption als Attributtyp <span class="inline
 </p>
 <p>
 In der Maske wird dadurch eine Combobox generiert. Passt man noch die Resource Bundles unter <em>$PROJECT_HOME/src/&lt;package&gt;/messages.properties</em>
-an, sieht dann die Maske folgendermaßen aus:
+an, sieht dann die Maske folgendermaÃŸen aus:
 </p>
 <p>
 <div class="image" >
@@ -86,17 +86,17 @@ an, sieht dann die Maske folgendermaßen aus:
 Die Generierung einer Combobox erfordert noch weitere Dinge im Hintergrund:
 <ol>
 	<li>
-		Für die Combobox muss ein Value Converter für JSF generiert werden, der die Werte aus der XHTML-Maske in Entity Bean-IDs
+		FÃ¼r die Combobox muss ein Value Converter fÃ¼r JSF generiert werden, der die Werte aus der XHTML-Maske in Entity Bean-IDs
 			konvertiert.
 	</li>
 	<li>
-		Die Entity Beans müssen die Methoden equals() und hash() so überschreiben, dass Entity Beans mit denselben IDs als identisch
+		Die Entity Beans mÃ¼ssen die Methoden equals() und hash() so Ã¼berschreiben, dass Entity Beans mit denselben IDs als identisch
 			angesehen werden, sonst funktioniert der Value Converter nicht.
 	</li>
 </ol>
 
-Es macht natürlich Sinn, dass es Personen gibt, in denen mehrere Adressen gespeichert werden. Damit wird das Modell um die Entity Bean
-<em>Person</em> ergänzt:
+Es macht natÃ¼rlich Sinn, dass es Personen gibt, in denen mehrere Adressen gespeichert werden. Damit wird das Modell um die Entity Bean
+<em>Person</em> ergÃ¤nzt:
 </p>
 <p>
 <div class="literallayout">
@@ -114,9 +114,9 @@ Es macht natürlich Sinn, dass es Personen gibt, in denen mehrere Adressen gespei
 </p>
 <p>
 In dieser Entity Bean wird ein Textfeld als ID-Feld markiert. Dadurch gibt es kein automatisches Integer-ID-Feld mehr. Es darf nur
-ein Feld als ID-Feld innerhalb einer Entity Bean gesetzt werden. Ferner wird mit dem Schlüsselwort Entity eine 1:n-Relation
-eingeführt, um mehrere Adressen an die Entity Bean binden zu können. Dabei muss der Typ - in diesem Falle Address - mit den []-Zeichen
-markiert werden, sonst wäre die Relation nur 1:1. Die Maske für die Person Entity Bean sieht folgendermaßen aus:
+ein Feld als ID-Feld innerhalb einer Entity Bean gesetzt werden. Ferner wird mit dem SchlÃ¼sselwort Entity eine 1:n-Relation
+eingefÃ¼hrt, um mehrere Adressen an die Entity Bean binden zu kÃ¶nnen. Dabei muss der Typ - in diesem Falle Address - mit den []-Zeichen
+markiert werden, sonst wÃ¤re die Relation nur 1:1. Die Maske fÃ¼r die Person Entity Bean sieht folgendermaÃŸen aus:
 </p>
 <p>
 <div class="image" >
@@ -133,10 +133,10 @@ Klickt man auf den "Edit addresses"-Button, gelangt man in die schon bekannte Ma
 <h2>Weitere Attributtypen</h2>
 <p>
 Um Daten in einer Datenbank zu speichern, machen diverse Datentypen Sinn. Jedes Attribut besteht aus der Kombination Datentyp,
-ergänzende Optionen Attributname und Transient-Flag. Wird ein Attribut abschließend mit dem transient-Schlüsselwort markiert, so wird
-dieses Attribut nicht in der Datenbank gespeichert. In diesem Fall werden zwei Klassen für die Entity Bean gemäß den Generation Gap
-Pattern generiert. Eine abstrakte Basisklasse enthält die Attribute der Entity Bean, die konkrete Klasse enthält Getter- und
-Setter-Methoden für die transienten Attribute. Man kann die transienten Methoden dazu verwenden, um aus anderen Attributen Werte
+ergÃ¤nzende Optionen Attributname und Transient-Flag. Wird ein Attribut abschlieÃŸend mit dem transient-SchlÃ¼sselwort markiert, so wird
+dieses Attribut nicht in der Datenbank gespeichert. In diesem Fall werden zwei Klassen fÃ¼r die Entity Bean gemÃ¤ÃŸ den Generation Gap
+Pattern generiert. Eine abstrakte Basisklasse enthÃ¤lt die Attribute der Entity Bean, die konkrete Klasse enthÃ¤lt Getter- und
+Setter-Methoden fÃ¼r die transienten Attribute. Man kann die transienten Methoden dazu verwenden, um aus anderen Attributen Werte
 zusammen zu bauen. Aus Vor- und Nachnamen kann man den gesamten Namen als transientes Attribut herleiten.
 </p>
 <p>
@@ -191,13 +191,13 @@ Daraus wird in der Datei <em>$PROJECT_HOME/src/&lt;package&gt;/entites/Person.ja
 </div>
 </div>
 
-Aus Gründen der Übersichtlichkeit wurde auf Prüfen von Null-Pointern verzichtet.
-Im Folgenden werden die Attribute aufgelistet und erklärt.
+Aus GrÃ¼nden der Ãœbersichtlichkeit wurde auf PrÃ¼fen von Null-Pointern verzichtet.
+Im Folgenden werden die Attribute aufgelistet und erklÃ¤rt.
 </p>
 <a name="Text"></a>
 <h3>Text</h3>
 <p>
-Das Textattribut wurde schon ausführlich erklärt. Es hat die Syntax:
+Das Textattribut wurde schon ausfÃ¼hrlich erklÃ¤rt. Es hat die Syntax:
 </p>
 <p>
 <div class="literallayout">
@@ -242,7 +242,7 @@ im Formular folgendes Schnipsel generiert:
 <a name="Integer"></a>
 <h3>Integer</h3>
 <p>
-Integer-Datentypen werden durch das Schlüsselwort <span class="inlinecode"><span class="keyword">Int</span></span> gefolgt von einem Variablennamen eingeleitet. Im XHTML-Formular
+Integer-Datentypen werden durch das SchlÃ¼sselwort <span class="inlinecode"><span class="keyword">Int</span></span> gefolgt von einem Variablennamen eingeleitet. Im XHTML-Formular
 wird dabei automatisch ein entsprechender Value Converter generiert, der den Inhalt des Eingabefeldes automatisch in einen Integer
 umwandelt. Die Syntax lautet:
 </p>
@@ -287,8 +287,8 @@ wird folgendes Schnipsel im XHTML generiert:
 <a name="Number"></a>
 <h3>Number</h3>
 <p>
-Number-Datentypen werden durch das Schlüsselwort <span class="inlinecode"><span class="keyword">Number</span></span> gefolgt von einem Variablennamen eingeleitet. Java-seitig
-wird dafür ein double generiert Im XHTML-Formular wird dabei automatisch ein entsprechender Value Converter generiert, der den
+Number-Datentypen werden durch das SchlÃ¼sselwort <span class="inlinecode"><span class="keyword">Number</span></span> gefolgt von einem Variablennamen eingeleitet. Java-seitig
+wird dafÃ¼r ein double generiert Im XHTML-Formular wird dabei automatisch ein entsprechender Value Converter generiert, der den
 Inhalt des Eingabefeldes automatisch in eine Kommazahl umwandelt. Die Syntax lautet:
 </p>
 <p>
@@ -332,7 +332,7 @@ wird folgendes Schnipsel im XHTML generiert:
 <a name="EMail"></a>
 <h3>E-Mail</h3>
 <p>
-Ein E-Mail-Datentyp kann als ID geführt werden und ist im Prinzip ein Textfeld mit dem Unterschied, dass ein Validator die Eingabe auf das Format einer gültigen EMail-Adresse prüft. Die Syntax lautet:
+Ein E-Mail-Datentyp kann als ID gefÃ¼hrt werden und ist im Prinzip ein Textfeld mit dem Unterschied, dass ein Validator die Eingabe auf das Format einer gÃ¼ltigen EMail-Adresse prÃ¼ft. Die Syntax lautet:
 </p>
 <p>
 <div class="literallayout">
@@ -382,7 +382,7 @@ Man beachte, dass automatisch der mailValidator eingebunden ist, der sich in der
 <a name="Clob"></a>
 <h3>Clob</h3>
 <p>
-Alle Textfelder werden in der Datenbank als Varchar angelegt, welche eine Längenbegrenzung auf 255 Zeichen beinhaltet. Wenn man
+Alle Textfelder werden in der Datenbank als Varchar angelegt, welche eine LÃ¤ngenbegrenzung auf 255 Zeichen beinhaltet. Wenn man
 mehr braucht, muss ein sog. Character Large Object benutzt werden. Im XHTML-Formular wird daraus eine Textarea generiert. Java-seitig
 ist dieser Datentyp wie Text und E-Mail ein java.lang.String. Die Syntax lautet:
 </p>
@@ -429,7 +429,7 @@ im Formular folgendes Schnipsel generiert:
 <a name="Blob"></a>
 <h3>Blob</h3>
 <p>
-Will man Binärdaten in der Datenbank speichern, muss man den Datentyp <span class="inlinecode"><span class="keyword">Blob</span></span> verwenden, der mit dem Schlüsselwort
+Will man BinÃ¤rdaten in der Datenbank speichern, muss man den Datentyp <span class="inlinecode"><span class="keyword">Blob</span></span> verwenden, der mit dem SchlÃ¼sselwort
 <span class="inlinecode"><span class="keyword">Blob</span></span> benutzt wird. Java-seitig wird daraus ein byte[]-Array. In einer XHTML-Maske erscheinen Attribute dieses
 Typs nicht. Die Syntax lautet:
 </p>
@@ -444,14 +444,14 @@ Typs nicht. Die Syntax lautet:
 </p>
 <p>
 <em>Hinweis</em>
-Aus Gründen der Performance sollten nicht zu große Binärdaten in einer Datenbank gespeichert werden. Große Datensätze bringt man
+Aus GrÃ¼nden der Performance sollten nicht zu groÃŸe BinÃ¤rdaten in einer Datenbank gespeichert werden. GroÃŸe DatensÃ¤tze bringt man
 besser im Dateisystem unter.
 </p>
 <a name="Boolean"></a>
 <h3>Boolean</h3>
 <p>
-Einen einfachen Booleschen Datentypen führt man mit dem Schlüsselwort <span class="inlinecode"><span class="keyword">Boolean</span></span> ein. Sollte der Attrributname active lauten, wird noch
-weitere Funktionalität generiert. In der XHTML-Maske wird in der Liste ein Kommandolink ergänzt, mit dem der Aktivierungsstatus dieses
+Einen einfachen Booleschen Datentypen fÃ¼hrt man mit dem SchlÃ¼sselwort <span class="inlinecode"><span class="keyword">Boolean</span></span> ein. Sollte der Attrributname active lauten, wird noch
+weitere FunktionalitÃ¤t generiert. In der XHTML-Maske wird in der Liste ein Kommandolink ergÃ¤nzt, mit dem der Aktivierungsstatus dieses
 Attributes gewechselt werden kann. Das setzt weitere Methoden im Action Handler und im DAO voraus, die automatisch mit generiert werden.
 </p>
 <p>
@@ -474,10 +474,10 @@ Attributes gewechselt werden kann. Das setzt weitere Methoden im Action Handler 
 <h3>Timestamp</h3>
 <p>
 Mit diesem Datentypen kann ein Zeitstempel bestehend aus Uhrzeit und Kalenderdatum in der Datenbank gespeichert werden. In der Entity
-Bean wird hierfür der Datentyp <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/Date.html" title="View JavaDoc"><abbr title="java.util.Date" >Date</abbr></a> verwendet. Über die Verwendung von Datumsangaben über Prepared Statements in EQL wird
-in diesem Artikel berichtet. Wird dem Schlüsselwort <span class="inlinecode"><span class="keyword">Timestamp</span></span> noch ein <span class="inlinecode"><span class="keyword">auto</span></span> beigegeben, so wird automatisch beim erstmaligem Speichern
-der Entity Bean das Erzeugungsdatum in dieses Attribut gespeichert. Benutzt man stattdessen oder zusätzlich noch das Schlüsselwort
-<span class="inlinecode"><span class="keyword">update</span></span>, wird bei jeder Änderung der Entity Bean in der Datenbank dieses Attribut auf den aktuellen Zeitstempel gebracht. Die Syntax
+Bean wird hierfÃ¼r der Datentyp <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/Date.html" title="View JavaDoc"><abbr title="java.util.Date" >Date</abbr></a> verwendet. Ãœber die Verwendung von Datumsangaben Ã¼ber Prepared Statements in EQL wird
+in diesem Artikel berichtet. Wird dem SchlÃ¼sselwort <span class="inlinecode"><span class="keyword">Timestamp</span></span> noch ein <span class="inlinecode"><span class="keyword">auto</span></span> beigegeben, so wird automatisch beim erstmaligem Speichern
+der Entity Bean das Erzeugungsdatum in dieses Attribut gespeichert. Benutzt man stattdessen oder zusÃ¤tzlich noch das SchlÃ¼sselwort
+<span class="inlinecode"><span class="keyword">update</span></span>, wird bei jeder Ã„nderung der Entity Bean in der Datenbank dieses Attribut auf den aktuellen Zeitstempel gebracht. Die Syntax
 lautet:
 </p>
 <p>
@@ -490,7 +490,7 @@ lautet:
 </div>
 </p>
 <p>
-Für folgende Modellzeile
+FÃ¼r folgende Modellzeile
 </p>
 <p>
 <div class="literallayout">
@@ -521,8 +521,8 @@ wird in der XHTML folgendes Schnipsel generiert:
 </div>
 </p>
 <p>
-Wird beim <span class="inlinecode"><span class="keyword">Timestamp</span></span> das Schlüsselwort <span class="inlinecode"><span class="keyword">auto</span></span> oder <span class="inlinecode"><span class="keyword">update</span></span> ergänzt, wird kein
-Formulareinstrag im XHTML generiert. Stattdessen werd in der Entity Bean entsprechende Methoden ergänzt:
+Wird beim <span class="inlinecode"><span class="keyword">Timestamp</span></span> das SchlÃ¼sselwort <span class="inlinecode"><span class="keyword">auto</span></span> oder <span class="inlinecode"><span class="keyword">update</span></span> ergÃ¤nzt, wird kein
+Formulareinstrag im XHTML generiert. Stattdessen werd in der Entity Bean entsprechende Methoden ergÃ¤nzt:
 </p>
 <p>
 <div class="literallayout">
@@ -557,8 +557,8 @@ Die Annotationen @PrePersist und @PreUpdate sind Bestandteile des JEE-Frameworks
 <a name="Date"></a>
 <h3>Date</h3>
 <p>
-Mit diesem Datentypen kann ein Kalenderdatum in der Datenbank untergebracht werden. In der Entity Bean wird hierfür der Datentyp
-<a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/Date.html" title="View JavaDoc"><abbr title="java.util.Date" >Date</abbr></a> verwendet. Über die Verwendung von Datumsangaben über Prepared Statements in EQL wird in diesem Artikel
+Mit diesem Datentypen kann ein Kalenderdatum in der Datenbank untergebracht werden. In der Entity Bean wird hierfÃ¼r der Datentyp
+<a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/Date.html" title="View JavaDoc"><abbr title="java.util.Date" >Date</abbr></a> verwendet. Ãœber die Verwendung von Datumsangaben Ã¼ber Prepared Statements in EQL wird in diesem Artikel
 berichtet. Die Syntax lautet:
 </p>
 <p>
@@ -571,7 +571,7 @@ berichtet. Die Syntax lautet:
 </div>
 </p>
 <p>
-Eine automatische Aktualisierung bei Anlegen und Ändern dieses Attributtyps wie beim Timestamp existiert bei diesem Attributtypen nicht! Aus der Modellzeile
+Eine automatische Aktualisierung bei Anlegen und Ã„ndern dieses Attributtyps wie beim Timestamp existiert bei diesem Attributtypen nicht! Aus der Modellzeile
 </p>
 <p>
 <div class="literallayout">
@@ -616,15 +616,15 @@ Mit diesem Attributtyp kann eine Relation auf eine andere Entity Bean modelliert
 </p>
 <p>
 Es wird zwischen einer 1:1- und einer 1:n-Relation unterschieden, indem dem Entity Typen das Symbol [] beigestellt wird.
-Die 1:1-Relation wird in einem XHTML-Formular nicht dargestellt. Soll für diesen Fall eine Combobox zur Auswahl dargestellt werden,
-muss das Attribut als <span class="inlinecode"><span class="keyword">Option</span>&nbsp;</span>(s.u.) deklariert werden. Für eine 1:n-Relation wird ein Button bereitgestellt, in der
+Die 1:1-Relation wird in einem XHTML-Formular nicht dargestellt. Soll fÃ¼r diesen Fall eine Combobox zur Auswahl dargestellt werden,
+muss das Attribut als <span class="inlinecode"><span class="keyword">Option</span>&nbsp;</span>(s.u.) deklariert werden. FÃ¼r eine 1:n-Relation wird ein Button bereitgestellt, in der
 die Liste der Entity Beans bearbeitet werden kann.
 </p>
 <a name="Option"></a>
 <h3>Option</h3>
 <p>
-Soll in einer Entity Bean eine 1:1-Relation in einer Combobox ausgewählt werden können, muss der entsprechende Attributtyp <span class="inlinecode"><span class="keyword">Option</span></span>
-lauten. Die Syntax ist ähnlich dem <span class="inlinecode"><span class="keyword">Entity</span></span>-Attributtyp mit dem Unterschied, dass keine 1:n-Relation benutzt werden kann:
+Soll in einer Entity Bean eine 1:1-Relation in einer Combobox ausgewÃ¤hlt werden kÃ¶nnen, muss der entsprechende Attributtyp <span class="inlinecode"><span class="keyword">Option</span></span>
+lauten. Die Syntax ist Ã¤hnlich dem <span class="inlinecode"><span class="keyword">Entity</span></span>-Attributtyp mit dem Unterschied, dass keine 1:n-Relation benutzt werden kann:
 </p>
 <p>
 <div class="literallayout">
@@ -669,17 +669,17 @@ Der XHTML-Codeschnipsel:
 </div>
 </p>
 <p>
-Der Action Handler stellt die Liste der möglichen Auswahlelemente bereit. In diesem Falle muss die Klasse OrderingHandler die
-Methode getUserInfoList() bereitstellen. In dem Beispiel darf die 1:1-Relation den Wert null annehmen. Soll das nicht möglich sein,
-muss das &lt;f:selectItem&gt;-Tag entfernt werden. Zusätzlich werden noch an der Entity Bean die Methoden hashCode() und equals() überladen.
+Der Action Handler stellt die Liste der mÃ¶glichen Auswahlelemente bereit. In diesem Falle muss die Klasse OrderingHandler die
+Methode getUserInfoList() bereitstellen. In dem Beispiel darf die 1:1-Relation den Wert null annehmen. Soll das nicht mÃ¶glich sein,
+muss das &lt;f:selectItem&gt;-Tag entfernt werden. ZusÃ¤tzlich werden noch an der Entity Bean die Methoden hashCode() und equals() Ã¼berladen.
 Die von den generierten Action Handlern beinhalten den dazu passenden Value Converter. In diesem Beispiel stellt die Klasse
-OrderingHandler über die Methode getUserInfoConverter() den Converter als innere Klasse UserInfoConverter zur Verfügung.
+OrderingHandler Ã¼ber die Methode getUserInfoConverter() den Converter als innere Klasse UserInfoConverter zur VerfÃ¼gung.
 </p>
 <a name="History"></a>
 <h3>History</h3>
 <p>
-Eine <span class="inlinecode"><span class="keyword">History</span></span> ist eine spezielle Form der 1:n-Relation. Es können Einträge in diese Liste hinzugefügt werden,
-allerdings keine gelöscht werden. Dadurch kann ein zeitlicher Verlauf zu einer Entity Bean nachgehalten werden.
+Eine <span class="inlinecode"><span class="keyword">History</span></span> ist eine spezielle Form der 1:n-Relation. Es kÃ¶nnen EintrÃ¤ge in diese Liste hinzugefÃ¼gt werden,
+allerdings keine gelÃ¶scht werden. Dadurch kann ein zeitlicher Verlauf zu einer Entity Bean nachgehalten werden.
 </p>
 <p>
 <em>Achtung!</em>
@@ -690,16 +690,16 @@ verwendet werden.
 <h3>Besonderheiten der generierten Entity Beans</h3>
 <p>
 Die generierten Entity Beans bieten noch einige Eigenschaften, die den Umgang mit den Entity Beans vereinfachen. So wird die
-toString()-Methode überladen, um alle Attribute der Entity Bean auf einfache Weise ausgeben zu können. Das ist für Logging-Zwecke
+toString()-Methode Ã¼berladen, um alle Attribute der Entity Bean auf einfache Weise ausgeben zu kÃ¶nnen. Das ist fÃ¼r Logging-Zwecke
 besonders sinnvoll.
 </p>
 <p>
-Sämtliche Attribute und Methoden werden mit Javadoc-Kommentaren dokumentiert.
+SÃ¤mtliche Attribute und Methoden werden mit Javadoc-Kommentaren dokumentiert.
 </p>
 <p>
-Wird in keinen Attribut das Schlüsselwort <span class="inlinecode"><span class="keyword">id</span></span> verwendet, wird automatisch eine ID-Spalte generiert, die die IDs aus
+Wird in keinen Attribut das SchlÃ¼sselwort <span class="inlinecode"><span class="keyword">id</span></span> verwendet, wird automatisch eine ID-Spalte generiert, die die IDs aus
 einer ID-Tabelle beziehen. Diese Form der ID-Generierung ist die kompatibelste Variante zwischen den Application Servern und den
-verwendeten Datenbanken. Jede Tabelle erhält in der IDs-Tabelle eine eigene Zeile, in denen die ID-Ranges verwaltet werden.
+verwendeten Datenbanken. Jede Tabelle erhÃ¤lt in der IDs-Tabelle eine eigene Zeile, in denen die ID-Ranges verwaltet werden.
 </p>
 <p>
 <div class="literallayout">
@@ -733,7 +733,7 @@ verwendeten Datenbanken. Jede Tabelle erhält in der IDs-Tabelle eine eigene Zeil
 </div>
 </p>
 <p>
-Den Entity Beans können durch weitere Schlüsselwörter noch zusätzliche Eigenschaften hinzugefügt werden. Zu diesem Zweck empfiehlt
+Den Entity Beans kÃ¶nnen durch weitere SchlÃ¼sselwÃ¶rter noch zusÃ¤tzliche Eigenschaften hinzugefÃ¼gt werden. Zu diesem Zweck empfiehlt
 sich die Auflistung der Syntax:
 </p>
 <p>
@@ -746,7 +746,7 @@ sich die Auflistung der Syntax:
 </div>
 </p>
 <p>
-Wie die Attribute attributes aussehen müssen wurde ja schon beschrieben. Werden für Auswahllisten Optionen verwendet, sieht die Syntax leicht erweitert aus. Hier lautet die Syntax:
+Wie die Attribute attributes aussehen mÃ¼ssen wurde ja schon beschrieben. Werden fÃ¼r Auswahllisten Optionen verwendet, sieht die Syntax leicht erweitert aus. Hier lautet die Syntax:
 </p>
 <p>
 <div class="literallayout">
@@ -769,26 +769,26 @@ Hier werden im Wesentlichen zwei Varianten unterschieden:
 </ol>
 
 Die nicht editierbaren Enumerations wurden weiter oben schon beispielhaft beschrieben. Um in einer XHTML eine andere Entity Bean
-als 1:1-Relation in einer Auswahlbox auswählen zu können, muss die Referenz auf diese Entity Bean als Option-Attribut benutzt werden.
-Sie unterscheiden sich ansonsten nicht von den üblichen Entity Beans, die mit dem entity-Schlüsselwort beschrieben werden.
+als 1:1-Relation in einer Auswahlbox auswÃ¤hlen zu kÃ¶nnen, muss die Referenz auf diese Entity Bean als Option-Attribut benutzt werden.
+Sie unterscheiden sich ansonsten nicht von den Ã¼blichen Entity Beans, die mit dem entity-SchlÃ¼sselwort beschrieben werden.
 </p>
 <p>
-Für alle Varianten gilt, dass man die erzeugte Entity Bean in eine andere Persistenz Unit hinzufügen kann. Es ist dabei zu beachten,
-dass alle rekursiv enthaltenen Relationen auf andere Entity Beans auch in derselben Persistenz Unit sein müssen. Der Eclipse-Editor
-quittiert das entsprechend mit einer Fehlermarkirung im Editor udn der Generatorlauf schlägt dementsprechend fehl. Lässt man die
-Definition auf die Persistenz Unit weg, wird automatisch die erste aufgelistete gewählt.
+FÃ¼r alle Varianten gilt, dass man die erzeugte Entity Bean in eine andere Persistenz Unit hinzufÃ¼gen kann. Es ist dabei zu beachten,
+dass alle rekursiv enthaltenen Relationen auf andere Entity Beans auch in derselben Persistenz Unit sein mÃ¼ssen. Der Eclipse-Editor
+quittiert das entsprechend mit einer Fehlermarkirung im Editor udn der Generatorlauf schlÃ¤gt dementsprechend fehl. LÃ¤sst man die
+Definition auf die Persistenz Unit weg, wird automatisch die erste aufgelistete gewÃ¤hlt.
 </p>
 <a name="Ergebnislistenfiltern"></a>
 <h3>Ergebnislisten filtern</h3>
 <p>
-Speziell für die Suche von Entity Beans aus Ergebnislisten kann das Filterable-Interface benutzt werden. Dieses Interface erfordert
-die Implementierung der Methode public boolean filter(String pattern, Locale locale). Wird das Schlüsselwort <span class="inlinecode"><span class="keyword">filterable</span></span>
+Speziell fÃ¼r die Suche von Entity Beans aus Ergebnislisten kann das Filterable-Interface benutzt werden. Dieses Interface erfordert
+die Implementierung der Methode public boolean filter(String pattern, Locale locale). Wird das SchlÃ¼sselwort <span class="inlinecode"><span class="keyword">filterable</span></span>
 gesetzt, wird die Entity Bean in eine abstrakte Klasse und eine konkrete Klasse generiert. Die konkrete Klasse muss dann die besagte
 Methode filter() implementieren. Da Suchen in Java schneller vonstatten geht, als in der Datenbank, macht das java-seitige Filtern bei
-relativ kleinen Datenmengen Sinn. Bei großen Datenmengen sollte nach wie vor auf Seiten der Datenbank gefiltert werden. Ein weiterer
-Vorteil der filter()-Methode ist, dass auf transienten Attributen gesucht werden kann. Um die Möglichkeit zu haben, sprachabhängig zu
-vergleichen oder zu suchen, wird der Methode filter() die entsprechende Locale mitgegeben. Ein Beispiel für eine 
-filter()-Implementierung könnte so aussehen:
+relativ kleinen Datenmengen Sinn. Bei groÃŸen Datenmengen sollte nach wie vor auf Seiten der Datenbank gefiltert werden. Ein weiterer
+Vorteil der filter()-Methode ist, dass auf transienten Attributen gesucht werden kann. Um die MÃ¶glichkeit zu haben, sprachabhÃ¤ngig zu
+vergleichen oder zu suchen, wird der Methode filter() die entsprechende Locale mitgegeben. Ein Beispiel fÃ¼r eine 
+filter()-Implementierung kÃ¶nnte so aussehen:
 </p>
 <p>
 <div class="literallayout">
@@ -804,11 +804,11 @@ filter()-Implementierung könnte so aussehen:
 </div>
 </p>
 <p>
-In diesem Beispiel wird abhängig von der übergebenen Locale nach einem Suchmuster pattern in einer Bestellposition gesucht. Die
-Bestellposition ist ein transientes Attribut. Bestellposition und Suchmuster werden gemäß des verwendeten Locales in Kleinbuchstaben
-umgewandelt. Die Implementierung der filter()-Methode reicht natürlich nicht aus. Es muss natürlich über eine Datenmenge gefiltert
-werden. Das geschieht sinnvollerweise in einem Action Handler. Dort wird über das DAO eine Datenmenge bezogen, danach gefiltert und
-an die übergeordnete XHTML-Seite übergeben. Eine solche getList()-Methode könnte folgendes Ausssehen haben:
+In diesem Beispiel wird abhÃ¤ngig von der Ã¼bergebenen Locale nach einem Suchmuster pattern in einer Bestellposition gesucht. Die
+Bestellposition ist ein transientes Attribut. Bestellposition und Suchmuster werden gemÃ¤ÃŸ des verwendeten Locales in Kleinbuchstaben
+umgewandelt. Die Implementierung der filter()-Methode reicht natÃ¼rlich nicht aus. Es muss natÃ¼rlich Ã¼ber eine Datenmenge gefiltert
+werden. Das geschieht sinnvollerweise in einem Action Handler. Dort wird Ã¼ber das DAO eine Datenmenge bezogen, danach gefiltert und
+an die Ã¼bergeordnete XHTML-Seite Ã¼bergeben. Eine solche getList()-Methode kÃ¶nnte folgendes Ausssehen haben:
 </p>
 <p>
 <div class="literallayout">
@@ -833,17 +833,17 @@ an die übergeordnete XHTML-Seite übergeben. Eine solche getList()-Methode könnte
 </p>
 <p>
 Die Klasse FilteredList erweitert die Klasse ArrayList und ist in der <a href="JEE6-Utils">javadoc/</a>-Bibliothek enthalten. Sie kann nur Elemente
-aufnehmen, die das Filterable-Interface implementieren. Die Klasse überlädt die Methoden add() und addAll(), in denen das
-Filtern stattfindet. Es werden nur Elemente der Liste hinzugefügt, die bei Aufruf der Elementmethode filter() true zurückliefern.
+aufnehmen, die das Filterable-Interface implementieren. Die Klasse Ã¼berlÃ¤dt die Methoden add() und addAll(), in denen das
+Filtern stattfindet. Es werden nur Elemente der Liste hinzugefÃ¼gt, die bei Aufruf der Elementmethode filter() true zurÃ¼ckliefern.
 Das Locale wird aus dem Request ermittelt und entspricht damit der im Browser eingestellten Sprache.
 </p>
 <a name="EntityBeansklonen"></a>
 <h3>Entity Beans klonen</h3>
 <p>
-Unter Umständen kann es nötig sein, dass eine Entity Bean geklont wird. Ein Beispiel hierfür ist, wenn Bestellpositionen kopiert
-werden sollen. In diesem Fall muss das Schlüsselwort clonable nach dem Namen der Entity Bean mitgegeben werden. Dabei wird die
-Methode clone() überladen. Damit es mit der Datenbank keine Probleme gibt, wird das ID-Attribut gelöscht, um die geklonte Entity
-Bean später neu persistieren zu können.
+Unter UmstÃ¤nden kann es nÃ¶tig sein, dass eine Entity Bean geklont wird. Ein Beispiel hierfÃ¼r ist, wenn Bestellpositionen kopiert
+werden sollen. In diesem Fall muss das SchlÃ¼sselwort clonable nach dem Namen der Entity Bean mitgegeben werden. Dabei wird die
+Methode clone() Ã¼berladen. Damit es mit der Datenbank keine Probleme gibt, wird das ID-Attribut gelÃ¶scht, um die geklonte Entity
+Bean spÃ¤ter neu persistieren zu kÃ¶nnen.
 </p>
 </body>
 </html>
