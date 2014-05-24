@@ -24,7 +24,7 @@
 			<include name="com.google.guava*.jar"/>
 			<include name="com.google.inject*.jar"/>
 			<include name="com.ibm.icu*.jar"/>
-			<include name="de.itemis.*.jar"/>
+			<include name="de.itemis.xtext.*.jar"/>
 			<include name="de.morknet.oaw.*.jar"/>
 			<include name="org.antlr.*.jar"/>
 			<include name="org.apache.commons.cli*.jar"/>
@@ -52,18 +52,23 @@
 	<!-- ==================================================== -->
 
 	<target name="-version">
-	<loadproperties srcfile="META-INF/MANIFEST.MF">
-		<filterchain>
-			<linecontains>
-				<contains value="Bundle-Version" />
-			</linecontains>
-			<tokenfilter>
-				<replaceregex pattern="^Bundle-Version: d*.d*.d*s*$" replace="" />
-			</tokenfilter>
-		</filterchain>
-	</loadproperties>
+		<tstamp>
+			<format property="current.time" pattern="yyyyMMddhhmmss" />
+		</tstamp>
+		<loadproperties srcfile="META-INF/MANIFEST.MF">
+			<filterchain>
+				<linecontains>
+					<contains value="Bundle-Version" />
+				</linecontains>
+				<tokenfilter>
+					<replaceregex pattern="^Bundle-Version: d*.d*.d*s*$" replace="" />
+					<replaceregex pattern="qualifier" replace="${current.time}"/>
+				</tokenfilter>
+			</filterchain>
+		</loadproperties>
 		<property name="plugin" value="${plugin-name}${Bundle-Version}.jar"/>
 		<echo message="Version: ${Bundle-Version}"/>
+		<echo message="Bundle:  ${plugin}"/>
 	</target>
 
 	<target name="clean" depends="-version">
