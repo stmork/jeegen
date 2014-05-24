@@ -62,7 +62,8 @@ public class TimerSingleton
 		infos.put("naxos",     info);
 
 //		info = new DownloadInfo(timerService, "http://daytoursantorini.com/webcam/caldera_santorini.jpg", 28);
-		info = new DownloadInfo(timerService, "http://daytoursantorini.com/webcam/santoriniwedings_net.jpg", 15);
+//		info = new DownloadInfo(timerService, "http://daytoursantorini.com/webcam/santoriniwedings_net.jpg", 15);
+		info = new DownloadInfo(timerService, "http://www.tholosresort.gr/webcam/current.jpg", 15);
 		infos.put("santorini", info);
 	}
 
