@@ -24,13 +24,13 @@ In der Modelldatei wird als erstes Kommando die Applikation beschrieben. Die Syn
 </p>
 <p>
 Der Name ist ein String, der im Klartext die Applikation beschreibt. Der Context-Path ist ein String, der den Applikationskontext
-festlegt. Dieser muss zwingend mit einem SchrÃ¤gstrich "/" beginnen. Es ist der erste Teil der URI.
+festlegt. Dieser muss zwingend mit einem Schrägstrich "/" beginnen. Es ist der erste Teil der URI.
 </p>
 <p>
 Optional kann der Session Timeout in Minuten festgelegt werden. Wird dieser nicht definiert, wird der Default des Application Servers
-verwendet. Ãœblicherweise betrÃ¤gt dieser Wert 30 Minuten. Als project-state kÃ¶nnen die drei SchlÃ¼sselwÃ¶rter <span class="inlinecode"><span class="keyword">development</span></span>,
-<span class="inlinecode"><span class="keyword">integration</span></span> und <span class="inlinecode"><span class="keyword">productive</span></span> dienen und beschreiben den Zustand des Projektes. AbhÃ¤ngig davon wird z.B. 
-das Logging entsprechend verschÃ¤rft.
+verwendet. Üblicherweise beträgt dieser Wert 30 Minuten. Als project-state können die drei Schlüsselwörter <span class="inlinecode"><span class="keyword">development</span></span>,
+<span class="inlinecode"><span class="keyword">integration</span></span> und <span class="inlinecode"><span class="keyword">productive</span></span> dienen und beschreiben den Zustand des Projektes. Abhängig davon wird z.B. 
+das Logging entsprechend verschärft.
 </p>
 <p>
 <table>
@@ -121,20 +121,20 @@ Productive
 </table>
 </p>
 <p>
-Als letztes optionales SchlÃ¼sselwort dient <span class="inlinecode"><span class="keyword">strict</span></span>. Es entscheidet, ob in den Basisklassen der Action Handler die Standardmethoden
-abstrakt vordefiniert werden und somit in den konkreten Klassen vorhanden sein mÃ¼ssen. Dadurch wird einerseits der Code besser, 
-allerdings kann es vorkommen, dass die geforderten Methoden tatsÃ¤chlich nicht gebraucht werden. Das kann aber nur bei starker 
+Als letztes optionales Schlüsselwort dient <span class="inlinecode"><span class="keyword">strict</span></span>. Es entscheidet, ob in den Basisklassen der Action Handler die Standardmethoden
+abstrakt vordefiniert werden und somit in den konkreten Klassen vorhanden sein müssen. Dadurch wird einerseits der Code besser, 
+allerdings kann es vorkommen, dass die geforderten Methoden tatsächlich nicht gebraucht werden. Das kann aber nur bei starker 
 Anpassung der XHTML-Masken passieren.
 </p>
 <p>
-Nach dem <span class="inlinecode"><span class="keyword">application</span></span>-Kommando werden Optionen festgelegt, die das Verhalten der Web-Applikation nÃ¤her beschreiben. Danach folgen 
+Nach dem <span class="inlinecode"><span class="keyword">application</span></span>-Kommando werden Optionen festgelegt, die das Verhalten der Web-Applikation näher beschreiben. Danach folgen 
 die Beschreibungen der Entity Beans, welche auf einer <a href="Entity%20Beans.html#EntityBeans" title="Go to &quot;Entity Beans&quot;">eigenen Seite genauer beschrieben werden</a> und zuletzt die Aufgaben- bzw. 
 Prozess-Umgebungen, in denen die Entity Beans benutzt werden sollen.
 </p>
 <a name="Applikationsoptionen"></a>
 <h2>Applikationsoptionen</h2>
 <p>
-Die Applikationsoptionen beschreiben die Web Applikation nÃ¤her. Sie beeinflussen folgende Eigenschaften:
+Die Applikationsoptionen beschreiben die Web Applikation näher. Sie beeinflussen folgende Eigenschaften:
 <ol>
 	<li>
 		Persistenz Kontexte
@@ -156,7 +156,7 @@ Die Applikationsoptionen beschreiben die Web Applikation nÃ¤her. Sie beeinflusse
 <a name="PersistenzKontexte"></a>
 <h3>Persistenz Kontexte</h3>
 <p>
-Der JEE6-Generator unterstÃ¼tzt mehrere Persistenz Kontexte in einer Applikation. Das setzt voraus, dass in diesem Falle die
+Der JEE6-Generator unterstützt mehrere Persistenz Kontexte in einer Applikation. Das setzt voraus, dass in diesem Falle die
 Datasources als XA-Datasource im Application Server konfiguriert sind. Die Syntax lautet:
 </p>
 <p>
@@ -171,11 +171,11 @@ Datasources als XA-Datasource im Application Server konfiguriert sind. Die Synta
 <p>
 Der unit-name wird in der persistence.xml als Referenz innerhalb der Web Applikation verwendet. Der JNDI-Name definiert, wie die
 Datasource im Application Server wiederzufinden ist. Eine eingehende Beschreibung, wie der JDNI-Name lauten sollte, findet sich auf
-diesen Seiten. Wird das optionale SchlÃ¼sselwort cacheable verwendet, wird die Persistence Unit als Second Level Cache konfiguriert.
+diesen Seiten. Wird das optionale Schlüsselwort cacheable verwendet, wird die Persistence Unit als Second Level Cache konfiguriert.
 </p>
 <p>
 <em>Hinweis</em>
-Es reicht nicht, nur das cacheable SchlÃ¼sselwort zu setzen, um im Application Server Second Level Caching zu aktivieren. Es mÃ¼ssen
+Es reicht nicht, nur das cacheable Schlüsselwort zu setzen, um im Application Server Second Level Caching zu aktivieren. Es müssen
 meistens noch am Application Server selbst noch Konfigurationen vorgenommen werden.
 </p>
 <p>
@@ -192,17 +192,17 @@ Es werden die Datenbanken
 	</li>
 </ul>
 
-unterstÃ¼tzt. Die Angabe wird nÃ¶tig, um in der generierten Datei persistence.xml den SQL-Sprachdialekt festzulegen.
+unterstützt. Die Angabe wird nötig, um in der generierten Datei persistence.xml den SQL-Sprachdialekt festzulegen.
 </p>
 <a name="VerwendeteSprachen"></a>
 <h3>Verwendete Sprachen (Lokalisierung)</h3>
 <p>
-In mehrsprachigen Umgebungen ist die Lokalisierung der Applikation immer wÃ¼nschenswert. Der JEE6-Generator hat fÃ¼r alle Komponenten
-eine entsprechende UnterstÃ¼tzung parat. Die Auswahl der Sprache selbst wird typischerweise im Browser eingestellt. Die Web Applikation
-erfÃ¤hrt das dadurch, dass die im Browser eingestellte Sprache im Request mitgeschickt wird. Die Lokalisierung wird Ã¼ber sog. Resource
-Bundles vorgenommen. Diese werden in den XHTML-Seiten eingebunden. FÃ¼r jedes Attribut, Entity Bean, etc. werden die dafÃ¼r benÃ¶tigten
-EintrÃ¤ge in die Resource Bundles nachgetragen, sofern sie noch nicht enthalten sind. Bereits bestehende EintrÃ¤ge werden nicht
-verÃ¤ndert. An dieser Stelle wird beschrieben, wie in der Modelldatei konfiguriert wird, welche Sprachen unterstÃ¼tzt werden sollen.
+In mehrsprachigen Umgebungen ist die Lokalisierung der Applikation immer wünschenswert. Der JEE6-Generator hat für alle Komponenten
+eine entsprechende Unterstützung parat. Die Auswahl der Sprache selbst wird typischerweise im Browser eingestellt. Die Web Applikation
+erfährt das dadurch, dass die im Browser eingestellte Sprache im Request mitgeschickt wird. Die Lokalisierung wird über sog. Resource
+Bundles vorgenommen. Diese werden in den XHTML-Seiten eingebunden. Für jedes Attribut, Entity Bean, etc. werden die dafür benötigten
+Einträge in die Resource Bundles nachgetragen, sofern sie noch nicht enthalten sind. Bereits bestehende Einträge werden nicht
+verändert. An dieser Stelle wird beschrieben, wie in der Modelldatei konfiguriert wird, welche Sprachen unterstützt werden sollen.
 Die Syntax lautet:
 </p>
 <p>
@@ -216,11 +216,11 @@ Die Syntax lautet:
 </p>
 <p>
 Die <em>language</em> ist der ISO-Code der zu verwendenden Sprache und hat typischerweise kleine Buchstaben. Der optionale Wert <em>country</em>
-bestimmt die ISO-LÃ¤nderkennung typischerweise in GroÃŸbuchstaben. Dadurch werden landestypische Sprachvarianten unterschieden.
+bestimmt die ISO-Länderkennung typischerweise in Großbuchstaben. Dadurch werden landestypische Sprachvarianten unterschieden.
 </p>
 <p>
 <em>Hinweis!</em>
-Es muss mindestens eine Locale-Definition vorhanden sein und genau eine braucht das ansonsten optionale SchlÃ¼sselwort default. Diese
+Es muss mindestens eine Locale-Definition vorhanden sein und genau eine braucht das ansonsten optionale Schlüsselwort default. Diese
 Sprache wird verwendet, falls die im Browser eingestellte Sprache in den Resource Bundles nicht gefunden werden konnte.
 </p>
 <a name="EMail"></a>
@@ -239,9 +239,9 @@ andererseits hier im Model eingetragen werden, unter welchem JDNI-Namen der Mail
 </div>
 </p>
 <p>
-Mehr Information zum Thema Mail im JEE-Umfeld befinden sich auf diesen Seiten. Die auf diesen Seiten beschriebenen EintrÃ¤ge in den
+Mehr Information zum Thema Mail im JEE-Umfeld befinden sich auf diesen Seiten. Die auf diesen Seiten beschriebenen Einträge in den
 genannten XML-Deskriptoren werden vom JEE6-Generator automatisch erzeugt. Die Resource muss manuell in dem DAO eingetragen werden,
-in dem Mailing verwendet werden soll. Das dazugehÃ¶rige Code-Schnipsel sieht folgendermaÃŸen aus:
+in dem Mailing verwendet werden soll. Das dazugehörige Code-Schnipsel sieht folgendermaßen aus:
 </p>
 <p>
 <div class="literallayout">
@@ -254,14 +254,14 @@ in dem Mailing verwendet werden soll. Das dazugehÃ¶rige Code-Schnipsel sieht fol
 </div>
 </p>
 <p>
-Wird fÃ¼r <em>jndi-name</em> "mail/Default" verwendet, muss im JBoss Application Server nichts mehr konfiguriert werden.
+Wird für <em>jndi-name</em> "mail/Default" verwendet, muss im JBoss Application Server nichts mehr konfiguriert werden.
 </p>
 <a name="SecurityDomain"></a>
 <h3>Security Domain</h3>
 <p>
-Sollen nur bestimmte User fÃ¼r bestimmte Bereiche (in der JEE6-Generator-Nomenklatur "Prozesse") Zugang haben, so muss eine sog.
-Security Domain Ã¼ber einen JNDI-Namen referenziert werden. Dieser muss dementsprechen wie die E-Mail im Application Server
-konfiguriert sein und benutzt den JAAS-Standard. Auf diesen Seiten befinden sich Informationen Ã¼ber die Konfiguration von JAAS.
+Sollen nur bestimmte User für bestimmte Bereiche (in der JEE6-Generator-Nomenklatur "Prozesse") Zugang haben, so muss eine sog.
+Security Domain über einen JNDI-Namen referenziert werden. Dieser muss dementsprechen wie die E-Mail im Application Server
+konfiguriert sein und benutzt den JAAS-Standard. Auf diesen Seiten befinden sich Informationen über die Konfiguration von JAAS.
 Die Syntax lautet:
 </p>
 <p>
@@ -274,13 +274,13 @@ Die Syntax lautet:
 </div>
 </p>
 <p>
-Das optionale SchlÃ¼sselwort <span class="inlinecode"><span class="keyword">clustered</span></span> bestimt, ob die Security Domain in einer geclusterten Umgebung funktionsfÃ¤hig
+Das optionale Schlüsselwort <span class="inlinecode"><span class="keyword">clustered</span></span> bestimt, ob die Security Domain in einer geclusterten Umgebung funktionsfähig
 sein muss.
 </p>
 <a name="WebParameter"></a>
 <h3>Web Parameter</h3>
 <p>
-Mit Web-Parametern kann man der Web Applikation in der web.xml Parameter Ã¼bergeben. Die Syntax lautet:
+Mit Web-Parametern kann man der Web Applikation in der web.xml Parameter übergeben. Die Syntax lautet:
 </p>
 <p>
 <div class="literallayout">
@@ -292,7 +292,7 @@ Mit Web-Parametern kann man der Web Applikation in der web.xml Parameter Ã¼berge
 </div>
 </p>
 <p>
-Die EintrÃ¤ge kÃ¶nnen beliebig hÃ¤ufig im Modell eingetragen werden. Aus folgender Modellzeile:
+Die Einträge können beliebig häufig im Modell eingetragen werden. Aus folgender Modellzeile:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
@@ -316,7 +316,7 @@ wird in der web.xml:
 </p>
 <p>
 Mit der Methode String getInitParameter(final String key) in einem Action Handler kann auf diesen Wert zugegriffen werden. Die Werte
-sind aus Sicht des Application Servers und der Applikation selbst nicht verÃ¤nderlich.
+sind aus Sicht des Application Servers und der Applikation selbst nicht veränderlich.
 </p>
 </body>
 </html>
