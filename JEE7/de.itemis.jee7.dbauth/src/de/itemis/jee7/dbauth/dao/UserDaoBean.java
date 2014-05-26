@@ -7,14 +7,13 @@
 package de.itemis.jee7.dbauth.dao;
 
 import javax.ejb.Stateless;
-import javax.interceptor.Interceptors;
 import javax.persistence.TypedQuery;
 
 import de.itemis.jee7.dbauth.entities.AuthInfo;
-import de.itemis.jee7.util.Profiler;
+import de.itemis.jee7.util.Profiled;
 
 @Stateless
-@Interceptors(Profiler.class)
+@Profiled
 public class UserDaoBean extends AbstractUserDaoBean
 {
 	public AuthInfo findAuthInfo(final String email)
