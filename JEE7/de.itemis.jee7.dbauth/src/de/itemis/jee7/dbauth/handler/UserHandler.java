@@ -6,14 +6,17 @@
 
 package de.itemis.jee7.dbauth.handler;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-
 import java.util.List;
+
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
 
 import de.itemis.jee7.dbauth.entities.AuthInfo;
 import de.itemis.jee7.dbauth.entities.SiteAuthInfo;
 import de.itemis.jee7.dbauth.entities.SiteInfo;
+import de.itemis.jee7.util.Profiled;
 
 /**
  * This managed bean class implements the action handlings for the following entity beans:
@@ -27,8 +30,10 @@ import de.itemis.jee7.dbauth.entities.SiteInfo;
 
  * </ul>
  */
-@ManagedBean
+@Named
 @SessionScoped
+@Transactional(value = TxType.REQUIRED)
+@Profiled
 public class UserHandler extends AbstractUserHandler {
 	private static final long serialVersionUID = 1L;
 
@@ -326,5 +331,4 @@ public class UserHandler extends AbstractUserHandler {
 	public String backFromSiteInfo() {
 		return NAV_INDEX;
 	}
-
 }
