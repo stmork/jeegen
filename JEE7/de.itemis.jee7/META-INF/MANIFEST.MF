@@ -5,14 +5,16 @@ Bundle-Vendor: itemis AG
 Bundle-Version: 1.0.0.qualifier
 Bundle-SymbolicName: de.itemis.jee7;singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: de.morknet.oaw.dependencies;bundle-version="5.2.5";visibility:=reexport,
- de.morknet.oaw.tools5;bundle-version="5.2.4";visibility:=reexport,
+Require-Bundle: de.morknet.oaw.tools5;bundle-version="5.2.5";visibility:=reexport,
  org.eclipse.xtext,
  org.eclipse.xtext.util,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
  org.antlr.runtime,
- org.eclipse.xtext.common.types
+ org.eclipse.xtext.common.types,
+ org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional,
+ org.eclipse.xtext.ui,
+ org.eclipse.xtext.generator
 Import-Package: org.apache.commons.logging,
  org.apache.log4j,
  org.eclipse.xtend2.lib,
@@ -20,17 +22,14 @@ Import-Package: org.apache.commons.logging,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: de.itemis.jee7.formatting;uses:="org.eclipse.xtext.formatting.impl",
  de.itemis.jee7.generator,
- de.itemis.jee7.jee7;uses:="org.eclipse.emf.ecore,org.eclipse.emf.common.util",
- de.itemis.jee7.jee7.impl; uses:="de.itemis.jee7.jee7,  org.eclipse.emf.ecore,  org.eclipse.emf.common.util,  org.eclipse.emf.ecore.impl,  org.eclipse.emf.common.notify",
- de.itemis.jee7.jee7.util; uses:="org.eclipse.emf.ecore.util,  de.itemis.jee7.jee7,  org.eclipse.emf.ecore,  org.eclipse.emf.common.notify.impl,  org.eclipse.emf.common.notify",
+ de.itemis.jee7.jee7,
+ de.itemis.jee7.jee7.impl,
+ de.itemis.jee7.jee7.util,
  de.itemis.jee7.parser.antlr;uses:="org.eclipse.xtext.parser.antlr,de.itemis.jee7.parser.antlr.internal,de.itemis.jee7.services",
  de.itemis.jee7.parser.antlr.internal; uses:="org.eclipse.emf.ecore,  org.antlr.runtime,  org.eclipse.xtext.parser.antlr,  de.itemis.jee7.services",
  de.itemis.jee7.scoping;uses:="org.eclipse.xtext.scoping.impl",
  de.itemis.jee7.serializer,
  de.itemis.jee7.services;uses:="org.eclipse.xtext,org.eclipse.xtext.common.services,org.eclipse.xtext.service",
  de.itemis.jee7.validation,
- de.itemis.jee7;uses:="org.eclipse.xtext,org.eclipse.xtext.service,com.google.inject",
- de.itemis.jee7.jee7,
- de.itemis.jee7.jee7.impl,
- de.itemis.jee7.jee7.util
+ de.itemis.jee7;uses:="org.eclipse.xtext,org.eclipse.xtext.service,com.google.inject"
 
