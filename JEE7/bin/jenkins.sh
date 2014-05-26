@@ -15,9 +15,6 @@ cd ../de.itemis.jee7.ui
 ant undeploy
 ant clean deploy
 
-cd ../MinimalWebApplicationCdi
-ant clean package
-
 cd ../MinimalWebApplicationCdi7
 ant clean package
 
