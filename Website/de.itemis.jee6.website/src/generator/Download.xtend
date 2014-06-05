@@ -34,13 +34,13 @@ class Download extends AbstractWebsite {
 			<div class="container">
 				<h2>Installation Instructions</h2>
 	    		<p>
-	      			<strong>Der JEE-Generator ist in Java implementiert, daher muss die
+	      			<strong>Die JEE-Generatoren sind in Java implementiert, daher muss die
 	        		<a href="http://www.oracle.com/technetwork/java/index.html">Java
 	        		Runtime Environment</a> installiert sein.
 	      			</strong>
 	    		</p>
 				<p>
-					Es gibt zwei einfache Wege, den JEE-Generator ans Laufen zu bringen. Eine vorkonfigurierte Eclipse-Distribution
+					Es gibt zwei einfache Wege, die JEE-Generatoren ans Laufen zu bringen. Eine vorkonfigurierte Eclipse-Distribution
 					ist bereits mit allen notwendigen Plugins vorinstalliert verfügbar. Alternativ kann über eine Update Site
 					ein Eclipse mit allen notwendigen Plugins nachinstalliert werden.
 				</p>
@@ -62,20 +62,20 @@ class Download extends AbstractWebsite {
 					</ol>
 				</section>
 				<section>
-					<h2>JEE-Generator von der Update Site installieren  </h2>
+					<h2>JEE-Generatoren von der Update Site installieren  </h2>
 					<p>
 						Wenn Eclipse läuft:
 						<ul>
 							<li>
 								Wähle <strong>Help -&gt; Install New Software...</strong> aus der Menüleiste und
 								<strong>  Add...</strong> Geben Sie eine der Update Site URLs von oben an.
-								Diese Site fasst alle benötigten Komponenten und Abhängigkeiten für den JEE-Generator zusammen.
+								Diese Site fasst alle benötigten Komponenten und Abhängigkeiten für die JEE-Generatoren zusammen.
 							</li>
-							<li>Wähle <i>JEE-Generator</i> aus der Kategorie <i>JEE-Generator</i> und durch wiederholtes Klicken von
+							<li>Wähle den passenden <i>JEE-Generator</i> aus der Kategorie <i>JEE-Generatoren</i> und durch wiederholtes Klicken von
 								<i>Next</i> und einem abschließenden <i>Finish</i> wird die Installation abgeschlossen.
 							</li>
 							<li>
-								Nach einem kurzen Download steht der JEE-Generator zum Gebrauch zur Verfügung.
+								Nach einem kurzen Download stehen die JEE-Generatoren zum Gebrauch zur Verfügung.
 							</li>
 						</ul>
 					</p>
@@ -89,9 +89,9 @@ class Download extends AbstractWebsite {
 						Eclipse hat einen eingebauten Updatemanager, dieser arbeitet mit so genannten Updatesites als Quelle.<br />
 						In Eclipse öffne das <i>"Help"</i> Menü und klicke auf <i>"Install new Software..."</i>.
 					</p>
-				    <h3>Was ist die Lizenz des JEE-Generators?</h3>
+				    <h3>Was ist die Lizenz der JEE-Generatoren?</h3>
 					<p>
-						Der JEE-Generator ist frei verfügbar unter der <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.
+						Die JEE-Generator sind frei verfügbar unter der <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.
 					</p>
 				</div>
 			</div>

@@ -15,19 +15,20 @@ class MainSite {
 			<!-- Le styles -->
 			<link href="«bootstrapPath»/css/bootstrap.min.css" rel="stylesheet">
 			<style type="text/css">
-			    code.prettyprint {
-			        padding: 0px;
-			        background-color: white;
+					code.prettyprint {
+					padding: 0px;
+					background-color: white;
 					border: none;
-			    }
+				}
+
 				body {
 					padding-top: 20px;
 				}
-				
+
 				section {
 					padding-top: 40px;
 				}
-				
+
 				div#maincontainer>section {
 					padding-top: 90px;
 				}

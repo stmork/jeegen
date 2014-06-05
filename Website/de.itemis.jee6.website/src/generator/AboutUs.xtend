@@ -37,7 +37,7 @@ class AboutUs extends AbstractWebsite {
 							das Frontend des Eclipse basierten Frontends.
 						</p>
 						<p>
-							Seit 2012 arbeitet Steffen an dem <a href="http://www.jee-generator.de">JEE-Generator</a>, der
+							Seit 2012 arbeitet Steffen an den <a href="http://www.jee-generator.de">JEE-Generatoren</a>, der
 							modellbasiert ein einfaches Prototyping für Web-Anwendungen ermöglicht. Einige dieser Web-Anwendungen
 							werden hausintern verwendet, um die Produktivität zu erhöhen.
 						</p>
@@ -54,9 +54,9 @@ class AboutUs extends AbstractWebsite {
 							ebenfalls in der Abteilung für Infrastruktur und Beschaffung.
 						</p>
 						<p>
-							Seit 2012 arbeitet Dominik mit am JEE-Generator, der modellbasiert ein einfaches Prototyping für
+							Seit 2012 arbeitet Dominik mit an den JEE-Generatoren, der modellbasiert ein einfaches Prototyping für
 							Web-Anwendungen ermöglicht. Der generierte Prototyp lässt sich einfach für beliebige Anwendungsfälle
-							erweitern. Der JEE-Generator wird intern zur Erstellung einiger hausinterner Anwendungen genutzt.
+							erweitern. Der JEE6-Generator wird intern zur Erstellung einiger hausinterner Anwendungen genutzt.
 						</p>
 						<p>
 							Eine der hausinternen Anwendungen ist das Flexmento Lizenzsystem.
