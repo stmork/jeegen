@@ -1,5 +1,5 @@
 instructions.configure=\
-addRepository(type:0,location:https${#58}//download.eclipse.org/releases/kepler/,enabled:true);\
+addRepository(type:0,location:https${#58}//download.eclipse.org/releases/luna/,enabled:true);\
 addRepository(type:3,location:https${#58}//download.itemis.com/updates/releases/2.0.0/,enabled:true);\
 addRepository(type:4,location:https${#58}//oaw.sourceforge.net/updates/,enabled:true);\
-addRepository(type:5,location:https${#58}//jee6-generator.itemis.de/updates/kepler/,enabled:true);
+addRepository(type:5,location:https${#58}//jee-generator.de/updates/snapshot/luna/,enabled:true);
