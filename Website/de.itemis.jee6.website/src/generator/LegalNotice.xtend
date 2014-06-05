@@ -21,7 +21,7 @@ class LegalNotice extends AbstractWebsite {
 
 				<h3>Aufsichtsrat</h3>
 				Prof. Dr. Burkhard Igel (Vorsitzender), Stephan Grollmann (stellv. Vorsitzender), Michael Neuhaus
-				Sitz der Gesellschaft 	Lünen
+				Sitz der Gesellschaft Lünen
 				
 				<h3>Registergericht</h3>
 				Amtsgericht Dortmund

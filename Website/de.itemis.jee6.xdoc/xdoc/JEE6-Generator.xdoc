@@ -1,11 +1,11 @@
-chapter:JEE6Generator[JEE6-Generator]
+chapter:JEE6Generator[Die JEE-Generatoren]
 
-Der JEE-6Generator ist in der Lage, eine komplette JEE6-Web-Applikation aus einem einfachen Modell zu generieren.
-Das Framework wurde mit Xtext realisiert und ist als Eclipse-Plugin verfügbar.
+Die JEE-Generatoren sind in der Lage, eine komplette JEE6- oder JEE7-Web-Applikation aus einem einfachen Modell zu generieren.
+Das Framework wurde mit Xtext realisiert und die beiden Generatoren sind als Eclipse-Plugin verfügbar.
 
 section:newproject[JEE6-Projekt anlegen]
 
-Ein neues JEE6-Projekt kann mit der JEE6-Distribution einfach angelegt werden. Dazu muss der Menüpunkt File -> New -> Project...
+Ein neues JEE-Projekt kann mit der JEE-Distribution einfach angelegt werden. Dazu muss der Menüpunkt File -> New -> Project...
 aufgerufen werden. Im sich öffnenden Dialog wählt man unter dem Punkt Xtext den Punkt JEE6 Generator Project aus:
 
 img[images/NewProject1.png][][][]
