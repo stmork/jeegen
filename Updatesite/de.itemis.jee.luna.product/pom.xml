@@ -74,23 +74,23 @@
 								<!-- FETCH BASE DISTROS -->
 								<!-- OSX -->
 								<get src="${eclipsesdk.osx}"
-									dest="targets/4.3/macosx/x86_64/eclipse-jee-${eclipse.version}-macosx-cocoa-x86_64.tar.gz"
+									dest="targets/4.4/macosx/x86_64/eclipse-jee-${eclipse.version}-macosx-cocoa-x86_64.tar.gz"
 									skipexisting="true" />
 								<get src="${eclipsesdk.osx32}"
-									dest="targets/4.3/macosx/x86/eclipse-jee-${eclipse.version}-macosx-cocoa.tar.gz"
+									dest="targets/4.4/macosx/x86/eclipse-jee-${eclipse.version}-macosx-cocoa.tar.gz"
 									skipexisting="true" />
 								<!-- Windows -->
 								<get src="${eclipsesdk.windows}"
-									dest="targets/4.3/win32/x86_64/eclipse-jee-${eclipse.version}-win32-x86_64.zip"
+									dest="targets/4.4/win32/x86_64/eclipse-jee-${eclipse.version}-win32-x86_64.zip"
 									skipexisting="true" />
 								<get src="${eclipsesdk.windows32}" dest="targets/4.3/win32/x86/eclipse-jee-${eclipse.version}-win32.zip"
 									skipexisting="true" />
 								<!-- Linux -->
 								<get src="${eclipsesdk.linux32}"
-									dest="targets/4.3/linux/x86_64/eclipse-jee-${eclipse.version}-linux-gtk.tar.gz"
+									dest="targets/4.4/linux/x86_64/eclipse-jee-${eclipse.version}-linux-gtk.tar.gz"
 									skipexisting="true" />
 								<get src="${eclipsesdk.linux}"
-									dest="targets/4.3/linux/x86_64/eclipse-jee-${eclipse.version}-linux-gtk-x86_64.tar.gz"
+									dest="targets/4.4/linux/x86_64/eclipse-jee-${eclipse.version}-linux-gtk-x86_64.tar.gz"
 									skipexisting="true" />
 
 
