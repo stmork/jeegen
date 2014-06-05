@@ -1,6 +1,8 @@
 #!/bin/bash
 
-setenv LC_ALL de_DE.UTF-8
+set -e
 
-cd de.itemis.jee6.website
+export LC_ALL=de_DE.UTF-8
+BASE=`dirname $0`
+cd $BASE/../de.itemis.jee6.website
 ant clean generate
