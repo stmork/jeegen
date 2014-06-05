@@ -11,7 +11,6 @@ import java.util.logging.Logger;
 
 /**
  * This base class initializes a {@link Locale} for comparison purposes.
- * @author sm
  *
  * @param <T> The type to compare.
  */

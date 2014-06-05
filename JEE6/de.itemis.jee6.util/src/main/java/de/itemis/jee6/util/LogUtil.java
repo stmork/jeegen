@@ -11,8 +11,6 @@ import org.apache.commons.logging.Log;
 
 /**
  * This class helps logging in a performant manner.
- * @author sm
- *
  */
 public class LogUtil
 {

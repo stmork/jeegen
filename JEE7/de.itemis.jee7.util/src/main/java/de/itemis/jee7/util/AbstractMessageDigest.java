@@ -5,6 +5,14 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Formatter;
 
+/**
+ * This abstract class provides message digests. The following hash methods are supported:
+ * <ul>
+ * <li>MD5</li>
+ * <li>SHA1</li>
+ * <li>SHA256</li>
+ * </ul>
+ */
 abstract public class AbstractMessageDigest
 {
 	protected enum DIGEST
@@ -27,7 +35,12 @@ abstract public class AbstractMessageDigest
 	};
 
 	private MessageDigest crypt;
-	
+
+	/**
+	 * This constructor initializes this class with the given hash algorithm.
+	 * 
+	 * @param digest The hash to use.
+	 */
 	protected AbstractMessageDigest(final DIGEST digest)
 	{
 		try

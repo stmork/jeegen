@@ -12,8 +12,6 @@ import javax.faces.validator.ValidatorException;
 
 /**
  * This class is an abstract class for validators.
- * @author sm
- *
  */
 abstract public class BaseValidator implements ResourceBundleDefinitions
 {

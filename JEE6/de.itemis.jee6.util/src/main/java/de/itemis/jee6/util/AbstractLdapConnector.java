@@ -66,6 +66,13 @@ abstract public class AbstractLdapConnector
 		LogUtil.debug(log, "Contact to LDAP (%s) with user %s.", url, part);
 	}
 
+	/**
+	 * This constructor setups an existing {@link DirContext} and the given dn.
+	 * 
+	 * @param context The initialized {@link DirContext}
+	 * @param dn The distinguished name to use.
+	 * @throws NamingException
+	 */
 	protected AbstractLdapConnector(final DirContext context, final String dn) throws NamingException
 	{
 		this.dn = dn;

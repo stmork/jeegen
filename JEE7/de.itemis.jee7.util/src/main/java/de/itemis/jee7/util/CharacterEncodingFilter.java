@@ -14,7 +14,6 @@ import javax.servlet.annotation.WebFilter;
 
 /**
  * This web servlet filter ensures that the request encoding is set to UTF-8.
- *
  */
 @WebFilter(urlPatterns = {"/*"})
 public class CharacterEncodingFilter implements Filter

@@ -15,7 +15,6 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * This web servlet filter ensures that the request encoding is set to UTF-8.
- *
  */
 @WebFilter(urlPatterns = {"/*"})
 public class CharacterEncodingFilter implements Filter
@@ -30,7 +29,7 @@ public class CharacterEncodingFilter implements Filter
 	{
 		log.debug("=init()");
 	}
-	
+
 	/**
 	 * This destroy method intentionally do nothing.
 	 */
