@@ -83,7 +83,7 @@
 								<get src="${eclipsesdk.windows}"
 									dest="targets/4.4/win32/x86_64/eclipse-jee-${eclipse.version}-win32-x86_64.zip"
 									skipexisting="true" />
-								<get src="${eclipsesdk.windows32}" dest="targets/4.3/win32/x86/eclipse-jee-${eclipse.version}-win32.zip"
+								<get src="${eclipsesdk.windows32}" dest="targets/4.4/win32/x86/eclipse-jee-${eclipse.version}-win32.zip"
 									skipexisting="true" />
 								<!-- Linux -->
 								<get src="${eclipsesdk.linux32}"
