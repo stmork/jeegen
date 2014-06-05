@@ -12,7 +12,7 @@ class Features extends AbstractWebsite {
 			<h2>Features</h2>
 			<div class="box introduction">
 				<p>
-					Der JEE-Generator soll durch ein einfaches Modell die gesamte Infrastruktur für eine
+					Die JEE-Generatoren sollen durch ein einfaches Modell die gesamte Infrastruktur für eine
 					Web-Anwendung generieren. Dadurch soll der Aufwand für Build und Deploy
 					möglichst minimiert werden. Das von der Web-Anwendung unabhängige Verhalten wird
 					abhängig vom benutzten Container in diesem konfiguriert. Dadurch kann dieselbe
@@ -21,12 +21,12 @@ class Features extends AbstractWebsite {
 				</p>
 
 				<p>
-					Der Generator generiert eine Web-Applikation, die folgende Frameworks des JEE6-Standards
+					Der JEE6- oder JEE7-Generator generiert eine Web-Applikation, die folgende Frameworks des JEE-Standards
 					benutzt:
 					<ul>
-						<li>Servlet API 3.0</li>
-						<li>XHTML/JSF 2.0</li>
-						<li>EJB 3.1</li>
+						<li>Servlet API 3.x</li>
+						<li>XHTML/JSF 2.x</li>
+						<li>EJB 3.1 oder höher</li>
 						<li>JAAS</li>
 						<li>Java Mail</li>
 					</ul>

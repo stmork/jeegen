@@ -11,11 +11,11 @@ class PostProcessor {
 
 	def protected getCodePattern() {
 		if(_codePattern == null)
-		 	_codePattern = Pattern::compile(
-		 		Pattern::quote(markCodeBegin) + "\\n(\\s*).*?" + Pattern::quote(markCodeEnd), 
-		 		Pattern::MULTILINE + Pattern::DOTALL
-		 	)
-		 _codePattern
+			_codePattern = Pattern::compile(
+				Pattern::quote(markCodeBegin) + "\\n(\\s*).*?" + Pattern::quote(markCodeEnd), 
+				Pattern::MULTILINE + Pattern::DOTALL
+			)
+		_codePattern
 	}
 	
 	def protected unindentCodeBlocks(CharSequence it) {
