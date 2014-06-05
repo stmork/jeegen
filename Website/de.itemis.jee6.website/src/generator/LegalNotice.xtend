@@ -12,8 +12,9 @@ class LegalNotice extends AbstractWebsite {
 			<h2>Impressum</h2>
 			<div class="box introduction">
 				<h3>Unternehmen</h3>
-				itemis AG
-				Am Brambusch 15
+				itemis AG<br/>
+				Am Brambusch 15<br/>
+				<br/>
 				44536 Lünen
 
 				<h3>Vorstand</h3>
@@ -21,12 +22,15 @@ class LegalNotice extends AbstractWebsite {
 
 				<h3>Aufsichtsrat</h3>
 				Prof. Dr. Burkhard Igel (Vorsitzender), Stephan Grollmann (stellv. Vorsitzender), Michael Neuhaus
-				Sitz der Gesellschaft Lünen
-				
+
+				<h3>Sitz der Gesellschaft</h3>
+				Lünen
+
 				<h3>Registergericht</h3>
 				Amtsgericht Dortmund
 				Registernummer 
 				HRB 20621
+
 				<h3>Umsatzsteueridentifikationsnummer</h3>
 				DE 23 11 77 498
 			</div>
