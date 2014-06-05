@@ -112,17 +112,22 @@ class Download extends AbstractWebsite {
 				<tbody>
 					<tr>
 						<td style="text-align: center;">
-							<a href="http://jee6-generator.itemis.de/updates/kepler/" class="btn" style="width: 70%;">Kepler</a>
+							<a href="http://jee6-generator.itemis.de/updates/kepler/" class="btn" style="width: 70%;">Kepler (Release)</a>
 						</td>
 					</tr>
 					<tr>
 						<td style="text-align: center;">
-							<a href="http://jee6-generator.itemis.de/updates/luna/" class="btn" style="width: 70%;">Luna</a>
+							<a href="http://jee6-generator.itemis.de/updates/luna/" class="btn" style="width: 70%;">Luna (Release)</a>
 						</td>
 					</tr>
 					<tr>
 						<td style="text-align: center;">
-							<a href="http://jee6-generator.itemis.de/updates/snapshot/" class="btn" style="width: 70%;">Snapshot</a>
+							<a href="http://jee6-generator.itemis.de/updates/snapshot/kepler" class="btn" style="width: 70%;">Kepler (Snapshot)</a>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align: center;">
+							<a href="http://jee6-generator.itemis.de/updates/snapshot/luna" class="btn" style="width: 70%;">Luna (Snapshot)</a>
 						</td>
 					</tr>
 				</tbody>
