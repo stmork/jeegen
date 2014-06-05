@@ -30,17 +30,17 @@ class Community extends AbstractWebsite {
 		<div class="row">
 			<div class="span1">&nbsp;</div>
 			<div class="span9 team">
-		    <a href="«link.trim»" class="anchor-in-div"></a>
-		    <div class="row">
-			  <div class="span1 ">
-			    <img src="images/«img.trim»" alt="image" class="image_left">
-			  </div>
-			  <div class="span2 ">
-			    <h3>«title.trim»</h3>
-			 	</div>
-				<div class="span6 ">
-					«description»
-				</div>
+				<a href="«link.trim»" class="anchor-in-div"></a>
+				<div class="row">
+					<div class="span1 ">
+						<img src="images/«img.trim»" alt="image" class="image_left">
+					</div>
+					<div class="span2 ">
+						<h3>«title.trim»</h3>
+					</div>
+					<div class="span6 ">
+						«description»
+					</div>
 				</div>
 			</div>
 		  <div class="span1">&nbsp;</div>

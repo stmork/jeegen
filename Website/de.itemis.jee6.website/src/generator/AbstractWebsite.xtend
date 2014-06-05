@@ -128,9 +128,9 @@ abstract class AbstractWebsite implements Resource {
 	def slogan() '''
 		<div id="slogan">
 			<div class="sloganCentering">
-				<h2>Was ist der JEE-Generator?</h2>
-				<h3>Der JEE-Generator ist in der Lage, eine komplette JEE-Web-Applikation aus einem einfachen Modell zu generieren.
-					Das Framework wurde mit Xtext realisiert und ist als Eclipse-Plugin verfügbar. </h3>
+				<h2>Was sind die JEE-Generatoren?</h2>
+				<h3>Die JEE-Generatoren sind in der Lage, eine komplette JEE-Web-Applikation (Java EE 6 oder Java EE 7) aus einem einfachen Modell zu generieren.
+					Das Framework wurde mit Xtext realisiert und ist als Eclipse-Plugin verfügbar. Für JEE6 und JEE7 stehen getrennte Plugins zur Verfügung.</h3>
 			</div>
 		</div>
 	'''
