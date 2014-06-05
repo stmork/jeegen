@@ -9,6 +9,9 @@ import java.lang.annotation.Target;
 
 import javax.interceptor.InterceptorBinding;
 
+/**
+ * This annotation defines the profiling tagging.
+ */
 @InterceptorBinding
 @Target({TYPE, METHOD})
 @Retention(RUNTIME)

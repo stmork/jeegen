@@ -13,8 +13,6 @@ import javax.faces.validator.ValidatorException;
 
 /**
  * This class implements a JSF {@link Validator}.
- * @author sm
- *
  */
 @ManagedBean
 @FacesValidator("mailValidator")
@@ -25,7 +23,7 @@ public class MailValidator implements Validator
 			"(\\.[A-Za-z]{2,})$";
  
 	private static final Pattern pattern = Pattern.compile(EMAIL_PATTERN);
-	
+
 	@Override
 	public void validate(FacesContext context, UIComponent component, Object input)
 			throws ValidatorException

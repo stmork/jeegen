@@ -9,8 +9,6 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * This class has some methods for finding some special time points.
- * @author sm
- *
  */
 public class DateTimeUtil
 {

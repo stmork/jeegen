@@ -5,8 +5,6 @@ package de.itemis.jee6.util;
 
 /**
  * This bean class holds information about a bundle key and its UI element id pair.
- * @author sm
- *
  */
 public class ErrorInfo
 {

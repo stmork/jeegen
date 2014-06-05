@@ -11,8 +11,6 @@ import java.util.logging.Logger;
 
 /**
  * This class helps logging in a performant manner.
- * @author sm
- *
  */
 public class LogUtil
 {

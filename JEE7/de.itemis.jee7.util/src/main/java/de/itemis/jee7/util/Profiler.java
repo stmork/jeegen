@@ -15,9 +15,6 @@ import javax.interceptor.InvocationContext;
 
 /**
  * This method implements a logging profiler which can be used as and EJB SessionBean {@link Interceptor}.
- * 
- * @author sm
- *
  */
 @Profiled
 @Interceptor

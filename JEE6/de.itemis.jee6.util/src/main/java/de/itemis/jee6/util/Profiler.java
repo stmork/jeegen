@@ -14,9 +14,6 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * This method implements a logging profiler which can be used as and EJB SessionBean interceptor.
- * 
- * @author sm
- *
  */
 public class Profiler implements Serializable
 {

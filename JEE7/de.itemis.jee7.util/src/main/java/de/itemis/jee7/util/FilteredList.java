@@ -11,8 +11,6 @@ import java.util.Locale;
 /**
  * This class extends an {@link ArrayList} for use with the {@link Filterable} interface. Only
  * Objects which implements this interface and which filter returns true are added to this {@link List}.
- * 
- * @author sm
  *
  * @param <T> This class can only comsume Filterable classes.
  */

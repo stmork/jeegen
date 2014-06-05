@@ -19,9 +19,6 @@ import javax.imageio.ImageIO;
 
 /**
  * This class helps downloading binary file via the HTTP protocol.
- * 
- * @author sm
- *
  */
 public class Download implements Serializable
 {
@@ -35,6 +32,7 @@ public class Download implements Serializable
 
 	/**
 	 * The constructor specifies the URL.
+	 * 
 	 * @param url The URL for downloading.
 	 * @throws MalformedURLException Thrown if the URL is malformed.
 	 */
@@ -46,6 +44,7 @@ public class Download implements Serializable
 
 	/**
 	 * The constructor specifies the URL.
+	 * 
 	 * @param url The URL for downloading.
 	 * @throws MalformedURLException Thrown if the URL is malformed.
 	 */
@@ -159,16 +158,31 @@ public class Download implements Serializable
 		return this.mimeType;
 	}
 
+	/**
+	 * This method returns the used {@link URL}.
+	 * 
+	 * @return The used {@link URL}.
+	 */
 	public String getUrl()
 	{
 		return url.toString();
 	}
 
+	/**
+	 * This method returns the connection timeout.
+	 * 
+	 * @return The connection timeout.
+	 */
 	public int getTimeout()
 	{
 		return timeout;
 	}
 
+	/**
+	 * This method sets a new timeout.
+	 * 
+	 * @param timeout The new timeout.
+	 */
 	public void setTimeout(int timeout)
 	{
 		this.timeout = timeout;
