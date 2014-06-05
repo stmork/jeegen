@@ -71,7 +71,7 @@ class Download extends AbstractWebsite {
 								<strong>  Add...</strong> Geben Sie eine der Update Site URLs von oben an.
 								Diese Site fasst alle benötigten Komponenten und Abhängigkeiten für die JEE-Generatoren zusammen.
 							</li>
-							<li>Wähle den passenden <i>JEE-Generator</i> aus der Kategorie <i>JEE-Generatoren</i> und durch wiederholtes Klicken von
+							<li>Wähle den passenden <i>JEE-Generator</i> aus der Kategorie <i>JEE-Generators</i> und durch wiederholtes Klicken von
 								<i>Next</i> und einem abschließenden <i>Finish</i> wird die Installation abgeschlossen.
 							</li>
 							<li>

@@ -104,7 +104,7 @@ zugreifen. Veranschaulicht wird das anhand folgenden Beispielmodells, dass teilw
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">Boolean</span>&nbsp;<span class="keyword">default</span>&nbsp;<span class="keyword">false</span>&nbsp;<span class="string">"productive"</span>&nbsp;&nbsp;&nbsp;<span class="keyword">ref</span>&nbsp;<span class="string">"java:global/productive"</span>;<br/>
 &nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;Person<br/>
-}
+}<br/>
 </p>
 </div>
 </div>
@@ -121,7 +121,7 @@ diese Klasse eine Referenz auf das DAO UserDaoBean mit Namen dao vom Application
 <div class="incode">
 <p class="code">
 @EJB<br/>
-<span class="keyword">protected</span>&nbsp;UserDaoBean&nbsp;dao;
+<span class="keyword">protected</span>&nbsp;UserDaoBean&nbsp;dao;<br/>
 </p>
 </div>
 </div>
@@ -137,7 +137,7 @@ Address enthalten ist, werden die entsprechenden Zugriffsmethoden dafür gleich m
 <span class="keyword">abstract</span>&nbsp;String&nbsp;changePerson(<span class="keyword">final</span>&nbsp;Person&nbsp;person);<br/>
 <span class="keyword">abstract</span>&nbsp;String&nbsp;removePerson(<span class="keyword">final</span>&nbsp;Person&nbsp;person);<br/>
 <span class="keyword">abstract</span>&nbsp;String&nbsp;savePerson();<br/>
-<span class="keyword">abstract</span>&nbsp;String&nbsp;backFromPerson();
+<span class="keyword">abstract</span>&nbsp;String&nbsp;backFromPerson();<br/>
 </p>
 </div>
 </div>
@@ -150,7 +150,7 @@ brauchen wir hierfür auch Zugriffsmethoden:
 <p class="code">
 <span class="keyword">public</span>&nbsp;Person&nbsp;&nbsp;getPerson();<br/>
 <span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;&nbsp;&nbsp;&nbsp;setPerson(<span class="keyword">final</span>&nbsp;Person&nbsp;person);<br/>
-<span class="keyword">public</span>&nbsp;<span class="keyword">boolean</span>&nbsp;isPersonEmpty(<span class="keyword">final</span>&nbsp;Person&nbsp;person);
+<span class="keyword">public</span>&nbsp;<span class="keyword">boolean</span>&nbsp;isPersonEmpty(<span class="keyword">final</span>&nbsp;Person&nbsp;person);<br/>
 </p>
 </div>
 </div>
@@ -174,7 +174,7 @@ public List&lt;Address&gt; getAddressList() {
 <span class="keyword">abstract</span>&nbsp;String&nbsp;changeAddress(<span class="keyword">final</span>&nbsp;Address&nbsp;address);<br/>
 <span class="keyword">abstract</span>&nbsp;String&nbsp;removeAddress(<span class="keyword">final</span>&nbsp;Address&nbsp;address);<br/>
 <span class="keyword">abstract</span>&nbsp;String&nbsp;saveAddress();<br/>
-<span class="keyword">abstract</span>&nbsp;String&nbsp;backFromAddress();
+<span class="keyword">abstract</span>&nbsp;String&nbsp;backFromAddress();<br/>
 </p>
 </div>
 </div>
@@ -200,7 +200,7 @@ sein eigenes DAO hat, kann das zum Action Handler passende DAO direkt in den Act
 <span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;addPerson(<span class="keyword">final</span>&nbsp;Person&nbsp;person);<br/>
 <span class="keyword">public</span>&nbsp;Person&nbsp;updatePerson(<span class="keyword">final</span>&nbsp;Person&nbsp;person);<br/>
 <span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;deletePerson(Person&nbsp;person);<br/>
-<span class="keyword">public</span>&nbsp;List&lt;Person&gt;&nbsp;getPersonList();
+<span class="keyword">public</span>&nbsp;List&lt;Person&gt;&nbsp;getPersonList();<br/>
 </p>
 </div>
 </div>
@@ -213,7 +213,7 @@ Relation vorhanden:
 <p class="code">
 <span class="keyword">public</span>&nbsp;Address&nbsp;addToPerson(Person&nbsp;person,&nbsp;<span class="keyword">final</span>&nbsp;Address&nbsp;address);<br/>
 <span class="keyword">public</span>&nbsp;Person&nbsp;deleteFromPerson(Address&nbsp;address);<br/>
-<span class="keyword">public</span>&nbsp;List&lt;Address&gt;&nbsp;getAddressList(<span class="keyword">final</span>&nbsp;Person&nbsp;person);
+<span class="keyword">public</span>&nbsp;List&lt;Address&gt;&nbsp;getAddressList(<span class="keyword">final</span>&nbsp;Person&nbsp;person);<br/>
 </p>
 </div>
 </div>
@@ -226,7 +226,7 @@ Die Methoden für die Entity Bean Address wird auch der Vollständigkeit halber au
 <span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;addAddress(<span class="keyword">final</span>&nbsp;Address&nbsp;address);<br/>
 <span class="keyword">public</span>&nbsp;Address&nbsp;updateAddress(<span class="keyword">final</span>&nbsp;Address&nbsp;address);<br/>
 <span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;deleteAddress(Address&nbsp;address);<br/>
-<span class="keyword">public</span>&nbsp;List&lt;Address&gt;&nbsp;getAddressList();
+<span class="keyword">public</span>&nbsp;List&lt;Address&gt;&nbsp;getAddressList();<br/>
 </p>
 </div>
 </div>
@@ -249,7 +249,7 @@ Diese Methode zeigt an, dass der Zugriff für den eingeloggten Benutzer erlaubt i
 <p class="code">
 &lt;ui:fragment&nbsp;rendered=<span class="string">"#{userHandler.allowed"</span>&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;nur&nbsp;bei&nbsp;Berechtigung&nbsp;sichtbar&nbsp;--&gt;<br/>
-&lt;/ui:fragment&gt;
+&lt;/ui:fragment&gt;<br/>
 </p>
 </div>
 </div>
@@ -306,7 +306,7 @@ Aus dem Beispiel oben wird im DAO folgender Eintrag generiert:
 <div class="incode">
 <p class="code">
 @Resource(mappedName&nbsp;=&nbsp;<span class="string">"build"</span>)<br/>
-<span class="keyword">private</span>&nbsp;<span class="keyword">int</span>&nbsp;build;
+<span class="keyword">private</span>&nbsp;<span class="keyword">int</span>&nbsp;build;<br/>
 </p>
 </div>
 </div>
@@ -318,7 +318,13 @@ Mit Boolean-Properties kann man Texte wie z.B. URLs in einem Application Server 
 im Modell lautet:
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">Boolean</span>&nbsp;(<span class="keyword">default</span>&nbsp;&lt;<span class="keyword">true</span>|<span class="keyword">false</span>)&nbsp;&lt;Jndi&gt;&nbsp;(<span class="keyword">ref</span>&nbsp;&lt;Original-Jndi&gt;);</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">Boolean</span>&nbsp;(<span class="keyword">default</span>&nbsp;&lt;<span class="keyword">true</span>|<span class="keyword">false</span>)&nbsp;&lt;Jndi&gt;&nbsp;(<span class="keyword">ref</span>&nbsp;&lt;Original-Jndi&gt;);<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 Aus dem Beispiel oben wird im DAO folgender Eintrag generiert:
@@ -328,7 +334,7 @@ Aus dem Beispiel oben wird im DAO folgender Eintrag generiert:
 <div class="incode">
 <p class="code">
 @Resource(mappedName&nbsp;=&nbsp;<span class="string">"build"</span>)<br/>
-<span class="keyword">private</span>&nbsp;<span class="keyword">boolean</span>&nbsp;build&nbsp;=&nbsp;<span class="keyword">false</span>;
+<span class="keyword">private</span>&nbsp;<span class="keyword">boolean</span>&nbsp;build&nbsp;=&nbsp;<span class="keyword">false</span>;<br/>
 </p>
 </div>
 </div>
@@ -343,7 +349,13 @@ Es ist nicht nur möglich, einfache Datentypen über JNDI zu referenzieren. Bei de
 werden:
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">Type</span>&nbsp;&lt;class-name&gt;&nbsp;&lt;Jndi&gt;&nbsp;(<span class="keyword">ref</span>&nbsp;&lt;Original-Jndi);</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">Type</span>&nbsp;&lt;class-name&gt;&nbsp;&lt;Jndi&gt;&nbsp;(<span class="keyword">ref</span>&nbsp;&lt;Original-Jndi);<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 Aus dem Beispiel oben wird im DAO folgender Eintrag generiert:
@@ -351,7 +363,7 @@ Aus dem Beispiel oben wird im DAO folgender Eintrag generiert:
 <div class="incode">
 <p class="code">
 @Resource(mappedName=<span class="string">"ldap/itemis"</span>)<br/>
-<span class="keyword">private</span>&nbsp;DirContext&nbsp;ldap;
+<span class="keyword">private</span>&nbsp;DirContext&nbsp;ldap;<br/>
 </p>
 </div>
 </div>
