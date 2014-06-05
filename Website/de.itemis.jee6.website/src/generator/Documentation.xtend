@@ -109,7 +109,8 @@ class Documentation extends AbstractXdocBaseWebsite {
 		<li><strong>Additional Resources</strong></li>
 		<li>
 			<ul>
-				<li><a href="javadoc/">API Documentation (JavaDoc)</a></li>
+				<li><a href="javadoc/jee6">API Documentation Java EE 6 (JavaDoc)</a></li>
+				<li><a href="javadoc/jee7">API Documentation Java EE 7 (JavaDoc)</a></li>
 			</ul>
 		</li>
 	'''
