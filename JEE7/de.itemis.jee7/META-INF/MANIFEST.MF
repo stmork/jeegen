@@ -5,7 +5,7 @@ Bundle-Vendor: itemis AG
 Bundle-Version: 1.0.0.qualifier
 Bundle-SymbolicName: de.itemis.jee7;singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: de.morknet.oaw.tools5;bundle-version="5.2.5";visibility:=reexport,
+Require-Bundle: de.morknet.oaw.tools5;visibility:=reexport,
  org.eclipse.xtext,
  org.eclipse.xtext.util,
  org.eclipse.emf.ecore,

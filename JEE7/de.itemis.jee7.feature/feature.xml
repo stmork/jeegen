@@ -107,6 +107,7 @@ This Agreement is governed by the laws of the State of New York and the intellec
    <url>
       <update label="JEE Generator Update Site" url="http://www.jee-generator.de/updates/kepler"/>
       <discovery label="JEE Generator Project Site" url="http://www.jee-generator.de/"/>
+      <discovery label="OAW-Tools" url="http://oaw.sourceforge.net/updates/"/>
    </url>
 
    <requires>
