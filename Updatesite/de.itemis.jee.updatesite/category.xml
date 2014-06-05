@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
    <feature url="features/de.itemis.jee6.feature_1.1.8.qualifier.jar" id="de.itemis.jee6.feature" version="1.1.8.qualifier">
-      <category name="de.itemis.jee6"/>
+      <category name="de.itemis.jee"/>
    </feature>
    <feature url="features/de.itemis.jee7.feature_1.0.0.qualifier.jar" id="de.itemis.jee7.feature" version="1.0.0.qualifier">
-      <category name="de.itemis.jee7"/>
+      <category name="de.itemis.jee"/>
    </feature>
-   <category-def name="de.itemis.jee6" label="JEE6-Generator"/>
-   <category-def name="de.itemis.jee7" label="JEE7-Generator"/>
+   <category-def name="de.itemis.jee" label="JEE-Generators"/>
 </site>

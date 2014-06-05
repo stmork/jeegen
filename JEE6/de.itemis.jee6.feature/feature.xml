@@ -110,7 +110,6 @@ This Agreement is governed by the laws of the State of New York and the intellec
    </url>
 
    <requires>
-      <import plugin="de.morknet.oaw.tools5" version="5.2.4" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtext"/>
       <import plugin="org.eclipse.xtext.util"/>
       <import plugin="org.eclipse.emf.ecore"/>
@@ -133,6 +132,7 @@ This Agreement is governed by the laws of the State of New York and the intellec
       <import plugin="org.eclipse.xtend"/>
       <import plugin="org.eclipse.xpand"/>
       <import plugin="org.eclipse.help"/>
+      <import feature="de.morknet.oaw.tools5" version="5.2.5" match="greaterOrEqual"/>
    </requires>
 
    <plugin
