@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <description name="JEE6 Generator Update Site" url="http://jee6-generator.itemis.de/updates/kepler">
+   <description name="JEE-Generators Update Site" url="http://www.jee-generator.de/updates/kepler">
       
    </description>
    <feature url="features/de.itemis.jee6.feature_1.1.8.qualifier.jar" id="de.itemis.jee6.feature" version="1.1.8.qualifier"/>
