@@ -112,4 +112,5 @@
 			</plugin>
 		</plugins>
 	</build>
+	<version>1.0.1</version>
 </project>

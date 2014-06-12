@@ -2,7 +2,7 @@
 <feature
       id="de.itemis.jee7.feature"
       label="JEE7-Generator"
-      version="1.0.0.qualifier"
+      version="1.0.1"
       provider-name="itemis AG"
       plugin="de.itemis.jee7">
 
@@ -133,7 +133,7 @@ This Agreement is governed by the laws of the State of New York and the intellec
       <import plugin="org.eclipse.xtend"/>
       <import plugin="org.eclipse.xpand"/>
       <import plugin="org.eclipse.help"/>
-      <import feature="de.morknet.oaw.tools5" version="5.2.5" match="greaterOrEqual"/>
+      <import feature="de.morknet.oaw.tools5" version="5.2.8.201210111430" match="greaterOrEqual"/>
    </requires>
 
    <plugin

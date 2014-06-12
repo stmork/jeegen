@@ -13,4 +13,6 @@
   <packaging>eclipse-feature</packaging>
 
   <name>JEE7 DSL Feature</name>
+  <groupId>de.itemis.jee7</groupId>
+  <version>1.0.1</version>
 </project>
