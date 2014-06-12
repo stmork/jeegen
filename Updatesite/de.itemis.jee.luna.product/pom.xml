@@ -142,19 +142,19 @@
 								</builder>
 								<!-- Linux -->
 								<move file="${project.build.directory}/dist/${eclipsesdk.linux.filename}-${appname}-${project.version}.tar.gz"
-										tofile="${project.build.directory}/dist/eclipse-jee6-generator-kepler-linux-gtk-x86_64.tar.gz" />
+										tofile="${project.build.directory}/dist/eclipse-jee-generator-kepler-linux-gtk-x86_64.tar.gz" />
 								<move file="${project.build.directory}/dist/${eclipsesdk.linux32.filename}-${appname}-${project.version}.tar.gz"
-										tofile="${project.build.directory}/dist/eclipse-jee6-generator-kepler-linux-gtk.tar.gz" />
+										tofile="${project.build.directory}/dist/eclipse-jee-generator-kepler-linux-gtk.tar.gz" />
 								<!-- Windows -->
 								<move file="${project.build.directory}/dist/${eclipsesdk.windows.filename}-${appname}-${project.version}.zip"
-										tofile="${project.build.directory}/dist/eclipse-jee6-generator-kepler-win32-x86_64.zip" />
+										tofile="${project.build.directory}/dist/eclipse-jee-generator-kepler-win32-x86_64.zip" />
 								<move file="${project.build.directory}/dist/${eclipsesdk.windows32.filename}-${appname}-${project.version}.zip"
-										tofile="${project.build.directory}/dist/eclipse-jee6-generator-kepler-win32.zip" />
+										tofile="${project.build.directory}/dist/eclipse-jee-generator-kepler-win32.zip" />
 								<!-- OSX -->
 								<move file="${project.build.directory}/dist/${eclipsesdk.osx.filename}-${appname}-${project.version}.tar.gz"
-										tofile="${project.build.directory}/dist/eclipse-jee6-generator-kepler-macosx-cocoa-x86_64.tar.gz" />
+										tofile="${project.build.directory}/dist/eclipse-jee-generator-kepler-macosx-cocoa-x86_64.tar.gz" />
 								<move file="${project.build.directory}/dist/${eclipsesdk.osx32.filename}-${appname}-${project.version}.tar.gz"
-										tofile="${project.build.directory}/dist/eclipse-jee6-generator-kepler-macosx-cocoa.tar.gz" />
+										tofile="${project.build.directory}/dist/eclipse-jee-generator-kepler-macosx-cocoa.tar.gz" />
 							</target>
 						</configuration>
 					</execution>
