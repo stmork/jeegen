@@ -7,7 +7,7 @@ class Download extends AbstractWebsite {
 	}
 
 	def String getLink(String platform) {
-		'distro/eclipse-jee6-generator-kepler-' + platform + platform.fileExtension
+		'distro/eclipse-jee-generator-kepler-' + platform + platform.fileExtension
 	}
 
 	def String fileExtension(String platform) {
@@ -112,22 +112,22 @@ class Download extends AbstractWebsite {
 				<tbody>
 					<tr>
 						<td style="text-align: center;">
-							<a href="http://jee6-generator.itemis.de/updates/kepler/" class="btn" style="width: 70%;">Kepler (Release)</a>
+							<a href="http://jee-generator.de/updates/kepler/" class="btn" style="width: 70%;">Kepler (Release)</a>
 						</td>
 					</tr>
 					<tr>
 						<td style="text-align: center;">
-							<a href="http://jee6-generator.itemis.de/updates/luna/" class="btn" style="width: 70%;">Luna (Release)</a>
+							<a href="http://jee-generator.de/updates/luna/" class="btn" style="width: 70%;">Luna (Release)</a>
 						</td>
 					</tr>
 					<tr>
 						<td style="text-align: center;">
-							<a href="http://jee6-generator.itemis.de/updates/snapshot/kepler" class="btn" style="width: 70%;">Kepler (Snapshot)</a>
+							<a href="http://jee-generator.de/updates/snapshot/kepler" class="btn" style="width: 70%;">Kepler (Snapshot)</a>
 						</td>
 					</tr>
 					<tr>
 						<td style="text-align: center;">
-							<a href="http://jee6-generator.itemis.de/updates/snapshot/luna" class="btn" style="width: 70%;">Luna (Snapshot)</a>
+							<a href="http://jee-generator.de/updates/snapshot/luna" class="btn" style="width: 70%;">Luna (Snapshot)</a>
 						</td>
 					</tr>
 				</tbody>
