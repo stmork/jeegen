@@ -255,11 +255,6 @@
 					<layout>p2</layout>
 					<url>http://oaw.sourceforge.net/updates/</url>
 				</repository>
-				<repository>
-					<id>xtext</id>
-					<layout>p2</layout>
-					<url>http://download.itemis.com/updates/</url>
-				</repository>
 			</repositories>
 			<build>
 				<plugins>
@@ -320,11 +315,6 @@
 					<id>oaw-tools</id>
 					<layout>p2</layout>
 					<url>http://oaw.sourceforge.net/updates/</url>
-				</repository>
-				<repository>
-					<id>xtext</id>
-					<layout>p2</layout>
-					<url>http://download.itemis.com/updates/</url>
 				</repository>
 			</repositories>
 			<build>
