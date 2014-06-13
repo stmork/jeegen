@@ -55,6 +55,139 @@ Workflow
 «ENDDEFINE»
 
 «DEFINE build FOR DslProjectInfo»
+«IF mavenProject»
+«FILE "pom.xml"»
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>«this.basePackage»</groupId>
+  <artifactId>«this.projectName»</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <src-gen>${project.basedir}/src/generated/java</src-gen>
+    <res-gen>${project.basedir}/src/generated/resources</res-gen>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>de.itemis.jee6</groupId>
+      <artifactId>de.itemis.jee6.utils</artifactId>
+      <version>1.1.9</version>
+    </dependency>
+    <dependency>
+      <groupId>javax</groupId>
+      <artifactId>javaee-api</artifactId>
+      <version>6.0</version>
+    </dependency>
+  </dependencies>
+
+  <repositories>
+    <repository>
+      <id>jee-generator</id>
+      <url>https://projects.itemis.de/nexus/content/groups/ejb3/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+    </repository>
+  </repositories>
+
+  <build>
+    <finalName>«this.projectName»</finalName>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+          <generatedSourcesDirectory>${src-gen}</generatedSourcesDirectory>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.17</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>2.5</version>
+        <configuration>
+          <filesets>
+            <fileset>
+              <directory>${src-gen}</directory>
+              <excludes>
+                <exclude>**/*.svn/**</exclude>
+                <exclude>**/*.git/**</exclude>
+              </excludes>
+            </fileset>
+            <fileset>
+              <directory>${res-gen}</directory>
+              <excludes>
+                <exclude>**/*.svn/**</exclude>
+                <exclude>**/*.git/**</exclude>
+              </excludes>
+            </fileset>
+          </filesets>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.fornax.toolsupport</groupId>
+        <artifactId>fornax-oaw-m2-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>run-workflow</goal>
+            </goals>
+            <configuration>
+              <workflowEngine>mwe2</workflowEngine>
+              <workflowDescriptor>src/main/java/Generator.mwe2</workflowDescriptor>
+              <jvmSettings>
+                <fork>true</fork>
+              </jvmSettings>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>properties-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>initialize</phase>
+            <goals>
+              <goal>read-project-properties</goal>
+            </goals>
+            <configuration>
+              <files>
+                <file>${user.home}/.jee6.properties</file>
+              </files>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>fornax</id>
+      <url>http://www.fornax-platform.org/m2/repository</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
+</project>
+«ENDFILE»
+«ELSE»
 «FILE "build.xml"»
 <project name="«this.projectName»" default="package">
 	<property file="${user.home}/.jee6.properties" />
@@ -207,6 +340,7 @@ Workflow
 	<target name="round-trip" depends="generate,deploy"/>
 </project>
 «ENDFILE»
+«ENDIF»
 «ENDDEFINE»
 
 «DEFINE readme FOR DslProjectInfo»

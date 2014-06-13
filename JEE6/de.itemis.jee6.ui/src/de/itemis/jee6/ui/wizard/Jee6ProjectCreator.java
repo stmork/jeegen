@@ -14,37 +14,46 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.xtext.ui.util.ProjectFactory;
+
+import com.google.common.collect.ImmutableList;
 
 public class Jee6ProjectCreator extends DslProjectCreator
 {
 	private final static String BUNDLE_ID   = "de.itemis.jee6.ui";
-	private final static String WEB_CONTENT = "res";
+
+	private final static String SRC_ROOT = "src/main/java";
+	private final static String SRC_GEN_ROOT = "src/generated/java";
+	private final static String RES_ROOT = "src/main/resources";
+	private final static String RES_GEN_ROOT = "src/generated/resources";
+	private final static String WEB_CONTENT_ROOT = "src/main/webapp";
+	private final static String MODEL_ROOT = "model";
+
+	private final List<String> PLAIN_SRC_FOLDER_LIST = ImmutableList.of(SRC_ROOT, SRC_GEN_ROOT, RES_ROOT, RES_GEN_ROOT, WEB_CONTENT_ROOT, MODEL_ROOT);
+	protected final List<String> SRC_FOLDER_LIST = ImmutableList.of("src","src/main","src/generated",SRC_ROOT, SRC_GEN_ROOT, RES_ROOT, RES_GEN_ROOT, WEB_CONTENT_ROOT, MODEL_ROOT);
 
 	@Override
 	protected List<String> getAllFolders()
 	{
-		List<String> defaultFolders = new ArrayList<String>(super.getAllFolders());
-		defaultFolders.add(WEB_CONTENT);
-		defaultFolders.add("WebContent");
-		defaultFolders.add("res-gen");
-		defaultFolders.add("model");
-        return defaultFolders;
+        return SRC_FOLDER_LIST;
     }
 
 	@Override
-	protected void enhanceProject(IProject project, IProgressMonitor monitor)
-			throws CoreException
+	protected void enhanceProject(IProject project, IProgressMonitor monitor) throws CoreException
 	{
 		try
 		{
-			copyFile(project, "resources/logo.png",       WEB_CONTENT + "/img");
-			copyFile(project, "resources/favicon.ico",    WEB_CONTENT + "/img");
-			copyFile(project, "resources/jee6-utils.jar", WEB_CONTENT + "/WEB-INF/lib");
+			copyFile(project, "resources/logo.png",       RES_ROOT + "/img");
+			copyFile(project, "resources/favicon.ico",    RES_ROOT + "/img");
+			if(!getProjectInfo().isMavenProject()) {
+				copyFile(project, "resources/jee6-utils.jar", WEB_CONTENT_ROOT + "/WEB-INF/lib");
+			}
 		}
 		catch(Exception e)
 		{
@@ -52,16 +61,43 @@ public class Jee6ProjectCreator extends DslProjectCreator
 			Status status = new Status(Status.ERROR, BUNDLE_ID, e.getMessage(), e);
 			throw new CoreException(status);
 		}
-		
-		final IJavaProject javaProject = JavaCore.create(project);
-		final IPath path = javaProject.getPath().append(WEB_CONTENT + "/WEB-INF/lib/jee6-utils.jar");
-		final IClasspathEntry entry = JavaCore.newLibraryEntry(path, null, null);
 
-		IClasspathEntry [] oldEntries = javaProject.getRawClasspath();
-		IClasspathEntry [] newEntries = new IClasspathEntry[oldEntries.length + 1];
-		newEntries[0] = entry;
-		System.arraycopy(oldEntries, 0, newEntries, 1, oldEntries.length);
+		final IJavaProject javaProject = JavaCore.create(project);
+		ArrayList<IClasspathEntry> newEntryList = new ArrayList<IClasspathEntry>();
+
+		System.out.println(getProjectInfo().isMavenProject());
 		
+		if(!getProjectInfo().isMavenProject()) {
+			final IPath path = javaProject.getPath().append(WEB_CONTENT_ROOT + "/WEB-INF/lib/jee6-utils.jar");
+			final IClasspathEntry jeeUtils = JavaCore.newLibraryEntry(path, null, null);
+			newEntryList.add(jeeUtils);
+		}
+
+		/*
+		 * Set the JVM Version to 1.6
+		 */
+		final IClasspathEntry jvmVersion = JavaCore.newContainerEntry(
+				new Path("org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"));
+		newEntryList.add(jvmVersion);
+
+		/*
+		 * Add the required plugins from MANIFEST.MF to the classpath
+		 */
+		final IClasspathEntry requiredPlugins = JavaCore.newContainerEntry(
+				new Path("org.eclipse.pde.core.requiredPlugins"));
+		newEntryList.add(requiredPlugins);
+
+		for(String folder : PLAIN_SRC_FOLDER_LIST)
+		{
+			IClasspathEntry srcfolder = JavaCore.newSourceEntry(javaProject.getPath().append(folder), null);
+			newEntryList.add(srcfolder);
+		}
+
+		IClasspathEntry [] newEntries = new IClasspathEntry[newEntryList.size()];
+		for(int i=0; i<newEntryList.size(); i++)
+		{
+			newEntries[i] = newEntryList.get(i);
+		}
 		javaProject.setRawClasspath(newEntries, new NullProgressMonitor());
 
 		super.enhanceProject(project, monitor);
@@ -107,5 +143,26 @@ public class Jee6ProjectCreator extends DslProjectCreator
 				stream.close();
 			}
 		}
+	}
+
+	@Override
+	protected DslProjectInfo getProjectInfo() {
+		return super.getProjectInfo();
+	}
+
+	@Override
+	protected String getModelFolderName() {
+		return super.getModelFolderName();
+	}
+
+	@Override
+	protected ProjectFactory configureProjectFactory(ProjectFactory factory) {
+		if(getProjectInfo().isMavenProject())
+		{
+			factory.addBuilderIds("org.eclipse.m2e.core.maven2Builder");
+			factory.addProjectNatures("org.eclipse.m2e.core.maven2Nature");
+		}
+
+		return super.configureProjectFactory(factory);
 	}
 }
