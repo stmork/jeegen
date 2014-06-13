@@ -1,17 +1,17 @@
 String getSrcPath() :
-	"src";
+	"src/main/java";
 
 String getSrcGenPath() :
-	"src-gen";
+	"src/generated/java";
 
 String getResPath() :
-	"res";
+	"src/main/resources";
 
 String getResGenPath() :
-	"res-gen";
+	"src/generated/resources";
 
 String getWebContentPath() :
-	"WebContent";
+	"src/main/webapp";
 
 String getModelPath() :
 	"model";
