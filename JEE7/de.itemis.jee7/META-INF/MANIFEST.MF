@@ -15,7 +15,11 @@ Require-Bundle: de.morknet.oaw.tools5;visibility:=reexport,
  org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional,
  org.eclipse.xtext.ui,
  org.eclipse.xtext.generator,
- org.eclipse.emf.mwe2.launch
+ org.eclipse.emf.mwe2.launch,
+ org.eclipse.text;visibility:=reexport,
+ org.eclipse.jdt.core;visibility:=reexport,
+ org.eclipse.core.resources;visibility:=reexport,
+ org.eclipse.core.runtime;visibility:=reexport
 Import-Package: org.apache.commons.logging,
  org.apache.log4j,
  org.eclipse.xtend2.lib,
