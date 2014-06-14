@@ -6,6 +6,7 @@ Bundle-Version: 1.1.10.qualifier
 Bundle-SymbolicName: de.itemis.jee6.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: de.itemis.jee6,
+ org.eclipse.jdt.core,
  org.eclipse.ui.ide,
  org.eclipse.xtext.ui,
  org.eclipse.xtext.ui.shared,
@@ -14,7 +15,11 @@ Require-Bundle: de.itemis.jee6,
  org.eclipse.xtext.ui.codetemplates.ui,
  org.eclipse.xtend,
  org.eclipse.xpand,
- org.eclipse.xtend
+ org.eclipse.ui.editors,
+ org.eclipse.ui,
+ org.antlr.runtime,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: de.itemis.jee6.ui.contentassist; uses:="org.eclipse.xtext,  org.eclipse.emf.ecore,  org.eclipse.xtext.common.ui.contentassist,  org.eclipse.xtext.ui.editor.contentassist",
