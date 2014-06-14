@@ -6,9 +6,9 @@ Bundle-Version: 1.0.2.qualifier
 Bundle-SymbolicName: de.itemis.jee7;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: de.morknet.oaw.tools5,
- org.eclipse.core.runtime,
+ org.eclipse.core.runtime;visibility:=reexport,
  org.eclipse.jdt.core;visibility:=reexport,
- org.eclipse.jface.text,
+ org.eclipse.jface.text;visibility:=reexport,
  org.eclipse.xtext,
  org.eclipse.xtext.ui,
  org.eclipse.xtext.generator,

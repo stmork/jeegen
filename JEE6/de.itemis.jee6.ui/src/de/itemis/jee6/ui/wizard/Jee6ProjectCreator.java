@@ -28,12 +28,12 @@ public class Jee6ProjectCreator extends DslProjectCreator
 {
 	private final static String BUNDLE_ID   = "de.itemis.jee6.ui";
 
-	private final static String SRC_ROOT = "src/main/java";
-	private final static String SRC_GEN_ROOT = "src/generated/java";
-	private final static String RES_ROOT = "src/main/resources";
-	private final static String RES_GEN_ROOT = "src/generated/resources";
+	private final static String SRC_ROOT         = "src/main/java";
+	private final static String SRC_GEN_ROOT     = "src/generated/java";
+	private final static String RES_ROOT         = "src/main/resources";
+	private final static String RES_GEN_ROOT     = "src/generated/resources";
 	private final static String WEB_CONTENT_ROOT = "src/main/webapp";
-	private final static String MODEL_ROOT = "model";
+	private final static String MODEL_ROOT       = "model";
 
 	private final List<String> PLAIN_SRC_FOLDER_LIST = ImmutableList.of(SRC_ROOT, SRC_GEN_ROOT, RES_ROOT, RES_GEN_ROOT, WEB_CONTENT_ROOT, MODEL_ROOT);
 	protected final List<String> SRC_FOLDER_LIST = ImmutableList.of("src","src/main","src/generated",SRC_ROOT, SRC_GEN_ROOT, RES_ROOT, RES_GEN_ROOT, WEB_CONTENT_ROOT, MODEL_ROOT);
@@ -41,8 +41,8 @@ public class Jee6ProjectCreator extends DslProjectCreator
 	@Override
 	protected List<String> getAllFolders()
 	{
-        return SRC_FOLDER_LIST;
-    }
+		return SRC_FOLDER_LIST;
+	}
 
 	@Override
 	protected void enhanceProject(IProject project, IProgressMonitor monitor) throws CoreException

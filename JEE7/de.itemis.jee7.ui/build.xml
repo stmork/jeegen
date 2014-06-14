@@ -72,6 +72,7 @@
 			</fileset>
 		</delete>
 		<delete dir="${bin-path}" />
+		<delete dir="./target" />
 	</target>
 
 	<target name="compile">
