@@ -3,7 +3,6 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Faces Test
 Bundle-SymbolicName: de.itemis.faces
 Bundle-Version: 1.0.0.qualifier
-Require-Bundle: de.itemis.jee7;bundle-version="1.0.0",
- de.morknet.oaw.dependencies;bundle-version="5.2.4"
+Require-Bundle: de.itemis.jee7;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-Vendor: itemis AG

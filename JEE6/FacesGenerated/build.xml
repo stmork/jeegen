@@ -58,6 +58,7 @@
 			<include name="org.eclipse.equi*.jar"/>
 			<include name="javax.inject*.jar"/>
 			<include name="stringtemplate*.jar"/>
+			<include name="org.objectweb.asm_5.0.1*.jar"/>
 
 			<exclude name="**/*source*.jar"/>
 			<exclude name="**/*src*.jar"/>
