@@ -14,7 +14,12 @@ Require-Bundle: de.itemis.jee7;visibility:=reexport,
  org.eclipse.xtext.ui.codetemplates.ui,
  org.eclipse.xtend,
  org.eclipse.xpand,
- org.eclipse.jdt.core
+ org.eclipse.jdt.core,
+ org.eclipse.ui.editors,
+ org.eclipse.ui,
+ org.antlr.runtime,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: de.itemis.jee7.ui.contentassist; uses:="org.eclipse.xtext,  org.eclipse.emf.ecore,  org.eclipse.xtext.common.ui.contentassist,  org.eclipse.xtext.ui.editor.contentassist",
