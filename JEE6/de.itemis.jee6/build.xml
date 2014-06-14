@@ -78,6 +78,7 @@
 			</fileset>
 		</delete>
 		<delete dir="${bin-path}" />
+		<delete dir="./target" />
 	</target>
 
 	<target name="generate" depends="clean,undeploy">

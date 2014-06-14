@@ -197,15 +197,7 @@
       </category>
       <wizard
             category="de.itemis.jee.ui.category"
-            class="de.itemis.jee6.ui.DslExecutableExtensionFactory:de.itemis.jee6.ui.wizard.Jee6MavenNewProjectWizard"
-            icon="icons/jee6_32.gif"
-            id="de.itemis.jee6.ui.wizard.DslNewProjectWizard"
-            name="JEE6 Generator Project (Maven based)"
-            project="true">
-      </wizard>
-      <wizard
-            category="de.itemis.jee.ui.category"
-            class="de.itemis.jee6.ui.DslExecutableExtensionFactory:de.itemis.jee6.ui.wizard.Jee6AntNewProjectWizard"
+            class="de.itemis.jee6.ui.DslExecutableExtensionFactory:de.itemis.jee6.ui.wizard.DslNewProjectWizard"
             icon="icons/jee6_32.gif"
             id="de.itemis.jee6.ui.wizard.DslNewProjectWizard"
             name="JEE6 Generator Project (Ant based)"
