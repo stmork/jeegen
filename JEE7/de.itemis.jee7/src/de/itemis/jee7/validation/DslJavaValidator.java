@@ -24,7 +24,6 @@ import de.itemis.jee7.jee7.Persistence;
 import de.itemis.jee7.jee7.Reference;
 import de.itemis.jee7.jee7.Security;
 import de.itemis.jee7.jee7.Timestamp;
- 
 
 public class DslJavaValidator extends AbstractDslJavaValidator
 {
