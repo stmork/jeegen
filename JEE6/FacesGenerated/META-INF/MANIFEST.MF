@@ -4,6 +4,7 @@ Bundle-Name: JEE6 Generator Example
 Bundle-SymbolicName: de.itemis.jee6.example;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: itemis AG
-Require-Bundle: de.itemis.jee6;bundle-version="1.1.0"
+Require-Bundle: de.itemis.jee6;bundle-version="1.1.0",
+ org.apache.commons.logging;bundle-version="1.1.1"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
