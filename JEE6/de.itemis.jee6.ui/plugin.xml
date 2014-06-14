@@ -200,7 +200,7 @@
             class="de.itemis.jee6.ui.DslExecutableExtensionFactory:de.itemis.jee6.ui.wizard.Jee6MavenNewProjectWizard"
             icon="icons/jee6_32.gif"
             id="de.itemis.jee6.ui.wizard.DslNewProjectWizard"
-            name="Maven based JEE6 Generator Project"
+            name="JEE6 Generator Project (Maven based)"
             project="true">
       </wizard>
       <wizard
@@ -208,7 +208,7 @@
             class="de.itemis.jee6.ui.DslExecutableExtensionFactory:de.itemis.jee6.ui.wizard.Jee6AntNewProjectWizard"
             icon="icons/jee6_32.gif"
             id="de.itemis.jee6.ui.wizard.DslNewProjectWizard"
-            name="Ant based JEE6 Generator Project"
+            name="JEE6 Generator Project (Ant based)"
             project="true">
       </wizard>
    </extension>
