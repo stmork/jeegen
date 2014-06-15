@@ -9,14 +9,13 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.xml.serialize.OutputFormat;
+import org.apache.xml.serialize.XMLSerializer;
 import org.eclipse.xpand2.output.FileHandle;
 import org.eclipse.xpand2.output.PostProcessor;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-
-import com.sun.org.apache.xml.internal.serialize.OutputFormat;
-import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 
 /**
  * Diese Klasse verschönert XML-Dateien. Die folgenden Dateiendungen werden erkannt:
