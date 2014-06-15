@@ -89,10 +89,6 @@
 									installing new software.</update.site.description>
 								<update.site.version>${project.version}</update.site.version>
 							</symbols>
-							<!-- <p2StatsUrl>http://server.org/url/where/to/push/stats</p2StatsUrl> -->
-							<associateSites>
-								<site>http://oaw.sourceforge.net/updates/</site>
-							</associateSites>
 						</configuration>
 					</execution>
 				</executions>
@@ -250,11 +246,6 @@
 					<layout>p2</layout>
 					<url>http://download.eclipse.org/releases/luna</url>
 				</repository>
-				<repository>
-					<id>oaw-tools</id>
-					<layout>p2</layout>
-					<url>http://oaw.sourceforge.net/updates/</url>
-				</repository>
 				<repository> 
 					<id>xtext</id> 
 					<layout>p2</layout> 
@@ -315,11 +306,6 @@
 					<id>jee7-target</id>
 					<layout>p2</layout>
 					<url>http://download.eclipse.org/releases/kepler</url>
-				</repository>
-				<repository>
-					<id>oaw-tools</id>
-					<layout>p2</layout>
-					<url>http://oaw.sourceforge.net/updates/</url>
 				</repository>
 				<repository> 
 					<id>xtext</id> 
