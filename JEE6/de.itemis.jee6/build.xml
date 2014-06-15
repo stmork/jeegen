@@ -25,7 +25,6 @@
 			<include name="com.google.inject*.jar"/>
 			<include name="com.ibm.icu*.jar"/>
 			<include name="de.itemis.xtext.*.jar"/>
-			<include name="de.morknet.oaw.*.jar"/>
 			<include name="org.antlr.*.jar"/>
 			<include name="org.apache.commons.cli*.jar"/>
 			<include name="org.apache.commons.logging*.jar"/>
@@ -39,6 +38,7 @@
 			<include name="org.eclipse.equi*.jar"/>
 			<include name="javax.inject*.jar"/>
 			<include name="stringtemplate*.jar"/>
+			<include name="org.objectweb.asm_5.0.1*.jar"/>
 
 			<exclude name="**/*source*.jar"/>
 			<exclude name="**/*src*.jar"/>
