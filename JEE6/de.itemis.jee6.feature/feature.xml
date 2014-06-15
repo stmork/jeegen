@@ -110,6 +110,14 @@ This Agreement is governed by the laws of the State of New York and the intellec
       <discovery label="OAW-Tools" url="http://oaw.sourceforge.net/updates/"/>
    </url>
 
+   <includes
+         id="org.eclipse.xtext.ui"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.xtext.runtime"
+         version="0.0.0"/>
+
    <requires>
       <import plugin="org.eclipse.text"/>
       <import plugin="org.eclipse.jdt.core"/>
@@ -138,6 +146,9 @@ This Agreement is governed by the laws of the State of New York and the intellec
       <import plugin="org.eclipse.xtext.common.types.ui"/>
       <import plugin="org.eclipse.xtext.ui.codetemplates.ui"/>
       <import plugin="org.eclipse.help"/>
+      <import plugin="org.eclipse.xtext.junit4"/>
+      <import plugin="org.eclipse.xtext.ui.junit"/>
+      <import plugin="org.eclipse.emf.mwe2.language.ui"/>
    </requires>
 
    <plugin

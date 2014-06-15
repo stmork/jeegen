@@ -63,7 +63,7 @@ public class XmlBeautifier implements PostProcessor
 
 	protected String processXml(final String unformattedXml, final String filename) throws IOException
 	{
-		return removeEmptyLines(prettyPrintXml(unformattedXml));
+		return removeEmptyLines(prettyPrintXml(unformattedXml, filename));
 	}
 
 	@Override
@@ -84,43 +84,42 @@ public class XmlBeautifier implements PostProcessor
 		return false;
 	}
 
-	protected String prettyPrintXml(final String unformattedXml) throws IOException
+	protected String prettyPrintXml(
+			final String unformattedXml,
+			final String filename) throws IOException
 	{
-		Writer out    = null;
 		String result = null;
 
 		try
 		{		
 			// Create an "identity" transformer - copies input to output
 			final Document document = parseXmlFile(unformattedXml);
-	
 			final TransformerFactory factory = TransformerFactory.newInstance();
 			factory.setAttribute("indent-number", new Integer(INDENT.length()));
 			final Transformer transformer = factory.newTransformer();
-	
-			transformer.setOutputProperty(OutputKeys.METHOD,   "xml");
-			transformer.setOutputProperty(OutputKeys.INDENT,   "yes");
-			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", Integer.toString(INDENT.length())); 
-	
+			setProperties(transformer, filename);
+
 			// Serialize DOM tree
-			out = new StringWriter();
-			transformer.transform(new DOMSource(document), new StreamResult(out));
-			result = out.toString();
+			try(final Writer out = new StringWriter())
+			{
+				transformer.transform(new DOMSource(document), new StreamResult(out));
+				result = out.toString();
+			}
 		}
 		catch (Exception e)
 		{
 			log.error(e.getMessage(), e);
 			result = unformattedXml;
 		}
-		finally
-		{
-			if (out != null)
-			{
-				out.close();
-			}
-		}
 		return result.trim();
+	}
+
+	protected void setProperties(final Transformer transformer, final String filename)
+	{
+		transformer.setOutputProperty(OutputKeys.METHOD,   "xml");
+		transformer.setOutputProperty(OutputKeys.INDENT,   "yes");
+		transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+		transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", Integer.toString(INDENT.length())); 
 	}
 
 	protected Document parseXmlFile(final String in) throws ParserConfigurationException, SAXException, IOException

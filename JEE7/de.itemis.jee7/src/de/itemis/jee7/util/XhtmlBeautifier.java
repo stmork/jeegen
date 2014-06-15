@@ -1,15 +1,10 @@
 package de.itemis.jee7.util;
 
 import java.io.IOException;
-import java.io.StringWriter;
-import java.io.Writer;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -27,65 +22,34 @@ public class XhtmlBeautifier extends XmlBeautifier
 	@Override
 	protected String processXml(final String unformattedXml, final String filename) throws IOException
 	{
-		return removeEmptyLines(prettyPrintXmlNop(unformattedXml, filename.endsWith("/layout.xhtml")));
+		return removeEmptyLines(prettyPrintXmlNop(unformattedXml, filename));
 	}
 
-	protected String prettyPrintXml(
-			final String  unformattedXml,
-			final boolean isLayout) throws IOException
+	@Override
+	protected void setProperties(final Transformer transformer, final String filename)
 	{
-		Writer out    = null;
-		String result = null;
-
-		try
-		{		
-			// Create an "identity" transformer - copies input to output
-			final Document document = parseXmlFile(unformattedXml);
-			final TransformerFactory factory = TransformerFactory.newInstance();
-			factory.setAttribute("indent-number", new Integer(INDENT.length()));
-			final Transformer transformer = factory.newTransformer();
-
-			transformer.setOutputProperty(OutputKeys.METHOD,               "html");
-			transformer.setOutputProperty(OutputKeys.INDENT,               "yes");
-			transformer.setOutputProperty(OutputKeys.ENCODING,             "UTF-8");
-			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-			transformer.setOutputProperty(OutputKeys.VERSION,              "5.0");
-			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", Integer.toString(INDENT.length())); 
-			if (isLayout)
-			{
-				transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "html");
-			}
-
-			// Serialize DOM tree
-			out = new StringWriter();
-			transformer.transform(new DOMSource(document), new StreamResult(out));
-			result = out.toString();
-		}
-		catch (Exception e)
+		transformer.setOutputProperty(OutputKeys.METHOD,               "html");
+		transformer.setOutputProperty(OutputKeys.INDENT,               "yes");
+		transformer.setOutputProperty(OutputKeys.ENCODING,             "UTF-8");
+		transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+		transformer.setOutputProperty(OutputKeys.VERSION,              "5.0");
+		transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", Integer.toString(INDENT.length())); 
+		if (filename.endsWith("/layout.xhtml"))
 		{
-			log.error(e.getMessage(), e);
-			result = unformattedXml;
+			transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "html");
 		}
-		finally
-		{
-			if (out != null)
-			{
-				out.close();
-			}
-		}
-		return result;
 	}
 
 	protected String prettyPrintXmlSax(
-			final String  unformattedXml,
-			final boolean isLayout) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, ClassCastException
+			final String unformattedXml,
+			final String filename) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, ClassCastException
 	{
 		final Document                  document = parseXmlFile(unformattedXml);
 		final DOMImplementationRegistry registry = DOMImplementationRegistry.newInstance();
 		final DOMImplementationLS       impl     = (DOMImplementationLS)registry.getDOMImplementation("LS");
 		final LSSerializer              writer   = impl.createLSSerializer();
 
-		if (isLayout)
+		if (filename.endsWith("/layout.xhtml"))
 		{
 			final DocumentType docType = document.getImplementation().createDocumentType("html", "", "");
 			document.appendChild(docType);
@@ -95,7 +59,7 @@ public class XhtmlBeautifier extends XmlBeautifier
 		writer.getDomConfig().setParameter("xml-declaration", Boolean.FALSE); 
 		final String result = writer.writeToString(document);
 
-		if (isLayout)
+		if (filename.endsWith("/layout.xhtml"))
 		{
 			log.debug("\n" + unformattedXml);
 			log.debug("\n" + result);
@@ -104,7 +68,7 @@ public class XhtmlBeautifier extends XmlBeautifier
 		return result;
 	}
 	
-	protected String prettyPrintXmlNop(final String  unformattedXml, final boolean isLayout)
+	protected String prettyPrintXmlNop(final String  unformattedXml, final String filename)
 	{
 		return unformattedXml;
 	}
