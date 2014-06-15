@@ -5,20 +5,9 @@ Bundle-Vendor: itemis AG
 Bundle-Version: 1.1.10.qualifier
 Bundle-SymbolicName: de.itemis.jee6; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: de.morknet.oaw.tools5,
- org.eclipse.core.runtime;visibility:=reexport,
- org.eclipse.jdt.core;visibility:=reexport,
- org.eclipse.jface.text;visibility:=reexport,
- org.eclipse.xtext,
- org.eclipse.xtext.ui,
- org.eclipse.xtext.generator,
- org.eclipse.xtext.common.types,
- org.eclipse.xtext.util,
- org.eclipse.emf.ecore,
- org.eclipse.emf.common,
- org.eclipse.emf.mwe2.launch;visibility:=reexport,
- org.eclipse.text;visibility:=reexport,
- org.antlr.runtime,
+Require-Bundle: de.morknet.oaw.tools5;bundle-version="5.2.5";visibility:=reexport,
+ de.morknet.oaw.dependencies;bundle-version="5.2.5";visibility:=reexport,
+ org.eclipse.text,
  org.objectweb.asm;bundle-version="5.0.1";visibility:=reexport
 Import-Package: org.apache.commons.logging,
  org.apache.log4j
