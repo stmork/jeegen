@@ -5,22 +5,10 @@ Bundle-Vendor: itemis AG
 Bundle-Version: 1.0.2.qualifier
 Bundle-SymbolicName: de.itemis.jee7.ui;singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: de.itemis.jee7;visibility:=reexport,
- org.eclipse.jdt.core;visibility:=reexport,
- org.eclipse.core.resources;visibility:=reexport,
- org.eclipse.jface.text;visibility:=reexport,
- org.eclipse.text;visibility:=reexport,
- org.eclipse.ui,
- org.eclipse.ui.editors,
- org.eclipse.ui.ide,
- org.eclipse.xtext.ui,
- org.eclipse.xtext.ui.shared,
- org.eclipse.xtext.ui.codetemplates.ui,
+Require-Bundle: de.itemis.jee7;bundle-version="1.0.2",
  org.eclipse.xtext.builder,
- org.eclipse.xtext.common.types.ui,
- org.eclipse.xtend,
- org.eclipse.xpand,
- org.antlr.runtime
+ org.eclipse.xtext.ui.shared,
+ org.eclipse.ui.ide
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: de.itemis.jee7.ui.contentassist;
