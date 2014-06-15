@@ -1,8 +1,6 @@
 package de.itemis.jee6.util;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
 
@@ -15,7 +13,6 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.eclipse.xpand2.output.FileHandle;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentType;
 import org.w3c.dom.bootstrap.DOMImplementationRegistry;
@@ -26,26 +23,11 @@ import org.xml.sax.SAXException;
 public class XhtmlBeautifier extends XmlBeautifier
 {
 	private final static Log log = LogFactory.getLog(XhtmlBeautifier.class);
-	private final static String INDENT = "    ";
 
 	@Override
-	public void beforeWriteAndClose(FileHandle handle)
+	protected String processXml(final String unformattedXml, final String filename) throws IOException
 	{
-		final String filename = handle.getAbsolutePath(); 
-
-		if (isXmlFile(filename))
-		{
-			try
-			{
-				final String unformattedXml = handle.getBuffer().toString().trim(); 
-
-				handle.setBuffer(removeEmptyLines(prettyPrintXmlNop(unformattedXml, filename.endsWith("/layout.xhtml"))));
-			}
-			catch (Exception e)
-			{
-				log.error(e);
-			}
-		}
+		return removeEmptyLines(prettyPrintXmlNop(unformattedXml, filename.endsWith("/layout.xhtml")));
 	}
 
 	protected String prettyPrintXml(
@@ -58,25 +40,25 @@ public class XhtmlBeautifier extends XmlBeautifier
 		try
 		{		
 			// Create an "identity" transformer - copies input to output
-	        final Document document = parseXmlFile(unformattedXml);
+			final Document document = parseXmlFile(unformattedXml);
 			final TransformerFactory factory = TransformerFactory.newInstance();
 			factory.setAttribute("indent-number", new Integer(INDENT.length()));
-			final Transformer t = factory.newTransformer();
-	
-			t.setOutputProperty(OutputKeys.METHOD,               "html");
-			t.setOutputProperty(OutputKeys.INDENT,               "yes");
-			t.setOutputProperty(OutputKeys.ENCODING,             "UTF-8");
-			t.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-			t.setOutputProperty(OutputKeys.VERSION,              "5.0");
-			t.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", Integer.toString(INDENT.length())); 
+			final Transformer transformer = factory.newTransformer();
+
+			transformer.setOutputProperty(OutputKeys.METHOD,               "html");
+			transformer.setOutputProperty(OutputKeys.INDENT,               "yes");
+			transformer.setOutputProperty(OutputKeys.ENCODING,             "UTF-8");
+			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+			transformer.setOutputProperty(OutputKeys.VERSION,              "5.0");
+			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", Integer.toString(INDENT.length())); 
 			if (isLayout)
 			{
-				t.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "html");
+				transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "html");
 			}
-	
+
 			// Serialize DOM tree
 			out = new StringWriter();
-			t.transform(new DOMSource(document), new StreamResult(out));
+			transformer.transform(new DOMSource(document), new StreamResult(out));
 			result = out.toString();
 		}
 		catch (Exception e)
@@ -98,7 +80,7 @@ public class XhtmlBeautifier extends XmlBeautifier
 			final String  unformattedXml,
 			final boolean isLayout) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, ClassCastException
 	{
-        final Document                  document = parseXmlFile(unformattedXml);
+		final Document                  document = parseXmlFile(unformattedXml);
 		final DOMImplementationRegistry registry = DOMImplementationRegistry.newInstance();
 		final DOMImplementationLS       impl     = (DOMImplementationLS)registry.getDOMImplementation("LS");
 		final LSSerializer              writer   = impl.createLSSerializer();
@@ -125,39 +107,5 @@ public class XhtmlBeautifier extends XmlBeautifier
 	protected String prettyPrintXmlNop(final String  unformattedXml, final boolean isLayout)
 	{
 		return unformattedXml;
-	}
-
-	protected String removeEmptyLines(final String input) throws IOException
-	{
-		final StringReader sr = new StringReader(input);
-		BufferedReader reader = null;
-
-		try
-		{
-			final StringBuffer buffer = new StringBuffer(input.length());
-			String line;
-
-			reader = new BufferedReader(sr);
-			while ((line = reader.readLine()) != null)
-			{
-				if (line.trim().length() > 0)
-				{
-					while (line.startsWith(INDENT))
-					{
-						buffer.append("\t");
-						line = line.substring(INDENT.length());
-					}
-					buffer.append(line).append("\n");
-				}
-			}
-			return buffer.toString();
-		}
-		finally
-		{
-			if (reader != null)
-			{
-				reader.close();
-			}
-		}
 	}
 }

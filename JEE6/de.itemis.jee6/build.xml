@@ -30,7 +30,6 @@
 			<include name="org.apache.commons.cli*.jar"/>
 			<include name="org.apache.commons.logging*.jar"/>
 			<include name="org.apache.log4j*.jar"/>
-			<include name="org.apache.xerces*.jar"/>
 			<include name="org.eclipse.emf.*.jar"/>
 			<include name="org.eclipse.xpand*.jar"/>
 			<include name="org.eclipse.xtend*.jar"/>
