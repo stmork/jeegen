@@ -23,8 +23,6 @@ import org.w3c.dom.ls.DOMImplementationLS;
 import org.w3c.dom.ls.LSSerializer;
 import org.xml.sax.SAXException;
 
-import de.morknet.oaw.tools.postprocessor.XmlBeautifier;
-
 public class XhtmlBeautifier extends XmlBeautifier
 {
 	private final static Log log = LogFactory.getLog(XhtmlBeautifier.class);
