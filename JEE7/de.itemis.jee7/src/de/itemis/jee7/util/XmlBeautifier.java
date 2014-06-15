@@ -1,5 +1,6 @@
 package de.itemis.jee7.util;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -8,9 +9,14 @@ import java.io.Writer;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
-import org.apache.xml.serialize.OutputFormat;
-import org.apache.xml.serialize.XMLSerializer;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.xpand2.output.FileHandle;
 import org.eclipse.xpand2.output.PostProcessor;
 import org.w3c.dom.Document;
@@ -27,12 +33,13 @@ import org.xml.sax.SAXException;
  * <li>.xsdl</li>
  * <li>.xhtml</li>
  * </ul>
- * @author sm
- *
  */
 public class XmlBeautifier implements PostProcessor
 {
+	private final static Log log = LogFactory.getLog(XmlBeautifier.class);
+
 	protected String[] fileExtensions = new String[] { ".xml", ".xsl", ".xsd", ".wsdd", ".wsdl", ".xhtml" };
+	protected final static String INDENT = "    ";
 
 	@Override
 	public void beforeWriteAndClose(FileHandle handle)
@@ -45,13 +52,18 @@ public class XmlBeautifier implements PostProcessor
 			{
 				final String unformattedXml = handle.getBuffer().toString().trim(); 
 
-				handle.setBuffer(prettyPrintXml(unformattedXml));
+				handle.setBuffer(processXml(unformattedXml, filename));
 			}
 			catch (Exception e)
 			{
-				e.printStackTrace();
+				log.error(e);
 			}
 		}
+	}
+
+	protected String processXml(final String unformattedXml, final String filename) throws IOException
+	{
+		return removeEmptyLines(prettyPrintXml(unformattedXml));
 	}
 
 	@Override
@@ -72,17 +84,49 @@ public class XmlBeautifier implements PostProcessor
 		return false;
 	}
 
-	protected String prettyPrintXml(final String unformattedXml) throws ParserConfigurationException, SAXException, IOException
+	protected String prettyPrintXml(final String unformattedXml) throws IOException
 	{
-		final Document document = parseXmlFile(unformattedXml);
+		Writer out    = null;
+		String result = null;
 
-		return formatXml(document);
+		try
+		{		
+			// Create an "identity" transformer - copies input to output
+			final Document document = parseXmlFile(unformattedXml);
+	
+			final TransformerFactory factory = TransformerFactory.newInstance();
+			factory.setAttribute("indent-number", new Integer(INDENT.length()));
+			final Transformer transformer = factory.newTransformer();
+	
+			transformer.setOutputProperty(OutputKeys.METHOD,   "xml");
+			transformer.setOutputProperty(OutputKeys.INDENT,   "yes");
+			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", Integer.toString(INDENT.length())); 
+	
+			// Serialize DOM tree
+			out = new StringWriter();
+			transformer.transform(new DOMSource(document), new StreamResult(out));
+			result = out.toString();
+		}
+		catch (Exception e)
+		{
+			log.error(e.getMessage(), e);
+			result = unformattedXml;
+		}
+		finally
+		{
+			if (out != null)
+			{
+				out.close();
+			}
+		}
+		return result.trim();
 	}
 
 	protected Document parseXmlFile(final String in) throws ParserConfigurationException, SAXException, IOException
 	{
 		final DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		
+
 		dbf.setValidating(false);
 		dbf.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
 
@@ -92,17 +136,37 @@ public class XmlBeautifier implements PostProcessor
 		return db.parse(is);
 	}
 
-	protected String formatXml(final Document document) throws IOException, ParserConfigurationException, SAXException
+	protected String removeEmptyLines(final String input) throws IOException
 	{
-		final OutputFormat format = new OutputFormat(document);
-		final Writer out = new StringWriter();
+		final StringReader sr = new StringReader(input);
+		BufferedReader reader = null;
 
-		format.setLineWidth(80);
-		format.setIndenting(true);
-		format.setIndent(4);
-		final XMLSerializer serializer = new XMLSerializer(out, format);
-		serializer.serialize(document);
+		try
+		{
+			final StringBuffer buffer = new StringBuffer(input.length());
+			String line;
 
-		return out.toString();
+			reader = new BufferedReader(sr);
+			while ((line = reader.readLine()) != null)
+			{
+				if (line.trim().length() > 0)
+				{
+					while (line.startsWith(INDENT))
+					{
+						buffer.append("\t");
+						line = line.substring(INDENT.length());
+					}
+					buffer.append(line).append("\n");
+				}
+			}
+			return buffer.toString();
+		}
+		finally
+		{
+			if (reader != null)
+			{
+				reader.close();
+			}
+		}
 	}
 }
