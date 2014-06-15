@@ -5,8 +5,7 @@ Bundle-Vendor: itemis AG
 Bundle-Version: 1.1.10.qualifier
 Bundle-SymbolicName: de.itemis.jee6; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: de.morknet.oaw.tools5;bundle-version="5.2.5";visibility:=reexport,
- de.morknet.oaw.dependencies;bundle-version="5.2.5";visibility:=reexport,
+Require-Bundle: de.morknet.oaw.dependencies;bundle-version="5.2.5";visibility:=reexport,
  org.eclipse.text,
  org.objectweb.asm;bundle-version="5.0.1";visibility:=reexport
 Import-Package: org.apache.commons.logging,
