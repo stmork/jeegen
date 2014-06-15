@@ -125,16 +125,7 @@
 
 									<!-- Xtext Extensions -->
 									<updatesite url="http://download.itemis.com/updates/releases/" />
-									<!-- <installunit name="de.itemis.xtext.antlr.sdk.feature.group" 
-										/> -->
-									<!-- OAW Tools -->
-									<updatesite url="http://oaw.sourceforge.net/updates/" />
-									<installunit name="de.morknet.oaw.tools5" />
 
-									<!-- JBoss Tools -->
-<!-- 									<updatesite -->
-<!-- 										url="http://download.jboss.org/jbosstools/updates/stable/kepler" /> -->
-<!-- 									<installunit name="org.jboss.ide.eclipse.as.feature.feature.group" /> -->
 									<!-- JEE6 Generator -->
 									<updatesite url="http://jee6-generator.itemis.de/updates/snapshot/luna/" />
 									<installunit name="de.itemis.jee6.feature.feature.group" />

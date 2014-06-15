@@ -64,11 +64,7 @@
 								<update.site.version>${project.version}</update.site.version>
 								<target.eclipse.version>${target.eclipse.version}</target.eclipse.version>
 							</symbols>
-							<!-- <p2StatsUrl>http://server.org/url/where/to/push/stats</p2StatsUrl> -->
 							<associateSites>
-<!-- 								<site>http://download.eclipse.org/releases/kepler</site> -->
-<!-- 								<site>http://download.eclipse.org/rmf/updates/</site> -->
-								<site>http://oaw.sourceforge.net/updates/</site>
 								<site>http://download.itemis.com/updates/releases/2.0.0/</site>
 							</associateSites>
 						</configuration>
