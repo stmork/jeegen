@@ -4,14 +4,14 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.ejb.TimerConfig;
 import javax.ejb.TimerService;
+import javax.inject.Inject;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import de.itemis.jee7.util.Download;
 
@@ -24,7 +24,9 @@ import de.itemis.jee7.util.Download;
 public class DownloadInfo implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	private final static Log log = LogFactory.getLog(DownloadInfo.class);
+
+	@Inject
+	private Logger log;
 
 	private final AtomicBoolean lock = new AtomicBoolean();
 	private Download            download;
@@ -55,7 +57,7 @@ public class DownloadInfo implements Serializable
 		}
 		catch(MalformedURLException mue)
 		{
-			log.error(mue.getLocalizedMessage(), mue);
+			log.log(Level.SEVERE, mue.getLocalizedMessage(), mue);
 		}
 	}
 
@@ -117,7 +119,7 @@ public class DownloadInfo implements Serializable
 		}
 		else
 		{
-			log.trace (String.format("%s not loaded", download.getUrl()));
+			log.log (Level.FINEST, String.format("%s not loaded", download.getUrl()));
 		}
 	}
 
