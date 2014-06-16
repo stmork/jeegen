@@ -9,6 +9,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -29,6 +30,7 @@ public class Download implements Serializable
 	private final static byte [] empty = new byte[0];
 	private       String mimeType = null;
 	private       int timeout = 1000;
+	private       boolean redirect = true;
 
 	/**
 	 * The constructor specifies the URL.
@@ -85,6 +87,11 @@ public class Download implements Serializable
 		LogUtil.trace(log, ">download(%s)", url);
 		final URLConnection connection = url.openConnection();
 		connection.setReadTimeout(getTimeout());
+		if (connection instanceof HttpURLConnection)
+		{
+			final HttpURLConnection http = (HttpURLConnection)connection;
+			http.setInstanceFollowRedirects(redirect);
+		}
 
 		try(InputStream is = connection.getInputStream())
 		{
@@ -131,7 +138,7 @@ public class Download implements Serializable
 			LogUtil.trace(log, "<download(..) = %s", array != null);
 		}
 		return array;
-    }
+	}
 
 	/**
 	 * This method converts an image as byte array into a {@link BufferedImage}.
@@ -186,5 +193,25 @@ public class Download implements Serializable
 	public void setTimeout(int timeout)
 	{
 		this.timeout = timeout;
+	}
+
+	/**
+	 * This method returns a flag whether this download instance should follow redirects
+	 * 
+	 * @return Flag if this instance should process redirects.
+	 */
+	public boolean getFollowRedirect()
+	{
+		return redirect;
+	}
+
+	/**
+	 * This method sets the behavior concerning redirects.
+	 * 
+	 * @param redirect The flag which sets the redirect behavior of this instance. 
+	 */
+	public void setFollowRedirect(final boolean redirect)
+	{
+		this.redirect = redirect;
 	}
 }
