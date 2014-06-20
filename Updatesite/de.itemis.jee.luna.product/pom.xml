@@ -127,7 +127,7 @@
 									<updatesite url="http://download.itemis.com/updates/releases/" />
 
 									<!-- JEE6 Generator -->
-									<updatesite url="http://jee6-generator.itemis.de/updates/snapshot/luna/" />
+									<updatesite url="http://www.jee-generator.itemis.de/updates/snapshot/luna/" />
 									<installunit name="de.itemis.jee6.feature.feature.group" />
 									<installunit name="de.itemis.jee7.feature.feature.group" />
 								</builder>
