@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: de.itemis.jee6
 Bundle-Vendor: itemis AG
-Bundle-Version: 1.1.10
+Bundle-Version: 1.1.11.qualifier
 Bundle-SymbolicName: de.itemis.jee6; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.text,
