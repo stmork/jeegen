@@ -195,7 +195,7 @@
 		</category>
 		<wizard
 			category="de.itemis.jee.ui.category"
-			class="de.itemis.jee7.ui.DslExecutableExtensionFactory:de.itemis.jee7.ui.wizard.Jee6AntNewProjectWizard"
+			class="de.itemis.jee7.ui.DslExecutableExtensionFactory:de.itemis.jee7.ui.wizard.Jee7AntNewProjectWizard"
 			icon="icons/jee7_32.gif"
 			id="de.itemis.jee7.ui.wizard.DslNewProjectWizard"
 			name="JEE7 Generator Project (Ant based)"
