@@ -209,6 +209,17 @@ entity Lending
 	Date return_date;
 }
 
+entity MLConfig
+{
+	Text name;
+}
+
+entity MCGroup
+{
+	Text name;
+	Entity MLConfig [] config;
+}
+
 process Booking
 {
 	Book, Member

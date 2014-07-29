@@ -157,7 +157,7 @@ String packageOf(History ref) :
 	packageOf(ref.type);
 
 String annotationOf(History ref) :
-	"@OneToMany(mappedBy=\"" + nameOf((Entity)ref.eContainer) + "\")";
+	"@OneToMany(mappedBy=\"" + typeOf((Entity)ref.eContainer) + "\")";
 
 /*
  * Entity reference
@@ -172,7 +172,7 @@ String packageOf(EntityRef ref) :
 	packageOf(ref.type);
 
 String annotationOf(EntityRef ref) :
-	ref.many ? ("@OneToMany(mappedBy=\"" + nameOf((Entity)ref.eContainer) + "\")") : "@OneToOne";
+	ref.many ? ("@OneToMany(mappedBy=\"" + typeOf((Entity)ref.eContainer) + "\")") : "@OneToOne";
 
 /*
  * Options reference
