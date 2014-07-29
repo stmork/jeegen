@@ -26,7 +26,7 @@ import com.google.common.collect.ImmutableList;
 
 public class Jee7ProjectCreator extends DslProjectCreator
 {
-	private final static String BUNDLE_ID   = "de.itemis.jee6.ui";
+	private final static String BUNDLE_ID   = "de.itemis.jee7.ui";
 
 	private final static String SRC_ROOT         = "src/main/java";
 	private final static String SRC_GEN_ROOT     = "src/generated/java";
