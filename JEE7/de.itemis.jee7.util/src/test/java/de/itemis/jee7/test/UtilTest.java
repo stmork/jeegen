@@ -163,20 +163,20 @@ public class UtilTest
 	@Test
 	public void getDiff()
 	{
-		final Calendar past    = DateTimeUtil.getStartOfDay( 2, 9, 2013);
+		final Calendar past    = DateTimeUtil.getStartOfDay(  7, 7, 2014);
 		final Calendar today   = Calendar.getInstance();
-		final Calendar future  = DateTimeUtil.getStartOfDay( 7, 7, 2014);
+		final Calendar future  = DateTimeUtil.getStartOfDay( 29, 6, 2015);
 		final long ROUND_UP = DateTimeUtil.MILLIES_PER_DAY - 1;
 
 		Assert.assertEquals("00:00:00", time.format(past.getTime()));
-		Assert.assertEquals(    2, past.get(Calendar.DAY_OF_MONTH));
-		Assert.assertEquals(Calendar.SEPTEMBER, past.get(Calendar.MONTH));
-		Assert.assertEquals( 2013, past.get(Calendar.YEAR));
+		Assert.assertEquals(    7, past.get(Calendar.DAY_OF_MONTH));
+		Assert.assertEquals(Calendar.JULY, past.get(Calendar.MONTH));
+		Assert.assertEquals( 2014, past.get(Calendar.YEAR));
 
 		Assert.assertEquals("00:00:00", time.format(future.getTime()));
-		Assert.assertEquals(    7, future.get(Calendar.DAY_OF_MONTH));
-		Assert.assertEquals(Calendar.JULY, future.get(Calendar.MONTH));
-		Assert.assertEquals( 2014, future.get(Calendar.YEAR));
+		Assert.assertEquals(   29, future.get(Calendar.DAY_OF_MONTH));
+		Assert.assertEquals(Calendar.JUNE, future.get(Calendar.MONTH));
+		Assert.assertEquals( 2015, future.get(Calendar.YEAR));
 
 		final long diff1 = (today.getTimeInMillis()  - past.getTimeInMillis()) /
 				DateTimeUtil.MILLIES_PER_DAY;
