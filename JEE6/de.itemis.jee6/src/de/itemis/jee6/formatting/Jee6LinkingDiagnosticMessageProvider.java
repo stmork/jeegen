@@ -3,11 +3,11 @@ package de.itemis.jee6.formatting;
 
 import org.eclipse.xtext.diagnostics.DiagnosticMessage;
 import org.eclipse.xtext.diagnostics.Severity;
-import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
+import org.eclipse.xtext.linking.impl.LinkingDiagnosticMessageProvider;
 
 import de.itemis.jee6.jee6.Jee6Package;
 
-public class Jee6LinkingDiagnosticMessageProvider implements ILinkingDiagnosticMessageProvider
+public class Jee6LinkingDiagnosticMessageProvider extends LinkingDiagnosticMessageProvider
 {
 	public final static String ENTITY_MISSING  = "entity missing";
 	public final static String OPTION_MISSING  = "option missing";
@@ -39,6 +39,11 @@ public class Jee6LinkingDiagnosticMessageProvider implements ILinkingDiagnosticM
 			message = new DiagnosticMessage("Entity " + name + " is missing!",
 					Severity.ERROR, error, name);
 		}
+		else
+		{
+			message = super.getUnresolvedProxyMessage(context);
+		}
+
 		return message;
 	}
 }
