@@ -130,7 +130,7 @@ abstract class AbstractWebsite implements Resource {
 			<div class="sloganCentering">
 				<h2>Was sind die JEE-Generatoren?</h2>
 				<h3>Die JEE-Generatoren sind in der Lage, eine komplette JEE-Web-Applikation (Java EE 6 oder Java EE 7) aus einem einfachen Modell zu generieren.
-					Das Framework wurde mit Xtext realisiert und ist als Eclipse-Plugin verfügbar. Für JEE6 und JEE7 stehen getrennte Plugins zur Verfügung.</h3>
+					Das Framework wurde mit Xtext realisiert und ist als Eclipse-Plugin verfügbar. Für Java EE 6 und Java EE 7 stehen getrennte Plugins zur Verfügung.</h3>
 			</div>
 		</div>
 	'''

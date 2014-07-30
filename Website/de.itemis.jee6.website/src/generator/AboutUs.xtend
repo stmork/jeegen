@@ -16,7 +16,7 @@ class AboutUs extends AbstractWebsite {
 			<div class="box introduction">
 				<div class="y-g50 y-gl">
 					<div id="aboutUsText">
-						<h3>Steffen A. Mork</h3>
+						<h3><a href="http://www.xing.com/profile/Steffen_Mork">Steffen A. Mork</a></h3>
 						<div id="aboutUsImage">
 							<img src="images/mork.steffen.jpg"/>
 						</div>
@@ -41,11 +41,14 @@ class AboutUs extends AbstractWebsite {
 							modellbasiert ein einfaches Prototyping für Web-Anwendungen ermöglicht. Einige dieser Web-Anwendungen
 							werden hausintern verwendet, um die Produktivität zu erhöhen.
 						</p>
+						<p>
+							Steffen berichtet in seinem Blog <a href="http://morknet.de/">morknet.de</a> regelmäßig von neuen Aktivitäten.
+						<p>
 					</div>
 				</div>
 				<div class="y-g50 y-gl">
 					<div id="aboutUsText">
-						<h3>Dominik Pieper</h3>
+						<h3><a href="http://www.xing.com/profile/Dominik_Pieper">Dominik Pieper</a></h3>
 						<div id="aboutUsImage">
 							<img src="images/pieper.dominik.jpg"/>
 						</div>
@@ -54,7 +57,7 @@ class AboutUs extends AbstractWebsite {
 							ebenfalls in der Abteilung für Infrastruktur und Beschaffung.
 						</p>
 						<p>
-							Seit 2012 arbeitet Dominik mit an den JEE-Generatoren, der modellbasiert ein einfaches Prototyping für
+							Seit 2012 arbeitet Dominik mit an den <a href="http://www.jee-generator.de">JEE-Generatoren</a>, der modellbasiert ein einfaches Prototyping für
 							Web-Anwendungen ermöglicht. Der generierte Prototyp lässt sich einfach für beliebige Anwendungsfälle
 							erweitern. Der JEE6-Generator wird intern zur Erstellung einiger hausinterner Anwendungen genutzt.
 						</p>
@@ -64,6 +67,9 @@ class AboutUs extends AbstractWebsite {
 							Lizenzserver. Erfolgreiche Bestellungen werden entgegengenommen, Lizenzen generiert und via E-Mail
 							an den Kunden versandt.
 						</p>
+						<a>
+							Dominik schreibt in seinem Blog <a href="http://pieperhome.de/">pieperhome.de</a> zu verschiedenen Themen.
+						</a>
 					</div>
 				</div>
 			</div>
