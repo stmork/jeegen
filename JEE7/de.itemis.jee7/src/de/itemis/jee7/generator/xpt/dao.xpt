@@ -167,7 +167,7 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel()
 	 * bean may not been persisted, yet!
 	 *
 	 * @param «parameterOf(entity)» The {@link «typeOf(entity)»} entity bean.
-	 * @param «parameterOf(type)» The {@link «typeOf(type)»} entity bean to remove from the relation.
+	 * @param element The {@link «typeOf(type)»} entity bean to remove from the relation.
 	 * @return The removed {@link «typeOf(type)»} entity bean. 
 	 */
 	public «typeOf(type)» «adderTo(entity)»(«typeOf(entity)» «parameterOf(entity)», final «typeOf(type)» element)
