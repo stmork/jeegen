@@ -220,6 +220,28 @@ entity MCGroup
 	Entity MLConfig [] config;
 }
 
+entity File
+{
+	Text      filename;
+	Timestamp modified;
+	Int       size;
+}
+
+entity Directory
+{
+	Text                dirname;
+	Timestamp           modified;
+	Int                 size;
+	Entity File []      files;
+	Entity Directory [] directories;
+}
+
+entity FileSystem
+{
+	Text   path;
+	Entity Directory [] directories;
+}
+
 process Booking
 {
 	Book, Member
@@ -238,7 +260,7 @@ process Ordering roles "controlling","it-support","vorstand"
 
 process Admin roles "admin"
 {
-	Vendor, Distributor, InventoryType
+	Vendor, Distributor, InventoryType, FileSystem
 }
 
 process User roles "itemis", "extern"
