@@ -21,12 +21,12 @@ public class ExtensionHelper
 		{
 			final char [] array = elements[i].toCharArray();
 			array[0] = Character.toUpperCase(array[0]);
-					
+
 			buffer.append(array);
 		}
 		return buffer.toString();
 	}
-	
+
 	private static void add(final Set<Entity> set, final Entity entity)
 	{
 		final List<EntityRef> entities  = EcoreUtil2.typeSelect(entity.getTypes(), EntityRef.class);
@@ -36,9 +36,11 @@ public class ExtensionHelper
 
 		for (EntityRef ref : entities)
 		{
-			if (ref.isMany())
+			final Entity type = ref.getType();
+
+			if (ref.isMany() && (entity != type))
 			{
-				add(set, ref.getType());
+				add(set, type);
 			}
 		}
 		for (History history : histories)
@@ -56,14 +58,14 @@ public class ExtensionHelper
 	public static Set<Entity> getManyEntities(final List<Entity> entities)
 	{
 		final Set<Entity> set = new HashSet<Entity>();
-		
+
 		for (Entity entity : entities)
 		{
 			add(set, entity);
 		}
 		return set;
 	}
-	
+
 	private static void addUiEntities(final Set<Entity> set, final Entity entity)
 	{
 		final List<EntityRef> entities  = EcoreUtil2.typeSelect(entity.getTypes(), EntityRef.class);
@@ -73,7 +75,12 @@ public class ExtensionHelper
 		{
 			if (ref.isMany())
 			{
-				addUiEntities(set, ref.getType());
+				final Entity type = ref.getType();
+
+				if (entity.getClass() != type.getClass())
+				{
+					addUiEntities(set, type);
+				}
 				set.add(entity);
 			}
 		}

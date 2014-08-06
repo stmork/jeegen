@@ -170,20 +170,20 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel()
 	 * @param «parameterOf(type)» The {@link «typeOf(type)»} entity bean to remove from the relation.
 	 * @return The removed {@link «typeOf(type)»} entity bean. 
 	 */
-	public «typeOf(type)» «adderTo(entity)»(«typeOf(entity)» «parameterOf(entity)», final «typeOf(type)» «parameterOf(type)»)
+	public «typeOf(type)» «adderTo(entity)»(«typeOf(entity)» «parameterOf(entity)», final «typeOf(type)» element)
 	{
 «EXPAND GetReference(entity)»
 
 		// Link new «nameOf(type)»
-		«parameterOf(type)».«setterOf(entity)»(«parameterOf(entity)»);
-		«parameterOf(entity)».«getterOf(type)»().add(«parameterOf(type)»);
+		element.«setterOf(entity)»(«parameterOf(entity)»);
+		«parameterOf(entity)».«getterOf(type)»().add(element);
 «IF History.isInstance(type)»
-		«parameterOf(entity)».setLast(«parameterOf(type)»);
-«ENDIF»		
+		«parameterOf(entity)».setLast(element);
+«ENDIF»
 		// Update into database
-		«getPersistenceUnitName(getPU(entity))».persist(«parameterOf(type)»);
+		«getPersistenceUnitName(getPU(entity))».persist(element);
 
-		return «parameterOf(type)»;
+		return element;
 	}
 
 «IF !History.isInstance(type)»
@@ -197,15 +197,15 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel()
 	public «typeOf(entity)» «removerFrom(entity)»(«typeOf(type)» «parameterOf(type)»)
 	{
 «EXPAND GetReference((EntityRef)type)»
-		final «typeOf(entity)» «parameterOf(entity)» = «parameterOf(type)».«getterOf(entity)»();
+		final «typeOf(entity)» parent = «parameterOf(type)».«getterOf(entity)»();
 		
 		// Unlink
-		«parameterOf(entity)».«getterOf(type)»().remove(«parameterOf(type)»);
+		parent.«getterOf(type)»().remove(«parameterOf(type)»);
 		«parameterOf(type)».«setterOf(entity)»(null);
 
 		// finally do database operations
 		«getPersistenceUnitName(getPU(entity))».remove(«parameterOf(type)»);
-		return «parameterOf(entity)»;
+		return parent;
 	}
 «ENDIF»
 
