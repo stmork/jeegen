@@ -52,7 +52,7 @@ public class AsyncTimerService {
 			log.debug(">>>>>>>>>syncMethod");
 			try
 			{
-				Thread.sleep(27000L);
+				Thread.sleep(77000L);
 			}
 			catch (InterruptedException e)
 			{
