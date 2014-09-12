@@ -3,7 +3,6 @@ package de.itemis.jee6.util;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Formatter;
 
 /**
  * This abstract class provides message digests. The following hash methods are supported:
@@ -88,16 +87,10 @@ abstract public class AbstractMessageDigest
 	 */
 	synchronized public String encode(final byte[] buffer)
 	{
-		final Formatter formatter = new Formatter();
-		
 		crypt.reset();
 		crypt.update(buffer);
-		for (byte b : crypt.digest())
-		{
-		    formatter.format("%02x", b);
-		}
-		final String result = formatter.toString();
-		formatter.close();
-		return result;
+		return Hexadecimal.toHex(crypt.digest());
 	}
+
+	
 }
