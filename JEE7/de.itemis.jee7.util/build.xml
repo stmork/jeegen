@@ -143,6 +143,7 @@
 			<junit printsummary="true" fork="true" forkmode="once" haltonerror="yes" haltonfailure="yes">
 				<classpath refid="junit.path" />
 				<formatter type="xml"/>
+				<test name="de.itemis.jee7.test.HexadecimalTest"/>
 				<test name="de.itemis.jee7.test.Base64Test"/>
 				<test name="de.itemis.jee7.test.DigestTest"/>
 				<test name="de.itemis.jee7.test.UtilTest"/>
