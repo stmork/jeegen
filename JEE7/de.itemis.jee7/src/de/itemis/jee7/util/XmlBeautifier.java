@@ -95,7 +95,7 @@ public class XmlBeautifier implements PostProcessor
 			// Create an "identity" transformer - copies input to output
 			final Document document = parseXmlFile(unformattedXml);
 			final TransformerFactory factory = TransformerFactory.newInstance();
-			factory.setAttribute("indent-number", new Integer(INDENT.length()));
+			factory.setAttribute("indent-number", Integer.valueOf(INDENT.length()));
 			final Transformer transformer = factory.newTransformer();
 			setProperties(transformer, filename);
 
