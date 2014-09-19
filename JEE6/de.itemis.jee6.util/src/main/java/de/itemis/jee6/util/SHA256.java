@@ -1,7 +1,7 @@
 package de.itemis.jee6.util;
 
 /**
- * This class provides support methods for computing an SHA1 hash.
+ * This class provides support methods for computing an SHA-256 hash.
  */
 public class SHA256 extends AbstractMessageDigest
 {
