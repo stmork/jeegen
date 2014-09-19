@@ -93,6 +93,4 @@ abstract public class AbstractMessageDigest
 		crypt.update(buffer);
 		return Hexadecimal.toHex(crypt.digest());
 	}
-
-	
 }
