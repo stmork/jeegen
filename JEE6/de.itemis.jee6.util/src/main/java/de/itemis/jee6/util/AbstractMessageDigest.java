@@ -1,6 +1,7 @@
 package de.itemis.jee6.util;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -64,7 +65,7 @@ abstract public class AbstractMessageDigest
 	 */
 	public String encode(final String input) throws UnsupportedEncodingException
 	{
-		return encode(input, "ISO8859-1");
+		return encode(input, Charset.defaultCharset());
 	}
 
 	/**
@@ -75,9 +76,9 @@ abstract public class AbstractMessageDigest
 	 * @throws NoSuchAlgorithmException
 	 * @throws UnsupportedEncodingException
 	 */
-	public String encode(final String input, final String encoding) throws UnsupportedEncodingException
+	public String encode(final String input, final Charset charset) throws UnsupportedEncodingException
 	{
-		return encode(input.getBytes(encoding));
+		return encode(input.getBytes(charset));
 	}
 
 	/**
