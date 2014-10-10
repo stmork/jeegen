@@ -31,7 +31,7 @@
 		<eclipsesdk.linux32.filename>eclipse-jee-${eclipse.version}-linux-gtk</eclipsesdk.linux32.filename>
 		<eclipsesdk.linux>${eclipse.server}${eclipsesdk.linux.filename}.tar.gz</eclipsesdk.linux>
 		<eclipsesdk.linux.filename>eclipse-jee-${eclipse.version}-linux-gtk-x86_64</eclipsesdk.linux.filename>
-		<eclipse.version>luna-RC2</eclipse.version>
+		<eclipse.version>luna-SR1</eclipse.version>
 		<appname>jee-generator</appname>
 	</properties>
 
