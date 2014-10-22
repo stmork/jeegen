@@ -209,15 +209,15 @@ entity Lending
 	Date return_date;
 }
 
-entity MLConfig
+entity Config
 {
 	Text name;
 }
 
-entity MCGroup
+entity ConfigGroup
 {
-	Text name;
-	Entity MLConfig [] config;
+	Text   name;
+	Entity Config [] config;
 }
 
 entity File
