@@ -13,5 +13,5 @@
   <packaging>eclipse-feature</packaging>
 
   <name>JEE6 DSL Feature</name>
-  <version>1.1.11</version>
+  <version>1.1.12-SNAPSHOT</version>
 </project>
