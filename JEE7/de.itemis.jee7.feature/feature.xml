@@ -2,7 +2,7 @@
 <feature
       id="de.itemis.jee7.feature"
       label="JEE7-Generator"
-      version="1.0.3"
+      version="1.0.4.qualifier"
       provider-name="itemis AG"
       plugin="de.itemis.jee7">
 

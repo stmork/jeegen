@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: de.itemis.jee7.ui
 Bundle-Vendor: itemis AG
-Bundle-Version: 1.0.3
+Bundle-Version: 1.0.4.qualifier
 Bundle-SymbolicName: de.itemis.jee7.ui;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: de.itemis.jee7;bundle-version="1.0.2";visibility:=reexport,
