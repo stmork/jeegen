@@ -42,4 +42,5 @@
 			</plugin>
 		</plugins>
 	</build>
+	<version>1.0.3</version>
 </project>
