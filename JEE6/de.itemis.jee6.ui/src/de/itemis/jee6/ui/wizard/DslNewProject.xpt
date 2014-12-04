@@ -273,7 +273,7 @@ Workflow
 	<!-- ==================================================== -->
 
 	<path id="logger.path">
-		<fileset dir="${res-path}">
+		<fileset dir="${web-path}">
 			<include name="**/*.jar"/>
 		</fileset>
 	</path>
@@ -314,14 +314,14 @@ Workflow
 		</fileset>
 		<pathelement path="${src-path}" />
 	</path>
-	
+
 	<!-- ==================================================== -->
 	<!--              Setting up build targets                -->
 	<!-- ==================================================== -->
 
 	<target name="-version">
 		<first id="version-file">
-		    <fileset dir="${basedir}/${src-path}" includes="**/version.properties" />
+			<fileset dir="${basedir}/${src-path}" includes="**/version.properties" />
 		</first>
 		<property file="${toString:version-file}" />
 		<echo message="Version: ${version.major}.${version.minor}.${version.patch}"/>
@@ -361,7 +361,7 @@ Workflow
 			<doctitle><![CDATA[<h1>«this.projectName» classes</h1>]]></doctitle>
 			<bottom><![CDATA[<i>Copyright &#169; itemis AG]]></bottom>
 		</javadoc>
-    </target>
+	</target>
 
 	<target name="package" depends="compile">
 		<jar destfile="${war}">
@@ -381,17 +381,17 @@ Workflow
 			<zipfileset dir="${res-gen-path}"/>
 		</jar>
 	</target>
-	
+
 	<target name="deploy" depends="package">
 		<copy file="${war}" todir="${jboss.deploy}" />
 		<copy file="${war}" todir="${glassfish.deploy}" />
 	</target>
-	
+
 	<target name="undeploy">
 		<delete file="${jboss.deploy}/${war}" />
 		<delete file="${glassfish.deploy}/${war}" />
 	</target>
-	
+
 	<target name="round-trip" depends="generate,deploy"/>
 </project>
 «ENDFILE»
