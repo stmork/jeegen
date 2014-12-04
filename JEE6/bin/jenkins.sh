@@ -10,9 +10,9 @@ APPLE_JDK=/System//Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
 
 java -version
 
-test -d $OPEN_JDK   && export JAVA_HOME=$OPEN_JDK
-test -d $ORACLE_JDK && export JAVA_HOME=$ORACLE_JDK
-test -d $APPLE_JDK  && export JAVA_HOME=$APPLE_JDK
+test -d ${OPEN_JDK}/bin   && export JAVA_HOME=$OPEN_JDK
+test -d ${ORACLE_JDK}/bin && export JAVA_HOME=$ORACLE_JDK
+test -d ${APPLE_JDK}/bin  && export JAVA_HOME=$APPLE_JDK
 
 echo $JAVA_HOME
 
