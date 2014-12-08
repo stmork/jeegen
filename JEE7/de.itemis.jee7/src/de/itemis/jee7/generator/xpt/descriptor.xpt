@@ -228,7 +228,7 @@
 <jboss-web>
 «EXPAND utility::XmlHeader»
 «FOREACH getSecurityDomains() AS sd»
-	<security-domain>java:/jaas/«sd.jaas»</security-domain>
+	<security-domain>«sd.jaas»</security-domain>
 «IF sd.clustered»
 	<valve>
 		<class-name>org.apache.catalina.authenticator.SingleSignOn</class-name>
@@ -240,7 +240,7 @@
 	<resource-ref>
 		<res-ref-name>«mail.jndi»</res-ref-name>
 		<res-type>javax.mail.Session</res-type>
-		<jndi-name>java:/jboss/«mail.jndi»</jndi-name>
+		<jndi-name>«mail.jndi»</jndi-name>
 	</resource-ref>
 «ENDFOREACH»
 «EXPAND reference FOREACH getProperties()»
@@ -268,35 +268,43 @@
 «ERROR "Abstract Property"»
 «ENDDEFINE»
 
+«DEFINE jndi FOR jee7::Property»
+		<res-ref-name>«jndi»</res-ref-name>
+«ENDDEFINE»
+
+«DEFINE original FOR jee7::Property»
+		<jndi-name>«jndi»</jndi-name>
+«ENDDEFINE»
+
 «DEFINE reference FOR TextProp»
 	<resource-ref>
-		<res-ref-name>«jndi»</res-ref-name>
+«EXPAND jndi»
 		<res-type>java.lang.String</res-type>
-		<jndi-name>«original»</jndi-name>
+«EXPAND original»
 	</resource-ref>
 «ENDDEFINE»
 
 «DEFINE reference FOR TypeProp»
 	<resource-ref>
-		<res-ref-name>«jndi»</res-ref-name>
+«EXPAND jndi»
 		<res-type>«type»</res-type>
-		<jndi-name>«original»</jndi-name>
+«EXPAND original»
 	</resource-ref>
 «ENDDEFINE»
 
 «DEFINE reference FOR IntegerProp»
 	<resource-ref>
-		<res-ref-name>«jndi»</res-ref-name>
+«EXPAND jndi»
 		<res-type>java.lang.Integer</res-type>
-		<jndi-name>«original»</jndi-name>
+«EXPAND original»
 	</resource-ref>
 «ENDDEFINE»
 
 «DEFINE reference FOR BooleanProp»
 	<resource-ref>
-		<res-ref-name>«jndi»</res-ref-name>
+«EXPAND jndi»
 		<res-type>java.lang.Boolean</res-type>
-		<jndi-name>«original»</jndi-name>
+«EXPAND original»
 	</resource-ref>
 «ENDDEFINE»
 
