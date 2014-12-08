@@ -77,7 +77,7 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel()
 	/**
 	 * This is the getter of the «property.jndi» JNDI configuration property.
 	 *
-	 * @return The configured JNDI properity.
+	 * @return The configured JNDI property.
 	 */	
 	public «typeOf(property)» «getterOf(property)»()
 	{
