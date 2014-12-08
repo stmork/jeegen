@@ -41,7 +41,7 @@ public class LdapFactory implements ObjectFactory, InitialContextFactory
 			final RefAddr refBaseDN = ref.get("baseDN");
 			final RefAddr refPart   = ref.get("part");
 			final RefAddr refSecret = ref.get("secret");
-			
+
 			if (refUrl != null)
 			{
 				url = refUrl.getContent().toString();
