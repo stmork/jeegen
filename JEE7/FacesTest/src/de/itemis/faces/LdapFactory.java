@@ -27,8 +27,8 @@ public class LdapFactory implements ObjectFactory, InitialContextFactory
 			Context         nameCtx,
 			Hashtable<?, ?> environment) throws Exception
 	{
-		log.log(Level.FINE, ">getObjectInstance(...)");
-		log.log(Level.FINE, obj.toString());
+		log.fine(">getObjectInstance(...)");
+		log.fine(obj.toString());
 
 		String url    = "ldaps://master.itemis.de:636/";
 		String baseDN = "dc=itemis,dc=de";
@@ -66,7 +66,7 @@ public class LdapFactory implements ObjectFactory, InitialContextFactory
 		env.put(Context.SECURITY_AUTHENTICATION, "simple");
 		env.put(Context.PROVIDER_URL, url);
 
-		log.log(Level.FINE, " url=" + url);
+		log.fine(" url=" + url);
 
 		if ((part != null) && (secret != null))
 		{
@@ -87,7 +87,7 @@ public class LdapFactory implements ObjectFactory, InitialContextFactory
 		}
 		finally
 		{
-			log.log(Level.FINE, "<getObjectInstance(...) = " + result);
+			log.fine("<getObjectInstance(...) = " + result);
 		}
 		return result;
 	}
