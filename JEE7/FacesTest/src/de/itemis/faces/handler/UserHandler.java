@@ -76,7 +76,7 @@ public class UserHandler extends AbstractHandler
 
 	public String change()
 	{
-		log.log(Level.FINE, ">change");
+		log.fine(">change");
 		UserInfo user = sessionInfo.getUser();
 
 		try
@@ -88,12 +88,12 @@ public class UserHandler extends AbstractHandler
 		}
 		catch (IOException e)
 		{
-			log.log(Level.FINE, e.toString());
+			log.fine(e.toString());
 		}
 
 		user = dao.updateUserInfo(user);
 		sessionInfo.setUser(user);
-		log.log(Level.FINE, "<change");
+		log.fine("<change");
 		return "/index.xhtml";
 	}
 

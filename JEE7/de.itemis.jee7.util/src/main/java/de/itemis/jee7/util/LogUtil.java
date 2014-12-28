@@ -32,14 +32,14 @@ public class LogUtil
 	 * formatting needs only be done if trace logging is enabled.
 	 * 
 	 * @param log The {@link Logger} instance.
-	 * @param format The formattable messaage.
+	 * @param format The formattable message.
 	 * @param arguments The message objects formatted into the massage.
 	 */
 	public final static void trace(final Logger log, final String format, final Object ... arguments)
 	{
 		if (log.isLoggable(Level.FINER))
 		{
-			log.log(Level.FINER, printf(format, arguments));
+			log.finer(printf(format, arguments));
 		}
 	}
 
@@ -49,14 +49,14 @@ public class LogUtil
 	 * formatting needs only be done if debug logging is enabled.
 	 * 
 	 * @param log The {@link Logger} instance.
-	 * @param format The formattable messaage.
+	 * @param format The formattable message.
 	 * @param arguments The message objects formatted into the massage.
 	 */
 	public final static void debug(final Logger log, final String format, final Object ... arguments)
 	{
 		if (log.isLoggable(Level.FINE))
 		{
-			log.log(Level.FINE, printf(format, arguments));
+			log.fine(printf(format, arguments));
 		}
 	}
 
@@ -66,7 +66,7 @@ public class LogUtil
 	 * formatting needs only be done if info logging is enabled.
 	 * 
 	 * @param log The {@link Logger} instance.
-	 * @param format The formattable messaage.
+	 * @param format The formattable message.
 	 * @param arguments The message objects formatted into the massage.
 	 */
 	public final static void info(final Logger log, final String format, final Object ... arguments)
@@ -83,14 +83,14 @@ public class LogUtil
 	 * formatting needs only be done if warn logging is enabled.
 	 * 
 	 * @param log The {@link Logger} instance.
-	 * @param format The formattable messaage.
+	 * @param format The formattable message.
 	 * @param arguments The message objects formatted into the massage.
 	 */
 	public final static void warn(final Logger log, final String format, final Object ... arguments)
 	{
 		if (log.isLoggable(Level.WARNING))
 		{
-			log.log(Level.WARNING,  printf(format, arguments));
+			log.warning(printf(format, arguments));
 		}
 	}
 
@@ -100,14 +100,14 @@ public class LogUtil
 	 * formatting needs only be done if error logging is enabled.
 	 * 
 	 * @param log The {@link Logger} instance.
-	 * @param format The formattable messaage.
+	 * @param format The formattable message.
 	 * @param arguments The message objects formatted into the massage.
 	 */
 	public final static void error(final Logger log, final String format, final Object ... arguments)
 	{
 		if (log.isLoggable(Level.SEVERE))
 		{
-			log.log(Level.SEVERE, printf(format, arguments));
+			log.severe(printf(format, arguments));
 		}
 	}
 
