@@ -20,8 +20,6 @@ import javax.servlet.http.Part;
 import javax.transaction.Transactional;
 import javax.transaction.Transactional.TxType;
 
-import org.apache.commons.io.IOUtils;
-
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
@@ -38,6 +36,7 @@ import de.itemis.faces.dao.AdminDaoBean;
 import de.itemis.faces.entities.Address;
 import de.itemis.faces.entities.UserInfo;
 import de.itemis.faces.servlet.ImageServlet;
+import de.itemis.jee7.util.Download;
 import de.itemis.jee7.util.Profiled;
 
 @Named
@@ -83,17 +82,22 @@ public class UserHandler extends AbstractHandler
 		{
 			if ((image != null) && (image.getSize() > 0))
 			{
-				user.setImage(IOUtils.toByteArray(image.getInputStream()));
+				final byte buffer[] = Download.read(image.getInputStream(), (int)image.getSize());
+
+				user.setImage(buffer);
+
+				user = dao.updateUserInfo(user);
+				sessionInfo.setUser(user);
 			}
 		}
 		catch (IOException e)
 		{
 			log.fine(e.toString());
 		}
-
-		user = dao.updateUserInfo(user);
-		sessionInfo.setUser(user);
-		log.fine("<change");
+		finally
+		{
+			log.fine("<change");
+		}
 		return "/index.xhtml";
 	}
 

@@ -6,6 +6,7 @@ package de.itemis.jee7.util;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -13,7 +14,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
@@ -99,23 +99,7 @@ public class Download implements Serializable
 
 			if (len > 0)
 			{
-				array = new byte[len];
-				int already = 0;
-
-				while (already < len)
-				{
-					int read = is.read(array, already, len - already);
-					
-					if (read < 0)
-					{
-						log.log(Level.SEVERE, "Read error loading " + getUrl());
-						return empty;
-					}
-					else
-					{
-						already += read;
-					}
-				}
+				array = read(connection.getInputStream(), len);
 			}
 			else
 			{
@@ -213,5 +197,24 @@ public class Download implements Serializable
 	public void setFollowRedirect(final boolean redirect)
 	{
 		this.redirect = redirect;
+	}
+
+	/**
+	 * This method reads a defined length from an {@link InputStream} into a byte array. The input stream is closed after reading.
+	 * 
+	 * @param is The {@link InputStream}
+	 * @param len The length of data inside the {@link InputStream}.
+	 * @return The resulting byte array
+	 * @throws IOException
+	 */
+	public static byte [] read(final InputStream is, final int len) throws IOException
+	{
+		try(final DataInputStream dis = new DataInputStream(is))
+		{
+			final byte buffer[] = new byte[len];
+
+			dis.readFully(buffer);
+			return buffer;
+		}
 	}
 }
