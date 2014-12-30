@@ -9,9 +9,13 @@ package de.itemis.jee7.dbauth.entities;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import de.itemis.jee7.util.SHA1;
+import de.itemis.jee7.util.SHA512;
 
 /**
  * This class implements the AuthInfo entity bean,
@@ -21,7 +25,7 @@ import de.itemis.jee7.util.SHA1;
 @Table(name = "AuthInfo")
 public class AuthInfo extends AbstractAuthInfo {
 	private static final long serialVersionUID = 1L;
-	private static final SHA1 sha1 = new SHA1();
+	private static final SHA512 sha512 = new SHA512();
 
 	/**
 	 * This method is a transient getter of the virtual property passwordUncoded.
@@ -37,6 +41,6 @@ public class AuthInfo extends AbstractAuthInfo {
 	
 	public void setPasswordUncoded(final String password) throws NoSuchAlgorithmException, UnsupportedEncodingException
 	{
-		setPassword(sha1.encode(password));
+		setPassword(sha512.encode(password));
 	}
 }
