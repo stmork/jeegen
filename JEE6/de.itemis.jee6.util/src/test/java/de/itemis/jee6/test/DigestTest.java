@@ -13,6 +13,7 @@ import de.itemis.jee6.util.SHA256;
 import de.itemis.jee6.util.SHA384;
 import de.itemis.jee6.util.SHA512;
 
+@SuppressWarnings("deprecation")
 public class DigestTest
 {
 	private static final String TEST_CLEARTEXT = "Steffen A. Mork";

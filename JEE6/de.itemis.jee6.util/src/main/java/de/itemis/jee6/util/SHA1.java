@@ -3,6 +3,7 @@ package de.itemis.jee6.util;
 /**
  * This class provides support methods for computing an SHA1 hash.
  */
+@Deprecated
 public class SHA1 extends AbstractMessageDigest
 {
 	/**

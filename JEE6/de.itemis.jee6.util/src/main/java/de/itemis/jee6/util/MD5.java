@@ -3,6 +3,7 @@ package de.itemis.jee6.util;
 /**
  * This class provides MD5 hashing.
  */
+@Deprecated
 public class MD5 extends AbstractMessageDigest
 {
 	/**
