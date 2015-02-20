@@ -49,28 +49,28 @@ public class AutoLoginFilter implements Filter
 			final String basic = r.getHeader("authorization"); 
 
 			LogUtil.trace(log, " URI: %s", r.getRequestURI());
-	        LogUtil.trace(log, " URL: %s", r.getRequestURL());
-	        if ((basic != null) && basic.startsWith("Basic "))
-	        {
-	        	final String principal = r.getRemoteUser();
-	            if (principal == null)
-	            {
-	            	final byte [] text = Base64.decode(basic.substring(6));
-	            	final String encoding = request.getCharacterEncoding();
-	                final String [] userdata = new String (text, encoding != null ? encoding : "UTF-8").split(":");
-	                final String user = userdata[0];
-	
-	                LogUtil.trace(log, " Automatically logging in user %s.", user);
-	            	r.login(userdata[0], userdata[1]);
-	//            	HttpServletResponse resp = (HttpServletResponse)response;
-	//            	resp.sendRedirect(r.getRequestURL().toString());
-	            }
-	        }
-        }
+			LogUtil.trace(log, " URL: %s", r.getRequestURL());
+			if ((basic != null) && basic.startsWith("Basic "))
+			{
+				final String principal = r.getRemoteUser();
+				if (principal == null)
+				{
+					final byte [] text = Base64.decode(basic.substring(6));
+					final String encoding = request.getCharacterEncoding();
+					final String [] userdata = new String (text, encoding != null ? encoding : "UTF-8").split(":");
+					final String user = userdata[0];
+			
+					LogUtil.trace(log, " Automatically logging in user %s.", user);
+					r.login(userdata[0], userdata[1]);
+//					HttpServletResponse resp = (HttpServletResponse)response;
+//					resp.sendRedirect(r.getRequestURL().toString());
+				}
+			}
+		}
 //		else
-        {
-        	filter.doFilter(request, response);
-        }
+		{
+			filter.doFilter(request, response);
+		}
 		log.log(Level.FINER, "<doFilter()");
 	}
 }

@@ -153,13 +153,19 @@
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
 
-«IF timeout > 0»
 	<session-config>
+«IF timeout > 0»
 		<session-timeout>«timeout»</session-timeout>
-	</session-config>
 «ENDIF»
+		<cookie-config>
+			<http-only>true</http-only>
+			<secure>true</secure>
+		</cookie-config>
+		<tracking-mode>COOKIE</tracking-mode>
+	</session-config>
 
 	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.xhtml</welcome-file>
 	</welcome-file-list>
 
