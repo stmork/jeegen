@@ -108,7 +108,7 @@ public class Profiler implements Serializable
 		else
 		{
 			final StringBuffer buffer = new StringBuffer();
-			
+
 			for (int i = 0;i < params.length;i++)
 			{
 				if (i > 0)
@@ -136,7 +136,7 @@ public class Profiler implements Serializable
 	private static String paramToString(Object param)
 	{
 		String result;
-		
+
 		if (param != null)
 		{
 			result = param.toString();
