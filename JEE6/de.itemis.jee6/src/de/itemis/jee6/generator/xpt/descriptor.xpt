@@ -144,7 +144,6 @@ log4j.appender.R.layout.ConversionPattern=%-5p %-30.30c{1} %x - %m%n
 «ENDIF»
 		<cookie-config>
 			<http-only>true</http-only>
-			<secure>true</secure>
 		</cookie-config>
 		<tracking-mode>COOKIE</tracking-mode>
 	</session-config>
