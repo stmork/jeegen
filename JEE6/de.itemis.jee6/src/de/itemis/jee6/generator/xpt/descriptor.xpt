@@ -138,15 +138,17 @@ log4j.appender.R.layout.ConversionPattern=%-5p %-30.30c{1} %x - %m%n
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
 
-	<session-config>
 «IF timeout > 0»
+	<session-config>
 		<session-timeout>«timeout»</session-timeout>
-«ENDIF»
+«REM»
 		<cookie-config>
 			<http-only>true</http-only>
 		</cookie-config>
 		<tracking-mode>COOKIE</tracking-mode>
+«ENDREM»
 	</session-config>
+«ENDIF»
 
 	<welcome-file-list>
 		<welcome-file>index.xhtml</welcome-file>
