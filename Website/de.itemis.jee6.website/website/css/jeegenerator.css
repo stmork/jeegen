@@ -225,7 +225,7 @@ table.table td {
     font-family: 'Lato',sans-serif;
     font-size: .8em;
     font-weight: 400;
-    width: 40%;
+    width: 30%;
 }
 .downloadbox thead th {
     background: none repeat scroll 0 0 #333333;
@@ -239,6 +239,7 @@ table.table td {
     text-align: center;
     text-transform: uppercase;
     width: 84.3%;
+    height: 9em;
 }
 .downloadbox thead th h2 {
 	margin: .5em 0 !important;

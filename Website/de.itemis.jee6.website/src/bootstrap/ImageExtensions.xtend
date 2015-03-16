@@ -3,9 +3,9 @@ package bootstrap
 import java.io.File
 import javax.imageio.ImageIO
 import org.eclipse.emf.common.util.URI
-import org.eclipse.xtend.lib.Data
 import org.eclipse.xtext.xdoc.xdoc.ImageRef
 import java.io.FileInputStream
+import org.eclipse.xtend.lib.annotations.Data
 
 class ImageExtensions {
 	def getDimension(ImageRef imageRef) {

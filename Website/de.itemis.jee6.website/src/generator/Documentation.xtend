@@ -25,7 +25,7 @@ class Documentation extends AbstractXdocBaseWebsite {
 	new() {
 		doc = docLoader.loadDocument(xdocDocumentRootFolder)
 	}
-	
+
 	override getStandaloneSetup() {
 		new DocumentationSetup
 	}
