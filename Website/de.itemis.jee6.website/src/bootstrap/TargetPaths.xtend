@@ -7,6 +7,7 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl
 import org.eclipse.xtext.xdoc.xdoc.AbstractSection
 import org.eclipse.xtext.xdoc.xdoc.Document
 import org.eclipse.xtext.xdoc.xdoc.Identifiable
+import org.eclipse.xtend.lib.annotations.Data
 
 class TargetPaths {
 	

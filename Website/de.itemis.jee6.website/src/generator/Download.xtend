@@ -6,8 +6,12 @@ class Download extends AbstractWebsite {
 		"download.html"
 	}
 
-	def String getLink(String platform) {
+	def String getKeplerLink(String platform) {
 		'distro/eclipse-jee-generator-kepler-' + platform + platform.fileExtension
+	}
+	
+	def String getLunaLink(String platform) {
+		'distro/eclipse-jee-generator-luna-' + platform + platform.fileExtension
 	}
 
 	def String fileExtension(String platform) {
@@ -137,32 +141,68 @@ class Download extends AbstractWebsite {
 		    <table>
 		    	<thead>
 					<tr>
-						<th class="focus"><h2>Full Eclipse</h2> <span>Einfach runterladen und entpacken</span></th>
+						<th class="focus"><h2>Full Eclipse (Kepler)</h2> <span>Einfach runterladen und entpacken</span></th>
 					</tr>
 		    	</thead>
 				<tfoot><tr><td></td></tr></tfoot>
 				<tbody>
 					<tr>
 						<td style="text-align: center; white-space: nowrap;">
-							<a href="«getLink(OSX_64)»"
+							<a href="«getKeplerLink(OSX_64)»"
 								class="btn" style="width: 45%;">OS X 64 Bit</a>&nbsp;
-							<a href="«getLink(OSX_32)»"
+							<a href="«getKeplerLink(OSX_32)»"
 								class="btn" style="width:20%;">32 Bit</a>
 						</td>
 					</tr>
 					<tr>
 						<td style="text-align: center; white-space: nowrap;">
-							<a href="«getLink(LINUX_64)»"
+							<a href="«getKeplerLink(LINUX_64)»"
 								class="btn" style="width: 45%;">Linux 64 Bit</a>&nbsp;
-							<a href="«getLink(LINUX_32)»"
+							<a href="«getKeplerLink(LINUX_32)»"
 								class="btn" style="width:20%;">32 Bit</a>
 						</td>
 					</tr>
 					<tr>
 						<td style="text-align: center; white-space: nowrap;">
-							<a href="«getLink(WIN_64)»"
+							<a href="«getKeplerLink(WIN_64)»"
 								class="btn" style="width: 45%;">Windows 64 Bit</a>&nbsp;
-							<a href="«getLink(WIN_32)»"
+							<a href="«getKeplerLink(WIN_32)»"
+								class="btn" style="width:20%;">32 Bit</a>
+						</td>
+					</tr>
+				</tbody>
+		    </table>
+		</div>
+		<div class="downloadbox right">
+		    <table>
+		    	<thead>
+					<tr>
+						<th class="focus"><h2>Full Eclipse (Luna)</h2> <span>Einfach runterladen und entpacken</span></th>
+					</tr>
+		    	</thead>
+				<tfoot><tr><td></td></tr></tfoot>
+				<tbody>
+					<tr>
+						<td style="text-align: center; white-space: nowrap;">
+							<a href="«getLunaLink(OSX_64)»"
+								class="btn" style="width: 45%;">OS X 64 Bit</a>&nbsp;
+							<a href="«getLunaLink(OSX_32)»"
+								class="btn" style="width:20%;">32 Bit</a>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align: center; white-space: nowrap;">
+							<a href="«getLunaLink(LINUX_64)»"
+								class="btn" style="width: 45%;">Linux 64 Bit</a>&nbsp;
+							<a href="«getLunaLink(LINUX_32)»"
+								class="btn" style="width:20%;">32 Bit</a>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align: center; white-space: nowrap;">
+							<a href="«getLunaLink(WIN_64)»"
+								class="btn" style="width: 45%;">Windows 64 Bit</a>&nbsp;
+							<a href="«getLunaLink(WIN_32)»"
 								class="btn" style="width:20%;">32 Bit</a>
 						</td>
 					</tr>

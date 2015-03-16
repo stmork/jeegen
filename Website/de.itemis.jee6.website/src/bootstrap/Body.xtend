@@ -4,7 +4,6 @@ import com.google.inject.Inject
 import org.eclipse.xtext.xdoc.xdoc.AbstractSection
 
 class Body {
-	
 	@Inject extension XdocExtensions
 
 	@Inject extension HtmlExtensions

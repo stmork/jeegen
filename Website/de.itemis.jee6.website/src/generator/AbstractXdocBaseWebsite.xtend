@@ -14,7 +14,7 @@ abstract class AbstractXdocBaseWebsite extends AbstractWebsite {
 	override protected isPrettyPrint() {
 		true
 	}
-	
+
 	def prettify() { 
 		var result = '''<script type="text/javascript" src="google-code-prettify/lang-common.js"></script>'''
 		if(document != null){
