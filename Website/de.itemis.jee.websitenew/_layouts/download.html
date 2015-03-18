@@ -17,7 +17,6 @@ download:
 <div class="downloads">
 	<div class="container clearfix">
 		<!--table one starts-->
-		<div class="col-md-1">&nbsp;</div>
 	    <div class="col-md-4">
 			    <table class="pricing">
 					<tfoot>
@@ -32,7 +31,7 @@ download:
 				    <tr>
 				    	<td style="text-align: center;">
 				    	<a
-				    	rel="popover"
+				    	data-toggle="popover"
 				    	data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!"
 				    	data-original-title="Right-click and 'Copy Link'"
 				    	href="{{page.updateSite.release}}"
@@ -99,7 +98,6 @@ download:
 					</tbody>
 			    </table>
 	    </div>
-		<div class="col-md-1">&nbsp;</div>
 	</div>
 </div>
 <div class="container clearfix">
@@ -110,34 +108,38 @@ download:
 	<hr />
 	<div class="col-md-1">&nbsp;</div>
 	<div class="col-md-9" id="faq">
-		<div class="accordion" id="accordion2">
-		    <div class="accordion-group">
-		      <div class="accordion-heading">
-		    	<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#What_is_an_update_site_">
-		    	  Was ist eine Updatesite?
-		    	</a>
-		      </div>
-		      <div id="What_is_an_update_site_" class="accordion-body collapse">
-		    	<div class="accordion-inner">
-		    	  	<p>Eclipse hat einen eingebauten Updatemanager, dieser arbeitet mit so genannten Updatesites als Quelle.
+		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+		  <div class="panel panel-default">
+		    <div class="panel-heading" role="tab" id="headingOne">
+		      <h4 class="panel-title">
+		        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+		          Was ist eine Updatesite?
+		        </a>
+		      </h4>
+		    </div>
+		    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+		      <div class="panel-body">
+					<p>Eclipse hat einen eingebauten Updatemanager, dieser arbeitet mit so genannten Updatesites als Quelle.
 					In Eclipse öffne das "Help" Menü und klicke auf <i>"Install new Software..."</i>.</p>
-		    	</div>
 		      </div>
 		    </div>
-		    <div class="accordion-group">
-		      <div class="accordion-heading">
-		    	<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#What_is_the_license_of_Xtext_">
-		    	  Was ist die Lizenz der JEE-Generatoren?
-		    	</a>
-		      </div>
-		      <div id="What_is_the_license_of_Xtext_" class="accordion-body collapse">
-		    	<div class="accordion-inner">
-		    	  <p>Die JEE-Generator sind frei verfügbar unter der <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.</p>
-		    	</div>
+		  </div>
+		  <div class="panel panel-default">
+		    <div class="panel-heading" role="tab" id="headingTwo">
+		      <h4 class="panel-title">
+		        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+		          Was ist die Lizenz der JEE-Generatoren?
+		        </a>
+		      </h4>
+		    </div>
+		    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+		      <div class="panel-body">
+				<p>Die JEE-Generator sind frei verfügbar unter der <a href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License</a>.</p>
 		      </div>
 		    </div>
+		  </div>
 		</div>
-		</div>
+	</div>
 	<div class="col-md-1">&nbsp;</div>
 </div>
 </div>
