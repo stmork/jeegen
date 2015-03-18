@@ -1,9 +1,12 @@
 ---
 layout: default
 updateSite:
- release: http://download.eclipse.org/modeling/tmf/xtext/updates/composite/
- milestone: http://download.eclipse.org/modeling/tmf/xtext/updates/composite/milestones/
- bleeding: http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest/
+ release:
+  kepler: http://jee-generator.de/updates/kepler/
+  luna: http://jee-generator.de/updates/luna/
+ snapshot:
+  kepler: http://jee-generator.de/updates/snapshot/kepler/
+  luna: http://jee-generator.de/updates/snapshot/luna/
 
 download:
  osx64: http://sourceforge.net/projects/jeegen/files/distro/eclipse-jee-generator-kepler-macosx-cocoa-x86_64.tar.gz
@@ -30,33 +33,27 @@ download:
 				    </tr>
 				    <tr>
 				    	<td style="text-align: center;">
-				    	<a
-				    	data-toggle="popover"
-				    	data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!"
-				    	data-original-title="Right-click and 'Copy Link'"
-				    	href="{{page.updateSite.release}}"
-				    	class="has-popover btn btn-primary btn-lg"
-				    	style="width: 70%;">Latest Release</a></td>
+				    	<a href="{{page.updateSite.release.kepler}}"
+				    	class="btn btn-primary btn-lg"
+				    	style="width: 70%;">Kepler Release</a></td>
 				    </tr>
 				    <tr>
 						<td style="text-align: center;">
-						<a
-						  rel="popover"
-				    	data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!"
-				    	data-original-title="Right-click and 'Copy Link'"
-						  href="{{page.updateSite.milestone}}"
-				    	class="has-popover btn btn-primary btn-lg"
-				    	style="width: 70%;">Latest Milestone</a></td>
+						<a href="{{page.updateSite.snapshot.kepler}}"
+				    	class="btn btn-primary btn-lg"
+				    	style="width: 70%;">Kepler Snapshot</a></td>
 				    </tr>
 				    <tr>
 						<td style="text-align: center;">
-						<a
-							rel="popover"
-				    	data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!"
-				    	data-original-title="Right-click and 'Copy Link'"
-							href="{{page.updateSite.bleeding}}"
+						<a href="{{page.updateSite.release.luna}}"
+				    	class="btn btn-primary btn-lg"
+				    	style="width: 70%;">Luna Release</a></td>
+				    </tr>
+				   	<tr>
+						<td style="text-align: center;">
+						<a href="{{page.updateSite.snapshot.luna}}"
 				    	class="has-popover btn btn-primary btn-lg"
-				    	style="width: 70%;">Bleeding Edge!</a></td>
+				    	style="width: 70%;">Luna Snapshot</a></td>
 				    </tr>
 				</tbody>
 			    </table>
