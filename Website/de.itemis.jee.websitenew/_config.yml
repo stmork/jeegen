@@ -40,3 +40,6 @@ javadoc:
   utils6: "http://www.jee-generator.de/javadoc/jee6"
   utils7: "http://www.jee-generator.de/javadoc/jee7"
   javaee: "http://docs.oracle.com/javaee/5/api"
+
+sass:
+  sass_dir: _sass
