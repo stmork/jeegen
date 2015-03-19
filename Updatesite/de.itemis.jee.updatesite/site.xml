@@ -3,6 +3,6 @@
    <description name="JEE-Generators Update Site" url="http://www.jee-generator.de/updates/kepler">
       
    </description>
-   <feature url="features/de.itemis.jee6.feature_1.1.11.qualifier.jar" id="de.itemis.jee6.feature" version="1.1.11.qualifier"/>
-   <feature url="features/de.itemis.jee7.feature_1.0.3.qualifier.jar" id="de.itemis.jee7.feature" version="1.0.3.qualifier"/>
+   <feature url="features/de.itemis.jee6.feature_1.1.12.qualifier.jar" id="de.itemis.jee6.feature" version="1.1.12.qualifier"/>
+   <feature url="features/de.itemis.jee7.feature_1.0.4.qualifier.jar" id="de.itemis.jee7.feature" version="1.0.4.qualifier"/>
 </site>
