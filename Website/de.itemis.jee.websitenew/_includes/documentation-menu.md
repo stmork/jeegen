@@ -4,6 +4,6 @@
 	</li>
 	<li>&nbsp;</li>
 	<li style="color : #333;">Additional Resources
-	<li><a href="{{site.javadoc.xtext}}/">API for Java EE 6 (JavaDoc)</a>
+	<li><a href="{{site.javadoc.utils6}}/">API for Java EE 6 (JavaDoc)</a>
 	<li><a href="{{site.javadoc.utils7}}/">API for Java EE 7 (JavaDoc)</a>
 </ul>
