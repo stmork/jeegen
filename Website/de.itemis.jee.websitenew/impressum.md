@@ -17,7 +17,7 @@ Jens Wagener (Vorsitzender), Wolfgang Neuhaus, Sebastian Neus, Dr. Georg Pietrek
 
 Aufsichtsrat
 ------------------------------
-Prof. Dr. Burkhard Igel (Vorsitzender), Stephan Grollmann (stellv. Vorsitzender), Michael Neuhaus
+Prof. Dr. Burkhard Igel (Vorsitzender), Michael Neuhaus, Jennifer Fiorentino
 Sitz der Gesellschaft
 Lünen
 Registergericht
