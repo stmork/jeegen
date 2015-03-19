@@ -873,8 +873,8 @@ private boolean build = false;
 ```
 
 In diesem Beispiel wurde ein Default mit angegeben, der mit in den Quellcode generiert wird.
-top
-Freie Resource Adapter
+
+### Freie Resource Adapter
 
 Es ist nicht nur möglich, einfache Datentypen über JNDI zu referenzieren. Bei der Syntax muss voll qualifiziert die Klasse angegeben werden:
 
@@ -888,3 +888,133 @@ Aus dem Beispiel oben wird im DAO folgender Eintrag generiert:
 @Resource(mappedName="ldap/itemis")
 private DirContext ldap;
 ```
+
+# Generator von Java EE 6 auf Java EE 7 migrieren
+
+Obwohl die Syntax des Java EE 6-Generators sich nicht von dem des Java EE
+7-Generators unterscheidet, gibt es doch zum Teil erhebliche Unterschiede im
+Generat.  Zuerst muss das Projekt an die veränderte Laufzeitumgebung
+angepasst werden.  Dazu sollte die Java Version von Java 6 auf mindestens
+Java 7 gebracht werden.  Als Nächstes sollte man die _jee6util.jar_ durch die
+_jee7util.jar_ ersetzen und dabei den Build Path entsprechend anpassen. 
+Ferner sollten die Plugin-Abhängigkeiten im Eclipse von _de.itemis.jee6*_ auf
+_de.itemis.jee7*_ angepasst werden.  Dazu müssen auch in der _build.xml_ alle
+jee6-Referenzen durch jee7-Referenzen ersetzt werden.
+
+## Logging
+
+Der Logger wird unter Java EE 7 injiziert und nicht mehr als statische
+Variable angelegt.  Der entsprechende Code-Abschnitt sieht folgendermaßen
+aus:
+
+```java
+@Inject
+private Logger log;
+```
+
+Der Logger wird aus dem Paket java.util.logging entnommen. Somit ergeben
+sich auch andere Logging Level:
+
+|Bedeutung|Log Level JEE 6|Log Level JEE7|
+|---|---|---|
+|Exczessives Debugging	|TRACE	|FINER|
+|Konfiguration	 	|CONFIG	||
+|Debugging		|DEBUG	|FINE|
+|Information		|INFO	|INFO|
+|Warnung		|WARN	|WARNING|
+|Fehler			|ERROR	|SEVERE|
+
+Die in den JEE7-Utils verwendeten Logging-Methoden behalten ihre
+Methodennamen, haben allerdings für den Logger eine angepasste Signatur.
+
+## Action Handler unter JSF
+
+Die Action Handler sind jetzt keine Managed Beans im Sinne von JSF, sondern
+CDI-Beans.  Das hat den Vorteil, dass diese auch im transaktionalen Kontext
+laufen können.  Somit ändern sich auch die Annotationen auf:
+
+```java
+@Named
+@SessionScoped
+@Transactional(value = TxType.REQUIRED)
+@Profiled
+public class XyzHandler extends AbstractXyzHandler
+{
+...
+}
+```
+
+Die Annotation **@Profiled** ergänzt einen Interceptor, wie er schon bei den
+EJBs des JEE6-Generators Verwendung fand.
+
+**Hinweis!** Der im Java EE 6 Generator schon erzeugte **ApplicationController**
+wird im Java EE 7-Generator ebenfalls noch als Application Scoped Action
+Handler generiert, da es unter CDI keine Entsprechung für einen "eager
+started" Bean gibt.
+
+## Data Access Objects
+
+Die Data Access Objects (kurz DAOs) ändern sich nur wenig, außer dass für
+den Profile Interceptor die schon erwähnte Annotation Anwendung findet:
+
+```java
+@Stateless
+@Profiled
+public class XyzDaoBean extends AbstractXyzDaoBean
+{
+...
+}
+```
+
+## File Upload
+
+Der File Upload wird zwar von keinem JEE-Generator berücksichtigt,
+allerdings gibt es unter Java EE 7 eine nicht unbedeutende Vereinfachung. 
+Es muss erstens keine externe Library wie z.B.  die Apache Commons
+Fileupload verwendet werden und ferner muss kein sog.  Request Wrapper
+implementiert werden.  Beides entfällt ersatzlos.
+
+Das HTML des Formulars muss nur dahingehend angepasst werden, dass das neue
+JSF-Tag **<h:inputFile ...  />** verwendet werden muss.
+
+Beim Submit des Formulars muss im Action Handler aus dem **InputStream** des
+**javax.servlet.http.Part** der entsprechende Datenstrom extrahiert und für
+eigene Zwecke konvertiert werden.  Wenn es sich z.B.  um einen Bild-Upload
+handelt, kann folgender Code-Abschnitt verwendet werden:
+
+```java
+try
+{
+    // image ist vom Typ javax.servlet.http.Part
+    if ((image != null) && (image.getSize() > 0))
+    {
+        // Konvertierung in Blob
+        try(final DataInputStream dis = new DataInputStream(is))
+        {
+            final byte buffer[] = new byte[len];
+            dis.readFully(buffer);
+            user.setImage(buffer);
+        }
+    }
+}
+catch (IOException e)
+{
+    log.fine(e.toString());
+}
+```
+
+
+## Deskriptoren
+
+Die JEE-Generatoren erzeugen den Code mittels des sog. Generation Gap
+Patterns.  Alle bisherigen Punkte müssen auf bereits existierendem Code
+angewendet werden, damit sie dem Java EE 6-Generat rechnung tragen.  Alle
+folgenden Änderungen werden unabhängig vom bestehenden Code bei jedem
+Generatorlauf neu generiert und werden hier nur der Vollständigkeit halber
+aufgelistet.
+
+beans.xml
+
+Die _beans.xml_ wird generiert und in ihr der **bean-discovery-mode="all"**
+eingestellt.  Nur so kann z.B.  der Profile Interceptor aus den JEE7-Utils
+gefunden und verwendet werden.
