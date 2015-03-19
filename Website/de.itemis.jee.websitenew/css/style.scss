@@ -456,3 +456,18 @@ div#aboutUsImage img {
 	}
 }
 
+ul#markdown-toc
+{
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+ul#markdown-toc ul ul ul
+{
+	display: none;
+}
+
+ul#markdown-toc li
+{
+	list-style: none;
+}
