@@ -2,19 +2,17 @@
 layout: documentation
 ---
 
-<!--
-* Inhalt
-{:toc}
-* [API for Java EE 6-Utilities (JavaDoc)]({{site.javadoc.utils6}})
-* [API for Java EE 7-Utilities (JavaDoc)]({{site.javadoc.utils7}})
--->
-
-# Die JEE-Generatoren
+# Dokumentation der JEE-Generatoren
 
 Die JEE-Generatoren sind in der Lage, eine komplette JEE6- oder
 JEE7-Web-Applikation aus einem einfachen Modell zu generieren.  Das
 Framework wurde mit Xtext realisiert und die beiden Generatoren sind als
 Eclipse-Plugin verfügbar.
+
+## Inhalt
+
+* Inhalt
+{:toc}
 
 ## JEE-Projekt anlegen {#new-project}
 
@@ -1283,3 +1281,7 @@ _beans.xml_
 Die _beans.xml_ wird generiert und in ihr der `bean-discovery-mode="all"`
 eingestellt.  Nur so kann z.B.  der Profile Interceptor aus den JEE7-Utils
 gefunden und verwendet werden.
+
+# API
+* [API for Java EE 6-Utilities (JavaDoc)]({{site.javadoc.utils6}})
+* [API for Java EE 7-Utilities (JavaDoc)]({{site.javadoc.utils7}})
