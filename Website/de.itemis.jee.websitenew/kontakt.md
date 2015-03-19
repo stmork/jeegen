@@ -1,9 +1,6 @@
 ---
-layout: empty
+layout: kontakt
 ---
-
-Kontakt
-=========================
 
 Bug gefunden?
 ------------------------------

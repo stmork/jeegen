@@ -471,3 +471,14 @@ ul#markdown-toc li
 {
 	list-style: none;
 }
+
+.bug-banner {
+	padding-bottom: 5px;
+	color: white;
+	height: auto;
+	border: none;
+	overflow: hidden;
+	min-height: 826px;
+	background: url('{{ site.baseurl }}/images/bug-background.jpg') #00457c;
+	background-size: cover;
+}
