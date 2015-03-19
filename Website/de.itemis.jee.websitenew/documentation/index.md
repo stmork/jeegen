@@ -116,7 +116,7 @@ der URI.
 Optional kann der Session Timeout in Minuten festgelegt werden. Wird dieser
 nicht definiert, wird der Default des Application Servers verwendet. 
 Üblicherweise beträgt dieser Wert 30 Minuten.  Als project-state können die
-drei Schlüsselwörter **development**, **integration** und **productive**
+drei Schlüsselwörter `development`, `integration` und `productive`
 dienen und beschreiben den Zustand des Projektes.  Abhängig davon wird z.B. 
 das Logging entsprechend verschärft.
 
@@ -127,9 +127,9 @@ das Logging entsprechend verschärft.
 |Property eclipselink.logging.level 		|**res-gen/WEB-INF/classes/META-INF/persistence.xml** 	|DEBUG 			|INFO 			|INFO		|
 |<context-param> javax.faces.PROJECT_STAGE 	|**res-gen/WEB-INF/web.xml** 							|Development 	|SystemTest 	|Productive	|
 
-Als letztes optionales Schlüsselwort dient **strict**. Es entscheidet, ob in den Basisklassen der Action Handler die Standardmethoden abstrakt vordefiniert werden und somit in den konkreten Klassen vorhanden sein müssen. Dadurch wird einerseits der Code besser, allerdings kann es vorkommen, dass die geforderten Methoden tatsächlich nicht gebraucht werden. Das kann aber nur bei starker Anpassung der XHTML-Masken passieren.
+Als letztes optionales Schlüsselwort dient `strict`. Es entscheidet, ob in den Basisklassen der Action Handler die Standardmethoden abstrakt vordefiniert werden und somit in den konkreten Klassen vorhanden sein müssen. Dadurch wird einerseits der Code besser, allerdings kann es vorkommen, dass die geforderten Methoden tatsächlich nicht gebraucht werden. Das kann aber nur bei starker Anpassung der XHTML-Masken passieren.
 
-Nach dem **application**-Kommando werden Optionen festgelegt, die das Verhalten der Web-Applikation näher beschreiben. Danach folgen die Beschreibungen der Entity Beans, welche auf einer [eigenen Seite genauer beschrieben](.#entitybeans) werden und zuletzt die Aufgaben- bzw. Prozess-Umgebungen, in denen die Entity Beans benutzt werden sollen.
+Nach dem `application`-Kommando werden Optionen festgelegt, die das Verhalten der Web-Applikation näher beschreiben. Danach folgen die Beschreibungen der Entity Beans, welche auf einer [eigenen Seite genauer beschrieben](.#entitybeans) werden und zuletzt die Aufgaben- bzw. Prozess-Umgebungen, in denen die Entity Beans benutzt werden sollen.
 
 
 ### Applikationsoptionen {#appoptionen}
@@ -156,10 +156,10 @@ Der unit-name wird in der _persistence.xml_ als Referenz innerhalb der Web
 Applikation verwendet.  Der JNDI-Name definiert, wie die Datasource im
 Application Server wiederzufinden ist.  Eine eingehende Beschreibung, wie
 der JDNI-Name lauten sollte, findet sich auf diesen Seiten.  Wird das
-optionale Schlüsselwort **cacheable** verwendet, wird die Persistence Unit als
+optionale Schlüsselwort `cacheable` verwendet, wird die Persistence Unit als
 Second Level Cache konfiguriert.
 
-**Hinweis!** Es reicht nicht, nur das **cacheable** Schlüsselwort zu setzen, um im
+**Hinweis!** Es reicht nicht, nur das `cacheable` Schlüsselwort zu setzen, um im
 Application Server Second Level Caching zu aktivieren.  Es müssen meistens
 noch am Application Server selbst noch Konfigurationen vorgenommen werden.
 
@@ -191,13 +191,13 @@ sollen.  Die Syntax lautet:
 locale <Language> (<Country>) (default);
 ```
 
-Die **language** ist der ISO-Code der zu verwendenden Sprache und hat
-typischerweise kleine Buchstaben.  Der optionale Wert **country** bestimmt
+Die `language` ist der ISO-Code der zu verwendenden Sprache und hat
+typischerweise kleine Buchstaben.  Der optionale Wert `country` bestimmt
 die ISO-Länderkennung typischerweise in Großbuchstaben.  Dadurch werden
 landestypische Sprachvarianten unterschieden.
 
 **Hinweis!** Es muss mindestens eine Locale-Definition vorhanden sein und genau eine
-braucht das ansonsten optionale Schlüsselwort **default**.  Diese Sprache wird
+braucht das ansonsten optionale Schlüsselwort `default`.  Diese Sprache wird
 verwendet, falls die im Browser eingestellte Sprache in den Resource Bundles
 nicht gefunden werden konnte.
 
@@ -237,7 +237,7 @@ benutzt den JAAS-Standard.  Die Syntax lautet:
 security domain <Jndi-Name> (clustered);
 ```
 
-Das optionale Schlüsselwort **clustered** bestimt, ob die Security Domain in
+Das optionale Schlüsselwort `clustered` bestimt, ob die Security Domain in
 einer geclusterten Umgebung funktionsfähig sein muss.
 
 #### Web Parameter
@@ -269,9 +269,9 @@ Handler kann auf diesen Wert zugegriffen werden.  Die Werte sind aus Sicht
 des Application Servers und der Applikation selbst nicht veränderlich.
 
 ## Entity Beans {#entitybeans}
- In der Modelldatei können Entity Beans über die Schlüsselwörter **entity** und **options** definiert werden. Options sind spezielle Entity Beans, mit denen man Auswahllisten definieren kann. Die Auswahllisten können entweder editierbar sein, oder als Enumeration festgelegt werden.
+ In der Modelldatei können Entity Beans über die Schlüsselwörter `entity` und `options` definiert werden. Options sind spezielle Entity Beans, mit denen man Auswahllisten definieren kann. Die Auswahllisten können entweder editierbar sein, oder als Enumeration festgelegt werden.
 
-Eine einfache Entity Bean wird mit dem Schlüsselwort **entity** eingeleitet. In ihr können beliebig viele Attribute benutzt werden. Es können Text- und EMail-Felder als ID-Felder definiert werden. Wird kein ID-Feld definiert, wird automatisch ein Integer-Attribut mit Namen id generiert. Eine einfache Definition sieht folgendermaßen aus:
+Eine einfache Entity Bean wird mit dem Schlüsselwort `entity` eingeleitet. In ihr können beliebig viele Attribute benutzt werden. Es können Text- und EMail-Felder als ID-Felder definiert werden. Wird kein ID-Feld definiert, wird automatisch ein Integer-Attribut mit Namen id generiert. Eine einfache Definition sieht folgendermaßen aus:
 
 ```mydsl
 entity Address
@@ -285,11 +285,11 @@ Nach einem Generatorlauf kann die Applikation deployed werden. Die Maske sieht d
 ![](images/Entity1.jpg)
 
 Will man noch den Adresstyp zwischen privat und geschäftlich angeben, kann
-eine nicht editierbare option benutzt werden.  Diese **option** wird als
+eine nicht editierbare option benutzt werden.  Diese `option` wird als
 Enumeration generiert.  Als Werte können nur Textschlüssel verwendet werden. 
 Diese Schlüssel werden automatisch im Resource Bundle aller definierter
 Sprachen angelegt, falls sie noch nicht vorhanden sind.  In der Address
-Entity Bean wird der Adresstyp AddressOption als Attributtyp **Option**
+Entity Bean wird der Adresstyp AddressOption als Attributtyp `Option`
 eingebunden.  In der Datenbank entsteht dadurch eine 1:1-Relation.
 
 ```mydsl
@@ -308,7 +308,7 @@ entity Address
 ```
 
 In der Maske wird dadurch eine Combobox generiert. Passt man noch die
-Resource Bundles unter $PROJECT_HOME/src/<package>/messages.properties an,
+Resource Bundles unter _$PROJECT_HOME/src/<package>/messages.properties_ an,
 sieht dann die Maske folgendermaßen aus:
 
 ![](images/Entity2.jpg)
@@ -316,10 +316,10 @@ sieht dann die Maske folgendermaßen aus:
 Die Generierung einer Combobox erfordert noch weitere Dinge im Hintergrund:
 
  1. Für die Combobox muss ein Value Converter für JSF generiert werden, der die Werte aus der XHTML-Maske in Entity Bean-IDs konvertiert.
- 2. Die Entity Beans müssen die Methoden **equals()** und **hash()** so überschreiben, dass Entity Beans mit denselben IDs als identisch angesehen werden, sonst funktioniert der Value Converter nicht.
+ 2. Die Entity Beans müssen die Methoden `equals()` und `hash()` so überschreiben, dass Entity Beans mit denselben IDs als identisch angesehen werden, sonst funktioniert der Value Converter nicht.
  
 Es macht natürlich Sinn, dass es Personen gibt, in denen mehrere Adressen
-gespeichert werden.  Damit wird das Modell um die Entity Bean **Person**
+gespeichert werden.  Damit wird das Modell um die Entity Bean `Person`
 ergänzt:
 
 ```mydsl
@@ -342,7 +342,7 @@ Address - mit den []-Zeichen markiert werden, sonst wäre die Relation nur
 ![](images/Entity3.jpg)
 
 Klickt man auf den "Edit addresses"-Button, gelangt man in die schon
-bekannte Maske der **Address** Entity Bean.
+bekannte Maske der `Address` Entity Bean.
 
 ### Weitere Attributtypen
 
@@ -369,7 +369,7 @@ entity Person
 }
 ```
 
-Daraus wird in der Datei $PROJECT_HOME/src/<package>/entites/Person.java:
+Daraus wird in der Datei _$PROJECT_HOME/src/<package>/entites/Person.java_:
 
 ```java
 /*
@@ -513,7 +513,7 @@ im Formular folgendes Schnipsel generiert:
 </tr>
 ```
 
-Man beachte, dass automatisch der **mailValidator** eingebunden ist, der
+Man beachte, dass automatisch der `mailValidator` eingebunden ist, der
 sich in der JEE6-Utils-Bibliothek befindet.
 
 #### Clob
@@ -642,7 +642,7 @@ public void preUpdate() {
 }
 ```
 
-Die Annotationen **@PrePersist** und **@PreUpdate** sind Bestandteile des JEE-Frameworks.
+Die Annotationen `@PrePersist` und `@PreUpdate` sind Bestandteile des JEE-Frameworks.
 
 #### Date
 
@@ -729,13 +729,13 @@ Der XHTML-Codeschnipsel:
 ```
 
 Der Action Handler stellt die Liste der möglichen Auswahlelemente bereit. In
-diesem Falle muss die Klasse OrderingHandler die Methode **getUserInfoList()**
+diesem Falle muss die Klasse OrderingHandler die Methode `getUserInfoList()`
 bereitstellen.  In dem Beispiel darf die 1:1-Relation den Wert null
-annehmen.  Soll das nicht möglich sein, muss das **<f:selectItem>**-Tag entfernt
-werden.  Zusätzlich werden noch an der Entity Bean die Methoden **hashCode()**
-und **equals()** überladen.  Die von den generierten Action Handlern beinhalten
+annehmen.  Soll das nicht möglich sein, muss das `<f:selectItem>`-Tag entfernt
+werden.  Zusätzlich werden noch an der Entity Bean die Methoden `hashCode()`
+und `equals()` überladen.  Die von den generierten Action Handlern beinhalten
 den dazu passenden Value Converter.  In diesem Beispiel stellt die Klasse
-OrderingHandler über die Methode **getUserInfoConverter()** den Converter als
+OrderingHandler über die Methode `getUserInfoConverter()` den Converter als
 innere Klasse UserInfoConverter zur Verfügung.
 
 #### History
@@ -749,7 +749,7 @@ in darunterliegenden Entity Beans darf die Historie nicht mehr verwendet
 werden.  Besonderheiten der generierten Entity Beans
 
 Die generierten Entity Beans bieten noch einige Eigenschaften, die den
-Umgang mit den Entity Beans vereinfachen.  So wird die **toString()**-Methode
+Umgang mit den Entity Beans vereinfachen.  So wird die `toString()`-Methode
 überladen, um alle Attribute der Entity Bean auf einfache Weise ausgeben zu
 können.  Das ist für Logging-Zwecke besonders sinnvoll.
 
@@ -825,17 +825,17 @@ wird automatisch die erste aufgelistete gewählt.
 
 Speziell für die Suche von Entity Beans aus Ergebnislisten kann das
 Filterable-Interface benutzt werden.  Dieses Interface erfordert die
-Implementierung der Methode **public boolean filter(String pattern, Locale
-locale)**.  Wird das Schlüsselwort filterable gesetzt, wird die Entity Bean in
+Implementierung der Methode `public boolean filter(String pattern, Locale
+locale)`.  Wird das Schlüsselwort filterable gesetzt, wird die Entity Bean in
 eine abstrakte Klasse und eine konkrete Klasse generiert.  Die konkrete
-Klasse muss dann die besagte Methode **filter()** implementieren.  Da Suchen in
+Klasse muss dann die besagte Methode `filter()` implementieren.  Da Suchen in
 Java schneller vonstatten geht, als in der Datenbank, macht das java-seitige
 Filtern bei relativ kleinen Datenmengen Sinn.  Bei großen Datenmengen sollte
 nach wie vor auf Seiten der Datenbank gefiltert werden.  Ein weiterer
-Vorteil der **filter()**-Methode ist, dass auf transienten Attributen gesucht
+Vorteil der `filter()`-Methode ist, dass auf transienten Attributen gesucht
 werden kann.  Um die Möglichkeit zu haben, sprachabhängig zu vergleichen
-oder zu suchen, wird der Methode **filter()** die entsprechende Locale
-mitgegeben.  Ein Beispiel für eine **filter()**-Implementierung könnte so
+oder zu suchen, wird der Methode `filter()` die entsprechende Locale
+mitgegeben.  Ein Beispiel für eine `filter()`-Implementierung könnte so
 aussehen:
 
 ```java
@@ -850,11 +850,11 @@ In diesem Beispiel wird abhängig von der übergebenen Locale nach einem
 Suchmuster pattern in einer Bestellposition gesucht.  Die Bestellposition
 ist ein transientes Attribut.  Bestellposition und Suchmuster werden gemäß
 des verwendeten Locales in Kleinbuchstaben umgewandelt.  Die Implementierung
-der **filter()**-Methode reicht natürlich nicht aus.  Es muss natürlich über
+der `filter()`-Methode reicht natürlich nicht aus.  Es muss natürlich über
 eine Datenmenge gefiltert werden.  Das geschieht sinnvollerweise in einem
 Action Handler.  Dort wird über das DAO eine Datenmenge bezogen, danach
 gefiltert und an die übergeordnete XHTML-Seite übergeben.  Eine solche
-**getList()**-Methode könnte folgendes Ausssehen haben:
+`getList()`-Methode könnte folgendes Ausssehen haben:
 
 ```java
 /**
@@ -874,9 +874,9 @@ public List<OrderPosition> lastOrderList()
 
 Die Klasse FilteredList erweitert die Klasse ArrayList und ist in der
 javadoc/-Bibliothek enthalten.  Sie kann nur Elemente aufnehmen, die das
-Filterable-Interface implementieren.  Die Klasse überlädt die Methoden **add()**
-und **addAll()**, in denen das Filtern stattfindet.  Es werden nur Elemente der
-Liste hinzugefügt, die bei Aufruf der Elementmethode **filter()** true
+Filterable-Interface implementieren.  Die Klasse überlädt die Methoden `add()`
+und `addAll()`, in denen das Filtern stattfindet.  Es werden nur Elemente der
+Liste hinzugefügt, die bei Aufruf der Elementmethode `filter()` true
 zurückliefern.  Das Locale wird aus dem Request ermittelt und entspricht
 damit der im Browser eingestellten Sprache.
 
@@ -884,8 +884,8 @@ damit der im Browser eingestellten Sprache.
 
 Unter Umständen kann es nötig sein, dass eine Entity Bean geklont wird. Ein
 Beispiel hierfür ist, wenn Bestellpositionen kopiert werden sollen.  In
-diesem Fall muss das Schlüsselwort **clonable** nach dem Namen der Entity Bean
-mitgegeben werden.  Dabei wird die Methode **clone()** überladen.  Damit es mit
+diesem Fall muss das Schlüsselwort `clonable` nach dem Namen der Entity Bean
+mitgegeben werden.  Dabei wird die Methode `clone()` überladen.  Damit es mit
 der Datenbank keine Probleme gibt, wird das ID-Attribut gelöscht, um die
 geklonte Entity Bean später neu persistieren zu können.
 
@@ -949,7 +949,7 @@ process User
 ### Generierte Methoden im Action Handler
 
 Die Klasse AbstractUserHandler liefert für die Zugriffskontrolle die Methode
-**isAllowed()**, die in der XHTML verwendet werden kann.  Da in diesem Falle
+`isAllowed()`, die in der XHTML verwendet werden kann.  Da in diesem Falle
 keine Zugriffsberechtigungen auf Rollen beschränkt wurden, liefert diese
 Methode immer true zurück.  Ferner wird in diese Klasse eine Referenz auf
 das DAO UserDaoBean mit Namen dao vom Application Server injiziert:
@@ -984,7 +984,7 @@ public boolean isPersonEmpty(final Person person);
 ```
 
 Auf die Implementierung wurde der Übersichtlichkeit halber verzichtet. Die
-Methode **isPersonEmpty()** wurde nur generiert, weil in der Entity Bean Person
+Methode `isPersonEmpty()` wurde nur generiert, weil in der Entity Bean Person
 eine 1:n-Relation enthalten ist.  Für die Klasse Address lauten die
 Zugriffsmethoden:
 
@@ -1005,7 +1005,7 @@ abstract String backFromAddress();
 
 Die entsprechenden Methoden werden im konkreten Action Handler implementiert
 und können nach Bedarf angepasst werden.  Wäre im Modell für die
-1:n-Relation eine History vermerkt, würde die Methode **removeAddress()**
+1:n-Relation eine History vermerkt, würde die Methode `removeAddress()`
 fehlen.
 
 **Hinweis!** Die Methoden- und Klassennamen werden aus den Namen der entsprechenden
@@ -1057,8 +1057,8 @@ vorgeneriert.
 
 Die Action Handler enthalten Methoden, um programmatisch die
 Rollenzugehörigkeit abzufragen.  Das kann im XHTML dazu verwendet werden, um
-mittels des **<ui:fragment>**-Tags Blöcke nur bei Berechtigung sichbar zu
-machen.  Da ist zum Einen die Methode **boolean isAllowed()**.  Diese Methode
+mittels des `<ui:fragment>`-Tags Blöcke nur bei Berechtigung sichbar zu
+machen.  Da ist zum Einen die Methode `boolean isAllowed()`.  Diese Methode
 zeigt an, dass der Zugriff für den eingeloggten Benutzer erlaubt ist.  Ein
 Beispiel dafür lautet:
 
@@ -1072,7 +1072,7 @@ Sollte keine Rolle für den Prozess definiert worden sein, liefert diese
 Methode immer true zurück.  Man kann sich also auf die Existenz dieser
 Methode verlassen.
 
-Die andere Methode heißt **boolean isLoggedIn()**. Mit dieser Methode wird
+Die andere Methode heißt `boolean isLoggedIn()`. Mit dieser Methode wird
 überprüft, ob ein Benutzer überhaupt eingeloggt ist.
 
 #### Properties
@@ -1202,11 +1202,11 @@ public class XyzHandler extends AbstractXyzHandler
 }
 ```
 
-Die Annotation **@Profiled** ergänzt einen Interceptor, wie er schon bei den
+Die Annotation `@Profiled` ergänzt einen Interceptor, wie er schon bei den
 EJBs des JEE6-Generators Verwendung fand.
 
-**Hinweis!** Der im Java EE 6 Generator schon erzeugte **ApplicationController**
-wird im Java EE 7-Generator ebenfalls noch als Application Scoped Action
+**Hinweis!** Der im JEE6-Generator schon erzeugte `ApplicationController`
+wird im JEE7-Generator ebenfalls noch als Application Scoped Action
 Handler generiert, da es unter CDI keine Entsprechung für einen "eager
 started" Bean gibt.
 
@@ -1233,10 +1233,10 @@ Fileupload verwendet werden und ferner muss kein sog.  Request Wrapper
 implementiert werden.  Beides entfällt ersatzlos.
 
 Das HTML des Formulars muss nur dahingehend angepasst werden, dass das neue
-JSF-Tag **<h:inputFile ...  />** verwendet werden muss.
+JSF-Tag `<h:inputFile ...  />` verwendet werden muss.
 
-Beim Submit des Formulars muss im Action Handler aus dem **InputStream** des
-**javax.servlet.http.Part** der entsprechende Datenstrom extrahiert und für
+Beim Submit des Formulars muss im Action Handler aus dem `InputStream` des
+`javax.servlet.http.Part` der entsprechende Datenstrom extrahiert und für
 eigene Zwecke konvertiert werden.  Wenn es sich z.B.  um einen Bild-Upload
 handelt, kann folgender Code-Abschnitt verwendet werden:
 
@@ -1273,6 +1273,6 @@ aufgelistet.
 
 _beans.xml_
 
-Die _beans.xml_ wird generiert und in ihr der **bean-discovery-mode="all"**
+Die _beans.xml_ wird generiert und in ihr der `bean-discovery-mode="all"`
 eingestellt.  Nur so kann z.B.  der Profile Interceptor aus den JEE7-Utils
 gefunden und verwendet werden.
