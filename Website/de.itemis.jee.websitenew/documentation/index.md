@@ -2,6 +2,13 @@
 layout: documentation
 ---
 
+<!--
+* Inhalt
+{:toc}
+* [API for Java EE 6-Utilities (JavaDoc)]({{site.javadoc.utils6}})
+* [API for Java EE 7-Utilities (JavaDoc)]({{site.javadoc.utils7}})
+-->
+
 # Die JEE-Generatoren
 
 Die JEE-Generatoren sind in der Lage, eine komplette JEE6- oder
@@ -1147,7 +1154,7 @@ Aus dem Beispiel oben wird im DAO folgender Eintrag generiert:
 private DirContext ldap;
 ```
 
-# Generator von Java EE 6 auf Java EE 7 migrieren
+## Generator von Java EE 6 auf Java EE 7 migrieren
 
 Obwohl die Syntax des Java EE 6-Generators sich nicht von dem des Java EE
 7-Generators unterscheidet, gibt es doch zum Teil erhebliche Unterschiede im
@@ -1159,7 +1166,7 @@ Ferner sollten die Plugin-Abhängigkeiten im Eclipse von _de.itemis.jee6*_ auf
 _de.itemis.jee7*_ angepasst werden.  Dazu müssen auch in der _build.xml_ alle
 jee6-Referenzen durch jee7-Referenzen ersetzt werden.
 
-## Logging
+### Logging
 
 Der Logger wird unter Java EE 7 injiziert und nicht mehr als statische
 Variable angelegt.  Der entsprechende Code-Abschnitt sieht folgendermaßen
@@ -1185,7 +1192,7 @@ sich auch andere Logging Level:
 Die in den JEE7-Utils verwendeten Logging-Methoden behalten ihre
 Methodennamen, haben allerdings für den Logger eine angepasste Signatur.
 
-## Action Handler unter JSF
+### Action Handler unter JSF
 
 Die Action Handler sind jetzt keine Managed Beans im Sinne von JSF, sondern
 CDI-Beans.  Das hat den Vorteil, dass diese auch im transaktionalen Kontext
@@ -1210,7 +1217,7 @@ wird im JEE7-Generator ebenfalls noch als Application Scoped Action
 Handler generiert, da es unter CDI keine Entsprechung für einen "eager
 started" Bean gibt.
 
-## Data Access Objects
+### Data Access Objects
 
 Die Data Access Objects (kurz DAOs) ändern sich nur wenig, außer dass für
 den Profile Interceptor die schon erwähnte Annotation Anwendung findet:
@@ -1224,7 +1231,7 @@ public class XyzDaoBean extends AbstractXyzDaoBean
 }
 ```
 
-## File Upload
+### File Upload
 
 Der File Upload wird zwar von keinem JEE-Generator berücksichtigt,
 allerdings gibt es unter Java EE 7 eine nicht unbedeutende Vereinfachung. 
@@ -1262,7 +1269,7 @@ catch (IOException e)
 ```
 
 
-## Deskriptoren
+### Deskriptoren
 
 Die JEE-Generatoren erzeugen den Code mittels des sog. Generation Gap
 Patterns.  Alle bisherigen Punkte müssen auf bereits existierendem Code
