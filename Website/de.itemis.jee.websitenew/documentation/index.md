@@ -4,12 +4,15 @@ layout: documentation
 
 # Die JEE-Generatoren
 
-Die JEE-Generatoren sind in der Lage, eine komplette JEE6- oder JEE7-Web-Applikation aus einem einfachen Modell zu generieren. Das Framework wurde mit Xtext realisiert und die beiden Generatoren sind als Eclipse-Plugin verfügbar.
+Die JEE-Generatoren sind in der Lage, eine komplette JEE6- oder
+JEE7-Web-Applikation aus einem einfachen Modell zu generieren.  Das
+Framework wurde mit Xtext realisiert und die beiden Generatoren sind als
+Eclipse-Plugin verfügbar.
 
 ## JEE-Projekt anlegen {#new-project}
 
 Ein neues JEE-Projekt kann mit der JEE-Distribution einfach angelegt werden.
-Dazu muss der Menüpunkt File -> New -> Project...  aufgerufen werden.  Im
+Dazu muss der Menüpunkt _File -> New -> Project..._  aufgerufen werden.  Im
 sich öffnenden Dialog wählt man unter dem Punkt Xtext den Punkt JEE6
 Generator Project aus:
 
@@ -32,10 +35,9 @@ Application Server befindet.  Die Variablen lauten:
  * jboss.home
  * glassfish.home
 
-Dies muss nur ein einziges Mal für alle JEE-Projekte durchgeführt werden.
-
+Dies muss nur ein einziges Mal für alle JEE-Projekte durchgeführt werden. 
 Die letzten beiden Anmerkungen können in den Dateien
-_$PROJECT_HOME/LiesMich.txt_ bzw. _$PROJECT_HOME/ReadMe.txt_ nachgelesen
+_$PROJECT_HOME/LiesMich.txt_ bzw.  _$PROJECT_HOME/ReadMe.txt_ nachgelesen
 werden.
 
 ## Im JEE-Projekt entwickeln {#entwickeln}
@@ -55,9 +57,9 @@ application "beispiel" context "/beispiel" package org.example.jee6.beispiel dev
 ...
 ```
 
-Danach kann durch Aufrufen der ant-Targets generate und package die
-Applikation generiert und die WAR-Datei gebaut werden.  Diese kann mit ant
-deploy in den passenden Application Server per Hot Deployment installiert
+Danach kann durch Aufrufen der ant-Targets _generate_ und _package_ die
+Applikation generiert und die WAR-Datei gebaut werden.  Diese kann mit _ant
+deploy_ in den passenden Application Server per Hot Deployment installiert
 werden.  Der Generatorlauf erzeugt dabei folgende Artefakte:
 
 XHTML Presentation Layer inkl. Logos und CSS
@@ -68,9 +70,9 @@ XHTML Presentation Layer inkl. Logos und CSS
  * Resource Bundles für I18N und L10N
  * Eine version.properties für die Versionsnummer.
  * Dateien für Metadaten:
-     * web.xml
-     * faces-config.xml
-     * jboss-web.xml
+     * _web.xml_
+     * _faces-config.xml_
+     * _jboss-web.xml_
 
 Die Dateien für den XHTML-Presentation Layer werden nur generiert, wenn die
 dazu benötigte Dateien noch nicht vorhanden sind.  Bestehende Dateien werden
@@ -82,21 +84,21 @@ Fehlen generiert werden.  In der abstrakten Basisklasse der DAOs werden z.B.
 die konfigurierten Persistenzkontexte untergebracht.  Die generierten
 Dateien werden in folgende Verzeichnisse hinterlegt:
 
- * src
+ * _src_
    In diesem Verzeichnis werden die konkreten Klassen für die Action Handler und DAOs hinterlegt. Ferner werden hier die Resource Bundles und einige Service Klassen hineingeneriert. In diesem Verzeichnis können auch weitere eigene Klassen untergebracht werden. Alles, was hier hineingeneriert wird, wird nicht wieder überschrieben sondern nur angelegt, wenn die Klasse fehlt.
- * src-gen
+ * _src-gen_
    Hier werden die abstrakten Klassen und Entity Beans untergebracht. Diese werden bei jedem JEE-Generatorlauf neu generiert.
- * res
+ * _res_
    In diesem Verzeichnis werden bei Projektanlage Bilder und Libraries (JARs) angelegt. Hier können weitere Bilder untergebracht werden. Der JEE-Generator generiert in diesem Verzeichnis nichts.
- * res-gen
+ * _res-gen_
    In diesem Verzeichnis werden die Deployment Deskriptoren generiert. Diese Dateien werden bei jedem JEE-Generatorlauf neu generiert.
- * WebContent
+ * _WebContent_
    Hier werden die XHTML-Dateien und das CSS hineingelegt. Wie im src-Verzeichnis werden hier nur fehlende Dateien angelegt und bestehende nicht überschrieben.
 
-**Hinweis!** Die Inhalte der Verzeichnisse src, res und WebContent sollten der
+**Hinweis!** Die Inhalte der Verzeichnisse _src_, _res_ und _WebContent_ sollten der
 Verseinsverwaltung der Wahl zugeführt werden, da dort auch eigene
 Implementierungen untergebracht sein können.  Die Inhalte der Verzeichnisse
-src-gen und res-gen sollten nicht einer Versionsverwaltung zugeführt werden,
+_src-gen_ und _res-gen_ sollten nicht einer Versionsverwaltung zugeführt werden,
 da sie bei jedem JEE-Generatorlauf neu generiert werden.
 
 ## Allgemeine Modelleinstellungen {#modelleinstellungen}
@@ -150,14 +152,14 @@ XA-Datasource im Application Server konfiguriert sind.  Die Syntax lautet:
 persistence unit <Unit-Name> jndi <Jndi-Name> (cacheable) (MySQL|DB2|Oracle);
 ```
 
-Der unit-name wird in der persistence.xml als Referenz innerhalb der Web
+Der unit-name wird in der _persistence.xml_ als Referenz innerhalb der Web
 Applikation verwendet.  Der JNDI-Name definiert, wie die Datasource im
 Application Server wiederzufinden ist.  Eine eingehende Beschreibung, wie
 der JDNI-Name lauten sollte, findet sich auf diesen Seiten.  Wird das
-optionale Schlüsselwort cacheable verwendet, wird die Persistence Unit als
+optionale Schlüsselwort **cacheable** verwendet, wird die Persistence Unit als
 Second Level Cache konfiguriert.
 
-**Hinweis!** Es reicht nicht, nur das cacheable Schlüsselwort zu setzen, um im
+**Hinweis!** Es reicht nicht, nur das **cacheable** Schlüsselwort zu setzen, um im
 Application Server Second Level Caching zu aktivieren.  Es müssen meistens
 noch am Application Server selbst noch Konfigurationen vorgenommen werden.
 
@@ -168,7 +170,7 @@ Es werden die Datenbanken
  * Oracle
 
 unterstützt. Die Angabe wird nötig, um in der generierten Datei
-persistence.xml den SQL-Sprachdialekt festzulegen.
+_persistence.xml_ den SQL-Sprachdialekt festzulegen.
 
 #### Verwendete Sprachen (Lokalisierung)
 
@@ -195,7 +197,7 @@ die ISO-Länderkennung typischerweise in Großbuchstaben.  Dadurch werden
 landestypische Sprachvarianten unterschieden.
 
 **Hinweis!** Es muss mindestens eine Locale-Definition vorhanden sein und genau eine
-braucht das ansonsten optionale Schlüsselwort default.  Diese Sprache wird
+braucht das ansonsten optionale Schlüsselwort **default**.  Diese Sprache wird
 verwendet, falls die im Browser eingestellte Sprache in den Resource Bundles
 nicht gefunden werden konnte.
 
@@ -210,12 +212,10 @@ erreichbar ist.  Dazu dient die einfache Syntax:
 smtp <Jndi-Name>;
 ```
 
-Mehr Information zum Thema Mail im JEE-Umfeld befinden sich auf diesen
-Seiten.  Die auf diesen Seiten beschriebenen Einträge in den genannten
-XML-Deskriptoren werden vom JEE-Generator automatisch erzeugt.  Die
-Resource muss manuell in dem DAO eingetragen werden, in dem Mailing
-verwendet werden soll.  Das dazugehörige Code-Schnipsel sieht folgendermaßen
-aus:
+Die in den genötigten XML-Deskriptoren werden vom JEE-Generator automatisch
+erzeugt.  Die Resource muss manuell in dem DAO eingetragen werden, in dem
+Mailing verwendet werden soll.  Das dazugehörige Code-Schnipsel sieht
+folgendermaßen aus:
 
 ```java
 @Resource(name="<jndi-name>")
@@ -231,19 +231,18 @@ Sollen nur bestimmte User für bestimmte Bereiche (in der
 JEE-Generator-Nomenklatur "Prozesse") Zugang haben, so muss eine sog. 
 Security Domain über einen JNDI-Namen referenziert werden.  Dieser muss
 dementsprechen wie die E-Mail im Application Server konfiguriert sein und
-benutzt den JAAS-Standard.  Auf diesen Seiten befinden sich Informationen
-über die Konfiguration von JAAS.  Die Syntax lautet:
+benutzt den JAAS-Standard.  Die Syntax lautet:
 
 ```mydsl
 security domain <Jndi-Name> (clustered);
 ```
 
-Das optionale Schlüsselwort clustered bestimt, ob die Security Domain in
+Das optionale Schlüsselwort **clustered** bestimt, ob die Security Domain in
 einer geclusterten Umgebung funktionsfähig sein muss.
 
 #### Web Parameter
  
-Mit Web-Parametern kann man der Web Applikation in der web.xml Parameter übergeben. Die Syntax lautet:
+Mit Web-Parametern kann man der Web Applikation in der __web.xml__ Parameter übergeben. Die Syntax lautet:
 
 ```mydsl
 param <Key> = <Value> (description <Description>);
@@ -255,7 +254,7 @@ Die Einträge können beliebig häufig im Modell eingetragen werden. Aus folgend
 param de.itemis.purchasing.ITEMIKER = "itemis" description "LDAP-Gruppe aller itemiker";
 ```
 
-wird in der web.xml:
+wird in der _web.xml_:
 
 ```html
 <context-param>
@@ -317,7 +316,7 @@ sieht dann die Maske folgendermaßen aus:
 Die Generierung einer Combobox erfordert noch weitere Dinge im Hintergrund:
 
  1. Für die Combobox muss ein Value Converter für JSF generiert werden, der die Werte aus der XHTML-Maske in Entity Bean-IDs konvertiert.
- 2. Die Entity Beans müssen die Methoden equals() und hash() so überschreiben, dass Entity Beans mit denselben IDs als identisch angesehen werden, sonst funktioniert der Value Converter nicht.
+ 2. Die Entity Beans müssen die Methoden **equals()** und **hash()** so überschreiben, dass Entity Beans mit denselben IDs als identisch angesehen werden, sonst funktioniert der Value Converter nicht.
  
 Es macht natürlich Sinn, dass es Personen gibt, in denen mehrere Adressen
 gespeichert werden.  Damit wird das Modell um die Entity Bean **Person**
@@ -730,10 +729,10 @@ Der XHTML-Codeschnipsel:
 ```
 
 Der Action Handler stellt die Liste der möglichen Auswahlelemente bereit. In
-diesem Falle muss die Klasse OrderingHandler die Methode getUserInfoList()
+diesem Falle muss die Klasse OrderingHandler die Methode **getUserInfoList()**
 bereitstellen.  In dem Beispiel darf die 1:1-Relation den Wert null
 annehmen.  Soll das nicht möglich sein, muss das **<f:selectItem>**-Tag entfernt
-werden.  Zusätzlich werden noch an der Entity Bean die Methoden hashCode()
+werden.  Zusätzlich werden noch an der Entity Bean die Methoden **hashCode()**
 und **equals()** überladen.  Die von den generierten Action Handlern beinhalten
 den dazu passenden Value Converter.  In diesem Beispiel stellt die Klasse
 OrderingHandler über die Methode **getUserInfoConverter()** den Converter als
@@ -750,7 +749,7 @@ in darunterliegenden Entity Beans darf die Historie nicht mehr verwendet
 werden.  Besonderheiten der generierten Entity Beans
 
 Die generierten Entity Beans bieten noch einige Eigenschaften, die den
-Umgang mit den Entity Beans vereinfachen.  So wird die toString()-Methode
+Umgang mit den Entity Beans vereinfachen.  So wird die **toString()**-Methode
 überladen, um alle Attribute der Entity Bean auf einfache Weise ausgeben zu
 können.  Das ist für Logging-Zwecke besonders sinnvoll.
 
@@ -875,9 +874,9 @@ public List<OrderPosition> lastOrderList()
 
 Die Klasse FilteredList erweitert die Klasse ArrayList und ist in der
 javadoc/-Bibliothek enthalten.  Sie kann nur Elemente aufnehmen, die das
-Filterable-Interface implementieren.  Die Klasse überlädt die Methoden add()
-und addAll(), in denen das Filtern stattfindet.  Es werden nur Elemente der
-Liste hinzugefügt, die bei Aufruf der Elementmethode filter() true
+Filterable-Interface implementieren.  Die Klasse überlädt die Methoden **add()**
+und **addAll()**, in denen das Filtern stattfindet.  Es werden nur Elemente der
+Liste hinzugefügt, die bei Aufruf der Elementmethode **filter()** true
 zurückliefern.  Das Locale wird aus dem Request ermittelt und entspricht
 damit der im Browser eingestellten Sprache.
 
@@ -985,7 +984,7 @@ public boolean isPersonEmpty(final Person person);
 ```
 
 Auf die Implementierung wurde der Übersichtlichkeit halber verzichtet. Die
-Methode isPersonEmpty() wurde nur generiert, weil in der Entity Bean Person
+Methode **isPersonEmpty()** wurde nur generiert, weil in der Entity Bean Person
 eine 1:n-Relation enthalten ist.  Für die Klasse Address lauten die
 Zugriffsmethoden:
 
@@ -1006,7 +1005,7 @@ abstract String backFromAddress();
 
 Die entsprechenden Methoden werden im konkreten Action Handler implementiert
 und können nach Bedarf angepasst werden.  Wäre im Modell für die
-1:n-Relation eine History vermerkt, würde die Methode removeAddress()
+1:n-Relation eine History vermerkt, würde die Methode **removeAddress()**
 fehlen.
 
 **Hinweis!** Die Methoden- und Klassennamen werden aus den Namen der entsprechenden
@@ -1050,7 +1049,7 @@ public List<Address> getAddressList();
 #### Rollen
 
 Werden Rollen verwendet, muss auch eine Security Domain konfiguriert werden.
-Die entsprechenden Zugriffsrechte werden in die web.xml reingeneriert.  Je
+Die entsprechenden Zugriffsrechte werden in die _web.xml_ reingeneriert.  Je
 nach verwendetem Application Server müssen noch weitere Deskriptoren mit
 weiteren Roll Mappings konfiguriert werden.  Da sich diese Deskriptoren
 nicht gegenseitig beeinflussen, werden sie schon prophylaktisch
@@ -1073,7 +1072,7 @@ Sollte keine Rolle für den Prozess definiert worden sein, liefert diese
 Methode immer true zurück.  Man kann sich also auf die Existenz dieser
 Methode verlassen.
 
-Die andere Methode heißt boolean isLoggedIn(). Mit dieser Methode wird
+Die andere Methode heißt **boolean isLoggedIn()**. Mit dieser Methode wird
 überprüft, ob ein Benutzer überhaupt eingeloggt ist.
 
 #### Properties
@@ -1272,7 +1271,7 @@ folgenden Änderungen werden unabhängig vom bestehenden Code bei jedem
 Generatorlauf neu generiert und werden hier nur der Vollständigkeit halber
 aufgelistet.
 
-beans.xml
+_beans.xml_
 
 Die _beans.xml_ wird generiert und in ihr der **bean-discovery-mode="all"**
 eingestellt.  Nur so kann z.B.  der Profile Interceptor aus den JEE7-Utils
