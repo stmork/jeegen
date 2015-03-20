@@ -21,11 +21,11 @@ Dazu muss der Menüpunkt _File -> New -> Project..._  aufgerufen werden.  Im
 sich öffnenden Dialog wählt man unter dem Punkt Xtext den Punkt JEE6
 Generator Project aus:
 
-![](images/NewProject1.png)
+![](documentation/NewProject1.png)
 
 Danach wählt man einen Projektnamen aus: 
 
-![](images/NewProject2.png)
+![](documentation/NewProject2.png)
 
 Es wird danach ein Projekt namens "beispiel" angelegt. In diesem Projekt
 sind alle zum Bau notwendigen Dateien enthalten.  Die JEE-Distribution
@@ -287,7 +287,7 @@ entity Address
 }
 ```
 Nach einem Generatorlauf kann die Applikation deployed werden. Die Maske sieht dann wie folgt aus: 
-![](images/Entity1.jpg)
+![](documentation/Entity1.jpg)
 
 Will man noch den Adresstyp zwischen privat und geschäftlich angeben, kann
 eine nicht editierbare option benutzt werden.  Diese `option` wird als
@@ -316,7 +316,7 @@ In der Maske wird dadurch eine Combobox generiert. Passt man noch die
 Resource Bundles unter _$PROJECT_HOME/src/<package>/messages.properties_ an,
 sieht dann die Maske folgendermaßen aus:
 
-![](images/Entity2.jpg)
+![](documentation/Entity2.jpg)
 
 Die Generierung einer Combobox erfordert noch weitere Dinge im Hintergrund:
 
@@ -344,7 +344,7 @@ die Entity Bean binden zu können.  Dabei muss der Typ - in diesem Falle
 Address - mit den []-Zeichen markiert werden, sonst wäre die Relation nur
 1:1.  Die Maske für die Person Entity Bean sieht folgendermaßen aus:
 
-![](images/Entity3.jpg)
+![](documentation/Entity3.jpg)
 
 Klickt man auf den "Edit addresses"-Button, gelangt man in die schon
 bekannte Maske der `Address` Entity Bean.
