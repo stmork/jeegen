@@ -483,6 +483,14 @@ ul#markdown-toc li
 	background-size: cover;
 }
 
+@media screen and (max-device-width: 1023px)
+{
+	#header_wrapper, .downloads, .bug-banner
+	{
+		background-size: 100%;
+	}	
+}
+
 /*
 @media screen and (min-device-width: 768px) and (max-device-width: 1023px)
 {
