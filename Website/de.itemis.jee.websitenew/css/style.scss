@@ -164,7 +164,7 @@ ul {
 	border: none;
 	overflow: hidden;
 	min-height: 60px;
-	background: url('{{ site.baseurl }}/images/intro-background.jpg') #00457c;
+	background: url('{{ site.baseurl }}/images/background/intro.jpg') #00457c;
 	background-size: cover;
 }
 
@@ -222,7 +222,7 @@ ul {
 }
 
 .downloads {
-	background: url('{{ site.baseurl }}/images/download_background.jpg') #00457c;
+	background: url('{{ site.baseurl }}/images/background/download.jpg') #00457c;
 }
 
 /* Features */
@@ -485,7 +485,7 @@ ul#markdown-toc li
 	border: none;
 	overflow: hidden;
 	min-height: 826px;
-	background: url('{{ site.baseurl }}/images/bug-background.jpg') #00457c;
+	background: url('{{ site.baseurl }}/images/background/contact.jpg') #00457c;
 	background-size: cover;
 }
 
