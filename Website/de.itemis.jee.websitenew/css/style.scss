@@ -103,7 +103,6 @@ ul {
 #page {
 	background: #ffffff;
 	border-top: 1px solid #000;
-	padding-bottom: 20px;
 	margin: 0;
 	
 	h1 {
@@ -501,29 +500,3 @@ ul#markdown-toc li
 		background-size: 140%;
 	}	
 }
-
-/*
-@media screen and (min-device-width: 768px) and (max-device-width: 1023px)
-{
-	#header_wrapper, .downloads, .bug-banner
-	{
-		background-size: 50%;
-	}	
-}
-
-@media screen and (min-device-width: 480px) and (max-device-width: 767px)
-{
-	#header_wrapper, .downloads, .bug-banner
-	{
-		background-size: 40%;
-	}	
-}
-
-@media screen and (max-device-width: 479px)
-{
-	#header_wrapper, .downloads, .bug-banner
-	{
-		background-size: 25%;
-	}	
-}
-*/

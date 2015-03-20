@@ -12,14 +12,30 @@ Es gibt zwei einfache Wege, die JEE-Generatoren ans Laufen zu bringen. Eine vork
 Installiere vorkonfiguriertes Eclipse
 ------------------------------
 
- * Download die Distribution zum passenden Betriebssystem.
- * Das Archiv muss im Verzeichnis der Wahl ausgepackt werden Windows Benutzer sollten ein Verzeichnis möglichst in der Nähe des Wurzelverzeichnisses wählen, da Windows nur komplette Pfade mit maximal 256 Zeichen akzeptiert und Eclipse eine tiefe Verzeichnisstruktur benutzt.
+ * Downloade die Distribution zum passenden Betriebssystem.
+ * Das Archiv muss im Verzeichnis der Wahl ausgepackt werden. Windows Benutzer sollten ein Verzeichnis möglichst in der Nähe des Wurzelverzeichnisses wählen, da Windows nur komplette Pfade mit maximal 256 Zeichen akzeptiert und Eclipse eine tiefe Verzeichnisstruktur benutzt.
  * Danach kann Eclipse gestartet werden und der gewünschte Workspace ausgewählt werden. Ein Workspace ist das Verzeichnis für die Benutzerdaten und Projektdateien.
 
 JEE-Generatoren von der Update Site installieren
 ------------------------------
 
 Wenn Eclipse läuft:
- * Wähle Help -> Install New Software... aus der Menüleiste und Add... Geben Sie eine der Update Site URLs von oben an. Diese Site fasst alle benötigten Komponenten und Abhängigkeiten für die JEE-Generatoren zusammen.
+
+ * Wähle _Help -> Install New Software..._ aus der Menüleiste und _Add..._ Geben Sie eine der Update Site URLs von oben an. Diese Site fasst alle benötigten Komponenten und Abhängigkeiten für die JEE-Generatoren zusammen.
  * Wähle den passenden JEE-Generator aus der Kategorie JEE-Generators und durch wiederholtes Klicken von Next und einem abschließenden Finish wird die Installation abgeschlossen.
  * Nach einem kurzen Download stehen die JEE-Generatoren zum Gebrauch zur Verfügung.
+
+FAQ
+---
+
+### Was ist eine Updatesite? 
+
+Eclipse hat einen eingebauten Updatemanager, dieser arbeitet mit so
+genannten Updatesites als Quelle.  In Eclipse öffne das _Help -> Menü_ und
+klicke auf _Install new Software..._
+
+### Was ist die Lizenz der JEE-Generatoren?
+
+Die JEE-Generator sind frei verfügbar unter der [Eclipse Public License](http://www.eclipse.org/legal/epl-v10.html)
+
+
