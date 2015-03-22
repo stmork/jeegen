@@ -49,9 +49,9 @@ public class DownloadTest
 	}
 
 	@Test
-	public void jee6() throws IOException
+	public void jeeGenerator() throws IOException
 	{
-		final Download download = new Download("http://jee6-generator.itemis.de");
+		final Download download = new Download("http://www.jee-generator.de");
 
 		download.setTimeout(TIMEOUT);
 		Assert.assertEquals(TIMEOUT, download.getTimeout());
