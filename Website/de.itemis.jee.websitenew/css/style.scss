@@ -20,8 +20,9 @@ li {
 	line-height: 20px;
 }
 
-h1, h2, h3, h5, h5 {
+h1, h2, h3, h4, h5 {
 	font-family: 'Lato', sans-serif;
+	color: #00457c;
 }
 
 h1 {
@@ -34,13 +35,6 @@ h2 {
 	margin-bottom: 10px;
 	font-size: 26px;
 	font-weight: normal;
-	color: #00457c;
-}
-
-h2 small {
-	font-weight: normal;
-	font-size: 12px;
-	color: #00457c;
 }
 
 h3 {
@@ -48,20 +42,17 @@ h3 {
 	margin-bottom: 6px;
 	font-size: 20px;
 	font-weight: normal;
-	color: #00457c;
 }
 
 h4 {
 	margin-bottom: 2px;
 	font-size: 17px;
 	font-weight: bold;
-	color: #00457c;
 }
 
 h5 {
 	font-size: 15px;
 	font-weight: bold;
-	color: #515556;
 }
 
 ul {
@@ -111,18 +102,12 @@ ul {
 		line-height: 1.3em;
 		font-style: normal;
 		word-spacing: 1px;
-		font-size: 32px;
 	}
-}
-
-#page h1 small, #page h2 small, #page h3 small, #page h4 small, #page h5 small, #page h6 small {
-	font-weight: normal;
-	color: #00457c;
 }
 
 /* Introduction */
 .introduction {
-	padding-top: 70px;
+	padding-top: 40px;
 	padding-bottom: 70px;
 	position: relative;
 	overflow: visible;
@@ -156,20 +141,9 @@ ul {
 	}
 }
 
-#header_wrapper {
-	padding-bottom: 5px;
-	color: white;
-	height: auto;
-	border: none;
-	overflow: hidden;
-	min-height: 60px;
-	background: url('{{ site.baseurl }}/images/background/intro.jpg') #00457c;
-	background-size: cover;
-}
-
-.image-slider {
+.banner {
 	h2 {
-		margin-top: 80px;
+		margin-top: 40px;
 		font-size: 42px;
 		font-weight: 300;
 		color: #ffffff;
@@ -221,34 +195,6 @@ ul {
 }
 
 .downloads {
-	background: url('{{ site.baseurl }}/images/background/download.jpg') #00457c;
-}
-
-/* Features */
-
-#features {
-	h1, h4 {
-		color: #6B6B6B;
-		font-weight: 400;
-		line-height: 1.3em;
-		font-style: normal;
-		word-spacing: 1px;
-		text-align: center;
-		font-size: 32px;
-	}
-
-	h4 {
-		font-size: 24px;
-	}
-
-	p {
-		color: #6B6B6B;
-		font-weight: 200;
-		line-height: 1.3em;
-		font-style: normal;
-		word-spacing: 1px;
-		text-align: center;
-	}
 }
 
 #nav-outline li {
@@ -454,13 +400,6 @@ div#aboutUsImage img {
 	margin-right: 10px;
 }
 
-.container {
-	h1 {
-		margin-top: 1em;
-		margin-bottom: 1em;
-	}
-}
-
 ul#markdown-toc
 {
 	margin-top: 1em;
@@ -477,20 +416,34 @@ ul#markdown-toc li
 	list-style: none;
 }
 
-.bug-banner {
-	padding-bottom: 5px;
-	color: white;
-	height: auto;
-	border: none;
-	overflow: hidden;
-	min-height: 826px;
-	background: url('{{ site.baseurl }}/images/background/contact.jpg') #00457c;
+/* Background images for banners */
+
+.index-banner
+{
+	background: url('{{ site.baseurl }}/images/background/intro.jpg') #00457c;
 	background-size: cover;
+}
+
+.download-banner
+{
+	background: url('{{ site.baseurl }}/images/background/download.jpg') #00457c;
+}
+
+.bug-banner
+{
+	background: url('{{ site.baseurl }}/images/background/contact.jpg') #00457c;
+	min-height: 826px;
+}
+
+.banner
+{
+	background-size: cover;
+	color: white;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1023px) and (orientation: landscape)
 {
-	#header_wrapper, .downloads
+	.index-banner, .download-banner
 	{
 		background-size: 160%;
 	}	
