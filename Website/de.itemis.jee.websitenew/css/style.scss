@@ -433,6 +433,7 @@ ul#markdown-toc li
 {
 	background: url('{{ site.baseurl }}/images/background/contact.jpg') #00457c;
 	min-height: 826px;
+	background-color: white;
 }
 
 .banner
@@ -450,7 +451,17 @@ ul#markdown-toc li
 
 	.bug-banner
 	{
+		background-size: 160%;
+		background-repeat: no-repeat;
+	}	
+}
+
+@media screen and (max-width: 787px)
+{
+	.bug-banner
+	{
 		background-size: 120%;
 		background-repeat: no-repeat;
+		background-color: white;
 	}	
 }
