@@ -1,5 +1,5 @@
 ---
-layout: documentation
+layout: simple
 ---
 
 # Dokumentation der JEE-Generatoren

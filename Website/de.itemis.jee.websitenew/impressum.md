@@ -1,5 +1,5 @@
 ---
-layout: empty
+layout: simple
 ---
 
 Impressum
