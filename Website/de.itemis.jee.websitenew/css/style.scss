@@ -442,14 +442,16 @@ ul#markdown-toc li
 	color: white;
 }
 
-@media screen and (min-width: 768px) and (max-width: 1024px)
-// and (orientation: landscape)
+@media screen and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape)
 {
 	.index-banner, .download-banner
 	{
 		background-size: 200%;
 	}	
+}
 
+@media screen and (min-width: 768px) and (max-width: 1024px)
+{
 	.bug-banner
 	{
 		background-size: 140%;
