@@ -1,8 +1,9 @@
 #!/bin/bash
 
-set -e
+DST=_site
 
-export LC_ALL=de_DE.UTF-8
 BASE=`dirname $0`
-cd $BASE/../de.itemis.jee6.website
-ant clean generate
+cd $BASE/../de.itemis.jeegen.website
+test -d $DST && rm -rf $DST
+jekyll build
+rm -rf $DST/bin
