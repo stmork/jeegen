@@ -115,14 +115,14 @@
 									<installunit name="org.eclipse.emf.mwe.sdk.feature.group" />
 
 									<!-- Xtext, MWE2 -->
-									<updatesite
-										url="https://builds.itemis.de/nexus/content/repositories/eclipse-modeling/" />
+									<updatesite url="https://builds.itemis.de/nexus/content/repositories/eclipse-modeling/" />
+<!--
 									<installunit name="org.eclipse.emf.mwe2.language.sdk.feature.group" />
 									<installunit name="org.eclipse.emf.mwe2.runtime.sdk.feature.group" />
 									<installunit name="org.eclipse.xtext.sdk.feature.group" />
 									<installunit name="org.eclipse.xtext.xtend2.sdk.feature.group" />
 									<installunit name="org.eclipse.xtext.xtend2.m2e.feature.group" />
-
+-->
 									<!-- Xtext Extensions -->
 									<updatesite url="http://download.itemis.com/updates/releases/" />
 

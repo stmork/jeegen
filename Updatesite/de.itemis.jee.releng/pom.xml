@@ -15,7 +15,6 @@
 		<tycho-extras-version>0.21.0</tycho-extras-version>
 		<antrun-version>1.8</antrun-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jee7.utils.version>1.0.0</jee7.utils.version>
 	</properties>
 
 	<modules>
