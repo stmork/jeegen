@@ -1,10 +1,13 @@
 package de.itemis.jee6.test;
 
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
+import java.util.Random;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -17,6 +20,8 @@ public class DownloadTest
 	private final static String IMAGE_URL     = HOMEPAGE_URL + "/images/rcc32.gif";
 	private final static int    TIMEOUT       = 5000;
 	private final static int    FORCE_TIMEOUT =   50;
+	private final static Random random        = new Random(System.currentTimeMillis());
+
 
 	@Test
 	public void eisenbahnsteuerung() throws IOException
@@ -157,5 +162,59 @@ public class DownloadTest
 	public void malformedUrl() throws IOException
 	{
 		new Download("morknet");
+	}
+
+	@Test
+	public void testInputStream() throws IOException
+	{
+		for (int loop = 0; loop < 1024; loop++)
+		{
+			final byte input[] = new byte[random.nextInt(128 * 1024)];
+
+			// Fill with random bytes...
+			random.nextBytes(input);
+
+			// Init streams
+			final ByteArrayInputStream  bais = new ByteArrayInputStream(input);
+
+			// Test copy process
+			final byte [] output = Download.read(bais, input.length);
+			Assert.assertEquals(input.length, output.length);
+
+			// Compare if the buffers are equal.
+			for (int i = 0; i < input.length; i++)
+			{
+				Assert.assertEquals(input[i], output[i]);
+			}
+		}
+	}
+
+	@Test
+	public void testStreamCopy() throws IOException
+	{
+		for (int loop = 0; loop < 1024; loop++)
+		{
+			final byte input[] = new byte[random.nextInt(128 * 1024)];
+
+			// Fill with random bytes...
+			random.nextBytes(input);
+
+			// Init streams
+			final ByteArrayInputStream  bais = new ByteArrayInputStream(input);
+			final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+			// Test copy process
+			Assert.assertEquals(input.length, Download.copy(bais, baos));
+
+			// Test output buffer
+			final byte [] output = baos.toByteArray();
+			Assert.assertEquals(input.length, output.length);
+
+			// Compare if the buffers are equal.
+			for (int i = 0; i < input.length; i++)
+			{
+				Assert.assertEquals(input[i], output[i]);
+			}
+		}
 	}
 }

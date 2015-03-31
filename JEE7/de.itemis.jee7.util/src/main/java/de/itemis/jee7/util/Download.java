@@ -9,6 +9,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -200,7 +201,8 @@ public class Download implements Serializable
 	}
 
 	/**
-	 * This method reads a defined length from an {@link InputStream} into a byte array. The input stream is closed after reading.
+	 * This method reads a defined length from an {@link InputStream} into a byte array. The
+	 * {@link InputStream} is closed after reading.
 	 * 
 	 * @param is The {@link InputStream}
 	 * @param len The length of data inside the {@link InputStream}.
@@ -216,5 +218,30 @@ public class Download implements Serializable
 			dis.readFully(buffer);
 			return buffer;
 		}
+	}
+
+	/**
+	 * This method copies data from an {@link InputStream} directly into an {@link OutputStream}. The
+	 * amount of written bytes is returned. Both streams are not closed after copy.
+	 * 
+	 * @param is The {@link InputStream} to read from.
+	 * @param os The {@link OutputStream} to write to.
+	 * @return The amount of written bytes copied.
+	 * 
+	 * @throws IOException If some IO went wrong.
+	 */
+	public static long copy(final InputStream is, final OutputStream os) throws IOException
+	{
+		final byte buffer [] = new byte[32768];
+		int read;
+		long written = 0;
+
+		// Block buffered copy.
+		while((read = is.read(buffer, 0, buffer.length)) != -1)
+		{
+			os.write(buffer, 0, read);
+			written += read;
+		}
+		return written;
 	}
 }
