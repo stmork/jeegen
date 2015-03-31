@@ -13,7 +13,8 @@ Require-Bundle: de.itemis.jee7,
  org.eclipse.xtext.ui.junit,
  org.junit4;resolution:=optional,
  org.eclipse.ui.workbench;resolution:=optional,
- org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional
+ org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional,
+ org.eclipse.xtext.xbase.lib
 Import-Package: org.apache.log4j,
  org.junit.runner;version="4.5.0",
  org.junit.runner.manipulation;version="4.5.0",
