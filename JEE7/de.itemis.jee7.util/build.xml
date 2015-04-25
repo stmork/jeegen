@@ -152,8 +152,6 @@
 				<test name="de.itemis.jee7.test.FilterTest"/>
 				<test name="de.itemis.jee7.test.DownloadTest"/>
 				<test name="de.itemis.jee7.test.ValidatorTest"/>
-				<test name="de.itemis.jee7.test.LdapConnectionTest"/>
-				<test name="de.itemis.jee7.test.LdapTest"/>
 			</junit>
 		</jacoco:coverage>
 	</target>

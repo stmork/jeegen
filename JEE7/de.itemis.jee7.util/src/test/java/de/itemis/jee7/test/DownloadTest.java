@@ -103,6 +103,24 @@ public class DownloadTest
 	}
 
 	@Test
+	public void jee() throws IOException
+	{
+		final Download download = new Download("http://item.is/jee");
+
+		download.setTimeout(TIMEOUT);
+		Assert.assertEquals(TIMEOUT, download.getTimeout());
+
+		download.setFollowRedirect(false);
+		Assert.assertFalse(download.getFollowRedirect());
+
+		final byte [] array = download.downloadArray();
+		Assert.assertNotNull(array);
+
+		final String mimeType = download.getMimeType();
+		Assert.assertNull(mimeType);
+	}
+
+	@Test
 	public void image() throws IOException
 	{
 		final Download download = new Download(IMAGE_URL);

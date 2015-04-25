@@ -8,7 +8,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.interceptor.Interceptors;
-import javax.naming.directory.DirContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -42,15 +41,6 @@ public class ApplicationController extends AbstractApplicationController
 		log.debug(">init()");
 		try
 		{
-			final DirContext ldap = info.getLdapItemis();
-			final String     ns   = ldap.getNameInNamespace();
-
-			log.debug(ldap);
-			LogUtil.debug(log, " url        = %s", dao.getLdapUrl());
-			LogUtil.debug(log, " baseDN     = %s", dao.getLdapBaseDN());
-			LogUtil.debug(log, " productive = %s", info.isProductive());
-			LogUtil.debug(log, " namespace  = %s", ns);
-	
 			super.init();
 			multiple.xaAccess();
 			multiple.checkSsl();
