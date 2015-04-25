@@ -11,7 +11,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.inject.Inject;
-import javax.naming.directory.DirContext;
 
 import de.itemis.faces.dao.AdminDaoBean;
 import de.itemis.faces.dao.InfoDaoBean;
@@ -42,15 +41,6 @@ public class ApplicationController extends AbstractApplicationController
 		log.log(Level.FINE, ">init()");
 		try
 		{
-			final DirContext ldap = info.getLdapItemis();
-			final String     ns   = ldap.getNameInNamespace();
-
-			log.log(Level.FINE, ldap.toString());
-			LogUtil.debug(log, " url        = %s", dao.getLdapUrl());
-			LogUtil.debug(log, " baseDN     = %s", dao.getLdapBaseDN());
-			LogUtil.debug(log, " productive = %s", info.isProductive());
-			LogUtil.debug(log, " namespace  = %s", ns);
-
 			super.init();
 			multiple.xaAccess();
 			multiple.checkSsl();
