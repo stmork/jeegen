@@ -1,3 +1,6 @@
+/*
+ * $Id$
+ */
 package org.jeegen.jee6.test;
 
 import java.util.ArrayList;
