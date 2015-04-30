@@ -38,8 +38,8 @@ src:
   gef: "https://github.com/eclipse/gef/blob/master"
 
 javadoc:
-  utils6: "http://www.jee-generator.de/javadoc/jee6"
-  utils7: "http://www.jee-generator.de/javadoc/jee7"
+  utils6: "http://jee-generator.org/javadoc/jee7/"
+  utils7: "http://jee-generator.org/javadoc/jee7/"
   javaee: "http://docs.oracle.com/javaee/5/api"
 
 sass:
