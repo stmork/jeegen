@@ -71,8 +71,8 @@ Workflow
 
   <dependencies>
     <dependency>
-      <groupId>de.itemis.jee6</groupId>
-      <artifactId>de.itemis.jee6.utils</artifactId>
+      <groupId>org.jeegen.jee6</groupId>
+      <artifactId>org.jeegen.jee6.utils</artifactId>
       <version>1.1.9</version>
     </dependency>
     <dependency>

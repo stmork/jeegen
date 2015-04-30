@@ -8,6 +8,6 @@
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.jboss.ide.eclipse.as.core.server.runtime.runtimeTarget/JBoss 7.1 Runtime"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/de.itemis.jee6.util"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.jeegen.jee6.util"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -76,7 +76,7 @@
 
 	<target name="compile">
 		<mkdir dir="${bin-path}"/>
-		<copy file="../de.itemis.jee6.util/jee6-utils.jar" todir="resources"/>
+		<copy file="../org.jeegen.jee6.util/jee6-utils.jar" todir="resources"/>
 		<copy todir="${bin-path}">
 			<fileset dir="${src-path}">
 				<exclude name="**/*.java"/>

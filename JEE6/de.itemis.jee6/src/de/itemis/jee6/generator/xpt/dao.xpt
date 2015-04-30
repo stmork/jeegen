@@ -27,7 +27,7 @@ package «daoPackageOf(this)»;
 
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
-import de.itemis.jee6.util.Profiler;
+import org.jeegen.jee6.util.Profiler;
 
 @Stateless
 @Interceptors(Profiler.class)
@@ -268,7 +268,7 @@ package «daoPackageOf(this)»;
 
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
-import de.itemis.jee6.util.Profiler;
+import org.jeegen.jee6.util.Profiler;
 
 /**
  * This session bean implementation handles the database operations of the following option beans:

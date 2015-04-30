@@ -42,6 +42,6 @@
 	</target>
 		
 	<target name="run" depends="compile">
-		<java classpath="${bin-path}" classname="de.itemis.faces.client.FacesClient" fork="on"/>
+		<java classpath="${bin-path}" classname="org.jeegen.faces.client.FacesClient" fork="on"/>
 	</target>
 </project>
