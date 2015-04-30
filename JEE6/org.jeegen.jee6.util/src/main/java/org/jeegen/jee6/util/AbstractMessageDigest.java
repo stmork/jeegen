@@ -1,3 +1,6 @@
+/*
+ * $Id$
+ */
 package org.jeegen.jee6.util;
 
 import java.io.UnsupportedEncodingException;

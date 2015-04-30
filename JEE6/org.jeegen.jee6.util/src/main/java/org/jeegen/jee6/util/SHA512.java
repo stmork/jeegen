@@ -1,5 +1,7 @@
+/*
+ * $Id$
+ */
 package org.jeegen.jee6.util;
-
 
 /**
  * This class provides support methods for computing an SHA-512 hash.

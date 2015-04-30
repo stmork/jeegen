@@ -361,7 +361,7 @@ GlassFish Application Server 3.0 Servlet 3.0//EN"
 	</application>
 	<validator>
 		<validator-id>mailValidator</validator-id>
-		<validator-class>de.itemis.jee6.util.MailValidator</validator-class>
+		<validator-class>org.jeegen.jee6.util.MailValidator</validator-class>
 	</validator>
 </faces-config>
 «ENDFILE»

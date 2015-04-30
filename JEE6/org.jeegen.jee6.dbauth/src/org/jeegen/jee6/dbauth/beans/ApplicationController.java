@@ -33,7 +33,7 @@ public class ApplicationController extends AbstractApplicationController {
 		log.debug(">init()");
 		super.init();
 		log.info("\n"
-				+ LogUtil.banner("de.itemis.jee6.dbauth.version", "DB-Auth"));
+				+ LogUtil.banner("org.jeegen.jee6.dbauth.version", "DB-Auth"));
 		log.debug("<init()");
 		
 		
