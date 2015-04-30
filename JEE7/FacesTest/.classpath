@@ -19,6 +19,6 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/de.itemis.jee7.util"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.jeegen.jee7.util"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

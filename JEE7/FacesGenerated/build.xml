@@ -121,7 +121,7 @@
 	<target name="compile" depends="-version">
 		<mkdir dir="${bin-path}"/>
 		<mkdir dir="${lib-path}"/>
-		<copy file="../de.itemis.jee7.util/jee7-utils.jar" todir="${lib-path}"/>
+		<copy file="../org.jeegen.jee7.util/jee7-utils.jar" todir="${lib-path}"/>
 		<copy todir="${img-path}">
 			<fileset dir="../de.itemis.jee7.ui/resources">
 				<include name="*.*"/>

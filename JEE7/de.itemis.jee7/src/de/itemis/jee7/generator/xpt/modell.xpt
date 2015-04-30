@@ -37,7 +37,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
-import de.itemis.jee7.util.LogUtil;
+import org.jeegen.jee7.util.LogUtil;
 import javax.inject.Inject;
 
 /**
@@ -117,8 +117,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.transaction.Transactional.TxType;
-import de.itemis.jee7.util.Profiled;
-import de.itemis.jee7.util.LogUtil;
+import org.jeegen.jee7.util.Profiled;
+import org.jeegen.jee7.util.LogUtil;
 
 /**
  * This managed bean class handles some session tasks.
