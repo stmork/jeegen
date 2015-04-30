@@ -26,7 +26,7 @@
 package «daoPackageOf(this)»;
 
 import javax.ejb.Stateless;
-import de.itemis.jee7.util.Profiled;
+import org.jeegen.jee7.util.Profiled;
 
 @Stateless
 @Profiled
@@ -266,7 +266,7 @@ abstract public class «abstractDaoOf(this)» extends «abstractDaoOf(getModel()
 package «daoPackageOf(this)»;
 
 import javax.ejb.Stateless;
-import de.itemis.jee7.util.Profiled;
+import org.jeegen.jee7.util.Profiled;
 
 /**
  * This session bean implementation handles the database operations of the following option beans:

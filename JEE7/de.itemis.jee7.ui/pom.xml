@@ -43,8 +43,8 @@
 						<configuration>
 							<artifactItems>
 								<artifactItem>
-									<groupId>de.itemis.jee7</groupId>
-									<artifactId>de.itemis.jee7.utils</artifactId>
+									<groupId>org.jeegen.jee7</groupId>
+									<artifactId>org.jeegen.jee7.utils</artifactId>
 									<version>1.0.3</version>
 									<type>jar</type>
 									<overWrite>true</overWrite>

@@ -64,7 +64,7 @@ public class «abstractOf(this)» implements Serializable
 , Cloneable
 «ENDIF»
 «IF filterable»
-, de.itemis.jee7.util.Filterable
+, org.jeegen.jee7.util.Filterable
 «ENDIF»
 {
 	private static final long serialVersionUID = 1L;
@@ -127,7 +127,7 @@ public class «typeOf()» extends «abstractOf()»
 	 * @param pattern The pattern to search for.
 	 * @param locale The {@link Locale} for {@link String} comparison.
 	 * @return If the implemented instance meet the search pattern.
-	 * @see de.itemis.jee7.util.Filtarable
+	 * @see org.jeegen.jee7.util.Filtarable
 	 */
 	@Override
 	public boolean filter(final String pattern, final Locale locale) {

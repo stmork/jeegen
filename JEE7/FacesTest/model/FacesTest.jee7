@@ -1,4 +1,4 @@
-application "JEE7 Test Application" context "/faces" package de.itemis.faces timeout 2 development;
+application "JEE7 Test Application" context "/faces" package org.jeegen.faces timeout 2 development;
 persistence unit "facesDS" jndi "jdbc/facesDS";
 persistence unit "authDS"  jndi "jdbc/authDS";
 

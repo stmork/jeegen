@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="src-gen"/>
+	<classpathentry kind="src" path="res"/>
+	<classpathentry kind="src" path="WebContent"/>
+	<classpathentry kind="src" path="res-gen"/>
+	<classpathentry kind="src" path="model"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.jboss.ide.eclipse.as.core.server.runtime.runtimeTarget/WildFly 8.0 Runtime">
+		<attributes>
+			<attribute name="owner.project.facets" value="jst.web"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="res/WEB-INF/lib/jee7-utils.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.jeegen.jee7.util"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
