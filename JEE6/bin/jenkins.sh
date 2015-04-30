@@ -16,7 +16,7 @@ test -d ${APPLE_JDK}/bin  && export JAVA_HOME=$APPLE_JDK
 
 echo $JAVA_HOME
 
-cd ../de.itemis.jee6.util
+cd ../org.jeegen.jee6.util
 ant clean package javadoc jacoco
 
 cd ../de.itemis.jee6
@@ -42,5 +42,5 @@ ant clobber generate package findbugs
 cd ../FacesTest
 ant clean generate package findbugs test
 
-cd ../de.itemis.jee6.dbauth
+cd ../org.jeegen.jee6.dbauth
 ant clean generate package

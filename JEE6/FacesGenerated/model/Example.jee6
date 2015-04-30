@@ -1,4 +1,4 @@
-application "JEE6 Generated Example" context "/example" package de.itemis.example timeout 120 integration strict;
+application "JEE6 Generated Example" context "/example" package org.jeegen.example timeout 120 integration strict;
 persistence unit "exampleDS" jndi "jdbc/exampleDS" cacheable;
 security domain "itemis";
 smtp "mail/Default";
@@ -6,9 +6,9 @@ smtp "mail/Default";
 locale "de" default;
 locale "en";
 
-param de.itemis.purchasing.CONTROLLING_EMAIL = "controlling@itemis.de"           description "Ziel aller Inventarisierungs-EMails";
-param de.itemis.purchasing.ITEMIKER          = "itemis"                          description "LDAP-Gruppe aller itemiker";
-param de.itemis.purchasing.AUTHORIZER        = "vorstand,teamleiter,controlling" description "LDAP-Gruppen (komma-separiert) aller genehmigungsfaehigker itemiker";
+param de.itemis.purchasing.CONTROLLING_EMAIL = "controlling@jee-generator.org"   description "Ziel aller Inventarisierungs-EMails";
+param de.itemis.purchasing.ITEMIKER          = "alle"                            description "LDAP-Gruppe aller Mitarbeiter";
+param de.itemis.purchasing.AUTHORIZER        = "vorstand,teamleiter,controlling" description "LDAP-Gruppen der Leitung";
 
 options UserInfo editable
 {
