@@ -7,6 +7,35 @@
 	<version>1.0.7-SNAPSHOT</version>
 	<name>jee7-utils</name>
 
+	<description>Utils for Java Enterprise 7 Applications</description>
+	<url>http://jee-generator.org/javadoc/jee7/</url>
+
+	<developers>
+		<developer>
+			<name>Steffen Mork</name>
+			<email>info@jee-generator.org</email>
+			<url>http://morknet.de</url>
+		</developer>
+		<developer>
+			<name>Dominik Pieper</name>
+			<email>info@jee-generator.org</email>
+			<url>http://pieperhome.de</url>
+		</developer>
+	</developers>
+
+	<licenses>
+		<license>
+			<name>EPL License</name>
+			<url>http://opensource.org/licenses/EPL-1.0</url>
+		</license>
+	</licenses>
+
+	<scm>
+		<connection>scm:svn:https://svn.code.sf.net/p/jeegen/code/</connection>
+		<developerConnection>scm:svn:https://svn.code.sf.net/p/jeegen/code/</developerConnection>
+		<url>https://svn.code.sf.net/p/jeegen/code/trunk/JEE7/org.jeegen.jee7.util//</url>
+	</scm>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -49,7 +78,6 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
-					<finalName>${project.name}</finalName>
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
