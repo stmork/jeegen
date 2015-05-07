@@ -21,7 +21,7 @@ public class DownloadTest
 	private final static String HOMEPAGE_URL  = "http://eisenbahnsteuerung.org";
 	private final static String IMAGE_URL     = HOMEPAGE_URL + "/images/rcc32.gif";
 	private final static int    TIMEOUT       = 5000;
-	private final static int    FORCE_TIMEOUT =   50;
+	private final static int    FORCE_TIMEOUT =   10;
 	private final static Random random        = new Random(System.currentTimeMillis());
 
 	@Test
@@ -57,7 +57,7 @@ public class DownloadTest
 	@Test
 	public void jeeGenerator() throws IOException
 	{
-		final Download download = new Download("http://www.jee-generator.de");
+		final Download download = new Download("http://www.jee-generator.org");
 
 		download.setTimeout(TIMEOUT);
 		Assert.assertEquals(TIMEOUT, download.getTimeout());
