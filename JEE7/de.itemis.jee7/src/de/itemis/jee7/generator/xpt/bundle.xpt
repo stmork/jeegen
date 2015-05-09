@@ -1,5 +1,5 @@
 «REM»
-«###»	Copyright (C) 2014 itemis AG
+«###»	Copyright (C) 2015 Steffen A. Mork, Dominik Pieper
 «###»	$Id$
 «ENDREM»
 
@@ -101,7 +101,7 @@
 «LET versionFilename(this) AS filename»
 «FILE filename IMPL»
 «ENDFILE»
-«bundleUpdate(filename, "vendor", "itemis AG")»
+«bundleUpdate(filename, "vendor", "Steffen A. Mork, Dominik Pieper")»
 «bundleUpdate(filename, "version.major", "0")»
 «bundleUpdate(filename, "version.minor", "0")»
 «bundleUpdate(filename, "version.patch", "1")»
