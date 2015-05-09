@@ -101,7 +101,7 @@
 «LET versionFilename(this) AS filename»
 «FILE filename IMPL»
 «ENDFILE»
-«bundleUpdate(filename, "vendor", "Steffen A. Mork, Dominik Pieper")»
+«bundleUpdate(filename, "vendor", "JEE6-Generator")»
 «bundleUpdate(filename, "version.major", "0")»
 «bundleUpdate(filename, "version.minor", "0")»
 «bundleUpdate(filename, "version.patch", "1")»
