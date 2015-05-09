@@ -359,7 +359,7 @@ Workflow
 				charset="UTF-8"
 				windowtitle="«this.projectName» classes">
 			<doctitle><![CDATA[<h1>«this.projectName» classes</h1>]]></doctitle>
-			<bottom><![CDATA[<i>Copyright &#169; itemis AG]]></bottom>
+			<bottom><![CDATA[<i>Copyright &#169; Steffen A. Mork, Dominik Pieper]]></bottom>
 		</javadoc>
 	</target>
 
