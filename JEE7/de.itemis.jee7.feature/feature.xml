@@ -3,15 +3,15 @@
       id="de.itemis.jee7.feature"
       label="JEE7-Generator"
       version="1.0.5.qualifier"
-      provider-name="itemis AG"
+      provider-name="JEE-Generator"
       plugin="de.itemis.jee7">
 
-   <description url="http://www.jee-generator.de">
-      Dieses Feature ermöglicht das einfache Generieren einer JEE-basierten Webapplikation.
+   <description url="http://www.jee-generator.org">
+      Dieses Feature ermöglicht das einfache Generieren einer Java EE 7-basierten Webapplikation.
    </description>
 
    <copyright>
-      Copyright (C) 2014. itemis AG. All rights reserved.
+      Copyright (C) 2015 - Steffen A. Mork and Dominik Pieper. All rights reserved.
    </copyright>
 
    <license url="http://www.eclipse.org/legal/epl-v10.html">
@@ -105,9 +105,8 @@ This Agreement is governed by the laws of the State of New York and the intellec
    </license>
 
    <url>
-      <update label="JEE Generator Update Site" url="http://www.jee-generator.de/updates/kepler"/>
-      <discovery label="JEE Generator Project Site" url="http://www.jee-generator.de/"/>
-      <discovery label="OAW-Tools" url="http://oaw.sourceforge.net/updates/"/>
+      <update label="JEE Generator Update Site" url="http://www.jee-generator.org/updates/kepler"/>
+      <discovery label="JEE Generator Project Site" url="http://www.jee-generator.org/"/>
    </url>
 
    <includes
