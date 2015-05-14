@@ -126,8 +126,8 @@
 									<!-- Xtext Extensions -->
 									<updatesite url="http://download.itemis.com/updates/releases/" />
 
-									<!-- JEE6 Generator -->
-									<updatesite url="http://www.jee-generator.de/updates/luna/" />
+									<!-- Java EE Generators -->
+									<updatesite url="http://www.jee-generator.org/updates/luna/" />
 									<installunit name="de.itemis.jee6.feature.feature.group" />
 									<installunit name="de.itemis.jee7.feature.feature.group" />
 								</builder>

@@ -1,4 +1,4 @@
 instructions.configure=\
 addRepository(type:0,location:https${#58}//download.eclipse.org/releases/luna/,enabled:true);\
 addRepository(type:1,location:https${#58}//download.itemis.com/updates/releases/2.0.0/,enabled:true);\
-addRepository(type:2,location:https${#58}//www.jee-generator.de/updates/snapshot/luna/,enabled:true);
+addRepository(type:2,location:https${#58}//www.jee-generator.org/updates/snapshot/luna/,enabled:true);
