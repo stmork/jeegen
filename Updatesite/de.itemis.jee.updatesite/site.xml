@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <description name="JEE-Generators Update Site" url="http://www.jee-generator.de/updates/">
+   <description name="JEE-Generators Update Site" url="http://www.jee-generator.org/updates/">
       
    </description>
    <feature url="features/de.itemis.jee6.feature_1.1.13.qualifier.jar" id="de.itemis.jee6.feature" version="1.1.13.qualifier"/>
