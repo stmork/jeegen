@@ -1,13 +1,13 @@
 # Site settings
 title: JEE Generator
-email: info@jee-generator.de
+email: info@jee-generator.org
 description: > # this means to ignore newlines until "baseurl:"
   Die JEE-Generatoren sind in der Lage, eine komplette JEE-Web-Applikation (Java EE 6 oder Java EE 7) aus einem einfachen Modell zu generieren.
   Das Framework wurde mit Xtext realisiert und ist als Eclipse-Plugin verfügbar. Für Java EE 6 und Java EE 7 stehen getrennte Plugins zur Verfügung.
 
 baseurl: "" # the subpath of your site, e.g. /blog/
 
-url: "http://www.jee-generator.de" # the base hostname & protocol for your site
+url: "http://www.jee-generator.org" # the base hostname & protocol for your site
 encoding: UTF-8
 
 # Build settings
@@ -38,7 +38,7 @@ src:
   gef: "https://github.com/eclipse/gef/blob/master"
 
 javadoc:
-  utils6: "http://jee-generator.org/javadoc/jee7/"
+  utils6: "http://jee-generator.org/javadoc/jee6/"
   utils7: "http://jee-generator.org/javadoc/jee7/"
   javaee: "http://docs.oracle.com/javaee/5/api"
 
