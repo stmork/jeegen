@@ -48,6 +48,7 @@
 				<version>${tycho-version}</version>
 				<extensions>true</extensions>
 			</plugin>
+<!--
 			<plugin>
 				<groupId>de.itemis.signing</groupId>
 				<artifactId>itemis-jarsigner</artifactId>
@@ -66,6 +67,7 @@
 					</execution>
 				</executions>
 			</plugin>
+-->
 			<plugin>
 				<!-- See https://github.com/jbosstools/jbosstools-maven-plugins/wiki 
 					for documentation -->
@@ -225,6 +227,10 @@
 		<repository>
 			<id>projects</id>
 			<url>https://projects.itemis.de/nexus/content/groups/ejb3/</url>
+		</repository>
+		<repository>
+			<id>jeegen.sf.net</id>
+			<url>http://www.jee-generator.org/maven/</url>
 		</repository>
 	</repositories>
 
