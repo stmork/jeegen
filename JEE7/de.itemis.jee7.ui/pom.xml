@@ -14,6 +14,7 @@
 	<artifactId>de.itemis.jee7.ui</artifactId>
 	<groupId>de.itemis.jee7</groupId>
 	<packaging>eclipse-plugin</packaging>
+
 	<build>
 		<plugins>
 			<plugin>
