@@ -4,8 +4,8 @@
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<name>JEE  DSL Releng</name>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>de.itemis.jee</groupId>
-	<artifactId>de.itemis.jee.releng</artifactId>
+	<groupId>org.jeegen</groupId>
+	<artifactId>releng</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
@@ -20,13 +20,11 @@
 	<modules>
 		<module>../../JEE6/de.itemis.jee6</module>
 		<module>../../JEE6/de.itemis.jee6.ui</module>
-		<module>../../JEE6/de.itemis.jee6.doc</module>
 		<module>../../JEE6/de.itemis.jee6.feature</module>
 		<module>../../JEE7/de.itemis.jee7</module>
 		<module>../../JEE7/de.itemis.jee7.ui</module>
-		<module>../../JEE7/de.itemis.jee7.doc</module>
 		<module>../../JEE7/de.itemis.jee7.feature</module>
-		<module>../de.itemis.jee.updatesite</module>
+		<module>../org.jeegen.updatesite</module>
 	</modules>
 
 	<build>
@@ -82,7 +80,7 @@
 							<goal>generate-repository-facade</goal>
 						</goals>
 						<configuration>
-							<siteTemplateFolder>../de.itemis.jee6.updatesite/templates</siteTemplateFolder>
+							<siteTemplateFolder>../org.jeegen6.updatesite/templates</siteTemplateFolder>
 							<!-- Symbols are used while expanding index.html template -->
 							<symbols>
 								<update.site.name>JEE6 Generator Repository</update.site.name>
