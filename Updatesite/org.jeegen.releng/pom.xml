@@ -18,9 +18,9 @@
 	</properties>
 
 	<modules>
-		<module>../../JEE6/de.itemis.jee6</module>
-		<module>../../JEE6/de.itemis.jee6.ui</module>
-		<module>../../JEE6/de.itemis.jee6.feature</module>
+		<module>../../JEE6/org.jeegen.jee6</module>
+		<module>../../JEE6/org.jeegen.jee6.ui</module>
+		<module>../../JEE6/org.jeegen.jee6.feature</module>
 		<module>../../JEE7/de.itemis.jee7</module>
 		<module>../../JEE7/de.itemis.jee7.ui</module>
 		<module>../../JEE7/de.itemis.jee7.feature</module>
