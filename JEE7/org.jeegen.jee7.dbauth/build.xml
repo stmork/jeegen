@@ -46,7 +46,7 @@
 			<include name="com.google.guava*.jar"/>
 			<include name="com.google.inject*.jar"/>
 			<include name="com.ibm.icu*.jar"/>
-			<include name="de.itemis.jee7*.jar"/>
+			<include name="org.jeegen.jee7*.jar"/>
 			<include name="org.antlr.runtime*.jar"/>
 			<include name="org.apache.commons.cli*.jar"/>
 			<include name="org.apache.commons.logging*.jar"/>
@@ -114,7 +114,7 @@
 				charset="UTF-8"
 				windowtitle="dbauth classes">
 			<doctitle><![CDATA[<h1>dbauth classes</h1>]]></doctitle>
-			<bottom><![CDATA[<i>Copyright &#169; itemis AG]]></bottom>
+			<bottom><![CDATA[<i>Copyright &#169; Steffen A. Mork and Dominik Pieper]]></bottom>
 		</javadoc>
     </target>
 

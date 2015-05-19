@@ -43,7 +43,7 @@
 			<include name="com.google.guava*.jar"/>
 			<include name="com.google.inject*.jar"/>
 			<include name="com.ibm.icu*.jar"/>
-			<include name="de.itemis.jee7*.jar"/>
+			<include name="org.jeegen.jee7*.jar"/>
 			<include name="org.antlr.runtime*.jar"/>
 			<include name="org.apache.commons.cli*.jar"/>
 			<include name="org.apache.commons.logging*.jar"/>
@@ -123,7 +123,7 @@
 		<mkdir dir="${lib-path}"/>
 		<copy file="../org.jeegen.jee7.util/jee7-utils.jar" todir="${lib-path}"/>
 		<copy todir="${img-path}">
-			<fileset dir="../de.itemis.jee7.ui/resources">
+			<fileset dir="../org.jeegen.jee7.ui/resources">
 				<include name="*.*"/>
 			</fileset>
 		</copy>

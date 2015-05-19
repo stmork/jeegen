@@ -5,5 +5,5 @@ Bundle-Vendor: My Company
 Bundle-Version: 1.0.0.qualifier
 Bundle-SymbolicName: org.jeegen.jee7.dbauth;singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: de.itemis.jee7;bundle-version="1.0.0"
+Require-Bundle: org.jeegen.jee7;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: J2SE-1.7
