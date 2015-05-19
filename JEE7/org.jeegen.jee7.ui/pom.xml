@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.jeegen</groupId>
+		<artifactId>releng</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../../Updatesite/org.jeegen.releng/pom.xml</relativePath>
+	</parent>
+
+	<name>JEE7 DSL UI</name>
+	<version>1.0.5-SNAPSHOT</version>
+	<groupId>org.jeegen</groupId>
+	<artifactId>org.jeegen.jee7.ui</artifactId>
+	<packaging>eclipse-plugin</packaging>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-source-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>plugin-source</id>
+						<goals>
+							<goal>plugin-source</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.8</version>
+				<executions>
+					<execution>
+						<id>copy</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>org.jeegen</groupId>
+									<artifactId>jee7.utils</artifactId>
+									<version>1.0.7</version>
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${basedir}/resources</outputDirectory>
+									<destFileName>jee7-utils.jar</destFileName>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

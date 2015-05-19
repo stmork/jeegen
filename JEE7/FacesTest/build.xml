@@ -66,7 +66,7 @@
 			<include name="com.google.guava*.jar"/>
 			<include name="com.google.inject*.jar"/>
 			<include name="com.ibm.icu*.jar"/>
-			<include name="de.itemis.jee7*.jar"/>
+			<include name="org.jeegen.jee7*.jar"/>
 			<include name="org.antlr.runtime*.jar"/>
 			<include name="org.apache.commons.cli*.jar"/>
 			<include name="org.apache.commons.logging*.jar"/>
