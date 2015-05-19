@@ -3,10 +3,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>de.itemis.jee6</groupId>
+		<groupId>org.jeegen6</groupId>
 		<artifactId>de.itemis.jee6.releng</artifactId>
 		<version>1.1.8-SNAPSHOT</version>
-		<relativePath>../de.itemis.jee6.releng/pom.xml</relativePath>
+		<relativePath>../org.jeegen6.releng/pom.xml</relativePath>
 	</parent>
 	<name>JEE6 DSL Tests</name>
 	<artifactId>de.itemis.jee6.tests</artifactId>
