@@ -43,6 +43,3 @@ klicke auf _Install new Software..._
 
 ### Was ist die Lizenz der JEE-Generatoren?
 
-Die JEE-Generator sind frei verfügbar unter der [Eclipse Public License](http://www.eclipse.org/legal/epl-v10.html)
-
-
