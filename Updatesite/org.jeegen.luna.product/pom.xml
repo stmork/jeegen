@@ -9,30 +9,38 @@
 		<relativePath>../org.jeegen.releng/pom.xml</relativePath>
 	</parent>
 
-	<artifactId>jee6.product</artifactId>
-
 	<name>JEE DSL Product</name>
+	<version>1.1.9-SNAPSHOT</version>
+	<groupId>org.jeegen</groupId>
+	<artifactId>jee.product.luna</artifactId>
 
 	<properties>
-		<eclipse.server>https://master.itemis.de/software/Eclipse/4.4/</eclipse.server>
-		<ftp.server>mirror.netcologne.de</ftp.server>
-		<ftp.path>eclipse/eclipse/downloads/drops4/S-4.3RC3-201305301430</ftp.path>
-		<ftp.director.path>eclipse/tools/buckminster/products</ftp.director.path>
+		<download.server>ftp.halifax.rwth-aachen.de</download.server>
+		<download.eclipse.url>http://${download.server}/eclipse/technology/epp/downloads/release/luna/SR2/</download.eclipse.url>
+		<download.director.path>eclipse/tools/buckminster/products</download.director.path>
 
-		<eclipsesdk.osx32>${eclipse.server}${eclipsesdk.osx32.filename}.tar.gz</eclipsesdk.osx32>
-		<eclipsesdk.osx32.filename>eclipse-jee-${eclipse.version}-macosx-cocoa</eclipsesdk.osx32.filename>
-		<eclipsesdk.osx>${eclipse.server}${eclipsesdk.osx.filename}.tar.gz</eclipsesdk.osx>
-		<eclipsesdk.osx.filename>eclipse-jee-${eclipse.version}-macosx-cocoa-x86_64</eclipsesdk.osx.filename>
-		<eclipsesdk.windows32>${eclipse.server}${eclipsesdk.windows32.filename}.zip</eclipsesdk.windows32>
-		<eclipsesdk.windows32.filename>eclipse-jee-${eclipse.version}-win32</eclipsesdk.windows32.filename>
-		<eclipsesdk.windows>${eclipse.server}${eclipsesdk.windows.filename}.zip</eclipsesdk.windows>
-		<eclipsesdk.windows.filename>eclipse-jee-${eclipse.version}-win32-x86_64</eclipsesdk.windows.filename>
-		<eclipsesdk.linux32>${eclipse.server}${eclipsesdk.linux32.filename}.tar.gz</eclipsesdk.linux32>
-		<eclipsesdk.linux32.filename>eclipse-jee-${eclipse.version}-linux-gtk</eclipsesdk.linux32.filename>
-		<eclipsesdk.linux>${eclipse.server}${eclipsesdk.linux.filename}.tar.gz</eclipsesdk.linux>
-		<eclipsesdk.linux.filename>eclipse-jee-${eclipse.version}-linux-gtk-x86_64</eclipsesdk.linux.filename>
+		<eclipse.download>download</eclipse.download>
+		<eclipse.package>jee</eclipse.package>
 		<eclipse.version>luna-SR2</eclipse.version>
 		<appname>jee-generator</appname>
+
+		<eclipsesdk.osx32>${download.eclipse.url}${eclipsesdk.osx32.filename}.tar.gz</eclipsesdk.osx32>
+		<eclipsesdk.osx32.filename>eclipse-${eclipse.package}-${eclipse.version}-macosx-cocoa</eclipsesdk.osx32.filename>
+
+		<eclipsesdk.osx>${download.eclipse.url}${eclipsesdk.osx.filename}.tar.gz</eclipsesdk.osx>
+		<eclipsesdk.osx.filename>eclipse-${eclipse.package}-${eclipse.version}-macosx-cocoa-x86_64</eclipsesdk.osx.filename>
+
+		<eclipsesdk.windows32>${download.eclipse.url}${eclipsesdk.windows32.filename}.zip</eclipsesdk.windows32>
+		<eclipsesdk.windows32.filename>eclipse-${eclipse.package}-${eclipse.version}-win32</eclipsesdk.windows32.filename>
+
+		<eclipsesdk.windows>${download.eclipse.url}${eclipsesdk.windows.filename}.zip</eclipsesdk.windows>
+		<eclipsesdk.windows.filename>eclipse-${eclipse.package}-${eclipse.version}-win32-x86_64</eclipsesdk.windows.filename>
+
+		<eclipsesdk.linux32>${download.eclipse.url}${eclipsesdk.linux32.filename}.tar.gz</eclipsesdk.linux32>
+		<eclipsesdk.linux32.filename>eclipse-${eclipse.package}-${eclipse.version}-linux-gtk</eclipsesdk.linux32.filename>
+
+		<eclipsesdk.linux>${download.eclipse.url}${eclipsesdk.linux.filename}.tar.gz</eclipsesdk.linux>
+		<eclipsesdk.linux.filename>eclipse-${eclipse.package}-${eclipse.version}-linux-gtk-x86_64</eclipsesdk.linux.filename>
 	</properties>
 
 	<build>
@@ -53,16 +61,17 @@
 									classname="at.bestsolution.releng.distrobuilder.ant.DistroBuilderTaskDef" />
 								<mkdir dir="builder" />
 								<mkdir dir="repos/shared" />
-								<!-- KEPLER DEVELOPER IDE -->
-								<mkdir dir="targets/4.4/macosx/x86" />
-								<mkdir dir="targets/4.4/macosx/x86_64" />
-								<mkdir dir="targets/4.4/win32/x86_64" />
-								<mkdir dir="targets/4.4/win32/x86" />
-								<mkdir dir="targets/4.4/linux/x86" />
-								<mkdir dir="targets/4.4/linux/x86_64" />
+
+								<!-- LUNA JEE -->
+								<mkdir dir="${eclipse.download}/${eclipse.version}/macosx/x86" />
+								<mkdir dir="${eclipse.download}/${eclipse.version}/macosx/x86_64" />
+								<mkdir dir="${eclipse.download}/${eclipse.version}/win32/x86_64" />
+								<mkdir dir="${eclipse.download}/${eclipse.version}/win32/x86" />
+								<mkdir dir="${eclipse.download}/${eclipse.version}/linux/x86" />
+								<mkdir dir="${eclipse.download}/${eclipse.version}/linux/x86_64" />
 
 								<get
-									src="http://${ftp.server}/${ftp.director.path}/director_latest.zip"
+									src="http://${download.server}/${download.director.path}/director_latest.zip"
 									dest="${project.build.directory}/director_latest.zip"
 									skipexisting="true" />
 
@@ -73,24 +82,27 @@
 
 								<!-- FETCH BASE DISTROS -->
 								<!-- OSX -->
-								<get src="${eclipsesdk.osx}"
-									dest="targets/4.4/macosx/x86_64/eclipse-jee-${eclipse.version}-macosx-cocoa-x86_64.tar.gz"
-									skipexisting="true" />
 								<get src="${eclipsesdk.osx32}"
-									dest="targets/4.4/macosx/x86/eclipse-jee-${eclipse.version}-macosx-cocoa.tar.gz"
+									dest="${eclipse.download}/${eclipse.version}/macosx/x86/eclipse-${eclipse.package}-${eclipse.version}-macosx-cocoa.tar.gz"
 									skipexisting="true" />
+								<get src="${eclipsesdk.osx}"
+									dest="${eclipse.download}/${eclipse.version}/macosx/x86_64/eclipse-${eclipse.package}-${eclipse.version}-macosx-cocoa-x86_64.tar.gz"
+									skipexisting="true" />
+
 								<!-- Windows -->
+								<get src="${eclipsesdk.windows32}"
+									dest="${eclipse.download}/${eclipse.version}/win32/x86/eclipse-${eclipse.package}-${eclipse.version}-win32.zip"
+									skipexisting="true" />
 								<get src="${eclipsesdk.windows}"
-									dest="targets/4.4/win32/x86_64/eclipse-jee-${eclipse.version}-win32-x86_64.zip"
+									dest="${eclipse.download}/${eclipse.version}/win32/x86_64/eclipse-${eclipse.package}-${eclipse.version}-win32-x86_64.zip"
 									skipexisting="true" />
-								<get src="${eclipsesdk.windows32}" dest="targets/4.4/win32/x86/eclipse-jee-${eclipse.version}-win32.zip"
-									skipexisting="true" />
+
 								<!-- Linux -->
 								<get src="${eclipsesdk.linux32}"
-									dest="targets/4.4/linux/x86_64/eclipse-jee-${eclipse.version}-linux-gtk.tar.gz"
+									dest="${eclipse.download}/${eclipse.version}/linux/x86/eclipse-${eclipse.package}-${eclipse.version}-linux-gtk.tar.gz"
 									skipexisting="true" />
 								<get src="${eclipsesdk.linux}"
-									dest="targets/4.4/linux/x86_64/eclipse-jee-${eclipse.version}-linux-gtk-x86_64.tar.gz"
+									dest="${eclipse.download}/${eclipse.version}/linux/x86_64/eclipse-${eclipse.package}-${eclipse.version}-linux-gtk-x86_64.tar.gz"
 									skipexisting="true" />
 
 
@@ -98,12 +110,11 @@
 								<echo>Build Distribution</echo>
 								<builder builddirectory="${project.build.directory}/build"
 									p2directorexecutable="${project.build.directory}/director/director"
-									targetdirectory="${basedir}/targets" staticreposdirectory="${basedir}/repos"
+									targetdirectory="${basedir}/${eclipse.download}" staticreposdirectory="${basedir}/repos"
 									distdirectory="${project.build.directory}/dist" appname="${appname}"
 									version="${project.version}">
 
-									<updatesite
-										url="https://builds.itemis.de/nexus/content/repositories/luna/" />
+									<updatesite url="https://builds.itemis.de/nexus/content/repositories/luna/" />
 
 									<!-- Eclipse Platform -->
 									<installunit name="org.eclipse.egit.feature.group" />
@@ -115,8 +126,8 @@
 									<installunit name="org.eclipse.emf.mwe.sdk.feature.group" />
 
 									<!-- Xtext, MWE2 -->
-									<updatesite
-										url="https://builds.itemis.de/nexus/content/repositories/eclipse-modeling/" />
+									<updatesite url="https://builds.itemis.de/nexus/content/repositories/eclipse-modeling/" />
+
 									<installunit name="org.eclipse.emf.mwe2.language.sdk.feature.group" />
 									<installunit name="org.eclipse.emf.mwe2.runtime.sdk.feature.group" />
 									<installunit name="org.eclipse.xtext.sdk.feature.group" />
@@ -131,21 +142,24 @@
 									<installunit name="org.jeegen.jee6.feature.feature.group" />
 									<installunit name="de.itemis.jee7.feature.feature.group" />
 								</builder>
+
 								<!-- Linux -->
-								<move file="${project.build.directory}/dist/${eclipsesdk.linux.filename}-${appname}-${project.version}.tar.gz"
-										tofile="${project.build.directory}/dist/eclipse-jee-generator-luna-linux-gtk-x86_64.tar.gz" />
 								<move file="${project.build.directory}/dist/${eclipsesdk.linux32.filename}-${appname}-${project.version}.tar.gz"
-										tofile="${project.build.directory}/dist/eclipse-jee-generator-luna-linux-gtk.tar.gz" />
+										tofile="${project.build.directory}/dist/eclipse-jee-generator-${eclipse.version}-linux-gtk.tar.gz" />
+								<move file="${project.build.directory}/dist/${eclipsesdk.linux.filename}-${appname}-${project.version}.tar.gz"
+										tofile="${project.build.directory}/dist/eclipse-jee-generator-${eclipse.version}-linux-gtk-x86_64.tar.gz" />
+
 								<!-- Windows -->
-								<move file="${project.build.directory}/dist/${eclipsesdk.windows.filename}-${appname}-${project.version}.zip"
-										tofile="${project.build.directory}/dist/eclipse-jee-generator-luna-win32-x86_64.zip" />
 								<move file="${project.build.directory}/dist/${eclipsesdk.windows32.filename}-${appname}-${project.version}.zip"
-										tofile="${project.build.directory}/dist/eclipse-jee-generator-luna-win32.zip" />
+										tofile="${project.build.directory}/dist/eclipse-jee-generator-${eclipse.version}-win32.zip" />
+								<move file="${project.build.directory}/dist/${eclipsesdk.windows.filename}-${appname}-${project.version}.zip"
+										tofile="${project.build.directory}/dist/eclipse-jee-generator-${eclipse.version}-win32-x86_64.zip" />
+
 								<!-- OSX -->
-								<move file="${project.build.directory}/dist/${eclipsesdk.osx.filename}-${appname}-${project.version}.tar.gz"
-										tofile="${project.build.directory}/dist/eclipse-jee-generator-luna-macosx-cocoa-x86_64.tar.gz" />
 								<move file="${project.build.directory}/dist/${eclipsesdk.osx32.filename}-${appname}-${project.version}.tar.gz"
-										tofile="${project.build.directory}/dist/eclipse-jee-generator-luna-macosx-cocoa.tar.gz" />
+										tofile="${project.build.directory}/dist/eclipse-jee-generator-${eclipse.version}-macosx-cocoa.tar.gz" />
+								<move file="${project.build.directory}/dist/${eclipsesdk.osx.filename}-${appname}-${project.version}.tar.gz"
+										tofile="${project.build.directory}/dist/eclipse-jee-generator-${eclipse.version}-macosx-cocoa-x86_64.tar.gz" />
 							</target>
 						</configuration>
 					</execution>
@@ -181,5 +195,4 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
-	<version>1.1.9-SNAPSHOT</version>
 </project>
