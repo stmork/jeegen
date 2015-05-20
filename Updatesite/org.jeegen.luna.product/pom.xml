@@ -109,36 +109,30 @@
 
 								<echo>Build Distribution</echo>
 								<builder builddirectory="${project.build.directory}/build"
-									p2directorexecutable="${project.build.directory}/director/director"
-									targetdirectory="${basedir}/${eclipse.download}" staticreposdirectory="${basedir}/repos"
-									distdirectory="${project.build.directory}/dist" appname="${appname}"
-									version="${project.version}">
+										p2directorexecutable="${project.build.directory}/director/director"
+										targetdirectory="${basedir}/${eclipse.download}"
+										staticreposdirectory="${basedir}/repos"
+										distdirectory="${project.build.directory}/dist"
+										appname="${appname}"
+										version="${project.version}">
 
-									<updatesite url="https://builds.itemis.de/nexus/content/repositories/luna/" />
+									<updatesite url="http://download.eclipse.org/releases/luna/" />
+									<updatesite url="http://download.itemis.com/updates/releases/" />
+									<updatesite url="http://www.jee-generator.org/updates/snapshot/luna/" />
 
-									<!-- Eclipse Platform -->
+									<!-- Eclipse git -->
 									<installunit name="org.eclipse.egit.feature.group" />
 
-									<!-- Eclipse General Purpose Tools -->
-
-									<!-- Eclipse Modeling -->
+									<!-- Xtext, MWE2 -->
 									<installunit name="org.eclipse.emf.sdk.feature.group" />
 									<installunit name="org.eclipse.emf.mwe.sdk.feature.group" />
-
-									<!-- Xtext, MWE2 -->
-									<updatesite url="https://builds.itemis.de/nexus/content/repositories/eclipse-modeling/" />
-
 									<installunit name="org.eclipse.emf.mwe2.language.sdk.feature.group" />
 									<installunit name="org.eclipse.emf.mwe2.runtime.sdk.feature.group" />
 									<installunit name="org.eclipse.xtext.sdk.feature.group" />
 									<installunit name="org.eclipse.xtext.xtend2.sdk.feature.group" />
 									<installunit name="org.eclipse.xtext.xtend2.m2e.feature.group" />
 
-									<!-- Xtext Extensions -->
-									<updatesite url="http://download.itemis.com/updates/releases/" />
-
 									<!-- Java EE Generators -->
-									<updatesite url="http://www.jee-generator.org/updates/luna/" />
 									<installunit name="org.jeegen.jee6.feature.feature.group" />
 									<installunit name="org.jeegen.jee7.feature.feature.group" />
 								</builder>
