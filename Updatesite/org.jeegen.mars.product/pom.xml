@@ -133,7 +133,7 @@
 									<!-- Java EE Generators -->
 									<updatesite url="http://www.jee-generator.org/updates/mars/" />
 									<installunit name="org.jeegen.jee6.feature.feature.group" />
-									<installunit name="de.itemis.jee7.feature.feature.group" />
+									<installunit name="org.jeegen.jee7.feature.feature.group" />
 								</builder>
 
 								<!-- Linux -->
