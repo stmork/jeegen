@@ -9,10 +9,11 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
+	<name>JEE  DSL Update Site</name>
+	<version>1.0.0-SNAPSHOT</version>
+	<groupId>org.jeegen</groupId>
 	<artifactId>updatesite</artifactId>
 	<packaging>eclipse-repository</packaging>
-
-	<name>JEE  DSL Update Site</name>
 
 	<build>
 		<plugins>
@@ -73,5 +74,4 @@
 			</plugin>
 		</plugins>
 	</build>
-	<version>1.0.0-SNAPSHOT</version>
 </project>
