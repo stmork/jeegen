@@ -14,4 +14,24 @@
 	<groupId>org.jeegen</groupId>
 	<artifactId>org.jeegen.jee7.feature</artifactId>
 	<packaging>eclipse-feature</packaging>
+
+	<developers>
+		<developer>
+			<name>Steffen Mork</name>
+			<email>info@jee-generator.org</email>
+			<url>http://morknet.de</url>
+		</developer>
+		<developer>
+			<name>Dominik Pieper</name>
+			<email>info@jee-generator.org</email>
+			<url>http://pieperhome.de</url>
+		</developer>
+	</developers>
+
+	<licenses>
+		<license>
+			<name>Eclipse Public License</name>
+			<url>http://www.eclipse.org/legal/epl-v10.html</url>
+		</license>
+	</licenses>
 </project>
