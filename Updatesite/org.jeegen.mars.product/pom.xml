@@ -132,19 +132,19 @@
 
 								<!-- Linux -->
 								<move file="${project.build.directory}/dist/${eclipsesdk.linux32.filename}-${appname}-${project.version}.tar.gz"
-										tofile="${project.build.directory}/dist/eclipse-jee-generator-${eclipse.version}-linux-gtk.tar.gz" />
+										tofile="${project.build.directory}/dist/eclipse-${appname}-${eclipse.version}-linux-gtk.tar.gz" />
 								<move file="${project.build.directory}/dist/${eclipsesdk.linux.filename}-${appname}-${project.version}.tar.gz"
-										tofile="${project.build.directory}/dist/eclipse-jee-generator-${eclipse.version}-linux-gtk-x86_64.tar.gz" />
+										tofile="${project.build.directory}/dist/eclipse-${appname}-${eclipse.version}-linux-gtk-x86_64.tar.gz" />
 
 								<!-- Windows -->
 								<move file="${project.build.directory}/dist/${eclipsesdk.windows32.filename}-${appname}-${project.version}.zip"
-										tofile="${project.build.directory}/dist/eclipse-jee-generator-${eclipse.version}-win32.zip" />
+										tofile="${project.build.directory}/dist/eclipse-${appname}-${eclipse.version}-win32.zip" />
 								<move file="${project.build.directory}/dist/${eclipsesdk.windows.filename}-${appname}-${project.version}.zip"
-										tofile="${project.build.directory}/dist/eclipse-jee-generator-${eclipse.version}-win32-x86_64.zip" />
+										tofile="${project.build.directory}/dist/eclipse-${appname}-${eclipse.version}-win32-x86_64.zip" />
 
 								<!-- OSX -->
 								<move file="${project.build.directory}/dist/${eclipsesdk.osx.filename}-${appname}-${project.version}.tar.gz"
-										tofile="${project.build.directory}/dist/eclipse-jee-generator-${eclipse.version}-macosx-cocoa-x86_64.tar.gz" />
+										tofile="${project.build.directory}/dist/eclipse-${appname}-${eclipse.version}-macosx-cocoa-x86_64.tar.gz" />
 							</target>
 						</configuration>
 					</execution>
