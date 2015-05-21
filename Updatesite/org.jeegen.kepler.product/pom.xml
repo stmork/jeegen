@@ -118,7 +118,7 @@
 
 									<updatesite url="http://download.eclipse.org/releases/kepler/" />
 									<updatesite url="http://download.itemis.com/updates/releases/" />
-									<updatesite url="http://www.jee-generator.org/updates/snapshot/kepler/" />
+									<updatesite url="http://www.jee-generator.org/updates/kepler/" />
 
 									<!-- Eclipse git -->
 									<installunit name="org.eclipse.egit.feature.group" />

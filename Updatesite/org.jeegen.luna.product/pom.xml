@@ -118,7 +118,7 @@
 
 									<updatesite url="http://download.eclipse.org/releases/luna/" />
 									<updatesite url="http://download.itemis.com/updates/releases/" />
-									<updatesite url="http://www.jee-generator.org/updates/snapshot/luna/" />
+									<updatesite url="http://www.jee-generator.org/updates/luna/" />
 
 									<!-- Eclipse git -->
 									<installunit name="org.eclipse.egit.feature.group" />
