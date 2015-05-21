@@ -59,7 +59,7 @@
 								<mkdir dir="builder" />
 								<mkdir dir="repos/shared" />
 
-								<!-- LUNA JEE -->
+								<!-- MARS JEE -->
 								<mkdir dir="${eclipse.download}/${eclipse.version}/macosx/x86_64" />
 								<mkdir dir="${eclipse.download}/${eclipse.version}/win32/x86_64" />
 								<mkdir dir="${eclipse.download}/${eclipse.version}/win32/x86" />
