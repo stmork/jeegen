@@ -20,8 +20,8 @@ public class DownloadTest
 {
 	private final static String HOMEPAGE_URL  = "http://eisenbahnsteuerung.org";
 	private final static String IMAGE_URL     = HOMEPAGE_URL + "/images/rcc32.gif";
-	private final static int    TIMEOUT       = 5000;
-	private final static int    FORCE_TIMEOUT =   10;
+	private final static int    TIMEOUT       = 10000;
+	private final static int    FORCE_TIMEOUT =    10;
 	private final static Random random        = new Random(System.currentTimeMillis());
 
 	@Test
