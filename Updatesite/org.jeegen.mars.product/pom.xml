@@ -111,7 +111,7 @@
 
 									<updatesite url="http://download.eclipse.org/releases/mars/" />
 									<updatesite url="http://download.itemis.com/updates/releases/" />
-									<updatesite url="http://www.jee-generator.org/updates/snapshot/mars/" />
+									<updatesite url="http://www.jee-generator.org/updates/mars/" />
 
 									<!-- Eclipse git -->
 									<installunit name="org.eclipse.egit.feature.group" />
