@@ -24,23 +24,23 @@
 		<eclipse.version>kepler-SR2</eclipse.version>
 		<appname>jee-generator</appname>
 
-		<eclipsesdk.osx32>${download.eclipse.url}${eclipsesdk.osx32.filename}.tar.gz</eclipsesdk.osx32>
-		<eclipsesdk.osx32.filename>eclipse-${eclipse.package}-${eclipse.version}-macosx-cocoa</eclipsesdk.osx32.filename>
+		<eclipse.linux64>${download.eclipse.url}${eclipse.linux64.filename}.tar.gz</eclipse.linux64>
+		<eclipse.linux64.filename>eclipse-${eclipse.package}-${eclipse.version}-linux-gtk-x86_64</eclipse.linux64.filename>
 
-		<eclipsesdk.osx>${download.eclipse.url}${eclipsesdk.osx.filename}.tar.gz</eclipsesdk.osx>
-		<eclipsesdk.osx.filename>eclipse-${eclipse.package}-${eclipse.version}-macosx-cocoa-x86_64</eclipsesdk.osx.filename>
+		<eclipse.linux32>${download.eclipse.url}${eclipse.linux32.filename}.tar.gz</eclipse.linux32>
+		<eclipse.linux32.filename>eclipse-${eclipse.package}-${eclipse.version}-linux-gtk</eclipse.linux32.filename>
 
-		<eclipsesdk.windows32>${download.eclipse.url}${eclipsesdk.windows32.filename}.zip</eclipsesdk.windows32>
-		<eclipsesdk.windows32.filename>eclipse-${eclipse.package}-${eclipse.version}-win32</eclipsesdk.windows32.filename>
+		<eclipse.osx64>${download.eclipse.url}${eclipse.osx64.filename}.tar.gz</eclipse.osx64>
+		<eclipse.osx64.filename>eclipse-${eclipse.package}-${eclipse.version}-macosx-cocoa-x86_64</eclipse.osx64.filename>
 
-		<eclipsesdk.windows>${download.eclipse.url}${eclipsesdk.windows.filename}.zip</eclipsesdk.windows>
-		<eclipsesdk.windows.filename>eclipse-${eclipse.package}-${eclipse.version}-win32-x86_64</eclipsesdk.windows.filename>
+		<eclipse.osx32>${download.eclipse.url}${eclipse.osx32.filename}.tar.gz</eclipse.osx32>
+		<eclipse.osx32.filename>eclipse-${eclipse.package}-${eclipse.version}-macosx-cocoa</eclipse.osx32.filename>
 
-		<eclipsesdk.linux32>${download.eclipse.url}${eclipsesdk.linux32.filename}.tar.gz</eclipsesdk.linux32>
-		<eclipsesdk.linux32.filename>eclipse-${eclipse.package}-${eclipse.version}-linux-gtk</eclipsesdk.linux32.filename>
+		<eclipse.windows64>${download.eclipse.url}${eclipse.windows64.filename}.zip</eclipse.windows64>
+		<eclipse.windows64.filename>eclipse-${eclipse.package}-${eclipse.version}-win32-x86_64</eclipse.windows64.filename>
 
-		<eclipsesdk.linux>${download.eclipse.url}${eclipsesdk.linux.filename}.tar.gz</eclipsesdk.linux>
-		<eclipsesdk.linux.filename>eclipse-${eclipse.package}-${eclipse.version}-linux-gtk-x86_64</eclipsesdk.linux.filename>
+		<eclipse.windows32>${download.eclipse.url}${eclipse.windows32.filename}.zip</eclipse.windows32>
+		<eclipse.windows32.filename>eclipse-${eclipse.package}-${eclipse.version}-win32</eclipse.windows32.filename>
 	</properties>
 
 	<build>
@@ -63,12 +63,12 @@
 								<mkdir dir="repos/shared" />
 
 								<!-- KEPLER JEE -->
-								<mkdir dir="${eclipse.download}/${eclipse.version}/macosx/x86" />
+								<mkdir dir="${eclipse.download}/${eclipse.version}/linux/x86_64" />
+								<mkdir dir="${eclipse.download}/${eclipse.version}/linux/x86" />
 								<mkdir dir="${eclipse.download}/${eclipse.version}/macosx/x86_64" />
+								<mkdir dir="${eclipse.download}/${eclipse.version}/macosx/x86" />
 								<mkdir dir="${eclipse.download}/${eclipse.version}/win32/x86_64" />
 								<mkdir dir="${eclipse.download}/${eclipse.version}/win32/x86" />
-								<mkdir dir="${eclipse.download}/${eclipse.version}/linux/x86" />
-								<mkdir dir="${eclipse.download}/${eclipse.version}/linux/x86_64" />
 
 								<get
 									src="http://${download.server}/${download.director.path}/director_latest.zip"
@@ -81,31 +81,26 @@
 									perm="+x" />
 
 								<!-- FETCH BASE DISTROS -->
-								<!-- OSX -->
-								<get src="${eclipsesdk.osx32}"
-									dest="${eclipse.download}/${eclipse.version}/macosx/x86/eclipse-${eclipse.package}-${eclipse.version}-macosx-cocoa.tar.gz"
-									skipexisting="true" />
-								<get src="${eclipsesdk.osx}"
-									dest="${eclipse.download}/${eclipse.version}/macosx/x86_64/eclipse-${eclipse.package}-${eclipse.version}-macosx-cocoa-x86_64.tar.gz"
-									skipexisting="true" />
-
-								<!-- Windows -->
-								<get src="${eclipsesdk.windows32}"
-									dest="${eclipse.download}/${eclipse.version}/win32/x86/eclipse-${eclipse.package}-${eclipse.version}-win32.zip"
-									skipexisting="true" />
-								<get src="${eclipsesdk.windows}"
-									dest="${eclipse.download}/${eclipse.version}/win32/x86_64/eclipse-${eclipse.package}-${eclipse.version}-win32-x86_64.zip"
-									skipexisting="true" />
-
-								<!-- Linux -->
-								<get src="${eclipsesdk.linux32}"
-									dest="${eclipse.download}/${eclipse.version}/linux/x86/eclipse-${eclipse.package}-${eclipse.version}-linux-gtk.tar.gz"
-									skipexisting="true" />
-								<get src="${eclipsesdk.linux}"
+								<get src="${eclipse.linux64}"
 									dest="${eclipse.download}/${eclipse.version}/linux/x86_64/eclipse-${eclipse.package}-${eclipse.version}-linux-gtk-x86_64.tar.gz"
 									skipexisting="true" />
-
-
+<!--
+								<get src="${eclipse.linux32}"
+									dest="${eclipse.download}/${eclipse.version}/linux/x86/eclipse-${eclipse.package}-${eclipse.version}-linux-gtk.tar.gz"
+									skipexisting="true" />
+								<get src="${eclipse.osx64}"
+									dest="${eclipse.download}/${eclipse.version}/macosx/x86_64/eclipse-${eclipse.package}-${eclipse.version}-macosx-cocoa-x86_64.tar.gz"
+									skipexisting="true" />
+								<get src="${eclipse.osx32}"
+									dest="${eclipse.download}/${eclipse.version}/macosx/x86/eclipse-${eclipse.package}-${eclipse.version}-macosx-cocoa.tar.gz"
+									skipexisting="true" />
+								<get src="${eclipse.windows64}"
+									dest="${eclipse.download}/${eclipse.version}/win32/x86_64/eclipse-${eclipse.package}-${eclipse.version}-win32-x86_64.zip"
+									skipexisting="true" />
+								<get src="${eclipse.windows32}"
+									dest="${eclipse.download}/${eclipse.version}/win32/x86/eclipse-${eclipse.package}-${eclipse.version}-win32.zip"
+									skipexisting="true" />
+-->
 
 								<echo>Build Distribution</echo>
 								<builder builddirectory="${project.build.directory}/build"
@@ -118,42 +113,32 @@
 
 									<updatesite url="http://download.eclipse.org/releases/kepler/" />
 									<updatesite url="http://download.itemis.com/updates/releases/" />
-									<updatesite url="http://www.jee-generator.org/updates/kepler/" />
+									<updatesite url="http://www.jee-generator.org/updates/snapshot/kepler/" />
 
-									<!-- Eclipse git -->
+									<!-- Eclipse staff -->
 									<installunit name="org.eclipse.egit.feature.group" />
-
-									<!-- Xtext, MWE2 -->
-									<installunit name="org.eclipse.emf.sdk.feature.group" />
-									<installunit name="org.eclipse.emf.mwe.sdk.feature.group" />
-									<installunit name="org.eclipse.emf.mwe2.language.sdk.feature.group" />
-									<installunit name="org.eclipse.emf.mwe2.runtime.sdk.feature.group" />
-									<installunit name="org.eclipse.xtext.sdk.feature.group" />
-									<installunit name="org.eclipse.xtext.xtend2.sdk.feature.group" />
-									<installunit name="org.eclipse.xtext.xtend2.m2e.feature.group" />
+									<installunit name="org.eclipse.sdk.ide" />
 
 									<!-- Java EE Generators -->
 									<installunit name="org.jeegen.jee6.feature.feature.group" />
 									<installunit name="org.jeegen.jee7.feature.feature.group" />
 								</builder>
 
-								<!-- Linux -->
-								<move file="${project.build.directory}/dist/${eclipsesdk.linux32.filename}-${appname}-${project.version}.tar.gz"
-										tofile="${project.build.directory}/dist/eclipse-${appname}-${eclipse.version}-linux-gtk.tar.gz" />
-								<move file="${project.build.directory}/dist/${eclipsesdk.linux.filename}-${appname}-${project.version}.tar.gz"
+								<!-- Renaming files -->
+								<move file="${project.build.directory}/dist/${eclipse.linux64.filename}-${appname}-${project.version}.tar.gz"
 										tofile="${project.build.directory}/dist/eclipse-${appname}-${eclipse.version}-linux-gtk-x86_64.tar.gz" />
-
-								<!-- Windows -->
-								<move file="${project.build.directory}/dist/${eclipsesdk.windows32.filename}-${appname}-${project.version}.zip"
-										tofile="${project.build.directory}/dist/eclipse-${appname}-${eclipse.version}-win32.zip" />
-								<move file="${project.build.directory}/dist/${eclipsesdk.windows.filename}-${appname}-${project.version}.zip"
-										tofile="${project.build.directory}/dist/eclipse-${appname}-${eclipse.version}-win32-x86_64.zip" />
-
-								<!-- OSX -->
-								<move file="${project.build.directory}/dist/${eclipsesdk.osx32.filename}-${appname}-${project.version}.tar.gz"
-										tofile="${project.build.directory}/dist/eclipse-${appname}-${eclipse.version}-macosx-cocoa.tar.gz" />
-								<move file="${project.build.directory}/dist/${eclipsesdk.osx.filename}-${appname}-${project.version}.tar.gz"
+<!--
+								<move file="${project.build.directory}/dist/${eclipse.linux32.filename}-${appname}-${project.version}.tar.gz"
+										tofile="${project.build.directory}/dist/eclipse-${appname}-${eclipse.version}-linux-gtk.tar.gz" />
+								<move file="${project.build.directory}/dist/${eclipse.osx64.filename}-${appname}-${project.version}.tar.gz"
 										tofile="${project.build.directory}/dist/eclipse-${appname}-${eclipse.version}-macosx-cocoa-x86_64.tar.gz" />
+								<move file="${project.build.directory}/dist/${eclipse.osx32.filename}-${appname}-${project.version}.tar.gz"
+										tofile="${project.build.directory}/dist/eclipse-${appname}-${eclipse.version}-macosx-cocoa.tar.gz" />
+								<move file="${project.build.directory}/dist/${eclipse.windows64.filename}-${appname}-${project.version}.zip"
+										tofile="${project.build.directory}/dist/eclipse-${appname}-${eclipse.version}-win32-x86_64.zip" />
+								<move file="${project.build.directory}/dist/${eclipse.windows32.filename}-${appname}-${project.version}.zip"
+										tofile="${project.build.directory}/dist/eclipse-${appname}-${eclipse.version}-win32.zip" />
+-->
 							</target>
 						</configuration>
 					</execution>
@@ -175,8 +160,6 @@
 			<artifactId>ant-optional</artifactId>
 			<version>1.5.2</version>
 		</dependency>
-		<!-- <dependency> <groupId>commons-net</groupId> <artifactId>commons-net</artifactId> 
-			<version>3.2</version> </dependency> -->
 	</dependencies>
 
 	<pluginRepositories>
