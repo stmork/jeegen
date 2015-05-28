@@ -15,14 +15,17 @@
 	<artifactId>jee.product.kepler</artifactId>
 
 	<properties>
-		<download.server>ftp.halifax.rwth-aachen.de</download.server>
-		<download.eclipse.url>http://${download.server}/eclipse/technology/epp/downloads/release/kepler/SR2/</download.eclipse.url>
-		<download.director.path>eclipse/tools/buckminster/products</download.director.path>
+		<appname>jee-generator</appname>
 
 		<eclipse.download>download</eclipse.download>
 		<eclipse.package>jee</eclipse.package>
-		<eclipse.version>kepler-SR2</eclipse.version>
-		<appname>jee-generator</appname>
+		<eclipse.distro>kepler</eclipse.distro>
+		<eclipse.release>SR2</eclipse.release>
+		<eclipse.version>${eclipse.distro}-${eclipse.release}</eclipse.version>
+
+		<download.server>ftp.halifax.rwth-aachen.de</download.server>
+		<download.eclipse.url>http://${download.server}/eclipse/technology/epp/downloads/release/${eclipse.distro}/${eclipse.release}/</download.eclipse.url>
+		<download.director.path>eclipse/tools/buckminster/products</download.director.path>
 
 		<eclipse.linux64>${download.eclipse.url}${eclipse.linux64.filename}.tar.gz</eclipse.linux64>
 		<eclipse.linux64.filename>eclipse-${eclipse.package}-${eclipse.version}-linux-gtk-x86_64</eclipse.linux64.filename>
@@ -111,9 +114,9 @@
 										appname="${appname}"
 										version="${project.version}">
 
-									<updatesite url="http://download.eclipse.org/releases/kepler/" />
+									<updatesite url="http://download.eclipse.org/releases/${eclipse.distro}/" />
 									<updatesite url="http://download.itemis.com/updates/releases/" />
-									<updatesite url="http://www.jee-generator.org/updates/kepler/" />
+									<updatesite url="http://www.jee-generator.org/updates/release/" />
 
 									<!-- Eclipse staff -->
 									<installunit name="org.eclipse.egit.feature.group" />
