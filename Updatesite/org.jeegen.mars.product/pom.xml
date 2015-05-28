@@ -20,7 +20,7 @@
 		<eclipse.download>download</eclipse.download>
 		<eclipse.package>jee</eclipse.package>
 		<eclipse.distro>mars</eclipse.distro>
-		<eclipse.release>RC1</eclipse.release>
+		<eclipse.release>M7</eclipse.release>
 		<eclipse.version>${eclipse.distro}-${eclipse.release}</eclipse.version>
 
 		<download.server>ftp.halifax.rwth-aachen.de</download.server>
