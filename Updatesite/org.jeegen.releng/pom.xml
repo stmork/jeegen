@@ -237,11 +237,11 @@
 			</properties>
 
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<activeByDefault>false</activeByDefault>
 			</activation>
 			<repositories>
 				<repository>
-					<id>jee-generator</id>
+					<id>mars</id>
 					<layout>p2</layout>
 					<url>http://download.eclipse.org/releases/mars</url>
 				</repository>
@@ -250,6 +250,11 @@
 					<layout>p2</layout> 
 					<url>http://download.itemis.com/updates/</url> 
 				</repository> 
+				<repository>
+					<id>jee-generator</id>
+					<layout>p2</layout>
+					<url>http://www.jee-generator.org/updates/snapshot/mars</url>
+				</repository>
 			</repositories>
 			<build>
 				<plugins>
@@ -302,7 +307,7 @@
 
 			<repositories>
 				<repository>
-					<id>jee-generator</id>
+					<id>release</id>
 					<layout>p2</layout>
 					<url>http://download.eclipse.org/releases/luna</url>
 				</repository>
@@ -311,6 +316,11 @@
 					<layout>p2</layout> 
 					<url>http://download.itemis.com/updates/</url> 
 				</repository> 
+				<repository>
+					<id>jee-generator</id>
+					<layout>p2</layout>
+					<url>http://www.jee-generator.org/updates/snapshot/luna</url>
+				</repository>
 			</repositories>
 			<build>
 				<plugins>
@@ -359,11 +369,11 @@
 			</properties>
 
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<activeByDefault>false</activeByDefault>
 			</activation>
 			<repositories>
 				<repository>
-					<id>jee-generator</id>
+					<id>release</id>
 					<layout>p2</layout>
 					<url>http://download.eclipse.org/releases/kepler</url>
 				</repository>
@@ -372,6 +382,11 @@
 					<layout>p2</layout> 
 					<url>http://download.itemis.com/updates/</url> 
 				</repository> 
+				<repository>
+					<id>jee-generator</id>
+					<layout>p2</layout>
+					<url>http://www.jee-generator.org/updates/snapshot/kepler</url>
+				</repository>
 			</repositories>
 			<build>
 				<plugins>
