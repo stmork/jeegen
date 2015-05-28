@@ -20,7 +20,7 @@
 		<eclipse.download>download</eclipse.download>
 		<eclipse.package>jee</eclipse.package>
 		<eclipse.distro>mars</eclipse.distro>
-		<eclipse.release>M7</eclipse.release>
+		<eclipse.release>RC1</eclipse.release>
 		<eclipse.version>${eclipse.distro}-${eclipse.release}</eclipse.version>
 
 		<download.server>ftp.halifax.rwth-aachen.de</download.server>
@@ -117,6 +117,7 @@
 									<!-- Eclipse staff -->
 									<installunit name="org.eclipse.egit.feature.group" />
 									<installunit name="org.eclipse.sdk.ide" />
+									<installunit name="org.eclipse.emf.mwe2.language.sdk.feature.group" />
 
 									<!-- Java EE Generators -->
 									<installunit name="org.jeegen.jee6.feature.feature.group" />
