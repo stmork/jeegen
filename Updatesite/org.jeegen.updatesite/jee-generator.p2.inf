@@ -1,0 +1,7 @@
+instructions.configure=\
+	addRepository(type:0,location:http${#58}//download.eclipse.org/releases/luna/,enabled:true);\
+	addRepository(type:1,location:http${#58}//download.eclipse.org/releases/luna/,enabled:true);\
+	addRepository(type:0,location:http${#58}//download.itemis.com/updates/releases/,enabled:true);\
+	addRepository(type:1,location:http${#58}//download.itemis.com/updates/releases/,enabled:true);\
+	addRepository(type:0,location:http${#58}//www.jee-generator.org/updates/luna/,enabled:true,name:JEE-Generators);\
+	addRepository(type:1,location:http${#58}//www.jee-generator.org/updates/luna/,enabled:true,name:JEE-Generators);
