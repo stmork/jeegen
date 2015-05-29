@@ -36,9 +36,6 @@
 		<eclipse.osx64>${download.eclipse.url}${eclipse.osx64.filename}.tar.gz</eclipse.osx64>
 		<eclipse.osx64.filename>eclipse-${eclipse.package}-${eclipse.version}-macosx-cocoa-x86_64</eclipse.osx64.filename>
 
-		<eclipse.osx32>${download.eclipse.url}${eclipse.osx32.filename}.tar.gz</eclipse.osx32>
-		<eclipse.osx32.filename>eclipse-${eclipse.package}-${eclipse.version}-macosx-cocoa</eclipse.osx32.filename>
-
 		<eclipse.windows64>${download.eclipse.url}${eclipse.windows64.filename}.zip</eclipse.windows64>
 		<eclipse.windows64.filename>eclipse-${eclipse.package}-${eclipse.version}-win32-x86_64</eclipse.windows64.filename>
 
@@ -93,9 +90,6 @@
 								<get src="${eclipse.osx64}"
 									dest="${eclipse.download}/${eclipse.version}/macosx/x86_64/eclipse-${eclipse.package}-${eclipse.version}-macosx-cocoa-x86_64.tar.gz"
 									skipexisting="true" />
-								<get src="${eclipse.osx32}"
-									dest="${eclipse.download}/${eclipse.version}/macosx/x86/eclipse-${eclipse.package}-${eclipse.version}-macosx-cocoa.tar.gz"
-									skipexisting="true" />
 								<get src="${eclipse.windows64}"
 									dest="${eclipse.download}/${eclipse.version}/win32/x86_64/eclipse-${eclipse.package}-${eclipse.version}-win32-x86_64.zip"
 									skipexisting="true" />
@@ -132,8 +126,6 @@
 										tofile="${project.build.directory}/dist/eclipse-${appname}-${eclipse.version}-linux-gtk.tar.gz" />
 								<move file="${project.build.directory}/dist/${eclipse.osx64.filename}-${appname}-${project.version}.tar.gz"
 										tofile="${project.build.directory}/dist/eclipse-${appname}-${eclipse.version}-macosx-cocoa-x86_64.tar.gz" />
-								<move file="${project.build.directory}/dist/${eclipse.osx32.filename}-${appname}-${project.version}.tar.gz"
-										tofile="${project.build.directory}/dist/eclipse-${appname}-${eclipse.version}-macosx-cocoa.tar.gz" />
 								<move file="${project.build.directory}/dist/${eclipse.windows64.filename}-${appname}-${project.version}.zip"
 										tofile="${project.build.directory}/dist/eclipse-${appname}-${eclipse.version}-win32-x86_64.zip" />
 								<move file="${project.build.directory}/dist/${eclipse.windows32.filename}-${appname}-${project.version}.zip"
