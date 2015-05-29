@@ -2,8 +2,7 @@
 layout: download
 ---
 
-Installation
-=========================
+# Installation
 
 Die JEE-Generatoren sind in Java implementiert, daher muss die Java Runtime Environment installiert sein.
 
@@ -12,15 +11,13 @@ vorkonfigurierte Eclipse-Distribution ist bereits mit allen notwendigen
 Plugins vorinstalliert verfügbar.  Alternativ kann über eine Update Site ein
 Eclipse mit allen notwendigen Plugins nachinstalliert werden.
 
-Installiere vorkonfiguriertes Eclipse
-------------------------------
+## Installiere vorkonfiguriertes Eclipse
 
  * Laden Sie sich die Distribution zum passenden Betriebssystem herunter.
  * Das Archiv muss im Verzeichnis Ihrer Wahl ausgepackt werden. Windows Benutzer sollten ein Verzeichnis möglichst in der Nähe des Wurzelverzeichnisses wählen, da Windows nur komplette Pfade mit maximal 256 Zeichen akzeptiert und Eclipse eine tiefe Verzeichnisstruktur benutzt.
  * Danach kann Eclipse gestartet werden und der gewünschte Workspace ausgewählt werden.
 
-JEE-Generatoren von der Update Site installieren
-------------------------------
+## JEE-Generatoren von der Update Site installieren
 
 Wenn Eclipse läuft:
 
@@ -28,8 +25,7 @@ Wenn Eclipse läuft:
  * Wähle den passenden JEE-Generator aus der Kategorie JEE-Generators und durch wiederholtes Klicken von _Next_ und einem abschließenden _Finish_ wird die Installation abgeschlossen.
  * Nach einem kurzen Download und Restart des Eclipse stehen die JEE-Generatoren zum Gebrauch zur Verfügung.
 
-FAQ
----
+##FAQ
 
 ### Was ist ein Workspace?
 
