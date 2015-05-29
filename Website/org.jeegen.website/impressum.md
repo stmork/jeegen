@@ -9,6 +9,8 @@ Die JEE-Generatoren sind Open Source und sind unter der [Eclipse Public License 
 
 Verantwortlich für diese Software sind Steffen A. Mork und Dominik Pieper.
 
+Kontakt: [info@jee-generator.org](mailto:info@jee-generator.org)
+
 Rechtliche Hinweise
 -------------------
 
@@ -23,7 +25,7 @@ Haftungsausschluss bei eigenen Inhalten
 ---------------------------------------
 
 Die Inhalte dieser Website werden mit größtmöglicher Sorgfalt recherchiert und implementiert. Fehler im Bearbeitungsvorgang
-sind dennoch nicht auszuschließen. Hinweise und Korrekturen senden Sie bitte an: info[at]jee-generator.org
+sind dennoch nicht auszuschließen. Hinweise und Korrekturen senden Sie bitte an: [info@jee-generator.org](mailto:info@jee-generator.org)
 
 Eine Haftung für die Richtigkeit, Vollständigkeit und Aktualität dieser Webseiten kann trotz sorgfältiger
 Prüfung nicht übernommen werden. Wir übernehmen insbesondere keinerlei Haftung für eventuelle Schäden oder

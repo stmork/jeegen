@@ -26,7 +26,7 @@ Wenn Eclipse läuft:
 
  * Wähle _Help -> Install New Software..._ aus der Menüleiste und _Add..._ Geben Sie eine der Update Site URLs von oben an. Diese Site fasst alle benötigten Komponenten und Abhängigkeiten für die JEE-Generatoren zusammen.
  * Wähle den passenden JEE-Generator aus der Kategorie JEE-Generators und durch wiederholtes Klicken von _Next_ und einem abschließenden _Finish_ wird die Installation abgeschlossen.
- * Nach einem kurzen Download stehen die JEE-Generatoren zum Gebrauch zur Verfügung.
+ * Nach einem kurzen Download und Restart des Eclipse stehen die JEE-Generatoren zum Gebrauch zur Verfügung.
 
 FAQ
 ---
@@ -44,3 +44,4 @@ klicke auf _Install new Software..._
 
 ### Was ist die Lizenz der JEE-Generatoren?
 
+Die JEE-Generatoren sind unter der [Eclipse Public License (EPL)](http://www.eclipse.org/legal/epl-v10.html) veröffentlicht.
