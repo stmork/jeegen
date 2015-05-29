@@ -84,7 +84,6 @@
 								<get src="${eclipse.linux64}"
 									dest="${eclipse.download}/${eclipse.version}/linux/x86_64/eclipse-${eclipse.package}-${eclipse.version}-linux-gtk-x86_64.tar.gz"
 									skipexisting="true" />
-<!--
 								<get src="${eclipse.linux32}"
 									dest="${eclipse.download}/${eclipse.version}/linux/x86/eclipse-${eclipse.package}-${eclipse.version}-linux-gtk.tar.gz"
 									skipexisting="true" />
@@ -97,9 +96,6 @@
 								<get src="${eclipse.windows32}"
 									dest="${eclipse.download}/${eclipse.version}/win32/x86/eclipse-${eclipse.package}-${eclipse.version}-win32.zip"
 									skipexisting="true" />
--->
-
-
 
 								<echo>Build Distribution</echo>
 								<builder builddirectory="${project.build.directory}/build"
@@ -127,7 +123,6 @@
 								<!-- Renaming files -->
 								<move file="${project.build.directory}/dist/${eclipse.linux64.filename}-${appname}-${project.version}.tar.gz"
 										tofile="${project.build.directory}/dist/eclipse-${appname}-${eclipse.version}-linux-gtk-x86_64.tar.gz" />
-<!--
 								<move file="${project.build.directory}/dist/${eclipse.linux32.filename}-${appname}-${project.version}.tar.gz"
 										tofile="${project.build.directory}/dist/eclipse-${appname}-${eclipse.version}-linux-gtk.tar.gz" />
 								<move file="${project.build.directory}/dist/${eclipse.osx64.filename}-${appname}-${project.version}.tar.gz"
@@ -136,7 +131,6 @@
 										tofile="${project.build.directory}/dist/eclipse-${appname}-${eclipse.version}-win32-x86_64.zip" />
 								<move file="${project.build.directory}/dist/${eclipse.windows32.filename}-${appname}-${project.version}.zip"
 										tofile="${project.build.directory}/dist/eclipse-${appname}-${eclipse.version}-win32.zip" />
--->
 							</target>
 						</configuration>
 					</execution>
