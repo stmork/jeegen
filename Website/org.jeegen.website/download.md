@@ -25,7 +25,7 @@ JEE-Generatoren von der Update Site installieren
 Wenn Eclipse läuft:
 
  * Wähle _Help -> Install New Software..._ aus der Menüleiste und _Add..._ Geben Sie eine der Update Site URLs von oben an. Diese Site fasst alle benötigten Komponenten und Abhängigkeiten für die JEE-Generatoren zusammen.
- * Wähle den passenden JEE-Generator aus der Kategorie JEE-Generators und durch wiederholtes Klicken von Next und einem abschließenden Finish wird die Installation abgeschlossen.
+ * Wähle den passenden JEE-Generator aus der Kategorie JEE-Generators und durch wiederholtes Klicken von _Next_ und einem abschließenden _Finish_ wird die Installation abgeschlossen.
  * Nach einem kurzen Download stehen die JEE-Generatoren zum Gebrauch zur Verfügung.
 
 FAQ
@@ -38,7 +38,8 @@ Ein Workspace ist das Verzeichnis für die Benutzerdaten und Projektdateien.
 ### Was ist eine Updatesite? 
 
 Eclipse hat einen eingebauten Updatemanager, dieser arbeitet mit so
-genannten Updatesites als Quelle.  In Eclipse öffne das _Help -> Menü_ und
+genannten Updatesites als Quelle. Dadurch bleibt die Software immer aktuall.
+In Eclipse öffne das _Help -> Menü_ und
 klicke auf _Install new Software..._
 
 ### Was ist die Lizenz der JEE-Generatoren?
