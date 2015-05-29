@@ -126,7 +126,7 @@
 										tofile="${project.build.directory}/dist/eclipse-${appname}-${eclipse.version}-linux-gtk.tar.gz" />
 								<move file="${project.build.directory}/dist/${eclipse.osx64.filename}-${appname}-${project.version}.tar.gz"
 										tofile="${project.build.directory}/dist/eclipse-${appname}-${eclipse.version}-macosx-cocoa-x86_64.tar.gz" />
-								<move file="${project.build.directory}/dist/${eclipse.osx32.filename}-${appname}-${project.version}.tar.gz"
+								<move file="${project.build.directory}/dist/${eclipse.windows64.filename}-${appname}-${project.version}.zip"
 										tofile="${project.build.directory}/dist/eclipse-${appname}-${eclipse.version}-win32-x86_64.zip" />
 								<move file="${project.build.directory}/dist/${eclipse.windows32.filename}-${appname}-${project.version}.zip"
 										tofile="${project.build.directory}/dist/eclipse-${appname}-${eclipse.version}-win32.zip" />
