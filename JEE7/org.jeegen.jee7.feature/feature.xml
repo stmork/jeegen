@@ -2,7 +2,7 @@
 <feature
       id="org.jeegen.jee7.feature"
       label="JEE7-Generator"
-      version="1.0.6.qualifier"
+      version="1.0.6"
       provider-name="JEE-Generator"
       plugin="org.jeegen.jee7">
 
