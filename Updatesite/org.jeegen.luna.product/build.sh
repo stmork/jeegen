@@ -13,6 +13,7 @@ DIRECTOR=${TARGET}/director/director
 
 mkdir -p $DOWNLOAD $BUILD $DIST
 
+echo "Preparing director..."
 test -e ${DOWNLOAD}/director_latest.zip || wget -q "http://${DOWNLOAD_SERVER}/eclipse/tools/buckminster/products/director_latest.zip" -O ${DOWNLOAD}/director_latest.zip
 test -d ${TARGET}/director || unzip -q ${DOWNLOAD}/director_latest.zip -d ${TARGET}
 
@@ -67,6 +68,7 @@ function build
 	test -e ${DOWNLOAD}/${ECLIPSE} || wget -q "http://${DOWNLOAD_SERVER}/eclipse/technology/epp/downloads/release/${DISTRO}/${RELEASE}/${ECLIPSE}" -O "${DOWNLOAD}/${ECLIPSE}"
 
 	unpack ${DOWNLOAD}/${ECLIPSE}
+	echo "Prepare Distro ${DISTRO}-${RELEASE}..."
 	${DIRECTOR} -noSplash\
 		-application org.eclipse.equinox.p2.director\
 		-profileProperties org.eclipse.update.install.features=true\
