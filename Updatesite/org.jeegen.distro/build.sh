@@ -1,7 +1,7 @@
 #!/bin/bash
 
-DISTRO=mars
-RELEASE=RC1
+DISTRO=${1:-kepler}
+RELEASE=${2:-SR2}
 DOWNLOAD_SERVER=ftp.halifax.rwth-aachen.de
 
 BASE=$PWD
@@ -73,7 +73,7 @@ function build
 		-application org.eclipse.equinox.p2.director\
 		-profileProperties org.eclipse.update.install.features=true\
 		-installIU org.eclipse.egit.feature.group,org.eclipse.sdk.ide,org.jeegen.jee6.feature.feature.group,org.jeegen.jee7.feature.feature.group\
-		-repository http://download.eclipse.org/releases/kepler/,http://download.itemis.com/updates/releases/,http://www.jee-generator.org/updates/release/\
+		-repository http://download.eclipse.org/releases/${DISTRO}/,http://download.itemis.com/updates/releases/,http://www.jee-generator.org/updates/release/\
 		-destination ${BUILD}/eclipse
 
 	pack ${DIST}/eclipse-jee-generator-${DISTRO}-${RELEASE}-$1
