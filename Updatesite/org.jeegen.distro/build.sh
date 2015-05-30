@@ -11,10 +11,17 @@ BUILD=${TARGET}/build
 DIST=${TARGET}/dist
 DIRECTOR=${TARGET}/director/director
 
+set -e
 mkdir -p $DOWNLOAD $BUILD $DIST
 
 echo "Preparing director..."
-test -e ${DOWNLOAD}/director_latest.zip || wget -q "http://${DOWNLOAD_SERVER}/eclipse/tools/buckminster/products/director_latest.zip" -O ${DOWNLOAD}/director_latest.zip
+if [ ! -e ${DOWNLOAD}/director_latest.zip ]
+then
+	URL="http://${DOWNLOAD_SERVER}/eclipse/tools/buckminster/products/director_latest.zip"
+	echo "Downloading $URL..."
+	wget -q $URL -O ${DOWNLOAD}/director_latest.zip
+fi
+
 test -d ${TARGET}/director || unzip -q ${DOWNLOAD}/director_latest.zip -d ${TARGET}
 
 function unpack
@@ -65,7 +72,12 @@ function build
 {
 	ECLIPSE="eclipse-jee-${DISTRO}-${RELEASE}-$1"
 
-	test -e ${DOWNLOAD}/${ECLIPSE} || wget -q "http://${DOWNLOAD_SERVER}/eclipse/technology/epp/downloads/release/${DISTRO}/${RELEASE}/${ECLIPSE}" -O "${DOWNLOAD}/${ECLIPSE}"
+	if [ ! -e ${DOWNLOAD}/${ECLIPSE} ]
+	then
+		URL="http://${DOWNLOAD_SERVER}/eclipse/technology/epp/downloads/release/${DISTRO}/${RELEASE}/${ECLIPSE}"
+		echo "Downloading $URL..."
+		wget -q $URL -O "${DOWNLOAD}/${ECLIPSE}"
+	fi
 
 	unpack ${DOWNLOAD}/${ECLIPSE}
 	echo "Prepare Distro ${DISTRO}-${RELEASE}..."
