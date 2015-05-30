@@ -13,7 +13,7 @@ DIRECTOR=${TARGET}/director/director
 
 mkdir -p $DOWNLOAD $BUILD $DIST
 
-test -e ${DOWNLOAD}/director_latest.zip || wget "http://${DOWNLOAD_SERVER}/eclipse/tools/buckminster/products/director_latest.zip" -O ${DOWNLOAD}/director_latest.zip
+test -e ${DOWNLOAD}/director_latest.zip || wget -q "http://${DOWNLOAD_SERVER}/eclipse/tools/buckminster/products/director_latest.zip" -O ${DOWNLOAD}/director_latest.zip
 test -d ${TARGET}/director || unzip -q ${DOWNLOAD}/director_latest.zip -d ${TARGET}
 
 function unpack
@@ -64,7 +64,7 @@ function build
 {
 	ECLIPSE="eclipse-jee-${DISTRO}-${RELEASE}-$1"
 
-	test -e ${DOWNLOAD}/${ECLIPSE} || wget "http://${DOWNLOAD_SERVER}/eclipse/technology/epp/downloads/release/${DISTRO}/${RELEASE}/${ECLIPSE}" -O "${DOWNLOAD}/${ECLIPSE}"
+	test -e ${DOWNLOAD}/${ECLIPSE} || wget -q "http://${DOWNLOAD_SERVER}/eclipse/technology/epp/downloads/release/${DISTRO}/${RELEASE}/${ECLIPSE}" -O "${DOWNLOAD}/${ECLIPSE}"
 
 	unpack ${DOWNLOAD}/${ECLIPSE}
 	${DIRECTOR} -noSplash\
