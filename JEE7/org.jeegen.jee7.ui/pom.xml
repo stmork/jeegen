@@ -11,7 +11,7 @@
 	</parent>
 
 	<name>JEE7 DSL UI</name>
-	<version>1.0.6</version>
+	<version>1.0.7-SNAPSHOT</version>
 	<groupId>org.jeegen</groupId>
 	<artifactId>org.jeegen.jee7.ui</artifactId>
 	<packaging>eclipse-plugin</packaging>
