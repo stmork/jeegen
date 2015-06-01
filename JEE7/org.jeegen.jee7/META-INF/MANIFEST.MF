@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.jeegen.jee7
 Bundle-Vendor: JEE-Generator
-Bundle-Version: 1.0.6
+Bundle-Version: 1.0.7.qualifier
 Bundle-SymbolicName: org.jeegen.jee7;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.text,
