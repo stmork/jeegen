@@ -47,7 +47,7 @@ public class UserHandler extends AbstractUserHandler {
 	 * This method returns a {@link List} of all {@link AuthInfo} beans.
 	 *
 	 * @return {@link List} of all {@link AuthInfo} beans.
-	 * @see de.itemis.jee6.dbauth.dao.AbstractUserDaoBean#getAuthInfoList()
+	 * @see org.jeegen.jee6.dbauth.dao.AbstractUserDaoBean#getAuthInfoList()
 	 */
 
 	@Override
@@ -62,7 +62,7 @@ public class UserHandler extends AbstractUserHandler {
 	 *
 	 * @param authInfo The new {@link AuthInfo} bean to persist.
 	 * @return The outcome where to go on success.
-	 * @see de.itemis.jee6.dbauth.dao.AbstractUserDaoBean#addAuthInfo(AuthInfo)
+	 * @see org.jeegen.jee6.dbauth.dao.AbstractUserDaoBean#addAuthInfo(AuthInfo)
 	 */
 
 	@Override
@@ -90,7 +90,7 @@ public class UserHandler extends AbstractUserHandler {
 	 *
 	 * @param authInfo The {@link AuthInfo} bean to remove.
 	 * @return The outcome where to go on success.
-	 * @see de.itemis.jee6.dbauth.dao.AbstractUserDaoBean#deleteAuthInfo(AuthInfo)
+	 * @see org.jeegen.jee6.dbauth.dao.AbstractUserDaoBean#deleteAuthInfo(AuthInfo)
 	 */
 
 	@Override
@@ -107,7 +107,7 @@ public class UserHandler extends AbstractUserHandler {
 	 * This method sets the given {@link AuthInfo} bean for editing.
 	 *
 	 * @return The outcome where to go on success.
-	 * @see de.itemis.jee6.dbauth.dao.AbstractUserDaoBean#updateAuthInfo(AuthInfo)
+	 * @see org.jeegen.jee6.dbauth.dao.AbstractUserDaoBean#updateAuthInfo(AuthInfo)
 	 */
 
 	@Override
@@ -133,7 +133,7 @@ public class UserHandler extends AbstractUserHandler {
 	 *
 	 * @param authInfo The {@link AuthInfo} bean to change the active flag.
 	 * @return The outcome where to go on success.
-	 * @see de.itemis.jee6.dbauth.dao.AbstractUserDaoBean#activate(AuthInfo,boolean)
+	 * @see org.jeegen.jee6.dbauth.dao.AbstractUserDaoBean#activate(AuthInfo,boolean)
 	 */
 
 	@Override
@@ -179,7 +179,7 @@ public class UserHandler extends AbstractUserHandler {
 	 *
 	 * @param siteAuthInfo The {@link SiteAuthInfo} entity bean to remove.
 	 * @return The outcome to return to the 1:n relation editing.
-	 * @see de.itemis.jee6.dbauth.dao.AbstractUserDaoBean#deleteFromAuthInfo(SiteAuthInfo)
+	 * @see org.jeegen.jee6.dbauth.dao.AbstractUserDaoBean#deleteFromAuthInfo(SiteAuthInfo)
 	 */
 
 	@Override
@@ -197,8 +197,8 @@ public class UserHandler extends AbstractUserHandler {
 	 * an 1:n relation of the {@link AuthInfo} entity bean.
 	 *
 	 * @return The outcome to return to the 1:n relation editing.
-	 * @see de.itemis.jee6.dbauth.dao.AbstractUserDaoBean#updateSiteAuthInfo(SiteAuthInfo)
-	 * @see de.itemis.jee6.dbauth.dao.AbstractUserDaoBean#addToAuthInfo(AuthInfo, SiteAuthInfo)
+	 * @see org.jeegen.jee6.dbauth.dao.AbstractUserDaoBean#updateSiteAuthInfo(SiteAuthInfo)
+	 * @see org.jeegen.jee6.dbauth.dao.AbstractUserDaoBean#addToAuthInfo(AuthInfo, SiteAuthInfo)
 	 */
 
 	@Override
@@ -230,7 +230,7 @@ public class UserHandler extends AbstractUserHandler {
 	 *
 	 * @param siteAuthInfo The {@link SiteAuthInfo} bean to change the active flag.
 	 * @return The outcome where to go on success.
-	 * @see de.itemis.jee6.dbauth.dao.AbstractUserDaoBean#activate(SiteAuthInfo,boolean)
+	 * @see org.jeegen.jee6.dbauth.dao.AbstractUserDaoBean#activate(SiteAuthInfo,boolean)
 	 */
 
 	@Override
@@ -247,7 +247,7 @@ public class UserHandler extends AbstractUserHandler {
 	 * This method returns a {@link List} of all {@link SiteInfo} beans.
 	 *
 	 * @return {@link List} of all {@link SiteInfo} beans.
-	 * @see de.itemis.jee6.dbauth.dao.AbstractUserDaoBean#getSiteInfoList()
+	 * @see org.jeegen.jee6.dbauth.dao.AbstractUserDaoBean#getSiteInfoList()
 	 */
 
 	@Override
@@ -262,7 +262,7 @@ public class UserHandler extends AbstractUserHandler {
 	 *
 	 * @param siteInfo The new {@link SiteInfo} bean to persist.
 	 * @return The outcome where to go on success.
-	 * @see de.itemis.jee6.dbauth.dao.AbstractUserDaoBean#addSiteInfo(SiteInfo)
+	 * @see org.jeegen.jee6.dbauth.dao.AbstractUserDaoBean#addSiteInfo(SiteInfo)
 	 */
 
 	@Override
@@ -290,7 +290,7 @@ public class UserHandler extends AbstractUserHandler {
 	 *
 	 * @param siteInfo The {@link SiteInfo} bean to remove.
 	 * @return The outcome where to go on success.
-	 * @see de.itemis.jee6.dbauth.dao.AbstractUserDaoBean#deleteSiteInfo(SiteInfo)
+	 * @see org.jeegen.jee6.dbauth.dao.AbstractUserDaoBean#deleteSiteInfo(SiteInfo)
 	 */
 
 	@Override
@@ -307,7 +307,7 @@ public class UserHandler extends AbstractUserHandler {
 	 * This method sets the given {@link SiteInfo} bean for editing.
 	 *
 	 * @return The outcome where to go on success.
-	 * @see de.itemis.jee6.dbauth.dao.AbstractUserDaoBean#updateSiteInfo(SiteInfo)
+	 * @see org.jeegen.jee6.dbauth.dao.AbstractUserDaoBean#updateSiteInfo(SiteInfo)
 	 */
 
 	@Override

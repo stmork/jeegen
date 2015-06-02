@@ -1,0 +1,368 @@
+«REM»
+«###»	Copyright (C) 2015 Steffen A. Mork, Dominik Pieper
+«###»	$Id$
+«ENDREM»
+
+«IMPORT jee6»
+
+«EXTENSION org::jeegen::jee6::generator::ext::model»
+«EXTENSION org::jeegen::jee6::generator::ext::bundle»
+«EXTENSION org::jeegen::jee6::generator::ext::entity»
+«EXTENSION org::jeegen::jee6::generator::ext::types»
+«EXTENSION org::jeegen::jee6::generator::ext::utility»
+
+«DEFINE Main FOR Model»
+«EXPAND Persistence»
+«EXPAND Web»
+«EXPAND JBoss»
+«EXPAND Glassfish»
+«EXPAND Sun»
+«EXPAND WebLogic»
+«EXPAND Faces»
+«EXPAND Log4J»
+«ENDDEFINE»
+
+«DEFINE Log4J FOR Model»
+«FILE "log4j.properties"»
+«IF state == ProjectState::Productive»
+log4j.rootLogger=info, R
+«ELSE»
+log4j.rootLogger=debug, R
+«ENDIF»
+log4j.appender.R=org.apache.log4j.ConsoleAppender
+log4j.appender.R.layout=org.apache.log4j.PatternLayout
+log4j.appender.R.layout.ConversionPattern=%-5p %-30.30c{1} %x - %m%n
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE Persistence FOR Model»
+«FILE "WEB-INF/classes/META-INF/persistence.xml" RES»
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+		xmlns="http://java.sun.com/xml/ns/persistence"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+«EXPAND utility::XmlHeader»
+«FOREACH getPersistenceUnits() AS pu»
+	<persistence-unit name="«pu.name»" transaction-type="JTA">
+		<jta-data-source>«pu.jndi»</jta-data-source>
+«FOREACH entities AS entity»
+«IF getPU(entity) == pu»
+		<class>«fqTypeOf(entity)»</class>
+«ENDIF»
+«ENDFOREACH»
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+«IF pu.cacheable»
+		<shared-cache-mode>ALL</shared-cache-mode>
+«ENDIF»
+		<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.«getDialect(pu)»Dialect"/>
+			<property name="hibernate.hbm2ddl.auto"                 value="update" />
+			<property name="hibernate.cache.use_second_level_cache" value="true"/>
+			<property name="hibernate.cache.use_minimal_puts"       value="true"/>
+«REM»
+			<property name="hibernate.cache.use_query_cache"        value="true" />
+«ENDREM»
+«IF state == ProjectState::Development»
+			<property name="hibernate.show_sql"                     value="true" />
+			<property name="eclipselink.logging.level"              value="DEBUG"/>
+«ELSE»
+			<property name="hibernate.show_sql"                     value="false" />
+			<property name="eclipselink.logging.level"              value="INFO"/>
+«ENDIF»
+			<property name="eclipselink.ddl-generation"             value="create-tables" />
+			<property name="openjpa.jdbc.SynchronizeMappings"       value="buildSchema(ForeignKeys=true)" />
+		</properties>
+	</persistence-unit>
+«ENDFOREACH»
+</persistence>
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE Web FOR Model»
+«FILE "WEB-INF/web.xml" RES»
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+		xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+		metadata-complete="false" version="3.0">
+«EXPAND utility::XmlHeader»
+	<display-name>«this.name»</display-name>
+	<distributable />
+
+«FOREACH options.typeSelect(Param) AS param»
+	<context-param>
+«IF param.description.length > 0»
+		<description>«param.description»</description>
+«ENDIF»
+		<param-name>«param.name»</param-name>
+		<param-value>«param.value»</param-value>
+	</context-param>
+«ENDFOREACH»
+
+	<context-param>
+		<description>Damit nicht immer UTC genommen wird ;-)</description>
+		<param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+		<param-value>server</param-value>
+	</context-param>
+«IF state != null»
+	<context-param>
+«IF state == ProjectState::Productive»
+		<description>Alles ist am geschmiert laufen...</description>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Productive</param-value>
+«ELSEIF state == ProjectState::Integration»
+		<description>Mal schauen, ob alles zusammenspielen tut.</description>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>SystemTest</param-value>
+«ELSE»
+		<description>Wir sind am Entwickeln am dran sein, am tun, am machen.</description>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Development</param-value>
+«ENDIF»
+	</context-param>
+«ENDIF»
+
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
+
+«IF timeout > 0»
+	<session-config>
+		<session-timeout>«timeout»</session-timeout>
+«REM»
+		<cookie-config>
+			<http-only>true</http-only>
+		</cookie-config>
+		<tracking-mode>COOKIE</tracking-mode>
+«ENDREM»
+	</session-config>
+«ENDIF»
+
+	<welcome-file-list>
+		<welcome-file>index.xhtml</welcome-file>
+	</welcome-file-list>
+
+«LET getSecurityDomains().first() AS sd»
+«IF sd != null»
+	<!-- ==================== -->
+	<!-- Security definitions -->
+	<!-- ==================== -->
+«FOREACH processes AS process»
+«IF process.roles.size > 0»
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>SecurePages</web-resource-name>
+			<description>Security constraint «uriOf(process)»</description>
+			<url-pattern>«uriOf(process)»/*</url-pattern>
+			<http-method>POST</http-method>
+			<http-method>GET</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+«FOREACH process.roles AS role»
+			<role-name>«role»</role-name>
+«ENDFOREACH»
+		</auth-constraint>
+	</security-constraint>
+«ENDIF»
+«ENDFOREACH»
+
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<realm-name>«sd.jaas»</realm-name>
+		<form-login-config>
+			<form-login-page>/login.xhtml</form-login-page>
+			<form-error-page>/index.xhtml</form-error-page>
+		</form-login-config>
+	</login-config>
+«FOREACH getAllRoles() AS role»
+	<security-role>
+		<role-name>«role»</role-name>
+	</security-role>
+«ENDFOREACH»
+«ENDIF»
+«ENDLET»
+	<error-page>
+		<exception-type>javax.faces.application.ViewExpiredException</exception-type>
+		<location>/</location>
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.RuntimeException</exception-type>
+		<location>/error.xhtml</location>
+	</error-page>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/error403.xhtml</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error404.xhtml</location>
+	</error-page>
+</web-app>
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE JBoss FOR Model»
+«FILE "WEB-INF/jboss-web.xml" RES»
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-web>
+«EXPAND utility::XmlHeader»
+«FOREACH getSecurityDomains() AS sd»
+	<security-domain>java:/jaas/«sd.jaas»</security-domain>
+«IF sd.clustered»
+	<valve>
+		<class-name>org.apache.catalina.authenticator.SingleSignOn</class-name>
+	</valve>
+«ENDIF»
+«ENDFOREACH»
+	<context-root>«path»</context-root>
+«FOREACH getMails() AS mail»
+	<resource-ref>
+		<res-ref-name>«mail.jndi»</res-ref-name>
+		<res-type>javax.mail.Session</res-type>
+		<jndi-name>java:/jboss/«mail.jndi»</jndi-name>
+	</resource-ref>
+«ENDFOREACH»
+«EXPAND reference FOREACH getProperties()»
+</jboss-web>
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE WebLogic FOR Model»
+«FILE "WEB-INF/weblogic.xml" RES»
+<?xml version="1.0" encoding="UTF-8"?>
+<weblogic-web-app>
+«EXPAND utility::XmlHeader»
+	<context-root>«path»</context-root>
+«FOREACH getAllRoles() AS role»
+	<security-role-assignment>
+		<role-name>«role»</role-name>
+		<externally-defined/>
+	</security-role-assignment>
+«ENDFOREACH»
+</weblogic-web-app>
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE reference FOR jee6::Property»
+«ERROR "Abstract Property"»
+«ENDDEFINE»
+
+«DEFINE reference FOR TextProp»
+	<resource-ref>
+		<res-ref-name>«jndi»</res-ref-name>
+		<res-type>java.lang.String</res-type>
+		<jndi-name>«original»</jndi-name>
+	</resource-ref>
+«ENDDEFINE»
+
+«DEFINE reference FOR TypeProp»
+	<resource-ref>
+		<res-ref-name>«jndi»</res-ref-name>
+		<res-type>«type»</res-type>
+		<jndi-name>«original»</jndi-name>
+	</resource-ref>
+«ENDDEFINE»
+
+«DEFINE reference FOR IntegerProp»
+	<resource-ref>
+		<res-ref-name>«jndi»</res-ref-name>
+		<res-type>java.lang.Integer</res-type>
+		<jndi-name>«original»</jndi-name>
+	</resource-ref>
+«ENDDEFINE»
+
+«DEFINE reference FOR BooleanProp»
+	<resource-ref>
+		<res-ref-name>«jndi»</res-ref-name>
+		<res-type>java.lang.Boolean</res-type>
+		<jndi-name>«original»</jndi-name>
+	</resource-ref>
+«ENDDEFINE»
+
+«DEFINE Sun FOR Model»
+«FILE "WEB-INF/sun-web.xml" RES»
+<!DOCTYPE sun-web-app PUBLIC "-//Sun Microsystems, Inc.//DTD 
+GlassFish Application Server 3.0 Servlet 3.0//EN" 
+"http://www.sun.com/software/appserver/dtds/sun-web-app_3_0-0.dtd">
+<sun-web-app>
+«EXPAND utility::XmlHeader»
+	<context-root>«path»</context-root>
+«FOREACH getAllRoles() AS role»
+	<security-role-mapping>
+		<role-name>«role»</role-name>
+		<group-name>«role»</group-name>
+	</security-role-mapping>
+«ENDFOREACH»
+	<parameter-encoding default-charset="UTF-8"/>
+</sun-web-app>
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE Glassfish FOR Model»
+«FILE "WEB-INF/glassfish-web.xml" RES»
+<!DOCTYPE sun-web-app PUBLIC "-//Sun Microsystems, Inc.//DTD
+GlassFish Application Server 3.0 Servlet 3.0//EN"
+"http://www.sun.com/software/appserver/dtds/sun-web-app_3_0-0.dtd">
+<glassfish-web-app>
+«EXPAND utility::XmlHeader»
+	<context-root>«path»</context-root>
+«FOREACH getAllRoles() AS role»
+	<security-role-mapping>
+		<role-name>«role»</role-name>
+		<group-name>«role»</group-name>
+	</security-role-mapping>
+«ENDFOREACH»
+	<parameter-encoding default-charset="UTF-8"/>
+</glassfish-web-app>
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE Faces FOR Model»
+«FILE "WEB-INF/faces-config.xml" RES»
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee"
+		xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+«EXPAND utility::XmlHeader»
+	<application>
+		<resource-bundle>
+			<base-name>«package».messages</base-name>
+			<var>msg</var>
+		</resource-bundle>
+		<resource-bundle>
+			<base-name>«package».errors</base-name>
+			<var>err</var>
+		</resource-bundle>
+		<resource-bundle>
+			<base-name>«package».version</base-name>
+			<var>ver</var>
+		</resource-bundle>
+		<locale-config>
+«FOREACH getLocales() AS locale»
+«IF locale.home»
+			<default-locale>«locale.language»</default-locale>
+«ELSE»
+			<supported-locale>«locale.language»</supported-locale>
+«ENDIF»
+«ENDFOREACH»
+		</locale-config>
+	</application>
+	<validator>
+		<validator-id>mailValidator</validator-id>
+		<validator-class>org.jeegen.jee6.util.MailValidator</validator-class>
+	</validator>
+</faces-config>
+«ENDFILE»
+«ENDDEFINE»

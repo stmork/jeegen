@@ -4,14 +4,14 @@
 
 	<parent>
 		<groupId>org.jeegen6</groupId>
-		<artifactId>de.itemis.jee6.releng</artifactId>
+		<artifactId>org.jeegen.jee6.releng</artifactId>
 		<version>1.1.8-SNAPSHOT</version>
 		<relativePath>../org.jeegen6.releng/pom.xml</relativePath>
 	</parent>
 
 	<name>JEE6 DSL Tests</name>
-	<artifactId>de.itemis.jee6.tests</artifactId>
-	<groupId>de.itemis.jee6</groupId>
+	<artifactId>org.jeegen.jee6.tests</artifactId>
+	<groupId>org.jeegen.jee6</groupId>
 	<packaging>eclipse-test-plugin</packaging>
 
 	<developers>

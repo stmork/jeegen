@@ -26,48 +26,48 @@ Require-Bundle: org.eclipse.text,
 Import-Package: org.apache.commons.logging,
  org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Export-Package: de.itemis.jee7;
+Export-Package: org.jeegen.jee7;
   uses:="org.eclipse.xtext,
    org.eclipse.xtext.service,
    org.eclipse.xtext.common.types,
    com.google.inject",
- de.itemis.jee7.formatting;
+ org.jeegen.jee7.formatting;
   uses:="org.eclipse.xtext.diagnostics,
    org.eclipse.xtext.linking,
    org.eclipse.xtext.formatting.impl,
    org.eclipse.emf.ecore,
    org.eclipse.xtext.ui.editor.model.edit",
- de.itemis.jee7.generator;uses:="org.apache.commons.logging,org.eclipse.xtend.expression",
- de.itemis.jee7.jee7;uses:="org.eclipse.emf.ecore,org.eclipse.emf.common.util",
- de.itemis.jee7.jee7.impl;
+ org.jeegen.jee7.generator;uses:="org.apache.commons.logging,org.eclipse.xtend.expression",
+ org.jeegen.jee7.jee7;uses:="org.eclipse.emf.ecore,org.eclipse.emf.common.util",
+ org.jeegen.jee7.jee7.impl;
   uses:="org.eclipse.emf.ecore,
    org.eclipse.emf.common.util,
-   de.itemis.jee7.jee7,
+   org.jeegen.jee7.jee7,
    org.eclipse.emf.common.notify,
    org.eclipse.emf.ecore.impl",
- de.itemis.jee7.jee7.util;
+ org.jeegen.jee7.jee7.util;
   uses:="org.eclipse.emf.ecore.util,
    org.eclipse.emf.ecore,
    org.eclipse.emf.common.notify.impl,
-   de.itemis.jee7.jee7,
+   org.jeegen.jee7.jee7,
    org.eclipse.emf.common.notify",
- de.itemis.jee7.parser.antlr;uses:="de.itemis.jee7.services,org.eclipse.xtext.parser.antlr,de.itemis.jee7.parser.antlr.internal",
- de.itemis.jee7.parser.antlr.internal;
+ org.jeegen.jee7.parser.antlr;uses:="org.jeegen.jee7.services,org.eclipse.xtext.parser.antlr,org.jeegen.jee7.parser.antlr.internal",
+ org.jeegen.jee7.parser.antlr.internal;
   uses:="org.eclipse.emf.ecore,
    org.eclipse.emf.common.util,
-   de.itemis.jee7.services,
+   org.jeegen.jee7.services,
    org.antlr.runtime,
    org.eclipse.xtext.parser.antlr",
- de.itemis.jee7.scoping;uses:="org.eclipse.xtext.scoping.impl",
- de.itemis.jee7.serializer;
+ org.jeegen.jee7.scoping;uses:="org.eclipse.xtext.scoping.impl",
+ org.jeegen.jee7.serializer;
   uses:="org.eclipse.xtext,
    org.eclipse.emf.ecore,
    org.eclipse.xtext.serializer.sequencer,
    org.eclipse.xtext.serializer.analysis,
-   de.itemis.jee7.services,
-   de.itemis.jee7.jee7,
+   org.jeegen.jee7.services,
+   org.jeegen.jee7.jee7,
    org.eclipse.xtext.nodemodel",
- de.itemis.jee7.services;uses:="org.eclipse.xtext,org.eclipse.xtext.common.services,org.eclipse.xtext.service",
- de.itemis.jee7.util;uses:="org.eclipse.xpand2.output,org.w3c.dom",
- de.itemis.jee7.validation;uses:="org.eclipse.xtext.validation"
+ org.jeegen.jee7.services;uses:="org.eclipse.xtext,org.eclipse.xtext.common.services,org.eclipse.xtext.service",
+ org.jeegen.jee7.util;uses:="org.eclipse.xpand2.output,org.w3c.dom",
+ org.jeegen.jee7.validation;uses:="org.eclipse.xtext.validation"
 

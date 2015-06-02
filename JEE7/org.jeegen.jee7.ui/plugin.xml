@@ -5,11 +5,11 @@
 
     <extension point="org.eclipse.ui.editors">
         <editor
-            class="de.itemis.jee7.ui.DslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+            class="org.jeegen.jee7.ui.DslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
             extensions="jee7"
-            id="de.itemis.jee7.Dsl"
+            id="org.jeegen.jee7.Dsl"
             icon="icons/jee7_16.gif"
             name="JEE7 Editor">
         </editor>
@@ -17,31 +17,31 @@
     <extension
         point="org.eclipse.ui.handlers">
         <handler
-            class="de.itemis.jee7.ui.DslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            class="org.jeegen.jee7.ui.DslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
             commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
             <activeWhen>
                 <reference
-                    definitionId="de.itemis.jee7.Dsl.Editor.opened">
+                    definitionId="org.jeegen.jee7.Dsl.Editor.opened">
                 </reference>
             </activeWhen>
         </handler>
         <handler
-            class="de.itemis.jee7.ui.DslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
-            commandId="de.itemis.jee7.Dsl.validate">
+            class="org.jeegen.jee7.ui.DslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+            commandId="org.jeegen.jee7.Dsl.validate">
          <activeWhen>
             <reference
-                    definitionId="de.itemis.jee7.Dsl.Editor.opened">
+                    definitionId="org.jeegen.jee7.Dsl.Editor.opened">
             </reference>
          </activeWhen>
       </handler>
     </extension>
     <extension point="org.eclipse.core.expressions.definitions">
-        <definition id="de.itemis.jee7.Dsl.Editor.opened">
+        <definition id="org.jeegen.jee7.Dsl.Editor.opened">
             <and>
                 <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
                 <with variable="activeEditor">
                     <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
-                        value="de.itemis.jee7.Dsl" 
+                        value="org.jeegen.jee7.Dsl" 
                         forcePluginActivation="true"/>
                 </with>        
             </and>
@@ -49,33 +49,33 @@
     </extension>
     <extension point="org.eclipse.ui.preferencePages">
         <page
-            class="de.itemis.jee7.ui.DslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
-            id="de.itemis.jee7.Dsl"
+            class="org.jeegen.jee7.ui.DslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.jeegen.jee7.Dsl"
             name="JEE7 Generator">
-            <keywordReference id="de.itemis.jee7.ui.keyword_Dsl"/>
+            <keywordReference id="org.jeegen.jee7.ui.keyword_Dsl"/>
         </page>
         <page
-            category="de.itemis.jee7.Dsl"
-            class="de.itemis.jee7.ui.DslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
-            id="de.itemis.jee7.Dsl.coloring"
+            category="org.jeegen.jee7.Dsl"
+            class="org.jeegen.jee7.ui.DslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="org.jeegen.jee7.Dsl.coloring"
             name="Syntax Coloring">
-            <keywordReference id="de.itemis.jee7.ui.keyword_Dsl"/>
+            <keywordReference id="org.jeegen.jee7.ui.keyword_Dsl"/>
         </page>
         <page
-            category="de.itemis.jee7.Dsl"
-            class="de.itemis.jee7.ui.DslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
-            id="de.itemis.jee7.Dsl.templates"
+            category="org.jeegen.jee7.Dsl"
+            class="org.jeegen.jee7.ui.DslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+            id="org.jeegen.jee7.Dsl.templates"
             name="Templates">
-            <keywordReference id="de.itemis.jee7.ui.keyword_Dsl"/>
+            <keywordReference id="org.jeegen.jee7.ui.keyword_Dsl"/>
         </page>
     </extension>
     <extension
             point="org.eclipse.ui.propertyPages">
         <page
-            class="de.itemis.jee7.ui.DslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
-            id="de.itemis.jee7.Dsl"
+            class="org.jeegen.jee7.ui.DslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.jeegen.jee7.Dsl"
             name="Dsl">
-            <keywordReference id="de.itemis.jee7.ui.keyword_Dsl"/>
+            <keywordReference id="org.jeegen.jee7.ui.keyword_Dsl"/>
             <enabledWhen>
 	            <adapt type="org.eclipse.core.resources.IProject"/>
 			</enabledWhen>
@@ -85,14 +85,14 @@
     <extension
         point="org.eclipse.ui.keywords">
         <keyword
-            id="de.itemis.jee7.ui.keyword_Dsl"
+            id="org.jeegen.jee7.ui.keyword_Dsl"
             label="Dsl"/>
     </extension>
     <extension
          point="org.eclipse.ui.commands">
       <command
             description="Trigger expensive validation"
-            id="de.itemis.jee7.Dsl.validate"
+            id="org.jeegen.jee7.Dsl.validate"
             name="Validate">
       </command>
     </extension>
@@ -100,12 +100,12 @@
         <menuContribution
             locationURI="popup:#TextEditorContext?after=group.edit">
              <command
-                 commandId="de.itemis.jee7.Dsl.validate"
+                 commandId="org.jeegen.jee7.Dsl.validate"
                  style="push"
                  tooltip="Trigger expensive validation">
             <visibleWhen checkEnabled="false">
                 <reference
-                    definitionId="de.itemis.jee7.Dsl.Editor.opened">
+                    definitionId="org.jeegen.jee7.Dsl.Editor.opened">
                 </reference>
             </visibleWhen>
          </command>  
@@ -115,7 +115,7 @@
 		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
 			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
 				<visibleWhen checkEnabled="false">
-                	<reference definitionId="de.itemis.jee7.Dsl.Editor.opened">
+                	<reference definitionId="org.jeegen.jee7.Dsl.Editor.opened">
                 	</reference>
             	</visibleWhen>
 			</command>
@@ -123,11 +123,11 @@
 	</extension>
 	<extension point="org.eclipse.ui.handlers">
 	    <handler
-            class="de.itemis.jee7.ui.DslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            class="org.jeegen.jee7.ui.DslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
             commandId="org.eclipse.xtext.ui.editor.FindReferences">
             <activeWhen>
                 <reference
-                    definitionId="de.itemis.jee7.Dsl.Editor.opened">
+                    definitionId="org.jeegen.jee7.Dsl.Editor.opened">
                 </reference>
             </activeWhen>
         </handler>
@@ -138,13 +138,13 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="de.itemis.jee7.ui.DslExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			class="org.jeegen.jee7.ui.DslExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="jee7">
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
-            class="de.itemis.jee7.ui.DslExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            class="org.jeegen.jee7.ui.DslExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
             uriExtension="jee7">
         </resourceServiceProvider>
     </extension>
@@ -155,11 +155,11 @@
 	<extension
 		point="org.eclipse.ui.handlers">
 		<handler 
-			class="de.itemis.jee7.ui.DslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
+			class="org.jeegen.jee7.ui.DslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
 			commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline">
 			<activeWhen>
 				<reference
-					definitionId="de.itemis.jee7.Dsl.Editor.opened">
+					definitionId="org.jeegen.jee7.Dsl.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
@@ -179,25 +179,25 @@
 				style="push"
 				tooltip="Open Quick Outline">
 				<visibleWhen checkEnabled="false">
-					<reference definitionId="de.itemis.jee7.Dsl.Editor.opened"/>
+					<reference definitionId="org.jeegen.jee7.Dsl.Editor.opened"/>
 				</visibleWhen>
 			</command>
 		</menuContribution>
 	</extension>
 	<!-- quickfix marker resolution generator -->
 	<extension point="org.eclipse.ui.ide.markerResolution">
-		<markerResolutionGenerator class="de.itemis.jee7.ui.DslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
+		<markerResolutionGenerator class="org.jeegen.jee7.ui.DslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
 		</markerResolutionGenerator>
 	</extension>
 
 	<extension point="org.eclipse.ui.newWizards">
-		<category id="de.itemis.jee.ui.category" name="JEE-Generators">
+		<category id="org.jeegen.jee.ui.category" name="JEE-Generators">
 		</category>
 		<wizard
-			category="de.itemis.jee.ui.category"
-			class="de.itemis.jee7.ui.DslExecutableExtensionFactory:de.itemis.jee7.ui.wizard.Jee7AntNewProjectWizard"
+			category="org.jeegen.jee.ui.category"
+			class="org.jeegen.jee7.ui.DslExecutableExtensionFactory:org.jeegen.jee7.ui.wizard.Jee7AntNewProjectWizard"
 			icon="icons/jee7_32.gif"
-			id="de.itemis.jee7.ui.wizard.DslNewProjectWizard"
+			id="org.jeegen.jee7.ui.wizard.DslNewProjectWizard"
 			name="JEE7 Generator Project (Ant based)"
 			project="true">
 		</wizard>

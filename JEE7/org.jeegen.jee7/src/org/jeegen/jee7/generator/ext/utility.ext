@@ -1,0 +1,7 @@
+import jee7;
+
+String id() :
+	"Id";
+
+Integer year() :
+	JAVA org.jeegen.jee7.generator.Tools.year();

@@ -1,0 +1,18 @@
+import jee7;
+
+extension org::jeegen::jee7::generator::ext::types;
+
+List[Options] getConverterReferencesList(Process p) :
+	p.entities.types.typeSelect(OptionRef).type.toSet();
+
+List[Options] getOptionsList(Process p) :
+	p.entities.types.typeSelect(OptionRef).type.union(p.entities.typeSelect(Options)).toSet();
+
+String converterGetter(Options option) :
+	"get" + typeOf(option) + "Converter";
+
+String uiConverter(Options option) :
+	typeOf(option).toFirstLower() + "Converter";
+
+String uiList(Entity options) :
+	typeOf(options).toFirstLower() + "List";

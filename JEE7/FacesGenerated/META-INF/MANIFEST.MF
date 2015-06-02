@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: JEE7 Generator Example
-Bundle-SymbolicName: de.itemis.jee7.example;singleton:=true
+Bundle-SymbolicName: org.jeegen.jee7.example;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: itemis AG
 Require-Bundle: org.jeegen.jee7;bundle-version="1.0.0"

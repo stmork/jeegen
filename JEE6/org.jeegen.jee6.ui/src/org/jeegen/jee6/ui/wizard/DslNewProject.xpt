@@ -1,0 +1,434 @@
+«IMPORT org::jeegen::jee6::ui::wizard»
+
+«EXTENSION org::jeegen::jee6::ui::wizard::paths»
+
+«DEFINE main FOR DslProjectInfo»
+«EXPAND model FOR this»
+«EXPAND workflow FOR this»
+«EXPAND build FOR this»
+«EXPAND readme FOR this»
+«ENDDEFINE»
+
+«DEFINE model FOR DslProjectInfo»
+«FILE getModelPath() + "/" + projectName + ".jee6"-»
+// Edit model here...
+application "«projectName»"  context "/«applicationName»" package «package(basePackage, applicationName)» development strict;
+persistence unit"«applicationName»DS" jndi "jdbc/«applicationName»DS";
+locale "de" default;
+
+entity UserInfo
+{
+	Text name;
+	Date birth;
+}
+
+process User
+{
+	UserInfo
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE workflow FOR DslProjectInfo»
+«FILE getSrcPath() + "/" + getWorkflow()-»
+module Generator
+
+var modelpath = "«getModelPath()»"
+var impldir   = "«getSrcPath()»"
+var srcdir    = "«getSrcGenPath()»"
+var xhtmldir  = "«getWebContentPath()»"
+var resdir    = "«getResGenPath()»"
+
+Workflow
+{
+/*
+	component = org.eclipse.emf.mwe.utils.DirectoryCleaner
+	{
+		directory = "${xhtmldir}"
+	}
+*/
+	component = @de.itemis.jee6.generator.DslGeneratorMWE auto-inject
+	{
+	}
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE build FOR DslProjectInfo»
+«IF mavenProject»
+«FILE "pom.xml"»
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>«this.basePackage»</groupId>
+	<artifactId>«this.projectName»</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<src-gen>${project.basedir}/src/generated/java</src-gen>
+		<res-gen>${project.basedir}/src/generated/resources</res-gen>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.jeegen</groupId>
+			<artifactId>org.jeegen.jee6.utils</artifactId>
+			<version>1.1.9</version>
+		</dependency>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>6.0</version>
+		</dependency>
+	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>jee-generator</id>
+			<url>https://projects.itemis.de/nexus/content/groups/ejb3/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
+	</repositories>
+
+	<build>
+		<finalName>«this.projectName»</finalName>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<generatedSourcesDirectory>${src-gen}</generatedSourcesDirectory>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.17</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>${src-gen}</directory>
+							<excludes>
+								<exclude>**/*.svn/**</exclude>
+								<exclude>**/*.git/**</exclude>
+							</excludes>
+						</fileset>
+						<fileset>
+							<directory>${res-gen}</directory>
+							<excludes>
+								<exclude>**/*.svn/**</exclude>
+								<exclude>**/*.git/**</exclude>
+							</excludes>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.fornax.toolsupport</groupId>
+				<artifactId>fornax-oaw-m2-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>run-workflow</goal>
+						</goals>
+						<configuration>
+							<workflowEngine>mwe2</workflowEngine>
+							<workflowDescriptor>src/main/java/Generator.mwe2</workflowDescriptor>
+							<jvmSettings>
+								<fork>true</fork>
+							</jvmSettings>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>properties-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>initialize</phase>
+						<goals>
+							<goal>read-project-properties</goal>
+						</goals>
+						<configuration>
+							<files>
+								<file>${user.home}/.jee6.properties</file>
+							</files>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.codehaus.mojo</groupId>
+										<artifactId>
+											properties-maven-plugin
+										</artifactId>
+										<versionRange>
+											[1.0-alpha-2,)
+										</versionRange>
+										<goals>
+											<goal>
+												read-project-properties
+											</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.fornax.toolsupport
+										</groupId>
+										<artifactId>
+											fornax-oaw-m2-plugin
+										</artifactId>
+										<versionRange>
+											[3.4.0,)
+										</versionRange>
+										<goals>
+											<goal>run-workflow</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>fornax</id>
+			<url>http://www.fornax-platform.org/m2/repository</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+</project>
+«ENDFILE»
+«ELSE»
+«FILE "build.xml"»
+<project name="«this.projectName»" default="package">
+	<property file="${user.home}/.jee6.properties" />
+	<property file="${basedir}/build.properties"/>
+
+	<property name="bin-path"             value="./bin"/>
+	<property name="src-path"             value="./«getSrcPath()»"/>
+	<property name="src-gen-path"         value="./«getSrcGenPath()»"/>
+	<property name="res-path"             value="./«getResPath()»"/>
+	<property name="res-gen-path"         value="./«getResGenPath()»"/>
+	<property name="web-path"             value="./«getWebContentPath()»"/>
+	<property name="doc-path"             value="../api"/>
+	<property name="lib-path"             value="${res-path}/WEB-INF/lib"/>
+
+	<property name="war"                  value="«applicationName».war"/>
+
+	<property name="eclipse.home"         value="/opt/eclipse"/>
+	<property name="eclipse.home.plugins" value="${eclipse.home}/plugins"/>
+	
+	<property name="jboss.home"           value="/opt/jboss-as-7.1.1.Final"/>
+	<property name="jboss.lib"            value="${jboss.home}/modules"/>
+	<property name="jboss.deploy"         value="${jboss.home}/standalone/deployments"/>
+
+	<property name="glassfish.home"       value="/opt/glassfish3"/>
+	<property name="glassfish.deploy"     value="${glassfish.home}/glassfish/domains/domain1/autodeploy/"/>
+
+	<!-- ==================================================== -->
+	<!--              Setting up classpaths                   -->
+	<!-- ==================================================== -->
+
+	<path id="logger.path">
+		<fileset dir="${web-path}">
+			<include name="**/*.jar"/>
+		</fileset>
+	</path>
+
+	<path id="compile.path">
+		<fileset dir="${jboss.lib}">
+			<include name="**/*.jar"/>
+			<exclude name="**/*jsf*1.2*.jar"/>
+		</fileset>
+		<path refid="logger.path"/>
+	</path>
+
+	<path id="generate.classpath">
+		<fileset dir="${eclipse.home.plugins}">
+			<include name="com.google.guava*.jar"/>
+			<include name="com.google.inject*.jar"/>
+			<include name="com.ibm.icu*.jar"/>
+			<include name="org.jeegen.jee6*.jar"/>
+			<include name="de.morknet.oaw.*.jar"/>
+			<include name="org.antlr.runtime*.jar"/>
+			<include name="org.apache.commons.cli*.jar"/>
+			<include name="org.apache.commons.logging*.jar"/>
+			<include name="org.apache.log4j*.jar"/>
+			<include name="org.eclipse.emf.*.jar"/>
+			<include name="org.eclipse.xpand*.jar"/>
+			<include name="org.eclipse.xtend*.jar"/>
+			<include name="org.eclipse.xtext*.jar"/>
+			<include name="org.eclipse.text*.jar"/>
+			<include name="org.eclipse.jdt*.jar"/>
+			<include name="org.eclipse.equi*.jar"/>
+			<include name="javax.inject*.jar"/>
+			<include name="stringtemplate*.jar"/>
+			<include name="org.objectweb.asm_5.0.1*.jar"/>
+
+			<exclude name="**/*source*.jar"/>
+			<exclude name="**/*src*.jar"/>
+			<exclude name="**/*editor*.jar"/>
+		</fileset>
+		<pathelement path="${src-path}" />
+	</path>
+
+	<!-- ==================================================== -->
+	<!--              Setting up build targets                -->
+	<!-- ==================================================== -->
+
+	<target name="-version">
+		<first id="version-file">
+			<fileset dir="${basedir}/${src-path}" includes="**/version.properties" />
+		</first>
+		<property file="${toString:version-file}" />
+		<echo message="Version: ${version.major}.${version.minor}.${version.patch}"/>
+	</target>
+
+	<target name="clean">
+		<delete file="${war}" />
+		<delete dir="${bin-path}" />
+	</target>
+
+	<target name="generate">
+		<echo message="${eclipse.home}"/>
+		<java classname="org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher" classpathref="generate.classpath" fork="true" failonerror="true">
+			<arg value="${src-path}/«getWorkflow()»"/>
+		</java>
+	</target>
+
+	<target name="compile" depends="-version">
+		<mkdir dir="${bin-path}"/>
+		<javac srcdir="${src-path}:${src-gen-path}" destdir="${bin-path}" debug="true" includeantruntime="false">
+			<classpath refid="compile.path"/>
+		</javac>
+	</target>
+
+	<target name="javadoc" depends="compile">
+		<javadoc access="package"
+				classpathref="compile.path"
+				sourcepath="${src-path}:${src-gen-path}"
+				destdir="${doc-path}"
+				author="true"
+				splitindex="true"
+				use="true"
+				failonerror="true"
+				docencoding="UTF-8"
+				charset="UTF-8"
+				windowtitle="«this.projectName» classes">
+			<doctitle><![CDATA[<h1>«this.projectName» classes</h1>]]></doctitle>
+			<bottom><![CDATA[<i>Copyright &#169; Steffen A. Mork, Dominik Pieper]]></bottom>
+		</javadoc>
+	</target>
+
+	<target name="package" depends="compile">
+		<jar destfile="${war}">
+			<zipfileset dir="${bin-path}" prefix="WEB-INF/classes">
+				<include name="**/*.class"/>
+			</zipfileset>
+			<zipfileset dir="${src-path}" prefix="WEB-INF/classes">
+				<include name="**/*.xml"/>
+				<include name="**/*.properties"/>
+			</zipfileset>
+			<zipfileset dir="${src-gen-path}" prefix="WEB-INF/classes">
+				<include name="**/*.xml"/>
+				<include name="**/*.properties"/>
+			</zipfileset>
+			<zipfileset dir="${web-path}"/>
+			<zipfileset dir="${res-path}"/>
+			<zipfileset dir="${res-gen-path}"/>
+		</jar>
+	</target>
+
+	<target name="deploy" depends="package">
+		<copy file="${war}" todir="${jboss.deploy}" />
+		<copy file="${war}" todir="${glassfish.deploy}" />
+	</target>
+
+	<target name="undeploy">
+		<delete file="${jboss.deploy}/${war}" />
+		<delete file="${glassfish.deploy}/${war}" />
+	</target>
+
+	<target name="round-trip" depends="generate,deploy"/>
+</project>
+«ENDFILE»
+«ENDIF»
+«ENDDEFINE»
+
+«DEFINE readme FOR DslProjectInfo»
+«FILE "LiesMich.txt"»
+Für das Kompilieren müssen folgende Bedingungen erfüllt sein:
+1. Eine Runtime-Umgebung muss eingerichtet werden. Unter "Window -> Preferences -> Server ->
+   Runtime Environment" kann eine eigerichtet werden. Im erzeugten Projekt muss das unter
+   "Project -> Properties -> Java Build Path -> Library -> Add Library" hinzugefügt werden.
+2. Es muss eine Data Source auf dem Application Server eingerichtet werden. Diese muss
+   "jdbc/«applicationName»DS" benannt werden.
+3. Es sollten die build.properties angepasst werden. Folgende Properties sollten gesetzt werden:
+   a) jboss.home
+   b) glassfish.home
+   Je nach verwendetem Application Server können die Home-Variablen weggelassen werden, wenn in
+   der build.xml die entsprechenden Tasks angepasst werden.
+   
+Abschließend: Bitte vergessen Sie nicht, die generierten Dateien in den Pfaden «getSrcPath()» und
+«getResPath()» der Versionsverwaltung hinzuzufügen!
+«ENDFILE»
+«FILE "ReadMe.txt"»
+For compiling the source you have to:
+1. configure your server runtime environment. You can do this under "Window -> Preferences ->
+   Server -> Runtime Environment". You have to add this environment in your newly created project:
+   "Project -> Properties -> Java Build Path -> Library -> Add Library".
+2. You have to configure a data source inside your application server. This must be named like
+   this: "jdbc/«applicationName»DS".
+3. You should also configure your build.properties. You have to add the following properties:
+   a) jboss.home
+   b) glassfish.home
+   Depending on your used application server you can remove those variables and you can adjust your
+   build targets inside the build.xml file.
+   
+Finally: Do not forget to add all generated files inside «getSrcPath()» and «getResPath()» to source control!
+«ENDFILE»
+«ENDDEFINE»

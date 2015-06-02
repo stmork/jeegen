@@ -8,7 +8,7 @@ var	xhtmldir  = "src/main/resources"
 
 Workflow
 {
-	component = @de.itemis.jee7.generator.DslGeneratorMWE auto-inject
+	component = @org.jeegen.jee7.generator.DslGeneratorMWE auto-inject
 	{
 	}
 }
