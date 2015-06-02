@@ -47,7 +47,7 @@ Workflow
 		directory = "${xhtmldir}"
 	}
 */
-	component = @de.itemis.jee7.generator.DslGeneratorMWE auto-inject
+	component = @org.jeegen.jee7.generator.DslGeneratorMWE auto-inject
 	{
 	}
 }
@@ -84,11 +84,8 @@ Workflow
 
 	<repositories>
 		<repository>
-			<id>jee-generator</id>
-			<url>https://projects.itemis.de/nexus/content/groups/ejb3/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
+			<id>jeegen.sf.net</id>
+			<url>http://www.jee-generator.org/maven/</url>
 		</repository>
 	</repositories>
 
