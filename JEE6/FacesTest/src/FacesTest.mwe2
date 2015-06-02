@@ -8,7 +8,7 @@ var xhtmldir="WebContent"
 
 Workflow
 {
-	component = @de.itemis.jee6.generator.DslGeneratorMWE auto-inject
+	component = @org.jeegen.jee6.generator.DslGeneratorMWE auto-inject
 	{
 		
 	}

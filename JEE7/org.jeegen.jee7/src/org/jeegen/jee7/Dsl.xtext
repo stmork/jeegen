@@ -1,0 +1,64 @@
+grammar org.jeegen.jee7.Dsl with org.eclipse.xtext.common.Terminals
+
+generate jee7 "http://org.jee-generator.org/jee7/Dsl"
+
+import 'http://www.eclipse.org/emf/2002/Ecore' as ecore
+
+Model:	'application' name=STRING 'context' path=STRING 'package' package=PACKAGED_ID ('timeout' timeout=INT)? (state=ProjectState)? (strict?='strict' )? ';'
+	(options   += Option)*
+	(entities  += Entity)*
+	(processes += Process)*;
+
+enum ProjectState : Development='development'|Integration='integration'|Productive='productive';
+enum DBType : MySQL|DB2|Oracle;
+
+Option:			(Persistence|Security|Mail|Locale|Param) ';';
+Security:		'security' 'domain' jaas=STRING (clustered?='clustered')?;
+Persistence:	'persistence' 'unit' name=STRING 'jndi' jndi=STRING (cacheable?='cacheable' )? (type=DBType)?;
+Mail:			'smtp' jndi=STRING;
+Locale:			'locale' language=STRING (country=STRING)? (home?='default')?;
+Param:			'param' name=PACKAGED_ID '=' value=STRING ('description' description=STRING)?;
+
+/* Types */
+Attribute:	(Simple|Reference) ';';
+
+Simple:		(Date|Timestamp|Boolean|Integer|Number|IdAttribute|Blob|Clob) name=ID (transient?='transient')?;
+
+IdAttribute:	(Text|Email) (id?='id')?;
+
+Date:		{Date}'Date';
+Timestamp:	{Timestamp}'Timestamp' (auto?='auto'|update?='update')?;
+Boolean:	{Boolean}'Boolean';
+Integer:	{Integer}'Int';
+Number:		{Number}'Number';
+Text:		{Text}'Text';
+Email:		{Email}'Email';
+Blob:		{Blob}'Blob';
+Clob:		{Clob}'Clob';
+
+Reference:	(History|EntityRef|OptionRef);
+History:	'History' type=[Table|ID] name=ID;
+EntityRef:	'Entity'  type=[Entity|ID] (many?='[]')? name=ID;
+OptionRef:	'Option'  type=[Options|ID] name=ID;
+
+/* Entities */
+Entity:		(Table|Options) ('persistence' 'unit' persistence = [Persistence|STRING])?;
+
+Table:		'entity'  name=ID (filterable?='filterable')? (cloneable?='cloneable')? '{' (types += Attribute)+ '}';
+Options:	'options' name=ID (filterable?='filterable')? (cloneable?='cloneable')?
+	('editable' '{' (types += Attribute)+ '}'| '{' keys+=STRING ( ',' keys += STRING)*  '}');
+
+Process:	'process' name=ID ('roles' roles+=STRING (',' roles+=STRING)* )?
+	'{'
+		(properties += Property)*
+		entities += [Entity|ID] (',' entities += [Entity|ID])*
+	'}';
+
+Property: (TypeProp|TextProp|IntegerProp|BooleanProp) jndi=STRING ('ref' original=STRING)? ';';
+
+TypeProp:		{TypeProp} 'Type' type=PACKAGED_ID;
+TextProp:		{TextProp}'Text' ('default' value=STRING)?;
+IntegerProp:	{IntegerProp}'Integer' ('default' value=INT)?;
+BooleanProp:	{BooleanProp}'Boolean' ('default' value=('true'|'false'))?;
+
+PACKAGED_ID : ID ('.' ID)* ;

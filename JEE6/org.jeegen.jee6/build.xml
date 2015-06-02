@@ -84,7 +84,7 @@
 	<target name="generate" depends="clean,undeploy">
 		<echo message="Eclipse: ${eclipse.home}"/>
 		<java classname="org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher" classpathref="generate.classpath" fork="true">
-			<arg value="${src-path}/de/itemis/jee6/GenerateDsl.mwe2"/>
+			<arg value="${src-path}/org/jeegen/jee6/GenerateDsl.mwe2"/>
 		</java>
 	</target>
 

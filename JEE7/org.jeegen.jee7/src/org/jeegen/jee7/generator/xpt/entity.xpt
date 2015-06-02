@@ -1,0 +1,622 @@
+«REM»
+«###»	Copyright (C) 2015 Steffen A. Mork, Dominik Pieper
+«###»	$Id$
+«ENDREM»
+
+«IMPORT jee7»
+
+«EXTENSION org::jeegen::jee7::generator::ext::types»
+«EXTENSION org::jeegen::jee7::generator::ext::naming»
+«EXTENSION org::jeegen::jee7::generator::ext::entity»
+
+«DEFINE Main FOR Model»
+«EXPAND AbstractEntity FOREACH entities»
+«EXPAND Implementation FOREACH entities»
+«ENDDEFINE»
+
+«REM»  Abstract entity bean if any trans  «ENDREM»
+«DEFINE AbstractEntity FOR Entity»
+«FILE abstractFilename(this)»
+«LET getId() AS id»
+«EXPAND utility::HeaderAbstract»
+package «packageOf(this)»;
+
+import java.io.Serializable;
+import java.text.MessageFormat;
+import javax.persistence.*;
+
+«IF (id == null) && (Options.isInstance(this))»
+«LET (Options)this AS options»
+«IF options.keys.size > 0»
+import java.util.Locale;
+«ENDIF»
+«ENDLET»
+«ENDIF»
+
+«IF hasList(this)»
+import java.util.List;
+«ENDIF»
+«FOREACH packages() AS pkg»
+import «pkg»;
+«ENDFOREACH»
+
+/**
+ * This class implements the «typeOf()» entity bean. It contains the following properties:
+ * <table>
+ * <tr><th align="left">Model type</th><th align="left">Java type</th><th align="left">Property name</th></tr>
+«FOREACH types AS property-»
+ * <tr><td>«property.metaType.toString()»</td><td>«IF Reference.isInstance(property)»{@link «typeOf(property)»}«ELSE»«typeOf(property)»«ENDIF»</td><td>«property.name»</td></tr>
+«ENDFOREACH-»
+ * </table>
+ */
+«IF isAbstract()»
+@MappedSuperclass
+abstract
+«ELSE»
+@Entity
+@Table(name="«typeOf(this)»")
+«IF Options.isInstance(this)»
+@Cacheable
+«ENDIF»
+«ENDIF»
+public class «abstractOf(this)» implements Serializable
+«IF cloneable»
+, Cloneable
+«ENDIF»
+«IF filterable»
+, org.jeegen.jee7.util.Filterable
+«ENDIF»
+{
+	private static final long serialVersionUID = 1L;
+
+«EXPAND Id(id)»
+«EXPAND GetterSetter»
+«EXPAND Automatic»
+«EXPAND Cloneable(id)»
+«EXPAND Sorting(id)»
+«EXPAND toString(id)»
+}
+«ENDLET»
+«ENDFILE»
+«ENDDEFINE»
+
+
+«REM»  Implementation of abstract entity bean if any  «ENDREM»
+«DEFINE Implementation FOR Entity»
+«IF isAbstract()»
+«FILE filename(this) IMPL»
+«EXPAND utility::HeaderImpl»
+package «packageOf(this)»;
+
+import javax.persistence.*;
+«IF filterable»
+import java.util.Locale;
+«ENDIF»
+
+/**
+ * This class implements the «typeOf()» entity bean,
+ */
+@Entity
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@Table(name="«typeOf(this)»")
+«IF Options.isInstance(this)»
+@Cacheable
+«ENDIF»
+public class «typeOf()» extends «abstractOf()»
+{
+	private static final long serialVersionUID = 1L;
+
+«FOREACH types.select(e|isTransient(e)) AS property»
+	/**
+	 * This method is a transient getter of the virtual property «nameOf(property)».
+	 *
+	 * @return The computed value for property «nameOf(property)».
+	 */
+	@Transient
+	@Override
+	public «typeOf(property)» «getterOf(property)»()
+	{
+		// TODO: Implement!
+		throw new IllegalStateException("«fqTypeOf()».«getterOf(property)»() not implemented!");
+	}
+«ENDFOREACH»
+«IF filterable»
+	/**
+	 * This method should filter entities with a given pattern and Locale.
+	 *
+	 * @param pattern The pattern to search for.
+	 * @param locale The {@link Locale} for {@link String} comparison.
+	 * @return If the implemented instance meet the search pattern.
+	 * @see org.jeegen.jee7.util.Filtarable
+	 */
+	@Override
+	public boolean filter(final String pattern, final Locale locale) {
+		// TODO: Auto-generated method stub
+		return false;
+	}
+«ENDIF»
+}
+«ENDFILE»
+«ENDIF»
+«ENDDEFINE»
+
+
+
+«REM»  Abstract entity ID  «ENDREM»
+«DEFINE Id(Attribute id) FOR Entity»
+«ERROR "Abstract call of ID generation!"»
+«ENDDEFINE»
+
+
+
+«REM»  Option ID with enumeration  «ENDREM»
+«DEFINE Id(Attribute id) FOR Options»
+«IF keys.size > 0»
+	/**
+	 * This enum lists all available enum states.
+	 */
+	public static enum «enumOf(this)»
+	{
+«FOREACH keys AS key SEPARATOR ","»
+		«enumOf(key)»
+«ENDFOREACH»
+	}
+
+	/**
+	 * The default constructor intentionally do nothing!
+	 */
+	public «abstractOf()»()
+	{
+	}
+
+«IF id == null»
+	/**
+	 * This constructor initializes this instance with a «enumOf(this)» state type.
+	 *
+	 * @param type The initializing «enumOf(this)» type.
+	 */
+	public «abstractOf()»(final «enumOf(this)» type)
+	{
+		this(type, type.name().replaceAll("_", ".").toLowerCase(Locale.ROOT));
+	}
+
+	/**
+	 * This constructor initializes this instance with the enumeration and
+	 * the corresponding key in the resource bundle for clear text purposes.
+	 *
+	 * @param type The enumeration of this instance.
+	 * @param bundleKey The corresponding resource bundle key.
+	 */
+	public «abstractOf()»(final «enumOf(this)» type, final String bundleKey)
+	{
+		this(type.ordinal(), bundleKey);
+	}
+
+	/**
+	 * This constructor initializes this instance with the ordinal of this enumeration and
+	 * the corresponding key in the resource bundle for clear text purposes.
+	 *
+	 * @param id The enumeration of this instance.
+	 * @param bundleKey The corresponding resource bundle key.
+	 */
+	public «abstractOf()»(final int id, final String bundleKey)
+	{
+		setId(id);
+		setBundleKey(bundleKey);
+	}
+
+	private int    id;
+
+	/**
+	 * This getter returns the ordinal value of this enumeration.
+	 *
+	 * @return The ordinal of this enumeration.
+	 */
+	@Id
+	public int getId() {
+		return this.id;
+	}
+
+	/**
+	 * This setter sets the ordinal value of this enumeration.
+	 *
+	 * @param id The ordinal value of this enumeration item.
+	 */
+	public void setId(final int id) {
+		this.id = id;
+	}
+
+	/**
+	 * This getter returns the ordinal value of this enumeration item.
+	 *
+	 * @return The ordinal value of this enumeration item.
+	 */
+	@Transient
+	public «enumOf(this)» get«enumOf(this)»()
+	{
+		return «enumOf(this)».values()[getId()];
+	}
+«ELSE»
+	/**
+	 * This constructor initializes this instance with the ordinal of this enumeration and
+	 * the corresponding key in the resource bundle for clear text purposes.
+	 *
+	 * @param «nameOf(id)» The enumeration of this instance.
+	 * @param bundleKey The corresponding resource bundle key.
+	 */
+	public «abstractOf()»(final «typeOf(id)» «nameOf(id)», final String bundleKey)
+	{
+		setId(«nameOf(id)»);
+		setKey(bundleKey);
+	}
+«ENDIF»
+	private String bundleKey;
+
+	/**
+	 * This getter returns the corresponing resource bundle key of this enumeration item.
+	 *
+	 * @return The resource bundle key of this enumeration item.
+	 */
+	@Column
+	@javax.validation.constraints.NotNull
+	public String getBundleKey() {
+		return this.bundleKey;
+	}
+
+	/**
+	 * This setter sets the resource bundle key for this enumeration item.
+	 *
+	 * @param bundleKey The resource key for this enumeration item.
+	 */
+	public void setBundleKey(final String bundleKey) {
+		this.bundleKey = bundleKey;
+	}
+«ELSE»
+«IF id == null»
+	private int id;
+
+	/**
+	 * This getter returns the ID of this entity bean. The ID of this entity bean is automatically
+	 * generated using the {@link TableGenerator} feature of the container.
+	 *
+	 * @return The ID of this entity bean.
+	 */
+	@Id
+	@TableGenerator(
+			name="«typeOf(this)»IDs", table = "IDs",
+			pkColumnName = "id", valueColumnName = "value", pkColumnValue = "«typeOf(this)»",
+			initialValue = 1, allocationSize = 10)
+	@GeneratedValue(strategy=GenerationType.TABLE, generator="«typeOf(this)»IDs")
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * This setter sets the ID of this entity bean. Generally its only used by the JEE7 container.
+	 *
+	 * @param id The ID to set.
+	 */
+	public void setId(final int id) {
+		this.id = id;
+	}
+«ENDIF»
+«ENDIF»
+«ENDDEFINE»
+
+
+
+«REM»  Entity ID  «ENDREM»
+«DEFINE Id(Attribute id) FOR Table»
+«IF id == null»
+	private int id;
+
+	/**
+	 * This getter returns the ID of this entity bean. The ID of this entity bean is automatically
+	 * generated using the {@link TableGenerator} feature of the container.
+	 *
+	 * @return The ID of this entity bean.
+	 */
+	@Id
+	@TableGenerator(
+			name="«typeOf(this)»IDs", table = "IDs",
+			pkColumnName = "id", valueColumnName = "value", pkColumnValue = "«typeOf(this)»",
+			initialValue = 1, allocationSize = 10)
+	@GeneratedValue(strategy=GenerationType.TABLE, generator="«typeOf(this)»IDs")
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * This setter sets the ID of this entity bean. Generally its only used by the JEE7 container.
+	 *
+	 * @param id The ID to set.
+	 */
+	public void setId(final int id) {
+		this.id = id;
+	}
+«ENDIF»
+«ENDDEFINE»
+
+«REM»  Getter/setter for usual property  «ENDREM»
+«DEFINE Property FOR Attribute»
+«IF isTransient()»
+	/**
+	 * This transient getter supplies a way for computing a value not available in the database.
+	 *
+	 * @return  «relationOfType()» The computed value.
+	 */
+	@Transient
+	public abstract «relationOfType()» «getterOf()»();
+«ELSE»
+	private «relationOfType()» «nameOf()» «defaultOf()»;
+
+«IF isId()»
+	/**
+	 * This getter returns the ID of this entity bean.
+	 *
+	 * @return The «nameOf()» property value.
+	 */
+	@Id
+«ELSE»
+	/**
+	 * This getter returns the value of the «nameOf()» property.
+	 *
+	 * @return The «nameOf()» property value.
+	 */
+	«annotationOf()»
+«ENDIF»
+	public «relationOfType()» «getterOf()»()
+	{
+		return this.«nameOf()»;
+	}
+
+	/**
+	 * This setter sets the value of the «nameOf()» property.
+	 *
+	 * @param «nameOf()» The new property value.
+	 */
+	public void «setterOf()»(final «relationOfType()» «nameOf()»)
+	{
+		this.«nameOf()» = «nameOf()»;
+	}
+«ENDIF»
+«ENDDEFINE»
+
+
+
+«REM»  Backward 1:n relation (so bidirectional)  «ENDREM»
+«DEFINE Property FOR Entity»
+	private «typeOf()» «nameOf()»;
+
+	/**
+	 * This getter returns the value of the «nameOf()» n:1 relation.
+	 *
+	 * @return The «nameOf()» n:1 relation.
+	 * @see «typeOf()»
+	 */
+	@ManyToOne
+	public «typeOf()» «getterOf()»()
+	{
+		return this.«nameOf()»;
+	}
+
+	/**
+	 * This setter sets the value of the «nameOf()» n:1 relation.
+	 *
+	 * @param «nameOf()» The new n:1 relation.
+	 * @see «typeOf()»
+	 */
+	public void «setterOf()»(final «typeOf()» «nameOf()»)
+	{
+		this.«nameOf()» = «nameOf()»;
+	}
+«ENDDEFINE»
+
+
+
+«REM»  Getter/setter for usual properties   «ENDREM»
+«DEFINE GetterSetter FOR Entity»
+«EXPAND Property FOREACH types»
+«EXPAND Property FOREACH getEntityReferences()»
+«LET getHistory() AS history»
+«IF history != null»
+	private «typeOf(history)» last;
+	
+	/**
+	 * This method returns the newest entry of the «typeOf(history)» list.
+	 *
+	 * @return «typeOf(history)» The last history entry.
+	 * @see «typeOf()»
+	 */
+	@OneToOne
+	public «typeOf(history)» getLast()
+	{
+		return this.last;
+	}
+
+	/**
+	 * This method sets the newest history entry of the «typeOf(history)» list.
+	 *
+	 * @param last The new history entry.
+	 * @see «typeOf()»
+	 */
+	public void setLast(final «typeOf(history)» last)
+	{
+		this.last = last;
+	}
+«ENDIF»
+«ENDLET»
+«ENDDEFINE»
+
+
+«REM»  Automatic  Update  «ENDREM»
+«DEFINE Automatic FOR Entity»
+«LET types.typeSelect(Timestamp).select(e|e.auto) AS auto»
+«IF auto.size > 0»
+	/**
+	 * This method is called before persisting this entity bean. It sets
+	 * the «FOREACH auto AS date SEPARATOR " "»«nameOf(date)»«ENDFOREACH»
+	 * properties to the actual timepoint.
+	 *
+	 * @see «typeOf()»
+	 */
+	@PrePersist
+	public void prePersist()
+	{
+«FOREACH auto AS date»
+		if («getterOf(date)»() == null)
+		{
+			«setterOf(date)»(new Date());
+		}
+«ENDFOREACH»
+	}
+«ENDIF»
+«ENDLET»
+
+«LET types.typeSelect(Timestamp).select(e|e.update) AS update»
+«IF update.size > 0»
+	/**
+	 * This method is called before updating this entity bean. It sets
+	 * the «FOREACH update AS date SEPARATOR " "»«nameOf(date)»«ENDFOREACH»
+	 * properties to the actual timepoint.
+	 *
+	 * @see «typeOf()»
+	 */
+	@PreUpdate
+	public void preUpdate()
+	{
+«FOREACH update AS date»
+		«setterOf(date)»(new Date());
+«ENDFOREACH»
+	}
+«ENDIF»
+«ENDLET»
+«ENDDEFINE»
+
+
+
+«REM»  Entity sorting do intentionally nothing  «ENDREM»
+«DEFINE Sorting(Attribute id) FOR Entity»
+«ENDDEFINE»
+
+
+«REM»  Options sorting  «ENDREM»
+«DEFINE Sorting(Attribute id) FOR Options»
+	/**
+	 * This method overrides the {@link Object#hashCode()} method to handle
+	 * correctly the JSF converter for HTML selection boxes. It returns the ID
+	 * of this bean in case its defined otherwise the default implementation of
+	 * this method. This method is thought to work correctly with all collection
+	 * classes of package java.util.
+	 *
+	 * @return The hash code of this entity bean.
+	 */
+	@Override
+	public int hashCode()
+	{
+«IF id == null»
+«IF keys.size == 0»
+		final int hash = getId();
+		
+		return hash == 0 ? super.hashCode() : hash;
+«ELSE»
+		return getId();
+«ENDIF»
+«ELSE»
+		final String object = «getterOf(id)»(); 
+		return object != null ? object.hashCode() : 0;
+«ENDIF»
+	}
+
+	/**
+	 * This method overrides the {@link Object#equals(Object)} method to handle
+	 * correctly the JSF converter for HTML selection boxes. The comparing object
+	 * must be of the same type and may not be null.
+«IF id == null»
+	 * It uses {@link Object#hashCode()} for comparing instances. 
+«ELSE»
+	 * It uses the {@link String} ID for comparison.
+«ENDIF»
+	 * This method is thought to work correctly with all collection
+	 * classes of package java.util.
+	 *
+	 * @return The hash code of this entity bean.
+	 */
+	@Override
+	public boolean equals(final Object object)
+	{
+		if ((object != null) && (object instanceof «abstractOf(this)»))
+		{
+			final «abstractOf(this)» option = («abstractOf(this)»)object;
+«IF id == null»
+			return hashCode() == option.hashCode();
+«ELSE»
+			return «getterOf(id)»().equals(option.«getterOf(id)»());
+«ENDIF»
+		}
+		return false;
+	}
+«ENDDEFINE»
+
+«DEFINE Cloneable(Attribute id) FOR Entity»
+«IF cloneable»
+	/**
+	 * This method clones this instance and initializes the ID to zero.
+	 *
+	 * @return A clone of this instance and ID set to zero or null.
+	 * see #clone()
+	 */ 
+	@Override
+	public «typeOf(this)» clone()
+	{
+		try
+		{
+			«typeOf(this)» «nameOf(this)» = («typeOf(this)»)super.clone();
+«IF id == null»
+			«nameOf(this)».setId(0);
+«ELSE»
+			«nameOf(this)».«setterOf(id)»(null);
+«ENDIF»
+«LET types.typeSelect(Timestamp) AS stamps»
+«FOREACH stamps.select(e|e.auto) AS auto»
+			«nameOf(this)».«setterOf(auto)»(null);
+«ENDFOREACH»
+«FOREACH stamps.select(e|e.update) AS update»
+			«nameOf(this)».«setterOf(update)»(null);
+«ENDFOREACH»
+«ENDLET»
+			return «nameOf(this)»;
+		}
+		catch (CloneNotSupportedException cnse)
+		{
+			return null;
+		}
+	}
+«ENDIF»
+«ENDDEFINE»
+
+
+
+«REM»  toString()  «ENDREM»
+«DEFINE toString(Attribute id) FOR Entity»
+	/**
+	 * This overrided method returns a summary of all properties inside this bean.
+	 *
+	 * @return Summary of all property values.
+	 */
+	@Override
+	public String toString()
+	{
+		StringBuffer buffer = new StringBuffer();
+«FOREACH types.typeSelect(Simple).reject(s|isId(s) || Blob.isInstance(s)) AS a»
+		buffer.append(" «nameOf(a)»=").append(«getterOf(a)»());
+«ENDFOREACH»
+		return MessageFormat.format("[«typeOf()»:{0}]{1}",
+«IF id == null»
+			getId(),
+«ELSE»
+			«getterOf(id)»(),
+«ENDIF»
+			buffer);
+	}
+«ENDDEFINE»

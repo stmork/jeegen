@@ -1,0 +1,134 @@
+import jee7;
+
+extension org::jeegen::jee7::generator::ext::model;
+extension org::jeegen::jee7::generator::ext::types;
+
+String index(Model m) :
+	"index.xhtml";
+
+String layout(Model m) :
+	"layout.xhtml";
+
+String login(Model m) :
+	"login.xhtml";
+
+String logout(Model m) :
+	"logout.xhtml";
+
+String menu(Model m) :
+	"menu.xhtml";
+
+String css(Model m) :
+	"resources/css/display.css";
+
+String navigation(Process p) :
+	"NAV_" + p.name.toUpperCase();
+
+String navigation(Process p, Entity e) :
+	navigation(p) + "_" + e.name.toUpperCase();
+
+String navigation(Process p, EntityRef er) :
+	navigation(p, er.type);
+
+String index(Process p) :
+	prefixOf(p) + "/index.xhtml";
+
+String index(Entity e) :
+	prefixOf(e) + ".xhtml";
+
+String index(Process p, Entity e) :
+	prefixOf(p) + "/" + index(e); 
+
+String sessionUri(Model m) :
+	sessionController(m).toFirstLower();
+
+Set[Entity] getHistoryEntities(Model m) :
+	m.eAllContents.typeSelect(History).type;
+
+Boolean isUi(Options o) :
+	o.keys.size == 0;
+
+Boolean isUi(Table t) :
+	!getHistoryEntities(getModel(t)).contains(t);
+
+Boolean isUi(Entity e) :
+	true;
+
+Set[Entity] getUiEntities(Process p) :
+//	p.entities.select(e|isUi(e));
+	JAVA org.jeegen.jee7.generator.ext.ExtensionHelper.getUiEntities(org.jeegen.jee7.jee7.Process);
+
+private List[History] getHistory(List[Attribute] a) :
+	a.typeSelect(History);
+
+cached Set[EntityRef] getManyEntites(List[Attribute] a) :
+	a.typeSelect(EntityRef).select(e|isMany(e));
+
+cached Set[Entity] getManyEntitiesWithHistory(List[Entity] entities): 
+//	getManyEntites(entities.types).type.union(getHistory(entities.types).type);
+	JAVA org.jeegen.jee7.generator.ext.ExtensionHelper.getManyEntities(java.util.List);
+
+
+Set[Entity] getEntitiesWithHistory(List[Entity] entities) :
+//	entities.union(getHistory(entities.types).type).union(getManyEntites(entities.types).type);
+	JAVA org.jeegen.jee7.generator.ext.ExtensionHelper.getManyEntities(java.util.List);
+
+private Boolean isListAttribute(Text t) :
+	!t.transient;
+
+private Boolean isListAttribute(Blob r) :
+	false;
+
+private Boolean isListAttribute(Clob r) :
+	true;
+
+private Boolean isListAttribute(OptionRef r) :
+	true;
+
+private Boolean isListAttribute(Reference r) :
+	false;
+
+private Boolean isListAttribute(Attribute a) :
+	true;
+
+private Boolean isMaskAttribute(Timestamp ts) :
+	!(ts.auto || ts.update);
+
+private Boolean isMaskAttribute(Attribute a) :
+	isListAttribute(a);
+
+List[Attribute] getMaskAttributes(Entity e) :
+	e.types.select(e|isMaskAttribute(e));
+
+List[Attribute] getListAttributes(Entity e) :
+	e.types.select(e|isListAttribute(e));
+
+List[Attribute] getMultipleAttributes(Entity e) :
+	e.types.select(e|isMany(e));
+
+String getClass(Text t) :
+	"left";
+
+String getClass(Reference r) :
+	"left";
+
+String getClass(jee7::Integer i) :
+	"right";
+
+String getClass(Number n) :
+	"right";
+
+String getClass(Boolean b) :
+	"center";
+
+String getClass(Email a) :
+	"left";
+
+String getClass(Attribute a) :
+	"center";
+
+String labelClass(Attribute a) :
+	"mid";
+
+String labelClass(Clob a) :
+	"top";

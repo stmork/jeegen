@@ -1,0 +1,976 @@
+«REM»
+«###»	Copyright (C) 2015 Steffen A. Mork, Dominik Pieper
+«###»	$Id$
+«ENDREM»
+
+«IMPORT jee7»
+
+«EXTENSION org::jeegen::jee7::generator::ext::bundle»
+«EXTENSION org::jeegen::jee7::generator::ext::entity»
+«EXTENSION org::jeegen::jee7::generator::ext::model»
+«EXTENSION org::jeegen::jee7::generator::ext::types»
+«EXTENSION org::jeegen::jee7::generator::ext::naming»
+«EXTENSION org::jeegen::jee7::generator::ext::converter»
+«EXTENSION org::jeegen::jee7::generator::ext::dao»
+«EXTENSION org::jeegen::jee7::generator::ext::ui»
+
+«DEFINE Main FOR Model»
+«EXPAND AbstractProcessHandler FOREACH processes»
+«EXPAND AbstractModelHandler»
+«EXPAND ProcessHandler FOREACH processes»
+«ENDDEFINE»
+
+«DEFINE ProcessHandler FOR Process»
+«FILE handlerFilename(this) IMPL»
+«LET getUiEntities().sortBy(e|e.name) AS entities»
+«EXPAND utility::HeaderImpl»
+package «handlerPackageOf(this)»;
+
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
+import org.jeegen.jee7.util.Profiled;
+«IF entities.size > 0»
+import java.util.List;
+«ENDIF»
+«FOREACH getEntitiesWithHistory(entities).sortBy(e|e.name) AS entity-»
+import «fqTypeOf(entity)»;
+«ENDFOREACH»
+
+/**
+ * This managed bean class implements the action handling for the following entity beans:
+ * <ul>
+«FOREACH getEntitiesWithHistory(entities).sortBy(e|e.name) AS entity-»
+ * <li>{@link «typeOf(entity)»}</li>
+«ENDFOREACH-»
+ * </ul>
+ */
+@Named
+@SessionScoped
+@Transactional(value=TxType.REQUIRED)
+@Profiled
+public class «handlerOf(this)» extends «abstractHandlerOf(this)»
+{
+	private static final long serialVersionUID = 1L;
+
+«FOREACH getEntitiesWithHistory(entities).sortBy(e|e.name) AS entity-»
+	private static final String «navigation(this, entity)» = "«index(entity)»";
+«ENDFOREACH»
+«FOREACH entities.sortBy(e|e.name) AS entity»
+
+	/*********************************************
+	 * «typeOf(entity)» «nameOf(entity)»
+	 *********************************************/
+«IF this.entities.contains(entity)»
+
+	/**
+	 * This method returns a {@link List} of all {@link «typeOf(entity)»} beans.
+	 *
+	 * @return {@link List} of all {@link «typeOf(entity)»} beans.
+	 * @see «fqAbstractDaoOf()»#«listOf(entity)»()
+	 */
+«IF isAbstract()»
+	@Override
+«ENDIF»
+	public List<«typeOf(entity)»> «listOf(entity)»()
+	{
+		final List<«typeOf(entity)»> list = dao.«listOf(entity)»();
+
+		return list;
+	} 
+
+	/**
+	 * This method adds a new {@link «typeOf(entity)»} bean.
+	 *
+	 * @param «nameOf(entity)» The new {@link «typeOf(entity)»} bean to persist.
+	 * @return The outcome where to go on success.
+	 * @see «fqAbstractDaoOf()»#«adder(entity)»(«typeOf(entity)»)
+	 */
+«IF isAbstract()»
+	@Override
+«ENDIF»
+	public String «createEntity(entity)»(final «typeOf(entity)» «nameOf(entity)») {
+		dao.«adder(entity)»(«nameOf(entity)»);
+		«setterOf(entity)»(new «typeOf(entity)»());
+		return «navigation(this, entity)»;
+	}
+
+	/**
+	 * This method sets the given {@link «typeOf(entity)»} bean for editing.
+	 *
+	 * @param «nameOf(entity)» The {@link «typeOf(entity)»} bean to edit.
+	 * @return The outcome where to go on success.
+	 */
+«IF isAbstract()»
+	@Override
+«ENDIF»
+	public String «changeEntity(entity)»(final «typeOf(entity)» «nameOf(entity)») {
+		«setterOf(entity)»(«nameOf(entity)»);
+		return «navigation(this, entity)»;
+	}
+
+	/**
+	 * This method removes the given {@link «typeOf(entity)»} bean.
+	 *
+	 * @param «nameOf(entity)» The {@link «typeOf(entity)»} bean to remove.
+	 * @return The outcome where to go on success.
+	 * @see «fqAbstractDaoOf()»#«remover(entity)»(«typeOf(entity)»)
+	 */
+«IF isAbstract()»
+	@Override
+«ENDIF»
+	public String «removeEntity(entity)»(final «typeOf(entity)» «nameOf(entity)») {
+		if («isEmpty(entity)»(«nameOf(entity)»))
+		{
+			dao.«remover(entity)»(«nameOf(entity)»);
+		}
+		else
+		{
+			error(null, "«prefixOf()».«prefixOf(entity)».not-empty");
+		}
+		return «navigation(this, entity)»;
+	}
+
+	/**
+	 * This method sets the given {@link «typeOf(entity)»} bean for editing.
+	 *
+	 * @return The outcome where to go on success.
+	 * @see «fqAbstractDaoOf()»#«updater(entity)»(«typeOf(entity)»)
+	 */
+«IF isAbstract()»
+	@Override
+«ENDIF»
+	public String «saveEntity(entity)»() {
+		dao.«updater(entity)»(«getterOf(entity)»());
+		«setterOf(entity)»(new «typeOf(entity)»());
+		return «navigation(this, entity)»;
+	}
+
+	/**
+	 * This method simply returns an outcome to return to the processes main menu.
+	 *
+	 * @return The outcome to go to the main menu.
+	 */
+«IF isAbstract()»
+	@Override
+«ENDIF»
+	public String «backEntity(entity)»()
+	{
+		return NAV_INDEX;
+	}
+
+«IF hasActivationBoolean(entity)»
+	/**
+	 * This method changes the active flag of the given {@link «typeOf(entity)»} bean.
+	 *
+	 * @param «nameOf(entity)» The {@link «typeOf(entity)»} bean to change the active flag.
+	 * @return The outcome where to go on success.
+	 * @see «fqAbstractDaoOf()»#activate(«typeOf(entity)»,boolean)
+	 */
+«IF isAbstract()»
+	@Override
+«ENDIF»
+	public String «reactivateEntity(entity)»(final «typeOf(entity)» «nameOf(entity)») {
+		dao.activate(«nameOf(entity)», !«nameOf(entity)».isActive());
+		return «navigation(this, entity)»;
+	}
+«ENDIF»
+«ENDIF»
+
+«FOREACH getManyEntites(entity.types) AS manyEntity»
+	/*********************************************
+	 * Editing of bean «typeOf(entity)»
+	 *********************************************/
+
+	/**
+	 * This method prepares the 1:n entities of the «typeOf(entity)» bean for editing.
+	 * 
+	 * @param «nameOf(entity)» The «typeOf(entity)» bean for «typeOf(manyEntity)» editing.
+	 * @return The outcome for «typeOf(manyEntity)» bean editing
+	 */
+«IF isAbstract()»
+	@Override
+«ENDIF»
+	public String «editEntity(manyEntity.type)»(final «typeOf(entity)» «nameOf(entity)») {
+		«setterOf(entity)»(«nameOf(entity)»);
+		«setterOf(manyEntity.type)»(new «typeOf(manyEntity.type)»());
+		return «navigation(this, manyEntity)»;
+	}
+
+	/**
+	 * Thie action method sets the specified {@link «typeOf(manyEntity.type)»} entity bean for editing.
+	 *
+	 * @param «nameOf(manyEntity.type)» The {@link «typeOf(manyEntity.type)»} entity bean to edit.
+	 * @return The outcome to return to the 1:n relation editing.
+	 */
+«IF isAbstract()»
+	@Override
+«ENDIF»
+	public String «changeEntity(manyEntity.type)»(final «typeOf(manyEntity.type)» «nameOf(manyEntity.type)») {
+		«setterOf(manyEntity.type)»(«nameOf(manyEntity.type)»);
+		return «navigation(this, manyEntity)»;
+	}
+
+	/**
+	 * This action method removes an {@link «typeOf(manyEntity.type)»} entity bean from the
+	 * 1:n relation «nameOf(manyEntity)» of the {@link «typeOf(entity)»} entity bean.
+	 *
+	 * @param «nameOf(manyEntity.type)» The {@link «typeOf(manyEntity.type)»} entity bean to remove.
+	 * @return The outcome to return to the 1:n relation editing.
+	 * @see «fqAbstractDaoOf()»#«removerFrom(entity)»(«typeOf(manyEntity.type)»)
+	 */
+«IF isAbstract()»
+	@Override
+«ENDIF»
+	public String «removeEntity(manyEntity.type)»(final «typeOf(manyEntity.type)» «nameOf(manyEntity.type)») {
+		if («isEmpty(manyEntity.type)»(«nameOf(manyEntity.type)»))
+		{
+			dao.«removerFrom(entity)»(«nameOf(manyEntity.type)»);
+		}
+		else
+		{
+			error(null, "«prefixOf()».«prefixOf(manyEntity.type)».not-empty");
+		}
+		return «navigation(this, manyEntity)»;
+	}
+
+	/**
+	 * This action method saves or creates an {@link «typeOf(manyEntity.type)»} entity bean inside
+	 * an 1:n relation of the {@link «typeOf(entity)»} entity bean.
+	 *
+	 * @return The outcome to return to the 1:n relation editing.
+	 * @see «fqAbstractDaoOf()»#«updater(manyEntity.type)»(«typeOf(manyEntity.type)»)
+	 * @see «fqAbstractDaoOf()»#«adderTo(entity)»(«typeOf(entity)», «typeOf(manyEntity.type)»)
+	 */ 
+«IF isAbstract()»
+	@Override
+«ENDIF»
+	public String «saveEntity(manyEntity.type)»()
+	{
+		final «typeOf(manyEntity.type)» «nameOf(manyEntity.type)» = «getterOf(manyEntity.type)»();
+
+«LET getId(manyEntity.type) AS id»
+«IF id == null»
+		if («nameOf(manyEntity.type)».getId() != 0)
+«ELSE»
+		if («nameOf(manyEntity.type)».«getterOf(id)»() != null)
+«ENDIF»
+«ENDLET»
+		{
+			dao.«updater(manyEntity.type)»(«nameOf(manyEntity.type)»);
+		}
+		else
+		{
+			dao.«adderTo(entity)»(«getterOf(entity)»(), «nameOf(manyEntity.type)»);
+		}
+		«setterOf(manyEntity.type)»(new «typeOf(manyEntity.type)»());
+		return «navigation(this, manyEntity)»;
+	}
+
+	/**
+	 * This action method returns to the editing of the {@link «typeOf(entity)»} bean.
+	 *
+	 * @return The outcome for editing the {@link «typeOf(entity)»} bean.
+	 */  	
+«IF isAbstract()»
+	@Override
+«ENDIF»
+	public String «backEntity(manyEntity.type)»()
+	{
+		return «navigation(this, entity)»;
+	}	
+
+«IF hasActivationBoolean(manyEntity.type)»
+	/**
+	 * This method changes the active flag of the given {@link «typeOf(manyEntity.type)»} bean.
+	 *
+	 * @param «nameOf(manyEntity.type)» The {@link «typeOf(manyEntity.type)»} bean to change the active flag.
+	 * @return The outcome where to go on success.
+	 * @see «fqAbstractDaoOf()»#activate(«typeOf(manyEntity.type)»,boolean)
+	 */
+«IF isAbstract()»
+	@Override
+«ENDIF»
+	public String «reactivateEntity(manyEntity.type)»(final «typeOf(manyEntity.type)» «nameOf(manyEntity.type)») {
+		dao.activate(«nameOf(manyEntity.type)», !«nameOf(manyEntity.type)».isActive());
+		return «navigation(this, manyEntity.type)»;
+	}
+«ENDIF»
+«ENDFOREACH»
+
+«LET getHistory(entity) AS history»
+«IF history != null»
+	/**
+	 * This method sets the given {@link «typeOf(entity)»} bean for history editing. The
+	 * history contains a {@link List} of {@link «typeOf(history.type)»} beans.
+	 *
+	 * @param «nameOf(entity)» The {@link «typeOf(entity)»} bean to edit.
+	 * @return The outcome where to go on success.
+	 */
+«IF isAbstract()»
+	@Override
+«ENDIF»
+	public String «editEntity(history.type)»(final «typeOf(entity)» «nameOf(entity)») {
+«IF history.type.cloneable»
+		final «typeOf(history.type)» last = «nameOf(entity)».getLast();  
+		final «typeOf(history.type)» newHistoryEntity = (last != null ? last.clone() : new «typeOf(history.type)»()); 
+
+«FOREACH getAutoCreationTimestampList(history.type) AS timestamp»
+		newHistoryEntity.«setterOf(timestamp)»(null);
+«ENDFOREACH»
+«ELSE»
+		final «typeOf(history.type)» newHistoryEntity = new «typeOf(history.type)»();
+«ENDIF»
+		«setterOf(entity)»(«nameOf(entity)»);
+		«setterOf(history.type)»(newHistoryEntity);	
+		return «navigation(this, history.type)»;
+	}
+
+	/**
+	 * This action method adds a {@link «typeOf(history.type)»} history bean to the
+	 * given {@link «typeOf(entity)»} bean for editing.
+	 *
+	 * @return The outcome where to go on success.
+	 * @see «fqAbstractDaoOf()»#«adderTo(entity)»(«typeOf(entity)», «typeOf(history.type)»)
+	 */
+«IF isAbstract()»
+	@Override
+«ENDIF»
+	public String «saveEntity(history.type)»() {
+«IF history.type.cloneable»
+		final «typeOf(history.type)» «nameOf(history.type)» = dao.«adderTo(entity)»(«getterOf(entity)»(), «getterOf(history.type)»());
+		final «typeOf(history.type)» newHistoryEntity = «nameOf(history.type)».clone(); 
+«FOREACH getAutoCreationTimestampList(history.type) AS timestamp»
+		newHistoryEntity.«setterOf(timestamp)»(null);
+«ENDFOREACH»
+		«setterOf(history.type)»(newHistoryEntity);
+«ELSE»
+		dao.«adderTo(entity)»(«getterOf(entity)»(), «getterOf(history.type)»());
+		«setterOf(history.type)»(new «typeOf(history.type)»());
+«ENDIF»
+		return «navigation(this, history.type)»;
+	}
+
+	/**
+	 * This action method returns to the editing of the {@link «typeOf(entity)»} bean.
+	 *
+	 * @return The outcome for editing the {@link «typeOf(entity)»} bean.
+	 */  	
+«IF isAbstract()»
+	@Override
+«ENDIF»
+	public String «backEntity(history.type)»()
+	{
+		return «navigation(this, entity)»;
+	}
+«ENDIF»
+«ENDLET»
+«ENDFOREACH»
+}
+«ENDLET»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE AbstractProcessHandler FOR Process»
+«FILE abstractHandlerFilename(this)»
+«EXPAND utility::HeaderAbstract»
+«LET getUiEntities().sortBy(e|e.name) AS entities»
+package «handlerPackageOf(this)»;
+
+import javax.ejb.EJB;
+import «fqDaoOf()»;
+«IF ((entities.size > 0) && isAbstract()) || (getManyEntitiesWithHistory(entities).size > 0)»
+import java.util.List;
+«ENDIF»
+«FOREACH getEntitiesWithHistory(entities) AS entity-»
+import «fqTypeOf(entity)»;
+«ENDFOREACH»
+
+«IF roles.size > 0»
+import javax.faces.context.ExternalContext;
+«ENDIF»
+
+/**
+ * This abstract action handler acts for the following entity beans:
+ * <ul>
+«FOREACH entities.sortBy(e|e.name) AS entity-»
+ * <li>{@link «typeOf(entity)»}</li>
+«ENDFOREACH-»
+ * </ul>
+ */
+abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(getModel(this))»
+{
+	private static final long serialVersionUID = 1L;
+	protected static final String «navigation(this)» = "/«prefixOf(this)»/";
+
+	/**
+	 * This is the injected DAO reference to the {@link «daoOf()»} session bean.
+	 */
+	@EJB
+	protected «daoOf()» dao;
+
+	/**
+«IF roles.size > 0»
+	 * This method checks wether the logged in user is allowed to use this handler.
+	 * The must be in one of the following roles:
+	 * <ul>
+«FOREACH roles.sortBy(r|r) AS role-»
+	 * <li>«role»</li>
+«ENDFOREACH-»
+	 * </ul>
+«ELSE»
+	 * This method returns true because everybody is allowed to access this handler. 
+«ENDIF»
+	 *  
+	 * @return A flag which signs the permission to use this handler.
+	 */
+	public boolean isAllowed()
+	{
+«IF roles.size > 0»
+		final ExternalContext context = getExternalContext();
+
+		return
+«FOREACH roles.sortBy(r|r) AS role SEPARATOR " || "-»
+			context.isUserInRole("«role»")
+«ENDFOREACH»;
+«ELSE»
+		return true;
+«ENDIF»
+	}
+
+«FOREACH getEntitiesWithHistory(entities).sortBy(e|e.name) AS entity»
+«LET getHistory(entity) AS history»
+	/*********************************************
+	 * Property type=«typeOf(entity)» name=«nameOf(entity)»
+	 *********************************************/
+
+	private «typeOf(entity)» «nameOf(entity)» = new «typeOf(entity)»();
+
+«EXPAND GetterSetter FOR entity»
+
+	/**
+	 * This method returns true if all containing 1:n relations doesn't contain any entity
+	 *
+	 * @param «nameOf(entity)» The entity bean to check.
+	 * @return true If no sub entity is listed in this {@link «typeOf(entity)»} entity bean.
+	 */
+	public boolean «isEmpty(entity)»(final «typeOf(entity)» «nameOf(entity)»)
+	{
+«FOREACH getManyEntites(entity.types) AS manyEntity»
+		if (dao.«listOf(manyEntity)»(«nameOf(entity)»).size() > 0)
+		{
+			return false;
+		}
+«ENDFOREACH»
+«IF history != null»
+		if (dao.«listOf(history.type)»(«nameOf(entity)»).size() > 0)
+		{
+			return false;
+		}
+«ENDIF»
+		return true;
+	}
+«ENDLET»
+«ENDFOREACH»
+
+«FOREACH entities.sortBy(e|e.name) AS entity»
+«LET getHistory(entity) AS history»
+
+	/*********************************************
+	 * Editing of bean «typeOf(entity)»
+	 *********************************************/
+
+«IF isAbstract() && this.entities.contains(entity)»
+	abstract public List<«typeOf(entity)»> «listOf(entity)»();
+«REM»
+«ENDREM»
+	abstract String «createEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
+	abstract String «changeEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
+	abstract String «removeEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
+	abstract String «saveEntity(entity)»();
+	abstract String «backEntity(entity)»();
+«IF hasActivationBoolean(entity)»
+	abstract String «reactivateEntity(entity)»(final «typeOf(entity)» «nameOf(entity)»);
+«ENDIF»
+«ENDIF»
+
+«FOREACH getManyEntites(entity.types) AS manyEntity»
+	/**
+	 * This returns the 1:n relation «nameOf(manyEntity)» of entity «typeOf(entity)».
+	 * 
+	 * @return The list of history entries.
+	 */
+	public List<«typeOf(manyEntity)»> «listOf(manyEntity)»()
+	{
+		return dao.«listOf(manyEntity)»(«getterOf(entity)»());
+	}
+
+«IF isAbstract()»
+	abstract String «editEntity(manyEntity.type)»(final «typeOf(entity)» «nameOf(entity)»);
+	abstract String «changeEntity(manyEntity.type)»(final «typeOf(manyEntity.type)» «nameOf(manyEntity.type)»);
+	abstract String «removeEntity(manyEntity.type)»(final «typeOf(manyEntity.type)» «nameOf(manyEntity.type)»);
+	abstract String «saveEntity(manyEntity.type)»();
+	abstract String «backEntity(manyEntity.type)»();
+«IF hasActivationBoolean(manyEntity.type)»
+	abstract String «reactivateEntity(manyEntity.type)»(final «typeOf(manyEntity.type)» «nameOf(manyEntity.type)»);
+«ENDIF»
+«ENDIF»
+«ENDFOREACH»
+
+«IF history != null»
+	/**
+	 * This returns the history list of entity «typeOf(entity)».
+	 * 
+	 * @return The list of history entries.
+	 */
+	public List<«typeOf(history)»> «listOf(history.type)»()
+	{
+		return dao.«listOf(history.type)»(«getterOf(entity)»());
+	}
+«IF isAbstract()»
+	// History management of «typeOf(history)»
+	abstract String «editEntity(history.type)»(final «typeOf(entity)» «nameOf(entity)»);
+	abstract String «saveEntity(history.type)»();
+	abstract String «backEntity(history.type)»();
+«ENDIF»
+«ENDIF»
+«ENDLET»
+«ENDFOREACH»
+}
+«ENDLET»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE GetterSetter FOR Entity»
+	/**
+	 * The getter of the {@link «typeOf()»} entity bean.
+	 *
+	 * @return The {@link «typeOf()»} bean.
+	 */
+	public «typeOf()» «getterOf()»()
+	{
+		return «nameOf()»;
+	}	
+
+	/**
+	 * The setter of the {@link «typeOf()»} entity bean.
+	 *
+	 * @param «nameOf()» The {@link «typeOf()»} bean.
+	 */
+	public void «setterOf()»(final «typeOf()» «nameOf()»)
+	{
+		this.«nameOf()» = «nameOf()»;
+	}
+«ENDDEFINE»
+
+«DEFINE AbstractModelHandler FOR Model»
+«FILE abstractHandlerFilename(this)»
+«LET entities.typeSelect(Options).sortBy(e|e.name) AS converterList»
+«EXPAND utility::HeaderAbstract»
+package «handlerPackageOf(this)»;
+
+import java.io.Serializable;
+import java.text.MessageFormat;
+import java.text.NumberFormat;
+import java.util.Calendar;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.application.ProjectStage;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
+import javax.servlet.http.HttpSession;
+
+import org.jeegen.jee7.util.ErrorInfo;
+import org.jeegen.jee7.util.ResourceBundleDefinitions;
+
+«IF converterList.size > 0»
+import javax.faces.component.UIComponent;
+import javax.faces.convert.Converter;
+import javax.ejb.EJB;
+import «fqDaoOf()»;
+«FOREACH converterList AS option-»
+import «fqTypeOf(option)»;
+«ENDFOREACH»
+«ENDIF»
+
+/**
+ * This abstract handler base class handles the convertes of the following entity beans:
+ * <ul>
+«FOREACH converterList AS option-»
+ * <li>{@link «typeOf(option)»}</li>
+«ENDFOREACH-»
+ * </ul>
+ */
+abstract public class «abstractHandlerOf(this)» implements Serializable, ResourceBundleDefinitions
+{
+	private static final long   serialVersionUID    = 1L;
+	private static final Logger log                 = Logger.getLogger(«abstractHandlerOf(this)».class.getName());
+	private static final ResourceBundle messages;
+	private static final ResourceBundle errors;
+
+	/**
+	 * A flag representing if this application is running in production mode. This value is retrieved
+	 * from the javax.faces.PROJECT_STAGE context parameter.
+	 */
+	protected static final boolean production;
+
+	/**
+	 * A {@link NumberFormat} instance representing the money formatting.
+	 */
+	protected static final NumberFormat money     = NumberFormat.getCurrencyInstance();
+
+	/**
+	 * The default outcome of an URI.
+	 */
+	protected static final String       NAV_INDEX    = "«index()»";
+	protected static final String       NAV_REDIRECT = "?faces-redirect=true";
+
+	/**
+	 * The empty marker for selection boxes.
+	 */
+	protected static final String       NULL      = "[NULL]";
+
+«IF converterList.size > 0»
+	/**
+	 * The options DAO bean nedded for converter operations.
+	 */
+	@EJB
+	protected «daoOf()» options;
+«ENDIF»
+
+	/**
+	 * This method initializes the resource bundles.
+	 */
+	static
+	{
+		log.log(Level.CONFIG, "Initializing resource bundles...");
+		FacesContext context = FacesContext.getCurrentInstance();
+		messages   = context.getApplication().getResourceBundle(context, BUNDLE_MESSAGES);
+		errors     = context.getApplication().getResourceBundle(context, BUNDLE_ERRORS);
+		production = context.getApplication().getProjectStage() == ProjectStage.Production;
+
+		if (log.isLoggable(Level.FINER))
+		{
+			ExternalContext external = context.getExternalContext();
+			log.log(Level.FINER, " default: " + Locale.getDefault());
+			log.log(Level.FINER, " req.:    " + external.getRequestLocale());
+			Iterator<Locale> locales = external.getRequestLocales();
+			if (locales != null)
+			{
+				while(locales.hasNext())
+				{
+					Locale locale = locales.next();
+					log.log(Level.FINER, " o " + locale);
+				}
+			}
+			log.log(Level.FINER, " msg: " + messages.getLocale());
+			log.log(Level.FINER, " err: " + errors.getLocale());
+		}
+		log.log(Level.FINE, "<getBundles()");
+	}
+
+
+«FOREACH converterList AS option»
+	/**********************************
+	 * «typeOf(option)» converter
+	 **********************************/
+	private final «converterOf(option)» «nameOf(option)» = new «converterOf(option)»();
+
+	/**
+	 * This class implements a converter for converting HTML selection box IDs to option entity beans.
+	 */
+	private class «converterOf(option)» implements Converter, Serializable
+	{
+		private static final long serialVersionUID    = 1L;
+
+«LET getId(option) AS id»
+		/**
+		 * This method converts an ID into its appropriate {@link «typeOf(option)»} option bean.
+		 *
+		 * @param context The {@link FacesContext}
+		 * @param compoent The {@link UIComponent} belonging to the selection box.
+		 * @param input The HTML input ID to be converted into the {@link «typeOf(option)»} option bean.
+		 */
+		@Override
+		public Object getAsObject(final FacesContext context, final UIComponent component, final String input)
+		{
+«IF id == null»
+			return isNull(input) ? null : options.«finderOf(option)»(Integer.parseInt(input));
+«ELSE»
+			return isNull(input) ? null : options.«finderOf(option)»(input);
+«ENDIF»
+		}
+
+		/**
+		 * This method converts the given {@link «typeOf(option)»} option bean into an HTML ID.
+		 *
+		 * @param context The {@link FacesContext}
+		 * @param compoent The {@link UIComponent} belonging to the selection box.
+		 * @param input The {@link «typeOf(option)»} option bean.
+		 */
+		@Override
+		public String getAsString(FacesContext context, UIComponent component, Object input)
+		{
+			final String result;
+			
+			if (isNull(input))
+			{
+				result = NULL;
+			}
+			else
+			{
+				final «typeOf(option)» option = («typeOf(option)»)input;
+«IF id == null»
+				result = Integer.toString(option.getId());
+«ELSE»
+				result = option.«getterOf(id)»();
+«ENDIF»
+			}
+			return result;
+		}
+«ENDLET»
+	}
+	
+	/**
+	 * This method returns a {@link List} of all {@link «typeOf(option)»} option beans.
+	 *
+	 * @return {@link List} of all {@link «typeOf(option)»} option beans.
+	 */
+	public List<«typeOf(option)»> «listOf(option)»()
+	{
+		return options.«listOf(option)»();
+	}
+	
+«IF hasActivationBoolean(option)»
+	/**
+	 * This method returns a {@link List} of all active {@link «typeOf(option)»} option beans.
+	 *
+	 * @return {@link List} of all {@link «typeOf(option)»} option beans.
+	 */
+	public List<«typeOf(option)»> «listActiveOf(option)»()
+	{
+		return options.«listActiveOf(option)»();
+	}
+«ENDIF»
+	
+	/**
+	 * This method returns the converter for this «typeOf(option)» option bean.
+	 *
+	 * @return The {@link «typeOf(option)»} option bean converter.
+	 */
+	public «converterOf(option)» «converterGetter(option)»()
+	{
+		return «nameOf(option)»;
+	}
+«ENDFOREACH»
+
+	/***********************
+	 *      utilities      *
+	 ***********************/
+
+	/**
+	 * This method checks whether an object is null.
+	 */
+	protected static boolean isNull(final Object input)
+	{
+		return (input == null) || NULL.equals(input);
+	}
+
+	/**
+	 * This method returns {@link ExternalContext}.
+	 *
+	 * @return The {@link ExternalContext}
+	 */
+	protected ExternalContext getExternalContext()
+	{
+		final FacesContext context = FacesContext.getCurrentInstance();
+
+		return context != null ? context.getExternalContext() : null;
+	}
+
+	/**
+	 * This method returns a servlet context init parameter.
+	 *
+	 * @param key The key of the servlet init parameter.
+	 * @return The resulting servlet init parameter.
+	 */
+	protected String getInitParameter(final String key)
+	{
+		return getExternalContext().getInitParameter(key);
+	}
+
+	/**
+	 * This method returns the {@link HttpSession} object.
+	 *
+	 * @return The {@link HttpSession} object.
+	 */
+	protected HttpSession getSession()
+	{
+		ExternalContext context = getExternalContext();
+		
+		return context != null ? (HttpSession) context.getSession(false) : null;
+	}
+
+	/**
+	 * This method returns true if a valid user is logged in.
+	 *
+	 * @return A flag signing if somebody is logged in.
+	 */ 
+	public boolean isLoggedIn()
+	{
+		return getExternalContext().getRemoteUser() != null;
+	}
+	
+	/**
+	 * This method gets a formatted messge from the resource bundle and formats it
+	 * using {link MessageFormat#format(final String, final Object...)}.
+	 *
+	 * @param key The key of the resource bundle.
+	 * @param params The array of optional format objects.
+	 * @return The formatted {@link String}.
+	 */
+	protected String getMessage(final String key, final Object ... params)
+	{
+		return MessageFormat.format(messages.getString(key), params);
+	}
+	
+	/**
+	 * This method gets a formatted error messge from the error resource bundle and formats it
+	 * using {link MessageFormat#format(final String, final Object...)}.
+	 *
+	 * @param key The key of the resource bundle.
+	 * @param params The array of optional format objects.
+	 * @return The formatted error {@link String}.
+	 */
+	protected String getError(final String key, final Object ... params)
+	{
+		String message;
+		
+		try
+		{
+			final String format = errors.getString(key);
+			message = MessageFormat.format(format, params);
+		}
+		catch (MissingResourceException mre)
+		{
+			message = key;
+		}
+		log.log(Level.SEVERE, message);
+		return message;
+	}
+
+	/**
+	 * This messages returns true if there are listed faces messages.
+	 *
+	 * @return True if there are any messages.
+	 */
+	protected boolean hasMessages()
+	{
+		return FacesContext.getCurrentInstance().getMessageList().size() > 0;
+	}
+	
+	/**
+	 * This method returns the localized version of "yes" or "no" depending of the selected language
+	 * and the given flag.
+	 *
+	 * @param flag A flag signing "yes" or "no".
+	 * @return The returning localized {@link String}.
+	 */
+	public String getYesNo(final boolean flag)
+	{
+		return messages.getString(flag ? "yes" : "no");
+	}
+
+	/**
+	 * This method sets an error message to the {@link FacesContext}.
+	 * 
+	 * @param id The JSF UI item id.
+	 * @param key The resource bundle key.
+	 * @param params The optional format objects.
+	 * @return The formatted error message.
+	 */
+	protected String error(final String id, final String key, final Object ... params)
+	{
+		final FacesContext context = FacesContext.getCurrentInstance();
+		final String text = getError(key, params);
+		final FacesMessage msg = new FacesMessage(text);
+		msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+		context.addMessage(id, msg);
+		return text;
+	}
+
+	/**
+	 * This method initializes the Faces error list from the given
+	 * {@link List} of {@link ErrorInfo} pairs.
+	 *
+	 * @param errors The {@link List} of {@link ErrorInfo} pairs.
+	 */
+	protected void addErrors(List<ErrorInfo> errors)
+	{
+		final FacesContext context = FacesContext.getCurrentInstance();
+		
+		for (ErrorInfo info : errors)
+		{
+			final String text = getError(info.getMessageKey());
+			final FacesMessage msg = new FacesMessage(text);
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			context.addMessage(info.getGuiItemId(), msg);
+		}		
+	}
+	
+	/**
+	 * This method returns the outcome of the default view.
+	 *
+	 * @return The default outcome.
+	 */
+	public String back()
+	{
+		return NAV_INDEX;
+	}
+
+	/**
+	 * This method returns the actual year as int.
+	 *
+	 * @return The actual year.
+	 */
+	public int getActYear()
+	{
+		return Calendar.getInstance().get(Calendar.YEAR);
+	}
+
+	/**
+	 * This method returns the actual amount ov available error messages.
+	 *
+	 * @return The amount of actual error messages.
+	 */
+	protected int getMessageCount()
+	{
+		return FacesContext.getCurrentInstance().getMessageList().size();
+	}
+
+	/**
+	 * This method throws a validation exception. The exception message is picked from
+	 * the error resource bundle and formatted with optional message objects.
+	 * 
+	 * @param key The key of the error resource bundle.
+	 * @param params Optional parameters needed to parametrize the error message.
+	 */
+	protected void validationError(final String key, final Object ... params)
+	{
+		FacesMessage msg = new FacesMessage(getError(key, params));
+		msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+		throw new ValidatorException(msg);
+	}
+}
+«ENDLET»
+«ENDFILE»
+«ENDDEFINE»

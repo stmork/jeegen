@@ -21,18 +21,18 @@ Require-Bundle: org.jeegen.jee6;visibility:=reexport,
  org.antlr.runtime
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: de.itemis.jee6.ui.contentassist;
+Export-Package: org.jeegen.jee6.ui.contentassist;
   uses:="org.eclipse.xtext,
    org.eclipse.emf.ecore,
    org.eclipse.xtext.common.ui.contentassist,
    org.eclipse.xtext.ui.editor.contentassist",
- de.itemis.jee6.ui.contentassist.antlr;
+ org.jeegen.jee6.ui.contentassist.antlr;
   uses:="org.eclipse.xtext,
-   de.itemis.jee6.ui.contentassist.antlr.internal,
+   org.jeegen.jee6.ui.contentassist.antlr.internal,
    org.eclipse.xtext.ui.editor.contentassist.antlr.internal,
    org.eclipse.xtext.ui.codetemplates.ui.partialEditing,
    org.eclipse.xtext.ui.editor.contentassist.antlr,
-   de.itemis.jee6.services",
- de.itemis.jee6.ui.internal;uses:="org.eclipse.ui.plugin,org.osgi.framework,com.google.inject",
- de.itemis.jee6.ui.quickfix;uses:="org.eclipse.xtext.ui.editor.quickfix,org.eclipse.xtext.validation"
-Bundle-Activator: de.itemis.jee6.ui.internal.DslActivator
+   org.jeegen.jee6.services",
+ org.jeegen.jee6.ui.internal;uses:="org.eclipse.ui.plugin,org.osgi.framework,com.google.inject",
+ org.jeegen.jee6.ui.quickfix;uses:="org.eclipse.xtext.ui.editor.quickfix,org.eclipse.xtext.validation"
+Bundle-Activator: org.jeegen.jee6.ui.internal.DslActivator

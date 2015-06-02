@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: de.itemis.jee7.ui
+Bundle-Name: org.jeegen.jee7.ui
 Bundle-Vendor: itemis AG
 Bundle-Version: 1.0.7.qualifier
 Bundle-SymbolicName: org.jeegen.jee7.ui;singleton:=true
@@ -21,18 +21,18 @@ Require-Bundle: org.jeegen.jee7;bundle-version="1.0.2";visibility:=reexport,
  org.antlr.runtime
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Export-Package: de.itemis.jee7.ui.contentassist;
+Export-Package: org.jeegen.jee7.ui.contentassist;
   uses:="org.eclipse.xtext,
    org.eclipse.emf.ecore,
    org.eclipse.xtext.common.ui.contentassist,
    org.eclipse.xtext.ui.editor.contentassist",
- de.itemis.jee7.ui.contentassist.antlr;
+ org.jeegen.jee7.ui.contentassist.antlr;
   uses:="org.eclipse.xtext,
-   de.itemis.jee7.services,
-   de.itemis.jee7.ui.contentassist.antlr.internal,
+   org.jeegen.jee7.services,
+   org.jeegen.jee7.ui.contentassist.antlr.internal,
    org.eclipse.xtext.ui.editor.contentassist.antlr.internal,
    org.eclipse.xtext.ui.codetemplates.ui.partialEditing,
    org.eclipse.xtext.ui.editor.contentassist.antlr",
- de.itemis.jee7.ui.internal;uses:="org.eclipse.ui.plugin,org.osgi.framework,com.google.inject",
- de.itemis.jee7.ui.quickfix;uses:="org.eclipse.xtext.ui.editor.quickfix,org.eclipse.xtext.validation"
-Bundle-Activator: de.itemis.jee7.ui.internal.DslActivator
+ org.jeegen.jee7.ui.internal;uses:="org.eclipse.ui.plugin,org.osgi.framework,com.google.inject",
+ org.jeegen.jee7.ui.quickfix;uses:="org.eclipse.xtext.ui.editor.quickfix,org.eclipse.xtext.validation"
+Bundle-Activator: org.jeegen.jee7.ui.internal.DslActivator

@@ -5,9 +5,9 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://www.itemis.de/jee7/Dsl" 
-       class = "de.itemis.jee7.jee7.Jee7Package"
-       genModel = "de/itemis/jee7/Dsl.genmodel" /> 
+       uri = "http://org.jee-generator.org/jee7/Dsl" 
+       class = "org.jeegen.jee7.jee7.Jee7Package"
+       genModel = "org/jeegen/jee7/Dsl.genmodel" /> 
 	
   </extension>
 
