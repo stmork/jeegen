@@ -1,5 +1,4 @@
-package de.itemis.jee7.minimal.handler;
-
+package org.jeegen.jee7.minimal.handler;
 import java.util.List;
 
 import javax.ejb.Stateful;
@@ -9,7 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import de.itemis.jee7.minimal.entity.MinimalEntity;
+import org.jeegen.jee7.minimal.entity.MinimalEntity;
+
 
 @Named("minimalHandler")
 @SessionScoped
