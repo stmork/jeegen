@@ -3,6 +3,6 @@
    <description name="JEE-Generators Update Site" url="http://www.jee-generator.org/updates/">
       
    </description>
-   <feature url="features/org.jeegen.jee6.feature_1.1.15.qualifier.jar" id="org.jeegen.jee6.feature" version="1.1.15.qualifier"/>
-   <feature url="features/org.jeegen.jee7.feature_1.0.7.qualifier.jar"  id="org.jeegen.jee7.feature" version="1.0.7.qualifier"/>
+   <feature url="features/org.jeegen.jee6.feature_1.2.0.qualifier.jar" id="org.jeegen.jee6.feature" version="1.2.0.qualifier"/>
+   <feature url="features/org.jeegen.jee7.feature_1.2.0.qualifier.jar"  id="org.jeegen.jee7.feature" version="1.2.0.qualifier"/>
 </site>
