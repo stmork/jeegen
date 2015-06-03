@@ -4,7 +4,7 @@ Bundle-Name: JEE6 Generator Example
 Bundle-SymbolicName: org.jeegen.jee6.example;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: JEE-Generator
-Require-Bundle: org.jeegen.jee6;bundle-version="1.1.0",
+Require-Bundle: org.jeegen.jee6;bundle-version="1.2.0",
  org.apache.commons.logging;bundle-version="1.1.1"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
