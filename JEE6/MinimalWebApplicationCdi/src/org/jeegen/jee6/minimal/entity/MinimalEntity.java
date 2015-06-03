@@ -1,4 +1,4 @@
-package de.itemis.jee7.minimal.entity;
+package org.jeegen.jee6.minimal.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

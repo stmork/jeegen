@@ -5,4 +5,4 @@ Bundle-SymbolicName: de.itemis.faces
 Bundle-Version: 1.0.0.qualifier
 Require-Bundle: org.jeegen.jee7;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Bundle-Vendor: itemis AG
+Bundle-Vendor: JEE-Generator

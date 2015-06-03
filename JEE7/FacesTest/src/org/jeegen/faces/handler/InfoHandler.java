@@ -47,7 +47,7 @@ public class InfoHandler extends AbstractInfoHandler
 	 * This method returns a {@link List} of all {@link Startup} beans.
 	 *
 	 * @return {@link List} of all {@link Startup} beans.
-	 * @see de.itemis.faces.dao.AbstractInfoDaoBean#getStartupList()
+	 * @see org.jeegen.faces.dao.AbstractInfoDaoBean#getStartupList()
 	 */
 
 	public List<Startup> getStartupList() {
@@ -61,7 +61,7 @@ public class InfoHandler extends AbstractInfoHandler
 	 *
 	 * @param startup The new {@link Startup} bean to persist.
 	 * @return The outcome where to go on success.
-	 * @see de.itemis.faces.dao.AbstractInfoDaoBean#addStartup(Startup)
+	 * @see org.jeegen.faces.dao.AbstractInfoDaoBean#addStartup(Startup)
 	 */
 
 	public String addStartup(final Startup startup) {
@@ -87,7 +87,7 @@ public class InfoHandler extends AbstractInfoHandler
 	 *
 	 * @param startup The {@link Startup} bean to remove.
 	 * @return The outcome where to go on success.
-	 * @see de.itemis.faces.dao.AbstractInfoDaoBean#deleteStartup(Startup)
+	 * @see org.jeegen.faces.dao.AbstractInfoDaoBean#deleteStartup(Startup)
 	 */
 
 	public String removeStartup(final Startup startup) {
@@ -103,7 +103,7 @@ public class InfoHandler extends AbstractInfoHandler
 	 * This method sets the given {@link Startup} bean for editing.
 	 *
 	 * @return The outcome where to go on success.
-	 * @see de.itemis.faces.dao.AbstractInfoDaoBean#updateStartup(Startup)
+	 * @see org.jeegen.faces.dao.AbstractInfoDaoBean#updateStartup(Startup)
 	 */
 
 	public String saveStartup() {
@@ -157,7 +157,7 @@ public class InfoHandler extends AbstractInfoHandler
 	 *
 	 * @param entityEntry The {@link EntityEntry} entity bean to remove.
 	 * @return The outcome to return to the 1:n relation editing.
-	 * @see de.itemis.faces.dao.AbstractInfoDaoBean#deleteFromStartup(EntityEntry)
+	 * @see org.jeegen.faces.dao.AbstractInfoDaoBean#deleteFromStartup(EntityEntry)
 	 */
 
 	public String removeEntityEntry(final EntityEntry entityEntry) {
@@ -174,8 +174,8 @@ public class InfoHandler extends AbstractInfoHandler
 	 * an 1:n relation of the {@link Startup} entity bean.
 	 *
 	 * @return The outcome to return to the 1:n relation editing.
-	 * @see de.itemis.faces.dao.AbstractInfoDaoBean#updateEntityEntry(EntityEntry)
-	 * @see de.itemis.faces.dao.AbstractInfoDaoBean#addToStartup(Startup, EntityEntry)
+	 * @see org.jeegen.faces.dao.AbstractInfoDaoBean#updateEntityEntry(EntityEntry)
+	 * @see org.jeegen.faces.dao.AbstractInfoDaoBean#addToStartup(Startup, EntityEntry)
 	 */
 
 	public String saveEntityEntry() {
@@ -224,7 +224,7 @@ public class InfoHandler extends AbstractInfoHandler
 	 * given {@link Startup} bean for editing.
 	 *
 	 * @return The outcome where to go on success.
-	 * @see de.itemis.faces.dao.AbstractInfoDaoBean#addToStartup(Startup, HistoryEntry)
+	 * @see org.jeegen.faces.dao.AbstractInfoDaoBean#addToStartup(Startup, HistoryEntry)
 	 */
 
 	public String saveHistoryEntry() {
