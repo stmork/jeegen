@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DISTRO=${1:-kepler}
+DISTRO=${1:-luna}
 RELEASE=${2:-SR2}
 DOWNLOAD_SERVER=ftp.halifax.rwth-aachen.de
 
