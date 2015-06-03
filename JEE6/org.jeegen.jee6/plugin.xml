@@ -5,6 +5,6 @@
 	<extension point="org.eclipse.emf.ecore.generated_package">
 		<package uri = "http://www.jee-generator.org/jee6/Dsl" 
 			class = "org.jeegen.jee6.jee6.Jee6Package"
-			genModel = "de/itemis/jee6/Dsl.genmodel" /> 
+			genModel = "org/jeegen/jee6/Dsl.genmodel" /> 
 	</extension>
 </plugin>

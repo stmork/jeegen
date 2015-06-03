@@ -1,4 +1,4 @@
-package de.itemis.jee7.minimal.handler;
+package org.jeegen.jee6.minimal.handler;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import de.itemis.jee7.minimal.entity.MinimalEntity;
+import org.jeegen.jee6.minimal.entity.MinimalEntity;
 
 @Named("minimalHandler")
 @SessionScoped
@@ -18,18 +18,18 @@ public class MinimalHandler
 {
 	@PersistenceContext(unitName = "minimalDS")
 	private EntityManager em;
-
+	
 	public List<MinimalEntity> getEntities()
 	{
 		TypedQuery<MinimalEntity> query = em.createQuery("SELECT entity FROM MinimalEntity entity", MinimalEntity.class);
-
+		
 		return query.getResultList();
 	}
-
+	
 	public void init()
 	{
 		MinimalEntity entity = new MinimalEntity();
-		entity.setName("Dr. Georg M. Pietrek");
+		entity.setName("Georg");
 		em.persist(entity);
 	}
 
