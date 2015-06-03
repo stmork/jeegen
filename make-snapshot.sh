@@ -23,3 +23,6 @@ do
 	echo $FILE
 	sed -e "s/${VERSION_JEE6_OLD}.qualifier/${VERSION_JEE6_NEW}.qualifier/g" -e "s/${VERSION_JEE7_OLD}.qualifier/${VERSION_JEE7_NEW}.qualifier/g" -i ${FILE}
 done
+
+sed -e "s/%RELEASE%/false/g" -e "s/%SNAPSHOT%/true/g" p2.template >JEE6/org.jeegen.jee6.feature/p2.inf
+cp -a JEE6/org.jeegen.jee6.feature/p2.inf JEE7/org.jeegen.jee7.feature/p2.inf
