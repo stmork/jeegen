@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: JEE7 Generator Example
 Bundle-SymbolicName: org.jeegen.jee7.example;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Vendor: itemis AG
-Require-Bundle: org.jeegen.jee7;bundle-version="1.0.0"
+Bundle-Vendor: JEE-Generator
+Require-Bundle: org.jeegen.jee7;bundle-version="1.2.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
