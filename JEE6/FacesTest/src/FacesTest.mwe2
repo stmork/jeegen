@@ -1,4 +1,4 @@
-module de.itemis.faces.FacesTest
+module org.jeegen.faces.FacesTest
 
 var	modelpath="model"
 var	impldir="src"
