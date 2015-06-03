@@ -1,4 +1,4 @@
-package de.itemis.jee6.minimal.handler;
+package org.jeegen.jee6.minimal.handler;
 
 import java.io.Serializable;
 
@@ -7,8 +7,8 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 
-import de.itemis.jee6.minimal.dao.MinimalDao;
-import de.itemis.jee6.minimal.entity.MinimalEntity;
+import org.jeegen.jee6.minimal.dao.MinimalDao;
+import org.jeegen.jee6.minimal.entity.MinimalEntity;
 
 @ManagedBean
 @SessionScoped
