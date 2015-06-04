@@ -1,4 +1,4 @@
-package de.itemis.jee6.minimal.dao;
+package org.jeegen.jee6.minimal.dao;
 
 
 import java.util.List;
@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import de.itemis.jee6.minimal.entity.MinimalEntity;
+import org.jeegen.jee6.minimal.entity.MinimalEntity;
 
 @Stateless
 public class MinimalDao {
