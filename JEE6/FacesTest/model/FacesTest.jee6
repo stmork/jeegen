@@ -2,7 +2,7 @@ application "JEE6 Test Application" context "/faces" package org.jeegen.faces ti
 persistence unit "facesDS" jndi "jdbc/facesDS";
 persistence unit "authDS"  jndi "jdbc/authDS";
 
-security domain "itemis";
+security domain "jeegen";
 smtp "mail/Default";
 locale "de" default;
 locale "en";
