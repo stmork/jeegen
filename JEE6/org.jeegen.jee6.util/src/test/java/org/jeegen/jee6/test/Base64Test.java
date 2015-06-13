@@ -35,7 +35,7 @@ public class Base64Test
 	{
 		recode("Test");
 		recode("Steffen A. Mork");
-		recode("itemis");
+		recode("JEE-Generator");
 		recode("äöü-ß-ÄÖÜ");
 	}
 

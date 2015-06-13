@@ -15,8 +15,8 @@ public class ValidatorTest
 	@Test
 	public void valid()
 	{
-		validator.validate(null, null, "smork@itemis.de");
-		validator.validate(null, null, "steffen.mork@itemis.de");
+		validator.validate(null, null, "smork@jee-generator.org.de");
+		validator.validate(null, null, "steffen.mork@jee-generator.org");
 		validator.validate(null, null, null);
 		validator.validate(null, null, "");
 		validator.validate(null, null, validator);
@@ -31,18 +31,18 @@ public class ValidatorTest
 	@Test(expected=ValidatorException.class)
 	public void invalid2()
 	{
-		validator.validate(null, null, "Mork @ itemis");
+		validator.validate(null, null, "Mork @ jee-generator");
 	}
 
 	@Test(expected=ValidatorException.class)
 	public void invalid3()
 	{
-		validator.validate(null, null, "Übermensch@itemis.de");
+		validator.validate(null, null, "Übermensch@jee-generator.org");
 	}
 
 	@Test(expected=ValidatorException.class)
 	public void invalid4()
 	{
-		validator.validate(null, null, "smork@itemis");
+		validator.validate(null, null, "smork@jee-generator");
 	}
 }

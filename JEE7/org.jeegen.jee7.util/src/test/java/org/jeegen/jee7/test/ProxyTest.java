@@ -18,7 +18,7 @@ public class ProxyTest {
 	@Test
 	public void proxyAuth() throws IOException
 	{
-		Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("vm04.itemis.de", 80));
+		Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("proxy", 80));
 		Authenticator authenticator = new Authenticator()
 		{
 			@Override
@@ -28,7 +28,7 @@ public class ProxyTest {
 			}
 		};
 		Authenticator.setDefault(authenticator);
-		URL url = new URL("http://blogs.itemis.de");
+		URL url = new URL("http://www.jee-generator.org");
 		URLConnection connection = url.openConnection(proxy);
 		InputStream stream = connection.getInputStream();
 		

@@ -73,21 +73,6 @@ public class DownloadTest
 	}
 
 	@Test
-	public void itemis() throws IOException
-	{
-		final Download download = new Download("http://www.itemis.de");
-
-		download.setTimeout(TIMEOUT);
-		Assert.assertEquals(TIMEOUT, download.getTimeout());
-
-		final byte [] array = download.downloadArray();
-		Assert.assertNotNull(array);
-
-		final String mimeType = download.getMimeType();
-		Assert.assertTrue(mimeType.startsWith("text/html"));
-	}
-
-	@Test
 	public void mrw() throws IOException
 	{
 		final Download download = new Download("http://item.is/mrw");
