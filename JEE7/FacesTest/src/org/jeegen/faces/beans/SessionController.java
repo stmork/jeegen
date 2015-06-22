@@ -43,10 +43,10 @@ public class SessionController extends AbstractHandler
 	public String logout(final HttpServletRequest request) throws ServletException
 	{
 		log.log(Level.FINE, ">Logout");
-		log.log(Level.FINE, " " +getExternalContext().getRemoteUser());
+		log.log(Level.FINE, " " + getExternalContext().getRemoteUser());
 		request.logout();
 		getExternalContext().invalidateSession();
-		log.log(Level.FINE, " " +getExternalContext().getRemoteUser());
+		log.log(Level.FINE, " " + getExternalContext().getRemoteUser());
 		log.log(Level.FINE, "<Logout");
 
 		return "/index.xhtml";
