@@ -1,7 +1,7 @@
 #!/bin/bash
 
-VERSION_JEE6=1.2.0
-VERSION_JEE7=1.2.0
+VERSION_JEE6=1.2.1
+VERSION_JEE7=1.2.1
 
 for FILE in JEE?/org.jeegen.jee?/pom.xml JEE?/org.jeegen.jee?.ui/pom.xml JEE?/org.jeegen.jee?.feature/pom.xml
 do

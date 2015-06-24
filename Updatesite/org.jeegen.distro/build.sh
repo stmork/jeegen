@@ -71,24 +71,30 @@ function pack
 function build
 {
 	ECLIPSE="eclipse-jee-${DISTRO}-${RELEASE}-$1"
+	TARGET=${DIST}/eclipse-jee-generator-${ECLIPSE}
 
-	if [ ! -e ${DOWNLOAD}/${ECLIPSE} ]
+	if [ ! -e ${TARGET} ]
 	then
-		URL="http://${DOWNLOAD_SERVER}/eclipse/technology/epp/downloads/release/${DISTRO}/${RELEASE}/${ECLIPSE}"
-		echo "Downloading $URL..."
-		wget -q $URL -O "${DOWNLOAD}/${ECLIPSE}"
+		if [ ! -e ${DOWNLOAD}/${ECLIPSE} ]
+		then
+			URL="http://${DOWNLOAD_SERVER}/eclipse/technology/epp/downloads/release/${DISTRO}/${RELEASE}/${ECLIPSE}"
+			echo "Downloading $URL..."
+			wget -q $URL -O "${DOWNLOAD}/${ECLIPSE}"
+		fi
+
+		unpack ${DOWNLOAD}/${ECLIPSE}
+		echo "Prepare Distro ${DISTRO} ${RELEASE}..."
+		${DIRECTOR} -noSplash\
+			-application org.eclipse.equinox.p2.director\
+			-profileProperties org.eclipse.update.install.features=true\
+			-installIU org.eclipse.egit.feature.group,org.eclipse.sdk.ide,org.jeegen.jee6.feature.feature.group,org.jeegen.jee7.feature.feature.group\
+			-repository http://download.eclipse.org/releases/${DISTRO}/,http://download.itemis.com/updates/releases/,http://www.jee-generator.org/updates/release/\
+			-destination ${BUILD}/eclipse
+
+		pack ${TARGET}
+	else
+		echo "${TARGET} already exists."
 	fi
-
-	unpack ${DOWNLOAD}/${ECLIPSE}
-	echo "Prepare Distro ${DISTRO}-${RELEASE}..."
-	${DIRECTOR} -noSplash\
-		-application org.eclipse.equinox.p2.director\
-		-profileProperties org.eclipse.update.install.features=true\
-		-installIU org.eclipse.egit.feature.group,org.eclipse.sdk.ide,org.jeegen.jee6.feature.feature.group,org.jeegen.jee7.feature.feature.group\
-		-repository http://download.eclipse.org/releases/${DISTRO}/,http://download.itemis.com/updates/releases/,http://www.jee-generator.org/updates/release/\
-		-destination ${BUILD}/eclipse
-
-	pack ${DIST}/eclipse-jee-generator-${DISTRO}-${RELEASE}-$1
 }
 
 build linux-gtk-x86_64.tar.gz
