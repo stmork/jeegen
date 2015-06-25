@@ -71,7 +71,7 @@ function pack
 function build
 {
 	ECLIPSE="eclipse-jee-${DISTRO}-${RELEASE}-$1"
-	TARGET=${DIST}/eclipse-jee-generator-${ECLIPSE}
+	TARGET=${DIST}/eclipse-jee-generator-${DISTRO}-${RELEASE}-$1
 
 	if [ ! -e ${TARGET} ]
 	then
