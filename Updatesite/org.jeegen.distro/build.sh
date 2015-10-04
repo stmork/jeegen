@@ -26,7 +26,7 @@ test -d ${TARGET}/director || unzip -q ${DOWNLOAD}/director_latest.zip -d ${TARG
 
 function unpack
 {
-	rm -rf ${BUILD}/eclipse
+	rm -rf ${BUILD}/?clipse*
 
 	echo "Unpacking... $1"
 
@@ -53,16 +53,16 @@ function pack
 	cd $BUILD
 	case "${1}" in
 	*.zip)
-		zip -r9 -q ${1} eclipse
+		zip -r9 -q ${1} ?clipse*
 		;;
 	*.tar)
-		tar cf ${1} eclipse
+		tar cf ${1} ?clipse*
 		;;
 	*.tar.gz)
-		tar cfz ${1} eclipse
+		tar cfz ${1} ?clipse*
 		;;
 	*.tar.bz2)
-		tar cfj ${1} eclipse
+		tar cfj ${1} ?clipse*
 		;;
 	esac
 	cd $BASE
@@ -84,12 +84,19 @@ function build
 
 		unpack ${DOWNLOAD}/${ECLIPSE}
 		echo "Prepare Distro ${DISTRO} ${RELEASE}..."
+		if [ -d ${BUILD}/eclipse.app ]
+		then
+			DEST=${BUILD}/Eclipse.app
+#/Contents/Eclipse/
+		else
+			DEST=${BUILD}/eclipse
+		fi
 		${DIRECTOR} -noSplash\
 			-application org.eclipse.equinox.p2.director\
 			-profileProperties org.eclipse.update.install.features=true\
 			-installIU org.eclipse.egit.feature.group,org.eclipse.sdk.ide,org.jeegen.jee6.feature.feature.group,org.jeegen.jee7.feature.feature.group\
 			-repository http://download.eclipse.org/releases/${DISTRO}/,http://download.itemis.com/updates/releases/,http://www.jee-generator.org/updates/release/\
-			-destination ${BUILD}/eclipse
+			-destination ${DEST}
 
 		pack ${TARGET}
 	else
@@ -97,10 +104,10 @@ function build
 	fi
 }
 
-build linux-gtk-x86_64.tar.gz
-build linux-gtk.tar.gz
+#build linux-gtk-x86_64.tar.gz
+#build linux-gtk.tar.gz
 build macosx-cocoa-x86_64.tar.gz
-build win32-x86_64.zip
-build win32.zip
+#build win32-x86_64.zip
+#build win32.zip
 
 rm -rf ${BUILD} ${DOWNLOAD} ${TARGET}/director
