@@ -25,7 +25,7 @@ Wenn Eclipse läuft:
  * Wähle den passenden JEE-Generator aus der Kategorie JEE-Generators und durch wiederholtes Klicken von _Next_ und einem abschließenden _Finish_ wird die Installation abgeschlossen.
  * Nach einem kurzen Download und Restart des Eclipse stehen die JEE-Generatoren zum Gebrauch zur Verfügung.
 
-##FAQ
+## FAQ
 
 ### Was ist ein Workspace?
 
