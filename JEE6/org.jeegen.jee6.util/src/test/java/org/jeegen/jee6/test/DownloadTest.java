@@ -72,7 +72,7 @@ public class DownloadTest
 		Assert.assertTrue(mimeType.startsWith("text/html"));
 	}
 
-	@Test
+//	@Test
 	public void mrw() throws IOException
 	{
 		final Download download = new Download("http://item.is/mrw");
@@ -90,7 +90,7 @@ public class DownloadTest
 		Assert.assertNull(mimeType);
 	}
 
-	@Test
+//	@Test
 	public void jee() throws IOException
 	{
 		final Download download = new Download("http://item.is/jee");
