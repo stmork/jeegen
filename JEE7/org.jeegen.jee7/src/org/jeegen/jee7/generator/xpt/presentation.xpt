@@ -37,7 +37,7 @@
 			</title>
 			<h:outputStylesheet library="css" name="display.css"/>
 			<link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/img/favicon.png" />
-			<link rel="apple-touch-icon-precomposed" href="#{request.contextPath}/resources/img/logo.png" />
+			<link rel="apple-touch-icon-precomposed" href="#{request.contextPath}/resources/img/jee-logo-120.png" sizes="120x120" type="image/png" />
 		</h:head>
 		<body>
 			<div class="header">
