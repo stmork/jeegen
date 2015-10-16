@@ -104,10 +104,10 @@ function build
 	fi
 }
 
-#build linux-gtk-x86_64.tar.gz
-#build linux-gtk.tar.gz
+build linux-gtk-x86_64.tar.gz
+build linux-gtk.tar.gz
 build macosx-cocoa-x86_64.tar.gz
-#build win32-x86_64.zip
-#build win32.zip
+build win32-x86_64.zip
+build win32.zip
 
 rm -rf ${BUILD} ${DOWNLOAD} ${TARGET}/director
