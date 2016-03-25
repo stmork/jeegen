@@ -232,7 +232,6 @@
 	</build>
 
 	<pluginRepositories>
-		<!-- Fornax Workflow Runner plugin -->
 		<pluginRepository>
 			<id>fornax</id>
 			<url>http://www.fornax-platform.org/m2/repository</url>

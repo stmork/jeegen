@@ -9,28 +9,34 @@ var file.extensions = "jee6"
 var projectName = "org.jeegen.jee6"
 var runtimeProject = "../${projectName}"
 
-Workflow {
-	bean = StandaloneSetup {
+Workflow
+{
+	bean = StandaloneSetup
+	{
 		scanClassPath = true
 		platformUri = "${runtimeProject}/.."
 	}
 
-	component = DirectoryCleaner {
+	component = DirectoryCleaner
+	{
 		directory = "${runtimeProject}/src-gen"
 	}
 
-	component = DirectoryCleaner {
+	component = DirectoryCleaner
+	{
 		directory = "${runtimeProject}.ui/src-gen"
 	}
 
-	component = Generator {
+	component = Generator
+	{
 		pathRtProject = runtimeProject
 		pathUiProject = "${runtimeProject}.ui"
 		pathTestProject = "${runtimeProject}.tests"
 		projectNameRt = projectName
 		projectNameUi = "${projectName}.ui"
 		encoding = "UTF-8"
-		language = {
+		language =
+		{
 			uri = grammarURI
 			fileExtensions = file.extensions
 
@@ -38,27 +44,29 @@ Workflow {
 			fragment = grammarAccess.GrammarAccessFragment {}
 
 			// generates Java API for the generated EPackages 
-			fragment = ecore.EcoreGeneratorFragment {
-			}
+			fragment = ecore.EMFGeneratorFragment {}
 
 			// the serialization component
 //			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
 			fragment = serializer.SerializerFragment {}
 
 			// a custom ResourceFactory for use with EMF 
-			fragment = resourceFactory.ResourceFactoryFragment {
+			fragment = resourceFactory.ResourceFactoryFragment
+			{
 				fileExtensions = file.extensions
 			}
 
 			// The antlr parser generator fragment.
-			fragment = parser.antlr.XtextAntlrGeneratorFragment {
+			fragment = parser.antlr.XtextAntlrGeneratorFragment
+			{
 			//  options = {
 			//		backtrack = true
 			//	}
 			}
 			
 			// java-based API for validation 
-			fragment = validation.JavaValidatorFragment {
+			fragment = validation.JavaValidatorFragment
+			{
 //				composedCheck = "org.eclipse.xtext.validation.ImportUriValidator"
 //				composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
 			}
@@ -75,7 +83,8 @@ Workflow {
 
 			// generator API
 			/*
-			fragment = generator.GeneratorFragment {
+			fragment = generator.GeneratorFragment
+			{
 				generateMwe = true
 				generateJavaMain = true
 			}
@@ -104,9 +113,10 @@ Workflow {
 			fragment = junit.Junit4Fragment {}
 
 			// project wizard (optional) 
-			fragment = projectWizard.SimpleProjectWizardFragment {
+			fragment = projectWizard.SimpleProjectWizardFragment
+			{
 			 		generatorProjectName = "${projectName}"
-					modelFileExtension = file.extensions
+					fileExtension = file.extensions
 			}
 
 			// provides the necessary bindings for java types integration
