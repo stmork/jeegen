@@ -72,7 +72,6 @@ Workflow
 			name = "RES"
 			path = resdir
 			postprocessor = org.jeegen.jee7.util.XmlBeautifier {}
-//			postprocessor = de.morknet.oaw.tools.postprocessor.unix.UnixBeautifier {}
 		}
 		outlet =
 		{
