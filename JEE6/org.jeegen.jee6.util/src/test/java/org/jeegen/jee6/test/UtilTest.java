@@ -119,6 +119,10 @@ public class UtilTest
 	{
 		final Calendar cal = Calendar.getInstance();
 
+		// This test fails on days with changing of daylight
+		// saving time. So set to first of month where the
+		// change never appears.
+		cal.set(Calendar.DAY_OF_MONTH, 1);
 		for (int hour = 0; hour < TimeUnit.DAYS.toHours(1); hour++)
 		{
 			for (int min = 0; min < TimeUnit.HOURS.toMinutes(1); min++)
