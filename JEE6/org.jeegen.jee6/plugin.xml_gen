@@ -7,7 +7,7 @@
     <package 
        uri = "http://www.jee-generator.org/jee6/Dsl" 
        class = "org.jeegen.jee6.jee6.Jee6Package"
-       genModel = "org/jeegen/jee6/Dsl.genmodel" /> 
+       genModel = "model/generated/Dsl.genmodel" /> 
 	
   </extension>
 
