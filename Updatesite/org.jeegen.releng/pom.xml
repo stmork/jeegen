@@ -159,6 +159,12 @@
 					<version>${tycho-version}</version>
 					<executions>
 						<execution>
+							<id>default-p2-metadata-default</id>
+							<configuration>
+								<attachP2Metadata>false</attachP2Metadata>
+							</configuration>
+						</execution>
+						<execution>
 							<id>attached-p2-metadata</id>
 							<phase>package</phase>
 							<goals>
@@ -244,16 +250,6 @@
 			</releases>
 		</pluginRepository>
 		<pluginRepository>
-			<id>fornax</id>
-			<url>https://projects.itemis.de/nexus/content/groups/public/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-		<pluginRepository>
 			<id>jboss-public-repository-group</id>
 			<name>JBoss Public Repository Group</name>
 			<url>http://repository.jboss.org/nexus/content/groups/public/</url>
@@ -282,12 +278,6 @@
 			<url>http://download.eclipse.org/releases/luna</url>
 		</repository>
 		<repository>
-					<id>xtext</id>
-								<layout>p2</layout>
-											<url>http://download.itemis.com/updates/</url>
-													</repository>
-													
-															<repository>
 			<id>jeegen.sf.net</id>
 			<url>http://www.jee-generator.org/maven/</url>
 		</repository>
