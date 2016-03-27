@@ -14,6 +14,7 @@
 		<tycho-version>0.21.0</tycho-version>
 		<tycho-extras-version>0.21.0</tycho-extras-version>
 		<antrun-version>1.8</antrun-version>
+		<xtext-version>2.9.2</xtext-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -115,7 +116,7 @@
 					<artifactId>tycho-compiler-plugin</artifactId>
 					<version>${tycho-version}</version>
 					<configuration>
-						<encoding>UTF-8</encoding>
+						<encoding>${project.build.sourceEncoding}</encoding>
 						<source>7.0</source>
 						<target>7.0</target>
 					</configuration>
@@ -125,7 +126,7 @@
 					<artifactId>maven-resources-plugin</artifactId>
 					<version>2.5</version>
 					<configuration>
-						<encoding>UTF-8</encoding>
+						<encoding>${project.build.sourceEncoding}</encoding>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -193,48 +194,58 @@
 						<arguments>-Prelease</arguments>
 					</configuration>
 				</plugin>
-					<plugin>
-						<groupId>org.eclipse.tycho</groupId>
-						<artifactId>target-platform-configuration</artifactId>
-						<version>${tycho-version}</version>
-						<configuration>
-							<environments>
-								<environment>
-									<os>linux</os>
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>target-platform-configuration</artifactId>
+					<version>${tycho-version}</version>
+					<configuration>
+						<environments>
+							<environment>
+								<os>linux</os>
+								<ws>gtk</ws>
+								<arch>x86</arch>
+							</environment>
+							<environment>
+								<os>linux</os>
 									<ws>gtk</ws>
-									<arch>x86</arch>
-								</environment>
-								<environment>
-									<os>linux</os>
-									<ws>gtk</ws>
-									<arch>x86_64</arch>
-								</environment>
-								<environment>
-									<os>win32</os>
-									<ws>win32</ws>
-									<arch>x86</arch>
-								</environment>
-								<environment>
-									<os>win32</os>
-									<ws>win32</ws>
-									<arch>x86_64</arch>
-								</environment>
-								<environment>
-									<os>macosx</os>
-									<ws>cocoa</ws>
-									<arch>x86_64</arch>
-								</environment>
-							</environments>
-						</configuration>
-					</plugin>
+								<arch>x86_64</arch>
+							</environment>
+							<environment>
+								<os>win32</os>
+								<ws>win32</ws>
+								<arch>x86</arch>
+							</environment>
+							<environment>
+								<os>win32</os>
+								<ws>win32</ws>
+								<arch>x86_64</arch>
+							</environment>
+							<environment>
+								<os>macosx</os>
+								<ws>cocoa</ws>
+								<arch>x86_64</arch>
+							</environment>
+						</environments>
+					</configuration>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
 
 	<pluginRepositories>
 		<pluginRepository>
+			<id>codehaus-snapshots</id>
+			<url>whatever</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</pluginRepository>
+		<pluginRepository>
 			<id>fornax</id>
-			<url>http://www.fornax-platform.org/m2/repository</url>
+			<url>https://projects.itemis.de/nexus/content/groups/public/</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
@@ -256,16 +267,27 @@
 
 	<repositories>
 		<repository>
+			<id>codehaus-snapshots</id>
+			<url>http://nexus.codehaus.org/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</repository>
+		<repository>
 			<id>release</id>
 			<layout>p2</layout>
 			<url>http://download.eclipse.org/releases/luna</url>
 		</repository>
-		<repository> 
-			<id>xtext</id> 
-			<layout>p2</layout> 
-			<url>http://download.itemis.com/updates/</url> 
-		</repository> 
 		<repository>
+					<id>xtext</id>
+								<layout>p2</layout>
+											<url>http://download.itemis.com/updates/</url>
+													</repository>
+													
+															<repository>
 			<id>jeegen.sf.net</id>
 			<url>http://www.jee-generator.org/maven/</url>
 		</repository>
