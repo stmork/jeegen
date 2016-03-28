@@ -14,7 +14,6 @@
 		<tycho-version>0.21.0</tycho-version>
 		<tycho-extras-version>0.21.0</tycho-extras-version>
 		<antrun-version>1.8</antrun-version>
-		<xtext-version>2.9.2</xtext-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -272,11 +271,19 @@
 				<enabled>false</enabled>
 			</releases>
 		</repository>
+
 		<repository>
 			<id>release</id>
 			<layout>p2</layout>
 			<url>http://download.eclipse.org/releases/luna</url>
 		</repository>
+
+		<repository>
+			<id>xtext</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/</url>
+		</repository>
+
 		<repository>
 			<id>jeegen.sf.net</id>
 			<url>http://www.jee-generator.org/maven/</url>
