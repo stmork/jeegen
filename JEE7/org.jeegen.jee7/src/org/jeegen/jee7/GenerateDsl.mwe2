@@ -47,7 +47,7 @@ Workflow
 			fragment = ecore.EMFGeneratorFragment {}
 
 			// the serialization component
-			// fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
+			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
 			// fragment = serializer.SerializerFragment {}
 
 			// a custom ResourceFactory for use with EMF 
