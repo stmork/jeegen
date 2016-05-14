@@ -248,12 +248,12 @@ process Booking
 }
 
 
-process Inventory roles "controlling","it-support","vorstand"
+process Inventory roles "admin"
 {
 	Inventory
 }
 
-process Ordering roles "controlling","it-support","vorstand"
+process Ordering roles "admin"
 {
 	Purchase
 }
@@ -273,7 +273,7 @@ process User roles "extern"
 
 process Info
 {
-	Boolean default false "productive" ref "java:global/productive";
+//	Boolean default false "productive" ref "java:global/productive";
 
 	Startup, Person
 }
