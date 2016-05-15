@@ -51,11 +51,11 @@
 
 «DEFINE HtmlHeader FOR Object»
 	<!-- ===== Created by JEE6-Generator $«id()»$ ================ -->
-	<!-- == Copyright (C) «year()»  Steffen A. Mork, Dominik Pieper == --> 
+	<!-- == Copyright (C) «year()»  Steffen A. Mork, Dominik Pieper == -->
 «ENDDEFINE»
 
 «DEFINE XmlHeader FOR Object»
 	<!-- ====== Created by JEE6-Generator ============================ -->
-	<!-- ==== Copyright (C) «year()»  Steffen A. Mork, Dominik Pieper ==== --> 
+	<!-- ==== Copyright (C) «year()»  Steffen A. Mork, Dominik Pieper ==== -->
 	<!-- ============================================================= -->
 «ENDDEFINE»
