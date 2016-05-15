@@ -247,7 +247,7 @@
 	<resource-ref>
 		<res-ref-name>«mail.jndi»</res-ref-name>
 		<res-type>javax.mail.Session</res-type>
-		<jndi-name>«mail.jndi»</jndi-name>
+		<jndi-name>java:jboss/«mail.jndi»</jndi-name>
 	</resource-ref>
 «ENDFOREACH»
 «EXPAND reference FOREACH getProperties()»
@@ -280,7 +280,7 @@
 «ENDDEFINE»
 
 «DEFINE original FOR jee7::Property»
-		<jndi-name>«jndi»</jndi-name>
+		<jndi-name>java:global/«jndi»</jndi-name>
 «ENDDEFINE»
 
 «DEFINE reference FOR TextProp»

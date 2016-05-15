@@ -273,7 +273,7 @@ process User roles "extern"
 
 process Info
 {
-//	Boolean default false "productive" ref "java:global/productive";
+	Boolean default false "productive" ref "java:global/productive";
 
 	Startup, Person
 }
