@@ -8,6 +8,7 @@ Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.text,
  org.eclipse.jdt.core;visibility:=reexport,
  org.eclipse.xtext,
+ org.eclipse.xtext.xbase;visibility:=reexport,
  org.eclipse.xtext.common.types,
  org.eclipse.xtext.generator,
  org.eclipse.xtext.junit4;visibility:=reexport,

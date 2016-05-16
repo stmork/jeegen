@@ -280,7 +280,7 @@
 «ENDDEFINE»
 
 «DEFINE original FOR jee7::Property»
-		<jndi-name>java:global/«jndi»</jndi-name>
+		<jndi-name>«original»</jndi-name>
 «ENDDEFINE»
 
 «DEFINE reference FOR TextProp»
