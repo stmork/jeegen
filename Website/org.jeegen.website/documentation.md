@@ -1164,6 +1164,15 @@ Ferner sollten die Plugin-Abhängigkeiten im Eclipse von _org.jeegen.jee6*_ auf
 _org.jeegen.jee7*_ angepasst werden.  Dazu müssen auch in der _build.xml_ alle
 jee6-Referenzen durch jee7-Referenzen ersetzt werden.
 
+Es sollte in der _build.xml_ darauf geachtet werden, dass ggf. ein anderer
+Application Server verwendet wird.  Dazu muss dann der entsprechende Pfad
+für das Deployment angepasst werden.
+
+Als letzte Änderung vor der Anpassung des Quellcodes muss der Generator von
+JEE 6 auf JEE 7 umgestellt werden.  In der entsprechenden Datei
+_src/Generator.mwe2_ wird das Package der Generatorkomponente auf
+`@org.jeegen.jee7.generator.DslGeneratorMWE` angepasst.
+
 ### Logging
 
 Der Logger wird unter Java EE 7 injiziert und nicht mehr als statische
@@ -1175,7 +1184,7 @@ aus:
 private Logger log;
 ```
 
-Der Logger wird aus dem Paket java.util.logging entnommen. Somit ergeben
+Der Logger wird aus dem Paket `java.util.logging` entnommen. Somit ergeben
 sich auch andere Logging Level:
 
 |Bedeutung|Log Level JEE 6|Log Level JEE7|
@@ -1189,6 +1198,17 @@ sich auch andere Logging Level:
 
 Die in den JEE7-Utils verwendeten Logging-Methoden behalten ihre
 Methodennamen, haben allerdings für den Logger eine angepasste Signatur.
+
+**Hinweis!** Es ist nicht mehr möglich, mit dem Logger direkt eine Exception
+zu übergeben. Um einen Stack Trace auszugeben, muss folgender Code verwendet werden:
+
+```java
+...
+catch (Exception e)
+{
+    log.severe(e.toString());
+}
+```
 
 ### Action Handler unter JSF
 
@@ -1244,8 +1264,10 @@ Es muss erstens keine externe Library wie z.B.  die Apache Commons
 Fileupload verwendet werden und ferner muss kein sog.  Request Wrapper
 implementiert werden.  Beides entfällt ersatzlos.
 
-Das HTML des Formulars muss nur dahingehend angepasst werden, dass das neue
-JSF-Tag `<h:inputFile ...  />` verwendet werden muss.
+Das XHTML des Formulars muss nur dahingehend angepasst werden, dass das neue
+JSF-Tag `<h:inputFile ...  />` verwendet werden muss.  Dieses muss um das
+value-Tag ergänzt werden, das auf ein entsprechendes Property im Action
+Handler vom Typ `javax.servlet.http.Part` verweist.
 
 Beim Submit des Formulars muss im Action Handler aus dem `InputStream` des
 `javax.servlet.http.Part` der entsprechende Datenstrom extrahiert und für
