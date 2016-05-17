@@ -1197,6 +1197,13 @@ CDI-Beans.  Das hat den Vorteil, dass diese auch im transaktionalen Kontext
 laufen können.  Somit ändern sich auch die Annotationen auf:
 
 ```java
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
+import org.jeegen.jee7.util.LogUtil;
+import org.jeegen.jee7.util.Profiled;
+
 @Named
 @SessionScoped
 @Transactional(value = TxType.REQUIRED)
