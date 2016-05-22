@@ -1203,10 +1203,12 @@ Methodennamen, haben allerdings für den Logger eine angepasste Signatur.
 zu übergeben. Um einen Stack Trace auszugeben, muss folgender Code verwendet werden:
 
 ```java
+import java.util.logging.Level;
+import java.util.logging.Logger;
 ...
 catch (Exception e)
 {
-    log.severe(e.toString());
+	log.log(Level.SEVERE, e.getMessage(), e);
 }
 ```
 
