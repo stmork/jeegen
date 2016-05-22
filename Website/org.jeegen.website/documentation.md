@@ -1208,7 +1208,7 @@ import java.util.logging.Logger;
 ...
 catch (Exception e)
 {
-	log.log(Level.SEVERE, e.getMessage(), e);
+    log.log(Level.SEVERE, e.getMessage(), e);
 }
 ```
 
@@ -1293,7 +1293,7 @@ try
 }
 catch (IOException e)
 {
-    log.fine(e.toString());
+    log.log(Level.SEVERE, e.getMessage(), e);
 }
 ```
 
