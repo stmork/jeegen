@@ -11,7 +11,7 @@
 	</parent>
 
 	<name>JEE7 DSL</name>
-	<version>1.2.2-SNAPSHOT</version>
+	<version>1.2.2</version>
 	<groupId>org.jeegen</groupId>
 	<artifactId>org.jeegen.jee7</artifactId>
 	<packaging>eclipse-plugin</packaging>
