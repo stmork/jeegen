@@ -120,6 +120,7 @@ This Agreement is governed by the laws of the State of New York and the intellec
       <import plugin="org.eclipse.text"/>
       <import plugin="org.eclipse.jdt.core"/>
       <import plugin="org.eclipse.xtext"/>
+      <import plugin="org.eclipse.xtext.xbase"/>
       <import plugin="org.eclipse.xtext.common.types"/>
       <import plugin="org.eclipse.xtext.generator"/>
       <import plugin="org.eclipse.xtext.junit4"/>
@@ -150,7 +151,6 @@ This Agreement is governed by the laws of the State of New York and the intellec
       <import feature="org.eclipse.xpand.sdk"/>
       <import feature="org.eclipse.xtend.sdk"/>
       <import feature="org.eclipse.xtext.sdk"/>
-      <import plugin="org.eclipse.xtext.xbase"/>
    </requires>
 
    <plugin
