@@ -97,7 +97,7 @@
 
 «REM»EMail field«ENDREM»
 «DEFINE element(Process p, Entity e) FOR jee7::Email»
-						<h:inputText id="«nameOf()»" label="#{msg['«prefixOf(p)».«prefixOf(e)».«prefixOf()»']}"
+						<h:inputText p:type="email" id="«nameOf()»" label="#{msg['«prefixOf(p)».«prefixOf(e)».«prefixOf()»']}"
 								value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" maxlength="255">
 							<f:validator validatorId="mailValidator"/>
 						</h:inputText>
