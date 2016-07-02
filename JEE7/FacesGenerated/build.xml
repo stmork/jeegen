@@ -127,7 +127,7 @@
 				<include name="*.*"/>
 			</fileset>
 		</copy>
-		<javac srcdir="${src-path}:${src-gen-path}" destdir="${bin-path}" debug="true" includeantruntime="false" failonerror="true" source="1.8">
+		<javac srcdir="${src-path}:${src-gen-path}" destdir="${bin-path}" debug="true" includeantruntime="false" failonerror="true" source="1.7">
 			<classpath refid="compile.path"/>
 		</javac>
 	</target>
