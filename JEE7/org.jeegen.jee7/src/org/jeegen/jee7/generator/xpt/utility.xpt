@@ -27,6 +27,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 		xmlns:f="http://java.sun.com/jsf/core"
 		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
 		xmlns:ui="http://java.sun.com/jsf/facelets">
 
 «EXPAND HtmlHeader»
@@ -40,6 +41,7 @@
 <div xmlns="http://www.w3.org/1999/xhtml" 
 		xmlns:f="http://java.sun.com/jsf/core"
 		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
 		xmlns:ui="http://java.sun.com/jsf/facelets">
 
 «EXPAND HtmlHeader»

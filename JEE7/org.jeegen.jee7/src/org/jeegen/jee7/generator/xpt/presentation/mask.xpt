@@ -117,7 +117,7 @@
 
 «REM»Integer Field«ENDREM»
 «DEFINE element(Process p, Entity e) FOR jee7::Integer»
-						<h:inputText id="«nameOf()»" label="#{msg['«prefixOf(p)».«prefixOf(e)».«prefixOf()»']}"
+						<h:inputText p:type="number" id="«nameOf()»" label="#{msg['«prefixOf(p)».«prefixOf(e)».«prefixOf()»']}"
 							value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" size="10"/>
 «ENDDEFINE»
 
