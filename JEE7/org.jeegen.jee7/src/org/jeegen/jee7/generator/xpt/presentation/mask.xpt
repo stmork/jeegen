@@ -90,7 +90,7 @@
 «IF transient»
 						#{«handlerUri(p)».«nameOf(e)».«nameOf()»}
 «ELSE»
-						<h:inputText id="«nameOf()»" label="#{msg['«prefixOf(p)».«prefixOf(e)».«prefixOf()»']}"
+						<h:inputText «IF nameOf().toLowerCase() == "url"»p:type="url" «ENDIF»id="«nameOf()»" label="#{msg['«prefixOf(p)».«prefixOf(e)».«prefixOf()»']}"
 							value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" maxlength="255"/>
 «ENDIF»
 «ENDDEFINE»
@@ -123,7 +123,7 @@
 
 «REM»Number Field«ENDREM»
 «DEFINE element(Process p, Entity e) FOR jee7::Number»
-						<h:inputText id="«nameOf()»" label="#{msg['«prefixOf(p)».«prefixOf(e)».«prefixOf()»']}"
+						<h:inputText p:pattern="[-+]?\d+(?:[\.,]\d+)?" id="«nameOf()»" label="#{msg['«prefixOf(p)».«prefixOf(e)».«prefixOf()»']}"
 							value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" maxlength="10" />
 «ENDDEFINE»
 
