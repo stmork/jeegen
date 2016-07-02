@@ -142,6 +142,7 @@ entity Startup
 {
 	Text                   subject;
 	Email                  mail;
+	Text                   url;
 	Int                    integerEntry;
 	Number                 numberEntry;
 	Clob                   clobEntry;
