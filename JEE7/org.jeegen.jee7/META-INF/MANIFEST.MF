@@ -7,6 +7,7 @@ Bundle-SymbolicName: org.jeegen.jee7;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.text,
  org.eclipse.jdt.core;visibility:=reexport,
+ org.eclipse.core.resources;visibility:=reexport,
  org.eclipse.xtext,
  org.eclipse.xtext.common.types,
  org.eclipse.xtext.generator,
@@ -26,7 +27,7 @@ Require-Bundle: org.eclipse.text,
  org.eclipse.xtext.xbase;visibility:=reexport
 Import-Package: org.apache.commons.logging,
  org.apache.log4j
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.jeegen.jee7,
  org.jeegen.jee7.formatting;
   uses:="org.eclipse.emf.ecore,
