@@ -13,7 +13,6 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
@@ -49,11 +48,12 @@ public class Jee7ProjectCreator extends DslProjectCreator
 	{
 		try
 		{
-			copyFile(project, "resources/jee-logo-120.png", RES_ROOT + "/img");
-			copyFile(project, "resources/logo.png",         RES_ROOT + "/img");
-			copyFile(project, "resources/favicon.png",      RES_ROOT + "/img");
-			if(!getProjectInfo().isMavenProject()) {
-				copyFile(project, "resources/jee7-utils.jar", WEB_CONTENT_ROOT + "/WEB-INF/lib");
+			copyFile(project, "resources/jee-logo-120.png", RES_ROOT + "/img", monitor);
+			copyFile(project, "resources/logo.png",         RES_ROOT + "/img", monitor);
+			copyFile(project, "resources/favicon.png",      RES_ROOT + "/img", monitor);
+			if(!getProjectInfo().isMavenProject())
+			{
+				copyFile(project, "resources/jee7-utils.jar", WEB_CONTENT_ROOT + "/WEB-INF/lib", monitor);
 			}
 		}
 		catch(Exception e)
@@ -95,29 +95,27 @@ public class Jee7ProjectCreator extends DslProjectCreator
 		}
 
 		IClasspathEntry [] newEntries = new IClasspathEntry[newEntryList.size()];
-		for(int i=0; i<newEntryList.size(); i++)
-		{
-			newEntries[i] = newEntryList.get(i);
-		}
-		javaProject.setRawClasspath(newEntries, new NullProgressMonitor());
+		newEntryList.toArray(newEntries);
+		javaProject.setRawClasspath(newEntries, monitor);
 
 		super.enhanceProject(project, monitor);
 	}
 
-	private void createFolder(IFolder folder) throws CoreException
+	private void createFolder(final IFolder folder, final IProgressMonitor monitor) throws CoreException
 	{
-		IContainer parent = folder.getParent();
+		final IContainer parent = folder.getParent();
+
 		if (parent instanceof IFolder)
 		{
-			createFolder((IFolder)parent);
+			createFolder((IFolder)parent, monitor);
 		}
 		if (!folder.exists())
 		{
-			folder.create(false, true, new NullProgressMonitor());
+			folder.create(false, true, monitor);
 		}
 	}
 
-	private void copyFile(final IProject project, final String src, final String dstDir) throws CoreException, IOException
+	private void copyFile(final IProject project, final String src, final String dstDir, final IProgressMonitor monitor) throws CoreException, IOException
 	{
 		final URL url = Platform.getBundle(BUNDLE_ID).getEntry(src);
 		final String urlString = url.toString();
@@ -127,7 +125,7 @@ public class Jee7ProjectCreator extends DslProjectCreator
 		{
 			// Create target directory.
 			final IFolder folder = project.getFolder(dstDir);
-			createFolder(folder);
+			createFolder(folder, monitor);
 
 			// Copy file
 			final String fileName = urlString.substring(urlString.lastIndexOf('/'));
@@ -135,7 +133,7 @@ public class Jee7ProjectCreator extends DslProjectCreator
 			final IFile file = project.getFile(destinationFile);
 
 			stream = url.openStream();
-			file.create(stream, true, new NullProgressMonitor());
+			file.create(stream, true, monitor);
 		}
 		finally
 		{
