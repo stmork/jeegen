@@ -30,6 +30,14 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.transaction.Transactional;
 import javax.transaction.Transactional.TxType;
+«IF entities.exists(e|e.hasUpload())»
+import javax.inject.Inject;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.jeegen.jee7.util.Download;
+«ENDIF»
 import org.jeegen.jee7.util.Profiled;
 «IF entities.size > 0»
 import java.util.List;
@@ -53,6 +61,11 @@ import «fqTypeOf(entity)»;
 public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 {
 	private static final long serialVersionUID = 1L;
+
+«IF entities.exists(e|e.hasUpload())»
+	@Inject
+	private Logger log;
+«ENDIF»
 
 «FOREACH getEntitiesWithHistory(entities).sortBy(e|e.name) AS entity-»
 	private static final String «navigation(this, entity)» = "«index(entity)»";
@@ -142,8 +155,33 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 	@Override
 «ENDIF»
 	public String «saveEntity(entity)»() {
-		dao.«updater(entity)»(«getterOf(entity)»());
-		«setterOf(entity)»(new «typeOf(entity)»());
+«LET getParts(entity) AS parts»
+«IF parts.size > 0»
+		try
+		{
+«FOREACH parts AS part»
+			// «part.name»
+			if ((«partGetterOf(entity, part)»() != null) && («partGetterOf(entity, part)»().getSize() > 0))
+			{
+				final byte buffer[] = Download.read(«partGetterOf(entity, part)»().getInputStream(), (int)«partGetterOf(entity, part)»().getSize());
+«IF Clob.isInstance(part)»
+					«getterOf(entity)»().«setterOf(part)»(new String(buffer, Charset.defaultCharset()));
+«ELSE»
+					«getterOf(entity)»().«setterOf(part)»(buffer);
+«ENDIF»
+			}
+«ENDFOREACH»
+«ENDIF»
+			dao.«updater(entity)»(«getterOf(entity)»());
+			«setterOf(entity)»(new «typeOf(entity)»());
+«IF parts.size > 0»
+		}
+		catch (IOException e)
+		{
+			log.log(Level.SEVERE, e.getMessage(), e);
+		}
+«ENDIF»
+«ENDLET»
 		return «navigation(this, entity)»;
 	}
 
@@ -199,7 +237,7 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 	}
 
 	/**
-	 * Thie action method sets the specified {@link «typeOf(manyEntity.type)»} entity bean for editing.
+	 * This action method sets the specified {@link «typeOf(manyEntity.type)»} entity bean for editing.
 	 *
 	 * @param «nameOf(manyEntity.type)» The {@link «typeOf(manyEntity.type)»} entity bean to edit.
 	 * @return The outcome to return to the 1:n relation editing.
@@ -480,6 +518,32 @@ abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(ge
 	/*********************************************
 	 * Editing of bean «typeOf(entity)»
 	 *********************************************/
+
+«FOREACH getParts(entity) AS part»
+	private javax.servlet.http.Part «partNameOf(entity, part)»;
+
+	/**
+	 * This setter sets the upload part of entity member «part.name».
+	 *
+	 * @param part The uploaded form part.
+	 * @see javax.servlet.http.Part
+	 */
+	public void «partSetterOf(entity, part)»(final javax.servlet.http.Part part)
+	{
+		this.«partNameOf(entity, part)» = part;
+	}
+
+	/**
+	 * This setter returns the upload part of entity member «part.name».
+	 *
+	 * @returns The uploaded form part.
+	 * @see javax.servlet.http.Part
+	 */
+	public javax.servlet.http.Part «partGetterOf(entity, part)»()
+	{
+		return this.«partNameOf(entity, part)»;
+	}
+«ENDFOREACH»
 
 «IF isAbstract() && this.entities.contains(entity)»
 	abstract public List<«typeOf(entity)»> «listOf(entity)»();

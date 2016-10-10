@@ -47,7 +47,6 @@ import com.itextpdf.text.pdf.PdfWriter;
 public class UserHandler extends AbstractHandler
 {
 	private static final long serialVersionUID = 1L;
-//	private final static Logger log = Logger.getLogger(UserHandler.class.getName());
 
 	@Inject
 	private Logger log;

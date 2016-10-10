@@ -83,3 +83,8 @@ String getterOf(jee7::Property p) :
 String getterOf(jee7::BooleanProp p) :
 	"is" + nameOf(p).toFirstUpper();
 	
+String partGetterOf(Entity e, Lob lob) :
+	"get" + partNameOf(e, lob).toFirstUpper();
+
+String partSetterOf(Entity e, Lob lob) :
+	"set" + partNameOf(e, lob).toFirstUpper();

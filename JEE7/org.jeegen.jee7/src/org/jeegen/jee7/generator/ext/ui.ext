@@ -2,6 +2,7 @@ import jee7;
 
 extension org::jeegen::jee7::generator::ext::model;
 extension org::jeegen::jee7::generator::ext::types;
+extension org::jeegen::jee7::generator::ext::entity;
 
 String index(Model m) :
 	"index.xhtml";
@@ -76,11 +77,8 @@ Set[Entity] getEntitiesWithHistory(List[Entity] entities) :
 private Boolean isListAttribute(Text t) :
 	!t.transient;
 
-private Boolean isListAttribute(Blob r) :
+private Boolean isListAttribute(Lob lob) :
 	false;
-
-private Boolean isListAttribute(Clob r) :
-	true;
 
 private Boolean isListAttribute(OptionRef r) :
 	true;
@@ -90,6 +88,9 @@ private Boolean isListAttribute(Reference r) :
 
 private Boolean isListAttribute(Attribute a) :
 	true;
+
+private Boolean isMaskAttribute(Lob lob) :
+	isUpload(lob);
 
 private Boolean isMaskAttribute(Timestamp ts) :
 	!(ts.auto || ts.update);

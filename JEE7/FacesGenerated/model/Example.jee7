@@ -147,6 +147,9 @@ entity Startup
 	Number                 numberEntry;
 	Clob                   clobEntry;
 	Blob                   blobEntry;
+
+	Clob                   clobUploadEntry upload "text/txt";
+	Blob                   blobUploadEntry upload "image/jpeg";
 	Boolean                active;
 
 	Timestamp auto         creation;

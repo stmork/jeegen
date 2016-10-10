@@ -145,6 +145,12 @@ String annotationOf(Clob lob) :
 	"@Column @Lob";
 
 /*
+ * Lob
+ */
+String partNameOf(Entity e, Lob lob) :
+	"part" + e.name.toFirstUpper() + lob.name.toFirstUpper();
+
+/*
  * History reference
  */
 Boolean isMany(History ref) :

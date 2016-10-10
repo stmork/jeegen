@@ -85,3 +85,12 @@ cached List[Timestamp] getLabelList(Entity e) :
 
 Persistence getPU(Entity entity) :
 	entity.persistence != null ? entity.persistence : getModel(entity).getPersistenceUnits().first();
+
+List[Lob] getParts(Entity e) :
+	e.types.typeSelect(Lob).select(lob|lob.isUpload()).sortBy(lob|lob.name);
+
+Boolean hasUpload(Entity e) :
+	e.types.typeSelect(Lob).exists(e|e.isUpload());
+
+Boolean isUpload(Lob lob) :
+	lob.mime != null && lob.mime.length > 3;
