@@ -198,7 +198,7 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 	}
 
 	/**
-	 * Thie action method sets the specified {@link «typeOf(manyEntity.type)»} entity bean for editing.
+	 * This action method sets the specified {@link «typeOf(manyEntity.type)»} entity bean for editing.
 	 *
 	 * @param «nameOf(manyEntity.type)» The {@link «typeOf(manyEntity.type)»} entity bean to edit.
 	 * @return The outcome to return to the 1:n relation editing.

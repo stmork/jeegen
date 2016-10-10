@@ -20,7 +20,7 @@
 «LET getId() AS id»
 «IF attributes.size > 0»
 		<div class="box">
-			<h:form id="«prefixOf()»">
+			<h:form id="«prefixOf()»"«IF hasUpload()» method="post" enctype="multipart/form-data" acceptcharset="UTF-8"«ENDIF»>
 				<table>
 «FOREACH attributes AS attr»
 					<tr>
@@ -103,10 +103,21 @@
 						</h:inputText>
 «ENDDEFINE»
 
-«REM»Text Area«ENDREM»
+«REM»Text Area or text upload«ENDREM»
 «DEFINE element(Process p, Entity e) FOR jee7::Clob»
+«IF isUpload()»
+						<h:inputFile id="«nameOf()»" name="«nameOf()»" value="#{«handlerUri(p)».«partNameOf(e, this)»}" accept="«mime»"/>
+«ELSE»
 						<h:inputTextarea id="«nameOf()»" label="#{msg['«prefixOf(p)».«prefixOf(e)».«prefixOf()»']}"
 							value="#{«handlerUri(p)».«nameOf(e)».«nameOf()»}" cols="32" rows="7"/>
+«ENDIF»
+«ENDDEFINE»
+
+«REM»Binary upload«ENDREM»
+«DEFINE element(Process p, Entity e) FOR jee7::Blob»
+«IF isUpload()»
+						<h:inputFile id="«nameOf()»" name="«nameOf()»" value="#{«handlerUri(p)».«partNameOf(e, this)»}" accept="«mime»"/>
+«ENDIF»
 «ENDDEFINE»
 
 «REM»Checkbox«ENDREM»

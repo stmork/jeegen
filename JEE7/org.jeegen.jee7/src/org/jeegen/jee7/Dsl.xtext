@@ -20,9 +20,9 @@ Locale:			'locale' language=STRING (country=STRING)? (home?='default')?;
 Param:			'param' name=PACKAGED_ID '=' value=STRING ('description' description=STRING)?;
 
 /* Types */
-Attribute:	(Simple|Reference) ';';
+Attribute:	(Simple|Lob|Reference) ';';
 
-Simple:		(Date|Timestamp|Boolean|Integer|Number|IdAttribute|Blob|Clob) name=ID (transient?='transient')?;
+Simple:		(Date|Timestamp|Boolean|Integer|Number|IdAttribute) name=ID (transient?='transient')?;
 
 IdAttribute:	(Text|Email) (id?='id')?;
 
@@ -33,6 +33,8 @@ Integer:	{Integer}'Int';
 Number:		{Number}'Number';
 Text:		{Text}'Text';
 Email:		{Email}'Email';
+
+Lob:		(Blob|Clob)  name=ID ('upload' mime=STRING)? (transient?='transient')?;
 Blob:		{Blob}'Blob';
 Clob:		{Clob}'Clob';
 
