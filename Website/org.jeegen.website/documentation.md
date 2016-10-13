@@ -700,7 +700,8 @@ wird in der XHTML folgendes Schnipsel generiert:
         <h:outputLabel for="timestamp1" value="#{msg['info.startup.timestamp1']}"/>
     </td>
     <td>
-        <h:inputText id="timestamp1" label="#{msg['info.startup.timestamp1']}" value="#{infoHandler.startup.timestamp1}" maxlength="10" styleClass="date">
+        <h:inputText id="timestamp1" label="#{msg['info.startup.timestamp1']}" maxlength="10" styleClass="date"
+                value="#{infoHandler.startup.timestamp1}">
             <f:convertDateTime pattern="dd.MM.yyyy" type="date"/>
         </h:inputText>
     </td>
@@ -759,7 +760,8 @@ wird folgendes XHTML-Schnipsel generiert:
         <h:outputLabel for="dateElement" value="#{msg['info.startup.dateelement']}"/>
     </td>
     <td>
-        <h:inputText id="dateElement" label="#{msg['info.startup.dateelement']}" value="#{infoHandler.startup.dateElement}" maxlength="10" styleClass="date">
+        <h:inputText id="dateElement" label="#{msg['info.startup.dateelement']}" maxlength="10" styleClass="date"
+                value="#{infoHandler.startup.dateElement}">
             <f:convertDateTime pattern="dd.MM.yyyy" type="date"/>
         </h:inputText>
     </td>
@@ -808,7 +810,8 @@ Der XHTML-Codeschnipsel:
         <h:outputLabel for="owner" value="#{msg['ordering.orderposition.owner']}"/>
     </td>
     <td>
-        <h:selectOneMenu converter="#{orderingHandler.userInfoConverter}" id="owner" label="#{msg['ordering.orderposition.owner']}" value="#{orderingHandler.orderPosition.owner}">
+        <h:selectOneMenu converter="#{orderingHandler.userInfoConverter}" id="owner"
+                label="#{msg['ordering.orderposition.owner']}" value="#{orderingHandler.orderPosition.owner}">
             <f:selectItem itemLabel="#{msg.no_selection}" itemValue="[NULL]"/>
             <f:selectItems itemLabel="#{owner.name}" itemValue="#{owner}" value="#{orderingHandler.userInfoList}" var="owner"/>
         </h:selectOneMenu>
