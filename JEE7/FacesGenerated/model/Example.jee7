@@ -124,6 +124,7 @@ entity HistoryEntry cloneable
 {
 	Timestamp auto creation;
 	Clob           comment;
+	Clob           catalog upload "text/txt";
 }
 
 entity EntityEntry
@@ -135,6 +136,7 @@ entity EntityEntry
 	Text                 subject;
 	Clob                 comment;
 	Boolean              active;
+	Clob                 catalog upload "text/txt";
 	Option AddressOption addressOption;
 }
 
