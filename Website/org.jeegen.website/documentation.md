@@ -574,9 +574,9 @@ im Formular folgendes Schnipsel generiert:
     <td class="top">
         <h:outputLabel for="clobEntry" value="#{msg['info.startup.clobentry']}"/>
     </td>
-	<td>
-		<h:inputFile id="clobEntry" name="clobEntry" value="#{infoHandler.startup.partStartupClobEntry}" accept="text/txt"/>
-	</td>
+    <td>
+        <h:inputFile id="clobEntry" name="clobEntry" value="#{infoHandler.startup.partStartupClobEntry}" accept="text/txt"/>
+    </td>
 </tr>
 ```
 
@@ -629,9 +629,9 @@ im Formular folgendes Schnipsel generiert:
     <td class="top">
         <h:outputLabel for="blobEntry" value="#{msg['info.startup.blobentry']}"/>
     </td>
-	<td>
-		<h:inputFile id="blobEntry" name="blobEntry" value="#{infoHandler.startup.partStartupBlobEntry}" accept="image/jpeg"/>
-	</td>
+    <td>
+        <h:inputFile id="blobEntry" name="blobEntry" value="#{infoHandler.startup.partStartupBlobEntry}" accept="image/jpeg"/>
+    </td>
 </tr>
 ```
 
