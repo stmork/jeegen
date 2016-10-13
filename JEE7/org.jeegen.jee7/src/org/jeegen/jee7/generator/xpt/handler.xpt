@@ -519,34 +519,8 @@ abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(ge
 «LET getHistory(entity) AS history»
 
 	/*********************************************
-	 * Editing of bean «typeOf(entity)»
+	 * Editing of entity bean «typeOf(entity)»
 	 *********************************************/
-
-«FOREACH getParts(entity) AS part»
-	private javax.servlet.http.Part «partNameOf(entity, part)»;
-
-	/**
-	 * This setter sets the upload part of entity member «part.name».
-	 *
-	 * @param part The uploaded form part.
-	 * @see javax.servlet.http.Part
-	 */
-	public void «partSetterOf(entity, part)»(final javax.servlet.http.Part part)
-	{
-		this.«partNameOf(entity, part)» = part;
-	}
-
-	/**
-	 * This setter returns the upload part of entity member «part.name».
-	 *
-	 * @returns The uploaded form part.
-	 * @see javax.servlet.http.Part
-	 */
-	public javax.servlet.http.Part «partGetterOf(entity, part)»()
-	{
-		return this.«partNameOf(entity, part)»;
-	}
-«ENDFOREACH»
 
 «IF isAbstract() && this.entities.contains(entity)»
 	abstract public List<«typeOf(entity)»> «listOf(entity)»();
@@ -629,6 +603,32 @@ abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(ge
 	{
 		this.«nameOf()» = «nameOf()»;
 	}
+
+«FOREACH getParts() AS part»
+	private javax.servlet.http.Part «partNameOf(this, part)»;
+
+	/**
+	 * This setter sets the upload part of entity member «part.name».
+	 *
+	 * @param part The uploaded form part.
+	 * @see javax.servlet.http.Part
+	 */
+	public void «partSetterOf(this, part)»(final javax.servlet.http.Part part)
+	{
+		this.«partNameOf(this, part)» = part;
+	}
+
+	/**
+	 * This setter returns the upload part of entity member «part.name».
+	 *
+	 * @returns The uploaded form part.
+	 * @see javax.servlet.http.Part
+	 */
+	public javax.servlet.http.Part «partGetterOf(this, part)»()
+	{
+		return this.«partNameOf(this, part)»;
+	}
+«ENDFOREACH»
 «ENDDEFINE»
 
 «DEFINE AbstractModelHandler FOR Model»
