@@ -552,6 +552,46 @@ im Formular folgendes Schnipsel generiert:
 </tr>
 ```
 
+##### Uploads mit Clob (nur JEE 7)
+
+Unter JEE 7 können leicht Forms gebaut werden, mit denen man Daten hochladen
+kann.  Das entsprechende XHTML-Tag lautet `<h:inputFile .../>`.  Die Syntax
+in der DSL wurde dementsprechend erweitert:
+
+```mydsl
+Clob <Name> (upload <mime type>) (transient);
+```
+In einer XHTML-Seite wird aus der Modellzeile
+
+```mydsl
+Clob clobEntry upload "text/txt";
+```
+
+im Formular folgendes Schnipsel generiert:
+
+```mydsl
+<tr>
+    <td class="top">
+        <h:outputLabel for="clobEntry" value="#{msg['info.startup.clobentry']}"/>
+    </td>
+	<td>
+		<h:inputFile id="clobEntry" name="clobEntry" value="#{infoHandler.startup.partStartupClobEntry}" accept="text/txt"/>
+	</td>
+</tr>
+```
+
+Die umschließende Form ist jetzt eine sog. Multipart-Form und erzwingt die
+HTTP-Methode POST.  So können die hochzuladenden Dateien quasi als
+Attachment dem Submit-Request beigelegt werden.  Der Handler wird in der
+dazugehörenden Save()-Methode entsprechend erweitert, sodass der die als
+Part bezeichneten Attachments auswertet und gegebenenfalls in der
+Entity-Bean speichert.  Für Clobs ist der Datentyp grundsätzlich `String`. 
+Die Save()-Methode kann grundsätzlich angepasst werden, sodass sie z.B. 
+durch Syntaxprüfungen ergänzt werden können.  Es ist auch zu beachten, dass
+die Entity-Bean nicht verändert wird, wenn kein Upload erfolgt.  Es werden
+also keine Clobs gelöscht.  Auch dieses Verhalten kann in der Save()-Methode
+angepasst werden.
+
 #### Blob
 
 Will man Binärdaten in der Datenbank speichern, muss man den Datentyp Blob
@@ -563,9 +603,49 @@ Typs nicht.  Die Syntax lautet:
 Blob <Name> (transient);
 ```
 
-Hinweis Aus Gründen der Performance sollten nicht zu große Binärdaten in
+**Hinweis!** Aus Gründen der Performance sollten nicht zu große Binärdaten in
 einer Datenbank gespeichert werden.  Große Datensätze bringt man besser im
 Dateisystem unter.
+
+##### Uploads mit Blob (nur JEE 7)
+
+Unter JEE 7 können leicht Forms gebaut werden, mit denen man Daten hochladen
+kann.  Das entsprechende XHTML-Tag lautet `<h:inputFile .../>`.  Die Syntax
+in der DSL wurde dementsprechend erweitert:
+
+```mydsl
+Blob <Name> (upload <mime type>) (transient);
+```
+In einer XHTML-Seite wird aus der Modellzeile
+
+```mydsl
+Blob blobEntry upload "image/jpeg";
+```
+
+im Formular folgendes Schnipsel generiert:
+
+```mydsl
+<tr>
+    <td class="top">
+        <h:outputLabel for="blobEntry" value="#{msg['info.startup.blobentry']}"/>
+    </td>
+	<td>
+		<h:inputFile id="blobEntry" name="blobEntry" value="#{infoHandler.startup.partStartupBlobEntry}" accept="image/jpeg"/>
+	</td>
+</tr>
+```
+
+Die umschließende Form ist jetzt eine sog. Multipart-Form und erzwingt die
+HTTP-Methode POST.  So können die hochzuladenden Dateien quasi als
+Attachment dem Submit-Request beigelegt werden.  Der Handler wird in der
+dazugehörenden Save()-Methode entsprechend erweitert, sodass der die als
+Part bezeichneten Attachments auswertet und gegebenenfalls in der
+Entity-Bean speichert.  Für Blobs ist der Datentyp grundsätzlich `byte[]`. 
+Die Save()-Methode kann grundsätzlich angepasst werden, sodass sie z.B. 
+durch Syntaxprüfungen ergänzt werden können.  Es ist auch zu beachten, dass
+die Entity-Bean nicht verändert wird, wenn kein Upload erfolgt.  Es werden
+also keine Blobs gelöscht.  Auch dieses Verhalten kann in der Save()-Methode
+angepasst werden.
 
 #### Boolean
 

@@ -421,7 +421,7 @@ public class «typeOf()» extends «abstractOf()»
 «LET getHistory() AS history»
 «IF history != null»
 	private «typeOf(history)» last;
-	
+
 	/**
 	 * This method returns the newest entry of the «typeOf(history)» list.
 	 *

@@ -89,7 +89,10 @@ private Boolean isListAttribute(Reference r) :
 private Boolean isListAttribute(Attribute a) :
 	true;
 
-private Boolean isMaskAttribute(Lob lob) :
+private Boolean isMaskAttribute(Clob lob) :
+	true;
+
+private Boolean isMaskAttribute(Blob lob) :
 	isUpload(lob);
 
 private Boolean isMaskAttribute(Timestamp ts) :
