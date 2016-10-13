@@ -1,5 +1,5 @@
 «REM»
-«###»	Copyright (C) 2015 Steffen A. Mork, Dominik Pieper
+«###»	Copyright (C) 2016 Steffen A. Mork, Dominik Pieper
 «###»	$Id$
 «ENDREM»
 
@@ -160,10 +160,13 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 		try
 		{
 «FOREACH parts AS part»
+			final javax.servlet.http.Part «localPartOf(part)» = «partGetterOf(entity, part)»();
+«ENDFOREACH»
+«FOREACH parts AS part»
 			// «part.name»
-			if ((«partGetterOf(entity, part)»() != null) && («partGetterOf(entity, part)»().getSize() > 0))
+			if ((«localPartOf(part)» != null) && («localPartOf(part)».getSize() > 0))
 			{
-				final byte buffer[] = Download.read(«partGetterOf(entity, part)»().getInputStream(), (int)«partGetterOf(entity, part)»().getSize());
+				final byte buffer[] = Download.read(«localPartOf(part)».getInputStream(), (int)«localPartOf(part)».getSize());
 «IF Clob.isInstance(part)»
 					«getterOf(entity)»().«setterOf(part)»(new String(buffer, Charset.defaultCharset()));
 «ELSE»

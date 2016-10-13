@@ -82,7 +82,10 @@ String getterOf(jee7::Property p) :
 
 String getterOf(jee7::BooleanProp p) :
 	"is" + nameOf(p).toFirstUpper();
-	
+
+String localPartOf(Lob lob) :
+	lob.name.toFirstLower() + "Part";
+
 String partGetterOf(Entity e, Lob lob) :
 	"get" + partNameOf(e, lob).toFirstUpper();
 
