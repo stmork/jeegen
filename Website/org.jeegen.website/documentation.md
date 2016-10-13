@@ -1383,6 +1383,11 @@ catch (IOException e)
 }
 ```
 
+** Hinweis!** Die DSL-Syntax wurde für `Clob` und `Blob` dahingehend
+verändert, dass daraus direkt der Upload generiert werden kann.  Da meist
+der Handler schon mit Business Logik angereichert wurde, muss dieser nach
+wie vor von Hand erweitert werden.
+
 
 ### Deskriptoren
 
