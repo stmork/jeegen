@@ -621,7 +621,7 @@ abstract public class «abstractHandlerOf(this)» extends «abstractHandlerOf(ge
 	/**
 	 * This setter returns the upload part of entity member «part.name».
 	 *
-	 * @returns The uploaded form part.
+	 * @return The uploaded form part.
 	 * @see javax.servlet.http.Part
 	 */
 	public javax.servlet.http.Part «partGetterOf(this, part)»()
