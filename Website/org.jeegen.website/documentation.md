@@ -621,7 +621,7 @@ Blob <Name> (upload <mime type>) (transient);
 In einer XHTML-Seite wird aus der Modellzeile
 
 ```mydsl
-Blob blobEntry upload "image/jpeg";
+Blob blobEntry upload "image/jpg";
 ```
 
 im Formular folgendes Schnipsel generiert:
@@ -633,7 +633,7 @@ im Formular folgendes Schnipsel generiert:
     </td>
     <td>
         <h:inputFile id="blobEntry" name="blobEntry"
-            value="#{infoHandler.startup.partStartupBlobEntry}" accept="image/jpeg"/>
+            value="#{infoHandler.startup.partStartupBlobEntry}" accept="image/jpg"/>
     </td>
 </tr>
 ```
