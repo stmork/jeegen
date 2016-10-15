@@ -10,10 +10,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
 import java.util.Random;
 
 import org.jeegen.jee7.util.Download;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class DownloadTest
@@ -23,6 +25,29 @@ public class DownloadTest
 	private final static int    TIMEOUT       = 10000;
 	private final static int    FORCE_TIMEOUT =    10;
 	private final static Random random        = new Random(System.currentTimeMillis());
+
+	@BeforeClass
+	public static void init()
+	{
+		final String [] hostnames =
+			{
+					"eisenbahnsteuerung.org",
+					"morknet.de",
+					"www.jee-generator.org"
+			};
+
+		for (String hostname : hostnames)
+		{
+			try
+			{
+				Download.resolve(hostname);
+			}
+			catch (UnknownHostException e)
+			{
+				System.err.printf("Cannot resolve host <%s>%n", hostname);
+			}
+		}
+	}
 
 	@Test
 	public void eisenbahnsteuerung() throws IOException

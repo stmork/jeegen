@@ -12,9 +12,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.net.HttpURLConnection;
+import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.UnknownHostException;
 
 import javax.imageio.ImageIO;
 
@@ -221,6 +223,18 @@ public class Download implements Serializable
 	public void setFollowRedirect(final boolean redirect)
 	{
 		this.redirect = redirect;
+	}
+
+	/**
+	 * This method resolves a full qualified hostname into an IP address.
+	 * 
+	 * @param fqhn The hostname to resolve.
+	 * @return The IP address if resolvable.
+	 * @throws UnknownHostException If the hostname cannot be resolved.
+	 */
+	public static InetAddress resolve(final String fqhn) throws UnknownHostException
+	{
+		return InetAddress.getByName(fqhn);
 	}
 
 	/**
