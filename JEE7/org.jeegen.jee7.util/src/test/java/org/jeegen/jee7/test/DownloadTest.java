@@ -8,6 +8,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
@@ -40,7 +41,9 @@ public class DownloadTest
 		{
 			try
 			{
-				Download.resolve(hostname);
+				final InetAddress ia = Download.resolve(hostname);
+
+				System.out.printf("%s: %s%n", hostname, ia.getHostAddress());
 			}
 			catch (UnknownHostException e)
 			{
