@@ -150,8 +150,8 @@ entity Startup
 	Clob                   clobEntry;
 	Blob                   blobEntry;
 
-	Clob                   clobUploadEntry upload "text/txt";
-	Blob                   blobUploadEntry upload "image/jpeg";
+	Clob                   clobUploadEntry upload "text/txt" transient;
+	Blob                   blobUploadEntry upload "image/jpeg" transient;
 	Boolean                active;
 
 	Timestamp auto         creation;

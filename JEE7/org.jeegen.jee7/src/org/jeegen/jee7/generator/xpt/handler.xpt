@@ -166,11 +166,14 @@ public class «handlerOf(this)» extends «abstractHandlerOf(this)»
 			// «part.name»
 			if ((«localPartOf(part)» != null) && («localPartOf(part)».getSize() > 0))
 			{
-				final byte buffer[] = Download.read(«localPartOf(part)».getInputStream(), (int)«localPartOf(part)».getSize());
+				final byte data[] = Download.read(«localPartOf(part)».getInputStream(), (int)«localPartOf(part)».getSize());
 «IF Clob.isInstance(part)»
-					«getterOf(entity)»().«setterOf(part)»(new String(buffer, Charset.defaultCharset()));
+				final String clob = new String(data, Charset.defaultCharset());
+«ENDIF»
+«IF isTransient(part)»
+				// TODO: This entity attribute is transient. Implement data handling here.
 «ELSE»
-					«getterOf(entity)»().«setterOf(part)»(buffer);
+				«getterOf(entity)»().«setterOf(part)»(«IF Clob.isInstance(part)»clob«ELSE»data«ENDIF»);
 «ENDIF»
 			}
 «ENDFOREACH»

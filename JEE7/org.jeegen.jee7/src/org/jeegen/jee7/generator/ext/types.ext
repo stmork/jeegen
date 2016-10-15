@@ -205,6 +205,9 @@ Boolean isTransient(Attribute a) :
 Boolean isTransient(Simple s) :
 	s.transient;
 
+Boolean isTransient(Lob l) :
+	l.transient;
+
 Boolean isAbstract(Entity e) :
 	e.filterable || e.types.exists(t|isTransient(t));
 
