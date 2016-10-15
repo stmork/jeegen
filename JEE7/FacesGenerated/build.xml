@@ -105,6 +105,7 @@
 				<include name="**/beans/**"/>
 				<include name="**/dao/**"/>
 				<include name="**/handler/**"/>
+				<include name="**/entities/Startup*"/>
 			</fileset>
 			<fileset dir="${res-path}">
 				<include name="**/*"/>
