@@ -140,6 +140,9 @@ public class DownloadTest
 	{
 		final Download download = new Download(IMAGE_URL);
 
+		download.setTimeout(TIMEOUT);
+		Assert.assertEquals(TIMEOUT, download.getTimeout());
+
 		String mimeType = download.getMimeType();
 		Assert.assertNull(mimeType);
 
