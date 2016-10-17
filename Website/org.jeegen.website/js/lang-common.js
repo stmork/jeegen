@@ -29,7 +29,7 @@ registerLanguage('super|instanceof|as|new|null|false|true|val|var|if|else|switch
 registerLanguage('to-instance|bind|to|mixin|super|instanceof|as|new|null|false|true|val|var|if|else|switch|case|default|do|while|for|typeof|throw|try|catch|finally|this|it|int|boolean|short|char|double|float|long|byte|void|return', 'guice');
 registerLanguage('extends|super|instanceof|as|new|null|false|true|val|var|if|else|switch|case|default|do|while|for|typeof|throw|try|catch|finally|this|it|int|boolean|short|char|double|float|long|byte|void|return|package|import|param|task|depends', 'builddsl');
 registerLanguage('extends|super|instanceof|as|new|null|false|true|val|var|if|else|switch|case|default|do|while|for|typeof|throw|try|catch|finally|this|it|int|boolean|short|char|double|float|long|byte|void|return|package|import|param|FOR|ENDFOR|IF|ELSE|ENDIF', 'templates');
-registerLanguage('application|context|package|strict|development|timeout|jndi|persistence|unit|cacheable|locale|default|smtp|security|domain|clustered|param|description|description|entity|Text|Number|Option|Clob|Blob|upload|transient|Timestamp|auto|update|Date|Entity|Int|Email|options|filterable|cloneable|editable|process|roles|Boolean|Type|ref', 'mydsl');
+registerLanguage('application|context|package|strict|development|timeout|jndi|persistence|unit|cacheable|locale|default|smtp|security|domain|clustered|param|description|description|entity|Text|Number|Option|Clob|Blob|upload|transient|Timestamp|auto|update|Date|Entity|Int|Email|options|filterable|cloneable|editable|process|roles|Boolean|Type|ref|MySQL|DB2|Oracle', 'mydsl');
 
 function registerLanguage(keywords, langName) {
 	var shortCut = commonLangShortCut();
