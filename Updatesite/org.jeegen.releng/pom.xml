@@ -80,10 +80,10 @@
 							<goal>generate-repository-facade</goal>
 						</goals>
 						<configuration>
-							<siteTemplateFolder>../org.jeegen6.updatesite/templates</siteTemplateFolder>
+							<siteTemplateFolder>../org.jeegen.updatesite/templates</siteTemplateFolder>
 							<!-- Symbols are used while expanding index.html template -->
 							<symbols>
-								<update.site.name>JEE6 Generator Repository</update.site.name>
+								<update.site.name>JEE Generator Repository</update.site.name>
 								<update.site.description>This URL can be used inside eclipse for
 									installing new software.</update.site.description>
 								<update.site.version>${project.version}</update.site.version>

@@ -53,7 +53,7 @@ public class Jee6ProjectCreator extends DslProjectCreator
 			copyFile(project, "resources/logo.png",         RES_ROOT + "/img");
 			copyFile(project, "resources/favicon.png",      RES_ROOT + "/img");
 			if(!getProjectInfo().isMavenProject()) {
-				copyFile(project, "resources/jee6-utils.jar", WEB_CONTENT_ROOT + "/WEB-INF/lib");
+				copyFile(project, "resources/jee6-utils.jar", RES_ROOT + "/WEB-INF/lib");
 			}
 		}
 		catch(Exception e)
