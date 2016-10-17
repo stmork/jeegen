@@ -19,6 +19,7 @@ import javax.interceptor.InterceptorBinding;
 @Target({TYPE, METHOD})
 @Retention(RUNTIME)
 @Inherited
-public @interface Profiled {
+public @interface Profiled
+{
 
 }

@@ -17,14 +17,15 @@ public class Producer implements Serializable
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * This method produces a {@link Logger} for approriate logging. The destination class name
+	 * This method produces a {@link Logger} for appropriate logging. The destination class name
 	 * is extracted via the given {@link InjectionPoint}.
 	 * 
-	 * @param injector The {@link InjectionPoint} ofor injection.
+	 * @param injector The {@link InjectionPoint} for injection.
 	 * @return The produced {@link Logger}.
 	 */
 	@Produces
-	public Logger produceLogger(final InjectionPoint injector) {
+	public Logger produceLogger(final InjectionPoint injector)
+	{
 		return Logger.getLogger(injector.getMember().getDeclaringClass()
 				.getName());
 	}
