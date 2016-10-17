@@ -53,7 +53,7 @@ public class Jee7ProjectCreator extends DslProjectCreator
 			copyFile(project, "resources/favicon.png",      RES_ROOT + "/img", monitor);
 			if(!getProjectInfo().isMavenProject())
 			{
-				copyFile(project, "resources/jee7-utils.jar", WEB_CONTENT_ROOT + "/WEB-INF/lib", monitor);
+				copyFile(project, "resources/jee7-utils.jar", RES_ROOT + "/WEB-INF/lib", monitor);
 			}
 		}
 		catch(Exception e)

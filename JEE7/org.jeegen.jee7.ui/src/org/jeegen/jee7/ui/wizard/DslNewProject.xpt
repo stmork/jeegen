@@ -276,7 +276,7 @@ Workflow
 	<!-- ==================================================== -->
 
 	<path id="logger.path">
-		<fileset dir="${web-path}">
+		<fileset dir="${lib-path}">
 			<include name="**/*.jar"/>
 		</fileset>
 	</path>

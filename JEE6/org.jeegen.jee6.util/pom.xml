@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<name>jee6-utils</name>
-	<version>1.1.16</version>
+	<version>1.1.17-SNAPSHOT</version>
 	<groupId>org.jeegen</groupId>
 	<artifactId>jee6.utils</artifactId>
 	<packaging>jar</packaging>
