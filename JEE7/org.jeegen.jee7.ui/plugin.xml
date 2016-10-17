@@ -85,7 +85,7 @@
 	<extension point="org.eclipse.ui.keywords">
 		<keyword
 			id="org.jeegen.jee7.ui.keyword_Dsl"
-			label="Dsl"/>
+			label="JEE7 Generator"/>
 	</extension>
 
 	<extension point="org.eclipse.ui.commands">
