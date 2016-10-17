@@ -285,6 +285,12 @@ entity Address
     Text plz;
     Text location;
 }
+
+process User
+{
+     Address
+}
+
 ```
 Nach einem Generatorlauf kann die Applikation deployed werden. Die Maske sieht dann wie folgt aus: 
 ![](documentation/Entity1.jpg)
@@ -313,7 +319,7 @@ entity Address
 ```
 
 In der Maske wird dadurch eine Combobox generiert. Passt man noch die
-Resource Bundles unter _$PROJECT_HOME/src/<package>/messages.properties_ an,
+Resource Bundles unter _$PROJECT_HOME/src/\<package\>/messages.properties_ an,
 sieht dann die Maske folgendermaßen aus:
 
 ![](documentation/Entity2.jpg)
@@ -374,7 +380,7 @@ entity Person
 }
 ```
 
-Daraus wird in der Datei _$PROJECT_HOME/src/<package>/entites/Person.java_:
+Daraus wird in der Datei _$PROJECT_HOME/src/\<package\>/entites/Person.java_:
 
 ```java
 /*
@@ -1383,7 +1389,7 @@ catch (IOException e)
 }
 ```
 
-** Hinweis!** Die DSL-Syntax wurde für `Clob` und `Blob` dahingehend
+**Hinweis!** Die DSL-Syntax wurde für `Clob` und `Blob` dahingehend
 verändert, dass daraus direkt der Upload generiert werden kann.  Da meist
 der Handler schon mit Business Logik angereichert wurde, muss dieser nach
 wie vor von Hand erweitert werden.
