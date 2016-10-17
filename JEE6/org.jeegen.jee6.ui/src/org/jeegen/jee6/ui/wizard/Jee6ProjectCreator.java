@@ -63,12 +63,10 @@ public class Jee6ProjectCreator extends DslProjectCreator
 			throw new CoreException(status);
 		}
 
-		final IJavaProject javaProject = JavaCore.create(project);
-
-		ArrayList<IClasspathEntry> newEntryList = new ArrayList<IClasspathEntry>();
+		final IJavaProject               javaProject  = JavaCore.create(project);
+		final ArrayList<IClasspathEntry> newEntryList = new ArrayList<IClasspathEntry>();
 
 		System.out.println(getProjectInfo().isMavenProject());
-
 		if(!getProjectInfo().isMavenProject())
 		{
 			final IPath path = javaProject.getPath().append(RES_ROOT + "/WEB-INF/lib/jee6-utils.jar");
