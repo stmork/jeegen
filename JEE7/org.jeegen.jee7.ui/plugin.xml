@@ -73,7 +73,7 @@
 		<page
 				class="org.jeegen.jee7.ui.DslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
 				id="org.jeegen.jee7.Dsl"
-				name="Dsl">
+				name="JEE7 Generator">
 			<keywordReference id="org.jeegen.jee7.ui.keyword_Dsl"/>
 			<enabledWhen>
 				<adapt type="org.eclipse.core.resources.IProject"/>
