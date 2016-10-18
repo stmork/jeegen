@@ -82,28 +82,30 @@ XHTML Presentation Layer inkl. Logos und CSS
 Die Dateien für den XHTML-Presentation Layer werden nur generiert, wenn die
 dazu benötigte Dateien noch nicht vorhanden sind.  Bestehende Dateien werden
 durch den Generator nicht überschrieben.  Die Action Handler und DAOs werden
-gemäß dem sog.  Generation Gap Pattern generiert.  Die abstrakten
-Basisklassen werden bei jedem Generatorlauf neu generiert, während die
-konkreten Klassen für die Implementierung der Business Logik nur einmal bei
-Fehlen generiert werden.  In der abstrakten Basisklasse der DAOs werden z.B. 
-die konfigurierten Persistenzkontexte untergebracht.  Die generierten
-Dateien werden in folgende Verzeichnisse hinterlegt:
+gemäß dem sog.  [Generation Gap
+Pattern](http://heikobehrens.net/2009/04/23/generation-gap-pattern/)
+generiert.  Die abstrakten Basisklassen werden bei jedem Generatorlauf neu
+generiert, während die konkreten Klassen für die Implementierung der
+Business Logik nur einmal bei Fehlen generiert werden.  In der abstrakten
+Basisklasse der DAOs werden z.B.  die konfigurierten Persistenzkontexte
+untergebracht.  Die generierten Dateien werden in folgende Verzeichnisse
+hinterlegt:
 
- * _src_
+ * _src/main/java_
    In diesem Verzeichnis werden die konkreten Klassen für die Action Handler und DAOs hinterlegt. Ferner werden hier die Resource Bundles und einige Service Klassen hineingeneriert. In diesem Verzeichnis können auch weitere eigene Klassen untergebracht werden. Alles, was hier hineingeneriert wird, wird nicht wieder überschrieben sondern nur angelegt, wenn die Klasse fehlt.
- * _src-gen_
+ * _src/generated/java_
    Hier werden die abstrakten Klassen und Entity Beans untergebracht. Diese werden bei jedem JEE-Generatorlauf neu generiert.
- * _res_
+ * _src/main/resources_
    In diesem Verzeichnis werden bei Projektanlage Bilder und Libraries (JARs) angelegt. Hier können weitere Bilder untergebracht werden. Der JEE-Generator generiert in diesem Verzeichnis nichts.
- * _res-gen_
+ * _src/generated/resources_
    In diesem Verzeichnis werden die Deployment Deskriptoren generiert. Diese Dateien werden bei jedem JEE-Generatorlauf neu generiert.
- * _WebContent_
-   Hier werden die XHTML-Dateien und das CSS hineingelegt. Wie im src-Verzeichnis werden hier nur fehlende Dateien angelegt und bestehende nicht überschrieben.
+ * _src/main/webapp_
+   Hier werden die XHTML-Dateien und das CSS hineingelegt. Wie im src/main/java-Verzeichnis werden hier nur fehlende Dateien angelegt und bestehende nicht überschrieben.
 
-**Hinweis!** Die Inhalte der Verzeichnisse _src_, _res_ und _WebContent_ sollten der
+**Hinweis!** Die Inhalte der Verzeichnisse _src/main/java_, _src/main/resources_ und _src/main/webapp_ sollten der
 Verseinsverwaltung der Wahl zugeführt werden, da dort auch eigene
 Implementierungen untergebracht sein können.  Die Inhalte der Verzeichnisse
-_src-gen_ und _res-gen_ sollten nicht einer Versionsverwaltung zugeführt werden,
+_src/generated/java_ und _src/generated/resources_ sollten nicht einer Versionsverwaltung zugeführt werden,
 da sie bei jedem JEE-Generatorlauf neu generiert werden.
 
 ## Allgemeine Modelleinstellungen {#modelleinstellungen}
@@ -127,14 +129,23 @@ das Logging entsprechend verschärft.
 
 | 											|Datei 													|development 	|integration 	|productive	|
 |---|---|---|---|---|
-|Logging Level 								|**src-gen/&lt;package&gt;/log4j.properties** 			|DEBUG 			|DEBUG 			|INFO		|
-|Property hibernate.show_sql 				|**res-gen/WEB-INF/classes/META-INF/persistence.xml** 	|true 			|false 			|false		|
-|Property eclipselink.logging.level 		|**res-gen/WEB-INF/classes/META-INF/persistence.xml** 	|DEBUG 			|INFO 			|INFO		|
-|<context-param> javax.faces.PROJECT_STAGE 	|**res-gen/WEB-INF/web.xml** 							|Development 	|SystemTest 	|Productive	|
+|Logging Level 								|**src/generated/java/&lt;package&gt;/log4j.properties** 			|DEBUG 			|DEBUG 			|INFO		|
+|Property hibernate.show_sql 				|**src/generated/resources/WEB-INF/classes/META-INF/persistence.xml** 	|true 			|false 			|false		|
+|Property eclipselink.logging.level 		|**src/generated/resources/WEB-INF/classes/META-INF/persistence.xml** 	|DEBUG 			|INFO 			|INFO		|
+|<context-param> javax.faces.PROJECT_STAGE 	|**src/generated/resources/WEB-INF/web.xml** 							|Development 	|SystemTest 	|Productive	|
 
-Als letztes optionales Schlüsselwort dient `strict`. Es entscheidet, ob in den Basisklassen der Action Handler die Standardmethoden abstrakt vordefiniert werden und somit in den konkreten Klassen vorhanden sein müssen. Dadurch wird einerseits der Code besser, allerdings kann es vorkommen, dass die geforderten Methoden tatsächlich nicht gebraucht werden. Das kann aber nur bei starker Anpassung der XHTML-Masken passieren.
+Als letztes optionales Schlüsselwort dient `strict`. Es entscheidet, ob in
+den Basisklassen der Action Handler die Standardmethoden abstrakt
+vordefiniert werden und somit in den konkreten Klassen vorhanden sein
+müssen.  Dadurch wird einerseits der Code besser, allerdings kann es
+vorkommen, dass die geforderten Methoden tatsächlich nicht gebraucht werden. 
+Das kann aber nur bei starker Anpassung der XHTML-Masken passieren.
 
-Nach dem `application`-Kommando werden Optionen festgelegt, die das Verhalten der Web-Applikation näher beschreiben. Danach folgen die Beschreibungen der Entity Beans, welche auf einer [eigenen Seite genauer beschrieben](.#entitybeans) werden und zuletzt die Aufgaben- bzw. Prozess-Umgebungen, in denen die Entity Beans benutzt werden sollen.
+Nach dem `application`-Kommando werden Optionen festgelegt, die das
+Verhalten der Web-Applikation näher beschreiben.  Danach folgen die
+Beschreibungen der Entity Beans, welche auf einer [eigenen Seite genauer
+beschrieben](.#entitybeans) werden und zuletzt die Aufgaben- bzw. 
+Prozess-Umgebungen, in denen die Entity Beans benutzt werden sollen.
 
 
 ### Applikationsoptionen {#appoptionen}
@@ -269,7 +280,7 @@ wird in der _web.xml_:
 </context-param>
 ```
 
-Mit der Methode String getInitParameter(final String key) in einem Action
+Mit der Methode String `getInitParameter(final String key)` in einem Action
 Handler kann auf diesen Wert zugegriffen werden.  Die Werte sind aus Sicht
 des Application Servers und der Applikation selbst nicht veränderlich.
 
@@ -319,7 +330,7 @@ entity Address
 ```
 
 In der Maske wird dadurch eine Combobox generiert. Passt man noch die
-Resource Bundles unter _$PROJECT_HOME/src/\<package\>/messages.properties_ an,
+Resource Bundles unter _$PROJECT_HOME/src/main/java/\<package\>/messages.properties_ an,
 sieht dann die Maske folgendermaßen aus:
 
 ![](documentation/Entity2.jpg)
@@ -345,7 +356,7 @@ entity Person
 In dieser Entity Bean wird ein Textfeld als ID-Feld markiert. Dadurch gibt
 es kein automatisches Integer-ID-Feld mehr.  Es darf nur ein Feld als
 ID-Feld innerhalb einer Entity Bean gesetzt werden.  Ferner wird mit dem
-Schlüsselwort Entity eine 1:n-Relation eingeführt, um mehrere Adressen an
+Schlüsselwort `Entity` eine 1:n-Relation eingeführt, um mehrere Adressen an
 die Entity Bean binden zu können.  Dabei muss der Typ - in diesem Falle
 Address - mit den []-Zeichen markiert werden, sonst wäre die Relation nur
 1:1.  Die Maske für die Person Entity Bean sieht folgendermaßen aus:
@@ -353,21 +364,22 @@ Address - mit den []-Zeichen markiert werden, sonst wäre die Relation nur
 ![](documentation/Entity3.jpg)
 
 Klickt man auf den "Edit addresses"-Button, gelangt man in die schon
-bekannte Maske der `Address` Entity Bean.
+bekannte Maske der Address Entity Bean.
 
 ### Weitere Attributtypen
 
-Um Daten in einer Datenbank zu speichern, machen diverse Datentypen Sinn.
+Um Daten in einer Datenbank zu speichern, machen diverse Datentypen Sinn. 
 Jedes Attribut besteht aus der Kombination Datentyp, ergänzende Optionen
 Attributname und Transient-Flag.  Wird ein Attribut abschließend mit dem
-transient-Schlüsselwort markiert, so wird dieses Attribut nicht in der
+`transient`-Schlüsselwort markiert, so wird dieses Attribut nicht in der
 Datenbank gespeichert.  In diesem Fall werden zwei Klassen für die Entity
-Bean gemäß den Generation Gap Pattern generiert.  Eine abstrakte Basisklasse
-enthält die Attribute der Entity Bean, die konkrete Klasse enthält Getter-
-und Setter-Methoden für die transienten Attribute.  Man kann die transienten
-Methoden dazu verwenden, um aus anderen Attributen Werte zusammen zu bauen. 
-Aus Vor- und Nachnamen kann man den gesamten Namen als transientes Attribut
-herleiten.
+Bean gemäß den [Generation Gap
+Pattern](http://heikobehrens.net/2009/04/23/generation-gap-pattern/)
+generiert.  Eine abstrakte Basisklasse enthält die Attribute der Entity
+Bean, die konkrete Klasse enthält Getter- und Setter-Methoden für die
+transienten Attribute.  Man kann die transienten Methoden dazu verwenden, um
+aus anderen Attributen Werte zusammen zu bauen.  Aus Vor- und Nachnamen kann
+man den gesamten Namen als transientes Attribut herleiten.
 
 ```mydsl
 entity Person
@@ -380,12 +392,12 @@ entity Person
 }
 ```
 
-Daraus wird in der Datei _$PROJECT_HOME/src/\<package\>/entites/Person.java_:
+Daraus wird in der Datei _$PROJECT_HOME/src/main/java/\<package\>/entites/Person.java_:
 
 ```java
 /*
 * Generated by Xtext/JEE6 Generator.
-* Copyright (C) 2015  Steffen A. Mork, Dominik Pieper
+* Copyright (C) 2016  Steffen A. Mork, Dominik Pieper
 * $Id$
 */
 package org.jeegen.jee6.beispiel.entities;
@@ -443,7 +455,7 @@ im Formular folgendes Schnipsel generiert:
 
 #### Integer
 
-Integer-Datentypen werden durch das Schlüsselwort Int gefolgt von einem Variablennamen eingeleitet. Im XHTML-Formular wird dabei automatisch ein entsprechender Value Converter generiert, der den Inhalt des Eingabefeldes automatisch in einen Integer umwandelt. Die Syntax lautet:
+Integer-Datentypen werden durch das Schlüsselwort `Int` gefolgt von einem Variablennamen eingeleitet. Im XHTML-Formular wird dabei automatisch ein entsprechender Value Converter generiert, der den Inhalt des Eingabefeldes automatisch in einen Integer umwandelt. Die Syntax lautet:
 
 ```mydsl
 Int <Name> (transient);
@@ -470,7 +482,7 @@ wird folgendes Schnipsel im XHTML generiert:
 
 #### Number
 
-Number-Datentypen werden durch das Schlüsselwort Number gefolgt von einem Variablennamen eingeleitet. Java-seitig wird dafür ein double generiert Im XHTML-Formular wird dabei automatisch ein entsprechender Value Converter generiert, der den Inhalt des Eingabefeldes automatisch in eine Kommazahl umwandelt. Die Syntax lautet:
+Number-Datentypen werden durch das Schlüsselwort `Number` gefolgt von einem Variablennamen eingeleitet. Java-seitig wird dafür ein double generiert Im XHTML-Formular wird dabei automatisch ein entsprechender Value Converter generiert, der den Inhalt des Eingabefeldes automatisch in eine Kommazahl umwandelt. Die Syntax lautet:
 
 ```mydsl
 Number <Name> (transient);
@@ -591,19 +603,19 @@ im Formular folgendes Schnipsel generiert:
 Die umschließende Form ist jetzt eine sog. Multipart-Form und erzwingt die
 HTTP-Methode POST.  So können die hochzuladenden Dateien quasi als
 Attachment dem Submit-Request beigelegt werden.  Der Handler wird in der
-dazugehörenden Save()-Methode entsprechend erweitert, sodass der die als
+dazugehörenden `save()`-Methode entsprechend erweitert, sodass der die als
 Part bezeichneten Attachments auswertet und gegebenenfalls in der
-Entity-Bean speichert.  Für Clobs ist der Datentyp grundsätzlich `String`. 
-Die Save()-Methode kann grundsätzlich angepasst werden, sodass sie z.B. 
+Entity Bean speichert.  Für Clobs ist der Datentyp grundsätzlich `String`. 
+Die `save()`-Methode kann grundsätzlich angepasst werden, sodass sie z.B. 
 durch Syntaxprüfungen ergänzt werden können.  Es ist auch zu beachten, dass
-die Entity-Bean nicht verändert wird, wenn kein Upload erfolgt.  Es werden
-also keine Clobs gelöscht.  Auch dieses Verhalten kann in der Save()-Methode
+die Entity Bean nicht verändert wird, wenn kein Upload erfolgt.  Es werden
+also keine Clobs gelöscht.  Auch dieses Verhalten kann in der `save()`-Methode
 angepasst werden.
 
 #### Blob
 
 Will man Binärdaten in der Datenbank speichern, muss man den Datentyp Blob
-verwenden, der mit dem Schlüsselwort Blob benutzt wird.  Java-seitig wird
+verwenden, der mit dem Schlüsselwort `Blob` benutzt wird.  Java-seitig wird
 daraus ein byte[]-Array.  In einer XHTML-Maske erscheinen Attribute dieses
 Typs nicht.  Die Syntax lautet:
 
@@ -647,19 +659,19 @@ im Formular folgendes Schnipsel generiert:
 Die umschließende Form ist jetzt eine sog. Multipart-Form und erzwingt die
 HTTP-Methode POST.  So können die hochzuladenden Dateien quasi als
 Attachment dem Submit-Request beigelegt werden.  Der Handler wird in der
-dazugehörenden Save()-Methode entsprechend erweitert, sodass der die als
+dazugehörenden `save()`-Methode entsprechend erweitert, sodass der die als
 Part bezeichneten Attachments auswertet und gegebenenfalls in der
-Entity-Bean speichert.  Für Blobs ist der Datentyp grundsätzlich `byte[]`. 
-Die Save()-Methode kann grundsätzlich angepasst werden, sodass sie z.B. 
+Entity Bean speichert.  Für Blobs ist der Datentyp grundsätzlich `byte[]`. 
+Die `save()`-Methode kann grundsätzlich angepasst werden, sodass sie z.B. 
 durch Syntaxprüfungen ergänzt werden können.  Es ist auch zu beachten, dass
-die Entity-Bean nicht verändert wird, wenn kein Upload erfolgt.  Es werden
-also keine Blobs gelöscht.  Auch dieses Verhalten kann in der Save()-Methode
+die Entity Bean nicht verändert wird, wenn kein Upload erfolgt.  Es werden
+also keine Blobs gelöscht.  Auch dieses Verhalten kann in der `save()`-Methode
 angepasst werden.
 
 #### Boolean
 
 Einen einfachen Booleschen Datentypen führt man mit dem Schlüsselwort
-Boolean ein.  Sollte der Attrributname active lauten, wird noch weitere
+`Boolean` ein.  Sollte der Attributname `active` lauten, wird noch weitere
 Funktionalität generiert.  In der XHTML-Maske wird in der Liste ein
 Kommandolink ergänzt, mit dem der Aktivierungsstatus dieses Attributes
 gewechselt werden kann.  Das setzt weitere Methoden im Action Handler und im
@@ -680,12 +692,12 @@ DAO voraus, die automatisch mit generiert werden.
 
 Mit diesem Datentypen kann ein Zeitstempel bestehend aus Uhrzeit und
 Kalenderdatum in der Datenbank gespeichert werden.  In der Entity Bean wird
-hierfür der Datentyp Date verwendet.  Über die Verwendung von Datumsangaben
+hierfür der Datentyp `Date` verwendet.  Über die Verwendung von Datumsangaben
 über Prepared Statements in EQL wird in diesem Artikel berichtet.  Wird dem
-Schlüsselwort Timestamp noch ein auto beigegeben, so wird automatisch beim
+Schlüsselwort `Timestamp` noch ein `auto` beigegeben, so wird automatisch beim
 erstmaligem Speichern der Entity Bean das Erzeugungsdatum in dieses Attribut
 gespeichert.  Benutzt man stattdessen oder zusätzlich noch das Schlüsselwort
-update, wird bei jeder Änderung der Entity Bean in der Datenbank dieses
+`update`, wird bei jeder Änderung der Entity Bean in der Datenbank dieses
 Attribut auf den aktuellen Zeitstempel gebracht.  Die Syntax lautet:
 
 ```mydsl
@@ -714,7 +726,7 @@ wird in der XHTML folgendes Schnipsel generiert:
 </tr>
 ```
 
-Wird beim Timestamp das Schlüsselwort auto oder update ergänzt, wird kein
+Wird beim Timestamp das Schlüsselwort `auto` oder `update` ergänzt, wird kein
 Formulareinstrag im XHTML generiert.  Stattdessen werd in der Entity Bean
 entsprechende Methoden ergänzt:
 
@@ -742,7 +754,7 @@ Die Annotationen `@PrePersist` und `@PreUpdate` sind Bestandteile des JEE-Framew
 #### Date
 
 Mit diesem Datentypen kann ein Kalenderdatum in der Datenbank untergebracht
-werden.  In der Entity Bean wird hierfür der Datentyp Date verwendet.  Über
+werden.  In der Entity Bean wird hierfür der Datentyp `Date` verwendet.  Über
 die Verwendung von Datumsangaben über Prepared Statements in EQL wird in
 diesem Artikel berichtet.  Die Syntax lautet:
 
@@ -786,7 +798,7 @@ Entity <Typ> ([]) <Name>;
 Es wird zwischen einer 1:1- und einer 1:n-Relation unterschieden, indem dem
 Entity Typen das Symbol [] beigestellt wird.  Die 1:1-Relation wird in einem
 XHTML-Formular nicht dargestellt.  Soll für diesen Fall eine Combobox zur
-Auswahl dargestellt werden, muss das Attribut als Option(s.u.) deklariert
+Auswahl dargestellt werden, muss das Attribut als `Option` (s.u.) deklariert
 werden.  Für eine 1:n-Relation wird ein Button bereitgestellt, in der die
 Liste der Entity Beans bearbeitet werden kann.
 
@@ -852,7 +864,7 @@ können.  Das ist für Logging-Zwecke besonders sinnvoll.
 
 Sämtliche Attribute und Methoden werden mit Javadoc-Kommentaren dokumentiert.
 
-Wird in keinen Attribut das Schlüsselwort id verwendet, wird automatisch
+Wird in keinen Attribut das Schlüsselwort `id` verwendet, wird automatisch
 eine ID-Spalte generiert, die die IDs aus einer ID-Tabelle beziehen.  Diese
 Form der ID-Generierung ist die kompatibelste Variante zwischen den
 Application Servern und den verwendeten Datenbanken.  Jede Tabelle erhält in
@@ -923,7 +935,7 @@ wird automatisch die erste aufgelistete gewählt.
 Speziell für die Suche von Entity Beans aus Ergebnislisten kann das
 Filterable-Interface benutzt werden.  Dieses Interface erfordert die
 Implementierung der Methode `public boolean filter(String pattern, Locale
-locale)`.  Wird das Schlüsselwort filterable gesetzt, wird die Entity Bean in
+locale)`.  Wird das Schlüsselwort `filterable` gesetzt, wird die Entity Bean in
 eine abstrakte Klasse und eine konkrete Klasse generiert.  Die konkrete
 Klasse muss dann die besagte Methode `filter()` implementieren.  Da Suchen in
 Java schneller vonstatten geht, als in der Datenbank, macht das java-seitige
@@ -1262,7 +1274,7 @@ für das Deployment angepasst werden.
 
 Als letzte Änderung vor der Anpassung des Quellcodes muss der Generator von
 JEE 6 auf JEE 7 umgestellt werden.  In der entsprechenden Datei
-_src/Generator.mwe2_ wird das Package der Generatorkomponente auf
+_src/main/java/Generator.mwe2_ wird das Package der Generatorkomponente auf
 `@org.jeegen.jee7.generator.DslGeneratorMWE` angepasst.
 
 ### Logging
@@ -1397,12 +1409,12 @@ wie vor von Hand erweitert werden.
 
 ### Deskriptoren
 
-Die JEE-Generatoren erzeugen den Code mittels des sog. Generation Gap
-Patterns.  Alle bisherigen Punkte müssen auf bereits existierendem Code
-angewendet werden, damit sie dem Java EE 6-Generat rechnung tragen.  Alle
-folgenden Änderungen werden unabhängig vom bestehenden Code bei jedem
-Generatorlauf neu generiert und werden hier nur der Vollständigkeit halber
-aufgelistet.
+Die JEE-Generatoren erzeugen den Code mittels des sog. [Generation Gap
+Patterns](http://heikobehrens.net/2009/04/23/generation-gap-pattern/).  Alle
+bisherigen Punkte müssen auf bereits existierendem Code angewendet werden,
+damit sie dem Java EE 6-Generat rechnung tragen.  Alle folgenden Änderungen
+werden unabhängig vom bestehenden Code bei jedem Generatorlauf neu generiert
+und werden hier nur der Vollständigkeit halber aufgelistet.
 
 _beans.xml_
 
