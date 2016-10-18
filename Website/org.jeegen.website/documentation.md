@@ -913,13 +913,13 @@ Der XHTML-Codeschnipsel:
 ```
 
 Der Action Handler stellt die Liste der möglichen Auswahlelemente bereit. In
-diesem Falle muss die Klasse OrderingHandler die Methode `getUserInfoList()`
+diesem Falle muss die Klasse _OrderingHandler_ die Methode `getUserInfoList()`
 bereitstellen.  In dem Beispiel darf die 1:1-Relation den Wert null
 annehmen.  Soll das nicht möglich sein, muss das `<f:selectItem>`-Tag entfernt
 werden.  Zusätzlich werden noch an der Entity Bean die Methoden `hashCode()`
 und `equals()` überladen.  Die von den generierten Action Handlern beinhalten
 den dazu passenden Value Converter.  In diesem Beispiel stellt die Klasse
-OrderingHandler über die Methode `getUserInfoConverter()` den Converter als
+_OrderingHandler_ über die Methode `getUserInfoConverter()` den Converter als
 innere Klasse UserInfoConverter zur Verfügung.
 
 #### History
@@ -1135,7 +1135,7 @@ process User
 
 ### Generierte Methoden im Action Handler
 
-Die Klasse AbstractUserHandler liefert für die Zugriffskontrolle die Methode
+Die Klasse _AbstractUserHandler_ liefert für die Zugriffskontrolle die Methode
 `isAllowed()`, die in der XHTML verwendet werden kann.  Da in diesem Falle
 keine Zugriffsberechtigungen auf Rollen beschränkt wurden, liefert diese
 Methode immer true zurück.  Ferner wird in diese Klasse eine Referenz auf
@@ -1160,7 +1160,7 @@ abstract String savePerson();
 abstract String backFromPerson();
 ```
 
-Der Action Handler PersonHandler ist Session scoped. Dadurch lässt sich der
+Der Action Handler _PersonHandler_ ist Session scoped. Dadurch lässt sich der
 Zustand der Entity Bean Person speichern.  Dadurch brauchen wir hierfür auch
 Zugriffsmethoden:
 
