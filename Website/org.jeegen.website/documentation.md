@@ -453,6 +453,27 @@ im Formular folgendes Schnipsel generiert:
 </tr>
 ```
 
+#### URLs unter JEE 7
+
+Eine Besonderheit ist die Benennung eines `Text`-Attributes unter JEE 7.
+Wenn der Name _url_ heißt, wird das XHTML ein wenig anders generiert:
+
+```xhtml
+<tr>
+    <td class="mid">
+        <h:outputLabel for="subject" value="#{msg['info.startup.subject']}"/>
+    </td>
+    <td>
+        <h:inputText p:type="url" id="subject" label="#{msg['info.startup.subject']}"
+            maxlength="255" value="#{infoHandler.startup.subject}"/>
+    </td>
+</tr>
+```
+
+Der Aplication Server erzeugt daraus HTML5, das auf Mobile Devices eine
+andere Tastatur bei der Eingabe einblendet.  Dadurch kann die Eingabe von
+URLs vereinfacht werden.
+
 #### Integer
 
 Integer-Datentypen werden durch das Schlüsselwort `Int` gefolgt von einem Variablennamen eingeleitet. Im XHTML-Formular wird dabei automatisch ein entsprechender Value Converter generiert, der den Inhalt des Eingabefeldes automatisch in einen Integer umwandelt. Die Syntax lautet:
@@ -477,6 +498,21 @@ wird folgendes Schnipsel im XHTML generiert:
     <td>
         <h:inputText id="integerEntry" label="#{msg['info.startup.integerentry']}" size="10"
             value="#{infoHandler.startup.integerEntry}"/>
+    </td>
+</tr>
+```
+
+Unter JEE 7 wird der XHTML-Schnipsel ein wenig anders generiert. durch
+`p:type="number"` wird nur noch die Eingabe von Ziffern möglich:
+
+```xhtml
+<tr>
+    <td class="mid">
+        <h:outputLabel for="integerEntry" value="#{msg['info.startup.integerentry']}"/>
+    </td>
+    <td>
+        <h:inputText p:type="number" id="integerEntry" label="#{msg['info.startup.integerentry']}"
+            size="10" value="#{infoHandler.startup.integerEntry}"/>
     </td>
 </tr>
 ```
@@ -509,6 +545,21 @@ wird folgendes Schnipsel im XHTML generiert:
 </tr>
 ```
 
+Unter JEE 7 wird das XHTML so generiert, dass nur noch erlaubte Zeichen eingegeben werden können. Der Schnipsel sieht dann so aus:
+
+```xhtml
+<tr>
+    <td class="mid">
+        <h:outputLabel for="numberEntry" value="#{msg['info.startup.numberentry']}"/>
+    </td>
+    <td>
+        <h:inputText p:pattern="[-+]?\d+(?:[\.,]\d+)?" id="numberEntry"
+            label="#{msg['info.startup.numberentry']}"
+            maxlength="10" value="#{infoHandler.startup.numberEntry}"/>
+    </td>
+</tr>
+```
+
 #### E-Mail
 
 Ein E-Mail-Datentyp kann als ID geführt werden und ist im Prinzip ein Textfeld mit dem Unterschied, dass ein Validator die Eingabe auf das Format einer gültigen EMail-Adresse prüft. Die Syntax lautet:
@@ -531,7 +582,8 @@ im Formular folgendes Schnipsel generiert:
         <h:outputLabel for="mail" value="#{msg['info.startup.mail']}"/>
     </td>
     <td>
-        <h:inputText id="mail" label="#{msg['info.startup.mail']}" maxlength="255" value="#{infoHandler.startup.mail}">
+        <h:inputText id="mail" label="#{msg['info.startup.mail']}" maxlength="255"
+                value="#{infoHandler.startup.mail}">
             <f:validator validatorId="mailValidator"/>
         </h:inputText>
     </td>
@@ -539,7 +591,25 @@ im Formular folgendes Schnipsel generiert:
 ```
 
 Man beachte, dass automatisch der `mailValidator` eingebunden ist, der
-sich in der JEE6-Utils-Bibliothek befindet.
+sich in der JEE-Utils-Bibliothek befindet.
+
+Unter JEE 7 wird das XHTML durch das Attribut `p:type="email"` ergänzt. 
+Dadurch wird auf Mobile Devices eine andere Tastatur für die Eingabe
+eingeblendet und ermöglicht dem Benutzer eine vereinfachte Eingabe:
+
+```xhtml
+<tr>
+    <td class="mid">
+        <h:outputLabel for="mail" value="#{msg['info.startup.mail']}"/>
+    </td>
+    <td>
+        <h:inputText p:type="email" id="mail" label="#{msg['info.startup.mail']}"
+                maxlength="255" value="#{infoHandler.startup.mail}">
+            <f:validator validatorId="mailValidator"/>
+        </h:inputText>
+    </td>
+</tr>
+```
 
 #### Clob
 
@@ -573,7 +643,7 @@ im Formular folgendes Schnipsel generiert:
 </tr>
 ```
 
-##### Uploads mit Clob (nur JEE 7)
+##### Uploads mit Clob (nur JEE 7) {#clob-jee7}
 
 Unter JEE 7 können leicht Forms gebaut werden, mit denen man Daten hochladen
 kann.  Das entsprechende XHTML-Tag lautet `<h:inputFile .../>`.  Die Syntax
@@ -629,7 +699,7 @@ Blob <Name> (transient);
 einer Datenbank gespeichert werden.  Große Datensätze bringt man besser im
 Dateisystem unter.
 
-##### Uploads mit Blob (nur JEE 7)
+##### Uploads mit Blob (nur JEE 7) {#blob-jee7}
 
 Unter JEE 7 können leicht Forms gebaut werden, mit denen man Daten hochladen
 kann.  Das entsprechende XHTML-Tag lautet `<h:inputFile .../>`.  Die Syntax
@@ -673,7 +743,7 @@ angepasst werden.
 #### Boolean
 
 Einen einfachen Booleschen Datentypen führt man mit dem Schlüsselwort
-`Boolean` ein.  Sollte der Attributname `active` lauten, wird noch weitere
+`Boolean` ein.  Sollte der Attributname _active_ lauten, wird noch weitere
 Funktionalität generiert.  In der XHTML-Maske wird in der Liste ein
 Kommandolink ergänzt, mit dem der Aktivierungsstatus dieses Attributes
 gewechselt werden kann.  Das setzt weitere Methoden im Action Handler und im
@@ -1372,8 +1442,8 @@ public class XyzDaoBean extends AbstractXyzDaoBean
 
 ### File Upload
 
-Der File Upload wird zwar von keinem JEE-Generator berücksichtigt,
-allerdings gibt es unter Java EE 7 eine nicht unbedeutende Vereinfachung. 
+Der File Upload wird neuerdings vom JEE7-Generator berücksichtigt,
+denn es gibt unter Java EE 7 eine nicht unbedeutende Vereinfachung. 
 Es muss erstens keine externe Library wie z.B.  die Apache Commons
 Fileupload verwendet werden und ferner muss kein sog.  Request Wrapper
 implementiert werden.  Beides entfällt ersatzlos.
@@ -1409,11 +1479,10 @@ catch (IOException e)
 }
 ```
 
-**Hinweis!** Die DSL-Syntax wurde für `Clob` und `Blob` dahingehend
-verändert, dass daraus direkt der Upload generiert werden kann.  Da meist
-der Handler schon mit Business Logik angereichert wurde, muss dieser nach
-wie vor von Hand erweitert werden.
-
+**Hinweis!** Die DSL-Syntax wurde für [`Clob`](.#clob-jee7) und
+[`Blob`](.#blob-jee7) dahingehend verändert, dass daraus direkt der Upload
+generiert werden kann.  Da meist der Handler schon mit Business Logik
+angereichert wurde, muss dieser nach wie vor von Hand erweitert werden.
 
 ### Deskriptoren
 
