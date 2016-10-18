@@ -441,7 +441,7 @@ Text subject;
 
 im Formular folgendes Schnipsel generiert:
 
-```html
+```xhtml
 <tr>
     <td class="mid">
         <h:outputLabel for="subject" value="#{msg['info.startup.subject']}"/>
@@ -469,7 +469,7 @@ Int integerEntry;
 
 wird folgendes Schnipsel im XHTML generiert:
 
-```html
+```xhtml
 <tr>
     <td class="mid">
         <h:outputLabel for="integerEntry" value="#{msg['info.startup.integerentry']}"/>
@@ -497,7 +497,7 @@ Number numberEntry;
 
 wird folgendes Schnipsel im XHTML generiert:
 
-```html
+```xhtml
 <tr>
     <td class="mid">
         <h:outputLabel for="numberEntry" value="#{msg['info.startup.numberentry']}"/>
@@ -525,7 +525,7 @@ Email mail;
 
 im Formular folgendes Schnipsel generiert:
 
-```mydsl
+```xhtml
 <tr>
     <td class="mid">
         <h:outputLabel for="mail" value="#{msg['info.startup.mail']}"/>
@@ -561,7 +561,7 @@ Clob clobEntry;
 
 im Formular folgendes Schnipsel generiert:
 
-```mydsl
+```xhtml
 <tr>
     <td class="top">
         <h:outputLabel for="clobEntry" value="#{msg['info.startup.clobentry']}"/>
@@ -590,7 +590,7 @@ Clob clobEntry upload "text/txt";
 
 im Formular folgendes Schnipsel generiert:
 
-```mydsl
+```xhtml
 <tr>
     <td class="top">
         <h:outputLabel for="clobEntry" value="#{msg['info.startup.clobentry']}"/>
@@ -618,7 +618,7 @@ angepasst werden.
 
 Will man Binärdaten in der Datenbank speichern, muss man den Datentyp Blob
 verwenden, der mit dem Schlüsselwort `Blob` benutzt wird.  Java-seitig wird
-daraus ein byte[]-Array.  In einer XHTML-Maske erscheinen Attribute dieses
+daraus ein `byte[]`-Array.  In einer XHTML-Maske erscheinen Attribute dieses
 Typs nicht.  Die Syntax lautet:
 
 ```mydsl
@@ -646,7 +646,7 @@ Blob blobEntry upload "image/jpg";
 
 im Formular folgendes Schnipsel generiert:
 
-```mydsl
+```xhtml
 <tr>
     <td class="top">
         <h:outputLabel for="blobEntry" value="#{msg['info.startup.blobentry']}"/>
@@ -679,7 +679,7 @@ Kommandolink ergänzt, mit dem der Aktivierungsstatus dieses Attributes
 gewechselt werden kann.  Das setzt weitere Methoden im Action Handler und im
 DAO voraus, die automatisch mit generiert werden.
 
-```mydsl
+```xhtml
 <tr>
     <td class="mid">
         <h:outputLabel for="active" value="#{msg['info.startup.active']}"/>
@@ -715,7 +715,7 @@ Timestamp timestamp1;
 
 wird in der XHTML folgendes Schnipsel generiert:
 
-```html
+```xhtml
 <tr>
     <td class="mid">
         <h:outputLabel for="timestamp1" value="#{msg['info.startup.timestamp1']}"/>
@@ -775,7 +775,7 @@ Date dateElement;
 
 wird folgendes XHTML-Schnipsel generiert:
 
-```html
+```xhtml
 <tr>
     <td class="mid">
         <h:outputLabel for="dateElement" value="#{msg['info.startup.dateelement']}"/>
