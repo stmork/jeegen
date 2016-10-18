@@ -301,7 +301,6 @@ process User
 {
      Address
 }
-
 ```
 Nach einem Generatorlauf kann die Applikation deployed werden. Die Maske sieht dann wie folgt aus: 
 ![](documentation/Entity1.jpg)
@@ -448,7 +447,8 @@ im Formular folgendes Schnipsel generiert:
         <h:outputLabel for="subject" value="#{msg['info.startup.subject']}"/>
     </td>
     <td>
-        <h:inputText id="subject" label="#{msg['info.startup.subject']}" maxlength="255" value="#{infoHandler.startup.subject}"/>
+        <h:inputText id="subject" label="#{msg['info.startup.subject']}"
+            maxlength="255" value="#{infoHandler.startup.subject}"/>
     </td>
 </tr>
 ```
@@ -475,7 +475,8 @@ wird folgendes Schnipsel im XHTML generiert:
         <h:outputLabel for="integerEntry" value="#{msg['info.startup.integerentry']}"/>
     </td>
     <td>
-        <h:inputText id="integerEntry" label="#{msg['info.startup.integerentry']}" size="10" value="#{infoHandler.startup.integerEntry}"/>
+        <h:inputText id="integerEntry" label="#{msg['info.startup.integerentry']}" size="10"
+            value="#{infoHandler.startup.integerEntry}"/>
     </td>
 </tr>
 ```
@@ -502,7 +503,8 @@ wird folgendes Schnipsel im XHTML generiert:
         <h:outputLabel for="numberEntry" value="#{msg['info.startup.numberentry']}"/>
     </td>
     <td>
-        <h:inputText id="numberEntry" label="#{msg['info.startup.numberentry']}" maxlength="10" value="#{infoHandler.startup.numberEntry}"/>
+        <h:inputText id="numberEntry" label="#{msg['info.startup.numberentry']}"
+            maxlength="10" value="#{infoHandler.startup.numberEntry}"/>
     </td>
 </tr>
 ```
@@ -683,7 +685,8 @@ DAO voraus, die automatisch mit generiert werden.
         <h:outputLabel for="active" value="#{msg['info.startup.active']}"/>
     </td>
     <td>
-        <h:selectBooleanCheckbox id="active" label="#{msg['info.startup.active']}" value="#{infoHandler.startup.active}"/>
+        <h:selectBooleanCheckbox id="active" label="#{msg['info.startup.active']}"
+            value="#{infoHandler.startup.active}"/>
     </td>
 </tr>
 ```
@@ -718,8 +721,8 @@ wird in der XHTML folgendes Schnipsel generiert:
         <h:outputLabel for="timestamp1" value="#{msg['info.startup.timestamp1']}"/>
     </td>
     <td>
-        <h:inputText id="timestamp1" label="#{msg['info.startup.timestamp1']}" maxlength="10" styleClass="date"
-                value="#{infoHandler.startup.timestamp1}">
+        <h:inputText id="timestamp1" label="#{msg['info.startup.timestamp1']}" maxlength="10"
+                styleClass="date" value="#{infoHandler.startup.timestamp1}">
             <f:convertDateTime pattern="dd.MM.yyyy" type="date"/>
         </h:inputText>
     </td>
@@ -778,8 +781,8 @@ wird folgendes XHTML-Schnipsel generiert:
         <h:outputLabel for="dateElement" value="#{msg['info.startup.dateelement']}"/>
     </td>
     <td>
-        <h:inputText id="dateElement" label="#{msg['info.startup.dateelement']}" maxlength="10" styleClass="date"
-                value="#{infoHandler.startup.dateElement}">
+        <h:inputText id="dateElement" label="#{msg['info.startup.dateelement']}" maxlength="10"
+                styleClass="date" value="#{infoHandler.startup.dateElement}">
             <f:convertDateTime pattern="dd.MM.yyyy" type="date"/>
         </h:inputText>
     </td>
@@ -805,15 +808,15 @@ Liste der Entity Beans bearbeitet werden kann.
 #### Option
 
 Soll in einer Entity Bean eine 1:1-Relation in einer Combobox ausgewählt
-werden können, muss der entsprechende Attributtyp Option lauten.  Die Syntax
-ist ähnlich dem Entity-Attributtyp mit dem Unterschied, dass keine
+werden können, muss der entsprechende Attributtyp `Option` lauten.  Die Syntax
+ist ähnlich dem `Entity`-Attributtyp mit dem Unterschied, dass keine
 1:n-Relation benutzt werden kann:
 
 ```mydsl
 Option <Typ> <Name>;
 ```
 
-Die als Option referenzierte Entity Bean kann sowohl eine Enumeration sein,
+Die als `Option` referenzierte Entity Bean kann sowohl eine Enumeration sein,
 als auch als editierbar gekennzeichnet sein.  Im Modell wird aus der Zeile
 
 ```mydsl
@@ -829,9 +832,11 @@ Der XHTML-Codeschnipsel:
     </td>
     <td>
         <h:selectOneMenu converter="#{orderingHandler.userInfoConverter}" id="owner"
-                label="#{msg['ordering.orderposition.owner']}" value="#{orderingHandler.orderPosition.owner}">
+                label="#{msg['ordering.orderposition.owner']}"
+                value="#{orderingHandler.orderPosition.owner}">
             <f:selectItem itemLabel="#{msg.no_selection}" itemValue="[NULL]"/>
-            <f:selectItems itemLabel="#{owner.name}" itemValue="#{owner}" value="#{orderingHandler.userInfoList}" var="owner"/>
+            <f:selectItems itemLabel="#{owner.name}" itemValue="#{owner}"
+                value="#{orderingHandler.userInfoList}" var="owner"/>
         </h:selectOneMenu>
     </td>
 </tr>
@@ -879,7 +884,8 @@ private int id;
 * @return The ID of this entity bean.
 */
 @Id
-@TableGenerator(name = "StartupIDs", table = "IDs", pkColumnName = "id", valueColumnName = "value", pkColumnValue = "Startup", initialValue = 1, allocationSize = 10)
+@TableGenerator(name = "StartupIDs", table = "IDs", pkColumnName = "id",
+    valueColumnName = "value", pkColumnValue = "Startup", initialValue = 1, allocationSize = 10)
 @GeneratedValue(strategy = GenerationType.TABLE, generator = "StartupIDs")
 public int getId() {
     return id;
@@ -907,7 +913,8 @@ Werden für Auswahllisten Optionen verwendet, sieht die Syntax leicht
 erweitert aus.  Hier lautet die Syntax:
 
 ```mydsl
-options <Name> (filterable) (cloneable) (editable { <Attributes>+ }) | ( { <Resource-Key>+ }) (persistence unit <Persistence-Unit>);
+options <Name> (filterable) (cloneable) (editable { <Attributes>+ }) | ( { <Resource-Key>+ })
+    (persistence unit <Persistence-Unit>);
 ```
 
 Hier werden im Wesentlichen zwei Varianten unterschieden:
@@ -918,7 +925,7 @@ Hier werden im Wesentlichen zwei Varianten unterschieden:
 Die nicht editierbaren Enumerations wurden weiter oben schon beispielhaft
 beschrieben.  Um in einer XHTML eine andere Entity Bean als 1:1-Relation in
 einer Auswahlbox auswählen zu können, muss die Referenz auf diese Entity
-Bean als Option-Attribut benutzt werden.  Sie unterscheiden sich ansonsten
+Bean als `Option`-Attribut benutzt werden.  Sie unterscheiden sich ansonsten
 nicht von den üblichen Entity Beans, die mit dem entity-Schlüsselwort
 beschrieben werden.
 
@@ -1022,7 +1029,8 @@ Für jeden Prozess wird ein eigener Action Handler und ein eigenes DAO generiert
 In den Action Handlern werden für die XHTML-Dateien die Zugriffsmethoden bereitgestellt, die wiederum auf die dazugehörigen DAOs zugreifen. Veranschaulicht wird das anhand folgenden Beispielmodells, dass teilweise schon bei den Entity Beans beschrieben wurde:
 
 ```mydsl
-application "Eine Beispiel-Applikation" context "/beispiel" package org.jeegen.jee6.beispiel development strict;
+application "Eine Beispiel-Applikation" context "/beispiel" package org.jeegen.jee6.beispiel
+    development strict;
 persistence unit"beispielDS" jndi "jdbc/exampleDS";
 locale "de" default;
 locale "el";
