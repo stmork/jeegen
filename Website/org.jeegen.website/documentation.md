@@ -309,8 +309,8 @@ Will man noch den Adresstyp zwischen privat und geschäftlich angeben, kann
 eine nicht editierbare option benutzt werden.  Diese `option` wird als
 Enumeration generiert.  Als Werte können nur Textschlüssel verwendet werden. 
 Diese Schlüssel werden automatisch im Resource Bundle aller definierter
-Sprachen angelegt, falls sie noch nicht vorhanden sind.  In der Address
-Entity Bean wird der Adresstyp AddressOption als Attributtyp `Option`
+Sprachen angelegt, falls sie noch nicht vorhanden sind.  In der _Address_
+Entity Bean wird der Adresstyp _AddressOption_ als Attributtyp `Option`
 eingebunden.  In der Datenbank entsteht dadurch eine 1:1-Relation.
 
 ```mydsl
@@ -340,7 +340,7 @@ Die Generierung einer Combobox erfordert noch weitere Dinge im Hintergrund:
  2. Die Entity Beans müssen die Methoden `equals()` und `hash()` so überschreiben, dass Entity Beans mit denselben IDs als identisch angesehen werden, sonst funktioniert der Value Converter nicht.
  
 Es macht natürlich Sinn, dass es Personen gibt, in denen mehrere Adressen
-gespeichert werden.  Damit wird das Modell um die Entity Bean `Person`
+gespeichert werden.  Damit wird das Modell um die Entity Bean _Person_
 ergänzt:
 
 ```mydsl
@@ -357,13 +357,13 @@ es kein automatisches Integer-ID-Feld mehr.  Es darf nur ein Feld als
 ID-Feld innerhalb einer Entity Bean gesetzt werden.  Ferner wird mit dem
 Schlüsselwort `Entity` eine 1:n-Relation eingeführt, um mehrere Adressen an
 die Entity Bean binden zu können.  Dabei muss der Typ - in diesem Falle
-Address - mit den []-Zeichen markiert werden, sonst wäre die Relation nur
-1:1.  Die Maske für die Person Entity Bean sieht folgendermaßen aus:
+_Address_ - mit den []-Zeichen markiert werden, sonst wäre die Relation nur
+1:1.  Die Maske für die _Person_ Entity Bean sieht folgendermaßen aus:
 
 ![](documentation/Entity3.jpg)
 
 Klickt man auf den "Edit addresses"-Button, gelangt man in die schon
-bekannte Maske der Address Entity Bean.
+bekannte Maske der _Address_ Entity Bean.
 
 ### Weitere Attributtypen
 
@@ -423,7 +423,8 @@ public class Person extends AbstractPerson {
 }
 ```
 
-Aus Gründen der Übersichtlichkeit wurde auf Prüfen von Null-Pointern verzichtet. Im Folgenden werden die Attribute aufgelistet und erklärt.
+Aus Gründen der Übersichtlichkeit wurde auf Prüfen von Null-Pointern
+verzichtet.  Im Folgenden werden die Attribute aufgelistet und erklärt.
 
 #### Text
 
@@ -476,7 +477,10 @@ URLs vereinfacht werden.
 
 #### Integer
 
-Integer-Datentypen werden durch das Schlüsselwort `Int` gefolgt von einem Variablennamen eingeleitet. Im XHTML-Formular wird dabei automatisch ein entsprechender Value Converter generiert, der den Inhalt des Eingabefeldes automatisch in einen Integer umwandelt. Die Syntax lautet:
+Integer-Datentypen werden durch das Schlüsselwort `Int` gefolgt von einem
+Variablennamen eingeleitet.  Im XHTML-Formular wird dabei automatisch ein
+entsprechender Value Converter generiert, der den Inhalt des Eingabefeldes
+automatisch in einen Integer umwandelt.  Die Syntax lautet:
 
 ```mydsl
 Int <Name> (transient);
@@ -562,7 +566,9 @@ Unter JEE 7 wird das XHTML so generiert, dass nur noch erlaubte Zeichen eingegeb
 
 #### E-Mail
 
-Ein E-Mail-Datentyp kann als ID geführt werden und ist im Prinzip ein Textfeld mit dem Unterschied, dass ein Validator die Eingabe auf das Format einer gültigen EMail-Adresse prüft. Die Syntax lautet:
+Ein E-Mail-Datentyp kann als ID geführt werden und ist im Prinzip ein
+Textfeld mit dem Unterschied, dass ein Validator die Eingabe auf das Format
+einer gültigen EMail-Adresse prüft.  Die Syntax lautet:
 
 ```mydsl
 Email (id) <Name> (transient);
@@ -684,6 +690,36 @@ die Entity Bean nicht verändert wird, wenn kein Upload erfolgt.  Es werden
 also keine Clobs gelöscht.  Auch dieses Verhalten kann in der `save()`-Methode
 angepasst werden.
 
+Die `save()`-Methode hat dann folgendes Aussehen:
+
+```java
+public String saveStartup()
+{
+    try
+    {
+        final javax.servlet.http.Part clobEntryPart = getPartStartupClobEntry();
+
+        // clobEntry
+        if ((clobEntryPart != null) && (clobEntryPart.getSize() > 0))
+        {
+            final byte data[] = Download.read(clobEntryPart.getInputStream(),
+                (int) clobEntryPart.getSize());
+            final String clob = new String(data, Charset.defaultCharset());
+
+            getStartup().setClobEntry(clob);
+        }
+        dao.updateStartup(getStartup());
+        setStartup(new Startup());
+    }
+    catch (IOException e)
+    {
+        log.log(Level.SEVERE, e.getMessage(), e);
+    }
+
+    return NAV_INFO_STARTUP;
+}
+```
+
 #### Blob
 
 Will man Binärdaten in der Datenbank speichern, muss man den Datentyp Blob
@@ -739,6 +775,35 @@ durch Syntaxprüfungen ergänzt werden können.  Es ist auch zu beachten, dass
 die Entity Bean nicht verändert wird, wenn kein Upload erfolgt.  Es werden
 also keine Blobs gelöscht.  Auch dieses Verhalten kann in der `save()`-Methode
 angepasst werden.
+
+Die `save()`-Methode hat dann folgendes Aussehen:
+
+```java
+public String saveStartup()
+{
+    try
+    {
+        final javax.servlet.http.Part blobEntryPart = getPartStartupBlobEntry();
+
+        // blobEntry
+        if ((blobEntryPart != null) && (blobEntryPart.getSize() > 0))
+        {
+            final byte data[] = Download.read(blobEntryPart.getInputStream(),
+                (int) blobEntryPart.getSize());
+
+            getStartup().setBlobEntry(data);
+        }
+        dao.updateStartup(getStartup());
+        setStartup(new Startup());
+    }
+    catch (IOException e)
+    {
+        log.log(Level.SEVERE, e.getMessage(), e);
+    }
+
+    return NAV_INFO_STARTUP;
+}
+```
 
 #### Boolean
 
@@ -1058,13 +1123,13 @@ public List<OrderPosition> lastOrderList()
 }
 ```
 
-Die Klasse FilteredList erweitert die Klasse ArrayList und ist in der
-javadoc/-Bibliothek enthalten.  Sie kann nur Elemente aufnehmen, die das
-Filterable-Interface implementieren.  Die Klasse überlädt die Methoden `add()`
-und `addAll()`, in denen das Filtern stattfindet.  Es werden nur Elemente der
-Liste hinzugefügt, die bei Aufruf der Elementmethode `filter()` true
-zurückliefern.  Das Locale wird aus dem Request ermittelt und entspricht
-damit der im Browser eingestellten Sprache.
+Die Klasse _FilteredList_ erweitert die Klasse _ArrayList_ und ist in der
+JEE-Util-Bibliothek enthalten.  Sie kann nur Elemente aufnehmen, die das
+_Filterable_-Interface implementieren.  Die Klasse überlädt die Methoden
+`add()` und `addAll()`, in denen das Filtern stattfindet.  Es werden nur
+Elemente der Liste hinzugefügt, die bei Aufruf der Elementmethode `filter()`
+true zurückliefern.  Das Locale wird aus dem Request ermittelt und
+entspricht damit der im Browser eingestellten Sprache.
 
 #### Entity Beans klonen
 
@@ -1077,26 +1142,43 @@ geklonte Entity Bean später neu persistieren zu können.
 
 ### Formularkontrolle
 
-Neben der allgemeinen Beschreibung der Web Applikation und die Definition der Entity Beans im Modell gibt es als weiteren großen Block die Definition der Prozesse. Über Prozesse kann definiert werden, für welche Entity Beans Dialogmasken generiert werden sollen und bei Bedarf, welche Rollen darauf Zugriff haben darf. Die Syntax lautet:
+Neben der allgemeinen Beschreibung der Web Applikation und die Definition
+der Entity Beans im Modell gibt es als weiteren großen Block die Definition
+der Prozesse.  Über Prozesse kann definiert werden, für welche Entity Beans
+Dialogmasken generiert werden sollen und bei Bedarf, welche Rollen darauf
+Zugriff haben darf.  Die Syntax lautet:
 
 ```mydsl
 process <Process-Name> (roles <Roles>+) { <Properties>* <Entities>+ } ;
 ```
 
-Der Name eines Prozesses taucht in der URI auf. Die URL ist dann wie folgt aufgebaut: http://<host>/<context>/<process-name>/<entity>.xhtml. Mit dem Schlüsselwort roles kann festgelegt werden, welche Rollen darauf Zugriff haben. Im Prozess können beliebig viele Properties untergebracht werden. Es handelt sich dabei um Werte, die im Application Server konfiguriert werden und per JDNI referenziert werden. Die Auflistung der Entity Beans führt dazu, dass die dafür nötigen XHTML-Dateien generiert werden.
+Der Name eines Prozesses taucht in der URI auf. Die URL ist dann wie folgt
+aufgebaut: http://\<host\>/\<context\>/\<process-name\>/\<entity\>.xhtml. 
+Mit dem Schlüsselwort `roles` kann festgelegt werden, welche Rollen darauf
+Zugriff haben.  Im Prozess können beliebig viele Properties untergebracht
+werden.  Es handelt sich dabei um Werte, die im Application Server
+konfiguriert werden und per JDNI referenziert werden.  Die Auflistung der
+Entity Beans führt dazu, dass die dafür nötigen XHTML-Dateien generiert
+werden.
 
-Für jeden Prozess wird ein eigener Action Handler und ein eigenes DAO generiert. Hier werden die benötigten Zugriffsmethoden auf die konfigurierten Entity Beans und evtl. die benötigten Value Converter generiert. Die Ableitungshierarchie ist dreistufig:
+Für jeden Prozess wird ein eigener Action Handler und ein eigenes DAO
+generiert.  Hier werden die benötigten Zugriffsmethoden auf die
+konfigurierten Entity Beans und evtl.  die benötigten Value Converter
+generiert.  Die Ableitungshierarchie ist dreistufig:
 
  * Action Handler
-    1. konkrete Implemenierung mit Namen <Process-name>Handler
+    1. konkrete Implementierung mit Namen <Process-name>Handler
     2. abstrakte Klasse mit Namen Abstract<Process-name>Handler
     3.die abstrakte Basisklasse aller Action Handler AbstractHandler
  * DAOs
-    1. konkrete Implemenierung mit Namen <Process-name>Handler
+    1. konkrete Implementierung mit Namen <Process-name>Handler
     2. abstrakte Klasse mit Namen Abstract<Process-name>Handler
     3. die abstrakte Basisklasse aller Action Handler AbstractHandler
 
-In den Action Handlern werden für die XHTML-Dateien die Zugriffsmethoden bereitgestellt, die wiederum auf die dazugehörigen DAOs zugreifen. Veranschaulicht wird das anhand folgenden Beispielmodells, dass teilweise schon bei den Entity Beans beschrieben wurde:
+In den Action Handlern werden für die XHTML-Dateien die Zugriffsmethoden
+bereitgestellt, die wiederum auf die dazugehörigen DAOs zugreifen. 
+Veranschaulicht wird das anhand folgenden Beispielmodells, dass teilweise
+schon bei den Entity Beans beschrieben wurde:
 
 ```mydsl
 application "Eine Beispiel-Applikation" context "/beispiel" package org.jeegen.jee6.beispiel
@@ -1135,23 +1217,23 @@ process User
 
 ### Generierte Methoden im Action Handler
 
-Die Klasse _AbstractUserHandler_ liefert für die Zugriffskontrolle die Methode
-`isAllowed()`, die in der XHTML verwendet werden kann.  Da in diesem Falle
-keine Zugriffsberechtigungen auf Rollen beschränkt wurden, liefert diese
-Methode immer true zurück.  Ferner wird in diese Klasse eine Referenz auf
-das DAO UserDaoBean mit Namen dao vom Application Server injiziert:
+Die Klasse _AbstractUserHandler_ liefert für die Zugriffskontrolle die
+Methode `isAllowed()`, die in der XHTML verwendet werden kann.  Da in diesem
+Falle keine Zugriffsberechtigungen auf Rollen beschränkt wurden, liefert
+diese Methode immer true zurück.  Ferner wird in diese Klasse eine Referenz
+auf das DAO UserDaoBean mit Namen dao vom Application Server injiziert:
 
 ```java
 @EJB
 protected UserDaoBean dao;
 ```
 
-Für die Entity Bean Person soll ein XHTML-Formular generiert werden. Da in
-dieser Entity Bean eine 1:n-Relation auf die Entity Bean Address enthalten
+Für die Entity Bean _Person_ soll ein XHTML-Formular generiert werden. Da in
+dieser Entity Bean eine 1:n-Relation auf die Entity Bean _Address_ enthalten
 ist, werden die entsprechenden Zugriffsmethoden dafür gleich mit generiert. 
-Die Methoden für die Klasse Person lauten:
+Die Methoden für die Klasse _Person_ lauten:
 
-```mydsl
+```java
 abstract public List<Person> getPersonList();
 abstract String addPerson(final Person person);
 abstract String changePerson(final Person person);
@@ -1160,9 +1242,9 @@ abstract String savePerson();
 abstract String backFromPerson();
 ```
 
-Der Action Handler _PersonHandler_ ist Session scoped. Dadurch lässt sich der
-Zustand der Entity Bean Person speichern.  Dadurch brauchen wir hierfür auch
-Zugriffsmethoden:
+Der Action Handler _PersonHandler_ ist session scoped. Dadurch lässt sich
+der Zustand der Entity Bean _Person_ speichern.  Dadurch brauchen wir
+hierfür auch Zugriffsmethoden:
 
 ```java
 public Person getPerson();
@@ -1171,8 +1253,8 @@ public boolean isPersonEmpty(final Person person);
 ```
 
 Auf die Implementierung wurde der Übersichtlichkeit halber verzichtet. Die
-Methode `isPersonEmpty()` wurde nur generiert, weil in der Entity Bean Person
-eine 1:n-Relation enthalten ist.  Für die Klasse Address lauten die
+Methode `isPersonEmpty()` wurde nur generiert, weil in der Entity Bean _Person_
+eine 1:n-Relation enthalten ist.  Für die Klasse _Address_ lauten die
 Zugriffsmethoden:
 
 ```java
@@ -1215,7 +1297,7 @@ public void deletePerson(Person person);
 public List<Person> getPersonList();
 ```
 
-Da die Entity Bean Person eine 1:n-Relation enthält, sind auch entsprechende
+Da die Entity Bean _Person_ eine 1:n-Relation enthält, sind auch entsprechende
 Methoden für das Hinzufügen und Entfernen aus der Relation vorhanden:
 
 ```java
@@ -1224,7 +1306,7 @@ public Person deleteFromPerson(Address address);
 public List<Address> getAddressList(final Person person);
 ```
 
-Die Methoden für die Entity Bean Address wird auch der Vollständigkeit halber aufgelistet:
+Die Methoden für die Entity Bean _Address_ wird auch der Vollständigkeit halber aufgelistet:
 
 ```java
 public void addAddress(final Address address);
@@ -1250,7 +1332,7 @@ zeigt an, dass der Zugriff für den eingeloggten Benutzer erlaubt ist.  Ein
 Beispiel dafür lautet:
 
 ```html
-<ui:fragment rendered="#{userHandler.allowed">
+<ui:fragment rendered="#{userHandler.allowed}">
 <!-- nur bei Berechtigung sichtbar -->
 </ui:fragment>
 ```
