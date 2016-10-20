@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# JEE versions:
+# JEE6-Generator: 1.2.3
+# JEE7-Generator: 1.2.3
+
 DISTRO=${1:-luna}
 RELEASE=${2:-SR2}
 DOWNLOAD_SERVER=ftp.halifax.rwth-aachen.de
@@ -87,7 +91,6 @@ function build
 		if [ -d ${BUILD}/eclipse.app ]
 		then
 			DEST=${BUILD}/Eclipse.app
-#/Contents/Eclipse/
 		else
 			DEST=${BUILD}/eclipse
 		fi
@@ -95,7 +98,7 @@ function build
 			-application org.eclipse.equinox.p2.director\
 			-profileProperties org.eclipse.update.install.features=true\
 			-installIU org.eclipse.egit.feature.group,org.eclipse.sdk.ide,org.jeegen.jee6.feature.feature.group,org.jeegen.jee7.feature.feature.group\
-			-repository http://download.eclipse.org/releases/${DISTRO}/,http://download.itemis.com/updates/releases/,http://www.jee-generator.org/updates/release/\
+			-repository http://download.eclipse.org/releases/${DISTRO}/,http://www.jee-generator.org/updates/release/\
 			-destination ${DEST}
 
 		pack ${TARGET}
