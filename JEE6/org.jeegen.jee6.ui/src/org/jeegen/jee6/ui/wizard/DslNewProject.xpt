@@ -15,7 +15,7 @@
 «ENDDEFINE»
 
 «DEFINE model FOR DslProjectInfo»
-«FILE getModelPath() + "/" + projectName + ".jee6"-»
+«FILE getModelPath() + "/" + applicationName + ".jee6"-»
 // Edit model here...
 application "«projectName»"  context "/«applicationName»" package «package(basePackage, applicationName)» development strict;
 persistence unit"«applicationName»DS" jndi "jdbc/«applicationName»DS";
@@ -361,7 +361,7 @@ Workflow
 				docencoding="UTF-8"
 				charset="UTF-8"
 				windowtitle="«this.projectName» classes">
-			<doctitle><![CDATA[<h1>«this.projectName» classes</h1>]]></doctitle>
+			<doctitle><![CDATA[<h1>«this.simpleName» classes</h1>]]></doctitle>
 			<bottom><![CDATA[<i>Copyright &#169; Steffen A. Mork, Dominik Pieper]]></bottom>
 		</javadoc>
 	</target>
