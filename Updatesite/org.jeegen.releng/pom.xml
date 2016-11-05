@@ -11,10 +11,11 @@
 
 	<!-- this is the parent POM from which all modules inherit common settings -->
 	<properties>
-		<tycho-version>0.21.0</tycho-version>
-		<tycho-extras-version>0.21.0</tycho-extras-version>
+		<tycho-version>0.24.0</tycho-version>
+		<tycho-extras-version>0.24.0</tycho-extras-version>
 		<antrun-version>1.8</antrun-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<source.update.site>http://www.jee-generator.org/updates/release/</source.update.site>
 	</properties>
 
 	<modules>
@@ -66,32 +67,6 @@
 				</executions>
 			</plugin>
 -->
-			<plugin>
-				<!-- See https://github.com/jbosstools/jbosstools-maven-plugins/wiki 
-					for documentation -->
-				<groupId>org.jboss.tools.tycho-plugins</groupId>
-				<artifactId>repository-utils</artifactId>
-				<version>0.16.0.CR1</version>
-				<executions>
-					<execution>
-						<id>generate-facade</id>
-						<phase>package</phase>
-						<goals>
-							<goal>generate-repository-facade</goal>
-						</goals>
-						<configuration>
-							<siteTemplateFolder>../org.jeegen.updatesite/templates</siteTemplateFolder>
-							<!-- Symbols are used while expanding index.html template -->
-							<symbols>
-								<update.site.name>JEE Generator Repository</update.site.name>
-								<update.site.description>This URL can be used inside eclipse for
-									installing new software.</update.site.description>
-								<update.site.version>${project.version}</update.site.version>
-							</symbols>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
