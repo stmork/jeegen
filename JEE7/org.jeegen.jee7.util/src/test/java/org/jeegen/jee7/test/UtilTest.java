@@ -166,18 +166,18 @@ public class UtilTest
 	@Test
 	public void getDiff()
 	{
-		final Calendar past    = DateTimeUtil.getStartOfDay(  7, 7, 2014);
+		final Calendar past    = DateTimeUtil.getStartOfDay(  4,12, 2016);
 		final Calendar today   = Calendar.getInstance();
-		final Calendar future  = DateTimeUtil.getStartOfDay( 17, 7, 2017);
+		final Calendar future  = DateTimeUtil.getStartOfDay( 21, 7, 2017);
 		final long ROUND_UP = DateTimeUtil.MILLIES_PER_DAY - 1;
 
 		Assert.assertEquals("00:00:00", time.format(past.getTime()));
-		Assert.assertEquals(    7, past.get(Calendar.DAY_OF_MONTH));
-		Assert.assertEquals(Calendar.JULY, past.get(Calendar.MONTH));
-		Assert.assertEquals( 2014, past.get(Calendar.YEAR));
+		Assert.assertEquals(    4, past.get(Calendar.DAY_OF_MONTH));
+		Assert.assertEquals(Calendar.DECEMBER, past.get(Calendar.MONTH));
+		Assert.assertEquals( 2016, past.get(Calendar.YEAR));
 
 		Assert.assertEquals("00:00:00", time.format(future.getTime()));
-		Assert.assertEquals(   17, future.get(Calendar.DAY_OF_MONTH));
+		Assert.assertEquals(   21, future.get(Calendar.DAY_OF_MONTH));
 		Assert.assertEquals(Calendar.JULY, future.get(Calendar.MONTH));
 		Assert.assertEquals( 2017, future.get(Calendar.YEAR));
 
