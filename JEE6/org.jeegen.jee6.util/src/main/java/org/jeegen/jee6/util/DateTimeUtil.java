@@ -125,15 +125,20 @@ public class DateTimeUtil
 	 * This method returns a {@link Calendar} object at the beginning of the given month and year. The date
 	 * will be 00:00 01.<em>month</em>.<em>year</em>.
 	 * 
+	 * <b>Note:</b> The month is not in {@link Calendar} notation. January has the value of 1 and not
+	 * {@link Calendar}.JANUARY!
+	 * 
 	 * @param month The month to compute the beginning from.
 	 * @param year The year to compute the beginning from.
 	 * @return The beginning of the specified month and year.
 	 */
 	public static Calendar getStartOfMonth(final int month, final int year)
 	{
-		final Calendar cal = getStartOfYear(year);
+		final Calendar cal = getStartOfDay();
 
-		cal.add(Calendar.MONTH, month - 1);
+		cal.set(Calendar.YEAR, year);
+		cal.set(Calendar.MONTH, month - 1);
+		cal.set(Calendar.DAY_OF_MONTH, 1);
 
 		return cal;
 	}
@@ -141,6 +146,9 @@ public class DateTimeUtil
 	/**
 	 * This method returns a {@link Calendar} object at the beginning of the given day, month and year. The date
 	 * will be 00:00 <em>day</em>.<em>month</em>.<em>year</em>.
+	 * 
+	 * <b>Note:</b> The month is not in {@link Calendar} notation. January has the value of 1 and not
+	 * {@link Calendar}.JANUARY!
 	 * 
 	 * @param day The day to compute the beginning from.
 	 * @param month The month to compute the beginning from.
