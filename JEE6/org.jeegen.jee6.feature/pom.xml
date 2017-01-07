@@ -10,7 +10,7 @@
 	</parent>
 
 	<name>JEE6 DSL Feature</name>
-	<version>1.2.4</version>
+	<version>1.2.5-SNAPSHOT</version>
 	<groupId>org.jeegen</groupId>
 	<artifactId>org.jeegen.jee6.feature</artifactId>
 	<packaging>eclipse-feature</packaging>
