@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # JEE versions:
-# JEE6-Generator: 1.2.3
-# JEE7-Generator: 1.2.3
+# JEE6-Generator: 1.2.4
+# JEE7-Generator: 1.2.4
 
-DISTRO=${1:-luna}
-RELEASE=${2:-SR2}
+DISTRO=${1:-neon}
+RELEASE=${2:-2}
 DOWNLOAD_SERVER=ftp.halifax.rwth-aachen.de
 
 BASE=$PWD
