@@ -45,6 +45,7 @@
 				<directory>${project.build.directory}/resources</directory>
 			</resource>
 		</resources>
+
 		<plugins>
  			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
@@ -70,8 +71,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>build-helper-maven-plugin</artifactId> 
-				</plugin> -->
+
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-source-plugin</artifactId>
@@ -85,6 +85,7 @@
 					</execution>
 				</executions>
 			</plugin>
+
 			<plugin>
 				<artifactId>maven-clean-plugin</artifactId>
 				<configuration>
@@ -110,6 +111,7 @@
 					</filesets>
 				</configuration>
 			</plugin>
+
 			<plugin>
 				<groupId>org.fornax.toolsupport</groupId>
 				<artifactId>fornax-oaw-m2-plugin</artifactId>

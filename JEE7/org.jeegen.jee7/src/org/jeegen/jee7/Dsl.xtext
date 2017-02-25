@@ -19,7 +19,7 @@ Mail:			'smtp' jndi=STRING;
 Locale:			'locale' language=STRING (country=STRING)? (home?='default')?;
 Param:			'param' name=PACKAGED_ID '=' value=STRING ('description' description=STRING)?;
 
-/* Types */
+// Types
 Attribute:	(Simple|Lob|Reference) ';';
 
 Simple:		(Date|Timestamp|Boolean|Integer|Number|IdAttribute) name=ID (transient?='transient')?;
@@ -43,7 +43,7 @@ History:	'History' type=[Table|ID] name=ID;
 EntityRef:	'Entity'  type=[Entity|ID] (many?='[]')? name=ID;
 OptionRef:	'Option'  type=[Options|ID] name=ID;
 
-/* Entities */
+// Entities
 Entity:		(Table|Options) ('persistence' 'unit' persistence = [Persistence|STRING])?;
 
 Table:		'entity'  name=ID (filterable?='filterable')? (cloneable?='cloneable')? '{' (types += Attribute)+ '}';
