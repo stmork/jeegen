@@ -30,7 +30,7 @@ test -d ${TARGET}/director || unzip -q ${DOWNLOAD}/director_latest.zip -d ${TARG
 
 function unpack
 {
-	rm -rf ${BUILD}/?clipse*
+	rm -rf ${BUILD}/?clipse* ${BUILD}/?.*
 
 	echo "Unpacking... $1"
 
@@ -46,6 +46,9 @@ function unpack
 		;;
 	*.tar.bz2)
 		tar xfj ${1} -C $BUILD
+		;;
+	*.dmg)
+		7z e ${1} -o$BUILD && 7z x $BUILD/*.hfs -o$BUILD >/dev/null
 		;;
 	esac
 }
@@ -65,7 +68,7 @@ function pack
 	*.tar.gz)
 		tar cfz ${1} ?clipse*
 		;;
-	*.tar.bz2)
+	*.tar.bz2|*.dmg)
 		tar cfj ${1} ?clipse*
 		;;
 	esac
@@ -83,17 +86,32 @@ function build
 		then
 			URL="http://${DOWNLOAD_SERVER}/eclipse/technology/epp/downloads/release/${DISTRO}/${RELEASE}/${ECLIPSE}"
 			echo "Downloading $URL..."
-			wget -q $URL -O "${DOWNLOAD}/${ECLIPSE}"
+
+			if ! wget -q $URL -O "${DOWNLOAD}/${ECLIPSE}"
+			then
+				echo "Cannot download ${1}!"
+				rm "${DOWNLOAD}/${ECLIPSE}"
+				return
+			fi
 		fi
 
 		unpack ${DOWNLOAD}/${ECLIPSE}
 		echo "Prepare Distro ${DISTRO} ${RELEASE}..."
-		if [ -d ${BUILD}/eclipse.app ]
+		if [ -d ${BUILD}/Eclipse.app ]
 		then
+			echo "Mac"
 			DEST=${BUILD}/Eclipse.app
 		else
-			DEST=${BUILD}/eclipse
+			if [ -d ${BUILD}/Eclipse/Eclipse.app ]
+			then
+				echo "Mac DMG"
+				DEST=${BUILD}/Eclipse/Eclipse.app
+			else
+				echo "Other"
+				DEST=${BUILD}/eclipse
+			fi
 		fi
+		echo "Eclipse directory: $DEST"
 		${DIRECTOR} -noSplash\
 			-application org.eclipse.equinox.p2.director\
 			-profileProperties org.eclipse.update.install.features=true\
@@ -107,10 +125,15 @@ function build
 	fi
 }
 
+#			-installIU org.eclipse.egit.feature.group,org.eclipse.sdk.ide,org.jeegen.jee6.feature.feature.group,org.jeegen.jee7.feature.feature.group
+
 build linux-gtk-x86_64.tar.gz
 build linux-gtk.tar.gz
 build macosx-cocoa-x86_64.tar.gz
+build macosx-cocoa-x86_64.dmg
 build win32-x86_64.zip
 build win32.zip
 
-rm -rf ${BUILD} ${DOWNLOAD} ${TARGET}/director
+rm -rf ${BUILD}
+rm -rf ${TARGET}/director
+rm -rf ${DOWNLOAD}
