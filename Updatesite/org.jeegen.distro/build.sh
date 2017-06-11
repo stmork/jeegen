@@ -55,21 +55,26 @@ function unpack
 
 function pack
 {
-	echo "Packing into... $1"
+	ARCHIVE=`echo ${1} | sed -e 's/.dmg$/.tar.bz2/g'`
+	echo "Packing into... $ARCHIVE"
 
 	cd $BUILD
 	case "${1}" in
 	*.zip)
-		zip -r9 -q ${1} ?clipse*
+		zip -r9 -q ${ARCHIVE} ?clipse*
 		;;
 	*.tar)
-		tar cf ${1} ?clipse*
+		tar cf ${ARCHIVE} ?clipse*
 		;;
 	*.tar.gz)
-		tar cfz ${1} ?clipse*
+		tar cfz ${ARCHIVE} ?clipse*
 		;;
-	*.tar.bz2|*.dmg)
-		tar cfj ${1} ?clipse*
+	*.tar.bz2)
+		tar cfj ${ARCHIVE} ?clipse*
+		;;
+	*.dmg)
+		cd Eclipse
+		tar cfj ${ARCHIVE} ?clipse*
 		;;
 	esac
 	cd $BASE
@@ -100,14 +105,14 @@ function build
 		if [ -d ${BUILD}/Eclipse.app ]
 		then
 			echo "Mac"
-			DEST=${BUILD}/Eclipse.app
+			DEST=${BUILD}/Eclipse.app/Contents/Eclipse
 		else
 			if [ -d ${BUILD}/Eclipse/Eclipse.app ]
 			then
 				echo "Mac DMG"
-				DEST=${BUILD}/Eclipse/Eclipse.app
+				DEST=${BUILD}/Eclipse/Eclipse.app/Contents/Eclipse
 			else
-				echo "Other"
+				echo "Other platform"
 				DEST=${BUILD}/eclipse
 			fi
 		fi
