@@ -32,6 +32,7 @@ public class Download implements Serializable
 	private final URL url;
 	private final static byte [] empty = new byte[0];
 	private       String mimeType = null;
+	private       int responseCode = 0;
 	private       int timeout = 1000;
 	private       boolean redirect = true;
 
@@ -89,12 +90,10 @@ public class Download implements Serializable
 
 		LogUtil.trace(log, ">download(%s)", url);
 		final URLConnection connection = url.openConnection();
+		final HttpURLConnection http = (HttpURLConnection)connection;
+
 		connection.setReadTimeout(getTimeout());
-		if (connection instanceof HttpURLConnection)
-		{
-			final HttpURLConnection http = (HttpURLConnection)connection;
-			http.setInstanceFollowRedirects(redirect);
-		}
+		http.setInstanceFollowRedirects(redirect);
 
 		try(InputStream is = connection.getInputStream())
 		{
@@ -122,7 +121,9 @@ public class Download implements Serializable
 		}
 		finally
 		{
-			LogUtil.trace(log, "<download(..) = %s", array != null);
+			responseCode = http.getResponseCode();
+
+			LogUtil.trace(log, "<download(..) = %s    response code=%d", array != null, responseCode);
 		}
 		return array;
 	}
@@ -152,6 +153,17 @@ public class Download implements Serializable
 		return this.mimeType;
 	}
 
+	/**
+	 * This getter returns the response code of the downloaded byte array This only defined
+	 * after using {@link #downloadArray()}, otherwise the return value is always 0.
+	 * 
+	 * @return The response coce of the {@link #downloadArray()} method call or 0 otherwise.
+	 */
+	public int getResponseCode()
+	{
+		return responseCode;
+
+	}
 	/**
 	 * This method returns the used {@link URL}.
 	 * 
