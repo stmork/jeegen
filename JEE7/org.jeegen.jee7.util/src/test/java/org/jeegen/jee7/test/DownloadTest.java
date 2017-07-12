@@ -8,6 +8,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
@@ -21,11 +22,12 @@ import org.junit.Test;
 
 public class DownloadTest
 {
-	private final static String HOMEPAGE_URL  = "http://eisenbahnsteuerung.org";
-	private final static String IMAGE_URL     = HOMEPAGE_URL + "/images/rcc32.gif";
-	private final static int    TIMEOUT       = 10000;
-	private final static int    FORCE_TIMEOUT =    10;
-	private final static Random random        = new Random(System.currentTimeMillis());
+	private final static String HOMEPAGE_URL    = "http://eisenbahnsteuerung.org";
+	private final static String IMAGE_URL       = HOMEPAGE_URL + "/images/rcc32.gif";
+	private final static String UNAUTORIZED_URL = "https://projects.itemis.de/server-status/";
+	private final static int    TIMEOUT         = 10000;
+	private final static int    FORCE_TIMEOUT   =    10;
+	private final static Random random          = new Random(System.currentTimeMillis());
 
 	@BeforeClass
 	public static void init()
@@ -60,11 +62,13 @@ public class DownloadTest
 		download.setTimeout(TIMEOUT);
 		Assert.assertEquals(TIMEOUT, download.getTimeout());
 
+		Assert.assertEquals(0, download.getResponseCode());
 		final byte [] array = download.downloadArray();
 		Assert.assertNotNull(array);
 
 		final String mimeType = download.getMimeType();
 		Assert.assertTrue(mimeType.startsWith("text/html"));
+		Assert.assertEquals(HttpURLConnection.HTTP_OK, download.getResponseCode());
 	}
 
 	@Test
@@ -75,11 +79,13 @@ public class DownloadTest
 		download.setTimeout(TIMEOUT);
 		Assert.assertEquals(TIMEOUT, download.getTimeout());
 
+		Assert.assertEquals(0, download.getResponseCode());
 		final byte [] array = download.downloadArray();
 		Assert.assertNotNull(array);
 
 		final String mimeType = download.getMimeType();
 		Assert.assertTrue(mimeType.startsWith("text/html"));
+		Assert.assertEquals(HttpURLConnection.HTTP_OK, download.getResponseCode());
 	}
 
 	@Test
@@ -92,11 +98,13 @@ public class DownloadTest
 
 		Assert.assertTrue(download.getFollowRedirect());
 
+		Assert.assertEquals(0, download.getResponseCode());
 		final byte [] array = download.downloadArray();
 		Assert.assertNotNull(array);
 
 		final String mimeType = download.getMimeType();
 		Assert.assertTrue(mimeType.startsWith("text/html"));
+		Assert.assertEquals(HttpURLConnection.HTTP_OK, download.getResponseCode());
 	}
 
 //	@Test
@@ -110,11 +118,13 @@ public class DownloadTest
 		download.setFollowRedirect(false);
 		Assert.assertFalse(download.getFollowRedirect());
 
+		Assert.assertEquals(0, download.getResponseCode());
 		final byte [] array = download.downloadArray();
 		Assert.assertNotNull(array);
 
 		final String mimeType = download.getMimeType();
 		Assert.assertNull(mimeType);
+		Assert.assertEquals(HttpURLConnection.HTTP_OK, download.getResponseCode());
 	}
 
 //	@Test
@@ -128,11 +138,13 @@ public class DownloadTest
 		download.setFollowRedirect(false);
 		Assert.assertFalse(download.getFollowRedirect());
 
+		Assert.assertEquals(0, download.getResponseCode());
 		final byte [] array = download.downloadArray();
 		Assert.assertNotNull(array);
 
 		final String mimeType = download.getMimeType();
 		Assert.assertNull(mimeType);
+		Assert.assertEquals(HttpURLConnection.HTTP_OK, download.getResponseCode());
 	}
 
 	@Test
@@ -148,17 +160,20 @@ public class DownloadTest
 
 		Assert.assertTrue(download.getFollowRedirect());
 
+		Assert.assertEquals(0, download.getResponseCode());
 		final byte [] array = download.downloadArray();
 		Assert.assertNotNull(array);
 
 		mimeType = download.getMimeType();
 		Assert.assertTrue(mimeType.startsWith("image/gif"));
+		Assert.assertEquals(HttpURLConnection.HTTP_OK, download.getResponseCode());
 
 		BufferedImage image = Download.parse(array);
 		Assert.assertNotNull(image);
 
 		mimeType = download.getMimeType();
 		Assert.assertTrue(mimeType.startsWith("image/gif"));
+		Assert.assertEquals(HttpURLConnection.HTTP_OK, download.getResponseCode());
 
 		image = download.downloadImage();
 		Assert.assertNotNull(image);
@@ -168,14 +183,35 @@ public class DownloadTest
 	}
 
 	@Test(expected=FileNotFoundException.class)
-	public void error404() throws IOException
+	public void notFound() throws IOException
 	{
 		final Download download = new Download("http://morknet.de/404");
 
 		download.setTimeout(TIMEOUT);
 		Assert.assertEquals(TIMEOUT, download.getTimeout());
 
+		Assert.assertEquals(0, download.getResponseCode());
 		download.downloadArray();
+		Assert.assertEquals(HttpURLConnection.HTTP_NOT_FOUND, download.getResponseCode());
+	}
+
+	@Test
+	public void unauthorized() throws IOException
+	{
+		final Download download = new Download(UNAUTORIZED_URL);
+
+		download.setTimeout(TIMEOUT);
+		Assert.assertEquals(TIMEOUT, download.getTimeout());
+
+		try
+		{
+			Assert.assertEquals(0, download.getResponseCode());
+			download.downloadArray();
+		}
+		catch(IOException e)
+		{
+			Assert.assertEquals(HttpURLConnection.HTTP_UNAUTHORIZED, download.getResponseCode());
+		}
 	}
 
 	@Test(expected=SocketTimeoutException.class)
@@ -186,11 +222,13 @@ public class DownloadTest
 		download.setTimeout(FORCE_TIMEOUT);
 		Assert.assertEquals(FORCE_TIMEOUT, download.getTimeout());
 
+		Assert.assertEquals(0, download.getResponseCode());
 		final byte [] array = download.downloadArray();
 		Assert.assertNotNull(array);
 
 		final String mimeType = download.getMimeType();
 		Assert.assertTrue(mimeType.startsWith("text/html"));
+		Assert.assertEquals(HttpURLConnection.HTTP_OK, download.getResponseCode());
 	}
 
 	@Test(expected=MalformedURLException.class)
