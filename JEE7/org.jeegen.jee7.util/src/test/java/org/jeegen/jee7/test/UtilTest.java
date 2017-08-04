@@ -164,32 +164,52 @@ public class UtilTest
 	}
 
 	@Test
-	public void getDiff()
+	public void getDiffPast()
 	{
-		final Calendar past    = DateTimeUtil.getStartOfDay(  4,12, 2016);
-		final Calendar today   = Calendar.getInstance();
-		final Calendar future  = DateTimeUtil.getStartOfDay( 21, 7, 2017);
-		final long ROUND_UP = DateTimeUtil.MILLIES_PER_DAY - 1;
+		getDiff(19, 7, 2017);
+	}
+
+	@Test
+	public void getDiffFuture1()
+	{
+		getDiff(16, 7, 2018);
+	}
+
+	@Test
+	public void getDiffFuture2()
+	{
+		getDiff(13, 8, 2017);
+	}
+
+	private final int CHECK_DAY   =   19;
+	private final int CHECK_MONTH =   12;
+	private final int CHECK_YEAR  = 2016;
+
+	public void getDiff(final int day, final int month, final int year)
+	{
+		final Calendar past     = DateTimeUtil.getStartOfDay(  CHECK_DAY, CHECK_MONTH, CHECK_YEAR);
+		final Calendar today    = DateTimeUtil.getStartOfDay();
+		final Calendar check    = DateTimeUtil.getStartOfDay( day, month, year);
 
 		Assert.assertEquals("00:00:00", time.format(past.getTime()));
-		Assert.assertEquals(    4, past.get(Calendar.DAY_OF_MONTH));
-		Assert.assertEquals(Calendar.DECEMBER, past.get(Calendar.MONTH));
-		Assert.assertEquals( 2016, past.get(Calendar.YEAR));
+		Assert.assertEquals( CHECK_DAY,       past.get(Calendar.DAY_OF_MONTH));
+		Assert.assertEquals( CHECK_MONTH - 1, past.get(Calendar.MONTH));
+		Assert.assertEquals( CHECK_YEAR,      past.get(Calendar.YEAR));
 
-		Assert.assertEquals("00:00:00", time.format(future.getTime()));
-		Assert.assertEquals(   21, future.get(Calendar.DAY_OF_MONTH));
-		Assert.assertEquals(Calendar.JULY, future.get(Calendar.MONTH));
-		Assert.assertEquals( 2017, future.get(Calendar.YEAR));
+		Assert.assertEquals("00:00:00", time.format(check.getTime()));
+		Assert.assertEquals( day,      check.get(Calendar.DAY_OF_MONTH));
+		Assert.assertEquals(month - 1, check.get(Calendar.MONTH));
+		Assert.assertEquals( year,     check.get(Calendar.YEAR));
 
-		final long diff1 = (today.getTimeInMillis()  - past.getTimeInMillis()) /
-				DateTimeUtil.MILLIES_PER_DAY;
-		final long diff2 = (future.getTimeInMillis() - today.getTimeInMillis() + ROUND_UP) /
-				DateTimeUtil.MILLIES_PER_DAY;
-		final long diff3 = (future.getTimeInMillis() - past.getTimeInMillis() + ROUND_UP) /
-				DateTimeUtil.MILLIES_PER_DAY;
+		final long diff1 = past.getTimeInMillis()  / DateTimeUtil.MILLIES_PER_DAY -
+				today.getTimeInMillis() / DateTimeUtil.MILLIES_PER_DAY;
+		final long diff2 = check.getTimeInMillis() / DateTimeUtil.MILLIES_PER_DAY -
+				today.getTimeInMillis() / DateTimeUtil.MILLIES_PER_DAY;
+		final long diff3 = check.getTimeInMillis() / DateTimeUtil.MILLIES_PER_DAY -
+				past.getTimeInMillis() / DateTimeUtil.MILLIES_PER_DAY;
 
-		System.out.printf ("%d day to past and %d days to future. Complete %d days%n", diff1, diff2, diff3);
-		Assert.assertEquals(diff3, diff1 + diff2);
+		System.out.printf ("%d day to past and %d days to check. Complete %d days%n", diff1, diff2, diff3);
+		Assert.assertEquals(diff3, diff2 - diff1);
 	}
 
 	@Test
