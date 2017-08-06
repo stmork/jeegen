@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.jeegen.jee7.tests
+Bundle-Name: JEE7-Generator tests
 Bundle-Vendor: JEE-Generator
 Bundle-Version: 1.0.0
 Bundle-SymbolicName: org.jeegen.jee7.tests;singleton:=true

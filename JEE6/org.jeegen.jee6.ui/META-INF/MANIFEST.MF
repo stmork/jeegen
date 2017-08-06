@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.jeegen.jee6.ui
+Bundle-Name: JEE6-Generator UI parts
 Bundle-Vendor: JEE-Generator
 Bundle-Version: 1.2.6.qualifier
 Bundle-SymbolicName: org.jeegen.jee6.ui;singleton:=true

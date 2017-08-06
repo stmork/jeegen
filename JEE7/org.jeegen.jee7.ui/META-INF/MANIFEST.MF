@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.jeegen.jee7.ui
-Bundle-Vendor: itemis AG
+Bundle-Name: JEE7-Generator UI parts
+Bundle-Vendor: JEE-Generator
 Bundle-Version: 1.2.6.qualifier
 Bundle-SymbolicName: org.jeegen.jee7.ui;singleton:=true
 Bundle-ActivationPolicy: lazy
