@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/org.jeegen.jee6.feature_1.2.6.qualifier.jar" id="org.jeegen.jee6.feature" version="1.2.6.qualifier">
+   <feature url="features/org.jeegen.jee6.feature_1.2.7.qualifier.jar" id="org.jeegen.jee6.feature" version="1.2.7.qualifier">
       <category name="org.jeegen"/>
    </feature>
-   <feature url="features/org.jeegen.jee7.feature_1.2.6.qualifier.jar"  id="org.jeegen.jee7.feature" version="1.2.6.qualifier">
+   <feature url="features/org.jeegen.jee7.feature_1.2.7.qualifier.jar"  id="org.jeegen.jee7.feature" version="1.2.7.qualifier">
       <category name="org.jeegen"/>
    </feature>
    <category-def name="org.jeegen" label="JEE-Generators"/>
