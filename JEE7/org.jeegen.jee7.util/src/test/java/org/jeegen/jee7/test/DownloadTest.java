@@ -24,7 +24,7 @@ public class DownloadTest
 {
 	private final static String HOMEPAGE_URL    = "http://eisenbahnsteuerung.org";
 	private final static String IMAGE_URL       = HOMEPAGE_URL + "/images/rcc32.gif";
-	private final static String UNAUTORIZED_URL = "https://projects.itemis.de/server-status/";
+	private final static String UNAUTORIZED_URL = "https://projects.itemis.de/subversion/admin/";
 	private final static int    TIMEOUT         = 10000;
 	private final static int    FORCE_TIMEOUT   =    10;
 	private final static Random random          = new Random(System.currentTimeMillis());
