@@ -5,7 +5,7 @@
 # JEE7-Generator: 1.2.4
 
 DISTRO=${1:-oxygen}
-RELEASE=${2:-1a}
+RELEASE=${2:-3}
 DOWNLOAD_SERVER=ftp.halifax.rwth-aachen.de
 
 BASE=$PWD
