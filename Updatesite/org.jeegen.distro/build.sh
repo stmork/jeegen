@@ -4,8 +4,8 @@
 # JEE6-Generator: 1.2.4
 # JEE7-Generator: 1.2.4
 
-DISTRO=${1:-oxygen}
-RELEASE=${2:-3a}
+DISTRO=${1:-photon}
+RELEASE=${2:-R}
 DOWNLOAD_SERVER=ftp.halifax.rwth-aachen.de
 
 BASE=$PWD
