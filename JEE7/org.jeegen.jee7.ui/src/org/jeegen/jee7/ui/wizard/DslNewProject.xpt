@@ -281,7 +281,7 @@ Workflow
 		</fileset>
 	</path>
 
-	<path id="compile.path">
+	<path id="compile.classpath">
 		<fileset dir="${jboss.lib}">
 			<include name="**/*.jar"/>
 			<exclude name="**/*jsf*1.2*.jar"/>
@@ -345,13 +345,13 @@ Workflow
 	<target name="compile" depends="-version">
 		<mkdir dir="${bin-path}"/>
 		<javac srcdir="${src-path}:${src-gen-path}" destdir="${bin-path}" debug="true" includeantruntime="false">
-			<classpath refid="compile.path"/>
+			<classpath refid="compile.classpath"/>
 		</javac>
 	</target>
 
 	<target name="javadoc" depends="compile">
 		<javadoc access="package"
-				classpathref="compile.path"
+				classpathref="compile.classpath"
 				sourcepath="${src-path}:${src-gen-path}"
 				destdir="${doc-path}"
 				author="true"
