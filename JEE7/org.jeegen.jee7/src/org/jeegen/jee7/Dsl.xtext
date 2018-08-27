@@ -10,7 +10,7 @@ Model:	'application' name=STRING 'context' path=STRING 'package' package=PACKAGE
 	(processes += Process)*;
 
 enum ProjectState : Development='development'|Integration='integration'|Productive='productive';
-enum DBType : MySQL|DB2|Oracle;
+enum DBType : MySQL|MariaDB|DB2|Oracle;
 
 Option:			(Persistence|Security|Mail|Locale|Param) ';';
 Security:		'security' 'domain' jaas=STRING (clustered?='clustered')?;
