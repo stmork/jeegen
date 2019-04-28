@@ -6,7 +6,6 @@
 
 DISTRO=${1:-2019-03}
 RELEASE=${2:-R}
-#DOWNLOAD_SERVER=ftp.halifax.rwth-aachen.de
 DOWNLOAD_SERVER=archive.eclipse.org
 
 BASE=$PWD
@@ -23,8 +22,7 @@ mkdir -p $DOWNLOAD $BUILD $DIST
 echo "Preparing director..."
 if [ ! -e ${DOWNLOAD}/${DIRECTOR_ZIP} ]
 then
-#	URL="http://${DOWNLOAD_SERVER}/eclipse/tools/buckminster/products/director_latest.zip"
-	URL="http://archive.eclipse.org/technology/epp/downloads/release/kepler/SR2/${DIRECTOR_ZIP}"
+	URL="http://${DOWNLOAD_SERVER}/technology/epp/downloads/release/kepler/SR2/${DIRECTOR_ZIP}"
 	echo "Downloading $URL..."
 	wget -q $URL -O ${DOWNLOAD}/${DIRECTOR_ZIP}
 fi
