@@ -4,29 +4,36 @@
 # JEE6-Generator: 1.2.4
 # JEE7-Generator: 1.2.4
 
-DISTRO=${1:-photon}
+DISTRO=${1:-2019-03}
 RELEASE=${2:-R}
-DOWNLOAD_SERVER=ftp.halifax.rwth-aachen.de
+#DOWNLOAD_SERVER=ftp.halifax.rwth-aachen.de
+DOWNLOAD_SERVER=archive.eclipse.org
 
 BASE=$PWD
 TARGET=${BASE}/target
 DOWNLOAD=${TARGET}/download
 BUILD=${TARGET}/build
 DIST=${TARGET}/dist
-DIRECTOR=${TARGET}/director/director
+DIRECTOR_ZIP=eclipse-testing-kepler-SR2-linux-gtk-x86_64.tar.gz
+DIRECTOR=${TARGET}/director/eclipse
 
 set -e
 mkdir -p $DOWNLOAD $BUILD $DIST
 
 echo "Preparing director..."
-if [ ! -e ${DOWNLOAD}/director_latest.zip ]
+if [ ! -e ${DOWNLOAD}/${DIRECTOR_ZIP} ]
 then
-	URL="http://${DOWNLOAD_SERVER}/eclipse/tools/buckminster/products/director_latest.zip"
+#	URL="http://${DOWNLOAD_SERVER}/eclipse/tools/buckminster/products/director_latest.zip"
+	URL="http://archive.eclipse.org/technology/epp/downloads/release/kepler/SR2/${DIRECTOR_ZIP}"
 	echo "Downloading $URL..."
-	wget -q $URL -O ${DOWNLOAD}/director_latest.zip
+	wget -q $URL -O ${DOWNLOAD}/${DIRECTOR_ZIP}
 fi
 
-test -d ${TARGET}/director || unzip -q ${DOWNLOAD}/director_latest.zip -d ${TARGET}
+echo "Unpacking director..."
+test -d ${TARGET}/director || tar xfz ${DOWNLOAD}/${DIRECTOR_ZIP}
+
+echo "Moving director..."
+test -d eclipse && mv eclipse/ ${TARGET}/director
 
 function unpack
 {
@@ -89,7 +96,7 @@ function build
 	then
 		if [ ! -e ${DOWNLOAD}/${ECLIPSE} ]
 		then
-			URL="http://${DOWNLOAD_SERVER}/eclipse/technology/epp/downloads/release/${DISTRO}/${RELEASE}/${ECLIPSE}"
+			URL="http://${DOWNLOAD_SERVER}/technology/epp/downloads/release/${DISTRO}/${RELEASE}/${ECLIPSE}"
 			echo "Downloading $URL..."
 
 			if ! wget -q $URL -O "${DOWNLOAD}/${ECLIPSE}"
