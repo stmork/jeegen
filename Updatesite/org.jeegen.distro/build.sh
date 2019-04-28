@@ -9,12 +9,13 @@ RELEASE=${2:-R}
 DOWNLOAD_SERVER=archive.eclipse.org
 
 BASE=$PWD
-TARGET=${BASE}/target
-DOWNLOAD=${TARGET}/download
-BUILD=${TARGET}/build
-DIST=${TARGET}/dist
+TARGET_BASE=${BASE}/target
+DOWNLOAD=${TARGET_BASE}/download
+BUILD=${TARGET_BASE}/build
+DIST=${TARGET_BASE}/dist
 DIRECTOR_ZIP=eclipse-testing-kepler-SR2-linux-gtk-x86_64.tar.gz
-DIRECTOR=${TARGET}/director/eclipse
+DIRECTOR=${TARGET_BASE}/director/eclipse
+#DIRECTOR=/tmp/director/director
 
 set -e
 mkdir -p $DOWNLOAD $BUILD $DIST
@@ -28,10 +29,10 @@ then
 fi
 
 echo "Unpacking director..."
-test -d ${TARGET}/director || tar xfz ${DOWNLOAD}/${DIRECTOR_ZIP}
+test -d ${TARGET_BASE}/director || tar xfz ${DOWNLOAD}/${DIRECTOR_ZIP}
 
 echo "Moving director..."
-test -d eclipse && mv eclipse/ ${TARGET}/director
+test -d eclipse && mv eclipse/ ${TARGET_BASE}/director
 
 function unpack
 {
@@ -135,8 +136,6 @@ function build
 	fi
 }
 
-#			-installIU org.eclipse.egit.feature.group,org.eclipse.sdk.ide,org.jeegen.jee6.feature.feature.group,org.jeegen.jee7.feature.feature.group
-
 build linux-gtk-x86_64.tar.gz
 build linux-gtk.tar.gz
 build macosx-cocoa-x86_64.tar.gz
@@ -145,5 +144,5 @@ build win32-x86_64.zip
 build win32.zip
 
 rm -rf ${BUILD}
-rm -rf ${TARGET}/director
+rm -rf ${TARGET_BASE}/director
 rm -rf ${DOWNLOAD}
