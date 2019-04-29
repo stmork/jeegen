@@ -14,7 +14,7 @@ DOWNLOAD=${TARGET_BASE}/download
 BUILD=${TARGET_BASE}/build
 DIST=${TARGET_BASE}/dist
 DIRECTOR_ZIP=eclipse-testing-kepler-SR2-linux-gtk-x86_64.tar.gz
-DIRECTOR=${TARGET_BASE}/director/eclipse
+DIRECTOR=${TARGET_BASE}/eclipse/eclipse
 #DIRECTOR=/tmp/director/director
 
 set -e
@@ -29,10 +29,7 @@ then
 fi
 
 echo "Unpacking director..."
-test -d ${TARGET_BASE}/director || tar xfz ${DOWNLOAD}/${DIRECTOR_ZIP}
-
-echo "Moving director..."
-test -d eclipse && mv eclipse/ ${TARGET_BASE}/director
+test -d ${TARGET_BASE}/director || tar xfz ${DOWNLOAD}/${DIRECTOR_ZIP} -C ${TARGET_BASE}/
 
 function unpack
 {
@@ -123,6 +120,8 @@ function build
 			fi
 		fi
 		echo "Eclipse directory: $DEST"
+
+		cp -a ${DEST}/configuration/config.ini .
 		${DIRECTOR} -noSplash\
 			-application org.eclipse.equinox.p2.director\
 			-profileProperties org.eclipse.update.install.features=true\
@@ -130,6 +129,7 @@ function build
 			-repository http://download.eclipse.org/releases/${DISTRO}/,http://www.jee-generator.org/updates/release/,http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/\
 			-destination ${DEST}
 
+		mv config.ini ${DEST}/configuration/
 		pack ${TARGET}
 	else
 		echo "${TARGET} already exists."
