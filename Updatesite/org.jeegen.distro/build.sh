@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # JEE versions:
-# JEE6-Generator: 1.2.4
-# JEE7-Generator: 1.2.4
+# JEE6-Generator: 1.2.6
+# JEE7-Generator: 1.2.6
 
 DISTRO=${1:-2019-03}
 RELEASE=${2:-R}
@@ -52,7 +52,7 @@ function unpack
 		tar xfj ${1} -C $BUILD
 		;;
 	*.dmg)
-		dmg2img ${1} -o ${DOWNLOAD}/eclipse-mac.img
+		dmg2img -s ${1} -o ${DOWNLOAD}/eclipse-mac.img
 		7z x ${DOWNLOAD}/eclipse-mac.img -o${BUILD}
 		;;
 	esac
