@@ -6,6 +6,7 @@
 
 DISTRO=${1:-2019-03}
 RELEASE=${2:-R}
+REFINEMENT=${3:-}
 DOWNLOAD_SERVER=archive.eclipse.org
 
 BASE=$PWD
@@ -35,7 +36,7 @@ function unpack
 {
 	rm -rf ${BUILD}/?clipse* ${BUILD}/?.*
 
-	echo "Unpacking... $1"
+	echo "Unpacking... ${DISTRO}"
 
 	case "${1}" in
 	*.zip)
@@ -51,7 +52,8 @@ function unpack
 		tar xfj ${1} -C $BUILD
 		;;
 	*.dmg)
-		7z e ${1} -o$BUILD && 7z x $BUILD/*.hfs -o$BUILD >/dev/null
+		dmg2img ${1} -o ${DOWNLOAD}/eclipse-mac.img
+		7z x ${DOWNLOAD}/eclipse-mac.img -o${BUILD}
 		;;
 	esac
 }
@@ -85,15 +87,16 @@ function pack
 
 function build
 {
-	ECLIPSE="eclipse-jee-${DISTRO}-${RELEASE}-$1"
-	TARGET=${DIST}/eclipse-jee-generator-${DISTRO}-${RELEASE}-$1
+	PLATFORM=${1}
+	ECLIPSE="eclipse-jee-${DISTRO}-${RELEASE}${REFINEMENT}-${PLATFORM}"
+	TARGET=${DIST}/eclipse-jee-generator-${DISTRO}-${RELEASE}-${PLATFORM}
 
 	if [ ! -e ${TARGET} ]
 	then
 		if [ ! -e ${DOWNLOAD}/${ECLIPSE} ]
 		then
 			URL="http://${DOWNLOAD_SERVER}/technology/epp/downloads/release/${DISTRO}/${RELEASE}/${ECLIPSE}"
-			echo "Downloading $URL..."
+			echo "Downloading $URL"
 
 			if ! wget -q $URL -O "${DOWNLOAD}/${ECLIPSE}"
 			then
@@ -104,7 +107,7 @@ function build
 		fi
 
 		unpack ${DOWNLOAD}/${ECLIPSE}
-		echo "Prepare Distro ${DISTRO} ${RELEASE}..."
+		echo "Preparing Distro ${DISTRO} ${RELEASE}"
 		if [ -d ${BUILD}/Eclipse.app ]
 		then
 			echo "Mac"
@@ -137,11 +140,8 @@ function build
 }
 
 build linux-gtk-x86_64.tar.gz
-build linux-gtk.tar.gz
-build macosx-cocoa-x86_64.tar.gz
 build macosx-cocoa-x86_64.dmg
 build win32-x86_64.zip
-build win32.zip
 
 rm -rf ${BUILD}
 rm -rf ${TARGET_BASE}/director

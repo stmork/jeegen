@@ -22,6 +22,7 @@ cd ../MinimalWebApplicationDao
 ant clean package
 
 cd ../FacesGenerated
+mkdir -p src/main/resources
 ant clobber generate package findbugs
 
 cd ../FacesTest
@@ -29,3 +30,5 @@ ant clean generate package findbugs test
 
 cd ../org.jeegen.jee7.dbauth
 ant clean generate package
+
+echo "Ready."
