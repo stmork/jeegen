@@ -34,25 +34,26 @@ test -d ${TARGET_BASE}/director || tar xfz ${DOWNLOAD}/${DIRECTOR_ZIP} -C ${TARG
 
 function unpack
 {
-	rm -rf ${BUILD}/?clipse* ${BUILD}/?.*
+	ARCHIVE=${1}
 
+	rm -rf ${BUILD}/?clipse* ${BUILD}/?.*
 	echo "Unpacking... ${DISTRO}"
 
-	case "${1}" in
+	case "${ARCHIVE}" in
 	*.zip)
-		unzip -q ${1} -d $BUILD
+		unzip -q ${ARCHIVE} -d $BUILD
 		;;
 	*.tar)
-		tar xf ${1} -C $BUILD
+		tar xf ${ARCHIVE} -C $BUILD
 		;;
 	*.tar.gz)
-		tar xfz ${1} -C $BUILD
+		tar xfz ${ARCHIVE} -C $BUILD
 		;;
 	*.tar.bz2)
-		tar xfj ${1} -C $BUILD
+		tar xfj ${ARCHIVE} -C $BUILD
 		;;
 	*.dmg)
-		dmg2img -s ${1} -o ${DOWNLOAD}/eclipse-mac.img
+		dmg2img -s ${ARCHIVE} -o ${DOWNLOAD}/eclipse-mac.img
 		7z x ${DOWNLOAD}/eclipse-mac.img -o${BUILD}
 		;;
 	esac
@@ -64,7 +65,7 @@ function pack
 	echo "Packing into... $ARCHIVE"
 
 	cd $BUILD
-	case "${1}" in
+	case "${ARCHIVE}" in
 	*.zip)
 		zip -r9 -q ${ARCHIVE} ?clipse*
 		;;
