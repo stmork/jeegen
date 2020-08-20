@@ -70,7 +70,7 @@ public class DownloadTest
 	@Test
 	public void morknet() throws IOException
 	{
-		final Download download = new Download("http://morknet.de");
+		final Download download = new Download("https://morknet.de");
 
 		download.setTimeout(TIMEOUT);
 		Assert.assertEquals(TIMEOUT, download.getTimeout());
@@ -170,7 +170,7 @@ public class DownloadTest
 	@Test(expected=FileNotFoundException.class)
 	public void error404() throws IOException
 	{
-		final Download download = new Download("http://morknet.de/404");
+		final Download download = new Download("https://morknet.de/404");
 
 		download.setTimeout(TIMEOUT);
 		Assert.assertEquals(TIMEOUT, download.getTimeout());
