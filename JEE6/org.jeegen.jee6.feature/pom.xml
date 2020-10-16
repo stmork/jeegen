@@ -34,4 +34,11 @@
 			<url>http://www.eclipse.org/legal/epl-v10.html</url>
 		</license>
 	</licenses>
+
+	<scm>
+		<connection>https://github.com/stmork/jeegen</connection>
+		<developerConnection>https://github.com/stmork</developerConnection>
+		<url>https://github.com/stmork/jeegen/tree/master/JEE6/org.jeegen.jee6.feature</url>
+		<tag>JEE</tag>
+	</scm>
 </project>

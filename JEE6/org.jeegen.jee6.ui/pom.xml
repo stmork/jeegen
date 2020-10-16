@@ -36,6 +36,13 @@
 		</license>
 	</licenses>
 
+	<scm>
+		<connection>https://github.com/stmork/jeegen</connection>
+		<developerConnection>https://github.com/stmork</developerConnection>
+		<url>https://github.com/stmork/jeegen/tree/master/JEE6/org.jeegen.jee6.ui</url>
+		<tag>JEE</tag>
+	</scm>
+
 	<build>
 		<plugins>
 			<plugin>

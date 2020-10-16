@@ -34,6 +34,13 @@
 		</license>
 	</licenses>
 
+	<scm>
+		<connection>https://github.com/stmork/jeegen</connection>
+		<developerConnection>https://github.com/stmork</developerConnection>
+		<url>https://github.com/stmork/jeegen/tree/master/JEE7/org.jeegen.jee7.tests</url>
+		<tag>JEE</tag>
+	</scm>
+
 	<build>
 		<plugins>
 			<plugin>
