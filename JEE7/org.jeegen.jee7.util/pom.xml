@@ -33,9 +33,10 @@
 	</licenses>
 
 	<scm>
-		<connection>scm:svn:https://svn.code.sf.net/p/jeegen/code/</connection>
-		<developerConnection>scm:svn:https://svn.code.sf.net/p/jeegen/code/</developerConnection>
-		<url>https://svn.code.sf.net/p/jeegen/code/trunk/JEE7/org.jeegen.jee7.util//</url>
+		<connection>https://github.com/stmork/jeegen</connection>
+		<developerConnection>https://github.com/stmork</developerConnection>
+		<url>https://github.com/stmork/jeegen/tree/master/JEE7/org.jeegen.jee7.util</url>
+		<tag>JEE</tag>
 	</scm>
 
 	<properties>
