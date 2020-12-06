@@ -74,7 +74,7 @@
 								<artifactItem>
 									<groupId>org.jeegen</groupId>
 									<artifactId>jee7.utils</artifactId>
-									<version>1.0.11</version>
+									<version>1.0.12</version>
 									<type>jar</type>
 									<overWrite>true</overWrite>
 									<outputDirectory>${basedir}/resources</outputDirectory>
