@@ -10,11 +10,11 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<tycho-version>0.26.0</tycho-version>
-		<tycho-extras-version>0.26.0</tycho-extras-version>
+		<tycho-version>1.7.0</tycho-version>
+		<tycho-extras-version>1.7.0</tycho-extras-version>
 		<antrun-version>1.8</antrun-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<eclipse.distro>oxygen</eclipse.distro>
+		<eclipse.distro>2018-09</eclipse.distro>
 		<source.update.site>http://www.jee-generator.org/updates/release/</source.update.site>
 	</properties>
 
