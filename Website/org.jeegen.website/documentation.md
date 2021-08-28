@@ -8,7 +8,7 @@ Die JEE-Generatoren sind in der Lage, eine komplette JEE6- oder
 JEE7-Web-Applikation aus einem einfachen Modell zu generieren.  Das
 Framework wurde mit Xtext realisiert und die beiden Generatoren sind als
 Eclipse-Plugin verfügbar.
-<img src="http://vg01.met.vgwort.de/na/c2c106fbd1b94db7b1e392a1deb146af" width="1" height="1" alt="">
+<img src="http://vg01.met.vgwort.de/na/c2c106fbd1b94db7b1e392a1deb146af" loading="eager" width="1" height="1" alt="">
 
 ## Inhalt
 
