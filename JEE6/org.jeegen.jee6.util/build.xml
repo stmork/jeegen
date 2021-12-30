@@ -150,7 +150,9 @@
 				<test name="org.jeegen.jee6.test.CollatorTest"/>
 				<test name="org.jeegen.jee6.test.ErrorInfoTest"/>
 				<test name="org.jeegen.jee6.test.FilterTest"/>
+<!--
 				<test name="org.jeegen.jee6.test.DownloadTest"/>
+-->
 				<test name="org.jeegen.jee6.test.ValidatorTest"/>
 			</junit>
 		</jacoco:coverage>
