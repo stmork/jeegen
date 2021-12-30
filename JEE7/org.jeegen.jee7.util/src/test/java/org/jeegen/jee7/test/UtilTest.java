@@ -172,18 +172,18 @@ public class UtilTest
 	@Test
 	public void getDiffFuture1()
 	{
-		getDiff(16, 7, 2018);
+		getDiff(30, 12, 2021);
 	}
 
 	@Test
 	public void getDiffFuture2()
 	{
-		getDiff(13, 8, 2017);
+		getDiff(13, 8, 2022);
 	}
 
 	private final int CHECK_DAY   =   19;
 	private final int CHECK_MONTH =   12;
-	private final int CHECK_YEAR  = 2016;
+	private final int CHECK_YEAR  = 2021;
 
 	public void getDiff(final int day, final int month, final int year)
 	{
@@ -215,30 +215,30 @@ public class UtilTest
 	@Test
 	public void december()
 	{
-		final Calendar cal = DateTimeUtil.getStartOfDay(  31, 12, 2016);
+		final Calendar cal = DateTimeUtil.getStartOfDay(  31, 12, 2021);
 
 		Assert.assertEquals(  31, cal.get(Calendar.DAY_OF_MONTH));
 		Assert.assertEquals(Calendar.DECEMBER, cal.get(Calendar.MONTH));
-		Assert.assertEquals( 2016, cal.get(Calendar.YEAR));
+		Assert.assertEquals( 2021, cal.get(Calendar.YEAR));
 	}
 
 	@Test
 	public void january()
 	{
-		final Calendar cal = DateTimeUtil.getStartOfDay(  1, 1, 2017);
+		final Calendar cal = DateTimeUtil.getStartOfDay(  1, 1, 2022);
 
 		Assert.assertEquals(  1, cal.get(Calendar.DAY_OF_MONTH));
 		Assert.assertEquals(Calendar.JANUARY, cal.get(Calendar.MONTH));
-		Assert.assertEquals( 2017, cal.get(Calendar.YEAR));
+		Assert.assertEquals( 2022, cal.get(Calendar.YEAR));
 	}
 
 	@Test
 	public void march()
 	{
-		final Calendar cal = DateTimeUtil.getStartOfDay(  15, 3, 2017);
+		final Calendar cal = DateTimeUtil.getStartOfDay(  15, 3, 2022);
 
 		Assert.assertEquals( 15, cal.get(Calendar.DAY_OF_MONTH));
 		Assert.assertEquals(Calendar.MARCH, cal.get(Calendar.MONTH));
-		Assert.assertEquals( 2017, cal.get(Calendar.YEAR));
+		Assert.assertEquals( 2022, cal.get(Calendar.YEAR));
 	}
 }
