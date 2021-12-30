@@ -30,6 +30,7 @@
 	<path id="junit.lib">
 		<fileset dir="${eclipse.home.plugins}">
 			<include name="org.junit_4*/*.jar"/>
+			<include name="org.junit_4*.jar"/>
 			<include name="org.hamcrest*.jar"/>
 			<include name="**/ant-junit4.jar"/>
 		</fileset>

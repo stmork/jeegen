@@ -11,9 +11,9 @@
 	<property name="lib-path"             value="${res-path}/WEB-INF/lib"/>
 	<property name="img-path"             value="${res-path}/img"/>
 
-	<property name="findbugs.home"        value="../FacesTest/findbugs"/>
-	<property name="findbugs.exclude"     value="../FacesTest/findbugs-exclude.xml"/>
-	<property name="findbugs.results"     value="./findbugs-results.xml"/>
+	<property name="spotbugs.home"        value="../FacesTest/spotbugs"/>
+	<property name="spotbugs.exclude"     value="../FacesTest/findbugs-exclude.xml"/>
+	<property name="spotbugs.results"     value="./findbugs-results.xml"/>
 
 	<property name="eclipse.home"         value="/opt/eclipse"/>
 	<property name="eclipse.home.plugins" value="${eclipse.home}/plugins"/>
@@ -68,8 +68,8 @@
 		<pathelement path="${src-path}" />
 	</path>
 	
-	<path id="findbugs.lib">
-		<fileset dir="${findbugs.home}">
+	<path id="spotbugs.lib">
+		<fileset dir="${spotbugs.home}">
 			<include name="**/*.jar"/>
 		</fileset>  
 	</path>
@@ -78,7 +78,7 @@
 	<!--            Setting up target definitions             -->
 	<!-- ==================================================== -->
 
-	<taskdef name="findbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask" classpathref="findbugs.lib"/>
+	<taskdef name="spotbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask" classpathref="spotbugs.lib"/>
 
 	<!-- ==================================================== -->
 	<!--              Setting up build targets                -->
@@ -93,7 +93,7 @@
 	</target>
 
 	<target name="clean">
-		<delete file="${findbugs.results}"/>
+		<delete file="${spotbugs.results}"/>
 		<delete file="${war}" />
 		<delete dir="${bin-path}" />
 	</target>
@@ -168,20 +168,20 @@
 	<!--              Setting up runtime targets              -->
 	<!-- ==================================================== -->
 
-	<target name="findbugs" depends="compile">
+	<target name="spotbugs" depends="compile">
 		<echo message="Checking ${ant.project.name}..."/>
-		<findbugs jvmargs="-Xmx512m" home="${findbugs.home}"
+		<spotbugs jvmargs="-Xmx512m" home="${spotbugs.home}"
 				output="xml:withMessages"
-				outputFile="${findbugs.results}"
+				outputFile="${spotbugs.results}"
 				classpathref="compile.path"
 				effort="max"
 				maxRank="20"
 				reportlevel="low"
-				excludeFilter="${findbugs.exclude}"
+				excludeFilter="${spotbugs.exclude}"
 				failonerror="true">
 			<sourcePath path="${src-path}:${src-gen-path}"/>
 			<class location="${bin-path}"/> 
 			<auxclasspath refid="compile.path"/>
-		</findbugs>
+		</spotbugs>
 	</target>
 </project>

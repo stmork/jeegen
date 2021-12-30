@@ -23,10 +23,10 @@ ant clean package
 
 cd ../FacesGenerated
 mkdir -p src/main/resources
-ant clobber generate package findbugs
+ant clobber generate package spotbugs
 
 cd ../FacesTest
-ant clean generate package findbugs test
+ant clean generate package spotbugs test
 
 cd ../org.jeegen.jee7.dbauth
 ant clean generate package
