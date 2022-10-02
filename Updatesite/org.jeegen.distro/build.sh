@@ -4,17 +4,20 @@
 # JEE6-Generator: 1.2.6
 # JEE7-Generator: 1.2.6
 
-DISTRO=${1:-2019-03}
+DISTRO=${1:-2021-12}
 RELEASE=${2:-R}
 REFINEMENT=${3:-}
-DOWNLOAD_SERVER=archive.eclipse.org
+DOWNLOAD_SERVER=ftp.halifax.rwth-aachen.de
+#DOWNLOAD_SERVER=archive.eclipse.org
+DOWNLOAD_URI=/eclipse
+#DOWNLOAD_URI="/downloads/download.php?file="
 
 BASE=$PWD
 TARGET_BASE=${BASE}/target
 DOWNLOAD=${TARGET_BASE}/download
 BUILD=${TARGET_BASE}/build
 DIST=${TARGET_BASE}/dist
-DIRECTOR_ZIP=eclipse-testing-kepler-SR2-linux-gtk-x86_64.tar.gz
+DIRECTOR_ZIP=eclipse-java-${DISTRO}-${RELEASE}-linux-gtk-x86_64.tar.gz
 DIRECTOR=${TARGET_BASE}/eclipse/eclipse
 #DIRECTOR=/tmp/director/director
 
@@ -24,8 +27,8 @@ mkdir -p $DOWNLOAD $BUILD $DIST
 echo "Preparing director..."
 if [ ! -e ${DOWNLOAD}/${DIRECTOR_ZIP} ]
 then
-	URL="http://${DOWNLOAD_SERVER}/technology/epp/downloads/release/kepler/SR2/${DIRECTOR_ZIP}"
-	echo "Downloading $URL..."
+	URL="http://${DOWNLOAD_SERVER}${DOWNLOAD_URI}/technology/epp/downloads/release/${DISTRO}/${RELEASE}/${DIRECTOR_ZIP}"
+	echo "Downloading $URL"
 	wget -q $URL -O ${DOWNLOAD}/${DIRECTOR_ZIP}
 fi
 
@@ -96,7 +99,7 @@ function build
 	then
 		if [ ! -e ${DOWNLOAD}/${ECLIPSE} ]
 		then
-			URL="http://${DOWNLOAD_SERVER}/technology/epp/downloads/release/${DISTRO}/${RELEASE}/${ECLIPSE}"
+			URL="http://${DOWNLOAD_SERVER}${DOWNLOAD_URI}/technology/epp/downloads/release/${DISTRO}/${RELEASE}/${ECLIPSE}"
 			echo "Downloading $URL"
 
 			if ! wget -q $URL -O "${DOWNLOAD}/${ECLIPSE}"
