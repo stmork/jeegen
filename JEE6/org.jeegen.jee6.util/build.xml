@@ -1,8 +1,8 @@
 <project name="JEE6 Utilities" default="package"  xmlns:jacoco="antlib:org.jacoco.ant">
 	<property file="${user.home}/.jee6.properties" />
 	<property file="${basedir}/build.properties"/>
-	<property name="ant.build.javac.source" value="1.6"/>
-	<property name="ant.build.javac.target" value="1.6"/>
+	<property name="ant.build.javac.source" value="1.7"/>
+	<property name="ant.build.javac.target" value="1.7"/>
 	
 	<property name="jar"           value="jee6-utils.jar"/>
 	<property name="bin-path"      value="./bin"/>
@@ -122,6 +122,7 @@
 				classpathref="compile.path"
 				sourcepath="${src-path}"
 				destdir="${doc-path}"
+				private="no"
 				author="true"
 				splitindex="true"
 				use="true"

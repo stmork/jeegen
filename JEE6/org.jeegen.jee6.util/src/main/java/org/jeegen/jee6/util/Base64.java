@@ -27,7 +27,7 @@ public class Base64
 	 * 
 	 * @param input The text to encode.
 	 * @return The encoded text.
-	 * @throws UnsupportedEncodingException
+	 * @throws UnsupportedEncodingException on encoding error.
 	 */
 	public static String encode(final String input) throws UnsupportedEncodingException
 	{
@@ -39,7 +39,6 @@ public class Base64
 	 * 
 	 * @param buffer The text to encode.
 	 * @return The encoded text.
-	 * @throws UnsupportedEncodingException
 	 */
 	public static String encode(final byte[] buffer)
 	{

@@ -47,7 +47,7 @@ abstract public class CollatingComparator<T> implements Comparator<T>, Serializa
 	 * 
 	 * @param order The wished sort order.
 	 * @param locale The {@link Locale} to use.
-	 * @param strength 
+	 * @param strength The comparison strength to use in the collator.
 	 */
 	public CollatingComparator(final int order, final Locale locale, final int strength)
 	{

@@ -18,15 +18,32 @@ import java.security.NoSuchAlgorithmException;
  */
 abstract public class AbstractMessageDigest
 {
+	/**
+	 * This enumeration lists the supported message digests.
+	 */
 	protected enum DIGEST
 	{
+		/** The deprecated MD5 hashing algorithm. */
 		MD5("MD5"),
+
+		/** The deprecated MD5 hashing algorithm. */
 		SHA1("SHA-1"),
+
+		/** The recommended SHA hashing algorithm. */
 		SHA256("SHA-256"),
+
+		/** The more safe SHA hashing algorithm. */
 		SHA384("SHA-384"),
+
+		/** The most safe SHA hashing algorithm. */
 		SHA512("SHA-512");
 
 		final private String digest;
+
+		/**
+		 * The digest to use inside this enumeration.
+		 * @param digest The digest as String.
+		 */
 		DIGEST(final String digest)
 		{
 			this.digest = digest;
@@ -63,8 +80,7 @@ abstract public class AbstractMessageDigest
 	 *  
 	 * @param input The text to hash.
 	 * @return The  hash.
-	 * @throws NoSuchAlgorithmException
-	 * @throws UnsupportedEncodingException
+	 * @throws UnsupportedEncodingException when the used encoding is unsupported.
 	 */
 	public String encode(final String input) throws UnsupportedEncodingException
 	{
@@ -75,9 +91,9 @@ abstract public class AbstractMessageDigest
 	 * This method computes the SHA1 hash of a text.
 	 *  
 	 * @param input The text to hash.
+	 * @param charset The encoding charset to use.
 	 * @return The hash.
-	 * @throws NoSuchAlgorithmException
-	 * @throws UnsupportedEncodingException
+	 * @throws UnsupportedEncodingException when the used encoding is unsupported.
 	 */
 	public String encode(final String input, final Charset charset) throws UnsupportedEncodingException
 	{
@@ -89,7 +105,6 @@ abstract public class AbstractMessageDigest
 	 * 
 	 * @param buffer The byte array to hash.
 	 * @return The hash.
-	 * @throws NoSuchAlgorithmException
 	 */
 	synchronized public String encode(final byte[] buffer)
 	{

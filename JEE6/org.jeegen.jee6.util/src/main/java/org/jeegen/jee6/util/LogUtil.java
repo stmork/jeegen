@@ -133,7 +133,15 @@ public class LogUtil
 	{
 		return (input == null) || input.trim().isEmpty();
 	}
-	
+
+	/**
+	 * This method builds a standard startup banner using the bundle name and the version string
+	 * extracted from the resource bundle.
+	 *
+	 * @param key The resource bundle key to use.
+	 * @param product The product name.
+	 * @return The banner string to display.
+	 */
 	public static String banner(final String key, final String product)
 	{
 		ResourceBundle bundle = ResourceBundle.getBundle(key);
