@@ -123,6 +123,7 @@
 				classpathref="compile.path"
 				sourcepath="${src-path}"
 				destdir="${doc-path}"
+				private="no"
 				author="true"
 				splitindex="true"
 				use="true"
@@ -133,7 +134,7 @@
 			<doctitle><![CDATA[<h1>JEE7 utility classes</h1>]]></doctitle>
 			<bottom><![CDATA[<i>Copyright &#169; 2013 all committers of JEE7 generator]]></bottom>
 		</javadoc>
-    </target>
+	</target>
 
 	<!-- ==================================================== -->
 	<!--              Setting up runtime targets              -->

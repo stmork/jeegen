@@ -40,6 +40,7 @@ public class Download implements Serializable
 	 * The constructor specifies the URL.
 	 * 
 	 * @param url The URL for downloading.
+	 * @param timeout The timeout for a download request in milliseconds.
 	 * @throws MalformedURLException Thrown if the URL is malformed.
 	 */
 	public Download(final String url, final int timeout) throws MalformedURLException
@@ -233,7 +234,7 @@ public class Download implements Serializable
 	 * @param is The {@link InputStream}
 	 * @param len The length of data inside the {@link InputStream}.
 	 * @return The resulting byte array
-	 * @throws IOException
+	 * @throws IOException on read error.
 	 */
 	public static byte [] read(final InputStream is, final int len) throws IOException
 	{

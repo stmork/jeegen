@@ -28,6 +28,8 @@ abstract public class AbstractLdapConnector implements AutoCloseable
 {
 	private final static Logger log = Logger.getLogger(AbstractLdapConnector.class.getName());
 	private final String dn;
+
+	/** The directory context used internally. */
 	protected DirContext ctx;
 
 	/**
@@ -39,7 +41,7 @@ abstract public class AbstractLdapConnector implements AutoCloseable
 	 * @param dn The base DN.
 	 * @param part The user part of the DN without the base DN.
 	 * @param secret The user secret.
-	 * @throws NamingException
+	 * @throws NamingException on error.
 	 */
 	protected AbstractLdapConnector(
 			final String url,
@@ -70,7 +72,7 @@ abstract public class AbstractLdapConnector implements AutoCloseable
 	 * 
 	 * @param context The initialized {@link DirContext}
 	 * @param dn The distinguished name to use.
-	 * @throws NamingException
+	 * @throws NamingException on error.
 	 */
 	protected AbstractLdapConnector(final DirContext context, final String dn) throws NamingException
 	{
@@ -119,7 +121,7 @@ abstract public class AbstractLdapConnector implements AutoCloseable
 	 * @param key Der Attributname
 	 * @return Der Attributwert
 	 * @throws IllegalArgumentException Falls das Attribut doch ein Mehrfachattribut ist.
-	 * @throws NamingException
+	 * @throws NamingException on error.
 	 */
 	public static String getValue(final Attributes attributes, final String key) throws NamingException
 	{
@@ -137,7 +139,7 @@ abstract public class AbstractLdapConnector implements AutoCloseable
 	 * @param attributes Die Attribute
 	 * @param key Der Attributname
 	 * @return Eine Liste von Attributwerten.
-	 * @throws NamingException
+	 * @throws NamingException on error.
 	 */
 	public static List<String> getValues(final Attributes attributes, final String key) throws NamingException
 	{
@@ -163,7 +165,7 @@ abstract public class AbstractLdapConnector implements AutoCloseable
 	 * @param partDn The sub DN
 	 * @param filter The search filter
 	 * @return The search results as a {@link NamingEnumeration}.
-	 * @throws NamingException
+	 * @throws NamingException on error.
 	 * @see AbstractLdapConnector#getSearchBase(String)
 	 */
 	public NamingEnumeration<SearchResult> search(final String partDn, final String filter) throws NamingException
@@ -178,7 +180,7 @@ abstract public class AbstractLdapConnector implements AutoCloseable
 	 * @param partDn Ths sub DN of the {@link Attributes}
 	 * @param filter An additional search filter.
 	 * @return The {@link Attributes} of the search result.
-	 * @throws NamingException
+	 * @throws NamingException on error.
 	 */
 	public Attributes getAttributes(final String partDn, final String filter) throws NamingException
 	{
@@ -203,7 +205,7 @@ abstract public class AbstractLdapConnector implements AutoCloseable
 	 * 
 	 * @param user The User.
 	 * @return The {@link Attributes} of the user.
-	 * @throws NamingException
+	 * @throws NamingException on error.
 	 */
 	public Attributes getUser(final String user) throws NamingException
 	{
@@ -215,7 +217,7 @@ abstract public class AbstractLdapConnector implements AutoCloseable
 	 * 
 	 * @param group The group name.
 	 * @return The {@link Collection} of all group members.
-	 * @throws NamingException
+	 * @throws NamingException on error.
 	 */
 	public Collection<String> getGroup(final String group) throws NamingException
 	{
@@ -273,7 +275,7 @@ abstract public class AbstractLdapConnector implements AutoCloseable
 	 * @param attributes The {@link Attributes}.
 	 * @param key The key of the {@link Attribute} to change.
 	 * @param value The value to use.
-	 * @throws UnsupportedEncodingException
+	 * @throws UnsupportedEncodingException on error.
 	 */
 	public static void setAttribute(final Attributes attributes, final String key, final String value) throws UnsupportedEncodingException
 	{
@@ -285,7 +287,7 @@ abstract public class AbstractLdapConnector implements AutoCloseable
 	 * 
 	 * @param partDn The partial DN to create.
 	 * @param attrs The {@link Attributes} to fill in.
-	 * @throws NamingException
+	 * @throws NamingException on error.
 	 * @see AbstractLdapConnector#getSearchBase(String)
 	 */
 	public void create(final String partDn, final Attributes attrs) throws NamingException
@@ -300,7 +302,7 @@ abstract public class AbstractLdapConnector implements AutoCloseable
 	 * 
 	 * @param partDn The partial DN to modify.
 	 * @param attributes The modified {@link Attributes}.
-	 * @throws NamingException
+	 * @throws NamingException on error.
 	 * @see AbstractLdapConnector#getSearchBase(String)
 	 */
 	public void modify(final String partDn, final Attributes attributes) throws NamingException
@@ -312,7 +314,7 @@ abstract public class AbstractLdapConnector implements AutoCloseable
 	 * This method deletes a directory entry from the LDAP server.
 	 * 
 	 * @param partDn The partial DN to delete.
-	 * @throws NamingException
+	 * @throws NamingException on error.
 	 * @see AbstractLdapConnector#getSearchBase(String)
 	 */
 	public void delete(final String partDn) throws NamingException

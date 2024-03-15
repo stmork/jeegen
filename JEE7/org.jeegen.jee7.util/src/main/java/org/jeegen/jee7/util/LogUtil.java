@@ -113,7 +113,7 @@ public class LogUtil
 
 	/**
 	 * This method formats a {@link String} using the {@link MessageFormat#format(String, Object...)} method.
-	 * 
+	 *
 	 * @param format The format {@link String}.
 	 * @param arguments The arguments to be formatted.
 	 * @return The completely formatted String.
@@ -125,7 +125,7 @@ public class LogUtil
 
 	/**
 	 * This method tests a given {@link String} if it is null or has zero length.
-	 * 
+	 *
 	 * @param input The {@link String} object to test.
 	 * @return true if given text is null or has zero length.
 	 */
@@ -134,9 +134,18 @@ public class LogUtil
 		return (input == null) || input.trim().isEmpty();
 	}
 
+	/**
+	 * This method builds a standard startup banner using the bundle name and the version string
+	 * extracted from the resource bundle.
+	 *
+	 * @param key The resource bundle key to use.
+	 * @param product The product name.
+	 * @return The banner string to display.
+	 */
 	public static String banner(final String key, final String product)
 	{
 		ResourceBundle bundle = ResourceBundle.getBundle(key);
+
 		final String version = LogUtil.format("= {4} (C) {0} {1}.{2}.{3} =",
 				bundle.getString("vendor"),
 				bundle.getString("version.major"),
