@@ -4,22 +4,24 @@
 # JEE6-Generator: 1.2.7
 # JEE7-Generator: 1.2.7
 
-DISTRO=${1:-2021-12}
+DISTRO=${1:-2025-03}
 RELEASE=${2:-R}
-REFINEMENT=${3:-}
-#DOWNLOAD_SERVER=ftp.halifax.rwth-aachen.de
-DOWNLOAD_SERVER=www.eclipse.org
-#DOWNLOAD_URI=/eclipse
-DOWNLOAD_URI="/downloads/download.php?file="
+DOWNLOAD_SERVER=ftp.halifax.rwth-aachen.de
+#DOWNLOAD_SERVER=archive.eclipse.org
+DOWNLOAD_URI=/eclipse
+#DOWNLOAD_URI="/downloads/download.php?file="
+
+LEVEL=release
+#LEVEL=snapshot
 
 BASE=$PWD
 TARGET_BASE=${BASE}/target
 DOWNLOAD=${TARGET_BASE}/download
 BUILD=${TARGET_BASE}/build
 DIST=${TARGET_BASE}/dist
-DIRECTOR_ZIP=eclipse-java-2020-09-${RELEASE}-linux-gtk-x86_64.tar.gz
+DIRECTOR_ZIP=eclipse-java-${DISTRO}-${RELEASE}-linux-gtk-x86_64.tar.gz
 DIRECTOR=${TARGET_BASE}/eclipse/eclipse
-#DIRECTOR=/tmp/director/director
+LOG_CONFIG_XML=`realpath logback.xml`
 
 set -e
 mkdir -p $DOWNLOAD $BUILD $DIST
@@ -27,20 +29,21 @@ mkdir -p $DOWNLOAD $BUILD $DIST
 echo "Preparing director..."
 if [ ! -e ${DOWNLOAD}/${DIRECTOR_ZIP} ]
 then
-	URL="http://${DOWNLOAD_SERVER}${DOWNLOAD_URI}/technology/epp/downloads/release/2020-09/${RELEASE}/${DIRECTOR_ZIP}"
-	echo "Downloading $URL"
-	wget -q $URL -O ${DOWNLOAD}/${DIRECTOR_ZIP}
+	URL="http://${DOWNLOAD_SERVER}${DOWNLOAD_URI}/technology/epp/downloads/release/${DISTRO}/${RELEASE}/${DIRECTOR_ZIP}"
+    echo "Downloading $URL"
+    wget -q $URL -O ${DOWNLOAD}/${DIRECTOR_ZIP}
 fi
 
 echo "Unpacking director..."
-test -d ${TARGET_BASE}/director || tar xfz ${DOWNLOAD}/${DIRECTOR_ZIP} -C ${TARGET_BASE}/
+test -d ${TARGET_BASE}/director || tar xfz ${DOWNLOAD}/${DIRECTOR_ZIP} -C ${TARGET_BASE}
 
 function unpack
 {
 	ARCHIVE=${1}
 
 	rm -rf ${BUILD}/?clipse* ${BUILD}/?.*
-	echo "Unpacking... ${DISTRO}"
+
+	echo "Unpacking... ${ARCHIVE}"
 
 	case "${ARCHIVE}" in
 	*.zip)
@@ -65,7 +68,8 @@ function unpack
 function pack
 {
 	ARCHIVE=`echo ${1} | sed -e 's/.dmg$/.tar.bz2/g'`
-	echo "Packing into... $ARCHIVE"
+
+	echo "Packing into... ${ARCHIVE}"
 
 	cd $BUILD
 	case "${ARCHIVE}" in
@@ -81,19 +85,14 @@ function pack
 	*.tar.bz2)
 		tar cfj ${ARCHIVE} ?clipse*
 		;;
-	*.dmg)
-		cd Eclipse
-		tar cfj ${ARCHIVE} ?clipse*
-		;;
 	esac
 	cd $BASE
 }
 
 function build
 {
-	PLATFORM=${1}
-	ECLIPSE="eclipse-jee-${DISTRO}-${RELEASE}${REFINEMENT}-${PLATFORM}"
-	TARGET=${DIST}/eclipse-jee-generator-${DISTRO}-${RELEASE}-${PLATFORM}
+	ECLIPSE="eclipse-jee-${DISTRO}-${RELEASE}-$1"
+	TARGET=${DIST}/eclipse-jee-generator-${DISTRO}-${RELEASE}-$1
 
 	if [ ! -e ${TARGET} ]
 	then
@@ -101,42 +100,31 @@ function build
 		then
 			URL="http://${DOWNLOAD_SERVER}${DOWNLOAD_URI}/technology/epp/downloads/release/${DISTRO}/${RELEASE}/${ECLIPSE}"
 			echo "Downloading $URL"
-
-			if ! wget -q $URL -O "${DOWNLOAD}/${ECLIPSE}"
-			then
-				echo "Cannot download ${1}!"
-				rm "${DOWNLOAD}/${ECLIPSE}"
-				return
-			fi
+			wget -q $URL -O "${DOWNLOAD}/${ECLIPSE}"
 		fi
 
 		unpack ${DOWNLOAD}/${ECLIPSE}
-		echo "Preparing Distro ${DISTRO} ${RELEASE}"
+		echo "Prepare Distro ${DISTRO} ${RELEASE}..."
 		if [ -d ${BUILD}/Eclipse.app ]
 		then
-			echo "Mac"
-			DEST=${BUILD}/Eclipse.app/Contents/Eclipse
+			DEST=${BUILD}/Eclipse.app
+			CONFIG=${DEST}/Contents/Eclipse/configuration
 		else
-			if [ -d ${BUILD}/Eclipse/Eclipse.app ]
-			then
-				echo "Mac DMG"
-				DEST=${BUILD}/Eclipse/Eclipse.app/Contents/Eclipse
-			else
-				echo "Other platform"
-				DEST=${BUILD}/eclipse
-			fi
+			DEST=${BUILD}/eclipse
+			CONFIG=${DEST}/configuration
 		fi
-		echo "Eclipse directory: $DEST"
 
-		cp -a ${DEST}/configuration/config.ini .
+		echo "################### Installing JEE generators..."
+		cp -a ${CONFIG}/config.ini .
 		${DIRECTOR} -noSplash\
 			-application org.eclipse.equinox.p2.director\
 			-profileProperties org.eclipse.update.install.features=true\
-			-installIU org.eclipse.egit.feature.group,org.eclipse.sdk.ide,org.jeegen.jee6.feature.feature.group,org.jeegen.jee7.feature.feature.group\
-			-repository http://download.eclipse.org/releases/${DISTRO}/,http://www.jee-generator.org/updates/release/,http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/\
-			-destination ${DEST}
+			-repository http://www.jee-generator.org/updates/${LEVEL}/,http://download.eclipse.org/releases/${DISTRO}/,http://download.eclipse.org/releases/2021-12/\
+			-installIU org.eclipse.emf.sdk.feature.group,org.eclipse.xpand.sdk.feature.group,org.eclipse.xtend.sdk.feature.group,org.eclipse.xtext.sdk.feature.group,org.jeegen.jee6.feature.feature.group,org.jeegen.jee7.feature.feature.group\
+			-destination ${DEST}\
+			-vmargs -Dlogback.configurationFile=${LOG_CONFIG_XML} -Dp2.httpRule=allow
 
-		mv config.ini ${DEST}/configuration/
+		mv config.ini ${CONFIG}/
 		pack ${TARGET}
 	else
 		echo "${TARGET} already exists."
@@ -144,9 +132,10 @@ function build
 }
 
 build linux-gtk-x86_64.tar.gz
-build macosx-cocoa-x86_64.dmg
+build macosx-cocoa-x86_64.tar.gz
 build win32-x86_64.zip
 
 rm -rf ${BUILD}
 rm -rf ${TARGET_BASE}/director
-rm -rf ${DOWNLOAD}
+#rm -rf ${DOWNLOAD}
+#rm -rf ${TARGET}
