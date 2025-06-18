@@ -189,12 +189,12 @@
 		<repository>
 			<id>release</id>
 			<layout>p2</layout>
-			<url>http://download.eclipse.org/releases/${eclipse.distro}</url>
+			<url>https://download.eclipse.org/releases/${eclipse.distro}</url>
 		</repository>
 
 		<repository>
 			<id>codehaus-snapshots</id>
-			<url>http://nexus.codehaus.org/</url>
+			<url>https://nexus.codehaus.org/</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
@@ -223,7 +223,7 @@
 		<pluginRepository>
 			<id>jboss-public-repository-group</id>
 			<name>JBoss Public Repository Group</name>
-			<url>http://repository.jboss.org/nexus/content/groups/public/</url>
+			<url>https://repository.jboss.org/nexus/content/groups/public/</url>
 		</pluginRepository>
 		<pluginRepository>
 			<id>jboss-snapshots-repository</id>
