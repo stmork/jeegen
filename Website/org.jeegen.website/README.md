@@ -2,6 +2,21 @@ How to Test the Website
 =======================
 
 The website is generated with [Jekyll](http://jekyllrb.com).
+
+On Ubuntu you have to install some packages using:
+```
+sudo apt-get install ruby-rubygems ruby-dev
+```
+
+For installing some Ruby Gems you have to put some environment veriables
+into your .bashrc:
+```
+export GEM_HOME="$HOME/gems"
+export PATH="$GEM_HOME/bin:$PATH"
+```
+
+Then you have to install the Jekyll Ruby Gem:
+
 ```
 gem install jekyll
 ```
