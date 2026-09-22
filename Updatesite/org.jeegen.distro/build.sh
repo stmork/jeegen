@@ -6,9 +6,9 @@
 
 DISTRO=${1:-2025-03}
 RELEASE=${2:-R}
-DOWNLOAD_SERVER=ftp.halifax.rwth-aachen.de
-#DOWNLOAD_SERVER=archive.eclipse.org
-DOWNLOAD_URI=/eclipse
+#DOWNLOAD_SERVER=ftp.halifax.rwth-aachen.de
+DOWNLOAD_SERVER=archive.eclipse.org
+#DOWNLOAD_URI=/eclipse
 #DOWNLOAD_URI="/downloads/download.php?file="
 
 LEVEL=release
@@ -31,7 +31,7 @@ if [ ! -e ${DOWNLOAD}/${DIRECTOR_ZIP} ]
 then
 	URL="http://${DOWNLOAD_SERVER}${DOWNLOAD_URI}/technology/epp/downloads/release/${DISTRO}/${RELEASE}/${DIRECTOR_ZIP}"
     echo "Downloading $URL"
-    wget -q $URL -O ${DOWNLOAD}/${DIRECTOR_ZIP}
+    wget -q $URL -O ${DOWNLOAD}/${DIRECTOR_ZIP} || echo "Failed!"
 fi
 
 echo "Unpacking director..."
