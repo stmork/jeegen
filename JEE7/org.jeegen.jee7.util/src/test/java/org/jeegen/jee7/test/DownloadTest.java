@@ -22,12 +22,12 @@ import org.junit.Test;
 
 public class DownloadTest
 {
-	private final static String HOMEPAGE_URL    = "http://eisenbahnsteuerung.org";
-	private final static String IMAGE_URL       = HOMEPAGE_URL + "/images/rcc32.gif";
-	private final static String UNAUTORIZED_URL = "https://subversion.ise.de/svn/listing.php";
-	private final static int    TIMEOUT         = 10000;
-	private final static int    FORCE_TIMEOUT   =    10;
-	private final static Random random          = new Random(System.currentTimeMillis());
+	private final static String HOMEPAGE_URL     = "http://eisenbahnsteuerung.org";
+	private final static String IMAGE_URL        = HOMEPAGE_URL + "/images/rcc32.gif";
+	private final static String UNAUTHORIZED_URL = "https://subversion.ise.de/svn/listing.php";
+	private final static int    TIMEOUT          = 10000;
+	private final static int    FORCE_TIMEOUT    =    10;
+	private final static Random random           = new Random(System.currentTimeMillis());
 
 	@BeforeClass
 	public static void init()
@@ -198,7 +198,7 @@ public class DownloadTest
 	@Test
 	public void unauthorized() throws IOException
 	{
-		final Download download = new Download(UNAUTORIZED_URL);
+		final Download download = new Download(UNAUTHORIZED_URL);
 
 		download.setTimeout(TIMEOUT);
 		Assert.assertEquals(TIMEOUT, download.getTimeout());
